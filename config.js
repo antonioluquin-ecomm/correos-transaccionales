@@ -70,11 +70,12 @@ const TEMPLATES = [
 ];
 
 const VERSION = {
-  number: '0.1.0',
+  number: '0.2.0',
   date: '2026-06-06',
-  summary: 'Primera versión del catálogo: 2 plantillas VTEX migradas y documentadas.',
+  summary: 'Visualizador de Plantillas: render en vivo de las plantillas con datos de ejemplo.',
 };
 
 const CHANGELOG = [
+  { version: '0.2.0', date: '2026-06-06', summary: 'Visualizador de Plantillas (Módulo 3) con selector de plantilla y escenario, render con Handlebars.' },
   { version: '0.1.0', date: '2026-06-06', summary: 'Estructura inicial y catálogo con pedido-confirmado y pago-aprobado.' },
 ];

@@ -5,19 +5,255 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Visualizador de Plantillas — Correos Transaccionales</title>
     <link rel="stylesheet" href="../../assets/css/shared.css" />
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@4.7.8/dist/handlebars.min.js"></script>
+    <style>
+      .ct-visualizer {
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
+        flex-wrap: wrap;
+      }
+
+      .ct-visualizer-controls {
+        flex: 0 0 300px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .ct-visualizer-controls label {
+        display: block;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--ct-text-muted);
+        margin-bottom: 4px;
+      }
+
+      .ct-visualizer-controls select {
+        width: 100%;
+      }
+
+      .ct-visualizer-info p {
+        margin: 6px 0 0 0;
+      }
+
+      .ct-visualizer-info .ct-meta {
+        font-size: 12px;
+        color: var(--ct-text-muted);
+      }
+
+      .ct-visualizer-info .ct-meta code {
+        font-size: 12px;
+      }
+
+      .ct-visualizer-info .ct-badges {
+        display: flex;
+        gap: 6px;
+        margin-bottom: 8px;
+      }
+
+      .ct-visualizer-preview {
+        flex: 1 1 480px;
+        min-width: 320px;
+      }
+
+      .ct-visualizer-frame-wrap {
+        background: #e5e7eb;
+        border-radius: 12px;
+        padding: 16px;
+        min-height: 640px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .ct-visualizer-frame {
+        width: 100%;
+        max-width: 640px;
+        height: 1400px;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        background: #ffffff;
+      }
+
+      .ct-visualizer-status {
+        font-size: 13px;
+        color: var(--ct-text-muted);
+        margin: 10px 0 0 0;
+      }
+
+      .ct-visualizer-status.error {
+        color: #b91c1c;
+      }
+    </style>
   </head>
   <body>
     <header class="ct-topbar" data-ct-topbar></header>
+
     <main class="ct-page">
       <h1>Visualizador de Plantillas</h1>
-      <p class="ct-subtitle">Previsualizá cada plantilla en distintos escenarios operativos (envío a domicilio, retiro en tienda, marketplace, cancelado, etc.) sin enviarla realmente.</p>
-      <div class="ct-card ct-empty">
-        <p><strong>Módulo en construcción.</strong></p>
-        <p>Se construirá una vez que la Biblioteca de Plantillas (catálogo) esté poblada y los datos de ejemplo normalizados — podés ver el avance en <a href="../catalogo/index.html">Biblioteca de Plantillas</a>.</p>
+      <p class="ct-subtitle">
+        Elegí una plantilla y un escenario de datos de ejemplo para ver cómo se renderiza el correo
+        con información real, sin necesidad de enviarlo.
+      </p>
+
+      <div class="ct-visualizer">
+        <aside class="ct-visualizer-controls">
+          <div>
+            <label for="ct-vis-template">Plantilla</label>
+            <select id="ct-vis-template" aria-label="Elegir plantilla"></select>
+          </div>
+          <div>
+            <label for="ct-vis-example">Escenario de datos</label>
+            <select id="ct-vis-example" aria-label="Elegir escenario de datos"></select>
+          </div>
+          <div class="ct-card ct-visualizer-info">
+            <div class="ct-badges" id="ct-vis-badges"></div>
+            <h3 id="ct-vis-nombre"></h3>
+            <p id="ct-vis-descripcion"></p>
+            <p class="ct-meta"><strong>Plantilla HTML:</strong> <code id="ct-vis-archivo"></code></p>
+            <p class="ct-meta"><strong>Datos de ejemplo:</strong> <code id="ct-vis-ejemplo"></code></p>
+          </div>
+          <p class="ct-visualizer-status" id="ct-vis-status"></p>
+        </aside>
+
+        <div class="ct-visualizer-preview">
+          <div class="ct-visualizer-frame-wrap">
+            <iframe
+              id="ct-vis-frame"
+              class="ct-visualizer-frame"
+              title="Previsualización del correo"
+              sandbox="allow-same-origin"
+            ></iframe>
+          </div>
+        </div>
       </div>
     </main>
+
     <script src="../../config.js"></script>
     <script src="../../assets/js/shared.js"></script>
-    <script>CT.renderTopbar('visualizador', '../../');</script>
+    <script>
+      (function () {
+        const BASE = '../../';
+        CT.renderTopbar('visualizador', BASE);
+
+        const EXAMPLES = [
+          { path: 'examples/vtex/pedido-estandar.json', label: 'Pedido estándar (envío a domicilio)' },
+          { path: 'examples/vtex/pedido-realizado.json', label: 'Pedido realizado con éxito' },
+          { path: 'examples/vtex/pago-aprobado.json', label: 'Pago aprobado' },
+          { path: 'examples/vtex/pedido-cancelado.json', label: 'Pedido cancelado' },
+        ];
+
+        Handlebars.registerHelper('formatCurrency', function (value) {
+          const num = Number(value || 0) / 100;
+          return num.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        });
+
+        Handlebars.registerHelper('formatDate', function (value) {
+          const date = new Date(value);
+          if (Number.isNaN(date.getTime())) return '';
+          return date.toLocaleDateString('es-AR', { day: 'numeric', month: 'long', year: 'numeric' });
+        });
+
+        Handlebars.registerHelper('eq', function (a, b, options) {
+          return a === b ? options.fn(this) : options.inverse(this);
+        });
+
+        const templateSelect = document.getElementById('ct-vis-template');
+        const exampleSelect = document.getElementById('ct-vis-example');
+        const badgesEl = document.getElementById('ct-vis-badges');
+        const nombreEl = document.getElementById('ct-vis-nombre');
+        const descripcionEl = document.getElementById('ct-vis-descripcion');
+        const archivoEl = document.getElementById('ct-vis-archivo');
+        const ejemploEl = document.getElementById('ct-vis-ejemplo');
+        const statusEl = document.getElementById('ct-vis-status');
+        const frame = document.getElementById('ct-vis-frame');
+
+        const renderable = TEMPLATES.filter((t) => t.archivoHtml);
+
+        renderable.forEach((template) => {
+          const option = document.createElement('option');
+          option.value = template.id;
+          option.textContent = template.nombre;
+          templateSelect.appendChild(option);
+        });
+
+        EXAMPLES.forEach((example) => {
+          const option = document.createElement('option');
+          option.value = example.path;
+          option.textContent = example.label;
+          exampleSelect.appendChild(option);
+        });
+
+        function currentTemplate() {
+          return renderable.find((t) => t.id === templateSelect.value) || renderable[0];
+        }
+
+        function setStatus(message, isError) {
+          statusEl.textContent = message || '';
+          statusEl.classList.toggle('error', Boolean(isError));
+        }
+
+        function updateInfo(template) {
+          badgesEl.innerHTML = `${CT.platformBadge(template.plataforma)}${CT.statusBadge(template.estado)}`;
+          nombreEl.textContent = template.nombre;
+          descripcionEl.textContent = template.descripcion;
+          archivoEl.textContent = template.archivoHtml;
+          ejemploEl.textContent = exampleSelect.value;
+        }
+
+        // Algunas plantillas esperan el pedido completo en la raíz del contexto
+        // ({{orderId}}, {{hostName}}) y otras esperan la estructura VTEX completa
+        // ({{orders.0.orderId}}). Fusionamos ambas formas para que cualquiera
+        // de las dos resuelva contra el mismo JSON de ejemplo.
+        function buildRenderContext(data) {
+          const order = (data.orders && data.orders[0]) || {};
+          return Object.assign({}, data, order, { orders: data.orders, _accountInfo: data._accountInfo });
+        }
+
+        async function renderPreview() {
+          const template = currentTemplate();
+          if (!template) return;
+
+          updateInfo(template);
+          setStatus('Renderizando…');
+          frame.srcdoc = '';
+
+          try {
+            const [html, jsonText] = await Promise.all([
+              CT.fetchText(BASE + template.archivoHtml),
+              CT.fetchText(BASE + exampleSelect.value),
+            ]);
+            const data = JSON.parse(jsonText);
+            const compiled = Handlebars.compile(html);
+            const rendered = compiled(buildRenderContext(data));
+            frame.srcdoc = rendered;
+            setStatus('Renderizado con datos de: ' + exampleSelect.value);
+          } catch (error) {
+            setStatus('No se pudo renderizar la previsualización: ' + error.message, true);
+          }
+        }
+
+        templateSelect.addEventListener('change', () => {
+          const template = currentTemplate();
+          if (template && template.ejemplo && EXAMPLES.some((e) => e.path === template.ejemplo)) {
+            exampleSelect.value = template.ejemplo;
+          }
+          renderPreview();
+        });
+
+        exampleSelect.addEventListener('change', renderPreview);
+
+        if (renderable.length) {
+          const initial = renderable[0];
+          templateSelect.value = initial.id;
+          if (initial.ejemplo && EXAMPLES.some((e) => e.path === initial.ejemplo)) {
+            exampleSelect.value = initial.ejemplo;
+          }
+          renderPreview();
+        } else {
+          setStatus('Todavía no hay plantillas con HTML asociado en el catálogo.', true);
+        }
+      })();
+    </script>
   </body>
 </html>
