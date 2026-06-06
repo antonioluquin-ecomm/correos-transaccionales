@@ -107,6 +107,49 @@ const CT = (() => {
     return response.text();
   }
 
+  // --- Render de plantillas de correo con Handlebars (Visualizador y Simulador) ---
+  // Requiere que la página haya cargado Handlebars (CDN) antes de llamar a estas funciones.
+
+  let handlebarsHelpersReady = false;
+
+  function ensureEmailHelpers() {
+    if (handlebarsHelpersReady || typeof Handlebars === 'undefined') return;
+
+    Handlebars.registerHelper('formatCurrency', function (value) {
+      const num = Number(value || 0) / 100;
+      return num.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    });
+
+    Handlebars.registerHelper('formatDate', function (value) {
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return '';
+      return date.toLocaleDateString('es-AR', { day: 'numeric', month: 'long', year: 'numeric' });
+    });
+
+    Handlebars.registerHelper('eq', function (a, b, options) {
+      return a === b ? options.fn(this) : options.inverse(this);
+    });
+
+    handlebarsHelpersReady = true;
+  }
+
+  /**
+   * Algunas plantillas esperan el pedido completo en la raíz del contexto
+   * ({{orderId}}, {{hostName}}) y otras esperan la estructura VTEX completa
+   * ({{orders.0.orderId}}). Fusionamos ambas formas para que cualquiera de
+   * las dos resuelva contra el mismo JSON de pedido.
+   */
+  function buildEmailRenderContext(data) {
+    const order = (data.orders && data.orders[0]) || {};
+    return Object.assign({}, data, order, { orders: data.orders, _accountInfo: data._accountInfo });
+  }
+
+  function renderEmailToFrame(frame, html, data) {
+    ensureEmailHelpers();
+    const compiled = Handlebars.compile(html);
+    frame.srcdoc = compiled(buildEmailRenderContext(data));
+  }
+
   return {
     escapeHtml,
     slugify,
@@ -115,5 +158,7 @@ const CT = (() => {
     renderTopbar,
     downloadFile,
     fetchText,
+    buildEmailRenderContext,
+    renderEmailToFrame,
   };
 })();

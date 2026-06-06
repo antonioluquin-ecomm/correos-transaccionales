@@ -5,19 +5,361 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Simulador de Datos — Correos Transaccionales</title>
     <link rel="stylesheet" href="../../assets/css/shared.css" />
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@4.7.8/dist/handlebars.min.js"></script>
+    <style>
+      .ct-simulator {
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
+        flex-wrap: wrap;
+      }
+
+      .ct-simulator-controls {
+        flex: 0 0 300px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .ct-simulator-controls label {
+        display: block;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--ct-text-muted);
+        margin-bottom: 4px;
+      }
+
+      .ct-simulator-controls select {
+        width: 100%;
+      }
+
+      .ct-simulator-info p {
+        margin: 6px 0 0 0;
+      }
+
+      .ct-simulator-info .ct-badges {
+        display: flex;
+        gap: 6px;
+        margin-bottom: 8px;
+      }
+
+      .ct-simulator-info .ct-meta {
+        font-size: 12px;
+        color: var(--ct-text-muted);
+      }
+
+      .ct-simulator-preview {
+        flex: 1 1 480px;
+        min-width: 320px;
+      }
+
+      .ct-simulator-frame-wrap {
+        background: #e5e7eb;
+        border-radius: 12px;
+        padding: 16px;
+        min-height: 640px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .ct-simulator-frame {
+        width: 100%;
+        max-width: 640px;
+        height: 1400px;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        background: #ffffff;
+      }
+
+      .ct-simulator-status {
+        font-size: 13px;
+        color: var(--ct-text-muted);
+        margin: 10px 0 0 0;
+      }
+
+      .ct-simulator-status.error {
+        color: #b91c1c;
+      }
+    </style>
   </head>
   <body>
     <header class="ct-topbar" data-ct-topbar></header>
+
     <main class="ct-page">
       <h1>Simulador de Datos</h1>
-      <p class="ct-subtitle">Elegí un pedido de ejemplo (JSON real de VTEX) y validá cómo quedan variables, condicionales, productos, imágenes y totales en cada plantilla.</p>
-      <div class="ct-card ct-empty">
-        <p><strong>Módulo en construcción.</strong></p>
-        <p>Depende del Visualizador de Plantillas. Mientras tanto, los pedidos de ejemplo ya normalizados están disponibles en <code>examples/vtex/</code> (pedido estándar, pedido cancelado, pago aprobado, pedido realizado).</p>
+      <p class="ct-subtitle">
+        Partí de un pedido real de ejemplo y combiná escenarios — envío, cantidad de productos,
+        promociones — para ver cómo reacciona cada plantilla sin necesitar un JSON distinto por caso.
+      </p>
+
+      <div class="ct-simulator">
+        <aside class="ct-simulator-controls">
+          <div>
+            <label for="ct-sim-template">Plantilla</label>
+            <select id="ct-sim-template" aria-label="Elegir plantilla"></select>
+          </div>
+          <div>
+            <label for="ct-sim-envio">Escenario de envío</label>
+            <select id="ct-sim-envio" aria-label="Elegir escenario de envío">
+              <option value="domicilio">Envío a domicilio (1 paquete)</option>
+              <option value="retiro">Retiro en tienda (1 paquete)</option>
+              <option value="mixto-mismo">2 paquetes — mismo depósito</option>
+              <option value="mixto-distinto">2 paquetes — depósitos distintos</option>
+            </select>
+          </div>
+          <div>
+            <label for="ct-sim-productos">Productos en el pedido</label>
+            <select id="ct-sim-productos" aria-label="Elegir cantidad de productos">
+              <option value="uno">1 producto</option>
+              <option value="dos">2 productos distintos</option>
+            </select>
+          </div>
+          <div>
+            <label for="ct-sim-promocion">Promoción / descuento</label>
+            <select id="ct-sim-promocion" aria-label="Elegir si hay promoción aplicada">
+              <option value="sin">Sin promoción</option>
+              <option value="con">Con promoción aplicada</option>
+            </select>
+          </div>
+          <div class="ct-card ct-simulator-info">
+            <div class="ct-badges" id="ct-sim-badges"></div>
+            <h3 id="ct-sim-nombre"></h3>
+            <p id="ct-sim-descripcion"></p>
+            <p class="ct-meta"><strong>Plantilla HTML:</strong> <code id="ct-sim-archivo"></code></p>
+            <p class="ct-meta"><strong>Pedido base:</strong> <code id="ct-sim-base"></code></p>
+          </div>
+          <p class="ct-simulator-status" id="ct-sim-status"></p>
+        </aside>
+
+        <div class="ct-simulator-preview">
+          <div class="ct-simulator-frame-wrap">
+            <iframe
+              id="ct-sim-frame"
+              class="ct-simulator-frame"
+              title="Previsualización simulada del correo"
+              sandbox="allow-same-origin"
+            ></iframe>
+          </div>
+        </div>
       </div>
     </main>
+
     <script src="../../config.js"></script>
     <script src="../../assets/js/shared.js"></script>
-    <script>CT.renderTopbar('simulador', '../../');</script>
+    <script>
+      (function () {
+        const BASE = '../../';
+        CT.renderTopbar('simulador', BASE);
+
+        const BASE_ORDER_PATH = 'examples/vtex/pago-aprobado.json';
+
+        const templateSelect = document.getElementById('ct-sim-template');
+        const envioSelect = document.getElementById('ct-sim-envio');
+        const productosSelect = document.getElementById('ct-sim-productos');
+        const promocionSelect = document.getElementById('ct-sim-promocion');
+        const badgesEl = document.getElementById('ct-sim-badges');
+        const nombreEl = document.getElementById('ct-sim-nombre');
+        const descripcionEl = document.getElementById('ct-sim-descripcion');
+        const archivoEl = document.getElementById('ct-sim-archivo');
+        const baseEl = document.getElementById('ct-sim-base');
+        const statusEl = document.getElementById('ct-sim-status');
+        const frame = document.getElementById('ct-sim-frame');
+
+        baseEl.textContent = BASE_ORDER_PATH;
+
+        const renderable = TEMPLATES.filter((t) => t.archivoHtml);
+        renderable.forEach((template) => {
+          const option = document.createElement('option');
+          option.value = template.id;
+          option.textContent = template.nombre;
+          templateSelect.appendChild(option);
+        });
+
+        function cloneDeep(value) {
+          return JSON.parse(JSON.stringify(value));
+        }
+
+        // Algunos JSON de ejemplo guardan el pedido "desnudo" (sin el wrapper
+        // orders[] que usa VTEX) — ver docs/decisions/2026-06-06-... Lo
+        // envolvemos para poder transformar siempre sobre orders[0].
+        function normalizeOrderPayload(raw) {
+          if (raw && Array.isArray(raw.orders)) return raw;
+          return { orders: [raw], _accountInfo: raw._accountInfo };
+        }
+
+        let baseDataPromise = null;
+
+        function loadBaseData() {
+          if (!baseDataPromise) {
+            baseDataPromise = CT.fetchText(BASE + BASE_ORDER_PATH)
+              .then((text) => normalizeOrderPayload(JSON.parse(text)));
+          }
+          return baseDataPromise;
+        }
+
+        function currentTemplate() {
+          return renderable.find((t) => t.id === templateSelect.value) || renderable[0];
+        }
+
+        function setStatus(message, isError) {
+          statusEl.textContent = message || '';
+          statusEl.classList.toggle('error', Boolean(isError));
+        }
+
+        function updateInfo(template) {
+          badgesEl.innerHTML = `${CT.platformBadge(template.plataforma)}${CT.statusBadge(template.estado)}`;
+          nombreEl.textContent = template.nombre;
+          descripcionEl.textContent = template.descripcion;
+          archivoEl.textContent = template.archivoHtml;
+        }
+
+        // --- Transformaciones de escenario sobre un pedido base clonado ---
+        // El objetivo no es generar JSON técnicamente perfectos sino disparar
+        // las mismas ramas condicionales que usan las plantillas reales
+        // (canal de entrega, multipaquete, descuentos) para poder verlas sin
+        // tener que conseguir y anonimizar un pedido real por cada caso.
+
+        function applyEnvio(order, scenario) {
+          const base = order.shippingData.logisticsInfo[0];
+          const domicilio = Object.assign({}, base, {
+            selectedDeliveryChannel: 'delivery',
+            pickupStoreInfo: { isPickupStore: false, friendlyName: null, address: null },
+          });
+          const retiro = Object.assign({}, base, {
+            selectedDeliveryChannel: 'pickup-in-point',
+            pickupStoreInfo: {
+              isPickupStore: true,
+              friendlyName: 'Sucursal Av. Corrientes',
+              address: { street: 'Av. Corrientes', number: '1234', city: 'Buenos Aires', state: 'CABA' },
+            },
+          });
+
+          if (scenario === 'domicilio') {
+            order.shippingData.logisticsInfo = [domicilio];
+          } else if (scenario === 'retiro') {
+            order.shippingData.logisticsInfo = [retiro];
+          } else if (scenario === 'mixto-mismo') {
+            const segundo = cloneDeep(domicilio);
+            segundo.itemIndex = 1;
+            order.shippingData.logisticsInfo = [domicilio, segundo];
+          } else if (scenario === 'mixto-distinto') {
+            const segundo = cloneDeep(domicilio);
+            segundo.itemIndex = 1;
+            segundo.deliveryIds = [
+              Object.assign({}, (domicilio.deliveryIds && domicilio.deliveryIds[0]) || {}, {
+                warehouseId: 'deposito-cordoba',
+                courierName: 'Carrier alternativo',
+              }),
+            ];
+            order.shippingData.logisticsInfo = [domicilio, segundo];
+          }
+        }
+
+        function applyProductos(order, scenario) {
+          const base = order.items[0];
+          const items = [cloneDeep(base)];
+
+          if (scenario === 'dos') {
+            const segundo = cloneDeep(base);
+            segundo.id = base.id + '-sim-2';
+            segundo.uniqueId = base.uniqueId + '-sim-2';
+            segundo.name = 'Producto adicional de ejemplo';
+            segundo.skuName = 'Variante B';
+            segundo.quantity = 1;
+            segundo.listPrice = Math.round(base.listPrice * 0.6);
+            segundo.sellingPrice = segundo.listPrice;
+            segundo.priceDefinition = {
+              calculatedSellingPrice: segundo.sellingPrice,
+              total: segundo.sellingPrice * segundo.quantity,
+              sellingPrices: [{ value: segundo.sellingPrice, quantity: segundo.quantity }],
+            };
+            items.push(segundo);
+          }
+
+          order.items = items;
+        }
+
+        function applyPromocion(order, scenario) {
+          const discounts = order.totals.find((t) => t.id === 'Discounts');
+          const principal = order.items[0];
+
+          if (scenario === 'con') {
+            const descuento = Math.round(principal.priceDefinition.total * 0.15);
+            if (discounts) discounts.value = -descuento;
+            principal.listPrice = Math.round(principal.sellingPrice * 1.2);
+            order.ratesAndBenefitsData = {
+              rateAndBenefitsIdentifiers: [
+                { id: 'sim-promo', name: 'Promo simulada', description: '15% OFF en productos seleccionados', featured: true },
+              ],
+              teaser: [],
+            };
+          } else {
+            if (discounts) discounts.value = 0;
+            principal.listPrice = principal.sellingPrice;
+            order.ratesAndBenefitsData = { rateAndBenefitsIdentifiers: [], teaser: [] };
+          }
+        }
+
+        function recomputeTotals(order) {
+          const itemsTotal = order.items.reduce((sum, item) => {
+            return sum + (item.priceDefinition ? item.priceDefinition.total : item.sellingPrice * item.quantity);
+          }, 0);
+
+          const findTotal = (id) => order.totals.find((t) => t.id === id);
+          const itemsEntry = findTotal('Items');
+          if (itemsEntry) itemsEntry.value = itemsTotal;
+
+          const discountsValue = (findTotal('Discounts') || {}).value || 0;
+          const shippingValue = (findTotal('Shipping') || {}).value || 0;
+          const taxValue = (findTotal('Tax') || {}).value || 0;
+
+          order.value = itemsTotal + discountsValue + shippingValue + taxValue;
+        }
+
+        function buildSimulatedData(baseData) {
+          const data = cloneDeep(baseData);
+          const order = data.orders[0];
+
+          applyEnvio(order, envioSelect.value);
+          applyProductos(order, productosSelect.value);
+          applyPromocion(order, promocionSelect.value);
+          recomputeTotals(order);
+
+          return data;
+        }
+
+        async function renderPreview() {
+          const template = currentTemplate();
+          if (!template) return;
+
+          updateInfo(template);
+          setStatus('Renderizando…');
+          frame.srcdoc = '';
+
+          try {
+            const [html, baseData] = await Promise.all([
+              CT.fetchText(BASE + template.archivoHtml),
+              loadBaseData(),
+            ]);
+            const simulatedData = buildSimulatedData(baseData);
+            CT.renderEmailToFrame(frame, html, simulatedData);
+            setStatus('Escenario simulado a partir de: ' + BASE_ORDER_PATH);
+          } catch (error) {
+            setStatus('No se pudo renderizar la previsualización: ' + error.message, true);
+          }
+        }
+
+        [templateSelect, envioSelect, productosSelect, promocionSelect].forEach((el) => {
+          el.addEventListener('change', renderPreview);
+        });
+
+        if (renderable.length) {
+          templateSelect.value = renderable[0].id;
+          renderPreview();
+        } else {
+          setStatus('Todavía no hay plantillas con HTML asociado en el catálogo.', true);
+        }
+      })();
+    </script>
   </body>
 </html>
