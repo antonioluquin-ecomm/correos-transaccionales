@@ -103,6 +103,14 @@ a {
   font-size: 14px;
 }
 
+.ct-section-title {
+  font-size: 14px;
+  color: var(--ct-text-muted);
+  margin: 28px 0 12px 0;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
 /* Cards */
 .ct-card {
   background: #ffffff;

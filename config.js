@@ -79,12 +79,13 @@ const EXAMPLE_SCENARIOS = [
 ];
 
 const VERSION = {
-  number: '0.4.0',
+  number: '0.5.0',
   date: '2026-06-06',
-  summary: 'Hardening de datos de ejemplo, Handlebars local y ajustes de validacion.',
+  summary: 'Biblioteca y Visualizador como flujo principal; Simulador QA como herramienta secundaria.',
 };
 
 const CHANGELOG = [
+  { version: '0.5.0', date: '2026-06-06', summary: 'Se priorizan Biblioteca y Visualizador como flujo principal; Simulador queda rotulado como QA interno y se documenta el flujo para crear nuevas plantillas con JSON representativo.' },
   { version: '0.4.0', date: '2026-06-06', summary: 'Datos de ejemplo sanitizados, Handlebars local, escenarios centralizados, simulador coherente en multipaquete y docs de validacion/roadmap.' },
   { version: '0.3.0', date: '2026-06-06', summary: 'Simulador de Datos (Módulo 4) con escenarios combinables; fix: normalización de pedidos "desnudos" en el render compartido.' },
   { version: '0.2.0', date: '2026-06-06', summary: 'Visualizador de Plantillas (Módulo 3) con selector de plantilla y escenario, render con Handlebars.' },

@@ -11,15 +11,16 @@ Validación base para cambios en el sitio estático.
 | Abrir ficha de plantilla | La ficha muestra metadata, variables, link al HTML y botón de descarga. |
 | Filtrar/buscar en catálogo | Los resultados se actualizan y aparece estado vacío si no hay coincidencias. |
 | Navegar a Flujo de Correos | El módulo carga sin romper la navegación compartida. |
+| Abrir Simulador QA | El módulo queda disponible como herramienta secundaria de validación interna. |
 
 ## Preview
 
 | Caso | Esperado |
 | --- | --- |
 | Visualizador con cada plantilla y cada escenario de `EXAMPLE_SCENARIOS` | El iframe renderiza contenido y no queda en blanco. |
-| Simulador con domicilio, retiro y escenarios multipaquete | El iframe renderiza contenido y recalcula totales. |
-| Simulador con escenario multipaquete | El selector fuerza dos productos para evitar datos imposibles. |
-| Simulador con promoción aplicada | El resumen muestra beneficio/promoción y totales actualizados. |
+| Simulador QA con domicilio, retiro y escenarios multipaquete | El iframe renderiza contenido y recalcula totales. |
+| Simulador QA con escenario multipaquete | El selector fuerza dos productos para evitar datos imposibles. |
+| Simulador QA con promoción aplicada | El resumen muestra beneficio/promoción y totales actualizados. |
 
 ## Datos y publicación
 
@@ -29,3 +30,4 @@ Validación base para cambios en el sitio estático.
 | Revisar datos sensibles antes de publicar | No quedan IDs reales de cliente, pago, orden, cuenta o dirección. |
 | Validar rutas de `config.js` | `archivoHtml` y `ejemplo` apuntan a archivos existentes. |
 | Probar sin acceso a CDN externo | Visualizador y Simulador siguen funcionando con Handlebars local. |
+| Crear una plantilla nueva | Existe JSON real o representativo, sanitizado y documentado en `config.js`. |

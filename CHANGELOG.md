@@ -2,6 +2,15 @@
 
 Formato: versión, fecha, resumen del cambio principal.
 
+## v0.5.0 — 2026-06-06
+
+- Se reorganizó la orientación funcional: Biblioteca de Plantillas y Visualizador quedan como
+  flujo principal para agentes y mantenimiento interno.
+- El Simulador pasa a presentarse como `Simulador QA`, herramienta secundaria para validar
+  variantes de datos.
+- Se agregó `docs/crear-nueva-plantilla.md` con el flujo recomendado para sumar correos nuevos
+  usando un JSON real o representativo del evento.
+
 ## v0.4.0 — 2026-06-06
 
 - Hardening de datos de ejemplo: se reemplazaron identificadores reales de cliente, orden,

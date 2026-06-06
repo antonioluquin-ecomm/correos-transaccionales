@@ -17,9 +17,11 @@ Un único lugar donde el equipo puede ver:
 Sitio estático (HTML + CSS + JS, sin backend) pensado para GitHub Pages. Se navega desde [`index.html`](index.html) hacia los módulos:
 
 - `modules/catalogo/` — Biblioteca de Plantillas: listado, filtros, búsqueda y ficha por plantilla (descarga de HTML, variables).
-- `modules/flujo/` — Flujo de Correos: mapa del recorrido de comunicaciones al cliente.
 - `modules/visualizador/` — Visualizador de Plantillas: preview de cada plantilla en distintos escenarios.
-- `modules/simulador/` — Simulador de Datos: combina escenarios (envío, productos, promociones) sobre un pedido base para previsualizar cada plantilla sin necesitar un JSON distinto por caso.
+- `modules/flujo/` — Flujo de Correos: mapa del recorrido de comunicaciones al cliente.
+- `modules/simulador/` — Simulador QA: herramienta interna para probar variantes sobre un pedido base.
+
+Para sumar una plantilla nueva, usar [`docs/crear-nueva-plantilla.md`](docs/crear-nueva-plantilla.md). El insumo clave es un JSON real o representativo del evento: puede estar sanitizado, pero debe conservar la estructura de datos original para validar que el HTML sea funcional.
 
 ## Estructura
 
@@ -40,8 +42,8 @@ No hay build ni dependencias instalables, pero los módulos de preview usan `fet
 node .tmp-static-server.js
 ```
 
-Después abrir `http://127.0.0.1:8723/index.html`. Antes de publicar, hacer un smoke visual: carga de cada módulo, filtros y ficha del catálogo, render del Visualizador y el Simulador con sus distintos escenarios, y consola sin errores.
+Después abrir `http://127.0.0.1:8723/index.html`. Antes de publicar, hacer un smoke visual: carga de cada módulo, filtros y ficha del catálogo, render del Visualizador y, si aplica, prueba del Simulador QA con sus distintos escenarios. La consola debe quedar sin errores.
 
 ## Estado
 
-MVP en construcción — primer foco: Módulo 2 (Biblioteca de Plantillas).
+MVP operativo — foco principal: Biblioteca de Plantillas y Visualizador funcional.
