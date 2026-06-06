@@ -179,20 +179,11 @@
           return JSON.parse(JSON.stringify(value));
         }
 
-        // Algunos JSON de ejemplo guardan el pedido "desnudo" (sin el wrapper
-        // orders[] que usa VTEX) — ver docs/decisions/2026-06-06-... Lo
-        // envolvemos para poder transformar siempre sobre orders[0].
-        function normalizeOrderPayload(raw) {
-          if (raw && Array.isArray(raw.orders)) return raw;
-          return { orders: [raw], _accountInfo: raw._accountInfo };
-        }
-
         let baseDataPromise = null;
 
         function loadBaseData() {
           if (!baseDataPromise) {
-            baseDataPromise = CT.fetchText(BASE + BASE_ORDER_PATH)
-              .then((text) => normalizeOrderPayload(JSON.parse(text)));
+            baseDataPromise = CT.fetchText(BASE + BASE_ORDER_PATH).then((text) => JSON.parse(text));
           }
           return baseDataPromise;
         }

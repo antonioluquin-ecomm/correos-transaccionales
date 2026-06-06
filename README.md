@@ -19,7 +19,7 @@ Sitio estático (HTML + CSS + JS, sin backend) pensado para GitHub Pages. Se nav
 - `modules/catalogo/` — Biblioteca de Plantillas: listado, filtros, búsqueda y ficha por plantilla (descarga de HTML, variables).
 - `modules/flujo/` — Flujo de Correos: mapa del recorrido de comunicaciones al cliente.
 - `modules/visualizador/` — Visualizador de Plantillas: preview de cada plantilla en distintos escenarios.
-- `modules/simulador/` — Simulador de Datos: selección de pedidos de ejemplo (JSON) para alimentar el visualizador.
+- `modules/simulador/` — Simulador de Datos: combina escenarios (envío, productos, promociones) sobre un pedido base para previsualizar cada plantilla sin necesitar un JSON distinto por caso.
 
 ## Estructura
 
@@ -34,7 +34,7 @@ config.js     -> catálogo de plantillas (metadata), versión y changelog
 
 ## Cómo se valida
 
-No hay build ni dependencias: alcanza con abrir `index.html` en un navegador o servirlo con cualquier servidor estático. Antes de publicar, revisar el [smoke visual](docs/test-matrix.md): carga de páginas, filtros del catálogo, descarga de HTML y consola sin errores.
+No hay build ni dependencias: alcanza con abrir `index.html` en un navegador o servirlo con cualquier servidor estático. Antes de publicar, hacer un smoke visual: carga de cada módulo, filtros y ficha del catálogo, render del Visualizador y el Simulador con sus distintos escenarios, y consola sin errores.
 
 ## Estado
 

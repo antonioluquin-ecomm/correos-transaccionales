@@ -70,12 +70,13 @@ const TEMPLATES = [
 ];
 
 const VERSION = {
-  number: '0.2.0',
+  number: '0.3.0',
   date: '2026-06-06',
-  summary: 'Visualizador de Plantillas: render en vivo de las plantillas con datos de ejemplo.',
+  summary: 'Simulador de Datos y fix de normalización de pedidos en el Visualizador.',
 };
 
 const CHANGELOG = [
+  { version: '0.3.0', date: '2026-06-06', summary: 'Simulador de Datos (Módulo 4) con escenarios combinables; fix: normalización de pedidos "desnudos" en el render compartido.' },
   { version: '0.2.0', date: '2026-06-06', summary: 'Visualizador de Plantillas (Módulo 3) con selector de plantilla y escenario, render con Handlebars.' },
   { version: '0.1.0', date: '2026-06-06', summary: 'Estructura inicial y catálogo con pedido-confirmado y pago-aprobado.' },
 ];

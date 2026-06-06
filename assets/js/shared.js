@@ -136,12 +136,15 @@ const CT = (() => {
   /**
    * Algunas plantillas esperan el pedido completo en la raíz del contexto
    * ({{orderId}}, {{hostName}}) y otras esperan la estructura VTEX completa
-   * ({{orders.0.orderId}}). Fusionamos ambas formas para que cualquiera de
-   * las dos resuelva contra el mismo JSON de pedido.
+   * ({{orders.0.orderId}}). Algunos JSON de ejemplo además guardan el pedido
+   * "desnudo" (sin el wrapper orders[] que usa VTEX). Normalizamos siempre a
+   * la forma envuelta y fusionamos el pedido aplanado sobre la raíz, para que
+   * cualquier combinación de plantilla y dato resuelva contra el mismo JSON.
    */
   function buildEmailRenderContext(data) {
-    const order = (data.orders && data.orders[0]) || {};
-    return Object.assign({}, data, order, { orders: data.orders, _accountInfo: data._accountInfo });
+    const orders = Array.isArray(data.orders) ? data.orders : [data];
+    const order = orders[0] || {};
+    return Object.assign({}, data, order, { orders, _accountInfo: data._accountInfo || order._accountInfo });
   }
 
   function renderEmailToFrame(frame, html, data) {
