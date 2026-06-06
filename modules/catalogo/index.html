@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Biblioteca de Plantillas — Correos Transaccionales</title>
+    <link rel="stylesheet" href="../../assets/css/shared.css" />
+    <style>
+      .ct-template-card {
+        text-align: left;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .ct-template-card .ct-badges {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+
+      .ct-template-card h3 {
+        font-size: 16px;
+      }
+
+      .ct-template-card .ct-meta {
+        font-size: 12px;
+        color: var(--ct-text-muted);
+      }
+
+      /* Ficha de detalle */
+      .ct-detail-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(17, 24, 39, 0.45);
+        display: none;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 40px 16px;
+        z-index: 50;
+        overflow-y: auto;
+      }
+
+      .ct-detail-overlay.open {
+        display: flex;
+      }
+
+      .ct-detail {
+        background: #ffffff;
+        border-radius: 12px;
+        max-width: 640px;
+        width: 100%;
+        padding: 24px;
+      }
+
+      .ct-detail-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 16px;
+        margin-bottom: 12px;
+      }
+
+      .ct-detail dl {
+        display: grid;
+        grid-template-columns: 140px 1fr;
+        gap: 8px 16px;
+        font-size: 14px;
+        margin: 16px 0;
+      }
+
+      .ct-detail dt {
+        color: var(--ct-text-muted);
+        font-weight: 600;
+      }
+
+      .ct-detail dd {
+        margin: 0;
+      }
+
+      .ct-detail .ct-variables {
+        font-size: 13px;
+        line-height: 20px;
+        background: var(--ct-bg);
+        border-radius: 8px;
+        padding: 12px 16px;
+        max-height: 220px;
+        overflow-y: auto;
+      }
+
+      .ct-detail .ct-actions {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: 16px;
+      }
+
+      .ct-close {
+        border: none;
+        background: transparent;
+        font-size: 20px;
+        line-height: 1;
+        cursor: pointer;
+        color: var(--ct-text-muted);
+        padding: 4px;
+      }
+
+      .ct-close:hover {
+        color: var(--ct-text);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="ct-topbar" data-ct-topbar></header>
+
+    <main class="ct-page">
+      <h1>Biblioteca de Plantillas</h1>
+      <p class="ct-subtitle">
+        Catálogo central de las plantillas de correo existentes: nombre, plataforma, categoría,
+        estado, responsable y descripción funcional. Hacé clic en una para ver su ficha completa.
+      </p>
+
+      <div class="ct-toolbar">
+        <input type="search" id="ct-search" placeholder="Buscar por nombre o descripción…" aria-label="Buscar plantilla" />
+        <select id="ct-filter-plataforma" aria-label="Filtrar por plataforma">
+          <option value="">Plataforma: todas</option>
+        </select>
+        <select id="ct-filter-categoria" aria-label="Filtrar por categoría">
+          <option value="">Categoría: todas</option>
+        </select>
+        <select id="ct-filter-estado" aria-label="Filtrar por estado">
+          <option value="">Estado: todos</option>
+        </select>
+      </div>
+
+      <div id="ct-results" class="ct-grid"></div>
+      <div id="ct-empty" class="ct-empty" hidden>
+        <p><strong>No se encontraron plantillas con esos filtros.</strong></p>
+        <p>Probá ajustar la búsqueda o limpiar los filtros.</p>
+      </div>
+    </main>
+
+    <div class="ct-detail-overlay" id="ct-detail-overlay">
+      <div class="ct-detail" role="dialog" aria-modal="true" aria-labelledby="ct-detail-title">
+        <div class="ct-detail-header">
+          <div>
+            <div class="ct-badges" id="ct-detail-badges"></div>
+            <h2 id="ct-detail-title"></h2>
+          </div>
+          <button class="ct-close" id="ct-detail-close" aria-label="Cerrar ficha">&times;</button>
+        </div>
+        <p id="ct-detail-descripcion"></p>
+        <dl>
+          <dt>Responsable</dt>
+          <dd id="ct-detail-responsable"></dd>
+          <dt>Última actualización</dt>
+          <dd id="ct-detail-actualizado"></dd>
+          <dt>Plantilla HTML</dt>
+          <dd id="ct-detail-archivo"></dd>
+          <dt>Datos de ejemplo</dt>
+          <dd id="ct-detail-ejemplo"></dd>
+        </dl>
+        <h3>Variables y datos que utiliza</h3>
+        <div class="ct-variables" id="ct-detail-variables"></div>
+        <div class="ct-actions">
+          <a class="ct-btn ct-btn-primary" id="ct-detail-ver" target="_blank" rel="noopener">Ver HTML</a>
+          <button class="ct-btn" id="ct-detail-descargar">Descargar HTML</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="../../config.js"></script>
+    <script src="../../assets/js/shared.js"></script>
+    <script>
+      (function () {
+        const BASE = '../../';
+        CT.renderTopbar('catalogo', BASE);
+
+        const resultsEl = document.getElementById('ct-results');
+        const emptyEl = document.getElementById('ct-empty');
+        const searchEl = document.getElementById('ct-search');
+        const filterPlataformaEl = document.getElementById('ct-filter-plataforma');
+        const filterCategoriaEl = document.getElementById('ct-filter-categoria');
+        const filterEstadoEl = document.getElementById('ct-filter-estado');
+
+        function uniqueValues(field) {
+          return Array.from(new Set(TEMPLATES.map((t) => t[field]).filter(Boolean))).sort();
+        }
+
+        function fillSelect(selectEl, values) {
+          values.forEach((value) => {
+            const option = document.createElement('option');
+            option.value = value;
+            option.textContent = value;
+            selectEl.appendChild(option);
+          });
+        }
+
+        fillSelect(filterPlataformaEl, uniqueValues('plataforma'));
+        fillSelect(filterCategoriaEl, uniqueValues('categoria'));
+        fillSelect(filterEstadoEl, uniqueValues('estado'));
+
+        function matchesFilters(template) {
+          const query = searchEl.value.trim().toLowerCase();
+          const matchesQuery =
+            !query ||
+            template.nombre.toLowerCase().includes(query) ||
+            template.descripcion.toLowerCase().includes(query);
+
+          const matchesPlataforma = !filterPlataformaEl.value || template.plataforma === filterPlataformaEl.value;
+          const matchesCategoria = !filterCategoriaEl.value || template.categoria === filterCategoriaEl.value;
+          const matchesEstado = !filterEstadoEl.value || template.estado === filterEstadoEl.value;
+
+          return matchesQuery && matchesPlataforma && matchesCategoria && matchesEstado;
+        }
+
+        function renderCard(template) {
+          const card = document.createElement('button');
+          card.type = 'button';
+          card.className = 'ct-card ct-template-card';
+          card.innerHTML = `
+            <div class="ct-badges">
+              ${CT.platformBadge(template.plataforma)}
+              ${CT.statusBadge(template.estado)}
+            </div>
+            <h3>${CT.escapeHtml(template.nombre)}</h3>
+            <p>${CT.escapeHtml(template.descripcion)}</p>
+            <div class="ct-meta">${CT.escapeHtml(template.categoria)} · actualizado ${CT.escapeHtml(template.actualizado)}</div>
+          `;
+          card.addEventListener('click', () => openDetail(template));
+          return card;
+        }
+
+        function renderResults() {
+          const filtered = TEMPLATES.filter(matchesFilters);
+          resultsEl.innerHTML = '';
+          filtered.forEach((template) => resultsEl.appendChild(renderCard(template)));
+          emptyEl.hidden = filtered.length > 0;
+          resultsEl.hidden = filtered.length === 0;
+        }
+
+        [searchEl, filterPlataformaEl, filterCategoriaEl, filterEstadoEl].forEach((el) => {
+          el.addEventListener('input', renderResults);
+          el.addEventListener('change', renderResults);
+        });
+
+        // Ficha de detalle
+        const overlay = document.getElementById('ct-detail-overlay');
+        const closeBtn = document.getElementById('ct-detail-close');
+        const titleEl = document.getElementById('ct-detail-title');
+        const badgesEl = document.getElementById('ct-detail-badges');
+        const descripcionEl = document.getElementById('ct-detail-descripcion');
+        const responsableEl = document.getElementById('ct-detail-responsable');
+        const actualizadoEl = document.getElementById('ct-detail-actualizado');
+        const archivoEl = document.getElementById('ct-detail-archivo');
+        const ejemploEl = document.getElementById('ct-detail-ejemplo');
+        const variablesEl = document.getElementById('ct-detail-variables');
+        const verBtn = document.getElementById('ct-detail-ver');
+        const descargarBtn = document.getElementById('ct-detail-descargar');
+
+        let currentTemplate = null;
+
+        function openDetail(template) {
+          currentTemplate = template;
+          titleEl.textContent = template.nombre;
+          badgesEl.innerHTML = `${CT.platformBadge(template.plataforma)}${CT.statusBadge(template.estado)}`;
+          descripcionEl.textContent = template.descripcion;
+          responsableEl.textContent = template.responsable;
+          actualizadoEl.textContent = template.actualizado;
+          archivoEl.innerHTML = `<code>${CT.escapeHtml(template.archivoHtml)}</code>`;
+          ejemploEl.innerHTML = template.ejemplo
+            ? `<code>${CT.escapeHtml(template.ejemplo)}</code>`
+            : 'Sin dato de ejemplo asociado todavía.';
+          variablesEl.innerHTML = template.variables.length
+            ? `<ul>${template.variables.map((v) => `<li><code>${CT.escapeHtml(v)}</code></li>`).join('')}</ul>`
+            : '<p>Sin variables documentadas todavía.</p>';
+          verBtn.href = BASE + template.archivoHtml;
+
+          overlay.classList.add('open');
+        }
+
+        function closeDetail() {
+          overlay.classList.remove('open');
+          currentTemplate = null;
+        }
+
+        closeBtn.addEventListener('click', closeDetail);
+        overlay.addEventListener('click', (event) => {
+          if (event.target === overlay) closeDetail();
+        });
+        document.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape' && overlay.classList.contains('open')) closeDetail();
+        });
+
+        descargarBtn.addEventListener('click', async () => {
+          if (!currentTemplate) return;
+          try {
+            const html = await CT.fetchText(BASE + currentTemplate.archivoHtml);
+            const filename = currentTemplate.archivoHtml.split('/').pop();
+            CT.downloadFile(filename, html, 'text/html');
+          } catch (error) {
+            alert('No se pudo descargar el HTML: ' + error.message);
+          }
+        });
+
+        renderResults();
+      })();
+    </script>
+  </body>
+</html>

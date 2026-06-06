@@ -1,0 +1,495 @@
+{
+	"package": null,
+	"subjectItemAttachment": {
+		"item": "Zapatillas Puma Cour...",
+		"totalItems": 1
+	},
+	"cancellationReason": null,
+	"paymentData": {
+		"giftCards": [],
+		"transactions": [
+			{
+				"isActive": true,
+				"transactionId": "559011A7A38B40C38AB4942E984C76DB",
+				"merchantName": "S*********",
+				"payments": [
+					{
+						"id": "DF79CE7CF1464F3D95C89FD50D251005",
+						"paymentSystem": "10",
+						"paymentSystemName": "V************",
+						"value": 9589900,
+						"installments": 1,
+						"referenceValue": 9589900,
+						"cardHolder": null,
+						"cardNumber": null,
+						"firstDigits": "481550",
+						"lastDigits": "6586",
+						"cvv2": null,
+						"expireMonth": null,
+						"expireYear": null,
+						"url": null,
+						"giftCardId": null,
+						"giftCardName": null,
+						"giftCardCaption": null,
+						"redemptionCode": null,
+						"group": "debitCard",
+						"tid": "1574587058113-1",
+						"dueDate": null,
+						"connectorResponses": {
+							"Tid": "1574587058113-1",
+							"ReturnCode": "200",
+							"Message": "Transaction Approved",
+							"authId": "017017",
+							"nsu": "6153",
+							"acquirer": "Payway"
+						},
+						"giftCardProvider": null,
+						"giftCardAsDiscount": null,
+						"koinUrl": null,
+						"accountId": null,
+						"parentAccountId": null,
+						"bankIssuedInvoiceIdentificationNumber": null,
+						"bankIssuedInvoiceIdentificationNumberFormatted": null,
+						"bankIssuedInvoiceBarCodeNumber": null,
+						"bankIssuedInvoiceBarCodeType": null,
+						"billingAddress": {
+							"postalCode": "1***",
+							"city": "M**** C*******",
+							"state": "BUENOS AIRES",
+							"country": "ARG",
+							"street": "P*******",
+							"number": "1***",
+							"neighborhood": null,
+							"complement": null,
+							"reference": null,
+							"geoCoordinates": [
+								-51.4779552,
+								-0.0039779
+							]
+						},
+						"paymentOrigin": null
+					}
+				]
+			}
+		]
+	},
+	"cancellationRequests": null,
+	"invoiceData": null,
+	"clientProfileData": {
+		"id": "clientProfileData",
+		"email": "f*******************************@c*.v***.c**.b*",
+		"firstName": "H*******",
+		"lastName": "D** o**** A****",
+		"documentType": "dni",
+		"document": "2*******",
+		"phone": "0**********",
+		"corporateName": null,
+		"tradeName": null,
+		"corporateDocument": null,
+		"stateInscription": null,
+		"corporatePhone": null,
+		"isCorporate": false,
+		"userProfileId": "ed33f882-1af3-4d11-8bad-34cbb1904a20",
+		"userProfileVersion": null,
+		"customerClass": null,
+		"customerCode": null
+	},
+	"shippingData": {
+		"id": "shippingData",
+		"address": {
+			"addressType": "residential",
+			"receiverName": "H*******  D** o**** A****",
+			"addressId": "10573770067308",
+			"versionId": null,
+			"entityId": null,
+			"postalCode": "1***",
+			"city": "M**** C*******",
+			"state": "BUENOS AIRES",
+			"country": "ARG",
+			"street": "P*******",
+			"number": "1***",
+			"neighborhood": null,
+			"complement": null,
+			"reference": null,
+			"geoCoordinates": [
+				-51.4779552,
+				-0.0039779
+			]
+		},
+		"logisticsInfo": [
+			{
+				"itemIndex": 0,
+				"itemId": "310223788",
+				"selectedDeliveryChannel": "delivery",
+				"selectedSla": "Normal",
+				"lockTTL": "12d",
+				"price": 1090000,
+				"listPrice": 1090000,
+				"sellingPrice": 1090000,
+				"deliveryWindow": null,
+				"deliveryCompany": null,
+				"shippingEstimate": "4bd",
+				"shippingEstimateDate": null,
+				"slas": [
+					{
+						"id": "Normal",
+						"name": "N*****",
+						"shippingEstimate": "4bd",
+						"shippingEstimateDate": null,
+						"deliveryWindow": null,
+						"availableDeliveryWindows": [],
+						"deliveryIds": [
+							{
+								"courierId": "104_andreani_normal",
+								"courierName": "1**********************",
+								"dockId": "104",
+								"quantity": 1,
+								"warehouseId": "1_104",
+								"accountCarrierName": "s*******",
+								"kitItemDetails": []
+							}
+						],
+						"listPrice": 1090000,
+						"price": 1090000,
+						"deliveryChannel": "delivery",
+						"pickupStoreInfo": {
+							"additionalInfo": null,
+							"address": null,
+							"dockId": null,
+							"friendlyName": null,
+							"isPickupStore": false
+						},
+						"polygonName": "",
+						"lockTTL": "12d",
+						"pickupPointId": null,
+						"transitTime": "4bd",
+						"pickupDistance": 0
+					}
+				],
+				"shipsTo": [
+					"ARG"
+				],
+				"deliveryIds": [
+					{
+						"courierId": "104_andreani_normal",
+						"courierName": "1**********************",
+						"dockId": "104",
+						"quantity": 1,
+						"warehouseId": "1_104",
+						"accountCarrierName": "s*******",
+						"kitItemDetails": []
+					}
+				],
+				"deliveryChannels": [
+					{
+						"id": "delivery",
+						"stockBalance": 0
+					},
+					{
+						"id": "pickup-in-point",
+						"stockBalance": 0
+					}
+				],
+				"deliveryChannel": null,
+				"pickupStoreInfo": {
+					"additionalInfo": null,
+					"address": null,
+					"dockId": null,
+					"friendlyName": null,
+					"isPickupStore": false
+				},
+				"addressId": "10573770067308",
+				"versionId": null,
+				"entityId": null,
+				"polygonName": "",
+				"pickupPointId": null,
+				"transitTime": "4bd"
+			}
+		],
+		"trackingHints": [],
+		"selectedAddresses": [
+			{
+				"addressId": "10573770067308",
+				"versionId": null,
+				"entityId": null,
+				"addressType": "residential",
+				"receiverName": "H*******  D** o**** A****",
+				"street": "P*******",
+				"number": "1***",
+				"complement": null,
+				"neighborhood": null,
+				"postalCode": "1***",
+				"city": "M**** C*******",
+				"state": "BUENOS AIRES",
+				"country": "ARG",
+				"reference": null,
+				"geoCoordinates": [
+					-51.4779552,
+					-0.0039779
+				]
+			}
+		],
+		"availableAddresses": [
+			{
+				"addressId": "10573770067308",
+				"versionId": null,
+				"entityId": null,
+				"addressType": "residential",
+				"receiverName": "H*******  D** o**** A****",
+				"street": "P*******",
+				"number": "1***",
+				"complement": null,
+				"neighborhood": null,
+				"postalCode": "1***",
+				"city": "M**** C*******",
+				"state": "BUENOS AIRES",
+				"country": "ARG",
+				"reference": null,
+				"geoCoordinates": [
+					-51.4779552,
+					-0.0039779
+				]
+			}
+		],
+		"contactInformation": [],
+		"contactsInfo": []
+	},
+	"customData": {
+		"customApps": [
+			{
+				"fields": {
+					"uuid": "34c9593a-a5ea-4f6e-9927-767ddc42bb3f",
+					"source": "WEB_MOBILE"
+				},
+				"id": "synerise",
+				"major": 1
+			}
+		],
+		"customFields": []
+	},
+	"purchaseAgentData": null,
+	"authorizationPolicyData": null,
+	"items": [
+		{
+			"additionalInfo": {
+				"categoriesIds": "/106/107/110/",
+				"productClusterId": "151,155,503,557",
+				"commercialConditionId": "1",
+				"dimension": {
+					"cubicweight": 1.5125,
+					"height": 11,
+					"length": 33,
+					"weight": 300,
+					"width": 20
+				},
+				"brandName": "P***",
+				"brandId": "2000056",
+				"offeringInfo": null,
+				"offeringType": null,
+				"offeringTypeId": null
+			},
+			"sellerSku": "310223788",
+			"priceTable": null,
+			"priceValidUntil": "2026-11-07T17:51:23Z",
+			"callCenterOperator": null,
+			"commission": 0,
+			"freightCommission": 0,
+			"taxCode": "",
+			"catalogProvider": "vrn:vtex.catalog-api-proxy:-:sportingio:master:/proxy/authenticated/catalog/pvt/sku/stockkeepingunitbyid/310223788",
+			"uniqueId": "686FC72814F94498A71CAF5FFBD14E4F",
+			"id": "310223788",
+			"productId": "56133",
+			"productRefId": "40581005-000",
+			"refId": "40581005-000-60",
+			"ean": "null",
+			"name": "Z*******************************************************************",
+			"skuName": "C************************",
+			"modalType": null,
+			"parentItemIndex": null,
+			"parentAssemblyBinding": null,
+			"assemblies": [],
+			"tax": 0,
+			"price": 8499900,
+			"listPrice": 8499900,
+			"manualPrice": null,
+			"manualPriceAppliedBy": null,
+			"sellingPrice": 8499900,
+			"rewardValue": 0,
+			"isGift": false,
+			"preSaleDate": null,
+			"productCategoryIds": "/106/107/110/",
+			"productCategories": {
+				"106": "SPORTING",
+				"107": "CALZADO",
+				"110": "Zapatillas"
+			},
+			"quantity": 1,
+			"seller": "1",
+			"sellerChain": [
+				"1"
+			],
+			"imageUrl": "https://sporting.vteximg.com.br/arquivos/ids/2155973-150-150/40581005-000-1.jpg?v=638893911308200000",
+			"detailUrl": "/zapatillas-puma-court-classic-clean-unisex-40581005-000/p",
+			"components": [],
+			"bundleItems": [],
+			"attachments": [],
+			"attachmentOfferings": [],
+			"offerings": [],
+			"priceTags": [],
+			"availability": "available",
+			"measurementUnit": "un",
+			"unitMultiplier": 1,
+			"manufacturerCode": null,
+			"priceDefinition": {
+				"calculatedSellingPrice": 8499900,
+				"total": 8499900,
+				"sellingPrices": [
+					{
+						"value": 8499900,
+						"quantity": 1
+					}
+				]
+			}
+		}
+	],
+	"sellers": [
+		{
+			"subSellerId": "1",
+			"fulfillmentEndpoint": "http://fulfillment.vtexcommerce.com.br/api/fulfillment?an=sportingio",
+			"id": "1",
+			"name": "S*******",
+			"logo": ""
+		}
+	],
+	"giftRegistryData": null,
+	"receiptData": null,
+	"contextData": null,
+	"marketPlaceOrderId": "",
+	"marketPlaceOrderGroup": null,
+	"marketplaceServicesEndpoint": null,
+	"orderFormId": "70ec6490eb864bd08bc5afdd248c8b43",
+	"sequence": "7058113",
+	"affiliateId": "",
+	"status": "",
+	"callCenterOperator": "",
+	"userProfileId": "ed33f882-1af3-4d11-8bad-34cbb1904a20",
+	"hostName": "s*********",
+	"creationVersion": null,
+	"creationEnvironment": null,
+	"lastChangeVersion": null,
+	"workflowInstanceId": null,
+	"marketplacePaymentValue": null,
+	"orderId": "1574587058113-01",
+	"orderGroup": "1574587058113",
+	"state": "canceled",
+	"isCheckedIn": false,
+	"sellerOrderId": "00-1574587058113-01",
+	"storeId": null,
+	"checkedInPickupPointId": null,
+	"value": 9589900,
+	"totals": [
+		{
+			"id": "Items",
+			"name": "T*****************",
+			"value": 8499900
+		},
+		{
+			"id": "Discounts",
+			"name": "T******************",
+			"value": 0
+		},
+		{
+			"id": "Shipping",
+			"name": "C********************",
+			"value": 1090000
+		},
+		{
+			"id": "Tax",
+			"name": "C*********************",
+			"value": 0
+		}
+	],
+	"ratesAndBenefitsData": {
+		"rateAndBenefitsIdentifiers": [],
+		"teaser": []
+	},
+	"clientPreferencesData": {
+		"locale": "es-AR",
+		"optinNewsLetter": false
+	},
+	"commercialConditionData": null,
+	"marketingData": null,
+	"storePreferencesData": {
+		"countryCode": "ARG",
+		"saveUserData": false,
+		"timeZone": "Argentina Standard Time",
+		"currencyCode": "ARS",
+		"currencyLocale": 11274,
+		"currencySymbol": "$",
+		"currencyFormatInfo": {
+			"currencyDecimalDigits": 0,
+			"currencyDecimalSeparator": ",",
+			"currencyGroupSeparator": ".",
+			"currencyGroupSize": 3,
+			"startsWithCurrencySymbol": true
+		}
+	},
+	"openTextField": null,
+	"itemMetadata": null,
+	"taxData": null,
+	"hooksData": null,
+	"changeData": null,
+	"subscriptionData": null,
+	"salesChannel": "1",
+	"followUpEmail": "9**********************************.v***.c**.b*",
+	"creationDate": "2025-11-07T17:51:40.2597075Z",
+	"lastChange": "2025-11-07T18:06:59.3734157Z",
+	"timeZoneCreationDate": "2025-11-07T14:51:40.2597075",
+	"timeZoneLastChange": "2025-11-07T15:06:59.3734157",
+	"isCompleted": true,
+	"merchantName": null,
+	"userType": "",
+	"roundingError": 0,
+	"allowEdition": false,
+	"allowCancellation": false,
+	"isUserDataVisible": false,
+	"allowChangeSeller": false,
+	"cancellationData": {
+		"requestedByUser": false,
+		"requestedByPaymentNotification": true,
+		"reason": null,
+		"cancellationDate": "2025-11-07T17:51:53.7268799Z"
+	},
+	"_accountInfo": {
+		"MainAccountName": "s*******",
+		"AccountName": "s*********",
+		"Cnpj": "30709964360",
+		"Id": "3b50fdc9-2fa8-4ed3-b86c-5aace09d5051",
+		"AppId": "aad3c2ce-d115-4059-88c2-a0060e5acd9a",
+		"IsActive": true,
+		"IsOperating": true,
+		"CreationDate": "2017-09-13T04:00:22",
+		"OperationDate": "2018-04-12T14:44:05",
+		"CompanyName": "B*************",
+		"TradingName": "S*******",
+		"City": "San Miguel de Tucuman",
+		"Complement": null,
+		"Country": "Argentina",
+		"State": null,
+		"Address": "Avenida Siria",
+		"District": null,
+		"Number": "2345",
+		"PostalCode": "4000",
+		"Licenses": [
+			28
+		],
+		"ParentAccountId": null,
+		"ParentAccountName": null,
+		"InactivationDate": null,
+		"Platform": "vtex",
+		"Privacy": null,
+		"HasPiiRestriction": false,
+		"Infra": null,
+		"Sponsor": "df910ed7-4389-4261-977b-ead598aaa015"
+	}
+}

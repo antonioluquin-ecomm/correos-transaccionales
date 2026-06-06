@@ -1,0 +1,480 @@
+{
+  "orders": [
+    {
+      "package": null,
+      "subjectItemAttachment": {
+        "item": "Guantes Reebok Royal...",
+        "totalItems": 1
+      },
+      "cancellationReason": null,
+      "paymentData": {
+        "giftCards": [],
+        "transactions": [
+          {
+            "isActive": true,
+            "transactionId": "78D97E920BC848D09DB27F852111AAEB",
+            "merchantName": "S*********",
+            "payments": [
+              {
+                "id": "E308DADAD47D4748B2F476DD4BB833B4",
+                "paymentSystem": "177",
+                "paymentSystemName": "G*******",
+                "value": 3939800,
+                "installments": 1,
+                "referenceValue": 3939800,
+                "cardHolder": null,
+                "cardNumber": null,
+                "firstDigits": null,
+                "lastDigits": null,
+                "cvv2": null,
+                "expireMonth": null,
+                "expireYear": null,
+                "url": null,
+                "giftCardId": null,
+                "giftCardName": null,
+                "giftCardCaption": null,
+                "redemptionCode": null,
+                "group": "GOcuotas",
+                "tid": "2078410",
+                "dueDate": null,
+                "connectorResponses": {
+                  "Tid": "2078410",
+                  "ReturnCode": null,
+                  "Message": null,
+                  "authId": "Order-11893651",
+                  "nsu": "Installment-44643368",
+                  "acquirer": "gocuotaspartnerar"
+                },
+                "giftCardProvider": null,
+                "giftCardAsDiscount": null,
+                "koinUrl": null,
+                "accountId": null,
+                "parentAccountId": null,
+                "bankIssuedInvoiceIdentificationNumber": null,
+                "bankIssuedInvoiceIdentificationNumberFormatted": null,
+                "bankIssuedInvoiceBarCodeNumber": null,
+                "bankIssuedInvoiceBarCodeType": null,
+                "billingAddress": null,
+                "paymentOrigin": null
+              }
+            ]
+          }
+        ]
+      },
+      "cancellationRequests": null,
+      "invoiceData": null,
+      "clientProfileData": {
+        "id": "clientProfileData",
+        "email": "4*******************************@c*.v***.c**.b*",
+        "firstName": "R****** E******",
+        "lastName": "G*****",
+        "documentType": "dni",
+        "document": "4*******",
+        "phone": "3*********",
+        "corporateName": null,
+        "tradeName": null,
+        "corporateDocument": null,
+        "stateInscription": null,
+        "corporatePhone": null,
+        "isCorporate": false,
+        "userProfileId": "defa5735-8257-48b9-9597-f71fb5814df7",
+        "userProfileVersion": null,
+        "customerClass": null,
+        "customerCode": null
+      },
+      "shippingData": {
+        "id": "shippingData",
+        "address": {
+          "addressType": "residential",
+          "receiverName": "G***** R******",
+          "addressId": "12096498598408",
+          "versionId": null,
+          "entityId": null,
+          "postalCode": "4***",
+          "city": "L* Q*****",
+          "state": "JUJUY",
+          "country": "ARG",
+          "street": "L*********",
+          "number": "4",
+          "neighborhood": null,
+          "complement": null,
+          "reference": null,
+          "geoCoordinates": [-51.4779552, -0.0039779]
+        },
+        "logisticsInfo": [
+          {
+            "itemIndex": 0,
+            "itemId": "290866",
+            "selectedDeliveryChannel": "delivery",
+            "selectedSla": "Normal",
+            "lockTTL": "10d",
+            "price": 1090000,
+            "listPrice": 1090000,
+            "sellingPrice": 1090000,
+            "deliveryWindow": null,
+            "deliveryCompany": null,
+            "shippingEstimate": "4bd",
+            "shippingEstimateDate": "2025-12-13T19:47:02.2651985+00:00",
+            "slas": [
+              {
+                "id": "Normal",
+                "name": "N*****",
+                "shippingEstimate": "4bd",
+                "shippingEstimateDate": "2025-12-13T19:47:02.2651985+00:00",
+                "deliveryWindow": null,
+                "availableDeliveryWindows": [],
+                "deliveryIds": [
+                  {
+                    "courierId": "36_andreani_normal",
+                    "courierName": "3*********************",
+                    "dockId": "36",
+                    "quantity": 1,
+                    "warehouseId": "1_36",
+                    "accountCarrierName": "s*******",
+                    "kitItemDetails": []
+                  }
+                ],
+                "listPrice": 1090000,
+                "price": 1090000,
+                "deliveryChannel": "delivery",
+                "pickupStoreInfo": {
+                  "additionalInfo": null,
+                  "address": null,
+                  "dockId": null,
+                  "friendlyName": null,
+                  "isPickupStore": false
+                },
+                "polygonName": "",
+                "lockTTL": "10d",
+                "pickupPointId": null,
+                "transitTime": "3bd",
+                "pickupDistance": 0
+              }
+            ],
+            "shipsTo": ["ARG"],
+            "deliveryIds": [
+              {
+                "courierId": "36_andreani_normal",
+                "courierName": "3*********************",
+                "dockId": "36",
+                "quantity": 1,
+                "warehouseId": "1_36",
+                "accountCarrierName": "s*******",
+                "kitItemDetails": []
+              }
+            ],
+            "deliveryChannels": [
+              {
+                "id": "delivery",
+                "stockBalance": 0
+              }
+            ],
+            "deliveryChannel": null,
+            "pickupStoreInfo": {
+              "additionalInfo": null,
+              "address": null,
+              "dockId": null,
+              "friendlyName": null,
+              "isPickupStore": false
+            },
+            "addressId": "12096498598408",
+            "versionId": null,
+            "entityId": null,
+            "polygonName": "",
+            "pickupPointId": null,
+            "transitTime": "3bd"
+          }
+        ],
+        "trackingHints": [],
+        "selectedAddresses": [
+          {
+            "addressId": "12096498598408",
+            "versionId": null,
+            "entityId": null,
+            "addressType": "residential",
+            "receiverName": "G***** R******",
+            "street": "L*********",
+            "number": "4",
+            "complement": null,
+            "neighborhood": null,
+            "postalCode": "4***",
+            "city": "L* Q*****",
+            "state": "JUJUY",
+            "country": "ARG",
+            "reference": null,
+            "geoCoordinates": [-51.4779552, -0.0039779]
+          }
+        ],
+        "availableAddresses": [
+          {
+            "addressId": "12096498598408",
+            "versionId": null,
+            "entityId": null,
+            "addressType": "residential",
+            "receiverName": "G***** R******",
+            "street": "L*********",
+            "number": "4",
+            "complement": null,
+            "neighborhood": null,
+            "postalCode": "4***",
+            "city": "L* Q*****",
+            "state": "JUJUY",
+            "country": "ARG",
+            "reference": null,
+            "geoCoordinates": [-51.4779552, -0.0039779]
+          }
+        ],
+        "contactInformation": [],
+        "contactsInfo": []
+      },
+      "customData": {
+        "customApps": [
+          {
+            "fields": {
+              "uuid": "130da940-4589-4316-bbb3-f57314f6cf03",
+              "source": "WEB_MOBILE",
+              "snrs_params": "{\"utm_source\":\"gocuotas\",\"utm_medium\":\"Link\",\"utm_campaign\":\"gocuotas\"}"
+            },
+            "id": "synerise",
+            "major": 1
+          }
+        ],
+        "customFields": []
+      },
+      "purchaseAgentData": null,
+      "authorizationPolicyData": null,
+      "items": [
+        {
+          "additionalInfo": {
+            "categoriesIds": "/106/109/155/320/",
+            "productClusterId": "151,155,219,360,364,365,503,523,559,611,678,688,720,765,771,791,796,801,850,876,877",
+            "commercialConditionId": "1",
+            "dimension": {
+              "cubicweight": 0.375,
+              "height": 2,
+              "length": 30,
+              "weight": 100,
+              "width": 30
+            },
+            "brandName": "R*****",
+            "brandId": "2000059",
+            "offeringInfo": null,
+            "offeringType": null,
+            "offeringTypeId": null
+          },
+          "sellerSku": "290866",
+          "priceTable": null,
+          "priceValidUntil": "2026-12-09T19:41:48Z",
+          "callCenterOperator": null,
+          "commission": 0,
+          "freightCommission": 0,
+          "taxCode": "",
+          "catalogProvider": "vrn:vtex.catalog-api-proxy:-:sportingio:master:/proxy/authenticated/catalog/pvt/sku/stockkeepingunitbyid/290866",
+          "uniqueId": "074F915460164CBF894D6F25C2FD3BC2",
+          "id": "290866",
+          "productId": "48292",
+          "productRefId": "RFAAGE001WUR-000",
+          "refId": "RFAAGE001WUR-000-*9",
+          "ean": null,
+          "name": "G********************************************************",
+          "skuName": "C***********************",
+          "modalType": null,
+          "parentItemIndex": null,
+          "parentAssemblyBinding": null,
+          "assemblies": [],
+          "tax": 0,
+          "price": 2849800,
+          "listPrice": 4539900,
+          "manualPrice": null,
+          "manualPriceAppliedBy": null,
+          "sellingPrice": 2849800,
+          "rewardValue": 0,
+          "isGift": false,
+          "preSaleDate": null,
+          "productCategoryIds": "/106/109/155/320/",
+          "productCategories": {
+            "106": "SPORTING",
+            "109": "ACCESORIOS",
+            "155": "Guantes",
+            "320": "Guantes de Arquero"
+          },
+          "quantity": 1,
+          "seller": "1",
+          "sellerChain": ["1"],
+          "imageUrl": "https://sporting.vteximg.com.br/arquivos/ids/1660049-150-150/RFAAGE001WUR-000-1.jpg?v=638681412558030000",
+          "detailUrl": "/guantes-reebok-royal-3-de-hombre-rfaage001wur-000/p",
+          "components": [],
+          "bundleItems": [],
+          "attachments": [],
+          "attachmentOfferings": [],
+          "offerings": [],
+          "priceTags": [],
+          "availability": "available",
+          "measurementUnit": "un",
+          "unitMultiplier": 1,
+          "manufacturerCode": null,
+          "priceDefinition": {
+            "calculatedSellingPrice": 2849800,
+            "total": 2849800,
+            "sellingPrices": [
+              {
+                "value": 2849800,
+                "quantity": 1
+              }
+            ]
+          }
+        }
+      ],
+      "sellers": [
+        {
+          "subSellerId": "1",
+          "fulfillmentEndpoint": "http://fulfillment.vtexcommerce.com.br/api/fulfillment?an=sportingio",
+          "id": "1",
+          "name": "S*******",
+          "logo": ""
+        }
+      ],
+      "giftRegistryData": null,
+      "receiptData": null,
+      "contextData": null,
+      "marketPlaceOrderId": "",
+      "marketPlaceOrderGroup": null,
+      "marketplaceServicesEndpoint": null,
+      "orderFormId": "c425204f0a6f4654bd077947a6aa348b",
+      "sequence": "7194697",
+      "affiliateId": "",
+      "status": "",
+      "callCenterOperator": "",
+      "userProfileId": "defa5735-8257-48b9-9597-f71fb5814df7",
+      "hostName": "s*********",
+      "creationVersion": null,
+      "creationEnvironment": null,
+      "lastChangeVersion": null,
+      "workflowInstanceId": null,
+      "marketplacePaymentValue": null,
+      "orderId": "1582287194697-01",
+      "orderGroup": "1582287194697",
+      "state": "payment-approved",
+      "isCheckedIn": false,
+      "sellerOrderId": "00-1582287194697-01",
+      "storeId": null,
+      "checkedInPickupPointId": null,
+      "value": 3939800,
+      "totals": [
+        {
+          "id": "Items",
+          "name": "T*****************",
+          "value": 2849800
+        },
+        {
+          "id": "Discounts",
+          "name": "T******************",
+          "value": 0
+        },
+        {
+          "id": "Shipping",
+          "name": "C********************",
+          "value": 1090000
+        },
+        {
+          "id": "Tax",
+          "name": "C*********************",
+          "value": 0
+        }
+      ],
+      "ratesAndBenefitsData": {
+        "rateAndBenefitsIdentifiers": [],
+        "teaser": []
+      },
+      "clientPreferencesData": {
+        "locale": "es-AR",
+        "optinNewsLetter": false
+      },
+      "commercialConditionData": null,
+      "marketingData": {
+        "utmSource": "Web",
+        "utmMedium": "Link",
+        "utmCampaign": "gocuotas",
+        "utmipage": "",
+        "utmiPart": "",
+        "utmiCampaign": "",
+        "coupon": null,
+        "marketingTags": []
+      },
+      "storePreferencesData": {
+        "countryCode": "ARG",
+        "saveUserData": false,
+        "timeZone": "Argentina Standard Time",
+        "currencyCode": "ARS",
+        "currencyLocale": 11274,
+        "currencySymbol": "$",
+        "currencyFormatInfo": {
+          "currencyDecimalDigits": 0,
+          "currencyDecimalSeparator": ",",
+          "currencyGroupSeparator": ".",
+          "currencyGroupSize": 3,
+          "startsWithCurrencySymbol": true
+        }
+      },
+      "openTextField": null,
+      "itemMetadata": null,
+      "taxData": null,
+      "hooksData": null,
+      "changeData": null,
+      "subscriptionData": null,
+      "salesChannel": "1",
+      "followUpEmail": "f**********************************.v***.c**.b*",
+      "creationDate": "2025-12-09T19:43:52.4100825Z",
+      "lastChange": "2025-12-09T19:47:15.4589254Z",
+      "timeZoneCreationDate": "2025-12-09T16:43:52.4100825",
+      "timeZoneLastChange": "2025-12-09T16:47:15.4589254",
+      "isCompleted": true,
+      "merchantName": null,
+      "userType": "",
+      "roundingError": 0,
+      "allowEdition": false,
+      "allowCancellation": false,
+      "isUserDataVisible": false,
+      "allowChangeSeller": false
+    }
+  ],
+  "ordersUrl": "http://www.sporting.com.ar/account#/orders",
+  "orderGroup": "1582287194697",
+  "subjectItemAttachment": {
+    "item": "Guantes Reebok Royal...",
+    "totalItems": 1
+  },
+  "split": false,
+  "totalValue": 3939800,
+  "callCenterOperatorData": null,
+  "_accountInfo": {
+    "MainAccountName": "s*******",
+    "AccountName": "s*********",
+    "Cnpj": "30709964360",
+    "Id": "3b50fdc9-2fa8-4ed3-b86c-5aace09d5051",
+    "AppId": "aad3c2ce-d115-4059-88c2-a0060e5acd9a",
+    "IsActive": true,
+    "IsOperating": true,
+    "CreationDate": "2017-09-13T04:00:22",
+    "OperationDate": "2018-04-12T14:44:05",
+    "CompanyName": "B*************",
+    "TradingName": "S*******",
+    "City": "San Miguel de Tucuman",
+    "Complement": null,
+    "Country": "Argentina",
+    "State": null,
+    "Address": "Avenida Siria",
+    "District": null,
+    "Number": "2345",
+    "PostalCode": "4000",
+    "Licenses": [28],
+    "ParentAccountId": null,
+    "ParentAccountName": null,
+    "InactivationDate": null,
+    "Platform": "vtex",
+    "Privacy": null,
+    "HasPiiRestriction": false,
+    "Infra": null,
+    "Sponsor": "df910ed7-4389-4261-977b-ead598aaa015"
+  }
+}

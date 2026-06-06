@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Correos Transaccionales — Plataformas y Procesos</title>
+    <link rel="stylesheet" href="assets/css/shared.css" />
+  </head>
+  <body>
+    <header class="ct-topbar" data-ct-topbar></header>
+
+    <main class="ct-page">
+      <h1>Correos Transaccionales</h1>
+      <p class="ct-subtitle">
+        Un único lugar para identificar qué correos existen, qué plataforma los envía, en qué
+        momento del flujo se disparan, cómo se ven y con qué datos se prueban.
+      </p>
+
+      <div class="ct-grid">
+        <a class="ct-card" href="modules/catalogo/index.html" style="text-decoration: none;">
+          <h2>Biblioteca de Plantillas</h2>
+          <p>Catálogo central de plantillas con su metadata, búsqueda, filtros y descarga de HTML.</p>
+        </a>
+        <a class="ct-card" href="modules/flujo/index.html" style="text-decoration: none;">
+          <h2>Flujo de Correos</h2>
+          <p>Mapa del recorrido de comunicaciones al cliente: qué correo se dispara en cada etapa.</p>
+        </a>
+        <a class="ct-card" href="modules/visualizador/index.html" style="text-decoration: none;">
+          <h2>Visualizador de Plantillas</h2>
+          <p>Previsualizá cada plantilla en distintos escenarios sin necesidad de enviarla.</p>
+        </a>
+        <a class="ct-card" href="modules/simulador/index.html" style="text-decoration: none;">
+          <h2>Simulador de Datos</h2>
+          <p>Elegí un pedido de ejemplo (JSON) para alimentar el visualizador y validar variables.</p>
+        </a>
+      </div>
+    </main>
+
+    <script src="config.js"></script>
+    <script src="assets/js/shared.js"></script>
+    <script>
+      CT.renderTopbar('inicio', '');
+    </script>
+  </body>
+</html>

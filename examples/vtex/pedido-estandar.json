@@ -1,0 +1,477 @@
+{
+  "orders": [
+    {
+      "package": null,
+      "subjectItemAttachment": {
+        "item": "Botines adidas Nemez...",
+        "totalItems": 5,
+        "extraItems": 4
+      },
+      "cancellationReason": null,
+      "paymentData": {
+        "giftCards": [],
+        "transactions": [
+          {
+            "isActive": true,
+            "transactionId": "E5E298929E8F4FF19EA1CADEE0FD5D8D",
+            "merchantName": "S***********",
+            "payments": [
+              {
+                "id": "957E6116686A408598D683423D8F09CC",
+                "paymentSystem": "17",
+                "paymentSystemName": "P*********",
+                "value": 1249500,
+                "installments": 1,
+                "referenceValue": 1249500,
+                "cardHolder": null,
+                "cardNumber": null,
+                "firstDigits": null,
+                "lastDigits": null,
+                "cvv2": null,
+                "expireMonth": null,
+                "expireYear": null,
+                "url": null,
+                "giftCardId": null,
+                "giftCardName": null,
+                "giftCardCaption": null,
+                "redemptionCode": null,
+                "group": "promissory",
+                "tid": null,
+                "dueDate": null,
+                "connectorResponses": {},
+                "giftCardProvider": null,
+                "giftCardAsDiscount": null,
+                "koinUrl": null,
+                "accountId": null,
+                "parentAccountId": null,
+                "bankIssuedInvoiceIdentificationNumber": null,
+                "bankIssuedInvoiceIdentificationNumberFormatted": null,
+                "bankIssuedInvoiceBarCodeNumber": null,
+                "bankIssuedInvoiceBarCodeType": null,
+                "billingAddress": null,
+                "paymentOrigin": null
+              }
+            ]
+          }
+        ]
+      },
+      "cancellationRequests": null,
+      "invoiceData": null,
+      "clientProfileData": {
+        "id": "clientProfileData",
+        "email": "m*****.c*******@l*****.c**.a***************.c*.v***.c**.b*",
+        "firstName": "M***** F*******",
+        "lastName": "C*******",
+        "documentType": "dni",
+        "document": "3*******",
+        "phone": "3*********",
+        "corporateName": null,
+        "tradeName": null,
+        "corporateDocument": null,
+        "stateInscription": null,
+        "corporatePhone": null,
+        "isCorporate": false,
+        "userProfileId": "7a3d8094-128e-4b99-a486-f050d9cefd45",
+        "userProfileVersion": null,
+        "customerClass": null,
+        "customerCode": null
+      },
+      "shippingData": {
+        "id": "shippingData",
+        "address": {
+          "addressType": "residential",
+          "receiverName": "M***** F******* C*******",
+          "addressId": "8880925213605",
+          "versionId": null,
+          "entityId": null,
+          "postalCode": "4***",
+          "city": "S** M***** D* T******",
+          "state": "TUCUMÁN",
+          "country": "ARG",
+          "street": "A* S****",
+          "number": "2***",
+          "neighborhood": null,
+          "complement": null,
+          "reference": null,
+          "geoCoordinates": [-51.4779552, -0.0039779]
+        },
+        "logisticsInfo": [
+          {
+            "itemIndex": 0,
+            "itemId": "657",
+            "selectedDeliveryChannel": "delivery",
+            "selectedSla": "Envío domicilio",
+            "lockTTL": "12d",
+            "price": 0,
+            "listPrice": 899900,
+            "sellingPrice": 0,
+            "deliveryWindow": null,
+            "deliveryCompany": null,
+            "shippingEstimate": "1bd",
+            "shippingEstimateDate": "2026-04-16T15:19:57.2106729Z",
+            "slas": [
+              {
+                "id": "Envío domicilio",
+                "name": "E**************",
+                "shippingEstimate": "1bd",
+                "shippingEstimateDate": "2026-04-16T15:19:57.2106729Z",
+                "deliveryWindow": null,
+                "availableDeliveryWindows": [],
+                "deliveryIds": [],
+                "listPrice": 899900,
+                "price": 0,
+                "deliveryChannel": "delivery",
+                "pickupStoreInfo": {
+                  "additionalInfo": null,
+                  "address": null,
+                  "dockId": null,
+                  "friendlyName": null,
+                  "isPickupStore": false
+                },
+                "polygonName": null,
+                "lockTTL": "12d",
+                "pickupPointId": null,
+                "transitTime": null,
+                "pickupDistance": null
+              }
+            ],
+            "shipsTo": ["AR", "MX", "BR"],
+            "deliveryIds": [],
+            "deliveryChannels": [
+              {
+                "id": "delivery",
+                "stockBalance": 0
+              }
+            ],
+            "deliveryChannel": null,
+            "pickupStoreInfo": {
+              "additionalInfo": null,
+              "address": null,
+              "dockId": null,
+              "friendlyName": null,
+              "isPickupStore": false
+            },
+            "addressId": "8880925213605",
+            "versionId": null,
+            "entityId": null,
+            "polygonName": null,
+            "pickupPointId": null,
+            "transitTime": null
+          }
+        ],
+        "trackingHints": [],
+        "selectedAddresses": [
+          {
+            "addressId": "8880925213605",
+            "versionId": null,
+            "entityId": null,
+            "addressType": "residential",
+            "receiverName": "M***** F******* C*******",
+            "street": "A* S****",
+            "number": "2***",
+            "complement": null,
+            "neighborhood": null,
+            "postalCode": "4***",
+            "city": "S** M***** D* T******",
+            "state": "TUCUMÁN",
+            "country": "ARG",
+            "reference": null,
+            "geoCoordinates": [-51.4779552, -0.0039779]
+          }
+        ],
+        "availableAddresses": [
+          {
+            "addressId": "8880925213605",
+            "versionId": null,
+            "entityId": null,
+            "addressType": "residential",
+            "receiverName": "M***** F******* C*******",
+            "street": "A* S****",
+            "number": "2***",
+            "complement": null,
+            "neighborhood": null,
+            "postalCode": "4***",
+            "city": "S** M***** D* T******",
+            "state": "TUCUMÁN",
+            "country": "ARG",
+            "reference": null,
+            "geoCoordinates": [-51.4779552, -0.0039779]
+          }
+        ],
+        "contactInformation": [],
+        "contactsInfo": []
+      },
+      "customData": null,
+      "purchaseAgentData": null,
+      "authorizationPolicyData": {
+        "Status": "accepted",
+        "DeniedPolicies": [],
+        "PendingPolicies": []
+      },
+      "items": [
+        {
+          "additionalInfo": {
+            "categoriesIds": "/1/2/4/14/",
+            "productClusterId": "145",
+            "commercialConditionId": "1",
+            "dimension": {
+              "cubicweight": 0.2083,
+              "height": 10,
+              "length": 10,
+              "weight": 0.001,
+              "width": 10
+            },
+            "brandName": "A*****",
+            "brandId": "2000000",
+            "offeringInfo": null,
+            "offeringType": null,
+            "offeringTypeId": null
+          },
+          "sellerSku": "366908786",
+          "priceTable": null,
+          "priceValidUntil": null,
+          "callCenterOperator": null,
+          "commission": 0,
+          "freightCommission": 0,
+          "taxCode": null,
+          "catalogProvider": "vrn:vtex.catalog-api-proxy:-:sportingioqa:master:/proxy/authenticated/catalog/pvt/sku/stockkeepingunitbyid/657",
+          "uniqueId": "BBD2FBC60A7B4071A0CA9503F0360AF2",
+          "id": "657",
+          "productId": "106",
+          "productRefId": null,
+          "refId": "CP8985_630",
+          "ean": "4059323124074",
+          "name": "B**************************************************",
+          "skuName": "4*",
+          "modalType": null,
+          "parentItemIndex": null,
+          "parentAssemblyBinding": null,
+          "assemblies": [],
+          "tax": 0,
+          "price": 249900,
+          "listPrice": 249900,
+          "manualPrice": null,
+          "manualPriceAppliedBy": null,
+          "sellingPrice": 249900,
+          "rewardValue": 0,
+          "isGift": false,
+          "preSaleDate": null,
+          "productCategoryIds": "/1/2/4/14/",
+          "productCategories": {
+            "1": "SPORTING",
+            "2": "CALZADO",
+            "4": "Botines",
+            "14": "Con Tapones"
+          },
+          "quantity": 5,
+          "seller": "productecaadidasqa",
+          "sellerChain": ["productecaadidasqa"],
+          "imageUrl": "https://sportingioqa.vteximg.com.br/arquivos/ids/164020-55-55/image-a3e2892fbd7142bb829989b788f0f918.jpg?v=638906262524030000",
+          "detailUrl": "/botines-adidas-nemeziz-17-3-terreno-firme-hombre-106/p",
+          "components": [],
+          "bundleItems": [],
+          "attachments": [],
+          "attachmentOfferings": [],
+          "offerings": [],
+          "priceTags": [
+            {
+              "name": "d******************************************************************************************",
+              "value": -899900,
+              "rawValue": -8999,
+              "isPercentual": false,
+              "identifier": "031e951c-7385-4b73-ab9b-74b466284a14"
+            }
+          ],
+          "availability": "available",
+          "measurementUnit": "un",
+          "unitMultiplier": 1,
+          "manufacturerCode": null,
+          "priceDefinition": {
+            "calculatedSellingPrice": 249900,
+            "total": 1249500,
+            "sellingPrices": [
+              {
+                "value": 249900,
+                "quantity": 5
+              }
+            ]
+          }
+        }
+      ],
+      "sellers": [
+        {
+          "subSellerId": "1",
+          "fulfillmentEndpoint": "https://apps.producteca.com/sporting/api/vtex/250225",
+          "id": "productecaadidasqa",
+          "name": "P*******************",
+          "logo": ""
+        }
+      ],
+      "giftRegistryData": null,
+      "receiptData": null,
+      "contextData": null,
+      "marketPlaceOrderId": "",
+      "marketPlaceOrderGroup": null,
+      "marketplaceServicesEndpoint": null,
+      "orderFormId": "31ea232164f143ab9fae444c9d891944",
+      "sequence": "500336",
+      "affiliateId": "",
+      "status": "",
+      "callCenterOperator": "",
+      "userProfileId": "7a3d8094-128e-4b99-a486-f050d9cefd45",
+      "hostName": "s***********",
+      "creationVersion": null,
+      "creationEnvironment": null,
+      "lastChangeVersion": null,
+      "workflowInstanceId": null,
+      "marketplacePaymentValue": null,
+      "orderId": "1625110500336-01",
+      "orderGroup": "1625110500336",
+      "state": "payment-approved",
+      "isCheckedIn": false,
+      "sellerOrderId": "183549555",
+      "storeId": null,
+      "checkedInPickupPointId": null,
+      "value": 1249500,
+      "totals": [
+        {
+          "id": "Items",
+          "name": "T*****************",
+          "value": 1249500
+        },
+        {
+          "id": "Discounts",
+          "name": "T******************",
+          "value": 0
+        },
+        {
+          "id": "Shipping",
+          "name": "C********************",
+          "value": 0,
+          "alternativeTotals": [
+            {
+              "id": "AlternativeShippingTotal",
+              "name": "A*************************",
+              "value": 899900
+            },
+            {
+              "id": "AlternativeShippingDiscount",
+              "name": "A****************************",
+              "value": -899900
+            }
+          ]
+        },
+        {
+          "id": "Tax",
+          "name": "C*********************",
+          "value": 0
+        }
+      ],
+      "ratesAndBenefitsData": {
+        "rateAndBenefitsIdentifiers": [
+          {
+            "id": "031e951c-7385-4b73-ab9b-74b466284a14",
+            "name": "E************************",
+            "featured": false,
+            "description": "",
+            "matchedParameters": {
+              "Seller@CatalogSystem": "productecaadidasqa|inclusive"
+            },
+            "additionalInfo": null
+          }
+        ],
+        "teaser": []
+      },
+      "clientPreferencesData": {
+        "locale": "es-AR",
+        "optinNewsLetter": false
+      },
+      "commercialConditionData": null,
+      "marketingData": {
+        "utmSource": null,
+        "utmMedium": null,
+        "utmCampaign": null,
+        "utmipage": null,
+        "utmiPart": null,
+        "utmiCampaign": null,
+        "coupon": null,
+        "marketingTags": ["Antecedentes"]
+      },
+      "storePreferencesData": {
+        "countryCode": "ARG",
+        "saveUserData": false,
+        "timeZone": "Argentina Standard Time",
+        "currencyCode": "ARS",
+        "currencyLocale": 11274,
+        "currencySymbol": "$",
+        "currencyFormatInfo": {
+          "currencyDecimalDigits": 2,
+          "currencyDecimalSeparator": ",",
+          "currencyGroupSeparator": ".",
+          "currencyGroupSize": 3,
+          "startsWithCurrencySymbol": true
+        }
+      },
+      "openTextField": null,
+      "itemMetadata": null,
+      "taxData": null,
+      "hooksData": null,
+      "changeData": null,
+      "subscriptionData": null,
+      "salesChannel": "1",
+      "followUpEmail": "",
+      "creationDate": "2026-04-15T15:19:49.6736633Z",
+      "lastChange": "2026-04-15T15:19:57.2106866Z",
+      "timeZoneCreationDate": "2026-04-15T12:19:49.6736633",
+      "timeZoneLastChange": "2026-04-15T12:19:57.2106866",
+      "isCompleted": true,
+      "merchantName": null,
+      "userType": "",
+      "roundingError": 0,
+      "allowEdition": false,
+      "allowCancellation": false,
+      "isUserDataVisible": false,
+      "allowChangeSeller": false
+    }
+  ],
+  "ordersUrl": "http://sportingioqa.myvtex.com/account#/orders",
+  "orderGroup": "1625110500336",
+  "subjectItemAttachment": {
+    "item": "Botines adidas Nemez...",
+    "totalItems": 5,
+    "extraItems": 4
+  },
+  "split": false,
+  "totalValue": 1249500,
+  "callCenterOperatorData": null,
+  "_accountInfo": {
+    "MainAccountName": "s***********",
+    "AccountName": "s***********",
+    "Cnpj": null,
+    "Id": "b0bf4c87-fb05-4329-b27e-619d503d05d5",
+    "AppId": null,
+    "IsActive": true,
+    "IsOperating": false,
+    "CreationDate": "2022-12-07T14:49:59.3778486Z",
+    "OperationDate": null,
+    "CompanyName": "T****************************",
+    "TradingName": "T************",
+    "City": null,
+    "Complement": null,
+    "Country": null,
+    "State": null,
+    "Address": null,
+    "District": null,
+    "Number": null,
+    "PostalCode": null,
+    "Licenses": [7],
+    "ParentAccountId": null,
+    "ParentAccountName": null,
+    "InactivationDate": null,
+    "Platform": "vtex",
+    "Privacy": null,
+    "HasPiiRestriction": false,
+    "Infra": null,
+    "Sponsor": "3f29e577-433f-42b8-9ded-d2ede67d8ab3"
+  }
+}

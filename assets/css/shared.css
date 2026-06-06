@@ -1,0 +1,225 @@
+/* Estilos compartidos — Correos Transaccionales
+   Centraliza topbar, cards, badges y botones para mantener consistencia entre módulos. */
+
+:root {
+  --ct-navy: #1f3a5f;
+  --ct-navy-dark: #16293f;
+  --ct-bg: #f3f4f6;
+  --ct-card-border: #e5e7eb;
+  --ct-text: #111827;
+  --ct-text-muted: #6b7280;
+  --ct-accent: #2563eb;
+
+  --ct-platform-vtex: #ec4178;
+  --ct-platform-pim: #2dd4bf;
+
+  --ct-status-activo: #16a34a;
+  --ct-status-revision: #d97706;
+  --ct-status-deprecado: #6b7280;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--ct-bg);
+  color: var(--ct-text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: inherit;
+}
+
+/* Topbar */
+.ct-topbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 24px;
+  background: var(--ct-navy);
+  color: #ffffff;
+}
+
+.ct-topbar .ct-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.ct-topbar .ct-brand img {
+  height: 28px;
+  display: block;
+}
+
+.ct-topbar nav {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+  flex-wrap: wrap;
+}
+
+.ct-topbar nav a {
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.ct-topbar nav a.active,
+.ct-topbar nav a:hover {
+  background: #ffffff;
+  color: var(--ct-navy);
+  border-color: #ffffff;
+}
+
+/* Layout */
+.ct-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.ct-page h1 {
+  font-size: 24px;
+  margin: 0 0 6px 0;
+}
+
+.ct-page p.ct-subtitle {
+  color: var(--ct-text-muted);
+  margin: 0 0 24px 0;
+  font-size: 14px;
+}
+
+/* Cards */
+.ct-card {
+  background: #ffffff;
+  border: 1px solid var(--ct-card-border);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.ct-card h2,
+.ct-card h3 {
+  margin: 0 0 8px 0;
+}
+
+.ct-card p {
+  margin: 0;
+  color: var(--ct-text-muted);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.ct-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+/* Badges */
+.ct-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: #ffffff;
+}
+
+.ct-badge.ct-platform-vtex { background: var(--ct-platform-vtex); }
+.ct-badge.ct-platform-pim { background: var(--ct-platform-pim); color: #064e3b; }
+.ct-badge.ct-platform-otra { background: var(--ct-text-muted); }
+
+.ct-badge.ct-status-activo { background: var(--ct-status-activo); }
+.ct-badge.ct-status-en-revision { background: var(--ct-status-revision); }
+.ct-badge.ct-status-deprecado { background: var(--ct-status-deprecado); }
+
+/* Buttons */
+.ct-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--ct-card-border);
+  background: #ffffff;
+  color: var(--ct-text);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.ct-btn:hover {
+  border-color: var(--ct-accent);
+  color: var(--ct-accent);
+}
+
+.ct-btn.ct-btn-primary {
+  background: var(--ct-accent);
+  border-color: var(--ct-accent);
+  color: #ffffff;
+}
+
+.ct-btn.ct-btn-primary:hover {
+  opacity: 0.9;
+  color: #ffffff;
+}
+
+/* Toolbar (búsqueda y filtros) */
+.ct-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.ct-toolbar input[type="search"],
+.ct-toolbar select {
+  padding: 9px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--ct-card-border);
+  font-size: 14px;
+  background: #ffffff;
+  color: var(--ct-text);
+}
+
+.ct-toolbar input[type="search"] {
+  flex: 1 1 220px;
+}
+
+/* Estado vacío */
+.ct-empty {
+  text-align: center;
+  padding: 48px 16px;
+  color: var(--ct-text-muted);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .ct-topbar {
+    flex-wrap: wrap;
+  }
+
+  .ct-topbar nav {
+    margin-left: 0;
+    width: 100%;
+  }
+}
