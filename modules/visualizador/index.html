@@ -5,86 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Visualizador de Plantillas — Correos Transaccionales</title>
     <link rel="stylesheet" href="../../assets/css/shared.css" />
-    <script src="https://cdn.jsdelivr.net/npm/handlebars@4.7.8/dist/handlebars.min.js"></script>
-    <style>
-      .ct-visualizer {
-        display: flex;
-        gap: 20px;
-        align-items: flex-start;
-        flex-wrap: wrap;
-      }
-
-      .ct-visualizer-controls {
-        flex: 0 0 300px;
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
-      }
-
-      .ct-visualizer-controls label {
-        display: block;
-        font-size: 12px;
-        font-weight: 600;
-        color: var(--ct-text-muted);
-        margin-bottom: 4px;
-      }
-
-      .ct-visualizer-controls select {
-        width: 100%;
-      }
-
-      .ct-visualizer-info p {
-        margin: 6px 0 0 0;
-      }
-
-      .ct-visualizer-info .ct-meta {
-        font-size: 12px;
-        color: var(--ct-text-muted);
-      }
-
-      .ct-visualizer-info .ct-meta code {
-        font-size: 12px;
-      }
-
-      .ct-visualizer-info .ct-badges {
-        display: flex;
-        gap: 6px;
-        margin-bottom: 8px;
-      }
-
-      .ct-visualizer-preview {
-        flex: 1 1 480px;
-        min-width: 320px;
-      }
-
-      .ct-visualizer-frame-wrap {
-        background: #e5e7eb;
-        border-radius: 12px;
-        padding: 16px;
-        min-height: 640px;
-        display: flex;
-        justify-content: center;
-      }
-
-      .ct-visualizer-frame {
-        width: 100%;
-        max-width: 640px;
-        height: 1400px;
-        border: 1px solid #d1d5db;
-        border-radius: 8px;
-        background: #ffffff;
-      }
-
-      .ct-visualizer-status {
-        font-size: 13px;
-        color: var(--ct-text-muted);
-        margin: 10px 0 0 0;
-      }
-
-      .ct-visualizer-status.error {
-        color: #b91c1c;
-      }
-    </style>
+    <script src="../../assets/js/vendor/handlebars-4.7.8.min.js"></script>
   </head>
   <body>
     <header class="ct-topbar" data-ct-topbar></header>
@@ -96,8 +17,8 @@
         con información real, sin necesidad de enviarlo.
       </p>
 
-      <div class="ct-visualizer">
-        <aside class="ct-visualizer-controls">
+      <div class="ct-preview-tool">
+        <aside class="ct-preview-controls">
           <div>
             <label for="ct-vis-template">Plantilla</label>
             <select id="ct-vis-template" aria-label="Elegir plantilla"></select>
@@ -106,21 +27,21 @@
             <label for="ct-vis-example">Escenario de datos</label>
             <select id="ct-vis-example" aria-label="Elegir escenario de datos"></select>
           </div>
-          <div class="ct-card ct-visualizer-info">
+          <div class="ct-card ct-preview-info">
             <div class="ct-badges" id="ct-vis-badges"></div>
             <h3 id="ct-vis-nombre"></h3>
             <p id="ct-vis-descripcion"></p>
             <p class="ct-meta"><strong>Plantilla HTML:</strong> <code id="ct-vis-archivo"></code></p>
             <p class="ct-meta"><strong>Datos de ejemplo:</strong> <code id="ct-vis-ejemplo"></code></p>
           </div>
-          <p class="ct-visualizer-status" id="ct-vis-status"></p>
+          <p class="ct-preview-status" id="ct-vis-status"></p>
         </aside>
 
-        <div class="ct-visualizer-preview">
-          <div class="ct-visualizer-frame-wrap">
+        <div class="ct-preview-pane">
+          <div class="ct-preview-frame-wrap">
             <iframe
               id="ct-vis-frame"
-              class="ct-visualizer-frame"
+              class="ct-preview-frame"
               title="Previsualización del correo"
               sandbox="allow-same-origin"
             ></iframe>
@@ -136,12 +57,7 @@
         const BASE = '../../';
         CT.renderTopbar('visualizador', BASE);
 
-        const EXAMPLES = [
-          { path: 'examples/vtex/pedido-estandar.json', label: 'Pedido estándar (envío a domicilio)' },
-          { path: 'examples/vtex/pedido-realizado.json', label: 'Pedido realizado con éxito' },
-          { path: 'examples/vtex/pago-aprobado.json', label: 'Pago aprobado' },
-          { path: 'examples/vtex/pedido-cancelado.json', label: 'Pedido cancelado' },
-        ];
+        const examples = EXAMPLE_SCENARIOS;
 
         const templateSelect = document.getElementById('ct-vis-template');
         const exampleSelect = document.getElementById('ct-vis-example');
@@ -162,7 +78,7 @@
           templateSelect.appendChild(option);
         });
 
-        EXAMPLES.forEach((example) => {
+        examples.forEach((example) => {
           const option = document.createElement('option');
           option.value = example.path;
           option.textContent = example.label;
@@ -209,7 +125,7 @@
 
         templateSelect.addEventListener('change', () => {
           const template = currentTemplate();
-          if (template && template.ejemplo && EXAMPLES.some((e) => e.path === template.ejemplo)) {
+          if (template && template.ejemplo && examples.some((e) => e.path === template.ejemplo)) {
             exampleSelect.value = template.ejemplo;
           }
           renderPreview();
@@ -220,7 +136,7 @@
         if (renderable.length) {
           const initial = renderable[0];
           templateSelect.value = initial.id;
-          if (initial.ejemplo && EXAMPLES.some((e) => e.path === initial.ejemplo)) {
+          if (initial.ejemplo && examples.some((e) => e.path === initial.ejemplo)) {
             exampleSelect.value = initial.ejemplo;
           }
           renderPreview();

@@ -2,8 +2,9 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
-const root = process.cwd();
+const root = path.resolve(process.cwd());
 const port = 8723;
+const host = '127.0.0.1';
 
 const mime = {
   '.html': 'text/html; charset=utf-8',
@@ -14,9 +15,24 @@ const mime = {
 
 http
   .createServer((req, res) => {
-    let urlPath = decodeURIComponent(req.url.split('?')[0]);
+    let urlPath;
+    try {
+      urlPath = decodeURIComponent(req.url.split('?')[0]);
+    } catch (error) {
+      res.writeHead(400);
+      res.end('Bad request');
+      return;
+    }
+
     if (urlPath === '/') urlPath = '/index.html';
-    const filePath = path.join(root, urlPath);
+    const filePath = path.resolve(root, '.' + urlPath);
+    const isInsideRoot = filePath === root || filePath.startsWith(root + path.sep);
+    if (!isInsideRoot) {
+      res.writeHead(403);
+      res.end('Forbidden');
+      return;
+    }
+
     fs.readFile(filePath, (err, data) => {
       if (err) {
         res.writeHead(404);
@@ -28,4 +44,4 @@ http
       res.end(data);
     });
   })
-  .listen(port, () => console.log('listening on ' + port));
+  .listen(port, host, () => console.log(`listening on http://${host}:${port}`));

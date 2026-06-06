@@ -108,12 +108,15 @@ const CT = (() => {
   }
 
   // --- Render de plantillas de correo con Handlebars (Visualizador y Simulador) ---
-  // Requiere que la página haya cargado Handlebars (CDN) antes de llamar a estas funciones.
+  // Requiere que la página haya cargado Handlebars local antes de llamar a estas funciones.
 
   let handlebarsHelpersReady = false;
 
   function ensureEmailHelpers() {
-    if (handlebarsHelpersReady || typeof Handlebars === 'undefined') return;
+    if (handlebarsHelpersReady) return;
+    if (typeof Handlebars === 'undefined') {
+      throw new Error('Handlebars no esta cargado.');
+    }
 
     Handlebars.registerHelper('formatCurrency', function (value) {
       const num = Number(value || 0) / 100;

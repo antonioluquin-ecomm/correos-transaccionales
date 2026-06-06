@@ -34,7 +34,13 @@ config.js     -> catálogo de plantillas (metadata), versión y changelog
 
 ## Cómo se valida
 
-No hay build ni dependencias: alcanza con abrir `index.html` en un navegador o servirlo con cualquier servidor estático. Antes de publicar, hacer un smoke visual: carga de cada módulo, filtros y ficha del catálogo, render del Visualizador y el Simulador con sus distintos escenarios, y consola sin errores.
+No hay build ni dependencias instalables, pero los módulos de preview usan `fetch`, por lo que la validación debe hacerse sirviendo el repo por HTTP. Opción local:
+
+```powershell
+node .tmp-static-server.js
+```
+
+Después abrir `http://127.0.0.1:8723/index.html`. Antes de publicar, hacer un smoke visual: carga de cada módulo, filtros y ficha del catálogo, render del Visualizador y el Simulador con sus distintos escenarios, y consola sin errores.
 
 ## Estado
 

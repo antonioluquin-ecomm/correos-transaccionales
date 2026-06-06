@@ -14,7 +14,7 @@
           {
             "isActive": true,
             "transactionId": "E5E298929E8F4FF19EA1CADEE0FD5D8D",
-            "merchantName": "S***********",
+            "merchantName": "TIENDA-EJEMPLO",
             "payments": [
               {
                 "id": "957E6116686A408598D683423D8F09CC",
@@ -36,9 +36,13 @@
                 "giftCardCaption": null,
                 "redemptionCode": null,
                 "group": "promissory",
-                "tid": null,
+                "tid": "TID-EXAMPLE-1",
                 "dueDate": null,
-                "connectorResponses": {},
+                "connectorResponses": {
+                  "Tid": "TID-EXAMPLE-1",
+                  "authId": "AUTH-EXAMPLE-1",
+                  "nsu": "NSU-EXAMPLE-1"
+                },
                 "giftCardProvider": null,
                 "giftCardAsDiscount": null,
                 "koinUrl": null,
@@ -59,19 +63,19 @@
       "invoiceData": null,
       "clientProfileData": {
         "id": "clientProfileData",
-        "email": "m*****.c*******@l*****.c**.a***************.c*.v***.c**.b*",
-        "firstName": "M***** F*******",
-        "lastName": "C*******",
+        "email": "cliente-1@example.invalid",
+        "firstName": "Cliente",
+        "lastName": "Ejemplo 1",
         "documentType": "dni",
-        "document": "3*******",
-        "phone": "3*********",
+        "document": "00000000",
+        "phone": "+540000000000",
         "corporateName": null,
         "tradeName": null,
         "corporateDocument": null,
         "stateInscription": null,
         "corporatePhone": null,
         "isCorporate": false,
-        "userProfileId": "7a3d8094-128e-4b99-a486-f050d9cefd45",
+        "userProfileId": "00000000-0000-4000-8000-000000000001",
         "userProfileVersion": null,
         "customerClass": null,
         "customerCode": null
@@ -80,20 +84,23 @@
         "id": "shippingData",
         "address": {
           "addressType": "residential",
-          "receiverName": "M***** F******* C*******",
-          "addressId": "8880925213605",
+          "receiverName": "Cliente Ejemplo 1",
+          "addressId": "ADDR-EXAMPLE-1",
           "versionId": null,
           "entityId": null,
-          "postalCode": "4***",
-          "city": "S** M***** D* T******",
-          "state": "TUCUMÁN",
+          "postalCode": "0000",
+          "city": "Ciudad Ejemplo",
+          "state": "Provincia Ejemplo",
           "country": "ARG",
-          "street": "A* S****",
-          "number": "2***",
-          "neighborhood": null,
+          "street": "Calle Ejemplo",
+          "number": "123",
+          "neighborhood": "Barrio Ejemplo",
           "complement": null,
           "reference": null,
-          "geoCoordinates": [-51.4779552, -0.0039779]
+          "geoCoordinates": [
+            -51.4779552,
+            -0.0039779
+          ]
         },
         "logisticsInfo": [
           {
@@ -135,7 +142,11 @@
                 "pickupDistance": null
               }
             ],
-            "shipsTo": ["AR", "MX", "BR"],
+            "shipsTo": [
+              "AR",
+              "MX",
+              "BR"
+            ],
             "deliveryIds": [],
             "deliveryChannels": [
               {
@@ -151,7 +162,7 @@
               "friendlyName": null,
               "isPickupStore": false
             },
-            "addressId": "8880925213605",
+            "addressId": "ADDR-EXAMPLE-1",
             "versionId": null,
             "entityId": null,
             "polygonName": null,
@@ -162,40 +173,46 @@
         "trackingHints": [],
         "selectedAddresses": [
           {
-            "addressId": "8880925213605",
+            "addressId": "ADDR-EXAMPLE-1",
             "versionId": null,
             "entityId": null,
             "addressType": "residential",
-            "receiverName": "M***** F******* C*******",
-            "street": "A* S****",
-            "number": "2***",
+            "receiverName": "Cliente Ejemplo 1",
+            "street": "Calle Ejemplo",
+            "number": "123",
             "complement": null,
-            "neighborhood": null,
-            "postalCode": "4***",
-            "city": "S** M***** D* T******",
-            "state": "TUCUMÁN",
+            "neighborhood": "Barrio Ejemplo",
+            "postalCode": "0000",
+            "city": "Ciudad Ejemplo",
+            "state": "Provincia Ejemplo",
             "country": "ARG",
             "reference": null,
-            "geoCoordinates": [-51.4779552, -0.0039779]
+            "geoCoordinates": [
+              -51.4779552,
+              -0.0039779
+            ]
           }
         ],
         "availableAddresses": [
           {
-            "addressId": "8880925213605",
+            "addressId": "ADDR-EXAMPLE-1",
             "versionId": null,
             "entityId": null,
             "addressType": "residential",
-            "receiverName": "M***** F******* C*******",
-            "street": "A* S****",
-            "number": "2***",
+            "receiverName": "Cliente Ejemplo 1",
+            "street": "Calle Ejemplo",
+            "number": "123",
             "complement": null,
-            "neighborhood": null,
-            "postalCode": "4***",
-            "city": "S** M***** D* T******",
-            "state": "TUCUMÁN",
+            "neighborhood": "Barrio Ejemplo",
+            "postalCode": "0000",
+            "city": "Ciudad Ejemplo",
+            "state": "Provincia Ejemplo",
             "country": "ARG",
             "reference": null,
-            "geoCoordinates": [-51.4779552, -0.0039779]
+            "geoCoordinates": [
+              -51.4779552,
+              -0.0039779
+            ]
           }
         ],
         "contactInformation": [],
@@ -225,22 +242,23 @@
             "brandId": "2000000",
             "offeringInfo": null,
             "offeringType": null,
-            "offeringTypeId": null
+            "offeringTypeId": null,
+            "catalogProvider": "example-catalog-provider"
           },
-          "sellerSku": "366908786",
+          "sellerSku": "SKU-EXAMPLE-1-1",
           "priceTable": null,
           "priceValidUntil": null,
           "callCenterOperator": null,
           "commission": 0,
           "freightCommission": 0,
           "taxCode": null,
-          "catalogProvider": "vrn:vtex.catalog-api-proxy:-:sportingioqa:master:/proxy/authenticated/catalog/pvt/sku/stockkeepingunitbyid/657",
-          "uniqueId": "BBD2FBC60A7B4071A0CA9503F0360AF2",
-          "id": "657",
-          "productId": "106",
-          "productRefId": null,
-          "refId": "CP8985_630",
-          "ean": "4059323124074",
+          "catalogProvider": "example-catalog-provider",
+          "uniqueId": "UNIQUE-EXAMPLE-1-1",
+          "id": "SKU-EXAMPLE-1-1",
+          "productId": "PRODUCT-EXAMPLE-1-1",
+          "productRefId": "PRODUCT-REF-EXAMPLE-1-1",
+          "refId": "REF-EXAMPLE-1-1",
+          "ean": "0000000000000",
           "name": "B**************************************************",
           "skuName": "4*",
           "modalType": null,
@@ -264,10 +282,12 @@
             "14": "Con Tapones"
           },
           "quantity": 5,
-          "seller": "productecaadidasqa",
-          "sellerChain": ["productecaadidasqa"],
+          "seller": "SELLER-EXAMPLE",
+          "sellerChain": [
+            "productecaadidasqa"
+          ],
           "imageUrl": "https://sportingioqa.vteximg.com.br/arquivos/ids/164020-55-55/image-a3e2892fbd7142bb829989b788f0f918.jpg?v=638906262524030000",
-          "detailUrl": "/botines-adidas-nemeziz-17-3-terreno-firme-hombre-106/p",
+          "detailUrl": "/producto-ejemplo-1-1/p",
           "components": [],
           "bundleItems": [],
           "attachments": [],
@@ -279,7 +299,7 @@
               "value": -899900,
               "rawValue": -8999,
               "isPercentual": false,
-              "identifier": "031e951c-7385-4b73-ab9b-74b466284a14"
+              "identifier": "BENEFIT-EXAMPLE-1"
             }
           ],
           "availability": "available",
@@ -302,8 +322,8 @@
         {
           "subSellerId": "1",
           "fulfillmentEndpoint": "https://apps.producteca.com/sporting/api/vtex/250225",
-          "id": "productecaadidasqa",
-          "name": "P*******************",
+          "id": "SELLER-EXAMPLE",
+          "name": "Tienda Ejemplo",
           "logo": ""
         }
       ],
@@ -318,18 +338,18 @@
       "affiliateId": "",
       "status": "",
       "callCenterOperator": "",
-      "userProfileId": "7a3d8094-128e-4b99-a486-f050d9cefd45",
-      "hostName": "s***********",
+      "userProfileId": "00000000-0000-4000-8000-000000000001",
+      "hostName": "tienda-ejemplo.example.invalid",
       "creationVersion": null,
       "creationEnvironment": null,
       "lastChangeVersion": null,
       "workflowInstanceId": null,
       "marketplacePaymentValue": null,
-      "orderId": "1625110500336-01",
-      "orderGroup": "1625110500336",
+      "orderId": "TEST-1001-01",
+      "orderGroup": "TEST-1001",
       "state": "payment-approved",
       "isCheckedIn": false,
-      "sellerOrderId": "183549555",
+      "sellerOrderId": "TEST-1001-SELLER",
       "storeId": null,
       "checkedInPickupPointId": null,
       "value": 1249500,
@@ -370,7 +390,7 @@
       "ratesAndBenefitsData": {
         "rateAndBenefitsIdentifiers": [
           {
-            "id": "031e951c-7385-4b73-ab9b-74b466284a14",
+            "id": "00000000-0000-4000-8000-000000000501",
             "name": "E************************",
             "featured": false,
             "description": "",
@@ -395,7 +415,9 @@
         "utmiPart": null,
         "utmiCampaign": null,
         "coupon": null,
-        "marketingTags": ["Antecedentes"]
+        "marketingTags": [
+          "Antecedentes"
+        ]
       },
       "storePreferencesData": {
         "countryCode": "ARG",
@@ -419,13 +441,13 @@
       "changeData": null,
       "subscriptionData": null,
       "salesChannel": "1",
-      "followUpEmail": "",
+      "followUpEmail": "seguimiento-1@example.invalid",
       "creationDate": "2026-04-15T15:19:49.6736633Z",
       "lastChange": "2026-04-15T15:19:57.2106866Z",
       "timeZoneCreationDate": "2026-04-15T12:19:49.6736633",
       "timeZoneLastChange": "2026-04-15T12:19:57.2106866",
       "isCompleted": true,
-      "merchantName": null,
+      "merchantName": "TIENDA-EJEMPLO",
       "userType": "",
       "roundingError": 0,
       "allowEdition": false,
@@ -434,8 +456,8 @@
       "allowChangeSeller": false
     }
   ],
-  "ordersUrl": "http://sportingioqa.myvtex.com/account#/orders",
-  "orderGroup": "1625110500336",
+  "ordersUrl": "https://tienda-ejemplo.example.invalid/account#/orders",
+  "orderGroup": "TEST-1001",
   "subjectItemAttachment": {
     "item": "Botines adidas Nemez...",
     "totalItems": 5,
@@ -445,17 +467,17 @@
   "totalValue": 1249500,
   "callCenterOperatorData": null,
   "_accountInfo": {
-    "MainAccountName": "s***********",
-    "AccountName": "s***********",
-    "Cnpj": null,
-    "Id": "b0bf4c87-fb05-4329-b27e-619d503d05d5",
-    "AppId": null,
+    "MainAccountName": "tienda-ejemplo",
+    "AccountName": "tienda-ejemplo",
+    "Cnpj": "00000000000000",
+    "Id": "00000000-0000-4000-8000-000000000101",
+    "AppId": "00000000-0000-4000-8000-000000000201",
     "IsActive": true,
     "IsOperating": false,
     "CreationDate": "2022-12-07T14:49:59.3778486Z",
     "OperationDate": null,
     "CompanyName": "T****************************",
-    "TradingName": "T************",
+    "TradingName": "Tienda Ejemplo",
     "City": null,
     "Complement": null,
     "Country": null,
@@ -464,7 +486,9 @@
     "District": null,
     "Number": null,
     "PostalCode": null,
-    "Licenses": [7],
+    "Licenses": [
+      7
+    ],
     "ParentAccountId": null,
     "ParentAccountName": null,
     "InactivationDate": null,
@@ -472,6 +496,6 @@
     "Privacy": null,
     "HasPiiRestriction": false,
     "Infra": null,
-    "Sponsor": "3f29e577-433f-42b8-9ded-d2ede67d8ab3"
+    "Sponsor": "00000000-0000-4000-8000-000000000401"
   }
 }

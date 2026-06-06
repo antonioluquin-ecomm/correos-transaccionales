@@ -5,82 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Simulador de Datos — Correos Transaccionales</title>
     <link rel="stylesheet" href="../../assets/css/shared.css" />
-    <script src="https://cdn.jsdelivr.net/npm/handlebars@4.7.8/dist/handlebars.min.js"></script>
-    <style>
-      .ct-simulator {
-        display: flex;
-        gap: 20px;
-        align-items: flex-start;
-        flex-wrap: wrap;
-      }
-
-      .ct-simulator-controls {
-        flex: 0 0 300px;
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
-      }
-
-      .ct-simulator-controls label {
-        display: block;
-        font-size: 12px;
-        font-weight: 600;
-        color: var(--ct-text-muted);
-        margin-bottom: 4px;
-      }
-
-      .ct-simulator-controls select {
-        width: 100%;
-      }
-
-      .ct-simulator-info p {
-        margin: 6px 0 0 0;
-      }
-
-      .ct-simulator-info .ct-badges {
-        display: flex;
-        gap: 6px;
-        margin-bottom: 8px;
-      }
-
-      .ct-simulator-info .ct-meta {
-        font-size: 12px;
-        color: var(--ct-text-muted);
-      }
-
-      .ct-simulator-preview {
-        flex: 1 1 480px;
-        min-width: 320px;
-      }
-
-      .ct-simulator-frame-wrap {
-        background: #e5e7eb;
-        border-radius: 12px;
-        padding: 16px;
-        min-height: 640px;
-        display: flex;
-        justify-content: center;
-      }
-
-      .ct-simulator-frame {
-        width: 100%;
-        max-width: 640px;
-        height: 1400px;
-        border: 1px solid #d1d5db;
-        border-radius: 8px;
-        background: #ffffff;
-      }
-
-      .ct-simulator-status {
-        font-size: 13px;
-        color: var(--ct-text-muted);
-        margin: 10px 0 0 0;
-      }
-
-      .ct-simulator-status.error {
-        color: #b91c1c;
-      }
-    </style>
+    <script src="../../assets/js/vendor/handlebars-4.7.8.min.js"></script>
   </head>
   <body>
     <header class="ct-topbar" data-ct-topbar></header>
@@ -92,8 +17,8 @@
         promociones — para ver cómo reacciona cada plantilla sin necesitar un JSON distinto por caso.
       </p>
 
-      <div class="ct-simulator">
-        <aside class="ct-simulator-controls">
+      <div class="ct-preview-tool">
+        <aside class="ct-preview-controls">
           <div>
             <label for="ct-sim-template">Plantilla</label>
             <select id="ct-sim-template" aria-label="Elegir plantilla"></select>
@@ -121,21 +46,21 @@
               <option value="con">Con promoción aplicada</option>
             </select>
           </div>
-          <div class="ct-card ct-simulator-info">
+          <div class="ct-card ct-preview-info">
             <div class="ct-badges" id="ct-sim-badges"></div>
             <h3 id="ct-sim-nombre"></h3>
             <p id="ct-sim-descripcion"></p>
             <p class="ct-meta"><strong>Plantilla HTML:</strong> <code id="ct-sim-archivo"></code></p>
             <p class="ct-meta"><strong>Pedido base:</strong> <code id="ct-sim-base"></code></p>
           </div>
-          <p class="ct-simulator-status" id="ct-sim-status"></p>
+          <p class="ct-preview-status" id="ct-sim-status"></p>
         </aside>
 
-        <div class="ct-simulator-preview">
-          <div class="ct-simulator-frame-wrap">
+        <div class="ct-preview-pane">
+          <div class="ct-preview-frame-wrap">
             <iframe
               id="ct-sim-frame"
-              class="ct-simulator-frame"
+              class="ct-preview-frame"
               title="Previsualización simulada del correo"
               sandbox="allow-same-origin"
             ></iframe>
@@ -202,6 +127,20 @@
           nombreEl.textContent = template.nombre;
           descripcionEl.textContent = template.descripcion;
           archivoEl.textContent = template.archivoHtml;
+        }
+
+        function isMultipackageScenario() {
+          return envioSelect.value === 'mixto-mismo' || envioSelect.value === 'mixto-distinto';
+        }
+
+        function syncProductOptions() {
+          const oneProductOption = productosSelect.querySelector('option[value="uno"]');
+          if (!oneProductOption) return;
+
+          oneProductOption.disabled = isMultipackageScenario();
+          if (oneProductOption.disabled && productosSelect.value === 'uno') {
+            productosSelect.value = 'dos';
+          }
         }
 
         // --- Transformaciones de escenario sobre un pedido base clonado ---
@@ -311,8 +250,9 @@
           const data = cloneDeep(baseData);
           const order = data.orders[0];
 
-          applyEnvio(order, envioSelect.value);
+          syncProductOptions();
           applyProductos(order, productosSelect.value);
+          applyEnvio(order, envioSelect.value);
           applyPromocion(order, promocionSelect.value);
           recomputeTotals(order);
 
@@ -340,12 +280,15 @@
           }
         }
 
+        envioSelect.addEventListener('change', syncProductOptions);
+
         [templateSelect, envioSelect, productosSelect, promocionSelect].forEach((el) => {
           el.addEventListener('change', renderPreview);
         });
 
         if (renderable.length) {
           templateSelect.value = renderable[0].id;
+          syncProductOptions();
           renderPreview();
         } else {
           setStatus('Todavía no hay plantillas con HTML asociado en el catálogo.', true);

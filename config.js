@@ -16,6 +16,8 @@
  *   ejemplo       -> ruta relativa al JSON de datos de ejemplo dentro de examples/ (puede ser null si aún no hay)
  *   variables     -> lista de variables/datos clave que usa la plantilla (para consulta rápida,
  *                    no es la lista exhaustiva de helpers Handlebars del HTML)
+ *
+ * EXAMPLE_SCENARIOS centraliza los JSON disponibles para previsualización.
  */
 
 const TEMPLATES = [
@@ -69,13 +71,21 @@ const TEMPLATES = [
   },
 ];
 
+const EXAMPLE_SCENARIOS = [
+  { path: 'examples/vtex/pedido-estandar.json', label: 'Pedido estandar (envio a domicilio)' },
+  { path: 'examples/vtex/pedido-realizado.json', label: 'Pedido realizado con exito' },
+  { path: 'examples/vtex/pago-aprobado.json', label: 'Pago aprobado' },
+  { path: 'examples/vtex/pedido-cancelado.json', label: 'Pedido cancelado' },
+];
+
 const VERSION = {
-  number: '0.3.0',
+  number: '0.4.0',
   date: '2026-06-06',
-  summary: 'Simulador de Datos y fix de normalización de pedidos en el Visualizador.',
+  summary: 'Hardening de datos de ejemplo, Handlebars local y ajustes de validacion.',
 };
 
 const CHANGELOG = [
+  { version: '0.4.0', date: '2026-06-06', summary: 'Datos de ejemplo sanitizados, Handlebars local, escenarios centralizados, simulador coherente en multipaquete y docs de validacion/roadmap.' },
   { version: '0.3.0', date: '2026-06-06', summary: 'Simulador de Datos (Módulo 4) con escenarios combinables; fix: normalización de pedidos "desnudos" en el render compartido.' },
   { version: '0.2.0', date: '2026-06-06', summary: 'Visualizador de Plantillas (Módulo 3) con selector de plantilla y escenario, render con Handlebars.' },
   { version: '0.1.0', date: '2026-06-06', summary: 'Estructura inicial y catálogo con pedido-confirmado y pago-aprobado.' },

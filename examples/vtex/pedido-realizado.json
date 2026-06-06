@@ -13,7 +13,7 @@
           {
             "isActive": true,
             "transactionId": "78D97E920BC848D09DB27F852111AAEB",
-            "merchantName": "S*********",
+            "merchantName": "TIENDA-EJEMPLO",
             "payments": [
               {
                 "id": "E308DADAD47D4748B2F476DD4BB833B4",
@@ -35,14 +35,14 @@
                 "giftCardCaption": null,
                 "redemptionCode": null,
                 "group": "GOcuotas",
-                "tid": "2078410",
+                "tid": "TID-EXAMPLE-2",
                 "dueDate": null,
                 "connectorResponses": {
-                  "Tid": "2078410",
+                  "Tid": "TID-EXAMPLE-2",
                   "ReturnCode": null,
                   "Message": null,
-                  "authId": "Order-11893651",
-                  "nsu": "Installment-44643368",
+                  "authId": "AUTH-EXAMPLE-2",
+                  "nsu": "NSU-EXAMPLE-2",
                   "acquirer": "gocuotaspartnerar"
                 },
                 "giftCardProvider": null,
@@ -65,19 +65,19 @@
       "invoiceData": null,
       "clientProfileData": {
         "id": "clientProfileData",
-        "email": "4*******************************@c*.v***.c**.b*",
-        "firstName": "R****** E******",
-        "lastName": "G*****",
+        "email": "cliente-2@example.invalid",
+        "firstName": "Cliente",
+        "lastName": "Ejemplo 2",
         "documentType": "dni",
-        "document": "4*******",
-        "phone": "3*********",
+        "document": "00000000",
+        "phone": "+540000000000",
         "corporateName": null,
         "tradeName": null,
         "corporateDocument": null,
         "stateInscription": null,
         "corporatePhone": null,
         "isCorporate": false,
-        "userProfileId": "defa5735-8257-48b9-9597-f71fb5814df7",
+        "userProfileId": "00000000-0000-4000-8000-000000000002",
         "userProfileVersion": null,
         "customerClass": null,
         "customerCode": null
@@ -86,20 +86,23 @@
         "id": "shippingData",
         "address": {
           "addressType": "residential",
-          "receiverName": "G***** R******",
-          "addressId": "12096498598408",
+          "receiverName": "Cliente Ejemplo 2",
+          "addressId": "ADDR-EXAMPLE-2",
           "versionId": null,
           "entityId": null,
-          "postalCode": "4***",
-          "city": "L* Q*****",
-          "state": "JUJUY",
+          "postalCode": "0000",
+          "city": "Ciudad Ejemplo",
+          "state": "Provincia Ejemplo",
           "country": "ARG",
-          "street": "L*********",
-          "number": "4",
-          "neighborhood": null,
+          "street": "Calle Ejemplo",
+          "number": "123",
+          "neighborhood": "Barrio Ejemplo",
           "complement": null,
           "reference": null,
-          "geoCoordinates": [-51.4779552, -0.0039779]
+          "geoCoordinates": [
+            -51.4779552,
+            -0.0039779
+          ]
         },
         "logisticsInfo": [
           {
@@ -125,11 +128,11 @@
                 "availableDeliveryWindows": [],
                 "deliveryIds": [
                   {
-                    "courierId": "36_andreani_normal",
-                    "courierName": "3*********************",
-                    "dockId": "36",
+                    "courierId": "courier-example-1",
+                    "courierName": "Correo Ejemplo",
+                    "dockId": "dock-example-1",
                     "quantity": 1,
-                    "warehouseId": "1_36",
+                    "warehouseId": "deposito-principal",
                     "accountCarrierName": "s*******",
                     "kitItemDetails": []
                   }
@@ -151,14 +154,16 @@
                 "pickupDistance": 0
               }
             ],
-            "shipsTo": ["ARG"],
+            "shipsTo": [
+              "ARG"
+            ],
             "deliveryIds": [
               {
-                "courierId": "36_andreani_normal",
-                "courierName": "3*********************",
-                "dockId": "36",
+                "courierId": "courier-example-1",
+                "courierName": "Correo Ejemplo",
+                "dockId": "dock-example-1",
                 "quantity": 1,
-                "warehouseId": "1_36",
+                "warehouseId": "deposito-principal",
                 "accountCarrierName": "s*******",
                 "kitItemDetails": []
               }
@@ -177,7 +182,7 @@
               "friendlyName": null,
               "isPickupStore": false
             },
-            "addressId": "12096498598408",
+            "addressId": "ADDR-EXAMPLE-2",
             "versionId": null,
             "entityId": null,
             "polygonName": "",
@@ -188,40 +193,46 @@
         "trackingHints": [],
         "selectedAddresses": [
           {
-            "addressId": "12096498598408",
+            "addressId": "ADDR-EXAMPLE-2",
             "versionId": null,
             "entityId": null,
             "addressType": "residential",
-            "receiverName": "G***** R******",
-            "street": "L*********",
-            "number": "4",
+            "receiverName": "Cliente Ejemplo 2",
+            "street": "Calle Ejemplo",
+            "number": "123",
             "complement": null,
-            "neighborhood": null,
-            "postalCode": "4***",
-            "city": "L* Q*****",
-            "state": "JUJUY",
+            "neighborhood": "Barrio Ejemplo",
+            "postalCode": "0000",
+            "city": "Ciudad Ejemplo",
+            "state": "Provincia Ejemplo",
             "country": "ARG",
             "reference": null,
-            "geoCoordinates": [-51.4779552, -0.0039779]
+            "geoCoordinates": [
+              -51.4779552,
+              -0.0039779
+            ]
           }
         ],
         "availableAddresses": [
           {
-            "addressId": "12096498598408",
+            "addressId": "ADDR-EXAMPLE-2",
             "versionId": null,
             "entityId": null,
             "addressType": "residential",
-            "receiverName": "G***** R******",
-            "street": "L*********",
-            "number": "4",
+            "receiverName": "Cliente Ejemplo 2",
+            "street": "Calle Ejemplo",
+            "number": "123",
             "complement": null,
-            "neighborhood": null,
-            "postalCode": "4***",
-            "city": "L* Q*****",
-            "state": "JUJUY",
+            "neighborhood": "Barrio Ejemplo",
+            "postalCode": "0000",
+            "city": "Ciudad Ejemplo",
+            "state": "Provincia Ejemplo",
             "country": "ARG",
             "reference": null,
-            "geoCoordinates": [-51.4779552, -0.0039779]
+            "geoCoordinates": [
+              -51.4779552,
+              -0.0039779
+            ]
           }
         ],
         "contactInformation": [],
@@ -231,9 +242,9 @@
         "customApps": [
           {
             "fields": {
-              "uuid": "130da940-4589-4316-bbb3-f57314f6cf03",
+              "uuid": "00000000-0000-4000-8000-000000000302",
               "source": "WEB_MOBILE",
-              "snrs_params": "{\"utm_source\":\"gocuotas\",\"utm_medium\":\"Link\",\"utm_campaign\":\"gocuotas\"}"
+              "snrs_params": "{}"
             },
             "id": "synerise",
             "major": 1
@@ -260,22 +271,23 @@
             "brandId": "2000059",
             "offeringInfo": null,
             "offeringType": null,
-            "offeringTypeId": null
+            "offeringTypeId": null,
+            "catalogProvider": "example-catalog-provider"
           },
-          "sellerSku": "290866",
+          "sellerSku": "SKU-EXAMPLE-2-1",
           "priceTable": null,
           "priceValidUntil": "2026-12-09T19:41:48Z",
           "callCenterOperator": null,
           "commission": 0,
           "freightCommission": 0,
           "taxCode": "",
-          "catalogProvider": "vrn:vtex.catalog-api-proxy:-:sportingio:master:/proxy/authenticated/catalog/pvt/sku/stockkeepingunitbyid/290866",
-          "uniqueId": "074F915460164CBF894D6F25C2FD3BC2",
-          "id": "290866",
-          "productId": "48292",
-          "productRefId": "RFAAGE001WUR-000",
-          "refId": "RFAAGE001WUR-000-*9",
-          "ean": null,
+          "catalogProvider": "example-catalog-provider",
+          "uniqueId": "UNIQUE-EXAMPLE-2-1",
+          "id": "SKU-EXAMPLE-2-1",
+          "productId": "PRODUCT-EXAMPLE-2-1",
+          "productRefId": "PRODUCT-REF-EXAMPLE-2-1",
+          "refId": "REF-EXAMPLE-2-1",
+          "ean": "0000000000000",
           "name": "G********************************************************",
           "skuName": "C***********************",
           "modalType": null,
@@ -299,10 +311,12 @@
             "320": "Guantes de Arquero"
           },
           "quantity": 1,
-          "seller": "1",
-          "sellerChain": ["1"],
+          "seller": "SELLER-EXAMPLE",
+          "sellerChain": [
+            "1"
+          ],
           "imageUrl": "https://sporting.vteximg.com.br/arquivos/ids/1660049-150-150/RFAAGE001WUR-000-1.jpg?v=638681412558030000",
-          "detailUrl": "/guantes-reebok-royal-3-de-hombre-rfaage001wur-000/p",
+          "detailUrl": "/producto-ejemplo-2-1/p",
           "components": [],
           "bundleItems": [],
           "attachments": [],
@@ -329,8 +343,8 @@
         {
           "subSellerId": "1",
           "fulfillmentEndpoint": "http://fulfillment.vtexcommerce.com.br/api/fulfillment?an=sportingio",
-          "id": "1",
-          "name": "S*******",
+          "id": "SELLER-EXAMPLE",
+          "name": "Tienda Ejemplo",
           "logo": ""
         }
       ],
@@ -345,18 +359,18 @@
       "affiliateId": "",
       "status": "",
       "callCenterOperator": "",
-      "userProfileId": "defa5735-8257-48b9-9597-f71fb5814df7",
-      "hostName": "s*********",
+      "userProfileId": "00000000-0000-4000-8000-000000000002",
+      "hostName": "tienda-ejemplo.example.invalid",
       "creationVersion": null,
       "creationEnvironment": null,
       "lastChangeVersion": null,
       "workflowInstanceId": null,
       "marketplacePaymentValue": null,
-      "orderId": "1582287194697-01",
-      "orderGroup": "1582287194697",
+      "orderId": "TEST-1002-01",
+      "orderGroup": "TEST-1002",
       "state": "payment-approved",
       "isCheckedIn": false,
-      "sellerOrderId": "00-1582287194697-01",
+      "sellerOrderId": "TEST-1002-SELLER",
       "storeId": null,
       "checkedInPickupPointId": null,
       "value": 3939800,
@@ -423,13 +437,13 @@
       "changeData": null,
       "subscriptionData": null,
       "salesChannel": "1",
-      "followUpEmail": "f**********************************.v***.c**.b*",
+      "followUpEmail": "seguimiento-2@example.invalid",
       "creationDate": "2025-12-09T19:43:52.4100825Z",
       "lastChange": "2025-12-09T19:47:15.4589254Z",
       "timeZoneCreationDate": "2025-12-09T16:43:52.4100825",
       "timeZoneLastChange": "2025-12-09T16:47:15.4589254",
       "isCompleted": true,
-      "merchantName": null,
+      "merchantName": "TIENDA-EJEMPLO",
       "userType": "",
       "roundingError": 0,
       "allowEdition": false,
@@ -438,8 +452,8 @@
       "allowChangeSeller": false
     }
   ],
-  "ordersUrl": "http://www.sporting.com.ar/account#/orders",
-  "orderGroup": "1582287194697",
+  "ordersUrl": "https://tienda-ejemplo.example.invalid/account#/orders",
+  "orderGroup": "TEST-1002",
   "subjectItemAttachment": {
     "item": "Guantes Reebok Royal...",
     "totalItems": 1
@@ -448,17 +462,17 @@
   "totalValue": 3939800,
   "callCenterOperatorData": null,
   "_accountInfo": {
-    "MainAccountName": "s*******",
-    "AccountName": "s*********",
-    "Cnpj": "30709964360",
-    "Id": "3b50fdc9-2fa8-4ed3-b86c-5aace09d5051",
-    "AppId": "aad3c2ce-d115-4059-88c2-a0060e5acd9a",
+    "MainAccountName": "tienda-ejemplo",
+    "AccountName": "tienda-ejemplo",
+    "Cnpj": "00000000000000",
+    "Id": "00000000-0000-4000-8000-000000000102",
+    "AppId": "00000000-0000-4000-8000-000000000202",
     "IsActive": true,
     "IsOperating": true,
     "CreationDate": "2017-09-13T04:00:22",
     "OperationDate": "2018-04-12T14:44:05",
     "CompanyName": "B*************",
-    "TradingName": "S*******",
+    "TradingName": "Tienda Ejemplo",
     "City": "San Miguel de Tucuman",
     "Complement": null,
     "Country": "Argentina",
@@ -467,7 +481,9 @@
     "District": null,
     "Number": "2345",
     "PostalCode": "4000",
-    "Licenses": [28],
+    "Licenses": [
+      28
+    ],
     "ParentAccountId": null,
     "ParentAccountName": null,
     "InactivationDate": null,
@@ -475,6 +491,6 @@
     "Privacy": null,
     "HasPiiRestriction": false,
     "Infra": null,
-    "Sponsor": "df910ed7-4389-4261-977b-ead598aaa015"
+    "Sponsor": "00000000-0000-4000-8000-000000000402"
   }
 }

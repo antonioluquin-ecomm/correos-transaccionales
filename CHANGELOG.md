@@ -2,6 +2,17 @@
 
 Formato: versión, fecha, resumen del cambio principal.
 
+## v0.4.0 — 2026-06-06
+
+- Hardening de datos de ejemplo: se reemplazaron identificadores reales de cliente, orden,
+  pago, cuenta y dirección por valores sintéticos manteniendo la forma VTEX.
+- Visualizador y Simulador ahora cargan Handlebars desde `assets/js/vendor/` en vez de
+  depender del CDN en runtime.
+- Los escenarios de ejemplo se centralizaron en `config.js` (`EXAMPLE_SCENARIOS`) para evitar
+  listas duplicadas en módulos.
+- El Simulador evita estados imposibles: los escenarios multipaquete fuerzan dos productos.
+- Se agregó matriz de validación y roadmap vivo; el README ahora indica validación por HTTP.
+
 ## v0.3.0 — 2026-06-06
 
 - Simulador de Datos (Módulo 4): parte de un pedido base real y combina escenarios de
