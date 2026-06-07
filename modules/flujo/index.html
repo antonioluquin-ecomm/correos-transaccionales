@@ -6,6 +6,7 @@
     <title>Flujo de Correos — Correos Transaccionales</title>
     <link rel="stylesheet" href="../../assets/css/shared.css" />
     <style>
+      /* ---- Tabs ---- */
       .ct-flow-tabs {
         display: flex;
         gap: 8px;
@@ -22,6 +23,7 @@
         font-size: 13px;
         font-weight: 700;
         cursor: pointer;
+        transition: background 0.12s, color 0.12s;
       }
 
       .ct-flow-tab.active {
@@ -30,6 +32,12 @@
         border-color: var(--ct-navy);
       }
 
+      .ct-flow-tab:not(.active):hover {
+        border-color: var(--ct-navy);
+        color: var(--ct-navy);
+      }
+
+      /* ---- Shell ---- */
       .ct-flow-shell {
         background: #ffffff;
         border: 1px solid var(--ct-card-border);
@@ -37,6 +45,7 @@
         overflow: hidden;
       }
 
+      /* ---- Header ---- */
       .ct-flow-header {
         display: flex;
         justify-content: space-between;
@@ -77,6 +86,85 @@
         color: var(--ct-text-muted);
       }
 
+      /* ---- Filter bar ---- */
+      .ct-flow-filters {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 10px 16px;
+        border-bottom: 1px solid var(--ct-card-border);
+        background: #f9fafb;
+      }
+
+      .ct-flow-filter-label {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+        color: var(--ct-text-muted);
+        margin-right: 2px;
+      }
+
+      .ct-flow-filter-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 5px 12px;
+        border-radius: 999px;
+        border: 1px solid var(--ct-card-border);
+        background: #ffffff;
+        color: var(--ct-text);
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.12s, color 0.12s, border-color 0.12s;
+      }
+
+      .ct-flow-filter-btn:hover {
+        border-color: var(--ct-accent);
+        color: var(--ct-accent);
+      }
+
+      .ct-flow-filter-btn.active[data-filter="all"] {
+        background: var(--ct-navy);
+        color: #ffffff;
+        border-color: var(--ct-navy);
+      }
+
+      .ct-flow-filter-btn.active[data-filter="existente"] {
+        background: var(--ct-status-activo);
+        color: #ffffff;
+        border-color: var(--ct-status-activo);
+      }
+
+      .ct-flow-filter-btn.active[data-filter="faltante"] {
+        background: var(--ct-status-faltante);
+        color: #ffffff;
+        border-color: var(--ct-status-faltante);
+      }
+
+      .ct-flow-filter-btn.active[data-filter="candidato"] {
+        background: #2563eb;
+        color: #ffffff;
+        border-color: #2563eb;
+      }
+
+      .ct-flow-filter-btn.active[data-priority="alta"] {
+        background: #ef4444;
+        color: #ffffff;
+        border-color: #ef4444;
+      }
+
+      .ct-flow-filter-sep {
+        width: 1px;
+        height: 20px;
+        background: var(--ct-card-border);
+        flex-shrink: 0;
+        margin: 0 2px;
+      }
+
+      /* ---- Board ---- */
       .ct-flow-board-wrap {
         overflow: auto;
         background: #f8fafc;
@@ -103,7 +191,8 @@
         color: #ffffff;
         font-weight: 800;
         font-size: 14px;
-        box-shadow: 0 8px 18px rgba(15, 23, 42, 0.12);
+        box-shadow: 0 4px 12px rgba(15, 23, 42, 0.18);
+        letter-spacing: 0.3px;
       }
 
       .ct-flow-lane-guide {
@@ -115,6 +204,7 @@
         background: #94a3b8;
       }
 
+      /* ---- SVG links ---- */
       .ct-flow-svg {
         position: absolute;
         inset: 0;
@@ -126,9 +216,11 @@
       .ct-flow-link {
         fill: none;
         stroke: #1f5c8a;
-        stroke-width: 2;
+        stroke-width: 1.8;
+        opacity: 0.7;
       }
 
+      /* ---- Nodes ---- */
       .ct-flow-node {
         position: absolute;
         width: 118px;
@@ -142,11 +234,17 @@
         background: #ffffff;
         color: var(--ct-text);
         text-align: center;
-        font-size: 12px;
-        line-height: 15px;
+        font-size: 11px;
+        line-height: 14px;
         font-weight: 800;
-        box-shadow: 0 8px 18px rgba(15, 23, 42, 0.13);
+        box-shadow: 0 4px 10px rgba(15, 23, 42, 0.10);
         cursor: pointer;
+        transition: box-shadow 0.15s, opacity 0.2s;
+      }
+
+      .ct-flow-node:hover {
+        box-shadow: 0 10px 24px rgba(15, 23, 42, 0.18);
+        z-index: 2;
       }
 
       .ct-flow-node::before {
@@ -179,11 +277,6 @@
         color: #0f766e;
       }
 
-      .ct-flow-node.missing {
-        border-style: dashed;
-        background: #fff7ed;
-      }
-
       .ct-flow-node.status-existente {
         background: #f0fdf4;
       }
@@ -199,8 +292,9 @@
       }
 
       .ct-flow-node.active {
-        outline: 3px solid rgba(37, 99, 235, 0.25);
+        outline: 3px solid rgba(37, 99, 235, 0.3);
         outline-offset: 3px;
+        z-index: 3;
       }
 
       .ct-flow-node:focus-visible {
@@ -208,6 +302,12 @@
         outline-offset: 3px;
       }
 
+      .ct-flow-node.filtered-out {
+        opacity: 0.1;
+        pointer-events: none;
+      }
+
+      /* ---- Status dot (bottom-right) ---- */
       .ct-flow-node-status {
         position: absolute;
         right: -8px;
@@ -220,37 +320,65 @@
         border-radius: 999px;
         background: #ffffff;
         border: 1px solid currentColor;
-        font-size: 11px;
+        font-size: 10px;
         line-height: 1;
+        font-weight: 900;
       }
 
+      /* ---- Priority dot (top-left) ---- */
+      .ct-flow-node-priority {
+        position: absolute;
+        top: -5px;
+        left: -5px;
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        border: 2px solid #ffffff;
+        z-index: 1;
+      }
+
+      .ct-flow-node-priority.priority-alta { background: #ef4444; }
+      .ct-flow-node-priority.priority-media { background: #f59e0b; }
+      .ct-flow-node-priority.priority-baja { background: #9ca3af; }
+
+      /* ---- Footer note ---- */
       .ct-flow-note {
-        padding: 12px 16px;
+        padding: 10px 16px;
         border-top: 1px solid var(--ct-card-border);
         color: var(--ct-text-muted);
-        font-size: 13px;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
       }
 
+      .ct-flow-note::before {
+        content: "↑";
+        font-size: 14px;
+        opacity: 0.5;
+      }
+
+      /* ---- Side panel ---- */
       .ct-flow-detail-overlay {
         position: fixed;
-        inset: 0;
-        display: none;
-        justify-content: flex-end;
-        background: rgba(15, 23, 42, 0.38);
+        top: 0;
+        right: -400px;
+        width: 380px;
+        height: 100%;
+        background: #ffffff;
+        box-shadow: -8px 0 32px rgba(15, 23, 42, 0.14);
         z-index: 80;
+        overflow-y: auto;
+        transition: right 0.22s cubic-bezier(0.4, 0, 0.2, 1);
       }
 
       .ct-flow-detail-overlay.open {
-        display: flex;
+        right: 0;
       }
 
-      .ct-flow-detail {
-        width: min(420px, 100%);
-        height: 100%;
-        background: #ffffff;
+      .ct-flow-detail-inner {
         padding: 24px;
-        overflow-y: auto;
-        box-shadow: -16px 0 30px rgba(15, 23, 42, 0.18);
+        min-height: 100%;
       }
 
       .ct-flow-detail-header {
@@ -263,7 +391,8 @@
 
       .ct-flow-detail-header h2 {
         margin: 8px 0 0 0;
-        font-size: 20px;
+        font-size: 18px;
+        line-height: 24px;
       }
 
       #ct-flow-detail-badges {
@@ -272,47 +401,74 @@
         flex-wrap: wrap;
       }
 
-      .ct-flow-detail dl {
+      .ct-flow-detail-inner dl {
         display: grid;
-        grid-template-columns: 112px 1fr;
-        gap: 10px 14px;
+        grid-template-columns: 100px 1fr;
+        gap: 10px 12px;
         margin: 18px 0;
-        font-size: 14px;
+        font-size: 13px;
       }
 
-      .ct-flow-detail dt {
+      .ct-flow-detail-inner dt {
         color: var(--ct-text-muted);
         font-weight: 700;
       }
 
-      .ct-flow-detail dd {
+      .ct-flow-detail-inner dd {
         margin: 0;
       }
 
-      .ct-flow-detail .ct-actions {
+      .ct-flow-detail-inner .ct-actions {
         display: flex;
+        flex-direction: column;
         gap: 8px;
-        flex-wrap: wrap;
         margin-top: 18px;
+      }
+
+      .ct-flow-detail-inner .ct-actions a,
+      .ct-flow-detail-inner .ct-actions button {
+        justify-content: center;
       }
 
       .ct-flow-detail-note {
         color: var(--ct-text-muted);
-        font-size: 14px;
+        font-size: 13px;
         line-height: 20px;
         margin: 0;
+        padding: 12px 14px;
+        background: #f9fafb;
+        border-radius: 8px;
+        border-left: 3px solid var(--ct-card-border);
       }
 
       .ct-flow-close {
-        border: none;
-        background: transparent;
+        flex-shrink: 0;
+        border: 1px solid var(--ct-card-border);
+        background: #ffffff;
         color: var(--ct-text-muted);
         cursor: pointer;
-        font-size: 22px;
+        font-size: 18px;
         line-height: 1;
-        padding: 4px;
+        padding: 6px 9px;
+        border-radius: 8px;
+        transition: background 0.12s;
       }
 
+      .ct-flow-close:hover {
+        background: #f3f4f6;
+        color: var(--ct-text);
+      }
+
+      /* ---- Mobile backdrop ---- */
+      .ct-flow-backdrop {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.38);
+        z-index: 79;
+      }
+
+      /* ---- Responsive ---- */
       @media (max-width: 760px) {
         .ct-flow-header {
           flex-direction: column;
@@ -322,14 +478,20 @@
           justify-content: flex-start;
         }
 
-        .ct-flow-detail {
+        .ct-flow-detail-overlay {
           width: 100%;
+          right: -100%;
+        }
+
+        .ct-flow-backdrop.open {
+          display: block;
         }
       }
     </style>
   </head>
   <body>
     <header class="ct-topbar" data-ct-topbar></header>
+
     <main class="ct-page">
       <h1>Flujo de Correos</h1>
       <p class="ct-subtitle">
@@ -356,17 +518,31 @@
             <span class="ct-badge ct-status-candidato">? Candidato</span>
           </div>
         </div>
+
+        <div class="ct-flow-filters" id="ct-flow-filters">
+          <span class="ct-flow-filter-label">Ver</span>
+          <button class="ct-flow-filter-btn active" type="button" data-filter="all">Todos</button>
+          <button class="ct-flow-filter-btn" type="button" data-filter="existente">✓ Existentes</button>
+          <button class="ct-flow-filter-btn" type="button" data-filter="faltante">! Faltantes</button>
+          <button class="ct-flow-filter-btn" type="button" data-filter="candidato">? Candidatos</button>
+          <span class="ct-flow-filter-sep"></span>
+          <button class="ct-flow-filter-btn" type="button" data-priority="alta">↑ Prioridad alta</button>
+        </div>
+
         <div class="ct-flow-board-wrap">
           <div class="ct-flow-board" id="ct-flow-board"></div>
         </div>
+
         <div class="ct-flow-note">
           Hacé click en cualquier nodo para ver estado, prioridad, disparador y próxima acción.
         </div>
       </section>
     </main>
 
-    <div class="ct-flow-detail-overlay" id="ct-flow-detail-overlay">
-      <aside class="ct-flow-detail" role="dialog" aria-modal="true" aria-labelledby="ct-flow-detail-title">
+    <div id="ct-flow-backdrop" class="ct-flow-backdrop"></div>
+
+    <aside class="ct-flow-detail-overlay" id="ct-flow-detail-overlay" role="dialog" aria-modal="true" aria-labelledby="ct-flow-detail-title">
+      <div class="ct-flow-detail-inner">
         <div class="ct-flow-detail-header">
           <div>
             <div id="ct-flow-detail-badges"></div>
@@ -390,8 +566,8 @@
           <dd id="ct-flow-detail-template"></dd>
         </dl>
         <div class="ct-actions" id="ct-flow-detail-actions"></div>
-      </aside>
-    </div>
+      </div>
+    </aside>
 
     <script src="../../config.js"></script>
     <script src="../../assets/js/shared.js"></script>
@@ -528,8 +704,11 @@
         const detailTrigger = document.getElementById('ct-flow-detail-trigger');
         const detailTemplate = document.getElementById('ct-flow-detail-template');
         const detailActions = document.getElementById('ct-flow-detail-actions');
+        const backdrop = document.getElementById('ct-flow-backdrop');
 
         let activeFlowId = 'entrega';
+        let activeStatusFilter = null;
+        let activePriorityFilter = false;
 
         const STATUS_META = {
           existente: { label: 'Existente', icon: '✓', className: 'ct-status-activo' },
@@ -544,7 +723,7 @@
         };
 
         function templateById(templateId) {
-          return TEMPLATES.find((template) => template.id === templateId);
+          return TEMPLATES.find((t) => t.id === templateId);
         }
 
         function effectiveStatus(node) {
@@ -571,20 +750,27 @@
           return '../../docs/crear-nueva-plantilla.md';
         }
 
+        function applyFilter() {
+          boardEl.querySelectorAll('.ct-flow-node').forEach((el) => {
+            const matchStatus = !activeStatusFilter || el.dataset.status === activeStatusFilter;
+            const matchPriority = !activePriorityFilter || el.dataset.priority === 'alta';
+            el.classList.toggle('filtered-out', !(matchStatus && matchPriority));
+          });
+        }
+
         function closeDetail() {
           detailOverlay.classList.remove('open');
-          Array.from(boardEl.querySelectorAll('.ct-flow-node.active')).forEach((nodeEl) => {
-            nodeEl.classList.remove('active');
-          });
+          backdrop.classList.remove('open');
+          boardEl.querySelectorAll('.ct-flow-node.active').forEach((el) => el.classList.remove('active'));
         }
 
         function openDetail(node, flow, nodeEl) {
           const status = effectiveStatus(node);
           const statusMeta = STATUS_META[status] || STATUS_META.faltante;
           const template = templateById(node.templateId);
-          const lane = LANES.find((item) => item.id === node.lane);
+          const lane = LANES.find((l) => l.id === node.lane);
 
-          Array.from(boardEl.querySelectorAll('.ct-flow-node.active')).forEach((item) => item.classList.remove('active'));
+          boardEl.querySelectorAll('.ct-flow-node.active').forEach((el) => el.classList.remove('active'));
           nodeEl.classList.add('active');
 
           detailBadges.innerHTML = `${statusBadge(status)}${priorityBadge(node.priority || 'media')}`;
@@ -599,20 +785,15 @@
 
           const actionLabel = template ? 'Ver preview' : 'Crear plantilla';
           const actionClass = template ? 'ct-btn ct-btn-primary' : 'ct-btn';
-          detailActions.innerHTML = `
-            <a class="${actionClass}" href="${CT.escapeHtml(nodeActionUrl(node))}">${CT.escapeHtml(actionLabel)}</a>
-          `;
+          detailActions.innerHTML = `<a class="${actionClass}" href="${CT.escapeHtml(nodeActionUrl(node))}">${CT.escapeHtml(actionLabel)}</a>`;
 
           detailOverlay.classList.add('open');
+          backdrop.classList.add('open');
         }
 
         function nodePosition(node) {
-          const lane = LANES.find((item) => item.id === node.lane);
-          return {
-            left: node.x,
-            top: lane.top + (node.y || 0),
-            lane,
-          };
+          const lane = LANES.find((l) => l.id === node.lane);
+          return { left: node.x, top: lane.top + (node.y || 0), lane };
         }
 
         function linkPath(from, to) {
@@ -660,13 +841,31 @@
           svg.setAttribute('class', 'ct-flow-svg');
           svg.setAttribute('viewBox', '0 0 1180 560');
 
+          // Arrow marker
+          const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+          const marker = document.createElementNS('http://www.w3.org/2000/svg', 'marker');
+          marker.setAttribute('id', 'ct-arrow');
+          marker.setAttribute('viewBox', '0 0 6 6');
+          marker.setAttribute('refX', '5');
+          marker.setAttribute('refY', '3');
+          marker.setAttribute('markerWidth', '5');
+          marker.setAttribute('markerHeight', '5');
+          marker.setAttribute('orient', 'auto');
+          const arrowPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          arrowPath.setAttribute('d', 'M 0 0 L 6 3 L 0 6 z');
+          arrowPath.setAttribute('fill', '#1f5c8a');
+          marker.appendChild(arrowPath);
+          defs.appendChild(marker);
+          svg.appendChild(defs);
+
           flow.links.forEach(([fromId, toId]) => {
-            const from = flow.nodes.find((node) => node.id === fromId);
-            const to = flow.nodes.find((node) => node.id === toId);
+            const from = flow.nodes.find((n) => n.id === fromId);
+            const to = flow.nodes.find((n) => n.id === toId);
             if (!from || !to) return;
             const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
             path.setAttribute('class', 'ct-flow-link');
             path.setAttribute('d', linkPath(from, to));
+            path.setAttribute('marker-end', 'url(#ct-arrow)');
             svg.appendChild(path);
           });
 
@@ -678,7 +877,8 @@
             const statusMeta = STATUS_META[status] || STATUS_META.faltante;
             const el = document.createElement('div');
             el.className = `ct-flow-node ${node.lane} status-${status}`;
-            if (node.missing) el.classList.add('missing');
+            el.dataset.status = status;
+            el.dataset.priority = node.priority || 'media';
             el.style.left = position.left + 'px';
             el.style.top = position.top + 'px';
             el.textContent = node.text;
@@ -686,10 +886,14 @@
             el.setAttribute('role', 'button');
             el.setAttribute('aria-label', `${node.text}. Estado: ${statusMeta.label}`);
 
-            const statusEl = document.createElement('span');
-            statusEl.className = 'ct-flow-node-status';
-            statusEl.textContent = statusMeta.icon;
-            el.appendChild(statusEl);
+            const priorityDot = document.createElement('span');
+            priorityDot.className = `ct-flow-node-priority priority-${node.priority || 'media'}`;
+            el.appendChild(priorityDot);
+
+            const statusDot = document.createElement('span');
+            statusDot.className = 'ct-flow-node-status';
+            statusDot.textContent = statusMeta.icon;
+            el.appendChild(statusDot);
 
             el.addEventListener('click', () => openDetail(node, flow, el));
             el.addEventListener('keydown', (event) => {
@@ -705,7 +909,30 @@
           Array.from(tabsEl.children).forEach((tab) => {
             tab.classList.toggle('active', tab.dataset.flow === flowId);
           });
+
+          applyFilter();
         }
+
+        // Filter bar
+        document.getElementById('ct-flow-filters').addEventListener('click', (e) => {
+          const btn = e.target.closest('.ct-flow-filter-btn');
+          if (!btn) return;
+
+          if ('filter' in btn.dataset) {
+            const filter = btn.dataset.filter;
+            activeStatusFilter = filter === 'all' || activeStatusFilter === filter ? null : filter;
+            document.querySelectorAll('[data-filter]').forEach((b) => b.classList.remove('active'));
+            const activeBtn = activeStatusFilter
+              ? document.querySelector(`[data-filter="${activeStatusFilter}"]`)
+              : document.querySelector('[data-filter="all"]');
+            if (activeBtn) activeBtn.classList.add('active');
+          } else if ('priority' in btn.dataset) {
+            activePriorityFilter = !activePriorityFilter;
+            btn.classList.toggle('active', activePriorityFilter);
+          }
+
+          applyFilter();
+        });
 
         Object.entries(FLOWS).forEach(([flowId, flow]) => {
           const button = document.createElement('button');
@@ -713,14 +940,15 @@
           button.className = 'ct-flow-tab';
           button.dataset.flow = flowId;
           button.textContent = flow.title;
-          button.addEventListener('click', () => renderFlow(flowId));
+          button.addEventListener('click', () => {
+            closeDetail();
+            renderFlow(flowId);
+          });
           tabsEl.appendChild(button);
         });
 
         detailClose.addEventListener('click', closeDetail);
-        detailOverlay.addEventListener('click', (event) => {
-          if (event.target === detailOverlay) closeDetail();
-        });
+        backdrop.addEventListener('click', closeDetail);
         document.addEventListener('keydown', (event) => {
           if (event.key === 'Escape' && detailOverlay.classList.contains('open')) closeDetail();
         });

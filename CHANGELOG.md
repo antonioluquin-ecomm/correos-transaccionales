@@ -2,6 +2,17 @@
 
 Formato: versión, fecha, resumen del cambio principal.
 
+## v1.0.0 — 2026-06-07
+
+Rediseño del módulo Flujo de Correos:
+
+- **Side panel:** el detalle de cada nodo ahora se desliza desde la derecha sin tapar el mapa. En desktop conviven panel y diagrama; en mobile aparece backdrop oscuro. Cierre con botón ×, Escape o click en backdrop.
+- **Barra de filtros:** chips sobre el board para mostrar solo Existentes, Faltantes, Candidatos o la combinación con "↑ Prioridad alta". Los filtros de estado y prioridad son independientes y se combinan con AND. Clicar el mismo chip activo vuelve a "Todos".
+- **Dot de prioridad:** cada nodo tiene un punto 10px en la esquina superior izquierda: rojo (alta), ámbar (media), gris (baja). Permite escanear prioridades sin abrir la ficha.
+- **Arrowheads SVG:** las 17 conexiones del flujo tienen punta de flecha (`<marker>` en `<defs>`), haciendo la dirección del recorrido evidente de un vistazo.
+- **Dot de estado:** ícono ✓ / ! / ? en esquina inferior derecha del nodo como segundo indicador visual de estado.
+- **Typografía de nodos:** 12px → 11px / line-height 15px → 14px para mejorar legibilidad dentro del ancho fijo.
+
 ## v0.9.0 — 2026-06-07
 
 Mejoras de UI/UX en todos los módulos:
