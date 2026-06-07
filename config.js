@@ -33,6 +33,7 @@ const TEMPLATES = [
     archivoHtml: 'templates/vtex/pedido-confirmado.html',
     ejemplo: 'examples/vtex/pedido-estandar.json',
     variables: [
+      'hostName',
       '_accountInfo.TradingName',
       'orders.0.orderId',
       'orders.0.creationDate',
@@ -57,6 +58,7 @@ const TEMPLATES = [
     archivoHtml: 'templates/vtex/pago-aprobado.html',
     ejemplo: 'examples/vtex/pedido-estandar.json',
     variables: [
+      'hostName',
       '_accountInfo.TradingName',
       'orderId',
       'creationDate',
@@ -72,8 +74,8 @@ const TEMPLATES = [
 ];
 
 const EXAMPLE_SCENARIOS = [
-  { path: 'examples/vtex/pedido-estandar.json', label: 'Pedido estandar (envio a domicilio)' },
-  { path: 'examples/vtex/pedido-realizado.json', label: 'Pedido realizado con exito' },
+  { path: 'examples/vtex/pedido-estandar.json', label: 'Pedido estándar (envío a domicilio)' },
+  { path: 'examples/vtex/pedido-realizado.json', label: 'Pedido realizado con éxito' },
   { path: 'examples/vtex/pago-aprobado.json', label: 'Pago aprobado' },
   { path: 'examples/vtex/pedido-cancelado.json', label: 'Pedido cancelado' },
 ];

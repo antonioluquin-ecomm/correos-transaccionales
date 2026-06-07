@@ -15,6 +15,7 @@
 
   --ct-status-activo: #16a34a;
   --ct-status-revision: #d97706;
+  --ct-status-faltante: #f97316;
   --ct-status-deprecado: #6b7280;
 }
 
@@ -119,6 +120,10 @@ a {
   padding: 16px;
 }
 
+a.ct-card {
+  text-decoration: none;
+}
+
 .ct-card h2,
 .ct-card h3 {
   margin: 0 0 8px 0;
@@ -157,6 +162,8 @@ a {
 
 .ct-badge.ct-status-activo { background: var(--ct-status-activo); }
 .ct-badge.ct-status-en-revision { background: var(--ct-status-revision); }
+.ct-badge.ct-status-faltante { background: var(--ct-status-faltante); }
+.ct-badge.ct-status-candidato { background: #2563eb; }
 .ct-badge.ct-status-deprecado { background: var(--ct-status-deprecado); }
 
 /* Buttons */

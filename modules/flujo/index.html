@@ -185,12 +185,13 @@
         background: #eff6ff;
       }
 
-      .ct-badge.ct-status-candidato {
-        background: #2563eb;
-      }
-
       .ct-flow-node.active {
         outline: 3px solid rgba(37, 99, 235, 0.25);
+        outline-offset: 3px;
+      }
+
+      .ct-flow-node:focus-visible {
+        outline: 3px solid #2563eb;
         outline-offset: 3px;
       }
 
@@ -514,7 +515,7 @@
 
         const STATUS_META = {
           existente: { label: 'Existente', icon: '✓', className: 'ct-status-activo' },
-          faltante: { label: 'Faltante', icon: '!', className: 'ct-status-en-revision' },
+          faltante: { label: 'Faltante', icon: '!', className: 'ct-status-faltante' },
           candidato: { label: 'Candidato', icon: '?', className: 'ct-status-candidato' },
         };
 

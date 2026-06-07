@@ -138,6 +138,7 @@
       <div id="ct-empty" class="ct-empty" hidden>
         <p><strong>No se encontraron plantillas con esos filtros.</strong></p>
         <p>Probá ajustar la búsqueda o limpiar los filtros.</p>
+        <button class="ct-btn" id="ct-clear-filters">Limpiar filtros</button>
       </div>
     </main>
 
@@ -243,6 +244,14 @@
         [searchEl, filterPlataformaEl, filterCategoriaEl, filterEstadoEl].forEach((el) => {
           el.addEventListener('input', renderResults);
           el.addEventListener('change', renderResults);
+        });
+
+        document.getElementById('ct-clear-filters').addEventListener('click', () => {
+          searchEl.value = '';
+          filterPlataformaEl.value = '';
+          filterCategoriaEl.value = '';
+          filterEstadoEl.value = '';
+          renderResults();
         });
 
         // Ficha de detalle
