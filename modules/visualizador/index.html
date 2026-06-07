@@ -69,6 +69,9 @@
         const frame = document.getElementById('ct-vis-frame');
 
         const renderable = TEMPLATES.filter((t) => t.archivoHtml);
+        const urlParams = new URLSearchParams(window.location.search);
+        const requestedTemplateId = urlParams.get('template');
+        const requestedExamplePath = urlParams.get('example');
 
         renderable.forEach((template) => {
           const option = document.createElement('option');
@@ -133,9 +136,13 @@
         exampleSelect.addEventListener('change', renderPreview);
 
         if (renderable.length) {
-          const initial = renderable[0];
+          const requestedTemplate = renderable.find((t) => t.id === requestedTemplateId);
+          const initial = requestedTemplate || renderable[0];
+          const requestedExampleExists = examples.some((e) => e.path === requestedExamplePath);
           templateSelect.value = initial.id;
-          if (initial.ejemplo && examples.some((e) => e.path === initial.ejemplo)) {
+          if (requestedExampleExists) {
+            exampleSelect.value = requestedExamplePath;
+          } else if (initial.ejemplo && examples.some((e) => e.path === initial.ejemplo)) {
             exampleSelect.value = initial.ejemplo;
           }
           renderPreview();

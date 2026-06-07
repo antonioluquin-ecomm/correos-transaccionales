@@ -2,6 +2,14 @@
 
 Formato: versión, fecha, resumen del cambio principal.
 
+## v0.7.0 — 2026-06-07
+
+- El módulo `Flujo de Correos` ahora muestra estados operativos por nodo:
+  existente, faltante o candidato.
+- Cada nodo abre una ficha con plataforma, etapa, prioridad, disparador, nota y acción.
+- Los correos existentes abren el Visualizador con la plantilla seleccionada por query params.
+- Los correos faltantes o candidatos enlazan a la guía de creación de nuevas plantillas.
+
 ## v0.6.0 — 2026-06-06
 
 - Se implementó el módulo `Flujo de Correos` como mapa operativo con pestañas para

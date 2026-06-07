@@ -79,12 +79,13 @@ const EXAMPLE_SCENARIOS = [
 ];
 
 const VERSION = {
-  number: '0.6.0',
-  date: '2026-06-06',
-  summary: 'Mapa operativo de flujo de correos por logística y plataforma.',
+  number: '0.7.0',
+  date: '2026-06-07',
+  summary: 'Flujo operativo con estados, acciones y enlace directo al Visualizador.',
 };
 
 const CHANGELOG = [
+  { version: '0.7.0', date: '2026-06-07', summary: 'Flujo de Correos suma estados por nodo, ficha operativa, acciones para preview/creacion y soporte de query params en Visualizador.' },
   { version: '0.6.0', date: '2026-06-06', summary: 'Modulo Flujo de Correos con mapa por pestanas para entrega, cambio, devolucion y garantia, organizado por plataforma.' },
   { version: '0.5.0', date: '2026-06-06', summary: 'Se priorizan Biblioteca y Visualizador como flujo principal; Simulador queda rotulado como QA interno y se documenta el flujo para crear nuevas plantillas con JSON representativo.' },
   { version: '0.4.0', date: '2026-06-06', summary: 'Datos de ejemplo sanitizados, Handlebars local, escenarios centralizados, simulador coherente en multipaquete y docs de validacion/roadmap.' },

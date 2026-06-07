@@ -133,6 +133,7 @@
         line-height: 15px;
         font-weight: 800;
         box-shadow: 0 8px 18px rgba(15, 23, 42, 0.13);
+        cursor: pointer;
       }
 
       .ct-flow-node::before {
@@ -170,11 +171,132 @@
         background: #fff7ed;
       }
 
+      .ct-flow-node.status-existente {
+        background: #f0fdf4;
+      }
+
+      .ct-flow-node.status-faltante {
+        border-style: dashed;
+        background: #fff7ed;
+      }
+
+      .ct-flow-node.status-candidato {
+        border-style: dotted;
+        background: #eff6ff;
+      }
+
+      .ct-badge.ct-status-candidato {
+        background: #2563eb;
+      }
+
+      .ct-flow-node.active {
+        outline: 3px solid rgba(37, 99, 235, 0.25);
+        outline-offset: 3px;
+      }
+
+      .ct-flow-node-status {
+        position: absolute;
+        right: -8px;
+        bottom: -8px;
+        width: 18px;
+        height: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        background: #ffffff;
+        border: 1px solid currentColor;
+        font-size: 11px;
+        line-height: 1;
+      }
+
       .ct-flow-note {
         padding: 12px 16px;
         border-top: 1px solid var(--ct-card-border);
         color: var(--ct-text-muted);
         font-size: 13px;
+      }
+
+      .ct-flow-detail-overlay {
+        position: fixed;
+        inset: 0;
+        display: none;
+        justify-content: flex-end;
+        background: rgba(15, 23, 42, 0.38);
+        z-index: 80;
+      }
+
+      .ct-flow-detail-overlay.open {
+        display: flex;
+      }
+
+      .ct-flow-detail {
+        width: min(420px, 100%);
+        height: 100%;
+        background: #ffffff;
+        padding: 24px;
+        overflow-y: auto;
+        box-shadow: -16px 0 30px rgba(15, 23, 42, 0.18);
+      }
+
+      .ct-flow-detail-header {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        align-items: flex-start;
+        margin-bottom: 14px;
+      }
+
+      .ct-flow-detail-header h2 {
+        margin: 8px 0 0 0;
+        font-size: 20px;
+      }
+
+      #ct-flow-detail-badges {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+
+      .ct-flow-detail dl {
+        display: grid;
+        grid-template-columns: 112px 1fr;
+        gap: 10px 14px;
+        margin: 18px 0;
+        font-size: 14px;
+      }
+
+      .ct-flow-detail dt {
+        color: var(--ct-text-muted);
+        font-weight: 700;
+      }
+
+      .ct-flow-detail dd {
+        margin: 0;
+      }
+
+      .ct-flow-detail .ct-actions {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: 18px;
+      }
+
+      .ct-flow-detail-note {
+        color: var(--ct-text-muted);
+        font-size: 14px;
+        line-height: 20px;
+        margin: 0;
+      }
+
+      .ct-flow-close {
+        border: none;
+        background: transparent;
+        color: var(--ct-text-muted);
+        cursor: pointer;
+        font-size: 22px;
+        line-height: 1;
+        padding: 4px;
       }
 
       @media (max-width: 760px) {
@@ -184,6 +306,10 @@
 
         .ct-flow-legend {
           justify-content: flex-start;
+        }
+
+        .ct-flow-detail {
+          width: 100%;
         }
       }
     </style>
@@ -215,10 +341,39 @@
           <div class="ct-flow-board" id="ct-flow-board"></div>
         </div>
         <div class="ct-flow-note">
-          Los nodos con borde punteado representan correos mapeados como candidatos o pendientes de crear.
+          Hacé click en cualquier nodo para ver estado, prioridad, disparador y próxima acción.
         </div>
       </section>
     </main>
+
+    <div class="ct-flow-detail-overlay" id="ct-flow-detail-overlay">
+      <aside class="ct-flow-detail" role="dialog" aria-modal="true" aria-labelledby="ct-flow-detail-title">
+        <div class="ct-flow-detail-header">
+          <div>
+            <div id="ct-flow-detail-badges"></div>
+            <h2 id="ct-flow-detail-title"></h2>
+          </div>
+          <button class="ct-flow-close" id="ct-flow-detail-close" type="button" aria-label="Cerrar detalle">&times;</button>
+        </div>
+        <p class="ct-flow-detail-note" id="ct-flow-detail-note"></p>
+        <dl>
+          <dt>Plataforma</dt>
+          <dd id="ct-flow-detail-platform"></dd>
+          <dt>Etapa</dt>
+          <dd id="ct-flow-detail-stage"></dd>
+          <dt>Estado</dt>
+          <dd id="ct-flow-detail-status"></dd>
+          <dt>Prioridad</dt>
+          <dd id="ct-flow-detail-priority"></dd>
+          <dt>Disparador</dt>
+          <dd id="ct-flow-detail-trigger"></dd>
+          <dt>Plantilla</dt>
+          <dd id="ct-flow-detail-template"></dd>
+        </dl>
+        <div class="ct-actions" id="ct-flow-detail-actions"></div>
+      </aside>
+    </div>
+
     <script src="../../config.js"></script>
     <script src="../../assets/js/shared.js"></script>
     <script>
@@ -237,23 +392,23 @@
             title: 'Logística de Entrega',
             description: 'Recorrido principal desde cuenta/pedido hasta preparación, despacho, visita y entrega.',
             nodes: [
-              { id: 'access', lane: 'vtex', x: 170, text: 'Código de acceso a cuenta' },
-              { id: 'order', lane: 'vtex', x: 300, text: 'Pedido realizado con éxito' },
-              { id: 'cancelled', lane: 'vtex', x: 430, y: -44, text: 'Pedido cancelado', missing: true },
-              { id: 'paid', lane: 'vtex', x: 430, text: 'Pago aprobado' },
-              { id: 'stockout', lane: 'pim', x: 430, text: 'Sin stock', missing: true },
-              { id: 'invoiced', lane: 'pim', x: 560, text: 'Pedido facturado', missing: true },
-              { id: 'pickup', lane: 'pim', x: 690, y: -44, text: 'Pedido para retirar', missing: true },
-              { id: 'shipped', lane: 'pim', x: 690, text: 'Pedido despachado', missing: true },
-              { id: 'prep-a', lane: 'andreani', x: 690, text: 'Estamos preparando tu pedido', missing: true },
-              { id: 'moving-a', lane: 'andreani', x: 820, text: 'Tu envío está en camino', missing: true },
-              { id: 'today-a', lane: 'andreani', x: 950, y: -28, text: 'Tu envío llega hoy', missing: true },
-              { id: 'delay-a', lane: 'andreani', x: 950, y: 28, text: 'Pedido con demora', missing: true },
-              { id: 'visited-a', lane: 'andreani', x: 1080, text: 'Te visitamos', missing: true },
-              { id: 'prep-o', lane: 'ocasa', x: 690, text: 'Pedido en preparación', missing: true },
-              { id: 'visit-o', lane: 'ocasa', x: 820, text: 'Pronto visita', missing: true },
-              { id: 'today-o', lane: 'ocasa', x: 950, text: 'Hoy llegamos', missing: true },
-              { id: 'moving-o', lane: 'ocasa', x: 1080, text: 'En camino', missing: true },
+              { id: 'access', lane: 'vtex', x: 170, text: 'Código de acceso a cuenta', status: 'candidato', priority: 'baja', trigger: 'Usuario solicita ingreso o recuperación de acceso.', note: 'Confirmar si corresponde al alcance de correos transaccionales.' },
+              { id: 'order', lane: 'vtex', x: 300, text: 'Pedido realizado con éxito', templateId: 'pedido-confirmado', status: 'existente', priority: 'alta', trigger: 'VTEX registra correctamente un pedido.', note: 'Plantilla real disponible y asociada al catálogo.' },
+              { id: 'cancelled', lane: 'vtex', x: 430, y: -44, text: 'Pedido cancelado', status: 'faltante', priority: 'media', trigger: 'VTEX cancela o informa cancelación del pedido.', note: 'Hay escenario de datos, pero falta plantilla HTML propia.' },
+              { id: 'paid', lane: 'vtex', x: 430, text: 'Pago aprobado', templateId: 'pago-aprobado', status: 'existente', priority: 'alta', trigger: 'VTEX confirma autorización/aprobación de pago.', note: 'Plantilla real disponible y asociada al catálogo.' },
+              { id: 'stockout', lane: 'pim', x: 430, text: 'Sin stock', status: 'faltante', priority: 'alta', trigger: 'PIM detecta falta de stock para uno o más productos.', note: 'Priorizar si impacta pedidos ya pagados o confirmados.' },
+              { id: 'invoiced', lane: 'pim', x: 560, text: 'Pedido facturado', status: 'faltante', priority: 'media', trigger: 'PIM o facturación confirma comprobante emitido.', note: 'Definir si el cliente necesita recibir este aviso.' },
+              { id: 'pickup', lane: 'pim', x: 690, y: -44, text: 'Pedido para retirar', status: 'faltante', priority: 'alta', trigger: 'Pedido queda disponible para retiro.', note: 'Requiere JSON con datos de punto de retiro.' },
+              { id: 'shipped', lane: 'pim', x: 690, text: 'Pedido despachado', status: 'faltante', priority: 'alta', trigger: 'Pedido sale del depósito o pasa a operador logístico.', note: 'Debe incluir tracking o próxima comunicación esperada.' },
+              { id: 'prep-a', lane: 'andreani', x: 690, text: 'Estamos preparando tu pedido', status: 'faltante', priority: 'media', trigger: 'Andreani recibe prealta o preparación del envío.', note: 'Confirmar evento exacto con integración Andreani.' },
+              { id: 'moving-a', lane: 'andreani', x: 820, text: 'Tu envío está en camino', status: 'faltante', priority: 'alta', trigger: 'Andreani informa envío en tránsito.', note: 'Debe incluir número de seguimiento si está disponible.' },
+              { id: 'today-a', lane: 'andreani', x: 950, y: -28, text: 'Tu envío llega hoy', status: 'faltante', priority: 'media', trigger: 'Andreani informa visita programada para el día.', note: 'Validar si se envía siempre o solo en ciertos servicios.' },
+              { id: 'delay-a', lane: 'andreani', x: 950, y: 28, text: 'Pedido con demora', status: 'faltante', priority: 'media', trigger: 'Andreani informa atraso o reprogramación.', note: 'Debe explicar expectativa sin prometer fecha no confirmada.' },
+              { id: 'visited-a', lane: 'andreani', x: 1080, text: 'Te visitamos', status: 'faltante', priority: 'media', trigger: 'Andreani registra intento de entrega.', note: 'Definir variantes: entrega fallida, ausente o segunda visita.' },
+              { id: 'prep-o', lane: 'ocasa', x: 690, text: 'Pedido en preparación', status: 'faltante', priority: 'media', trigger: 'Ocasa recibe o prepara el envío.', note: 'Confirmar evento exacto de Ocasa.' },
+              { id: 'visit-o', lane: 'ocasa', x: 820, text: 'Pronto visita', status: 'faltante', priority: 'media', trigger: 'Ocasa anticipa próxima visita.', note: 'Requiere datos de ventana o mensaje operativo.' },
+              { id: 'today-o', lane: 'ocasa', x: 950, text: 'Hoy llegamos', status: 'faltante', priority: 'media', trigger: 'Ocasa informa entrega prevista para el día.', note: 'Validar si aplica a todos los envíos.' },
+              { id: 'moving-o', lane: 'ocasa', x: 1080, text: 'En camino', status: 'faltante', priority: 'alta', trigger: 'Ocasa informa envío en tránsito.', note: 'Debe incluir tracking si está disponible.' },
             ],
             links: [
               ['access', 'order'],
@@ -279,13 +434,13 @@
             title: 'Logística Inversa - Cambio',
             description: 'Flujo de retiro por cambio, recepción del producto y emisión de giftcard/código de cambio.',
             nodes: [
-              { id: 'request', lane: 'pim', x: 220, text: 'Solicitud de cambio', missing: true },
-              { id: 'pickup-order', lane: 'andreani', x: 350, text: 'Recibimos tu orden de retiro', missing: true },
-              { id: 'courier', lane: 'andreani', x: 500, text: 'Estamos en camino para retirar tu producto', missing: true },
-              { id: 'delivered', lane: 'andreani', x: 650, text: 'Ya entregamos tu producto', missing: true },
-              { id: 'rejected', lane: 'pim', x: 790, y: -26, text: 'Notificación de cambio rechazado', missing: true },
-              { id: 'received', lane: 'pim', x: 790, y: 34, text: 'Recepción de producto por cambio', missing: true },
-              { id: 'giftcard', lane: 'pim', x: 940, y: 34, text: 'Giftcard (Código para cambio)', missing: true },
+              { id: 'request', lane: 'pim', x: 220, text: 'Solicitud de cambio', status: 'faltante', priority: 'alta', trigger: 'Cliente solicita cambio de producto.', note: 'Inicio del flujo inverso de cambio.' },
+              { id: 'pickup-order', lane: 'andreani', x: 350, text: 'Recibimos tu orden de retiro', status: 'faltante', priority: 'alta', trigger: 'Andreani recibe orden de retiro.', note: 'Debe confirmar al cliente que el retiro fue solicitado.' },
+              { id: 'courier', lane: 'andreani', x: 500, text: 'Estamos en camino para retirar tu producto', status: 'faltante', priority: 'media', trigger: 'Andreani informa retiro en curso.', note: 'Validar disponibilidad de datos de visita.' },
+              { id: 'delivered', lane: 'andreani', x: 650, text: 'Ya entregamos tu producto', status: 'faltante', priority: 'media', trigger: 'Andreani confirma entrega/devolución al depósito.', note: 'Nombre operativo a confirmar: entrega del producto retirado.' },
+              { id: 'rejected', lane: 'pim', x: 790, y: -26, text: 'Notificación de cambio rechazado', status: 'faltante', priority: 'media', trigger: 'PIM rechaza solicitud o recepción de cambio.', note: 'Debe explicar motivo y próximo paso.' },
+              { id: 'received', lane: 'pim', x: 790, y: 34, text: 'Recepción de producto por cambio', status: 'faltante', priority: 'alta', trigger: 'PIM confirma recepción del producto a cambiar.', note: 'Dispara resolución del cambio.' },
+              { id: 'giftcard', lane: 'pim', x: 940, y: 34, text: 'Giftcard (Código para cambio)', status: 'faltante', priority: 'alta', trigger: 'Se emite código/giftcard para nuevo cambio.', note: 'Requiere datos de código, vigencia e instrucciones.' },
             ],
             links: [
               ['request', 'pickup-order'],
@@ -300,12 +455,12 @@
             title: 'Logística Inversa - Devolución',
             description: 'Flujo de solicitud, retiro y recepción de producto para gestionar devolución.',
             nodes: [
-              { id: 'request', lane: 'pim', x: 220, text: 'Solicitud de devolución', missing: true },
-              { id: 'pickup-order', lane: 'andreani', x: 350, text: 'Recibimos tu orden de retiro', missing: true },
-              { id: 'courier', lane: 'andreani', x: 500, text: 'Estamos en camino para retirar tu producto', missing: true },
-              { id: 'delivered', lane: 'andreani', x: 650, text: 'Ya entregamos tu producto', missing: true },
-              { id: 'rejected', lane: 'pim', x: 790, y: -26, text: 'Solicitud de devolución rechazada', missing: true },
-              { id: 'received', lane: 'pim', x: 790, y: 34, text: 'Recepción de devolución', missing: true },
+              { id: 'request', lane: 'pim', x: 220, text: 'Solicitud de devolución', status: 'faltante', priority: 'alta', trigger: 'Cliente solicita devolución.', note: 'Inicio del flujo inverso de devolución.' },
+              { id: 'pickup-order', lane: 'andreani', x: 350, text: 'Recibimos tu orden de retiro', status: 'faltante', priority: 'alta', trigger: 'Andreani recibe orden de retiro.', note: 'Debe confirmar el retiro al cliente.' },
+              { id: 'courier', lane: 'andreani', x: 500, text: 'Estamos en camino para retirar tu producto', status: 'faltante', priority: 'media', trigger: 'Andreani informa retiro en curso.', note: 'Validar evento de visita.' },
+              { id: 'delivered', lane: 'andreani', x: 650, text: 'Ya entregamos tu producto', status: 'faltante', priority: 'media', trigger: 'Andreani confirma entrega del producto retirado.', note: 'Nombre operativo a confirmar.' },
+              { id: 'rejected', lane: 'pim', x: 790, y: -26, text: 'Solicitud de devolución rechazada', status: 'faltante', priority: 'media', trigger: 'PIM rechaza devolución.', note: 'Debe explicar motivo y opciones.' },
+              { id: 'received', lane: 'pim', x: 790, y: 34, text: 'Recepción de devolución', status: 'faltante', priority: 'alta', trigger: 'PIM confirma recepción del producto devuelto.', note: 'Puede disparar reintegro o revisión interna.' },
             ],
             links: [
               ['request', 'pickup-order'],
@@ -319,13 +474,13 @@
             title: 'Logística Inversa - Garantía',
             description: 'Flujo de solicitud por garantía, retiro, recepción y resolución con cambio o rechazo.',
             nodes: [
-              { id: 'request', lane: 'pim', x: 220, text: 'Solicitud de cambio por garantía', missing: true },
-              { id: 'pickup-order', lane: 'andreani', x: 350, text: 'Recibimos tu orden de retiro', missing: true },
-              { id: 'courier', lane: 'andreani', x: 500, text: 'Estamos en camino para retirar tu producto', missing: true },
-              { id: 'delivered', lane: 'andreani', x: 650, text: 'Ya entregamos tu producto', missing: true },
-              { id: 'rejected', lane: 'pim', x: 790, y: -26, text: 'Notificación de garantía rechazada', missing: true },
-              { id: 'received', lane: 'pim', x: 790, y: 34, text: 'Recepción de producto para cambio', missing: true },
-              { id: 'giftcard', lane: 'pim', x: 940, y: 34, text: 'Giftcard (Código para cambio)', missing: true },
+              { id: 'request', lane: 'pim', x: 220, text: 'Solicitud de cambio por garantía', status: 'faltante', priority: 'alta', trigger: 'Cliente solicita garantía o cambio por falla.', note: 'Inicio del flujo de garantía.' },
+              { id: 'pickup-order', lane: 'andreani', x: 350, text: 'Recibimos tu orden de retiro', status: 'faltante', priority: 'alta', trigger: 'Andreani recibe orden de retiro.', note: 'Debe confirmar gestión de retiro.' },
+              { id: 'courier', lane: 'andreani', x: 500, text: 'Estamos en camino para retirar tu producto', status: 'faltante', priority: 'media', trigger: 'Andreani informa retiro en curso.', note: 'Validar si comparte texto con cambio/devolución.' },
+              { id: 'delivered', lane: 'andreani', x: 650, text: 'Ya entregamos tu producto', status: 'faltante', priority: 'media', trigger: 'Andreani confirma entrega al centro de revisión.', note: 'Nombre operativo a confirmar.' },
+              { id: 'rejected', lane: 'pim', x: 790, y: -26, text: 'Notificación de garantía rechazada', status: 'faltante', priority: 'media', trigger: 'Garantía rechazada por revisión.', note: 'Debe explicar motivo y alternativas.' },
+              { id: 'received', lane: 'pim', x: 790, y: 34, text: 'Recepción de producto para cambio', status: 'faltante', priority: 'alta', trigger: 'Producto recibido para revisión o cambio por garantía.', note: 'Puede disparar aprobación del cambio.' },
+              { id: 'giftcard', lane: 'pim', x: 940, y: 34, text: 'Giftcard (Código para cambio)', status: 'faltante', priority: 'alta', trigger: 'Se emite código para resolver la garantía.', note: 'Requiere código, vigencia e instrucciones.' },
             ],
             links: [
               ['request', 'pickup-order'],
@@ -342,6 +497,95 @@
         const boardEl = document.getElementById('ct-flow-board');
         const titleEl = document.getElementById('ct-flow-title');
         const descriptionEl = document.getElementById('ct-flow-description');
+        const detailOverlay = document.getElementById('ct-flow-detail-overlay');
+        const detailClose = document.getElementById('ct-flow-detail-close');
+        const detailBadges = document.getElementById('ct-flow-detail-badges');
+        const detailTitle = document.getElementById('ct-flow-detail-title');
+        const detailNote = document.getElementById('ct-flow-detail-note');
+        const detailPlatform = document.getElementById('ct-flow-detail-platform');
+        const detailStage = document.getElementById('ct-flow-detail-stage');
+        const detailStatus = document.getElementById('ct-flow-detail-status');
+        const detailPriority = document.getElementById('ct-flow-detail-priority');
+        const detailTrigger = document.getElementById('ct-flow-detail-trigger');
+        const detailTemplate = document.getElementById('ct-flow-detail-template');
+        const detailActions = document.getElementById('ct-flow-detail-actions');
+
+        let activeFlowId = 'entrega';
+
+        const STATUS_META = {
+          existente: { label: 'Existente', icon: '✓', className: 'ct-status-activo' },
+          faltante: { label: 'Faltante', icon: '!', className: 'ct-status-en-revision' },
+          candidato: { label: 'Candidato', icon: '?', className: 'ct-status-candidato' },
+        };
+
+        const PRIORITY_LABELS = {
+          alta: 'Alta',
+          media: 'Media',
+          baja: 'Baja',
+        };
+
+        function templateById(templateId) {
+          return TEMPLATES.find((template) => template.id === templateId);
+        }
+
+        function effectiveStatus(node) {
+          if (node.templateId && templateById(node.templateId)) return 'existente';
+          return node.status || 'faltante';
+        }
+
+        function statusBadge(status) {
+          const meta = STATUS_META[status] || STATUS_META.faltante;
+          return `<span class="ct-badge ${meta.className}">${CT.escapeHtml(meta.label)}</span>`;
+        }
+
+        function priorityBadge(priority) {
+          return `<span class="ct-badge ct-platform-otra">Prioridad ${CT.escapeHtml(PRIORITY_LABELS[priority] || priority || 'media')}</span>`;
+        }
+
+        function nodeActionUrl(node) {
+          const template = templateById(node.templateId);
+          if (template) {
+            const params = new URLSearchParams({ template: template.id });
+            if (template.ejemplo) params.set('example', template.ejemplo);
+            return `../visualizador/index.html?${params.toString()}`;
+          }
+          return '../../docs/crear-nueva-plantilla.md';
+        }
+
+        function closeDetail() {
+          detailOverlay.classList.remove('open');
+          Array.from(boardEl.querySelectorAll('.ct-flow-node.active')).forEach((nodeEl) => {
+            nodeEl.classList.remove('active');
+          });
+        }
+
+        function openDetail(node, flow, nodeEl) {
+          const status = effectiveStatus(node);
+          const statusMeta = STATUS_META[status] || STATUS_META.faltante;
+          const template = templateById(node.templateId);
+          const lane = LANES.find((item) => item.id === node.lane);
+
+          Array.from(boardEl.querySelectorAll('.ct-flow-node.active')).forEach((item) => item.classList.remove('active'));
+          nodeEl.classList.add('active');
+
+          detailBadges.innerHTML = `${statusBadge(status)}${priorityBadge(node.priority || 'media')}`;
+          detailTitle.textContent = node.text;
+          detailNote.textContent = node.note || 'Sin nota operativa definida.';
+          detailPlatform.textContent = lane ? lane.label : node.lane;
+          detailStage.textContent = flow.title;
+          detailStatus.textContent = statusMeta.label;
+          detailPriority.textContent = PRIORITY_LABELS[node.priority] || node.priority || 'Media';
+          detailTrigger.textContent = node.trigger || 'Por definir.';
+          detailTemplate.textContent = template ? template.nombre : 'Sin plantilla creada';
+
+          const actionLabel = template ? 'Ver preview' : 'Crear plantilla';
+          const actionClass = template ? 'ct-btn ct-btn-primary' : 'ct-btn';
+          detailActions.innerHTML = `
+            <a class="${actionClass}" href="${CT.escapeHtml(nodeActionUrl(node))}">${CT.escapeHtml(actionLabel)}</a>
+          `;
+
+          detailOverlay.classList.add('open');
+        }
 
         function nodePosition(node) {
           const lane = LANES.find((item) => item.id === node.lane);
@@ -365,6 +609,7 @@
 
         function renderFlow(flowId) {
           const flow = FLOWS[flowId];
+          activeFlowId = flowId;
           titleEl.textContent = flow.title;
           descriptionEl.textContent = flow.description;
           boardEl.innerHTML = '';
@@ -400,11 +645,31 @@
 
           flow.nodes.forEach((node) => {
             const position = nodePosition(node);
+            const status = effectiveStatus(node);
+            const statusMeta = STATUS_META[status] || STATUS_META.faltante;
             const el = document.createElement('div');
-            el.className = `ct-flow-node ${node.lane}${node.missing ? ' missing' : ''}`;
+            el.className = `ct-flow-node ${node.lane} status-${status}`;
+            if (node.missing) el.classList.add('missing');
             el.style.left = position.left + 'px';
             el.style.top = position.top + 'px';
             el.textContent = node.text;
+            el.tabIndex = 0;
+            el.setAttribute('role', 'button');
+            el.setAttribute('aria-label', `${node.text}. Estado: ${statusMeta.label}`);
+
+            const statusEl = document.createElement('span');
+            statusEl.className = 'ct-flow-node-status';
+            statusEl.textContent = statusMeta.icon;
+            el.appendChild(statusEl);
+
+            el.addEventListener('click', () => openDetail(node, flow, el));
+            el.addEventListener('keydown', (event) => {
+              if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                openDetail(node, flow, el);
+              }
+            });
+
             boardEl.appendChild(el);
           });
 
@@ -421,6 +686,14 @@
           button.textContent = flow.title;
           button.addEventListener('click', () => renderFlow(flowId));
           tabsEl.appendChild(button);
+        });
+
+        detailClose.addEventListener('click', closeDetail);
+        detailOverlay.addEventListener('click', (event) => {
+          if (event.target === detailOverlay) closeDetail();
+        });
+        document.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape' && detailOverlay.classList.contains('open')) closeDetail();
         });
 
         renderFlow('entrega');
