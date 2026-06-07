@@ -100,7 +100,14 @@ const CT = (() => {
   }
 
   async function fetchText(path) {
-    const response = await fetch(path);
+    const signal = AbortSignal.timeout(8000);
+    let response;
+    try {
+      response = await fetch(path, { signal });
+    } catch (err) {
+      if (err.name === 'TimeoutError') throw new Error(`Tiempo de espera agotado al cargar ${path}`);
+      throw err;
+    }
     if (!response.ok) {
       throw new Error(`No se pudo cargar ${path} (HTTP ${response.status})`);
     }

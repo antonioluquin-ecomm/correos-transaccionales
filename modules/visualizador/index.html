@@ -117,7 +117,12 @@
               CT.fetchText(BASE + template.archivoHtml),
               CT.fetchText(BASE + exampleSelect.value),
             ]);
-            const data = JSON.parse(jsonText);
+            let data;
+            try {
+              data = JSON.parse(jsonText);
+            } catch (e) {
+              throw new Error(`JSON inválido en ${exampleSelect.value}: ${e.message}`);
+            }
             CT.renderEmailToFrame(frame, html, data);
             setStatus('Renderizado con datos de: ' + exampleSelect.value);
           } catch (error) {

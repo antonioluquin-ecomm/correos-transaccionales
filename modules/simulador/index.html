@@ -37,6 +37,9 @@
               <option value="uno">1 producto</option>
               <option value="dos">2 productos distintos</option>
             </select>
+            <small id="ct-sim-productos-nota" hidden style="display:block;margin-top:4px;color:#d97706;font-size:12px;">
+              El escenario multipaquete requiere al menos 2 productos.
+            </small>
           </div>
           <div>
             <label for="ct-sim-promocion">Promoción / descuento</label>
@@ -107,7 +110,13 @@
 
         function loadBaseData() {
           if (!baseDataPromise) {
-            baseDataPromise = CT.fetchText(BASE + BASE_ORDER_PATH).then((text) => JSON.parse(text));
+            baseDataPromise = CT.fetchText(BASE + BASE_ORDER_PATH).then((text) => {
+              try {
+                return JSON.parse(text);
+              } catch (e) {
+                throw new Error(`JSON inválido en ${BASE_ORDER_PATH}: ${e.message}`);
+              }
+            });
           }
           return baseDataPromise;
         }
@@ -136,10 +145,13 @@
           const oneProductOption = productosSelect.querySelector('option[value="uno"]');
           if (!oneProductOption) return;
 
-          oneProductOption.disabled = isMultipackageScenario();
-          if (oneProductOption.disabled && productosSelect.value === 'uno') {
+          const isMulti = isMultipackageScenario();
+          oneProductOption.disabled = isMulti;
+          if (isMulti && productosSelect.value === 'uno') {
             productosSelect.value = 'dos';
           }
+          const nota = document.getElementById('ct-sim-productos-nota');
+          if (nota) nota.hidden = !isMulti;
         }
 
         // --- Transformaciones de escenario sobre un pedido base clonado ---
