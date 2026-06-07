@@ -46,4 +46,15 @@ Después abrir `http://127.0.0.1:8723/index.html`. Antes de publicar, hacer un s
 
 ## Estado
 
-MVP operativo — foco principal: Biblioteca de Plantillas y Visualizador funcional.
+MVP operativo con auditoría de calidad aplicada (v0.9.0).
+
+| Módulo | Estado |
+|---|---|
+| Biblioteca de Plantillas | Operativo — filtros, búsqueda, ficha con variables y descarga de HTML |
+| Visualizador de Plantillas | Operativo — render con Handlebars, iframe ajusta altura al contenido real |
+| Flujo de Correos | Operativo — mapa con leyenda de estados y estadísticas de cobertura por flujo |
+| Simulador QA | Operativo — escenarios combinables, nota contextual en multipaquete |
+
+**Cobertura actual:** 2 plantillas VTEX existentes (`pedido-confirmado`, `pago-aprobado`). El Flujo de Correos mapea el gap pendiente por flujo y plataforma.
+
+**Calidad:** el proyecto pasó una auditoría técnica que corrigió semántica de estados CSS, accesibilidad de teclado, typos visibles al usuario, robustez ante fetches lentos y errores de parseo, e inconsistencias de documentación en `config.js`.

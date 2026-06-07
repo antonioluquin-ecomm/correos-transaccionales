@@ -2,6 +2,27 @@
 
 Formato: versión, fecha, resumen del cambio principal.
 
+## v0.9.0 — 2026-06-07
+
+Mejoras de UI/UX en todos los módulos:
+
+- **Catálogo:** las opciones del filtro "Estado" muestran primera letra mayúscula (`Activo` en lugar de `activo`). Las fechas se muestran en formato legible (`6 de jun de 2026`) tanto en cards como en la ficha de detalle.
+- **Flujo de Correos:** la leyenda del header ahora incluye los tres estados (✓ Existente, ! Faltante, ? Candidato) junto a los colores de plataforma, haciendo el mapa autoexplicativo. Se agrega estadística de cobertura por flujo (ej. "2 de 17 existentes · 1 candidato · 14 faltantes").
+- **Visualizador:** el texto de estado muestra el label del escenario de datos ("Pedido estándar (envío a domicilio)") en lugar de la ruta técnica del JSON. El iframe ajusta su altura al contenido real del correo al cargar.
+- **Simulador QA:** el iframe ajusta su altura al contenido real del correo al cargar.
+- **Navegación global:** el link "Visualizador" pasa a "Visualizador de Plantillas" para coincidir con el `<h1>` de la página.
+
+## v0.8.0 — 2026-06-07
+
+Auditoría técnica y correcciones de calidad:
+
+- **Semántica de estados en Flujo:** el estado "Faltante" usaba la clase CSS `ct-status-en-revision` (mismo color que "En revisión"). Se creó el token `--ct-status-faltante` (`#f97316`) con color diferenciado.
+- **CSS centralizado:** `ct-status-candidato` y `ct-status-faltante` movidos de estilos inline del módulo Flujo a `shared.css`. `text-decoration: none` en `<a class="ct-card">` de la home pasó a regla `a.ct-card` en `shared.css`.
+- **Accesibilidad:** se agregó `:focus-visible` a los nodos del mapa de flujo (outline azul al navegar con teclado).
+- **Catálogo:** se agregó botón "Limpiar filtros" en el estado vacío de búsqueda.
+- **config.js:** se corrigieron tildes en labels de `EXAMPLE_SCENARIOS` visibles en dropdowns ("estándar", "envío", "éxito"). Se documentó `hostName` en el array `variables` de ambas plantillas.
+- **Robustez:** `CT.fetchText` incorpora timeout de 8 s via `AbortSignal.timeout` con mensaje descriptivo. `JSON.parse` en Simulador y Visualizador lanza errores con ruta y causa explícitas. El Simulador muestra una nota contextual cuando el escenario multipaquete fuerza el valor de productos a "2".
+
 ## v0.7.0 — 2026-06-07
 
 - El módulo `Flujo de Correos` ahora muestra estados operativos por nodo:
