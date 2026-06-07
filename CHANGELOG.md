@@ -2,6 +2,15 @@
 
 Formato: versión, fecha, resumen del cambio principal.
 
+## v0.6.0 — 2026-06-06
+
+- Se implementó el módulo `Flujo de Correos` como mapa operativo con pestañas para
+  logística de entrega, cambio, devolución y garantía.
+- El flujo queda organizado por plataforma/carril (`VTEX`, `PIM`, `Andreani`, `Ocasa`) y
+  distingue nodos candidatos o pendientes con borde punteado.
+- La home y la documentación mantienen Biblioteca + Visualizador como flujo principal, con
+  el mapa como soporte para priorizar nuevas plantillas.
+
 ## v0.5.0 — 2026-06-06
 
 - Se reorganizó la orientación funcional: Biblioteca de Plantillas y Visualizador quedan como

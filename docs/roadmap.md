@@ -8,11 +8,12 @@ Estado actual: MVP operativo para catalogar y visualizar plantillas VTEX inicial
 - Mantener Handlebars como dependencia local versionada en `assets/js/vendor/`.
 - Agregar cada nuevo escenario de ejemplo en `EXAMPLE_SCENARIOS` dentro de `config.js`.
 - Usar `docs/crear-nueva-plantilla.md` como flujo base para sumar correos nuevos.
+- Usar el mapa de `Flujo de Correos` para priorizar qué plantillas faltantes crear primero.
 
 ## Prioridad media
 
 - Sumar más plantillas VTEX siguiendo `templates/<plataforma>/<nombre-correo>.html`.
-- Completar el módulo `Flujo de Correos` con etapas reales y variantes de logística inversa.
+- Revisar con negocio si los nodos del flujo son definitivos o si falta alguna comunicación.
 - Documentar responsables funcionales reales en el catálogo.
 
 ## Prioridad baja

@@ -11,6 +11,9 @@ Validación base para cambios en el sitio estático.
 | Abrir ficha de plantilla | La ficha muestra metadata, variables, link al HTML y botón de descarga. |
 | Filtrar/buscar en catálogo | Los resultados se actualizan y aparece estado vacío si no hay coincidencias. |
 | Navegar a Flujo de Correos | El módulo carga sin romper la navegación compartida. |
+| Cambiar pestañas del flujo | Entrega, cambio, devolución y garantía renderizan su mapa correspondiente. |
+| Revisar carriles del flujo | Se muestran `Vtex`, `PIM`, `Andreani` y `Ocasa` como carriles operativos. |
+| Revisar nodos pendientes del flujo | Los candidatos o faltantes aparecen con borde punteado. |
 | Abrir Simulador QA | El módulo queda disponible como herramienta secundaria de validación interna. |
 
 ## Preview

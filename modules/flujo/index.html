@@ -5,19 +5,426 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Flujo de Correos — Correos Transaccionales</title>
     <link rel="stylesheet" href="../../assets/css/shared.css" />
+    <style>
+      .ct-flow-tabs {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 16px;
+      }
+
+      .ct-flow-tab {
+        border: 1px solid var(--ct-card-border);
+        background: #ffffff;
+        color: var(--ct-text);
+        border-radius: 8px;
+        padding: 9px 14px;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .ct-flow-tab.active {
+        background: var(--ct-navy);
+        color: #ffffff;
+        border-color: var(--ct-navy);
+      }
+
+      .ct-flow-shell {
+        background: #ffffff;
+        border: 1px solid var(--ct-card-border);
+        border-radius: 12px;
+        overflow: hidden;
+      }
+
+      .ct-flow-header {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 14px 16px;
+        border-bottom: 1px solid var(--ct-card-border);
+      }
+
+      .ct-flow-header h2 {
+        margin: 0;
+        font-size: 16px;
+      }
+
+      .ct-flow-header p {
+        margin: 4px 0 0 0;
+        color: var(--ct-text-muted);
+        font-size: 13px;
+      }
+
+      .ct-flow-legend {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      .ct-flow-board-wrap {
+        overflow: auto;
+        background: #f8fafc;
+      }
+
+      .ct-flow-board {
+        position: relative;
+        min-width: 1180px;
+        height: 560px;
+        background:
+          linear-gradient(#e5e7eb 1px, transparent 1px) 0 0 / 100% 112px,
+          #f8fafc;
+      }
+
+      .ct-flow-lane-label {
+        position: absolute;
+        left: 18px;
+        width: 96px;
+        min-height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        color: #ffffff;
+        font-weight: 800;
+        font-size: 14px;
+        box-shadow: 0 8px 18px rgba(15, 23, 42, 0.12);
+      }
+
+      .ct-flow-lane-guide {
+        position: absolute;
+        left: 134px;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        background: #94a3b8;
+      }
+
+      .ct-flow-svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      .ct-flow-link {
+        fill: none;
+        stroke: #1f5c8a;
+        stroke-width: 2;
+      }
+
+      .ct-flow-node {
+        position: absolute;
+        width: 118px;
+        min-height: 42px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px 10px;
+        border: 2px solid currentColor;
+        border-radius: 7px;
+        background: #ffffff;
+        color: var(--ct-text);
+        text-align: center;
+        font-size: 12px;
+        line-height: 15px;
+        font-weight: 800;
+        box-shadow: 0 8px 18px rgba(15, 23, 42, 0.13);
+      }
+
+      .ct-flow-node::before {
+        content: "✉";
+        position: absolute;
+        left: -12px;
+        top: -12px;
+        width: 21px;
+        height: 21px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+        background: #e0e7ff;
+        color: #2563eb;
+        border: 1px solid #c7d2fe;
+        font-size: 12px;
+      }
+
+      .ct-flow-node.vtex,
+      .ct-flow-node.andreani {
+        color: var(--ct-platform-vtex);
+      }
+
+      .ct-flow-node.pim {
+        color: #22b8c7;
+      }
+
+      .ct-flow-node.ocasa {
+        color: #0f766e;
+      }
+
+      .ct-flow-node.missing {
+        border-style: dashed;
+        background: #fff7ed;
+      }
+
+      .ct-flow-note {
+        padding: 12px 16px;
+        border-top: 1px solid var(--ct-card-border);
+        color: var(--ct-text-muted);
+        font-size: 13px;
+      }
+
+      @media (max-width: 760px) {
+        .ct-flow-header {
+          flex-direction: column;
+        }
+
+        .ct-flow-legend {
+          justify-content: flex-start;
+        }
+      }
+    </style>
   </head>
   <body>
     <header class="ct-topbar" data-ct-topbar></header>
     <main class="ct-page">
       <h1>Flujo de Correos</h1>
-      <p class="ct-subtitle">Mapa del recorrido de comunicaciones al cliente: qué correo se dispara en cada etapa, quién lo envía y a quién llega.</p>
-      <div class="ct-card ct-empty">
-        <p><strong>Módulo en construcción.</strong></p>
-        <p>Quedó fuera del primer alcance (MVP), que prioriza la Biblioteca de Plantillas. Próximamente se documentará acá el recorrido completo: pedido realizado → pago aprobado → preparación → despacho → entrega, y las variantes de logística inversa (cambio, devolución, garantía).</p>
-      </div>
+      <p class="ct-subtitle">
+        Mapa operativo de correos por etapa y plataforma. Sirve para identificar qué plantillas existen,
+        cuáles faltan y desde dónde conviene priorizar nuevas creaciones.
+      </p>
+
+      <div class="ct-flow-tabs" id="ct-flow-tabs"></div>
+
+      <section class="ct-flow-shell">
+        <div class="ct-flow-header">
+          <div>
+            <h2 id="ct-flow-title"></h2>
+            <p id="ct-flow-description"></p>
+          </div>
+          <div class="ct-flow-legend">
+            <span class="ct-badge ct-platform-vtex">VTEX / Andreani</span>
+            <span class="ct-badge ct-platform-pim">PIM</span>
+            <span class="ct-badge ct-platform-otra">Ocasa</span>
+          </div>
+        </div>
+        <div class="ct-flow-board-wrap">
+          <div class="ct-flow-board" id="ct-flow-board"></div>
+        </div>
+        <div class="ct-flow-note">
+          Los nodos con borde punteado representan correos mapeados como candidatos o pendientes de crear.
+        </div>
+      </section>
     </main>
     <script src="../../config.js"></script>
     <script src="../../assets/js/shared.js"></script>
-    <script>CT.renderTopbar('flujo', '../../');</script>
+    <script>
+      (function () {
+        CT.renderTopbar('flujo', '../../');
+
+        const LANES = [
+          { id: 'vtex', label: 'Vtex', top: 76, color: '#ec4178' },
+          { id: 'pim', label: 'PIM', top: 190, color: '#2bbecb' },
+          { id: 'andreani', label: 'Andreani', top: 304, color: '#ef4056' },
+          { id: 'ocasa', label: 'Ocasa', top: 418, color: '#0f5f63' },
+        ];
+
+        const FLOWS = {
+          entrega: {
+            title: 'Logística de Entrega',
+            description: 'Recorrido principal desde cuenta/pedido hasta preparación, despacho, visita y entrega.',
+            nodes: [
+              { id: 'access', lane: 'vtex', x: 170, text: 'Código de acceso a cuenta' },
+              { id: 'order', lane: 'vtex', x: 300, text: 'Pedido realizado con éxito' },
+              { id: 'cancelled', lane: 'vtex', x: 430, y: -44, text: 'Pedido cancelado', missing: true },
+              { id: 'paid', lane: 'vtex', x: 430, text: 'Pago aprobado' },
+              { id: 'stockout', lane: 'pim', x: 430, text: 'Sin stock', missing: true },
+              { id: 'invoiced', lane: 'pim', x: 560, text: 'Pedido facturado', missing: true },
+              { id: 'pickup', lane: 'pim', x: 690, y: -44, text: 'Pedido para retirar', missing: true },
+              { id: 'shipped', lane: 'pim', x: 690, text: 'Pedido despachado', missing: true },
+              { id: 'prep-a', lane: 'andreani', x: 690, text: 'Estamos preparando tu pedido', missing: true },
+              { id: 'moving-a', lane: 'andreani', x: 820, text: 'Tu envío está en camino', missing: true },
+              { id: 'today-a', lane: 'andreani', x: 950, y: -28, text: 'Tu envío llega hoy', missing: true },
+              { id: 'delay-a', lane: 'andreani', x: 950, y: 28, text: 'Pedido con demora', missing: true },
+              { id: 'visited-a', lane: 'andreani', x: 1080, text: 'Te visitamos', missing: true },
+              { id: 'prep-o', lane: 'ocasa', x: 690, text: 'Pedido en preparación', missing: true },
+              { id: 'visit-o', lane: 'ocasa', x: 820, text: 'Pronto visita', missing: true },
+              { id: 'today-o', lane: 'ocasa', x: 950, text: 'Hoy llegamos', missing: true },
+              { id: 'moving-o', lane: 'ocasa', x: 1080, text: 'En camino', missing: true },
+            ],
+            links: [
+              ['access', 'order'],
+              ['order', 'cancelled'],
+              ['order', 'paid'],
+              ['order', 'stockout'],
+              ['paid', 'invoiced'],
+              ['invoiced', 'pickup'],
+              ['invoiced', 'shipped'],
+              ['invoiced', 'prep-a'],
+              ['prep-a', 'moving-a'],
+              ['moving-a', 'today-a'],
+              ['moving-a', 'delay-a'],
+              ['today-a', 'visited-a'],
+              ['delay-a', 'visited-a'],
+              ['invoiced', 'prep-o'],
+              ['prep-o', 'visit-o'],
+              ['visit-o', 'today-o'],
+              ['today-o', 'moving-o'],
+            ],
+          },
+          cambio: {
+            title: 'Logística Inversa - Cambio',
+            description: 'Flujo de retiro por cambio, recepción del producto y emisión de giftcard/código de cambio.',
+            nodes: [
+              { id: 'request', lane: 'pim', x: 220, text: 'Solicitud de cambio', missing: true },
+              { id: 'pickup-order', lane: 'andreani', x: 350, text: 'Recibimos tu orden de retiro', missing: true },
+              { id: 'courier', lane: 'andreani', x: 500, text: 'Estamos en camino para retirar tu producto', missing: true },
+              { id: 'delivered', lane: 'andreani', x: 650, text: 'Ya entregamos tu producto', missing: true },
+              { id: 'rejected', lane: 'pim', x: 790, y: -26, text: 'Notificación de cambio rechazado', missing: true },
+              { id: 'received', lane: 'pim', x: 790, y: 34, text: 'Recepción de producto por cambio', missing: true },
+              { id: 'giftcard', lane: 'pim', x: 940, y: 34, text: 'Giftcard (Código para cambio)', missing: true },
+            ],
+            links: [
+              ['request', 'pickup-order'],
+              ['pickup-order', 'courier'],
+              ['courier', 'delivered'],
+              ['delivered', 'rejected'],
+              ['delivered', 'received'],
+              ['received', 'giftcard'],
+            ],
+          },
+          devolucion: {
+            title: 'Logística Inversa - Devolución',
+            description: 'Flujo de solicitud, retiro y recepción de producto para gestionar devolución.',
+            nodes: [
+              { id: 'request', lane: 'pim', x: 220, text: 'Solicitud de devolución', missing: true },
+              { id: 'pickup-order', lane: 'andreani', x: 350, text: 'Recibimos tu orden de retiro', missing: true },
+              { id: 'courier', lane: 'andreani', x: 500, text: 'Estamos en camino para retirar tu producto', missing: true },
+              { id: 'delivered', lane: 'andreani', x: 650, text: 'Ya entregamos tu producto', missing: true },
+              { id: 'rejected', lane: 'pim', x: 790, y: -26, text: 'Solicitud de devolución rechazada', missing: true },
+              { id: 'received', lane: 'pim', x: 790, y: 34, text: 'Recepción de devolución', missing: true },
+            ],
+            links: [
+              ['request', 'pickup-order'],
+              ['pickup-order', 'courier'],
+              ['courier', 'delivered'],
+              ['delivered', 'rejected'],
+              ['delivered', 'received'],
+            ],
+          },
+          garantia: {
+            title: 'Logística Inversa - Garantía',
+            description: 'Flujo de solicitud por garantía, retiro, recepción y resolución con cambio o rechazo.',
+            nodes: [
+              { id: 'request', lane: 'pim', x: 220, text: 'Solicitud de cambio por garantía', missing: true },
+              { id: 'pickup-order', lane: 'andreani', x: 350, text: 'Recibimos tu orden de retiro', missing: true },
+              { id: 'courier', lane: 'andreani', x: 500, text: 'Estamos en camino para retirar tu producto', missing: true },
+              { id: 'delivered', lane: 'andreani', x: 650, text: 'Ya entregamos tu producto', missing: true },
+              { id: 'rejected', lane: 'pim', x: 790, y: -26, text: 'Notificación de garantía rechazada', missing: true },
+              { id: 'received', lane: 'pim', x: 790, y: 34, text: 'Recepción de producto para cambio', missing: true },
+              { id: 'giftcard', lane: 'pim', x: 940, y: 34, text: 'Giftcard (Código para cambio)', missing: true },
+            ],
+            links: [
+              ['request', 'pickup-order'],
+              ['pickup-order', 'courier'],
+              ['courier', 'delivered'],
+              ['delivered', 'rejected'],
+              ['delivered', 'received'],
+              ['received', 'giftcard'],
+            ],
+          },
+        };
+
+        const tabsEl = document.getElementById('ct-flow-tabs');
+        const boardEl = document.getElementById('ct-flow-board');
+        const titleEl = document.getElementById('ct-flow-title');
+        const descriptionEl = document.getElementById('ct-flow-description');
+
+        function nodePosition(node) {
+          const lane = LANES.find((item) => item.id === node.lane);
+          return {
+            left: node.x,
+            top: lane.top + (node.y || 0),
+            lane,
+          };
+        }
+
+        function linkPath(from, to) {
+          const start = nodePosition(from);
+          const end = nodePosition(to);
+          const x1 = start.left + 118;
+          const y1 = start.top + 21;
+          const x2 = end.left;
+          const y2 = end.top + 21;
+          const mid = x1 + Math.max(24, (x2 - x1) / 2);
+          return `M ${x1} ${y1} H ${mid} V ${y2} H ${x2}`;
+        }
+
+        function renderFlow(flowId) {
+          const flow = FLOWS[flowId];
+          titleEl.textContent = flow.title;
+          descriptionEl.textContent = flow.description;
+          boardEl.innerHTML = '';
+
+          const laneGuide = document.createElement('div');
+          laneGuide.className = 'ct-flow-lane-guide';
+          boardEl.appendChild(laneGuide);
+
+          LANES.forEach((lane) => {
+            const label = document.createElement('div');
+            label.className = 'ct-flow-lane-label';
+            label.style.top = lane.top + 'px';
+            label.style.background = lane.color;
+            label.textContent = lane.label;
+            boardEl.appendChild(label);
+          });
+
+          const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+          svg.setAttribute('class', 'ct-flow-svg');
+          svg.setAttribute('viewBox', '0 0 1180 560');
+
+          flow.links.forEach(([fromId, toId]) => {
+            const from = flow.nodes.find((node) => node.id === fromId);
+            const to = flow.nodes.find((node) => node.id === toId);
+            if (!from || !to) return;
+            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            path.setAttribute('class', 'ct-flow-link');
+            path.setAttribute('d', linkPath(from, to));
+            svg.appendChild(path);
+          });
+
+          boardEl.appendChild(svg);
+
+          flow.nodes.forEach((node) => {
+            const position = nodePosition(node);
+            const el = document.createElement('div');
+            el.className = `ct-flow-node ${node.lane}${node.missing ? ' missing' : ''}`;
+            el.style.left = position.left + 'px';
+            el.style.top = position.top + 'px';
+            el.textContent = node.text;
+            boardEl.appendChild(el);
+          });
+
+          Array.from(tabsEl.children).forEach((tab) => {
+            tab.classList.toggle('active', tab.dataset.flow === flowId);
+          });
+        }
+
+        Object.entries(FLOWS).forEach(([flowId, flow]) => {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'ct-flow-tab';
+          button.dataset.flow = flowId;
+          button.textContent = flow.title;
+          button.addEventListener('click', () => renderFlow(flowId));
+          tabsEl.appendChild(button);
+        });
+
+        renderFlow('entrega');
+      })();
+    </script>
   </body>
 </html>
