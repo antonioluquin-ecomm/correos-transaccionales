@@ -87,10 +87,10 @@ const VERSION = {
 };
 
 const CHANGELOG = [
-  { version: '0.7.0', date: '2026-06-07', summary: 'Flujo de Correos suma estados por nodo, ficha operativa, acciones para preview/creacion y soporte de query params en Visualizador.' },
-  { version: '0.6.0', date: '2026-06-06', summary: 'Modulo Flujo de Correos con mapa por pestanas para entrega, cambio, devolucion y garantia, organizado por plataforma.' },
+  { version: '0.7.0', date: '2026-06-07', summary: 'Flujo de Correos suma estados por nodo, ficha operativa, acciones para previsualización/creación y soporte de query params en Visualizador.' },
+  { version: '0.6.0', date: '2026-06-06', summary: 'Módulo Flujo de Correos con mapa por pestañas para entrega, cambio, devolución y garantía, organizado por plataforma.' },
   { version: '0.5.0', date: '2026-06-06', summary: 'Se priorizan Biblioteca y Visualizador como flujo principal; Simulador queda rotulado como QA interno y se documenta el flujo para crear nuevas plantillas con JSON representativo.' },
-  { version: '0.4.0', date: '2026-06-06', summary: 'Datos de ejemplo sanitizados, Handlebars local, escenarios centralizados, simulador coherente en multipaquete y docs de validacion/roadmap.' },
+  { version: '0.4.0', date: '2026-06-06', summary: 'Datos de ejemplo sanitizados, Handlebars local, escenarios centralizados, simulador coherente en multipaquete y docs de validación/roadmap.' },
   { version: '0.3.0', date: '2026-06-06', summary: 'Simulador de Datos (Módulo 4) con escenarios combinables; fix: normalización de pedidos "desnudos" en el render compartido.' },
   { version: '0.2.0', date: '2026-06-06', summary: 'Visualizador de Plantillas (Módulo 3) con selector de plantilla y escenario, render con Handlebars.' },
   { version: '0.1.0', date: '2026-06-06', summary: 'Estructura inicial y catálogo con pedido-confirmado y pago-aprobado.' },
