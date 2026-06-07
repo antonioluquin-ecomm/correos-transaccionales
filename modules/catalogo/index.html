@@ -189,18 +189,27 @@
           return Array.from(new Set(TEMPLATES.map((t) => t[field]).filter(Boolean))).sort();
         }
 
-        function fillSelect(selectEl, values) {
+        function fillSelect(selectEl, values, labelFn) {
           values.forEach((value) => {
             const option = document.createElement('option');
             option.value = value;
-            option.textContent = value;
+            option.textContent = labelFn ? labelFn(value) : value;
             selectEl.appendChild(option);
           });
         }
 
+        function capitalizeFirst(str) {
+          return str ? str.charAt(0).toUpperCase() + str.slice(1) : str;
+        }
+
+        function formatDate(isoDate) {
+          const d = new Date(isoDate + 'T00:00:00');
+          return d.toLocaleDateString('es-AR', { day: 'numeric', month: 'short', year: 'numeric' });
+        }
+
         fillSelect(filterPlataformaEl, uniqueValues('plataforma'));
         fillSelect(filterCategoriaEl, uniqueValues('categoria'));
-        fillSelect(filterEstadoEl, uniqueValues('estado'));
+        fillSelect(filterEstadoEl, uniqueValues('estado'), capitalizeFirst);
 
         function matchesFilters(template) {
           const query = searchEl.value.trim().toLowerCase();
@@ -227,7 +236,7 @@
             </div>
             <h3>${CT.escapeHtml(template.nombre)}</h3>
             <p>${CT.escapeHtml(template.descripcion)}</p>
-            <div class="ct-meta">${CT.escapeHtml(template.categoria)} · actualizado ${CT.escapeHtml(template.actualizado)}</div>
+            <div class="ct-meta">${CT.escapeHtml(template.categoria)} · actualizado ${CT.escapeHtml(formatDate(template.actualizado))}</div>
           `;
           card.addEventListener('click', () => openDetail(template));
           return card;
@@ -276,7 +285,7 @@
           badgesEl.innerHTML = `${CT.platformBadge(template.plataforma)}${CT.statusBadge(template.estado)}`;
           descripcionEl.textContent = template.descripcion;
           responsableEl.textContent = template.responsable;
-          actualizadoEl.textContent = template.actualizado;
+          actualizadoEl.textContent = formatDate(template.actualizado);
           archivoEl.innerHTML = `<code>${CT.escapeHtml(template.archivoHtml)}</code>`;
           ejemploEl.innerHTML = template.ejemplo
             ? `<code>${CT.escapeHtml(template.ejemplo)}</code>`

@@ -290,7 +290,7 @@ a.ct-card {
 .ct-preview-frame {
   width: 100%;
   max-width: 640px;
-  height: 1400px;
+  min-height: 400px;
   border: 1px solid #d1d5db;
   border-radius: 8px;
   background: #ffffff;

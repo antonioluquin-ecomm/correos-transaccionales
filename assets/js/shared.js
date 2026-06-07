@@ -10,7 +10,7 @@ const CT = (() => {
     { href: 'index.html', label: 'Inicio', match: 'inicio' },
     { href: 'modules/catalogo/index.html', label: 'Biblioteca de Plantillas', match: 'catalogo' },
     { href: 'modules/flujo/index.html', label: 'Flujo de Correos', match: 'flujo' },
-    { href: 'modules/visualizador/index.html', label: 'Visualizador', match: 'visualizador' },
+    { href: 'modules/visualizador/index.html', label: 'Visualizador de Plantillas', match: 'visualizador' },
     { href: 'modules/simulador/index.html', label: 'Simulador QA', match: 'simulador' },
   ];
 
@@ -161,6 +161,13 @@ const CT = (() => {
     ensureEmailHelpers();
     const compiled = Handlebars.compile(html);
     frame.srcdoc = compiled(buildEmailRenderContext(data));
+    frame.addEventListener('load', function onLoad() {
+      frame.removeEventListener('load', onLoad);
+      try {
+        const h = frame.contentDocument?.body?.scrollHeight;
+        if (h && h > 0) frame.style.height = Math.max(h, 400) + 'px';
+      } catch (e) {}
+    });
   }
 
   return {

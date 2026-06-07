@@ -124,7 +124,8 @@
               throw new Error(`JSON inválido en ${exampleSelect.value}: ${e.message}`);
             }
             CT.renderEmailToFrame(frame, html, data);
-            setStatus('Renderizado con datos de: ' + exampleSelect.value);
+            const exampleLabel = examples.find((e) => e.path === exampleSelect.value)?.label || exampleSelect.value;
+            setStatus('Renderizado con: ' + exampleLabel);
           } catch (error) {
             setStatus('No se pudo renderizar la previsualización: ' + error.message, true);
           }

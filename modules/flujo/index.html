@@ -64,6 +64,19 @@
         justify-content: flex-end;
       }
 
+      .ct-flow-legend-sep {
+        width: 1px;
+        height: 16px;
+        background: var(--ct-card-border);
+        flex-shrink: 0;
+      }
+
+      .ct-flow-stats {
+        margin: 4px 0 0 0;
+        font-size: 12px;
+        color: var(--ct-text-muted);
+      }
+
       .ct-flow-board-wrap {
         overflow: auto;
         background: #f8fafc;
@@ -331,11 +344,16 @@
           <div>
             <h2 id="ct-flow-title"></h2>
             <p id="ct-flow-description"></p>
+            <p id="ct-flow-stats" class="ct-flow-stats"></p>
           </div>
           <div class="ct-flow-legend">
             <span class="ct-badge ct-platform-vtex">VTEX / Andreani</span>
             <span class="ct-badge ct-platform-pim">PIM</span>
             <span class="ct-badge ct-platform-otra">Ocasa</span>
+            <span class="ct-flow-legend-sep"></span>
+            <span class="ct-badge ct-status-activo">✓ Existente</span>
+            <span class="ct-badge ct-status-faltante">! Faltante</span>
+            <span class="ct-badge ct-status-candidato">? Candidato</span>
           </div>
         </div>
         <div class="ct-flow-board-wrap">
@@ -613,6 +631,16 @@
           activeFlowId = flowId;
           titleEl.textContent = flow.title;
           descriptionEl.textContent = flow.description;
+
+          const statsEl = document.getElementById('ct-flow-stats');
+          if (statsEl) {
+            const total = flow.nodes.length;
+            const existing = flow.nodes.filter((n) => effectiveStatus(n) === 'existente').length;
+            const candidate = flow.nodes.filter((n) => effectiveStatus(n) === 'candidato').length;
+            const missing = total - existing - candidate;
+            statsEl.textContent = `${existing} de ${total} existentes · ${candidate} candidato${candidate !== 1 ? 's' : ''} · ${missing} faltante${missing !== 1 ? 's' : ''}`;
+          }
+
           boardEl.innerHTML = '';
 
           const laneGuide = document.createElement('div');
