@@ -363,6 +363,12 @@
         .logo-img {
           width: 120px !important;
         }
+        /* Hero: quitar border-radius en mobile (la card ya va edge-to-edge) */
+        .hero-cancel-td {
+          border-radius: 0 !important;
+          padding-left: 16px !important;
+          padding-right: 16px !important;
+        }
       }
     </style>
   </head>
@@ -412,7 +418,7 @@
 
                   <!-- ── Hero cancelación ── -->
                   <tr>
-                    <td bgcolor="#7f1d1d" style="background: #7f1d1d; border-radius: 12px 12px 0 0; padding: 30px 24px 26px; text-align: center">
+                    <td class="hero-cancel-td" bgcolor="#7f1d1d" style="background: #7f1d1d; border-radius: 12px 12px 0 0; padding: 30px 24px 26px; text-align: center">
                       <!-- Ícono ✕ -->
                       <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin: 0 auto 14px auto">
                         <tr>
@@ -423,9 +429,9 @@
                       <p style="font-size: 21px; line-height: 27px; font-weight: bold; color: #ffffff; margin: 0 0 8px 0; text-align: center">
                         {{#if cancellationData.requestedByUser}}Cancelaste tu pedido{{else}}Tu pedido fue cancelado{{/if}}
                       </p>
-                      <!-- Greeting + número de pedido -->
+                      <!-- Greeting -->
                       <p style="font-size: 13px; line-height: 18px; color: #fca5a5; margin: 0; text-align: center">
-                        Hola{{#if clientProfileData.firstName}}, {{clientProfileData.firstName}}{{/if}} &nbsp;&middot;&nbsp; N.º {{orderId}}
+                        Hola{{#if clientProfileData.firstName}}, {{clientProfileData.firstName}}{{/if}}
                       </p>
                     </td>
                   </tr>
