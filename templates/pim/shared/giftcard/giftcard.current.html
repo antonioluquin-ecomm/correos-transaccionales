@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<body marginwidth="0" marginheight="0" background-color="#fff" style="padding:0px 0px;color:#333" leftmargin="0"topmargin="0" bis_status="ok" bis_frame_id="7570">
+    <table width="100%" cellspacing="0" background-color="#fff">
+        <tbody>
+            <tr>
+                <td valign="top" background-color="#fff" align="center" class="no-padding-top-bottom-mobile"style="background-color:#fff;color:#333">
+                    <table cellspacing="0" cellpadding="0" background-color="#fff" class="container" style="max-width:600px">
+                        <tbody>
+                            <!-- Header-->
+                            <tr>
+                                <td background-color="#ffffff" align="left" class="container-padding" style="background-color:#ffffff;padding-left:10px;padding-right:3px;font-size:13px;line-height:19px;font-family:Helvetica,sans-serif;color:#333">
+                                    <table width="100%" cellspacing="0" cellpadding="0" class="columns-container">
+                                        <tbody>
+                                            <tr>
+                                                <td class="force-col" style="padding-right:20px">
+                                                    <table width="100%" cellspacing="0" cellpadding="0" align="left" 
+                                                        style="padding-bottom:10px;border:none;border-left:0px;border-right:0px" 
+                                                        class="col-3">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td align="center"><a href={{ .Proveedor.GetEmailHeaderURL }}>
+                                                                    <img height="auto" width="auto"
+                                                                        style="width:25%;height:auto;border:none;border-left:0px;border-right:0px"
+                                                                        alt="Sporting"
+                                                                        src={{ .Proveedor.GetEmailHeaderImage }}
+                                                                        class="img-logo">
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <!-- Body -->
+                                            <tr>
+                                                <td class="force-col">
+                                                <table width="100%" cellspacing="0" cellpadding="0" background-color="#ffffff" align="left"style="padding-bottom:0;margin-bottom:0" class="col-3">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td align="left">
+                                                            <div style="color:#7F7F7F;font-size:23px;font-family:sans-serif;font-weight:bold">
+                                                                Estimado Cliente
+                                                            </div>
+                                                            <span style="font-size:16px;color:#7F7F7F;display:inline-block">
+                                                                Su código de cambio/reemplazo está listo.</span>
+                                                            <br><br>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <table width="100%" cellspacing="0" style="border-bottom:1px solid #333;border:1px solid #7F7F7F;box-shadow:1px 1px 2px rgba(0,0,0,.4)">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <div>
+                                                                    <div style="color:#3a87ad;text-align:center;font-size:25px;padding:10px">
+                                                                    <strong>{{ .Giftcard.Codigo }}</strong>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table><br>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <table width="100%" cellspacing="0" style="border-bottom:1px solid #333;border:1px solid #7F7F7F;box-shadow:1px 1px 2px rgba(0,0,0,.4)">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <div>
+                                                                    <div style="color:#7F7F7F;padding:10px">
+                                                                        {{ if .Giftcard.SaldoInicial }}
+                                                                            Saldo inicial: <strong>${{ .Giftcard.SaldoInicial }}</strong>
+                                                                            <br>
+                                                                        {{ end }}
+                                                                        {{ if .Giftcard.Descripcion }}
+                                                                            Observaciones: <strong>{{ .Giftcard.Descripcion }}</strong>
+                                                                            <br>
+                                                                        {{ end }}
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table><br>
+                                            </tr>
+                                            <tr style="color:#7F7F7F;font-size:16px;font-family:sans-serif;">
+                                                <td>
+                                                <h3>
+                                                    Informacion importante</h3>
+                                                <ul style="font-size:16px;color:#7F7F7F">
+                                                    <li>
+                                                        Este código se generó dada su intención de cambiar de producto 
+                                                        o porque no contamos con stock disponible para satisfacer su pedido.
+                                                    </li>
+                                                    <li>
+                                                        Ante esta última situación le pedimos disculpas y le brindamos una <b>Giftcard</b> para que pueda elegir un nuevo item de nuestro catálogo.
+                                                    </li>
+                                                    <li>
+                                                        En caso de no querer hacer uso de dicha opción por favor responda este mail solicitando la devolución del dinero.
+                                                    </li>
+                                                    <li>
+                                                        Este código deberá ser utilizado durante el proceso de pago en su próxima compra. Para obtener más detalles, consulte <a href="https://www.sporting.com.ar/politicas-de-cambio-y-devolucion">aquí</a>.
+                                                    </li>
+                                                    <li>
+                                                        Tenga en cuenta que la Giftcard es válida para todos nuestros productos, a excepción de aquellos identificados como "vendidos y distribuidos por adidas".
+                                                    </li>
+                                                    <li>
+                                                        El Codigo puede ser utilizado una única vez.
+                                                    </li>
+                                                    <li>
+                                                        Ten en cuenta que si bien la misma no tiene vencimiento, podremos actualizar el monto por cualquier variación en los precios dentro de los 5 días hábiles de enviada, por eso sugerimos su utilización dentro de ese plazo.
+                                                    </li>
+                                                    <li>
+                                                        Recomendamos utilizar todo su valor.
+                                                    </li>
+                                                    <li>
+                                                        Si el monto de su nueva compra supera el valor del código, podrá abonar la diferencia utilizando Tarjeta de Crédito, Débito o Efectivo.
+                                                    </li>
+                                                    <li>
+                                                        Una vez completada la compra, recibirá por correo electrónico la factura correspondiente y el código de seguimiento, el cual se activará en un plazo máximo de 72 horas hábiles.
+                                                    </li>
+                                                    <li>
+                                                        Para cualquier consulta adicional, no dude en responder a este correo o comunicarse con nosotros a través de nuestros distintos canales disponibles. Encuentre más información de contacto <a href="https://www.sporting.com.ar/contacto">aquí</a>.
+                                                    </li>
+                                                </ul>
+                                                </td>
+                                            </tr>
+                                            <!-- Footer-->
+                                            <tr>
+                                                <td style="font-size: 14px; line-height: 20px; box-sizing: border-box; border-collapse:collapse; text-align: left; border-top-style: solid; border-top-width: 1px; border-color:#eee; padding-left: .25rem; padding-right: .25rem !important;" align="left">
+                                                <table style="box-sizing: border-box; width: 100%; border-collapse: collapse; border-spacing: 0;">
+                                                    <tbody>
+                                                    <tr style="box-sizing: border-box !important;">
+                                                        <td align="center" style="font-size: 14px; line-height: 20px; box-sizing: border-box; border-collapse: collapse;padding-bottom: .5rem; padding-top: .5rem; text-align: center;">
+                                                        <img style="outline: none; text-decoration: none; -ms-interpolation-mode:bicubic; max-width: 100%; margin: 0 auto; display: block !important;"src="https://ventadeportiva.vteximg.com.br/arquivos/email-footer-banner.png">
+                                                        </td>
+                                                    </tr>
+                                                    <tr height="64px" style="box-sizing: border-box !important;">
+                                                        <td style="font-size: 14px; line-height: 20px; box-sizing: border-box; border-collapse: collapse; vertical-align: middle;" align="center" valign="middle"> <span style="color: #9f9f9f; font-size: .75rem; display: inline-block; line-height: 15px; height: 30px; text-align: center; padding: 5px 10px 5px 10px; width: 340px !important;"> Copyright © Sporting. Todos los derechos reservados. </span> <span style="width: 240px !important; padding: 0 10px; display: inline-block !important; vertical-align: top"> <img src="https://ventadeportiva.vteximg.com.br/arquivos/logos-footer-newsletter.png" alt="Logos" style="vertical-align: top; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; max-width: 100% !important;"> </span> </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

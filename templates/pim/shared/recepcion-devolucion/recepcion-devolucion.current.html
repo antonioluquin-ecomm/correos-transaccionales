@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<body marginwidth="0" marginheight="0" background-color="#fff" style="padding:0px 0px;color:#333" leftmargin="0"topmargin="0" bis_status="ok" bis_frame_id="7570">
+    <table width="100%" cellspacing="0" background-color="#fff">
+        <tbody>
+            <tr>
+                <td valign="top" background-color="#fff" align="center" class="no-padding-top-bottom-mobile"style="background-color:#fff;color:#333">
+                    <table cellspacing="0" cellpadding="0" background-color="#fff" class="container"style="max-width:600px">
+                        <tbody>
+                            <!-- Header -->
+                            <tr>
+                                <td background-color="#ffffff" align="left" class="container-padding" style="background-color:#ffffff;padding-left:10px;padding-right:3px;font-size:13px;line-height:19px;font-family:Helvetica,sans-serif;color:#333">
+                                    <table width="100%" cellspacing="0" cellpadding="0" class="columns-container">
+                                        <tbody>
+                                            <tr>
+                                                <td class="force-col" style="padding-right:20px">
+                                                    <table width="100%" cellspacing="0" cellpadding="0" align="left"
+                                                        style="padding-bottom:10px;border:none;border-left:0px;border-right:0px"
+                                                        class="col-3">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td align="center"><a href={{ .Tienda.Datos.NotificacionesConfig.HeaderURL }}>
+                                                                    <img height="auto" width="auto"
+                                                                            style="width:25%;height:auto;border:none;border-left:0px;border-right:0px"
+                                                                            alt="Sporting"
+                                                                            src={{ .Tienda.Datos.NotificacionesConfig.HeaderImage }}
+                                                                            class="img-logo">
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <!-- Body -->
+                                            <tr>
+                                                <td class="force-col" style="color:#7F7F7F;font-size:16px;font-family:sans-serif;">
+                                                    <div style="font-size:23px;font-weight:bold">
+                                                        Estimado Cliente
+                                                    </div>
+                                                    <span style="display:inline-block">Nos comunicamos para confirmarle que recibimos con éxito su <b>devolución</b>
+                                                    </span>
+                                                    <h3>Detalles</h3>
+                                                    {{ with .Pedido.LineasPedido }}
+                                                    <ul>
+                                                    {{ range . }}
+                                                        {{ if eq .Estado "O" }} 
+                                                        <li>
+                                                            Producto: {{ .Producto }} ({{ .SKU }}) | Cantidad: {{ .Cantidad }} | Estado: Aceptado 
+                                                        </li>
+                                                        {{ end }}
+                                                        {{ if eq .Estado "R" }} 
+                                                        <li>
+                                                            Producto: {{ .Producto }} ({{ .SKU }}) | Cantidad: {{ .Cantidad }} | Estado: Rechazado ({{ (index .Historial 0).Observaciones }} ) 
+                                                        </li>
+                                                        {{ end }}
+                                                    {{ end }}
+                                                    </ul>
+                                                    {{ end }}
+                                                    <h3>Información importante</h3>
+                                                    <p>Dentro de las próximas 96 horas hábiles se hará efectivo el reembolso con el mismo medio de pago que abonó usted.</p>
+                                                    <p>Si usted tiene alguna consulta puede respondernos a este mail o contactarnos por nuestros canales digitales ( IG/FB/WP ) o al 08007776789.</p>
+                                                </td>
+                                            </tr>
+                                            <!-- Footer-->
+                                            <tr>
+                                                <td style="font-size: 14px; line-height: 20px; box-sizing: border-box; border-collapse:collapse; text-align: left; border-top-style: solid; border-top-width: 1px; border-color:#eee; padding-left: .25rem; padding-right: .25rem !important;" align="left">
+                                                    <table style="box-sizing: border-box; width: 100%; border-collapse: collapse; border-spacing: 0;">
+                                                        <tbody>
+                                                            <tr style="box-sizing: border-box !important;">
+                                                                <td align="center" style="font-size: 14px; line-height: 20px; box-sizing: border-box; border-collapse: collapse;
+                                                                    padding-bottom: .5rem; padding-top: .5rem; text-align: center;">
+                                                                    <img style="outline: none; text-decoration: none; -ms-interpolation-mode:bicubic; max-width: 100%; margin: 0 auto; display: block !important;" src="https://ventadeportiva.vteximg.com.br/arquivos/email-footer-banner.png">
+                                                                </td>
+                                                            </tr>
+                                                            <tr height="64px" style="box-sizing: border-box !important;">
+                                                                <td style="font-size: 14px; line-height: 20px; box-sizing: border-box; border-collapse: collapse; vertical-align: middle;" align="center" valign="middle"> <span style="color: #9f9f9f; font-size: .75rem; display: inline-block; line-height: 15px; height: 30px; text-align: center; padding: 5px 10px 5px 10px; width: 340px !important;"> Copyright © Sporting. Todos los derechos reservados. </span> <span style="width: 240px !important; padding: 0 10px; display: inline-block !important; vertical-align: top"> <img src="https://ventadeportiva.vteximg.com.br/arquivos/logos-footer-newsletter.png" alt="Logos" style="vertical-align: top; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; max-width: 100% !important;"> </span> </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

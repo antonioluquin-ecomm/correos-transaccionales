@@ -4,30 +4,30 @@
       {
         "itemIndex": 0,
         "quantity": 1,
-        "price": 8999900,
+        "price": 10999900,
         "description": null,
         "unitMultiplier": 0
       }
     ],
-    "courier": null,
-    "invoiceNumber": "0-133292",
+    "courier": "URB",
+    "invoiceNumber": "187643007",
     "description": null,
-    "invoiceValue": 8999900,
-    "invoiceUrl": null,
-    "issuanceDate": "2026-06-08T13:19:27Z",
-    "trackingNumber": null,
+    "invoiceValue": 11999800,
+    "invoiceUrl": "https://apps.producteca.com/functions/adidas-functions/api/adidasFacturas?cuit=26034410&nroComprobante=06597089",
+    "issuanceDate": "2026-06-08T16:11:03.237Z",
+    "trackingNumber": "UR9005891595",
     "invoiceKey": null,
-    "trackingUrl": null,
+    "trackingUrl": "https://apis.urbano.com.ar/cespecifica/?shi_codigo=3003&cli_codigo=UR9005891595",
     "embeddedInvoice": "",
     "type": "Output",
     "courierStatus": null,
     "cfop": null,
     "restitutions": {},
     "volumes": null,
-    "EnableInferItems": true
+    "EnableInferItems": null
   },
   "subjectItemAttachment": {
-    "item": "Zapatillas adidas Ru...",
+    "item": "Zapatillas adidas de...",
     "totalItems": 1
   },
   "cancellationReason": null,
@@ -36,20 +36,20 @@
     "transactions": [
       {
         "isActive": true,
-        "transactionId": "3403CFFD35C441648112747B644F9BF6",
+        "transactionId": "887DD268E7EE4895AC805481AC68C537",
         "merchantName": "S*********",
         "payments": [
           {
-            "id": "A443261514D24584B6E6EBAEB1E98478",
+            "id": "20CA808F306F49C095D84773B6FF622F",
             "paymentSystem": "2",
             "paymentSystemName": "V***",
-            "value": 18399700,
+            "value": 11999800,
             "installments": 6,
-            "referenceValue": 18399700,
+            "referenceValue": 11999800,
             "cardHolder": null,
             "cardNumber": null,
-            "firstDigits": "454073",
-            "lastDigits": "8355",
+            "firstDigits": "454832",
+            "lastDigits": "1901",
             "cvv2": null,
             "expireMonth": null,
             "expireYear": null,
@@ -59,32 +59,32 @@
             "giftCardCaption": null,
             "redemptionCode": null,
             "group": "creditCard",
-            "tid": "1637667994219-1",
+            "tid": "1637927999315-1",
             "dueDate": null,
             "connectorResponses": {
-              "Tid": "1637667994219-1",
+              "Tid": "1637927999315-1",
               "ReturnCode": "200",
               "Message": "Transaction Approved",
-              "authId": "005630",
-              "nsu": "242",
+              "authId": "011686",
+              "nsu": "644",
               "acquirer": "Payway"
             },
             "giftCardProvider": null,
             "giftCardAsDiscount": null,
             "koinUrl": null,
-            "accountId": "49DE180DE02B48C7BCD6482B50A356A5",
+            "accountId": "3086D348E61546E0A9DB468E90CC89D6",
             "parentAccountId": null,
             "bankIssuedInvoiceIdentificationNumber": null,
             "bankIssuedInvoiceIdentificationNumberFormatted": null,
             "bankIssuedInvoiceBarCodeNumber": null,
             "bankIssuedInvoiceBarCodeType": null,
             "billingAddress": {
-              "postalCode": "5***",
-              "city": "G****** G********",
-              "state": "MENDOZA",
+              "postalCode": "7***",
+              "city": "G****** A*****",
+              "state": "Buenos Aires",
               "country": "ARG",
-              "street": "B***** P****** 1 m****** O",
-              "number": "0*",
+              "street": "R**** P****",
+              "number": "8**",
               "neighborhood": null,
               "complement": null,
               "reference": null,
@@ -100,37 +100,37 @@
   "invoiceData": null,
   "clientProfileData": {
     "id": "clientProfileData",
-    "email": "8*******************************@c*.v***.c**.b*",
-    "firstName": "C*********",
-    "lastName": "S*****",
+    "email": "b*******************************@c*.v***.c**.b*",
+    "firstName": "E****",
+    "lastName": "A******",
     "documentType": "dni",
     "document": "4*******",
-    "phone": "2*********",
+    "phone": "0**********",
     "corporateName": null,
     "tradeName": null,
     "corporateDocument": null,
     "stateInscription": null,
     "corporatePhone": null,
     "isCorporate": false,
-    "userProfileId": "de0c5a56-8d8d-495e-b16a-3528d9d2b5e8",
+    "userProfileId": "aecc4a59-4ead-4bc8-be01-997d4a1711d6",
     "userProfileVersion": null,
-    "customerClass": "Cashback",
+    "customerClass": null,
     "customerCode": null
   },
   "shippingData": {
     "id": "shippingData",
     "address": {
       "addressType": "residential",
-      "receiverName": "C*********  S*****",
-      "addressId": "8655845753390",
+      "receiverName": "M**** S***** o A******** O******",
+      "addressId": "5342627457369",
       "versionId": null,
       "entityId": null,
-      "postalCode": "5***",
-      "city": "G****** G********",
-      "state": "MENDOZA",
+      "postalCode": "7***",
+      "city": "G****** A*****",
+      "state": "Buenos Aires",
       "country": "ARG",
-      "street": "B***** P****** 1 m****** O",
-      "number": "0*",
+      "street": "R**** P****",
+      "number": "8**",
       "neighborhood": null,
       "complement": null,
       "reference": null,
@@ -139,38 +139,28 @@
     "logisticsInfo": [
       {
         "itemIndex": 0,
-        "itemId": "310241718",
+        "itemId": "310248866",
         "selectedDeliveryChannel": "delivery",
-        "selectedSla": "Normal",
-        "lockTTL": "11d",
-        "price": 0,
-        "listPrice": 1090000,
-        "sellingPrice": 0,
+        "selectedSla": "Envío domicilio",
+        "lockTTL": "10d",
+        "price": 999900,
+        "listPrice": 999900,
+        "sellingPrice": 999900,
         "deliveryWindow": null,
         "deliveryCompany": null,
-        "shippingEstimate": "6bd",
-        "shippingEstimateDate": "2026-06-13T21:30:55.8514063Z",
+        "shippingEstimate": "13bd",
+        "shippingEstimateDate": "2026-06-25T00:03:16.2084699Z",
         "slas": [
           {
-            "id": "Normal",
-            "name": "N*****",
-            "shippingEstimate": "6bd",
-            "shippingEstimateDate": "2026-06-13T21:30:55.8514063Z",
+            "id": "Envío domicilio",
+            "name": "E**************",
+            "shippingEstimate": "13bd",
+            "shippingEstimateDate": "2026-06-25T00:03:16.2084699Z",
             "deliveryWindow": null,
             "availableDeliveryWindows": [],
-            "deliveryIds": [
-              {
-                "courierId": "tucuman1_andreani_normal",
-                "courierName": "T***************************",
-                "dockId": "48",
-                "quantity": 1,
-                "warehouseId": "1_48",
-                "accountCarrierName": "s*******",
-                "kitItemDetails": []
-              }
-            ],
-            "listPrice": 1090000,
-            "price": 0,
+            "deliveryIds": [],
+            "listPrice": 999900,
+            "price": 999900,
             "deliveryChannel": "delivery",
             "pickupStoreInfo": {
               "additionalInfo": null,
@@ -179,25 +169,15 @@
               "friendlyName": null,
               "isPickupStore": false
             },
-            "polygonName": "m******",
-            "lockTTL": "11d",
+            "polygonName": null,
+            "lockTTL": "10d",
             "pickupPointId": null,
-            "transitTime": "5bd",
-            "pickupDistance": 0
+            "transitTime": null,
+            "pickupDistance": null
           }
         ],
-        "shipsTo": ["ARG"],
-        "deliveryIds": [
-          {
-            "courierId": "tucuman1_andreani_normal",
-            "courierName": "T***************************",
-            "dockId": "48",
-            "quantity": 1,
-            "warehouseId": "1_48",
-            "accountCarrierName": "s*******",
-            "kitItemDetails": []
-          }
-        ],
+        "shipsTo": ["AR", "MX", "BR"],
+        "deliveryIds": [],
         "deliveryChannels": [
           {
             "id": "delivery",
@@ -212,29 +192,29 @@
           "friendlyName": null,
           "isPickupStore": false
         },
-        "addressId": "8655845753390",
+        "addressId": "5342627457369",
         "versionId": null,
         "entityId": null,
-        "polygonName": "m******",
+        "polygonName": null,
         "pickupPointId": null,
-        "transitTime": "5bd"
+        "transitTime": null
       }
     ],
     "trackingHints": [],
     "selectedAddresses": [
       {
-        "addressId": "8655845753390",
+        "addressId": "5342627457369",
         "versionId": null,
         "entityId": null,
         "addressType": "residential",
-        "receiverName": "C*********  S*****",
-        "street": "B***** P****** 1 m****** O",
-        "number": "0*",
+        "receiverName": "M**** S***** o A******** O******",
+        "street": "R**** P****",
+        "number": "8**",
         "complement": null,
         "neighborhood": null,
-        "postalCode": "5***",
-        "city": "G****** G********",
-        "state": "MENDOZA",
+        "postalCode": "7***",
+        "city": "G****** A*****",
+        "state": "Buenos Aires",
         "country": "ARG",
         "reference": null,
         "geoCoordinates": [-51.4779552, -0.0039779]
@@ -242,18 +222,18 @@
     ],
     "availableAddresses": [
       {
-        "addressId": "8655845753390",
+        "addressId": "5342627457369",
         "versionId": null,
         "entityId": null,
         "addressType": "residential",
-        "receiverName": "C*********  S*****",
-        "street": "B***** P****** 1 m****** O",
-        "number": "0*",
+        "receiverName": "M**** S***** o A******** O******",
+        "street": "R**** P****",
+        "number": "8**",
         "complement": null,
         "neighborhood": null,
-        "postalCode": "5***",
-        "city": "G****** G********",
-        "state": "MENDOZA",
+        "postalCode": "7***",
+        "city": "G****** A*****",
+        "state": "Buenos Aires",
         "country": "ARG",
         "reference": null,
         "geoCoordinates": [-51.4779552, -0.0039779]
@@ -266,9 +246,9 @@
     "customApps": [
       {
         "fields": {
-          "uuid": "671c5658-96c8-4c1a-b1a5-7782dec18ee5",
-          "source": "WEB_MOBILE",
-          "snrs_params": "{\"snrs_cp\":\"695c511d-25db-40bb-b609-f4975959f6d2\",\"snrs_var\":\"500605\"}"
+          "uuid": "5ee8b575-90b9-4dfa-908f-d55fa8ceb822",
+          "source": "WEB_DESKTOP",
+          "snrs_params": "{\"utm_source\":\"google\",\"utm_medium\":\"search\",\"utm_campaign\":\"pauta-conversion-competencia\",\"utm_term\":\"generico\"}"
         },
         "id": "synerise",
         "major": 1
@@ -286,14 +266,14 @@
     {
       "additionalInfo": {
         "categoriesIds": "/106/107/110/",
-        "productClusterId": "155,406,503,557,884,905,916,935,938,939,959,961,991,1017,1021",
-        "commercialConditionId": "1",
+        "productClusterId": "155,503,557,843,884",
+        "commercialConditionId": "9",
         "dimension": {
-          "cubicweight": 0,
-          "height": 11,
-          "length": 33,
-          "weight": 300,
-          "width": 20
+          "cubicweight": 0.2083,
+          "height": 10,
+          "length": 10,
+          "weight": 0.001,
+          "width": 10
         },
         "brandName": "A*****",
         "brandId": "2000007",
@@ -301,32 +281,32 @@
         "offeringType": null,
         "offeringTypeId": null
       },
-      "sellerSku": "310241718",
+      "sellerSku": "370986403",
       "priceTable": null,
-      "priceValidUntil": "2027-06-06T21:24:09Z",
+      "priceValidUntil": null,
       "callCenterOperator": null,
       "commission": 0,
       "freightCommission": 0,
-      "taxCode": "",
-      "catalogProvider": "vrn:vtex.catalog-api-proxy:-:sportingio:master:/proxy/authenticated/catalog/pvt/sku/stockkeepingunitbyid/310241718",
-      "uniqueId": "77C836053A6E4CB6BEF5F23DAB2FB456",
-      "id": "310241718",
-      "productId": "59244",
-      "productRefId": "6JQ0630-000",
-      "refId": "6JQ0630-000-85",
-      "ean": "4068801137505",
-      "name": "Z**************************************************************",
-      "skuName": "C***********************",
+      "taxCode": null,
+      "catalogProvider": "vrn:vtex.catalog-api-proxy:-:sportingio:master:/proxy/authenticated/catalog/pvt/sku/stockkeepingunitbyid/310248866",
+      "uniqueId": "5F074B772C804C779AF11ACA5A5A6263",
+      "id": "310248866",
+      "productId": "60208",
+      "productRefId": null,
+      "refId": "JQ9401_630",
+      "ean": "4068812080951",
+      "name": "Z*************************************************",
+      "skuName": "8**",
       "modalType": null,
       "parentItemIndex": null,
       "parentAssemblyBinding": null,
       "assemblies": [],
       "tax": 0,
-      "price": 8999900,
-      "listPrice": 8999900,
+      "price": 10999900,
+      "listPrice": 10999900,
       "manualPrice": null,
       "manualPriceAppliedBy": null,
-      "sellingPrice": 8999900,
+      "sellingPrice": 10999900,
       "rewardValue": 0,
       "isGift": false,
       "preSaleDate": null,
@@ -337,34 +317,26 @@
         "110": "Zapatillas"
       },
       "quantity": 1,
-      "seller": "1",
-      "sellerChain": ["1"],
-      "imageUrl": "https://sporting.vteximg.com.br/arquivos/ids/2269995-150-150/6JQ0630-000-1.jpg?v=638996818669200000",
-      "detailUrl": "/zapatillas-adidas-runblaze-m-de-hombre-6jq0630-000/p",
+      "seller": "aradidas",
+      "sellerChain": ["aradidas"],
+      "imageUrl": "https://sporting.vteximg.com.br/arquivos/ids/2330552-150-150/image-7f31ec257b6843d0a43cbb33fb8177c5.jpg?v=639045063199430000",
+      "detailUrl": "/zapatillas-adidas-de-running-runfalcon-5-mujer-60208/p",
       "components": [],
       "bundleItems": [],
       "attachments": [],
       "attachmentOfferings": [],
       "offerings": [],
-      "priceTags": [
-        {
-          "name": "d******************************************************************************************",
-          "value": -1090000,
-          "rawValue": -10900,
-          "isPercentual": false,
-          "identifier": "b7597e74-2e0d-4a6a-a2ea-835dc06dfde7"
-        }
-      ],
+      "priceTags": [],
       "availability": "available",
       "measurementUnit": "un",
       "unitMultiplier": 1,
       "manufacturerCode": null,
       "priceDefinition": {
-        "calculatedSellingPrice": 8999900,
-        "total": 8999900,
+        "calculatedSellingPrice": 10999900,
+        "total": 10999900,
         "sellingPrices": [
           {
-            "value": 8999900,
+            "value": 10999900,
             "quantity": 1
           }
         ]
@@ -374,9 +346,9 @@
   "sellers": [
     {
       "subSellerId": "1",
-      "fulfillmentEndpoint": "http://fulfillment.vtexcommerce.com.br/api/fulfillment?an=sportingio",
-      "id": "1",
-      "name": "S*******",
+      "fulfillmentEndpoint": "https://apps.producteca.com/sporting/api/vtex/250215",
+      "id": "aradidas",
+      "name": "A*****",
       "logo": ""
     }
   ],
@@ -386,31 +358,31 @@
   "marketPlaceOrderId": "",
   "marketPlaceOrderGroup": null,
   "marketplaceServicesEndpoint": null,
-  "orderFormId": "f64bdb1f526d42b0a27528969838c0f1",
-  "sequence": "7994219",
+  "orderFormId": "b148c7744b0648ddb62295439f3eeec7",
+  "sequence": "7999315",
   "affiliateId": "",
   "status": "",
   "callCenterOperator": "",
-  "userProfileId": "de0c5a56-8d8d-495e-b16a-3528d9d2b5e8",
+  "userProfileId": "aecc4a59-4ead-4bc8-be01-997d4a1711d6",
   "hostName": "s*********",
   "creationVersion": null,
   "creationEnvironment": null,
   "lastChangeVersion": null,
   "workflowInstanceId": null,
   "marketplacePaymentValue": null,
-  "orderId": "1637667994219-01",
-  "orderGroup": "1637667994219",
+  "orderId": "1637927999315-01",
+  "orderGroup": "1637927999315",
   "state": "payment-approved",
   "isCheckedIn": false,
-  "sellerOrderId": "00-1637667994219-01",
+  "sellerOrderId": "187643007",
   "storeId": null,
   "checkedInPickupPointId": null,
-  "value": 18399700,
+  "value": 11999800,
   "totals": [
     {
       "id": "Items",
       "name": "T*****************",
-      "value": 18399700
+      "value": 10999900
     },
     {
       "id": "Discounts",
@@ -420,19 +392,7 @@
     {
       "id": "Shipping",
       "name": "C********************",
-      "value": 0,
-      "alternativeTotals": [
-        {
-          "id": "AlternativeShippingTotal",
-          "name": "A*************************",
-          "value": 3270000
-        },
-        {
-          "id": "AlternativeShippingDiscount",
-          "name": "A****************************",
-          "value": -3270000
-        }
-      ]
+      "value": 999900
     },
     {
       "id": "Tax",
@@ -441,16 +401,7 @@
     }
   ],
   "ratesAndBenefitsData": {
-    "rateAndBenefitsIdentifiers": [
-      {
-        "id": "b7597e74-2e0d-4a6a-a2ea-835dc06dfde7",
-        "name": "G********************************************",
-        "featured": false,
-        "description": "Envío Gratis desde $149.990",
-        "matchedParameters": {},
-        "additionalInfo": null
-      }
-    ],
+    "rateAndBenefitsIdentifiers": [],
     "teaser": []
   },
   "clientPreferencesData": {
@@ -459,14 +410,14 @@
   },
   "commercialConditionData": null,
   "marketingData": {
-    "utmSource": "Web",
-    "utmMedium": "Link",
-    "utmCampaign": "gocuotas",
+    "utmSource": "google",
+    "utmMedium": "search",
+    "utmCampaign": "pauta-conversion-competencia",
     "utmipage": "",
     "utmiPart": "",
     "utmiCampaign": "",
     "coupon": null,
-    "marketingTags": ["Antecedentes"]
+    "marketingTags": []
   },
   "storePreferencesData": {
     "countryCode": "ARG",
@@ -489,12 +440,12 @@
   "hooksData": null,
   "changeData": null,
   "subscriptionData": null,
-  "salesChannel": "1",
-  "followUpEmail": "f**********************************.v***.c**.b*",
-  "creationDate": "2026-06-06T21:30:34.9332297Z",
-  "lastChange": "2026-06-06T21:30:56.1496978Z",
-  "timeZoneCreationDate": "2026-06-06T18:30:34.9332297",
-  "timeZoneLastChange": "2026-06-06T18:30:56.1496978",
+  "salesChannel": "3",
+  "followUpEmail": "",
+  "creationDate": "2026-06-08T00:03:02.1615318Z",
+  "lastChange": "2026-06-08T00:03:16.2084887Z",
+  "timeZoneCreationDate": "2026-06-07T21:03:02.1615318",
+  "timeZoneLastChange": "2026-06-07T21:03:16.2084887",
   "isCompleted": true,
   "merchantName": null,
   "userType": "",

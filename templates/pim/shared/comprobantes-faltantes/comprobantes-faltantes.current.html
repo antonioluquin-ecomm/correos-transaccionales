@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid white;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        background-color: #96d4d4;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Comprobantes Faltantes</h2>
+
+    <table style="width: 100%">
+      <thead>
+        <tr>
+          <th>Tipo</th>
+          <th>PV</th>
+          <th>Nº Desde</th>
+          <th>Fecha Desde</th>
+          <th>Nº Hasta</th>
+          <th>Fecha Hasta</th>
+          <th>Falta AFIP</th>
+          <th>Falta BAS</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+      {{ with . }} {{ range . }}
+      <tr>
+        <td>{{ .Tipo }}</td>
+        <td>{{ .PV }}</td>
+        <td>{{ .NroDesde }}</td>
+        <td>{{ .FechaDesde }}</td>
+        <td>{{ .NroHasta }}</td>
+        <td>{{ .FechaHasta }}</td>
+        <td>{{ .FaltaAFIP }}</td>
+        <td>{{ .FaltaBAS }}</td>
+      </tr>
+      {{ end }} {{ end }}
+    </table>
+  </body>
+</html>

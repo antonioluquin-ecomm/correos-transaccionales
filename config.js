@@ -36,8 +36,8 @@ const TEMPLATES = [
     actualizado: '2026-06-06',
     responsable: 'Por definir',
     descripcion: 'Confirma al cliente que su pedido fue registrado correctamente, con resumen de productos, totales, dirección y forma de pago.',
-    archivoHtml: 'templates/vtex/pedido-confirmado.html',
-    ejemplo: 'examples/vtex/pedido-estandar.json',
+    archivoHtml: 'templates/vtex/sporting/pedido-confirmado/pedido-confirmado.v2.html',
+    ejemplo: 'examples/vtex/sporting/pedido-estandar.sample.json',
     variables: [
       'hostName',
       '_accountInfo.TradingName',
@@ -63,8 +63,8 @@ const TEMPLATES = [
     actualizado: '2026-06-08',
     responsable: 'Por definir',
     descripcion: 'Notifica al cliente que su pedido fue cancelado e informa el proceso de reintegro según el medio de pago.',
-    archivoHtml: 'templates/vtex/pedido-cancelado.html',
-    ejemplo: 'examples/vtex/pedido-cancelado.json',
+    archivoHtml: 'templates/vtex/sporting/pedido-cancelado/pedido-cancelado.v2.html',
+    ejemplo: 'examples/vtex/sporting/pedido-cancelado.sample.json',
     variables: [
       'hostName',
       '_accountInfo.TradingName',
@@ -91,8 +91,8 @@ const TEMPLATES = [
     actualizado: '2026-06-06',
     responsable: 'Por definir',
     descripcion: 'Notifica al cliente que el pago de su pedido fue aprobado, con resumen de productos, totales, envío/retiro y forma de pago.',
-    archivoHtml: 'templates/vtex/pago-aprobado.html',
-    ejemplo: 'examples/vtex/pedido-estandar.json',
+    archivoHtml: 'templates/vtex/sporting/pago-aprobado/pago-aprobado.v2.html',
+    ejemplo: 'examples/vtex/sporting/pedido-estandar.sample.json',
     variables: [
       'hostName',
       '_accountInfo.TradingName',
@@ -116,8 +116,8 @@ const TEMPLATES = [
     actualizado: '2026-06-08',
     responsable: 'Por definir',
     descripcion: 'Envía un código de verificación al cliente cuando solicita ingresar o recuperar acceso a su cuenta.',
-    archivoHtml: 'templates/vtex/access-key.html',
-    ejemplo: 'examples/vtex/access-key.json',
+    archivoHtml: 'templates/vtex/sporting/access-key/access-key.v2.html',
+    ejemplo: 'examples/vtex/sporting/access-key.sample.json',
     variables: [
       'to[0].name',
       'aditionalData.accessKey',
@@ -135,8 +135,8 @@ const TEMPLATES = [
     actualizado: '2026-06-08',
     responsable: 'Por definir',
     descripcion: 'Notifica al cliente suscrito que un SKU sin stock volvió a estar disponible para comprar.',
-    archivoHtml: 'templates/vtex/back-in-stock.html',
-    ejemplo: 'examples/vtex/back-in-stock.json',
+    archivoHtml: 'templates/vtex/sporting/back-in-stock/back-in-stock.v2.html',
+    ejemplo: 'examples/vtex/sporting/back-in-stock.sample.json',
     variables: [
       'NotifyRequest.name',
       'NotifyRequest.locale',
@@ -158,8 +158,8 @@ const TEMPLATES = [
     actualizado: '2026-06-08',
     responsable: 'Por definir',
     descripcion: 'Notifica al cliente que su pedido fue facturado, con acceso a las facturas y datos de seguimiento del despacho.',
-    archivoHtml: 'templates/vtex/order-invoiced.html',
-    ejemplo: 'examples/vtex/order-invoiced.json',
+    archivoHtml: 'templates/vtex/sporting/order-invoiced/order-invoiced.v2.html',
+    ejemplo: 'examples/vtex/sporting/order-invoiced.sample.json',
     variables: [
       'orderId',
       'clientProfileData.firstName',
@@ -176,7 +176,7 @@ const TEMPLATES = [
 const EXAMPLE_SCENARIOS = [
   {
     id: 'pedido-estandar-domicilio',
-    path: 'examples/vtex/pedido-estandar.json',
+    path: 'examples/vtex/sporting/pedido-estandar.sample.json',
     label: 'Pedido estándar - envío a domicilio',
     tipo: 'Pedido',
     descripcion: 'Pedido confirmado con varios productos, totales, dirección de entrega y pago registrado.',
@@ -184,7 +184,7 @@ const EXAMPLE_SCENARIOS = [
   },
   {
     id: 'pedido-realizado-exito',
-    path: 'examples/vtex/pedido-realizado.json',
+    path: 'examples/vtex/sporting/pedido-realizado.sample.json',
     label: 'Pedido realizado - 1 producto',
     tipo: 'Pedido',
     descripcion: 'Pedido confirmado simple para validar la rama base de compra realizada.',
@@ -192,7 +192,7 @@ const EXAMPLE_SCENARIOS = [
   },
   {
     id: 'pago-aprobado-base',
-    path: 'examples/vtex/pago-aprobado.json',
+    path: 'examples/vtex/sporting/pago-aprobado.sample.json',
     label: 'Pago aprobado - pedido base',
     tipo: 'Pedido',
     descripcion: 'Pedido con pago aprobado, datos de medio de pago y logística de entrega.',
@@ -200,7 +200,7 @@ const EXAMPLE_SCENARIOS = [
   },
   {
     id: 'pedido-cancelado-un-producto',
-    path: 'examples/vtex/pedido-cancelado.json',
+    path: 'examples/vtex/sporting/pedido-cancelado.sample.json',
     label: 'Cancelación - 1 producto',
     tipo: 'Cancelación',
     descripcion: 'Pedido cancelado con reintegro y un producto en el resumen.',
@@ -208,7 +208,7 @@ const EXAMPLE_SCENARIOS = [
   },
   {
     id: 'pedido-cancelado-envio-gratis',
-    path: 'examples/vtex/pedido-cancelado-2.json',
+    path: 'examples/vtex/sporting/pedido-cancelado-2.sample.json',
     label: 'Cancelación - 2 productos, envío gratis',
     tipo: 'Cancelación',
     descripcion: 'Pedido cancelado con más de un producto y condición de envío bonificado.',
@@ -216,7 +216,7 @@ const EXAMPLE_SCENARIOS = [
   },
   {
     id: 'access-key-login',
-    path: 'examples/vtex/access-key.json',
+    path: 'examples/vtex/sporting/access-key.sample.json',
     label: 'Acceso a cuenta - código de ingreso',
     tipo: 'Cuenta',
     descripcion: 'Evento de login o recuperación con código de verificación.',
@@ -224,7 +224,7 @@ const EXAMPLE_SCENARIOS = [
   },
   {
     id: 'back-in-stock-disponible',
-    path: 'examples/vtex/back-in-stock.json',
+    path: 'examples/vtex/sporting/back-in-stock.sample.json',
     label: 'Stock - SKU disponible',
     tipo: 'Stock',
     descripcion: 'Aviso a cliente suscrito cuando un SKU vuelve a estar disponible.',
@@ -232,7 +232,7 @@ const EXAMPLE_SCENARIOS = [
   },
   {
     id: 'order-invoiced-seguimiento',
-    path: 'examples/vtex/order-invoiced.json',
+    path: 'examples/vtex/sporting/order-invoiced.sample.json',
     label: 'Facturación - con seguimiento',
     tipo: 'Facturación',
     descripcion: 'Pedido facturado con paquete, factura y datos de tracking.',

@@ -1,0 +1,1418 @@
+{
+  "orders": [
+    {
+      "package": null,
+      "subjectItemAttachment": {
+        "item": "Pelota Blanca Nassau...",
+        "totalItems": 14,
+        "extraItems": 13
+      },
+      "cancellationReason": null,
+      "paymentData": {
+        "giftCards": [],
+        "transactions": [
+          {
+            "isActive": true,
+            "transactionId": "4CE858B94C454E41AB2D4BA3B008D0CF",
+            "merchantName": "V*************",
+            "payments": [
+              {
+                "id": "E117CAB1706D4A4DB772C9C645EF18D7",
+                "paymentSystem": "17",
+                "paymentSystemName": "P*********",
+                "value": 41153900,
+                "installments": 1,
+                "referenceValue": 41153900,
+                "cardHolder": null,
+                "cardNumber": null,
+                "firstDigits": null,
+                "lastDigits": null,
+                "cvv2": null,
+                "expireMonth": null,
+                "expireYear": null,
+                "url": null,
+                "giftCardId": null,
+                "giftCardName": null,
+                "giftCardCaption": null,
+                "redemptionCode": null,
+                "group": "promissory",
+                "tid": null,
+                "dueDate": null,
+                "connectorResponses": {},
+                "giftCardProvider": null,
+                "giftCardAsDiscount": null,
+                "koinUrl": null,
+                "accountId": null,
+                "parentAccountId": null,
+                "bankIssuedInvoiceIdentificationNumber": null,
+                "bankIssuedInvoiceIdentificationNumberFormatted": null,
+                "bankIssuedInvoiceBarCodeNumber": null,
+                "bankIssuedInvoiceBarCodeType": null,
+                "billingAddress": null,
+                "paymentOrigin": null
+              }
+            ]
+          }
+        ]
+      },
+      "cancellationRequests": null,
+      "invoiceData": null,
+      "clientProfileData": {
+        "id": "clientProfileData",
+        "email": "f*******************************@c*.v***.c**.b*",
+        "firstName": "j***",
+        "lastName": "B******",
+        "documentType": "dni",
+        "document": "2*******",
+        "phone": "3*********",
+        "corporateName": null,
+        "tradeName": null,
+        "corporateDocument": null,
+        "stateInscription": null,
+        "corporatePhone": null,
+        "isCorporate": false,
+        "userProfileId": "3881b059-6baf-4dc0-aedb-dbbe7ec831c2",
+        "userProfileVersion": null,
+        "customerClass": null,
+        "customerCode": null
+      },
+      "shippingData": {
+        "id": "shippingData",
+        "address": {
+          "addressType": "residential",
+          "receiverName": "j*** B******",
+          "addressId": "8561655261145",
+          "versionId": null,
+          "entityId": null,
+          "postalCode": "4***",
+          "city": "F********",
+          "state": "SANTIAGO DEL ESTERO",
+          "country": "ARG",
+          "street": "s** m***** y a** r****",
+          "number": "5**",
+          "neighborhood": null,
+          "complement": "1*",
+          "reference": null,
+          "geoCoordinates": [-51.4779552, -0.0039779]
+        },
+        "logisticsInfo": [
+          {
+            "itemIndex": 0,
+            "itemId": "898293",
+            "selectedDeliveryChannel": "delivery",
+            "selectedSla": "Normal",
+            "lockTTL": "38d",
+            "price": 0,
+            "listPrice": 0,
+            "sellingPrice": 0,
+            "deliveryWindow": null,
+            "deliveryCompany": null,
+            "shippingEstimate": "0bd",
+            "shippingEstimateDate": "2026-06-08T13:59:00+00:00",
+            "slas": [
+              {
+                "id": "Normal",
+                "name": "N*****",
+                "shippingEstimate": "0bd",
+                "shippingEstimateDate": "2026-06-08T13:59:00+00:00",
+                "deliveryWindow": null,
+                "availableDeliveryWindows": [],
+                "deliveryIds": [
+                  {
+                    "courierId": "1",
+                    "courierName": "T*************",
+                    "dockId": "1",
+                    "quantity": 4,
+                    "warehouseId": "1_1",
+                    "accountCarrierName": "v*************",
+                    "kitItemDetails": []
+                  }
+                ],
+                "listPrice": 0,
+                "price": 0,
+                "deliveryChannel": "delivery",
+                "pickupStoreInfo": {
+                  "additionalInfo": null,
+                  "address": null,
+                  "dockId": null,
+                  "friendlyName": null,
+                  "isPickupStore": false
+                },
+                "polygonName": "",
+                "lockTTL": "38d",
+                "pickupPointId": null,
+                "transitTime": "0bd",
+                "pickupDistance": 0
+              }
+            ],
+            "shipsTo": ["ARG"],
+            "deliveryIds": [
+              {
+                "courierId": "1",
+                "courierName": "T*************",
+                "dockId": "1",
+                "quantity": 4,
+                "warehouseId": "1_1",
+                "accountCarrierName": "v*************",
+                "kitItemDetails": []
+              }
+            ],
+            "deliveryChannels": [
+              {
+                "id": "delivery",
+                "stockBalance": 0
+              }
+            ],
+            "deliveryChannel": null,
+            "pickupStoreInfo": {
+              "additionalInfo": null,
+              "address": null,
+              "dockId": null,
+              "friendlyName": null,
+              "isPickupStore": false
+            },
+            "addressId": "8561655261145",
+            "versionId": null,
+            "entityId": null,
+            "polygonName": "",
+            "pickupPointId": null,
+            "transitTime": "0bd"
+          },
+          {
+            "itemIndex": 1,
+            "itemId": "899004",
+            "selectedDeliveryChannel": "delivery",
+            "selectedSla": "Normal",
+            "lockTTL": "38d",
+            "price": 0,
+            "listPrice": 0,
+            "sellingPrice": 0,
+            "deliveryWindow": null,
+            "deliveryCompany": null,
+            "shippingEstimate": "0bd",
+            "shippingEstimateDate": "2026-06-08T13:59:00+00:00",
+            "slas": [
+              {
+                "id": "Normal",
+                "name": "N*****",
+                "shippingEstimate": "0bd",
+                "shippingEstimateDate": "2026-06-08T13:59:00+00:00",
+                "deliveryWindow": null,
+                "availableDeliveryWindows": [],
+                "deliveryIds": [
+                  {
+                    "courierId": "1",
+                    "courierName": "T*************",
+                    "dockId": "1",
+                    "quantity": 1,
+                    "warehouseId": "1_1",
+                    "accountCarrierName": "v*************",
+                    "kitItemDetails": []
+                  }
+                ],
+                "listPrice": 0,
+                "price": 0,
+                "deliveryChannel": "delivery",
+                "pickupStoreInfo": {
+                  "additionalInfo": null,
+                  "address": null,
+                  "dockId": null,
+                  "friendlyName": null,
+                  "isPickupStore": false
+                },
+                "polygonName": "",
+                "lockTTL": "38d",
+                "pickupPointId": null,
+                "transitTime": "0bd",
+                "pickupDistance": 0
+              }
+            ],
+            "shipsTo": ["ARG"],
+            "deliveryIds": [
+              {
+                "courierId": "1",
+                "courierName": "T*************",
+                "dockId": "1",
+                "quantity": 1,
+                "warehouseId": "1_1",
+                "accountCarrierName": "v*************",
+                "kitItemDetails": []
+              }
+            ],
+            "deliveryChannels": [
+              {
+                "id": "delivery",
+                "stockBalance": 0
+              }
+            ],
+            "deliveryChannel": null,
+            "pickupStoreInfo": {
+              "additionalInfo": null,
+              "address": null,
+              "dockId": null,
+              "friendlyName": null,
+              "isPickupStore": false
+            },
+            "addressId": "8561655261145",
+            "versionId": null,
+            "entityId": null,
+            "polygonName": "",
+            "pickupPointId": null,
+            "transitTime": "0bd"
+          },
+          {
+            "itemIndex": 2,
+            "itemId": "895648",
+            "selectedDeliveryChannel": "delivery",
+            "selectedSla": "Normal",
+            "lockTTL": "38d",
+            "price": 0,
+            "listPrice": 0,
+            "sellingPrice": 0,
+            "deliveryWindow": null,
+            "deliveryCompany": null,
+            "shippingEstimate": "0bd",
+            "shippingEstimateDate": "2026-06-08T13:59:00+00:00",
+            "slas": [
+              {
+                "id": "Normal",
+                "name": "N*****",
+                "shippingEstimate": "0bd",
+                "shippingEstimateDate": "2026-06-08T13:59:00+00:00",
+                "deliveryWindow": null,
+                "availableDeliveryWindows": [],
+                "deliveryIds": [
+                  {
+                    "courierId": "1",
+                    "courierName": "T*************",
+                    "dockId": "1",
+                    "quantity": 4,
+                    "warehouseId": "1_1",
+                    "accountCarrierName": "v*************",
+                    "kitItemDetails": []
+                  }
+                ],
+                "listPrice": 0,
+                "price": 0,
+                "deliveryChannel": "delivery",
+                "pickupStoreInfo": {
+                  "additionalInfo": null,
+                  "address": null,
+                  "dockId": null,
+                  "friendlyName": null,
+                  "isPickupStore": false
+                },
+                "polygonName": "",
+                "lockTTL": "38d",
+                "pickupPointId": null,
+                "transitTime": "0bd",
+                "pickupDistance": 0
+              }
+            ],
+            "shipsTo": ["ARG"],
+            "deliveryIds": [
+              {
+                "courierId": "1",
+                "courierName": "T*************",
+                "dockId": "1",
+                "quantity": 4,
+                "warehouseId": "1_1",
+                "accountCarrierName": "v*************",
+                "kitItemDetails": []
+              }
+            ],
+            "deliveryChannels": [
+              {
+                "id": "delivery",
+                "stockBalance": 0
+              }
+            ],
+            "deliveryChannel": null,
+            "pickupStoreInfo": {
+              "additionalInfo": null,
+              "address": null,
+              "dockId": null,
+              "friendlyName": null,
+              "isPickupStore": false
+            },
+            "addressId": "8561655261145",
+            "versionId": null,
+            "entityId": null,
+            "polygonName": "",
+            "pickupPointId": null,
+            "transitTime": "0bd"
+          },
+          {
+            "itemIndex": 3,
+            "itemId": "897228",
+            "selectedDeliveryChannel": "delivery",
+            "selectedSla": "Normal",
+            "lockTTL": "38d",
+            "price": 0,
+            "listPrice": 0,
+            "sellingPrice": 0,
+            "deliveryWindow": null,
+            "deliveryCompany": null,
+            "shippingEstimate": "0bd",
+            "shippingEstimateDate": "2026-06-08T13:59:00+00:00",
+            "slas": [
+              {
+                "id": "Normal",
+                "name": "N*****",
+                "shippingEstimate": "0bd",
+                "shippingEstimateDate": "2026-06-08T13:59:00+00:00",
+                "deliveryWindow": null,
+                "availableDeliveryWindows": [],
+                "deliveryIds": [
+                  {
+                    "courierId": "1",
+                    "courierName": "T*************",
+                    "dockId": "1",
+                    "quantity": 2,
+                    "warehouseId": "1_1",
+                    "accountCarrierName": "v*************",
+                    "kitItemDetails": []
+                  }
+                ],
+                "listPrice": 0,
+                "price": 0,
+                "deliveryChannel": "delivery",
+                "pickupStoreInfo": {
+                  "additionalInfo": null,
+                  "address": null,
+                  "dockId": null,
+                  "friendlyName": null,
+                  "isPickupStore": false
+                },
+                "polygonName": "",
+                "lockTTL": "38d",
+                "pickupPointId": null,
+                "transitTime": "0bd",
+                "pickupDistance": 0
+              }
+            ],
+            "shipsTo": ["ARG"],
+            "deliveryIds": [
+              {
+                "courierId": "1",
+                "courierName": "T*************",
+                "dockId": "1",
+                "quantity": 2,
+                "warehouseId": "1_1",
+                "accountCarrierName": "v*************",
+                "kitItemDetails": []
+              }
+            ],
+            "deliveryChannels": [
+              {
+                "id": "delivery",
+                "stockBalance": 0
+              }
+            ],
+            "deliveryChannel": null,
+            "pickupStoreInfo": {
+              "additionalInfo": null,
+              "address": null,
+              "dockId": null,
+              "friendlyName": null,
+              "isPickupStore": false
+            },
+            "addressId": "8561655261145",
+            "versionId": null,
+            "entityId": null,
+            "polygonName": "",
+            "pickupPointId": null,
+            "transitTime": "0bd"
+          },
+          {
+            "itemIndex": 4,
+            "itemId": "898720",
+            "selectedDeliveryChannel": "delivery",
+            "selectedSla": "Normal",
+            "lockTTL": "38d",
+            "price": 0,
+            "listPrice": 0,
+            "sellingPrice": 0,
+            "deliveryWindow": null,
+            "deliveryCompany": null,
+            "shippingEstimate": "0bd",
+            "shippingEstimateDate": "2026-06-08T13:59:00+00:00",
+            "slas": [
+              {
+                "id": "Normal",
+                "name": "N*****",
+                "shippingEstimate": "0bd",
+                "shippingEstimateDate": "2026-06-08T13:59:00+00:00",
+                "deliveryWindow": null,
+                "availableDeliveryWindows": [],
+                "deliveryIds": [
+                  {
+                    "courierId": "1",
+                    "courierName": "T*************",
+                    "dockId": "1",
+                    "quantity": 1,
+                    "warehouseId": "1_1",
+                    "accountCarrierName": "v*************",
+                    "kitItemDetails": []
+                  }
+                ],
+                "listPrice": 0,
+                "price": 0,
+                "deliveryChannel": "delivery",
+                "pickupStoreInfo": {
+                  "additionalInfo": null,
+                  "address": null,
+                  "dockId": null,
+                  "friendlyName": null,
+                  "isPickupStore": false
+                },
+                "polygonName": "",
+                "lockTTL": "38d",
+                "pickupPointId": null,
+                "transitTime": "0bd",
+                "pickupDistance": 0
+              }
+            ],
+            "shipsTo": ["ARG"],
+            "deliveryIds": [
+              {
+                "courierId": "1",
+                "courierName": "T*************",
+                "dockId": "1",
+                "quantity": 1,
+                "warehouseId": "1_1",
+                "accountCarrierName": "v*************",
+                "kitItemDetails": []
+              }
+            ],
+            "deliveryChannels": [
+              {
+                "id": "delivery",
+                "stockBalance": 0
+              }
+            ],
+            "deliveryChannel": null,
+            "pickupStoreInfo": {
+              "additionalInfo": null,
+              "address": null,
+              "dockId": null,
+              "friendlyName": null,
+              "isPickupStore": false
+            },
+            "addressId": "8561655261145",
+            "versionId": null,
+            "entityId": null,
+            "polygonName": "",
+            "pickupPointId": null,
+            "transitTime": "0bd"
+          },
+          {
+            "itemIndex": 5,
+            "itemId": "898719",
+            "selectedDeliveryChannel": "delivery",
+            "selectedSla": "Normal",
+            "lockTTL": "38d",
+            "price": 0,
+            "listPrice": 0,
+            "sellingPrice": 0,
+            "deliveryWindow": null,
+            "deliveryCompany": null,
+            "shippingEstimate": "0bd",
+            "shippingEstimateDate": "2026-06-08T13:59:00+00:00",
+            "slas": [
+              {
+                "id": "Normal",
+                "name": "N*****",
+                "shippingEstimate": "0bd",
+                "shippingEstimateDate": "2026-06-08T13:59:00+00:00",
+                "deliveryWindow": null,
+                "availableDeliveryWindows": [],
+                "deliveryIds": [
+                  {
+                    "courierId": "1",
+                    "courierName": "T*************",
+                    "dockId": "1",
+                    "quantity": 1,
+                    "warehouseId": "1_1",
+                    "accountCarrierName": "v*************",
+                    "kitItemDetails": []
+                  }
+                ],
+                "listPrice": 0,
+                "price": 0,
+                "deliveryChannel": "delivery",
+                "pickupStoreInfo": {
+                  "additionalInfo": null,
+                  "address": null,
+                  "dockId": null,
+                  "friendlyName": null,
+                  "isPickupStore": false
+                },
+                "polygonName": "",
+                "lockTTL": "38d",
+                "pickupPointId": null,
+                "transitTime": "0bd",
+                "pickupDistance": 0
+              }
+            ],
+            "shipsTo": ["ARG"],
+            "deliveryIds": [
+              {
+                "courierId": "1",
+                "courierName": "T*************",
+                "dockId": "1",
+                "quantity": 1,
+                "warehouseId": "1_1",
+                "accountCarrierName": "v*************",
+                "kitItemDetails": []
+              }
+            ],
+            "deliveryChannels": [
+              {
+                "id": "delivery",
+                "stockBalance": 0
+              }
+            ],
+            "deliveryChannel": null,
+            "pickupStoreInfo": {
+              "additionalInfo": null,
+              "address": null,
+              "dockId": null,
+              "friendlyName": null,
+              "isPickupStore": false
+            },
+            "addressId": "8561655261145",
+            "versionId": null,
+            "entityId": null,
+            "polygonName": "",
+            "pickupPointId": null,
+            "transitTime": "0bd"
+          },
+          {
+            "itemIndex": 6,
+            "itemId": "898722",
+            "selectedDeliveryChannel": "delivery",
+            "selectedSla": "Normal",
+            "lockTTL": "38d",
+            "price": 0,
+            "listPrice": 0,
+            "sellingPrice": 0,
+            "deliveryWindow": null,
+            "deliveryCompany": null,
+            "shippingEstimate": "0bd",
+            "shippingEstimateDate": "2026-06-08T13:59:00+00:00",
+            "slas": [
+              {
+                "id": "Normal",
+                "name": "N*****",
+                "shippingEstimate": "0bd",
+                "shippingEstimateDate": "2026-06-08T13:59:00+00:00",
+                "deliveryWindow": null,
+                "availableDeliveryWindows": [],
+                "deliveryIds": [
+                  {
+                    "courierId": "1",
+                    "courierName": "T*************",
+                    "dockId": "1",
+                    "quantity": 1,
+                    "warehouseId": "1_1",
+                    "accountCarrierName": "v*************",
+                    "kitItemDetails": []
+                  }
+                ],
+                "listPrice": 0,
+                "price": 0,
+                "deliveryChannel": "delivery",
+                "pickupStoreInfo": {
+                  "additionalInfo": null,
+                  "address": null,
+                  "dockId": null,
+                  "friendlyName": null,
+                  "isPickupStore": false
+                },
+                "polygonName": "",
+                "lockTTL": "38d",
+                "pickupPointId": null,
+                "transitTime": "0bd",
+                "pickupDistance": 0
+              }
+            ],
+            "shipsTo": ["ARG"],
+            "deliveryIds": [
+              {
+                "courierId": "1",
+                "courierName": "T*************",
+                "dockId": "1",
+                "quantity": 1,
+                "warehouseId": "1_1",
+                "accountCarrierName": "v*************",
+                "kitItemDetails": []
+              }
+            ],
+            "deliveryChannels": [
+              {
+                "id": "delivery",
+                "stockBalance": 0
+              }
+            ],
+            "deliveryChannel": null,
+            "pickupStoreInfo": {
+              "additionalInfo": null,
+              "address": null,
+              "dockId": null,
+              "friendlyName": null,
+              "isPickupStore": false
+            },
+            "addressId": "8561655261145",
+            "versionId": null,
+            "entityId": null,
+            "polygonName": "",
+            "pickupPointId": null,
+            "transitTime": "0bd"
+          }
+        ],
+        "trackingHints": [],
+        "selectedAddresses": [
+          {
+            "addressId": "8561655261145",
+            "versionId": null,
+            "entityId": null,
+            "addressType": "residential",
+            "receiverName": "j*** B******",
+            "street": "s** m***** y a** r****",
+            "number": "5**",
+            "complement": "1*",
+            "neighborhood": null,
+            "postalCode": "4***",
+            "city": "F********",
+            "state": "SANTIAGO DEL ESTERO",
+            "country": "ARG",
+            "reference": null,
+            "geoCoordinates": [-51.4779552, -0.0039779]
+          }
+        ],
+        "availableAddresses": [
+          {
+            "addressId": "8561655261145",
+            "versionId": null,
+            "entityId": null,
+            "addressType": "residential",
+            "receiverName": "j*** B******",
+            "street": "s** m***** y a** r****",
+            "number": "5**",
+            "complement": "1*",
+            "neighborhood": null,
+            "postalCode": "4***",
+            "city": "F********",
+            "state": "SANTIAGO DEL ESTERO",
+            "country": "ARG",
+            "reference": null,
+            "geoCoordinates": [-51.4779552, -0.0039779]
+          }
+        ],
+        "contactInformation": [],
+        "contactsInfo": []
+      },
+      "customData": null,
+      "purchaseAgentData": null,
+      "authorizationPolicyData": null,
+      "items": [
+        {
+          "additionalInfo": {
+            "categoriesIds": "/1/9286/9332/",
+            "productClusterId": "",
+            "commercialConditionId": "1",
+            "dimension": {
+              "cubicweight": 0,
+              "height": 2,
+              "length": 30,
+              "weight": 100,
+              "width": 30
+            },
+            "brandName": "R*****",
+            "brandId": "2000021",
+            "offeringInfo": null,
+            "offeringType": null,
+            "offeringTypeId": null
+          },
+          "sellerSku": "898293",
+          "priceTable": null,
+          "priceValidUntil": "2027-06-08T13:59:41Z",
+          "callCenterOperator": null,
+          "commission": 0,
+          "freightCommission": 0,
+          "taxCode": "",
+          "catalogProvider": "vrn:vtex.catalog-api-proxy:-:ventadeportiva:master:/proxy/authenticated/catalog/pvt/sku/stockkeepingunitbyid/898293",
+          "uniqueId": "0F822832CBE7438FB461968B15AE0408",
+          "id": "898293",
+          "productId": "883331",
+          "productRefId": "3996328-UNICO",
+          "refId": "3996328-UNICO-UNICO",
+          "ean": "7790085476298",
+          "name": "P*****************************************************",
+          "skuName": "C***************************",
+          "modalType": null,
+          "parentItemIndex": null,
+          "parentAssemblyBinding": null,
+          "assemblies": [],
+          "tax": 0,
+          "price": 2750500,
+          "listPrice": 2750500,
+          "manualPrice": null,
+          "manualPriceAppliedBy": null,
+          "sellingPrice": 2750500,
+          "rewardValue": 0,
+          "isGift": false,
+          "preSaleDate": null,
+          "productCategoryIds": "/1/9286/9332/",
+          "productCategories": {
+            "1": "B2B",
+            "9286": "ACCESORIOS",
+            "9332": "Pelotas"
+          },
+          "quantity": 4,
+          "seller": "1",
+          "sellerChain": ["1"],
+          "imageUrl": "https://ventadeportiva.vteximg.com.br/arquivos/ids/234100-55-55/3996328-UNICO-1.jpg?v=638772081879300000",
+          "detailUrl": "/pelota-reebok-royal-3-n5-3996328-unico/p",
+          "components": [],
+          "bundleItems": [],
+          "attachments": [],
+          "attachmentOfferings": [],
+          "offerings": [],
+          "priceTags": [],
+          "availability": "available",
+          "measurementUnit": "un",
+          "unitMultiplier": 1,
+          "manufacturerCode": null,
+          "priceDefinition": {
+            "calculatedSellingPrice": 2750500,
+            "total": 11002000,
+            "sellingPrices": [
+              {
+                "value": 2750500,
+                "quantity": 4
+              }
+            ]
+          }
+        },
+        {
+          "additionalInfo": {
+            "categoriesIds": "/1/9286/9325/",
+            "productClusterId": "142",
+            "commercialConditionId": "1",
+            "dimension": {
+              "cubicweight": 0,
+              "height": 2,
+              "length": 30,
+              "weight": 100,
+              "width": 30
+            },
+            "brandName": "D********",
+            "brandId": "2000009",
+            "offeringInfo": null,
+            "offeringType": null,
+            "offeringTypeId": null
+          },
+          "sellerSku": "899004",
+          "priceTable": null,
+          "priceValidUntil": "2027-06-08T13:59:41Z",
+          "callCenterOperator": null,
+          "commission": 0,
+          "freightCommission": 0,
+          "taxCode": "",
+          "catalogProvider": "vrn:vtex.catalog-api-proxy:-:ventadeportiva:master:/proxy/authenticated/catalog/pvt/sku/stockkeepingunitbyid/899004",
+          "uniqueId": "4B0C7A94138D4899BFAE2725551BF5E7",
+          "id": "899004",
+          "productId": "883498",
+          "productRefId": "DFIAGU033BO-000",
+          "refId": "DFIAGU033BO-000-*9",
+          "ean": "7790085480172",
+          "name": "G***************************************************************",
+          "skuName": "C**********************",
+          "modalType": null,
+          "parentItemIndex": null,
+          "parentAssemblyBinding": null,
+          "assemblies": [],
+          "tax": 0,
+          "price": 3809300,
+          "listPrice": 5313700,
+          "manualPrice": null,
+          "manualPriceAppliedBy": null,
+          "sellingPrice": 3809300,
+          "rewardValue": 0,
+          "isGift": false,
+          "preSaleDate": null,
+          "productCategoryIds": "/1/9286/9325/",
+          "productCategories": {
+            "1": "B2B",
+            "9286": "ACCESORIOS",
+            "9325": "Guantes"
+          },
+          "quantity": 1,
+          "seller": "1",
+          "sellerChain": ["1"],
+          "imageUrl": "https://ventadeportiva.vteximg.com.br/arquivos/ids/237411-55-55/DFIAGU033BO-000-1.jpg?v=638877572153600000",
+          "detailUrl": "/guantes-de-arquero-drb-leader-4-0-unisex-dfiagu033bo-000/p",
+          "components": [],
+          "bundleItems": [],
+          "attachments": [],
+          "attachmentOfferings": [],
+          "offerings": [],
+          "priceTags": [],
+          "availability": "available",
+          "measurementUnit": "un",
+          "unitMultiplier": 1,
+          "manufacturerCode": null,
+          "priceDefinition": {
+            "calculatedSellingPrice": 3809300,
+            "total": 3809300,
+            "sellingPrices": [
+              {
+                "value": 3809300,
+                "quantity": 1
+              }
+            ]
+          }
+        },
+        {
+          "additionalInfo": {
+            "categoriesIds": "/1/9286/9373/",
+            "productClusterId": "",
+            "commercialConditionId": "1",
+            "dimension": {
+              "cubicweight": 0,
+              "height": 2,
+              "length": 30,
+              "weight": 100,
+              "width": 30
+            },
+            "brandName": "S******",
+            "brandId": "2000030",
+            "offeringInfo": null,
+            "offeringType": null,
+            "offeringTypeId": null
+          },
+          "sellerSku": "895648",
+          "priceTable": null,
+          "priceValidUntil": "2027-06-08T13:59:41Z",
+          "callCenterOperator": null,
+          "commission": 0,
+          "freightCommission": 0,
+          "taxCode": "",
+          "catalogProvider": "vrn:vtex.catalog-api-proxy:-:ventadeportiva:master:/proxy/authenticated/catalog/pvt/sku/stockkeepingunitbyid/895648",
+          "uniqueId": "F97901D55C4F4A68AD928C9983F487E7",
+          "id": "895648",
+          "productId": "882776",
+          "productRefId": "4700630-AZU",
+          "refId": "4700630-AZU-*0",
+          "ean": "0066143340465",
+          "name": "S****************************************************",
+          "skuName": "C*********************",
+          "modalType": null,
+          "parentItemIndex": null,
+          "parentAssemblyBinding": null,
+          "assemblies": [],
+          "tax": 0,
+          "price": 1097600,
+          "listPrice": 1097600,
+          "manualPrice": null,
+          "manualPriceAppliedBy": null,
+          "sellingPrice": 1097600,
+          "rewardValue": 0,
+          "isGift": false,
+          "preSaleDate": null,
+          "productCategoryIds": "/1/9286/9373/",
+          "productCategories": {
+            "1": "B2B",
+            "9286": "ACCESORIOS",
+            "9373": "Silbatos"
+          },
+          "quantity": 4,
+          "seller": "1",
+          "sellerChain": ["1"],
+          "imageUrl": "https://ventadeportiva.vteximg.com.br/arquivos/ids/222216-55-55/4700630-AZU-1.jpg?v=638525976065330000",
+          "detailUrl": "/silbato-striker-fox-40-classic-4700630-azu/p",
+          "components": [],
+          "bundleItems": [],
+          "attachments": [],
+          "attachmentOfferings": [],
+          "offerings": [],
+          "priceTags": [],
+          "availability": "available",
+          "measurementUnit": "un",
+          "unitMultiplier": 1,
+          "manufacturerCode": null,
+          "priceDefinition": {
+            "calculatedSellingPrice": 1097600,
+            "total": 4390400,
+            "sellingPrices": [
+              {
+                "value": 1097600,
+                "quantity": 4
+              }
+            ]
+          }
+        },
+        {
+          "additionalInfo": {
+            "categoriesIds": "/1/9286/9332/",
+            "productClusterId": "",
+            "commercialConditionId": "1",
+            "dimension": {
+              "cubicweight": 0,
+              "height": 2,
+              "length": 30,
+              "weight": 100,
+              "width": 30
+            },
+            "brandName": "N*****",
+            "brandId": "2000068",
+            "offeringInfo": null,
+            "offeringType": null,
+            "offeringTypeId": null
+          },
+          "sellerSku": "897228",
+          "priceTable": null,
+          "priceValidUntil": "2027-06-08T13:59:41Z",
+          "callCenterOperator": null,
+          "commission": 0,
+          "freightCommission": 0,
+          "taxCode": "",
+          "catalogProvider": "vrn:vtex.catalog-api-proxy:-:ventadeportiva:master:/proxy/authenticated/catalog/pvt/sku/stockkeepingunitbyid/897228",
+          "uniqueId": "DCF274650FD44AFF9C6CD702BE8F7CD8",
+          "id": "897228",
+          "productId": "883134",
+          "productRefId": "3450201-UNICO",
+          "refId": "3450201-UNICO-UNICO",
+          "ean": "8804234544185",
+          "name": "P*********************************************************************",
+          "skuName": "C***************************",
+          "modalType": null,
+          "parentItemIndex": null,
+          "parentAssemblyBinding": null,
+          "assemblies": [],
+          "tax": 0,
+          "price": 6714800,
+          "listPrice": 6714800,
+          "manualPrice": null,
+          "manualPriceAppliedBy": null,
+          "sellingPrice": 6714800,
+          "rewardValue": 0,
+          "isGift": false,
+          "preSaleDate": null,
+          "productCategoryIds": "/1/9286/9332/",
+          "productCategories": {
+            "1": "B2B",
+            "9286": "ACCESORIOS",
+            "9332": "Pelotas"
+          },
+          "quantity": 2,
+          "seller": "1",
+          "sellerChain": ["1"],
+          "imageUrl": "https://ventadeportiva.vteximg.com.br/arquivos/ids/229277-55-55/3450201-000-1.jpg?v=638658143559570000",
+          "detailUrl": "/pelota-blanca-nassau-championship-pro-n5--3450201-unico/p",
+          "components": [],
+          "bundleItems": [],
+          "attachments": [],
+          "attachmentOfferings": [],
+          "offerings": [],
+          "priceTags": [],
+          "availability": "available",
+          "measurementUnit": "un",
+          "unitMultiplier": 1,
+          "manufacturerCode": null,
+          "priceDefinition": {
+            "calculatedSellingPrice": 6714800,
+            "total": 13429600,
+            "sellingPrices": [
+              {
+                "value": 6714800,
+                "quantity": 2
+              }
+            ]
+          }
+        },
+        {
+          "additionalInfo": {
+            "categoriesIds": "/1/9286/9325/",
+            "productClusterId": "142",
+            "commercialConditionId": "1",
+            "dimension": {
+              "cubicweight": 0,
+              "height": 2,
+              "length": 30,
+              "weight": 100,
+              "width": 30
+            },
+            "brandName": "D********",
+            "brandId": "2000009",
+            "offeringInfo": null,
+            "offeringType": null,
+            "offeringTypeId": null
+          },
+          "sellerSku": "898720",
+          "priceTable": null,
+          "priceValidUntil": "2027-06-08T13:59:41Z",
+          "callCenterOperator": null,
+          "commission": 0,
+          "freightCommission": 0,
+          "taxCode": "",
+          "catalogProvider": "vrn:vtex.catalog-api-proxy:-:ventadeportiva:master:/proxy/authenticated/catalog/pvt/sku/stockkeepingunitbyid/898720",
+          "uniqueId": "BF2E616F5EEB41DAB0C2F50A3203C185",
+          "id": "898720",
+          "productId": "883447",
+          "productRefId": "DFIAGU032WSU-000",
+          "refId": "DFIAGU032WSU-000-*9",
+          "ean": "7790085480134",
+          "name": "G****************************************************************",
+          "skuName": "C***********************",
+          "modalType": null,
+          "parentItemIndex": null,
+          "parentAssemblyBinding": null,
+          "assemblies": [],
+          "tax": 0,
+          "price": 3357400,
+          "listPrice": 4028900,
+          "manualPrice": null,
+          "manualPriceAppliedBy": null,
+          "sellingPrice": 3357400,
+          "rewardValue": 0,
+          "isGift": false,
+          "preSaleDate": null,
+          "productCategoryIds": "/1/9286/9325/",
+          "productCategories": {
+            "1": "B2B",
+            "9286": "ACCESORIOS",
+            "9325": "Guantes"
+          },
+          "quantity": 1,
+          "seller": "1",
+          "sellerChain": ["1"],
+          "imageUrl": "https://ventadeportiva.vteximg.com.br/arquivos/ids/235776-55-55/DFIAGU032WSU-000-1.jpg?v=638823023900830000",
+          "detailUrl": "/guantes-de-arquero-drb-royal-4-de-adulto-dfiagu032wsu-000/p",
+          "components": [],
+          "bundleItems": [],
+          "attachments": [],
+          "attachmentOfferings": [],
+          "offerings": [],
+          "priceTags": [],
+          "availability": "available",
+          "measurementUnit": "un",
+          "unitMultiplier": 1,
+          "manufacturerCode": null,
+          "priceDefinition": {
+            "calculatedSellingPrice": 3357400,
+            "total": 3357400,
+            "sellingPrices": [
+              {
+                "value": 3357400,
+                "quantity": 1
+              }
+            ]
+          }
+        },
+        {
+          "additionalInfo": {
+            "categoriesIds": "/1/9286/9325/",
+            "productClusterId": "142",
+            "commercialConditionId": "1",
+            "dimension": {
+              "cubicweight": 0,
+              "height": 2,
+              "length": 30,
+              "weight": 100,
+              "width": 30
+            },
+            "brandName": "D********",
+            "brandId": "2000009",
+            "offeringInfo": null,
+            "offeringType": null,
+            "offeringTypeId": null
+          },
+          "sellerSku": "898719",
+          "priceTable": null,
+          "priceValidUntil": "2027-06-08T13:59:41Z",
+          "callCenterOperator": null,
+          "commission": 0,
+          "freightCommission": 0,
+          "taxCode": "",
+          "catalogProvider": "vrn:vtex.catalog-api-proxy:-:ventadeportiva:master:/proxy/authenticated/catalog/pvt/sku/stockkeepingunitbyid/898719",
+          "uniqueId": "4DC7141B16804864BDD5B79781CEAC71",
+          "id": "898719",
+          "productId": "883447",
+          "productRefId": "DFIAGU032WSU-000",
+          "refId": "DFIAGU032WSU-000-11",
+          "ean": "7790085480158",
+          "name": "G*****************************************************************",
+          "skuName": "C************************",
+          "modalType": null,
+          "parentItemIndex": null,
+          "parentAssemblyBinding": null,
+          "assemblies": [],
+          "tax": 0,
+          "price": 2582600,
+          "listPrice": 4028900,
+          "manualPrice": null,
+          "manualPriceAppliedBy": null,
+          "sellingPrice": 2582600,
+          "rewardValue": 0,
+          "isGift": false,
+          "preSaleDate": null,
+          "productCategoryIds": "/1/9286/9325/",
+          "productCategories": {
+            "1": "B2B",
+            "9286": "ACCESORIOS",
+            "9325": "Guantes"
+          },
+          "quantity": 1,
+          "seller": "1",
+          "sellerChain": ["1"],
+          "imageUrl": "https://ventadeportiva.vteximg.com.br/arquivos/ids/235777-55-55/DFIAGU032WSU-000-1.jpg?v=638823023900830000",
+          "detailUrl": "/guantes-de-arquero-drb-royal-4-de-adulto-dfiagu032wsu-000/p",
+          "components": [],
+          "bundleItems": [],
+          "attachments": [],
+          "attachmentOfferings": [],
+          "offerings": [],
+          "priceTags": [],
+          "availability": "available",
+          "measurementUnit": "un",
+          "unitMultiplier": 1,
+          "manufacturerCode": null,
+          "priceDefinition": {
+            "calculatedSellingPrice": 2582600,
+            "total": 2582600,
+            "sellingPrices": [
+              {
+                "value": 2582600,
+                "quantity": 1
+              }
+            ]
+          }
+        },
+        {
+          "additionalInfo": {
+            "categoriesIds": "/1/9286/9325/",
+            "productClusterId": "142",
+            "commercialConditionId": "1",
+            "dimension": {
+              "cubicweight": 0,
+              "height": 2,
+              "length": 30,
+              "weight": 100,
+              "width": 30
+            },
+            "brandName": "D********",
+            "brandId": "2000009",
+            "offeringInfo": null,
+            "offeringType": null,
+            "offeringTypeId": null
+          },
+          "sellerSku": "898722",
+          "priceTable": null,
+          "priceValidUntil": "2027-06-08T13:59:41Z",
+          "callCenterOperator": null,
+          "commission": 0,
+          "freightCommission": 0,
+          "taxCode": "",
+          "catalogProvider": "vrn:vtex.catalog-api-proxy:-:ventadeportiva:master:/proxy/authenticated/catalog/pvt/sku/stockkeepingunitbyid/898722",
+          "uniqueId": "FEF7210910A344DA8AF794ADFF60B879",
+          "id": "898722",
+          "productId": "883447",
+          "productRefId": "DFIAGU032WSU-000",
+          "refId": "DFIAGU032WSU-000-10",
+          "ean": "7790085480141",
+          "name": "G*****************************************************************",
+          "skuName": "C************************",
+          "modalType": null,
+          "parentItemIndex": null,
+          "parentAssemblyBinding": null,
+          "assemblies": [],
+          "tax": 0,
+          "price": 2582600,
+          "listPrice": 4028900,
+          "manualPrice": null,
+          "manualPriceAppliedBy": null,
+          "sellingPrice": 2582600,
+          "rewardValue": 0,
+          "isGift": false,
+          "preSaleDate": null,
+          "productCategoryIds": "/1/9286/9325/",
+          "productCategories": {
+            "1": "B2B",
+            "9286": "ACCESORIOS",
+            "9325": "Guantes"
+          },
+          "quantity": 1,
+          "seller": "1",
+          "sellerChain": ["1"],
+          "imageUrl": "https://ventadeportiva.vteximg.com.br/arquivos/ids/235785-55-55/DFIAGU032WSU-000-1.jpg?v=638823024067200000",
+          "detailUrl": "/guantes-de-arquero-drb-royal-4-de-adulto-dfiagu032wsu-000/p",
+          "components": [],
+          "bundleItems": [],
+          "attachments": [],
+          "attachmentOfferings": [],
+          "offerings": [],
+          "priceTags": [],
+          "availability": "available",
+          "measurementUnit": "un",
+          "unitMultiplier": 1,
+          "manufacturerCode": null,
+          "priceDefinition": {
+            "calculatedSellingPrice": 2582600,
+            "total": 2582600,
+            "sellingPrices": [
+              {
+                "value": 2582600,
+                "quantity": 1
+              }
+            ]
+          }
+        }
+      ],
+      "sellers": [
+        {
+          "subSellerId": "1",
+          "fulfillmentEndpoint": "http://fulfillment.vtexcommerce.com.br/api/fulfillment?an=ventadeportiva",
+          "id": "1",
+          "name": "V**************",
+          "logo": ""
+        }
+      ],
+      "giftRegistryData": null,
+      "receiptData": null,
+      "contextData": null,
+      "marketPlaceOrderId": "",
+      "marketPlaceOrderGroup": null,
+      "marketplaceServicesEndpoint": null,
+      "orderFormId": "3d4fe222af6741b58406c44b4a762e1e",
+      "sequence": "502677",
+      "affiliateId": "",
+      "status": "",
+      "callCenterOperator": "",
+      "userProfileId": "3881b059-6baf-4dc0-aedb-dbbe7ec831c2",
+      "hostName": "v*************",
+      "creationVersion": null,
+      "creationEnvironment": null,
+      "lastChangeVersion": null,
+      "workflowInstanceId": null,
+      "marketplacePaymentValue": null,
+      "orderId": "1638060502677-01",
+      "orderGroup": "1638060502677",
+      "state": "payment-pending",
+      "isCheckedIn": false,
+      "sellerOrderId": "00-1638060502677-01",
+      "storeId": null,
+      "checkedInPickupPointId": null,
+      "value": 41153900,
+      "totals": [
+        {
+          "id": "Items",
+          "name": "T*****************",
+          "value": 41153900
+        },
+        {
+          "id": "Discounts",
+          "name": "T******************",
+          "value": 0
+        },
+        {
+          "id": "Shipping",
+          "name": "C********************",
+          "value": 0
+        },
+        {
+          "id": "Tax",
+          "name": "C*********************",
+          "value": 0
+        }
+      ],
+      "ratesAndBenefitsData": {
+        "rateAndBenefitsIdentifiers": [],
+        "teaser": []
+      },
+      "clientPreferencesData": {
+        "locale": "es-AR",
+        "optinNewsLetter": false
+      },
+      "commercialConditionData": null,
+      "marketingData": null,
+      "storePreferencesData": {
+        "countryCode": "ARG",
+        "saveUserData": false,
+        "timeZone": "Argentina Standard Time",
+        "currencyCode": "ARS",
+        "currencyLocale": 11274,
+        "currencySymbol": "$",
+        "currencyFormatInfo": {
+          "currencyDecimalDigits": 0,
+          "currencyDecimalSeparator": ",",
+          "currencyGroupSeparator": ".",
+          "currencyGroupSize": 3,
+          "startsWithCurrencySymbol": true
+        }
+      },
+      "openTextField": null,
+      "itemMetadata": null,
+      "taxData": null,
+      "hooksData": null,
+      "changeData": null,
+      "subscriptionData": null,
+      "salesChannel": "1",
+      "followUpEmail": "4**********************************.v***.c**.b*",
+      "creationDate": "2026-06-08T13:59:58.3807076Z",
+      "lastChange": "2026-06-08T14:00:08.1517136Z",
+      "timeZoneCreationDate": "2026-06-08T10:59:58.3807076",
+      "timeZoneLastChange": "2026-06-08T11:00:08.1517136",
+      "isCompleted": true,
+      "merchantName": null,
+      "userType": "",
+      "roundingError": 0,
+      "allowEdition": false,
+      "allowCancellation": false,
+      "isUserDataVisible": false,
+      "allowChangeSeller": false
+    }
+  ],
+  "ordersUrl": "http://www.ventadeportiva.com.ar/account#/orders",
+  "orderGroup": "1638060502677",
+  "subjectItemAttachment": {
+    "item": "Pelota Blanca Nassau...",
+    "totalItems": 14,
+    "extraItems": 13
+  },
+  "split": false,
+  "totalValue": 41153900,
+  "callCenterOperatorData": null,
+  "_accountInfo": {
+    "MainAccountName": "v*************",
+    "AccountName": "v*************",
+    "Cnpj": "123",
+    "Id": "47c870f1-2269-4f5a-bd02-4b5a2fc3e216",
+    "AppId": null,
+    "IsActive": true,
+    "IsOperating": true,
+    "CreationDate": "2022-06-28T18:56:38.2107768Z",
+    "OperationDate": "2022-12-27T12:28:12.8322361+00:00",
+    "CompanyName": "B***********",
+    "TradingName": "V**************",
+    "City": null,
+    "Complement": null,
+    "Country": null,
+    "State": null,
+    "Address": null,
+    "District": null,
+    "Number": null,
+    "PostalCode": null,
+    "Licenses": [7],
+    "ParentAccountId": null,
+    "ParentAccountName": null,
+    "InactivationDate": null,
+    "Platform": "vtex",
+    "Privacy": null,
+    "HasPiiRestriction": false,
+    "Infra": null,
+    "Sponsor": "3f29e577-433f-42b8-9ded-d2ede67d8ab3"
+  }
+}
