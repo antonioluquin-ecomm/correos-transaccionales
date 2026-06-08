@@ -224,6 +224,10 @@
           max-height: none !important;
           overflow: visible !important;
         }
+        .logo-strip {
+          padding: 16px 16px 14px !important;
+          border-radius: 0 !important;
+        }
         .logo-img {
           width: 120px !important;
         }
@@ -256,7 +260,7 @@
                 <table role="presentation" width="100%" class="card">
                   <!-- ── Logo strip ── -->
                   <tr>
-                    <td align="center" style="background: #ffffff; border-radius: 12px 12px 0 0; padding: 20px 24px 16px;">
+                    <td align="center" class="logo-strip" style="background: #ffffff; border-radius: 12px 12px 0 0; padding: 20px 24px 16px;">
                       <a href="https://{{#if _accountInfo.HostName}}{{_accountInfo.HostName}}{{else}}{{hostName}}{{/if}}" target="_blank">
                         <img src="https://sporting.vteximg.com.br/arquivos/logo-mail-2.png"
                              alt="{{_accountInfo.TradingName}}" width="150" class="logo-img"
