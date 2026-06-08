@@ -6,7 +6,15 @@
     <title>Flujo de Correos — Correos Transaccionales</title>
     <link rel="stylesheet" href="../../assets/css/shared.css" />
     <style>
-      /* ---- Tabs ---- */
+      .ct-flow-page {
+        max-width: 1600px;
+      }
+
+      .ct-flow-page h1 {
+        font-size: 28px;
+        letter-spacing: 0;
+      }
+
       .ct-flow-tabs {
         display: flex;
         gap: 8px;
@@ -15,63 +23,102 @@
       }
 
       .ct-flow-tab {
-        border: 1px solid var(--ct-card-border);
+        border: 1px solid #d7dde7;
         background: #ffffff;
-        color: var(--ct-text);
+        color: #253247;
         border-radius: 8px;
         padding: 9px 14px;
+        min-height: 38px;
         font-size: 13px;
-        font-weight: 700;
+        font-weight: 800;
         cursor: pointer;
-        transition: background 0.12s, color 0.12s;
+        box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+        transition: background 0.14s, color 0.14s, border-color 0.14s, box-shadow 0.14s;
       }
 
       .ct-flow-tab.active {
         background: var(--ct-navy);
         color: #ffffff;
         border-color: var(--ct-navy);
+        box-shadow: 0 8px 18px rgba(31, 58, 95, 0.18);
       }
 
       .ct-flow-tab:not(.active):hover {
-        border-color: var(--ct-navy);
+        border-color: #8ea4c0;
         color: var(--ct-navy);
-      }
-
-      /* ---- Shell ---- */
-      .ct-flow-page {
-        max-width: 1600px;
       }
 
       .ct-flow-shell {
         background: #ffffff;
-        border: 1px solid var(--ct-card-border);
-        border-radius: 12px;
+        border: 1px solid #dce3ec;
+        border-radius: 8px;
         overflow: hidden;
+        box-shadow: 0 16px 40px rgba(31, 58, 95, 0.08);
       }
 
-      /* ---- Header ---- */
       .ct-flow-header {
-        display: flex;
-        justify-content: space-between;
-        gap: 16px;
-        padding: 14px 16px;
-        border-bottom: 1px solid var(--ct-card-border);
+        display: grid;
+        grid-template-columns: minmax(280px, 1fr) auto;
+        gap: 20px;
+        padding: 18px 20px;
+        border-bottom: 1px solid #dce3ec;
+        background: #ffffff;
       }
 
       .ct-flow-header h2 {
         margin: 0;
-        font-size: 16px;
+        font-size: 17px;
+        letter-spacing: 0;
       }
 
       .ct-flow-header p {
-        margin: 4px 0 0 0;
-        color: var(--ct-text-muted);
+        margin: 5px 0 0 0;
+        color: #526174;
         font-size: 13px;
+        line-height: 19px;
+      }
+
+      .ct-flow-header-side {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 12px;
+      }
+
+      .ct-flow-kpis {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(86px, 1fr));
+        gap: 8px;
+      }
+
+      .ct-flow-kpi {
+        min-width: 86px;
+        padding: 8px 10px;
+        border: 1px solid #dce3ec;
+        border-radius: 8px;
+        background: #f8fafc;
+        text-align: right;
+      }
+
+      .ct-flow-kpi strong {
+        display: block;
+        color: #16293f;
+        font-size: 18px;
+        line-height: 20px;
+      }
+
+      .ct-flow-kpi span {
+        display: block;
+        margin-top: 2px;
+        color: #64748b;
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
       }
 
       .ct-flow-legend {
         display: flex;
-        gap: 8px;
+        gap: 6px;
         align-items: center;
         flex-wrap: wrap;
         justify-content: flex-end;
@@ -79,55 +126,54 @@
 
       .ct-flow-legend-sep {
         width: 1px;
-        height: 16px;
-        background: var(--ct-card-border);
+        height: 18px;
+        background: #dce3ec;
         flex-shrink: 0;
+        margin: 0 2px;
       }
 
-      .ct-flow-stats {
-        margin: 4px 0 0 0;
-        font-size: 12px;
-        color: var(--ct-text-muted);
-      }
-
-      /* ---- Filter bar ---- */
       .ct-flow-filters {
         display: flex;
-        gap: 6px;
+        gap: 8px;
         flex-wrap: wrap;
         align-items: center;
-        padding: 10px 16px;
-        border-bottom: 1px solid var(--ct-card-border);
-        background: #f9fafb;
+        padding: 12px 20px;
+        border-bottom: 1px solid #dce3ec;
+        background: #f8fafc;
       }
 
       .ct-flow-filter-label {
         font-size: 11px;
-        font-weight: 700;
+        font-weight: 800;
         text-transform: uppercase;
-        letter-spacing: 0.4px;
-        color: var(--ct-text-muted);
+        color: #64748b;
         margin-right: 2px;
       }
 
       .ct-flow-filter-btn {
         display: inline-flex;
         align-items: center;
-        gap: 4px;
-        padding: 5px 12px;
-        border-radius: 999px;
-        border: 1px solid var(--ct-card-border);
+        gap: 6px;
+        padding: 7px 12px;
+        min-height: 32px;
+        border-radius: 8px;
+        border: 1px solid #d7dde7;
         background: #ffffff;
-        color: var(--ct-text);
+        color: #253247;
         font-size: 12px;
-        font-weight: 600;
+        font-weight: 800;
         cursor: pointer;
-        transition: background 0.12s, color 0.12s, border-color 0.12s;
+        box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+        transition: background 0.14s, color 0.14s, border-color 0.14s, box-shadow 0.14s;
       }
 
       .ct-flow-filter-btn:hover {
-        border-color: var(--ct-accent);
-        color: var(--ct-accent);
+        border-color: #8ea4c0;
+        color: var(--ct-navy);
+      }
+
+      .ct-flow-filter-btn.active {
+        box-shadow: 0 8px 18px rgba(15, 23, 42, 0.12);
       }
 
       .ct-flow-filter-btn.active[data-filter="all"] {
@@ -155,61 +201,73 @@
       }
 
       .ct-flow-filter-btn.active[data-priority="alta"] {
-        background: #ef4444;
+        background: #dc2626;
         color: #ffffff;
-        border-color: #ef4444;
+        border-color: #dc2626;
       }
 
       .ct-flow-filter-sep {
         width: 1px;
-        height: 20px;
-        background: var(--ct-card-border);
+        height: 24px;
+        background: #dce3ec;
         flex-shrink: 0;
-        margin: 0 2px;
       }
 
-      /* ---- Board ---- */
       .ct-flow-board-wrap {
-        overflow: hidden;
-        background: #f8fafc;
+        overflow: auto;
+        background: #eef3f8;
       }
 
       .ct-flow-board {
         position: relative;
-        width: 1320px;
-        height: 560px;
+        width: 1420px;
+        height: 620px;
         transform-origin: top left;
         background:
-          linear-gradient(#e5e7eb 1px, transparent 1px) 0 0 / 100% 112px,
-          #f8fafc;
+          linear-gradient(90deg, rgba(148, 163, 184, 0.14) 1px, transparent 1px) 0 0 / 130px 100%,
+          linear-gradient(#dce3ec 1px, transparent 1px) 0 88px / 100% 128px,
+          #f6f9fc;
+      }
+
+      .ct-flow-stage-label {
+        position: absolute;
+        top: 18px;
+        min-width: 96px;
+        padding: 5px 9px;
+        border: 1px solid #d7dde7;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.82);
+        color: #64748b;
+        font-size: 10px;
+        font-weight: 900;
+        text-align: center;
+        text-transform: uppercase;
       }
 
       .ct-flow-lane-label {
         position: absolute;
         left: 18px;
-        width: 96px;
-        min-height: 38px;
+        width: 112px;
+        min-height: 46px;
         display: flex;
         align-items: center;
         justify-content: center;
         border-radius: 8px;
         color: #ffffff;
-        font-weight: 800;
+        font-weight: 900;
         font-size: 14px;
-        box-shadow: 0 4px 12px rgba(15, 23, 42, 0.18);
-        letter-spacing: 0.3px;
+        box-shadow: 0 10px 22px rgba(15, 23, 42, 0.16);
       }
 
       .ct-flow-lane-guide {
         position: absolute;
-        left: 134px;
+        left: 150px;
         top: 0;
         bottom: 0;
         width: 1px;
-        background: #94a3b8;
+        background: #a7b4c5;
       }
 
-      /* ---- SVG links ---- */
       .ct-flow-svg {
         position: absolute;
         inset: 0;
@@ -220,89 +278,58 @@
 
       .ct-flow-link {
         fill: none;
-        stroke: #1f5c8a;
-        stroke-width: 1.8;
-        opacity: 0.7;
+        stroke: #32648f;
+        stroke-width: 2;
+        opacity: 0.78;
       }
 
-      /* ---- Nodes ---- */
+      .ct-flow-link.filtered-out {
+        opacity: 0.12;
+      }
+
       .ct-flow-node {
         position: absolute;
-        width: 118px;
-        min-height: 42px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 8px 10px;
-        border: 2px solid currentColor;
-        border-radius: 7px;
+        width: 128px;
+        min-height: 60px;
+        display: grid;
+        grid-template-rows: auto 1fr;
+        gap: 4px;
+        padding: 8px 10px 9px 13px;
+        border: 1px solid #d7dde7;
+        border-left: 5px solid currentColor;
+        border-radius: 8px;
         background: #ffffff;
         color: var(--ct-text);
-        text-align: center;
-        font-size: 11px;
-        line-height: 14px;
-        font-weight: 800;
-        box-shadow: 0 4px 10px rgba(15, 23, 42, 0.10);
+        box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
         cursor: pointer;
-        transition: box-shadow 0.15s, opacity 0.2s;
+        transition: transform 0.14s, box-shadow 0.14s, opacity 0.2s, border-color 0.14s;
       }
 
       .ct-flow-node:hover {
-        box-shadow: 0 10px 24px rgba(15, 23, 42, 0.18);
-        z-index: 2;
+        transform: translateY(-2px);
+        box-shadow: 0 16px 32px rgba(15, 23, 42, 0.16);
+        z-index: 4;
       }
 
-      .ct-flow-node::before {
-        content: "✉";
-        position: absolute;
-        left: -12px;
-        top: -12px;
-        width: 21px;
-        height: 21px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 4px;
-        background: #e0e7ff;
-        color: #2563eb;
-        border: 1px solid #c7d2fe;
-        font-size: 12px;
-      }
+      .ct-flow-node.vtex { color: var(--ct-platform-vtex); }
+      .ct-flow-node.andreani { color: #ef4056; }
+      .ct-flow-node.pim { color: #0891b2; }
+      .ct-flow-node.ocasa { color: #0f766e; }
 
-      .ct-flow-node.vtex {
-        color: var(--ct-platform-vtex);
-      }
-
-      .ct-flow-node.andreani {
-        color: #ef4056;
-      }
-
-      .ct-flow-node.pim {
-        color: #22b8c7;
-      }
-
-      .ct-flow-node.ocasa {
-        color: #0f766e;
-      }
-
-      .ct-flow-node.status-existente {
-        background: #f0fdf4;
-      }
-
+      .ct-flow-node.status-existente { background: #f3fcf6; }
       .ct-flow-node.status-faltante {
-        border-style: dashed;
-        background: #fff7ed;
+        background: #fffaf3;
+        border-style: solid solid solid dashed;
       }
-
       .ct-flow-node.status-candidato {
-        border-style: dotted;
-        background: #eff6ff;
+        background: #f2f7ff;
+        border-style: solid solid solid dotted;
       }
 
       .ct-flow-node.active {
-        outline: 3px solid rgba(37, 99, 235, 0.3);
+        outline: 3px solid rgba(37, 99, 235, 0.24);
         outline-offset: 3px;
-        z-index: 3;
+        z-index: 5;
       }
 
       .ct-flow-node:focus-visible {
@@ -311,18 +338,51 @@
       }
 
       .ct-flow-node.filtered-out {
-        opacity: 0.1;
-        pointer-events: none;
+        opacity: 0.15;
       }
 
-      /* ---- Status dot (bottom-right) ---- */
+      .ct-flow-node-meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 6px;
+        min-width: 0;
+      }
+
+      .ct-flow-node-platform {
+        color: #64748b;
+        font-size: 9px;
+        font-weight: 900;
+        line-height: 1;
+        text-transform: uppercase;
+      }
+
+      .ct-flow-node-priority {
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        flex-shrink: 0;
+      }
+
+      .ct-flow-node-priority.priority-alta { background: #dc2626; }
+      .ct-flow-node-priority.priority-media { background: #f59e0b; }
+      .ct-flow-node-priority.priority-baja { background: #94a3b8; }
+
+      .ct-flow-node-title {
+        color: #172033;
+        font-size: 11px;
+        font-weight: 900;
+        line-height: 14px;
+        text-align: left;
+      }
+
       .ct-flow-node-status {
         position: absolute;
         right: -8px;
         bottom: -8px;
-        width: 18px;
-        height: 18px;
-        display: flex;
+        min-width: 20px;
+        height: 20px;
+        display: inline-flex;
         align-items: center;
         justify-content: center;
         border-radius: 999px;
@@ -333,48 +393,23 @@
         font-weight: 900;
       }
 
-      /* ---- Priority dot (top-left) ---- */
-      .ct-flow-node-priority {
-        position: absolute;
-        top: -5px;
-        left: -5px;
-        width: 10px;
-        height: 10px;
-        border-radius: 999px;
-        border: 2px solid #ffffff;
-        z-index: 1;
-      }
-
-      .ct-flow-node-priority.priority-alta { background: #ef4444; }
-      .ct-flow-node-priority.priority-media { background: #f59e0b; }
-      .ct-flow-node-priority.priority-baja { background: #9ca3af; }
-
-      /* ---- Footer note ---- */
       .ct-flow-note {
-        padding: 10px 16px;
-        border-top: 1px solid var(--ct-card-border);
-        color: var(--ct-text-muted);
+        padding: 10px 20px;
+        border-top: 1px solid #dce3ec;
+        background: #ffffff;
+        color: #64748b;
         font-size: 12px;
-        display: flex;
-        align-items: center;
-        gap: 6px;
+        line-height: 18px;
       }
 
-      .ct-flow-note::before {
-        content: "↑";
-        font-size: 14px;
-        opacity: 0.5;
-      }
-
-      /* ---- Side panel ---- */
       .ct-flow-detail-overlay {
         position: fixed;
         top: 0;
-        right: -400px;
-        width: 380px;
+        right: -440px;
+        width: 420px;
         height: 100%;
         background: #ffffff;
-        box-shadow: -8px 0 32px rgba(15, 23, 42, 0.14);
+        box-shadow: -16px 0 48px rgba(15, 23, 42, 0.18);
         z-index: 80;
         overflow-y: auto;
         transition: right 0.22s cubic-bezier(0.4, 0, 0.2, 1);
@@ -385,7 +420,7 @@
       }
 
       .ct-flow-detail-inner {
-        padding: 24px;
+        padding: 26px;
         min-height: 100%;
       }
 
@@ -394,13 +429,14 @@
         justify-content: space-between;
         gap: 16px;
         align-items: flex-start;
-        margin-bottom: 14px;
+        margin-bottom: 16px;
       }
 
       .ct-flow-detail-header h2 {
-        margin: 8px 0 0 0;
-        font-size: 18px;
-        line-height: 24px;
+        margin: 10px 0 0 0;
+        color: #172033;
+        font-size: 22px;
+        line-height: 28px;
       }
 
       #ct-flow-detail-badges {
@@ -411,19 +447,24 @@
 
       .ct-flow-detail-inner dl {
         display: grid;
-        grid-template-columns: 100px 1fr;
-        gap: 10px 12px;
-        margin: 18px 0;
+        grid-template-columns: 112px minmax(0, 1fr);
+        gap: 12px 14px;
+        margin: 20px 0;
+        padding: 16px 0;
+        border-top: 1px solid #e6ebf2;
+        border-bottom: 1px solid #e6ebf2;
         font-size: 13px;
       }
 
       .ct-flow-detail-inner dt {
-        color: var(--ct-text-muted);
-        font-weight: 700;
+        color: #64748b;
+        font-weight: 800;
       }
 
       .ct-flow-detail-inner dd {
         margin: 0;
+        color: #253247;
+        line-height: 19px;
       }
 
       .ct-flow-detail-inner .ct-actions {
@@ -448,57 +489,110 @@
         background: #ef4056;
       }
 
+      .ct-badge.ct-platform-ocasa {
+        background: #0f766e;
+      }
+
+      .ct-badge.ct-priority-alta { background: #dc2626; }
+      .ct-badge.ct-priority-media { background: #d97706; }
+      .ct-badge.ct-priority-baja { background: #64748b; }
+
       .ct-flow-detail-note {
-        color: var(--ct-text-muted);
+        color: #526174;
         font-size: 13px;
         line-height: 20px;
         margin: 0;
-        padding: 12px 14px;
-        background: #f9fafb;
+        padding: 13px 14px;
+        background: #f8fafc;
         border-radius: 8px;
-        border-left: 3px solid var(--ct-card-border);
+        border-left: 4px solid #8ea4c0;
       }
 
       .ct-flow-close {
         flex-shrink: 0;
-        border: 1px solid var(--ct-card-border);
+        width: 34px;
+        height: 34px;
+        border: 1px solid #d7dde7;
         background: #ffffff;
-        color: var(--ct-text-muted);
+        color: #64748b;
         cursor: pointer;
-        font-size: 18px;
+        font-size: 22px;
         line-height: 1;
-        padding: 6px 9px;
+        padding: 0;
         border-radius: 8px;
-        transition: background 0.12s;
+        transition: background 0.14s, color 0.14s;
       }
 
       .ct-flow-close:hover {
-        background: #f3f4f6;
-        color: var(--ct-text);
+        background: #f1f5f9;
+        color: #172033;
       }
 
-      /* ---- Mobile backdrop ---- */
       .ct-flow-backdrop {
         display: none;
         position: fixed;
         inset: 0;
-        background: rgba(15, 23, 42, 0.38);
+        background: rgba(15, 23, 42, 0.42);
         z-index: 79;
       }
 
-      /* ---- Responsive ---- */
-      @media (max-width: 760px) {
+      @media (max-width: 920px) {
         .ct-flow-header {
-          flex-direction: column;
+          grid-template-columns: 1fr;
+        }
+
+        .ct-flow-header-side {
+          align-items: stretch;
+        }
+
+        .ct-flow-kpis {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .ct-flow-kpi {
+          text-align: left;
         }
 
         .ct-flow-legend {
           justify-content: flex-start;
         }
+      }
+
+      @media (max-width: 760px) {
+        .ct-flow-page {
+          padding: 18px 14px;
+        }
+
+        .ct-flow-page h1 {
+          font-size: 24px;
+        }
+
+        .ct-flow-tab,
+        .ct-flow-filter-btn {
+          flex: 1 1 auto;
+          justify-content: center;
+        }
+
+        .ct-flow-board-wrap {
+          overflow-x: auto;
+        }
+
+        .ct-flow-board {
+          transform: none !important;
+        }
 
         .ct-flow-detail-overlay {
           width: 100%;
           right: -100%;
+        }
+
+        .ct-flow-detail-inner {
+          padding: 22px 18px;
+        }
+
+        .ct-flow-detail-inner dl {
+          grid-template-columns: 1fr;
+          gap: 4px 0;
         }
 
         .ct-flow-backdrop.open {
@@ -513,8 +607,7 @@
     <main class="ct-page ct-flow-page">
       <h1>Flujo de Correos</h1>
       <p class="ct-subtitle">
-        Mapa operativo de correos por etapa y plataforma. Sirve para identificar qué plantillas existen,
-        cuáles faltan y desde dónde conviene priorizar nuevas creaciones.
+        Cobertura operativa de comunicaciones transaccionales por etapa, plataforma y prioridad.
       </p>
 
       <div class="ct-flow-tabs" id="ct-flow-tabs"></div>
@@ -524,17 +617,32 @@
           <div>
             <h2 id="ct-flow-title"></h2>
             <p id="ct-flow-description"></p>
-            <p id="ct-flow-stats" class="ct-flow-stats"></p>
           </div>
-          <div class="ct-flow-legend">
-            <span class="ct-badge ct-platform-vtex">VTEX</span>
-            <span class="ct-badge ct-platform-pim">PIM</span>
-            <span class="ct-badge ct-platform-andreani">Andreani</span>
-            <span class="ct-badge ct-platform-otra">Ocasa</span>
-            <span class="ct-flow-legend-sep"></span>
-            <span class="ct-badge ct-status-activo">✓ Existente</span>
-            <span class="ct-badge ct-status-faltante">! Faltante</span>
-            <span class="ct-badge ct-status-candidato">? Candidato</span>
+          <div class="ct-flow-header-side">
+            <div class="ct-flow-kpis" aria-label="Cobertura del flujo">
+              <div class="ct-flow-kpi">
+                <strong id="ct-flow-kpi-existing">0</strong>
+                <span>Existentes</span>
+              </div>
+              <div class="ct-flow-kpi">
+                <strong id="ct-flow-kpi-missing">0</strong>
+                <span>Faltantes</span>
+              </div>
+              <div class="ct-flow-kpi">
+                <strong id="ct-flow-kpi-priority">0</strong>
+                <span>Alta prioridad</span>
+              </div>
+            </div>
+            <div class="ct-flow-legend">
+              <span class="ct-badge ct-platform-vtex">VTEX</span>
+              <span class="ct-badge ct-platform-pim">PIM</span>
+              <span class="ct-badge ct-platform-andreani">Andreani</span>
+              <span class="ct-badge ct-platform-ocasa">Ocasa</span>
+              <span class="ct-flow-legend-sep"></span>
+              <span class="ct-badge ct-status-activo">✓ Existente</span>
+              <span class="ct-badge ct-status-faltante">! Faltante</span>
+              <span class="ct-badge ct-status-candidato">? Candidato</span>
+            </div>
           </div>
         </div>
 
@@ -553,7 +661,7 @@
         </div>
 
         <div class="ct-flow-note">
-          Hacé click en cualquier nodo para ver estado, prioridad, disparador y próxima acción.
+          La prioridad alta agrupa comunicaciones con impacto directo en confirmación, despacho, retiro o seguimiento.
         </div>
       </section>
     </main>
@@ -595,10 +703,18 @@
         CT.renderTopbar('flujo', '../../');
 
         const LANES = [
-          { id: 'vtex', label: 'Vtex', top: 76, color: '#ec4178' },
-          { id: 'pim', label: 'PIM', top: 190, color: '#2bbecb' },
-          { id: 'andreani', label: 'Andreani', top: 304, color: '#ef4056' },
-          { id: 'ocasa', label: 'Ocasa', top: 418, color: '#0f5f63' },
+          { id: 'vtex', label: 'VTEX', top: 112, color: '#ec4178' },
+          { id: 'pim', label: 'PIM', top: 240, color: '#0891b2' },
+          { id: 'andreani', label: 'Andreani', top: 368, color: '#ef4056' },
+          { id: 'ocasa', label: 'Ocasa', top: 496, color: '#0f766e' },
+        ];
+
+        const STAGE_LABELS = [
+          { x: 40, label: 'Cuenta' },
+          { x: 300, label: 'Pedido' },
+          { x: 560, label: 'Facturación' },
+          { x: 690, label: 'Despacho' },
+          { x: 950, label: 'Seguimiento' },
         ];
 
         const FLOWS = {
@@ -609,15 +725,15 @@
               { id: 'back-in-stock', lane: 'vtex', x: 40, text: 'Volvió a stock', templateId: 'back-in-stock', status: 'existente', priority: 'media', trigger: 'SKU sin stock pasa a disponible y hay suscriptores activos.', note: 'Plantilla disponible en catálogo. Pendiente revisión de diseño.' },
               { id: 'access', lane: 'vtex', x: 170, text: 'Código de acceso a cuenta', templateId: 'access-key', status: 'existente', priority: 'baja', trigger: 'Usuario solicita ingreso o recuperación de acceso.', note: 'Plantilla disponible en catálogo. Pendiente revisión de diseño.' },
               { id: 'order', lane: 'vtex', x: 300, text: 'Pedido realizado con éxito', templateId: 'pedido-confirmado', status: 'existente', priority: 'alta', trigger: 'VTEX registra correctamente un pedido.', note: 'Plantilla real disponible y asociada al catálogo.' },
-              { id: 'cancelled', lane: 'vtex', x: 430, y: -44, text: 'Pedido cancelado', templateId: 'pedido-cancelado', status: 'existente', priority: 'media', trigger: 'VTEX cancela o informa cancelación del pedido.', note: 'Plantilla real disponible y asociada al catálogo.' },
+              { id: 'cancelled', lane: 'vtex', x: 430, y: -72, text: 'Pedido cancelado', templateId: 'pedido-cancelado', status: 'existente', priority: 'media', trigger: 'VTEX cancela o informa cancelación del pedido.', note: 'Plantilla real disponible y asociada al catálogo.' },
               { id: 'paid', lane: 'vtex', x: 430, text: 'Pago aprobado', templateId: 'pago-aprobado', status: 'existente', priority: 'alta', trigger: 'VTEX confirma autorización/aprobación de pago.', note: 'Plantilla real disponible y asociada al catálogo.' },
               { id: 'stockout', lane: 'pim', x: 430, text: 'Sin stock', status: 'faltante', priority: 'alta', trigger: 'PIM detecta falta de stock para uno o más productos.', note: 'Priorizar si impacta pedidos ya pagados o confirmados.' },
               { id: 'invoiced', lane: 'vtex', x: 560, text: 'Pedido facturado', templateId: 'order-invoiced', status: 'existente', priority: 'media', trigger: 'VTEX notifica facturación y despacho del pedido.', note: 'Plantilla disponible en catálogo. Pendiente revisión de diseño.' },
-              { id: 'pickup', lane: 'pim', x: 690, y: -44, text: 'Pedido para retirar', status: 'faltante', priority: 'alta', trigger: 'Pedido queda disponible para retiro.', note: 'Requiere JSON con datos de punto de retiro.' },
+              { id: 'pickup', lane: 'pim', x: 690, y: -72, text: 'Pedido para retirar', status: 'faltante', priority: 'alta', trigger: 'Pedido queda disponible para retiro.', note: 'Requiere JSON con datos de punto de retiro.' },
               { id: 'shipped', lane: 'pim', x: 690, text: 'Pedido despachado', status: 'faltante', priority: 'alta', trigger: 'Pedido sale del depósito o pasa a operador logístico.', note: 'Debe incluir tracking o próxima comunicación esperada.' },
               { id: 'prep-a', lane: 'andreani', x: 690, text: 'Estamos preparando tu pedido', status: 'faltante', priority: 'media', trigger: 'Andreani recibe prealta o preparación del envío.', note: 'Confirmar evento exacto con integración Andreani.' },
               { id: 'moving-a', lane: 'andreani', x: 820, text: 'Tu envío está en camino', status: 'faltante', priority: 'alta', trigger: 'Andreani informa envío en tránsito.', note: 'Debe incluir número de seguimiento si está disponible.' },
-              { id: 'today-a', lane: 'andreani', x: 950, y: -28, text: 'Tu envío llega hoy', status: 'faltante', priority: 'media', trigger: 'Andreani informa visita programada para el día.', note: 'Validar si se envía siempre o solo en ciertos servicios.' },
+              { id: 'today-a', lane: 'andreani', x: 950, y: -72, text: 'Tu envío llega hoy', status: 'faltante', priority: 'media', trigger: 'Andreani informa visita programada para el día.', note: 'Validar si se envía siempre o solo en ciertos servicios.' },
               { id: 'delay-a', lane: 'andreani', x: 950, y: 28, text: 'Pedido con demora', status: 'faltante', priority: 'media', trigger: 'Andreani informa atraso o reprogramación.', note: 'Debe explicar expectativa sin prometer fecha no confirmada.' },
               { id: 'visited-a', lane: 'andreani', x: 1080, text: 'Te visitamos', status: 'faltante', priority: 'media', trigger: 'Andreani registra intento de entrega.', note: 'Definir variantes: entrega fallida, ausente o segunda visita.' },
               { id: 'prep-o', lane: 'ocasa', x: 690, text: 'Pedido en preparación', status: 'faltante', priority: 'media', trigger: 'Ocasa recibe o prepara el envío.', note: 'Confirmar evento exacto de Ocasa.' },
@@ -626,6 +742,7 @@
               { id: 'moving-o', lane: 'ocasa', x: 1080, text: 'En camino', status: 'faltante', priority: 'alta', trigger: 'Ocasa informa envío en tránsito.', note: 'Debe incluir tracking si está disponible.' },
             ],
             links: [
+              ['back-in-stock', 'access'],
               ['access', 'order'],
               ['order', 'cancelled'],
               ['order', 'paid'],
@@ -653,9 +770,9 @@
               { id: 'pickup-order', lane: 'andreani', x: 350, text: 'Recibimos tu orden de retiro', status: 'faltante', priority: 'alta', trigger: 'Andreani recibe orden de retiro.', note: 'Debe confirmar al cliente que el retiro fue solicitado.' },
               { id: 'courier', lane: 'andreani', x: 500, text: 'Estamos en camino para retirar tu producto', status: 'faltante', priority: 'media', trigger: 'Andreani informa retiro en curso.', note: 'Validar disponibilidad de datos de visita.' },
               { id: 'delivered', lane: 'andreani', x: 650, text: 'Ya entregamos tu producto', status: 'faltante', priority: 'media', trigger: 'Andreani confirma entrega/devolución al depósito.', note: 'Nombre operativo a confirmar: entrega del producto retirado.' },
-              { id: 'rejected', lane: 'pim', x: 790, y: -26, text: 'Notificación de cambio rechazado', status: 'faltante', priority: 'media', trigger: 'PIM rechaza solicitud o recepción de cambio.', note: 'Debe explicar motivo y próximo paso.' },
-              { id: 'received', lane: 'pim', x: 790, y: 34, text: 'Recepción de producto por cambio', status: 'faltante', priority: 'alta', trigger: 'PIM confirma recepción del producto a cambiar.', note: 'Dispara resolución del cambio.' },
-              { id: 'giftcard', lane: 'pim', x: 940, y: 34, text: 'Giftcard (Código para cambio)', status: 'faltante', priority: 'alta', trigger: 'Se emite código/giftcard para nuevo cambio.', note: 'Requiere datos de código, vigencia e instrucciones.' },
+              { id: 'rejected', lane: 'pim', x: 790, y: -72, text: 'Notificación de cambio rechazado', status: 'faltante', priority: 'media', trigger: 'PIM rechaza solicitud o recepción de cambio.', note: 'Debe explicar motivo y próximo paso.' },
+              { id: 'received', lane: 'pim', x: 790, y: 12, text: 'Recepción de producto por cambio', status: 'faltante', priority: 'alta', trigger: 'PIM confirma recepción del producto a cambiar.', note: 'Dispara resolución del cambio.' },
+              { id: 'giftcard', lane: 'pim', x: 940, y: 12, text: 'Giftcard (Código para cambio)', status: 'faltante', priority: 'alta', trigger: 'Se emite código/giftcard para nuevo cambio.', note: 'Requiere datos de código, vigencia e instrucciones.' },
             ],
             links: [
               ['request', 'pickup-order'],
@@ -674,8 +791,8 @@
               { id: 'pickup-order', lane: 'andreani', x: 350, text: 'Recibimos tu orden de retiro', status: 'faltante', priority: 'alta', trigger: 'Andreani recibe orden de retiro.', note: 'Debe confirmar el retiro al cliente.' },
               { id: 'courier', lane: 'andreani', x: 500, text: 'Estamos en camino para retirar tu producto', status: 'faltante', priority: 'media', trigger: 'Andreani informa retiro en curso.', note: 'Validar evento de visita.' },
               { id: 'delivered', lane: 'andreani', x: 650, text: 'Ya entregamos tu producto', status: 'faltante', priority: 'media', trigger: 'Andreani confirma entrega del producto retirado.', note: 'Nombre operativo a confirmar.' },
-              { id: 'rejected', lane: 'pim', x: 790, y: -26, text: 'Solicitud de devolución rechazada', status: 'faltante', priority: 'media', trigger: 'PIM rechaza devolución.', note: 'Debe explicar motivo y opciones.' },
-              { id: 'received', lane: 'pim', x: 790, y: 34, text: 'Recepción de devolución', status: 'faltante', priority: 'alta', trigger: 'PIM confirma recepción del producto devuelto.', note: 'Puede disparar reintegro o revisión interna.' },
+              { id: 'rejected', lane: 'pim', x: 790, y: -72, text: 'Solicitud de devolución rechazada', status: 'faltante', priority: 'media', trigger: 'PIM rechaza devolución.', note: 'Debe explicar motivo y opciones.' },
+              { id: 'received', lane: 'pim', x: 790, y: 12, text: 'Recepción de devolución', status: 'faltante', priority: 'alta', trigger: 'PIM confirma recepción del producto devuelto.', note: 'Puede disparar reintegro o revisión interna.' },
             ],
             links: [
               ['request', 'pickup-order'],
@@ -693,9 +810,9 @@
               { id: 'pickup-order', lane: 'andreani', x: 350, text: 'Recibimos tu orden de retiro', status: 'faltante', priority: 'alta', trigger: 'Andreani recibe orden de retiro.', note: 'Debe confirmar gestión de retiro.' },
               { id: 'courier', lane: 'andreani', x: 500, text: 'Estamos en camino para retirar tu producto', status: 'faltante', priority: 'media', trigger: 'Andreani informa retiro en curso.', note: 'Validar si comparte texto con cambio/devolución.' },
               { id: 'delivered', lane: 'andreani', x: 650, text: 'Ya entregamos tu producto', status: 'faltante', priority: 'media', trigger: 'Andreani confirma entrega al centro de revisión.', note: 'Nombre operativo a confirmar.' },
-              { id: 'rejected', lane: 'pim', x: 790, y: -26, text: 'Notificación de garantía rechazada', status: 'faltante', priority: 'media', trigger: 'Garantía rechazada por revisión.', note: 'Debe explicar motivo y alternativas.' },
-              { id: 'received', lane: 'pim', x: 790, y: 34, text: 'Recepción de producto para cambio', status: 'faltante', priority: 'alta', trigger: 'Producto recibido para revisión o cambio por garantía.', note: 'Puede disparar aprobación del cambio.' },
-              { id: 'giftcard', lane: 'pim', x: 940, y: 34, text: 'Giftcard (Código para cambio)', status: 'faltante', priority: 'alta', trigger: 'Se emite código para resolver la garantía.', note: 'Requiere código, vigencia e instrucciones.' },
+              { id: 'rejected', lane: 'pim', x: 790, y: -72, text: 'Notificación de garantía rechazada', status: 'faltante', priority: 'media', trigger: 'Garantía rechazada por revisión.', note: 'Debe explicar motivo y alternativas.' },
+              { id: 'received', lane: 'pim', x: 790, y: 12, text: 'Recepción de producto para cambio', status: 'faltante', priority: 'alta', trigger: 'Producto recibido para revisión o cambio por garantía.', note: 'Puede disparar aprobación del cambio.' },
+              { id: 'giftcard', lane: 'pim', x: 940, y: 12, text: 'Giftcard (Código para cambio)', status: 'faltante', priority: 'alta', trigger: 'Se emite código para resolver la garantía.', note: 'Requiere código, vigencia e instrucciones.' },
             ],
             links: [
               ['request', 'pickup-order'],
@@ -726,15 +843,19 @@
         const detailTemplate = document.getElementById('ct-flow-detail-template');
         const detailActions = document.getElementById('ct-flow-detail-actions');
         const backdrop = document.getElementById('ct-flow-backdrop');
+        const kpiExisting = document.getElementById('ct-flow-kpi-existing');
+        const kpiMissing = document.getElementById('ct-flow-kpi-missing');
+        const kpiPriority = document.getElementById('ct-flow-kpi-priority');
 
         let activeFlowId = 'entrega';
         let activeStatusFilter = null;
         let activePriorityFilter = false;
 
-        const BOARD_WIDTH = 1320;
-        const BOARD_HEIGHT = 560;
-        const NODE_WIDTH = 118;
-        const NODE_HEIGHT = 42;
+        const BOARD_WIDTH = 1420;
+        const BOARD_HEIGHT = 620;
+        const FLOW_X_OFFSET = 170;
+        const NODE_WIDTH = 128;
+        const NODE_HEIGHT = 60;
 
         const STATUS_META = {
           existente: { label: 'Existente', icon: '✓', className: 'ct-status-activo' },
@@ -746,6 +867,12 @@
           alta: 'Alta',
           media: 'Media',
           baja: 'Baja',
+        };
+
+        const PRIORITY_BADGE_CLASSES = {
+          alta: 'ct-priority-alta',
+          media: 'ct-priority-media',
+          baja: 'ct-priority-baja',
         };
 
         function templateById(templateId) {
@@ -763,7 +890,9 @@
         }
 
         function priorityBadge(priority) {
-          return `<span class="ct-badge ct-platform-otra">Prioridad ${CT.escapeHtml(PRIORITY_LABELS[priority] || priority || 'media')}</span>`;
+          const normalized = priority || 'media';
+          const className = PRIORITY_BADGE_CLASSES[normalized] || PRIORITY_BADGE_CLASSES.media;
+          return `<span class="ct-badge ${className}">Prioridad ${CT.escapeHtml(PRIORITY_LABELS[normalized] || normalized)}</span>`;
         }
 
         function nodeActionUrl(node, device) {
@@ -780,7 +909,8 @@
         function fitBoardToViewport() {
           if (!boardWrapEl) return;
           const available = boardWrapEl.clientWidth;
-          const scale = Math.min(1, available / BOARD_WIDTH);
+          const forceScroll = window.matchMedia('(max-width: 760px)').matches;
+          const scale = forceScroll ? 1 : Math.min(1, Math.max(0.82, available / BOARD_WIDTH));
           boardEl.style.width = BOARD_WIDTH + 'px';
           boardEl.style.height = BOARD_HEIGHT + 'px';
           boardEl.style.transform = `scale(${scale})`;
@@ -788,10 +918,20 @@
         }
 
         function applyFilter() {
+          const visibleNodes = new Map();
+
           boardEl.querySelectorAll('.ct-flow-node').forEach((el) => {
             const matchStatus = !activeStatusFilter || el.dataset.status === activeStatusFilter;
             const matchPriority = !activePriorityFilter || el.dataset.priority === 'alta';
-            el.classList.toggle('filtered-out', !(matchStatus && matchPriority));
+            const isVisible = matchStatus && matchPriority;
+            visibleNodes.set(el.dataset.node, isVisible);
+            el.classList.toggle('filtered-out', !isVisible);
+          });
+
+          boardEl.querySelectorAll('.ct-flow-link').forEach((el) => {
+            const sourceVisible = visibleNodes.get(el.dataset.from) !== false;
+            const targetVisible = visibleNodes.get(el.dataset.to) !== false;
+            el.classList.toggle('filtered-out', !(sourceVisible && targetVisible));
           });
         }
 
@@ -838,7 +978,7 @@
 
         function nodePosition(node) {
           const lane = LANES.find((l) => l.id === node.lane);
-          return { left: node.x, top: lane.top + (node.y || 0), lane };
+          return { left: FLOW_X_OFFSET + node.x, top: lane.top + (node.y || 0), lane };
         }
 
         function linkPath(from, to) {
@@ -858,14 +998,14 @@
           titleEl.textContent = flow.title;
           descriptionEl.textContent = flow.description;
 
-          const statsEl = document.getElementById('ct-flow-stats');
-          if (statsEl) {
-            const total = flow.nodes.length;
-            const existing = flow.nodes.filter((n) => effectiveStatus(n) === 'existente').length;
-            const candidate = flow.nodes.filter((n) => effectiveStatus(n) === 'candidato').length;
-            const missing = total - existing - candidate;
-            statsEl.textContent = `${existing} de ${total} existentes · ${candidate} candidato${candidate !== 1 ? 's' : ''} · ${missing} faltante${missing !== 1 ? 's' : ''}`;
-          }
+          const total = flow.nodes.length;
+          const existing = flow.nodes.filter((n) => effectiveStatus(n) === 'existente').length;
+          const candidate = flow.nodes.filter((n) => effectiveStatus(n) === 'candidato').length;
+          const missing = total - existing - candidate;
+          const highPriority = flow.nodes.filter((n) => (n.priority || 'media') === 'alta').length;
+          kpiExisting.textContent = existing;
+          kpiMissing.textContent = missing + candidate;
+          kpiPriority.textContent = highPriority;
 
           boardEl.innerHTML = '';
 
@@ -879,6 +1019,14 @@
             label.style.top = lane.top + 'px';
             label.style.background = lane.color;
             label.textContent = lane.label;
+            boardEl.appendChild(label);
+          });
+
+          STAGE_LABELS.forEach((stage) => {
+            const label = document.createElement('div');
+            label.className = 'ct-flow-stage-label';
+            label.style.left = FLOW_X_OFFSET + stage.x + 'px';
+            label.textContent = stage.label;
             boardEl.appendChild(label);
           });
 
@@ -909,6 +1057,8 @@
             if (!from || !to) return;
             const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
             path.setAttribute('class', 'ct-flow-link');
+            path.dataset.from = fromId;
+            path.dataset.to = toId;
             path.setAttribute('d', linkPath(from, to));
             path.setAttribute('marker-end', 'url(#ct-arrow)');
             svg.appendChild(path);
@@ -922,18 +1072,21 @@
             const statusMeta = STATUS_META[status] || STATUS_META.faltante;
             const el = document.createElement('div');
             el.className = `ct-flow-node ${node.lane} status-${status}`;
+            el.dataset.node = node.id;
             el.dataset.status = status;
             el.dataset.priority = node.priority || 'media';
             el.style.left = position.left + 'px';
             el.style.top = position.top + 'px';
-            el.textContent = node.text;
             el.tabIndex = 0;
             el.setAttribute('role', 'button');
             el.setAttribute('aria-label', `${node.text}. Estado: ${statusMeta.label}`);
-
-            const priorityDot = document.createElement('span');
-            priorityDot.className = `ct-flow-node-priority priority-${node.priority || 'media'}`;
-            el.appendChild(priorityDot);
+            el.innerHTML = `
+              <span class="ct-flow-node-meta">
+                <span class="ct-flow-node-platform">${CT.escapeHtml(position.lane ? position.lane.label : node.lane)}</span>
+                <span class="ct-flow-node-priority priority-${CT.escapeHtml(node.priority || 'media')}"></span>
+              </span>
+              <span class="ct-flow-node-title">${CT.escapeHtml(node.text)}</span>
+            `;
 
             const statusDot = document.createElement('span');
             statusDot.className = 'ct-flow-node-status';
