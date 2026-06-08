@@ -61,7 +61,7 @@
     <main class="ct-page ct-sim-page">
       <h1>Simulador QA</h1>
       <p class="ct-subtitle">
-        Herramienta interna para probar variantes de envío, productos y promociones sobre un pedido base.
+        Herramienta interna para generar variantes QA desde un escenario base.
       </p>
 
       <div class="ct-preview-tool">
@@ -71,7 +71,7 @@
             <select id="ct-sim-template" aria-label="Elegir plantilla"></select>
           </div>
           <div>
-            <label for="ct-sim-envio">Escenario de envío</label>
+            <label for="ct-sim-envio">Variante de envío</label>
             <select id="ct-sim-envio" aria-label="Elegir escenario de envío">
               <option value="domicilio">Envío a domicilio (1 paquete)</option>
               <option value="retiro">Retiro en tienda (1 paquete)</option>
@@ -109,7 +109,7 @@
             <h3 id="ct-sim-nombre"></h3>
             <p id="ct-sim-descripcion"></p>
             <p class="ct-meta"><strong>Plantilla HTML:</strong> <code id="ct-sim-archivo"></code></p>
-            <p class="ct-meta"><strong>Pedido base:</strong> <code id="ct-sim-base"></code></p>
+            <p class="ct-meta"><strong>Escenario base JSON:</strong> <code id="ct-sim-base"></code></p>
           </div>
           <p class="ct-preview-status" id="ct-sim-status"></p>
         </aside>
@@ -354,7 +354,7 @@
             ]);
             const simulatedData = buildSimulatedData(baseData);
             CT.renderEmailToFrame(frame, html, simulatedData);
-            setStatus('Escenario simulado a partir de: ' + BASE_ORDER_PATH);
+            setStatus('Variante QA generada desde: ' + BASE_ORDER_PATH);
           } catch (error) {
             setStatus('No se pudo renderizar la previsualización: ' + error.message, true);
           }

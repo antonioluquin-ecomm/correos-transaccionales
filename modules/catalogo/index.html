@@ -408,7 +408,7 @@
         <div>
           <h1 id="ct-page-title">Biblioteca de Plantillas</h1>
           <p class="ct-subtitle">
-            Catálogo central de plantillas transaccionales con estado, metadata, datos de ejemplo y
+            Catálogo central de plantillas transaccionales con estado, metadata, escenarios de datos y
             accesos rápidos para revisar o descargar el HTML real.
           </p>
         </div>
@@ -423,7 +423,7 @@
           </div>
           <div class="ct-kpi">
             <strong id="ct-kpi-examples">0</strong>
-            <span>Con ejemplo</span>
+            <span>Con escenario</span>
           </div>
           <div class="ct-kpi">
             <strong id="ct-kpi-platforms">0</strong>
@@ -506,7 +506,7 @@
             <dd id="ct-detail-actualizado"></dd>
             <dt>Plantilla HTML</dt>
             <dd id="ct-detail-archivo"></dd>
-            <dt>Datos de ejemplo</dt>
+            <dt>Escenario de datos</dt>
             <dd id="ct-detail-ejemplo"></dd>
           </dl>
           <h3>Variables y datos que utiliza</h3>
@@ -530,6 +530,7 @@
         CT.renderTopbar('catalogo', BASE);
 
         const templates = typeof TEMPLATES !== 'undefined' && Array.isArray(TEMPLATES) ? TEMPLATES : [];
+        const scenarios = typeof EXAMPLE_SCENARIOS !== 'undefined' && Array.isArray(EXAMPLE_SCENARIOS) ? EXAMPLE_SCENARIOS : [];
         const collator = new Intl.Collator('es', { sensitivity: 'base' });
 
         const resultsEl = document.getElementById('ct-results');
@@ -612,6 +613,10 @@
           const params = new URLSearchParams({ template: template.id });
           if (template.ejemplo) params.set('example', template.ejemplo);
           return `../visualizador/index.html?${params.toString()}`;
+        }
+
+        function scenarioByPath(path) {
+          return scenarios.find((scenario) => scenario.path === path);
         }
 
         function htmlUrl(template) {
@@ -726,7 +731,10 @@
           categoriaEl.textContent = template.categoria || 'Sin categoría';
           actualizadoEl.textContent = formatDate(template.actualizado);
           archivoEl.innerHTML = template.archivoHtml ? `<code>${CT.escapeHtml(template.archivoHtml)}</code>` : 'Sin HTML asociado.';
-          ejemploEl.innerHTML = template.ejemplo ? `<code>${CT.escapeHtml(template.ejemplo)}</code>` : 'Sin dato de ejemplo asociado todavía.';
+          const scenario = scenarioByPath(template.ejemplo);
+          ejemploEl.innerHTML = template.ejemplo
+            ? `<strong>${CT.escapeHtml(scenario?.label || 'Escenario sin clasificar')}</strong><br><code>${CT.escapeHtml(template.ejemplo)}</code>`
+            : 'Sin escenario de datos asociado todavía.';
           variablesEl.innerHTML = Array.isArray(template.variables) && template.variables.length
             ? `<ul>${template.variables.map((v) => `<li><code>${CT.escapeHtml(v)}</code></li>`).join('')}</ul>`
             : '<p>Sin variables documentadas todavía.</p>';

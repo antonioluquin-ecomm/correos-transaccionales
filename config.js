@@ -18,6 +18,12 @@
  *                    no es la lista exhaustiva de helpers Handlebars del HTML)
  *
  * EXAMPLE_SCENARIOS centraliza los JSON disponibles para previsualización.
+ *   id                  -> identificador estable del escenario
+ *   path                -> ruta relativa al JSON dentro de examples/
+ *   label               -> nombre visible del escenario
+ *   tipo                -> familia funcional del JSON
+ *   descripcion         -> variante que representa
+ *   compatibleTemplates -> ids de plantillas que pueden renderizarse con ese JSON
  */
 
 const TEMPLATES = [
@@ -168,14 +174,70 @@ const TEMPLATES = [
 ];
 
 const EXAMPLE_SCENARIOS = [
-  { path: 'examples/vtex/pedido-estandar.json', label: 'Pedido estándar (envío a domicilio)' },
-  { path: 'examples/vtex/pedido-realizado.json', label: 'Pedido realizado con éxito' },
-  { path: 'examples/vtex/pago-aprobado.json', label: 'Pago aprobado' },
-  { path: 'examples/vtex/pedido-cancelado.json', label: 'Pedido cancelado (1 producto)' },
-  { path: 'examples/vtex/pedido-cancelado-2.json', label: 'Pedido cancelado (2 productos, envío gratis)' },
-  { path: 'examples/vtex/access-key.json', label: 'Código de acceso a cuenta' },
-  { path: 'examples/vtex/back-in-stock.json', label: 'Volvió a stock (SKU disponible)' },
-  { path: 'examples/vtex/order-invoiced.json', label: 'Pedido facturado (con seguimiento)' },
+  {
+    id: 'pedido-estandar-domicilio',
+    path: 'examples/vtex/pedido-estandar.json',
+    label: 'Pedido estándar - envío a domicilio',
+    tipo: 'Pedido',
+    descripcion: 'Pedido confirmado con varios productos, totales, dirección de entrega y pago registrado.',
+    compatibleTemplates: ['pedido-confirmado', 'pago-aprobado'],
+  },
+  {
+    id: 'pedido-realizado-exito',
+    path: 'examples/vtex/pedido-realizado.json',
+    label: 'Pedido realizado - 1 producto',
+    tipo: 'Pedido',
+    descripcion: 'Pedido confirmado simple para validar la rama base de compra realizada.',
+    compatibleTemplates: ['pedido-confirmado', 'pago-aprobado'],
+  },
+  {
+    id: 'pago-aprobado-base',
+    path: 'examples/vtex/pago-aprobado.json',
+    label: 'Pago aprobado - pedido base',
+    tipo: 'Pedido',
+    descripcion: 'Pedido con pago aprobado, datos de medio de pago y logística de entrega.',
+    compatibleTemplates: ['pago-aprobado', 'pedido-confirmado'],
+  },
+  {
+    id: 'pedido-cancelado-un-producto',
+    path: 'examples/vtex/pedido-cancelado.json',
+    label: 'Cancelación - 1 producto',
+    tipo: 'Cancelación',
+    descripcion: 'Pedido cancelado con reintegro y un producto en el resumen.',
+    compatibleTemplates: ['pedido-cancelado'],
+  },
+  {
+    id: 'pedido-cancelado-envio-gratis',
+    path: 'examples/vtex/pedido-cancelado-2.json',
+    label: 'Cancelación - 2 productos, envío gratis',
+    tipo: 'Cancelación',
+    descripcion: 'Pedido cancelado con más de un producto y condición de envío bonificado.',
+    compatibleTemplates: ['pedido-cancelado'],
+  },
+  {
+    id: 'access-key-login',
+    path: 'examples/vtex/access-key.json',
+    label: 'Acceso a cuenta - código de ingreso',
+    tipo: 'Cuenta',
+    descripcion: 'Evento de login o recuperación con código de verificación.',
+    compatibleTemplates: ['access-key'],
+  },
+  {
+    id: 'back-in-stock-disponible',
+    path: 'examples/vtex/back-in-stock.json',
+    label: 'Stock - SKU disponible',
+    tipo: 'Stock',
+    descripcion: 'Aviso a cliente suscrito cuando un SKU vuelve a estar disponible.',
+    compatibleTemplates: ['back-in-stock'],
+  },
+  {
+    id: 'order-invoiced-seguimiento',
+    path: 'examples/vtex/order-invoiced.json',
+    label: 'Facturación - con seguimiento',
+    tipo: 'Facturación',
+    descripcion: 'Pedido facturado con paquete, factura y datos de tracking.',
+    compatibleTemplates: ['order-invoiced'],
+  },
 ];
 
 const VERSION = {

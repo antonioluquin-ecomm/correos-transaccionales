@@ -16,9 +16,31 @@
         min-width: 0;
       }
 
+      .ct-vis-page .ct-preview-controls {
+        flex-basis: 320px;
+      }
+
       .ct-vis-page .ct-preview-frame-wrap {
         align-items: flex-start;
         overflow: hidden;
+      }
+
+      .ct-vis-field-note {
+        display: block;
+        min-height: 18px;
+        margin-top: 5px;
+        color: #64748b;
+        font-size: 12px;
+        line-height: 17px;
+      }
+
+      .ct-vis-scenario-note {
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px solid var(--ct-card-border);
+        color: #526174;
+        font-size: 12px;
+        line-height: 18px;
       }
     </style>
   </head>
@@ -28,18 +50,19 @@
     <main class="ct-page ct-vis-page">
       <h1>Visualizador de Plantillas</h1>
       <p class="ct-subtitle">
-        Revisá el HTML real de cada correo con datos de ejemplo validados, sin necesidad de enviarlo.
+        Previsualización de una plantilla HTML con un escenario de datos compatible.
       </p>
 
       <div class="ct-preview-tool">
         <aside class="ct-preview-controls">
           <div>
-            <label for="ct-vis-template">Plantilla</label>
+            <label for="ct-vis-template">Plantilla HTML</label>
             <select id="ct-vis-template" aria-label="Elegir plantilla"></select>
           </div>
           <div>
-            <label for="ct-vis-example">Escenario de datos</label>
+            <label for="ct-vis-example">Escenario de datos compatible</label>
             <select id="ct-vis-example" aria-label="Elegir escenario de datos"></select>
+            <small class="ct-vis-field-note" id="ct-vis-example-help"></small>
           </div>
           <div>
             <label>Formato de vista</label>
@@ -54,7 +77,9 @@
             <h3 id="ct-vis-nombre"></h3>
             <p id="ct-vis-descripcion"></p>
             <p class="ct-meta"><strong>Plantilla HTML:</strong> <code id="ct-vis-archivo"></code></p>
-            <p class="ct-meta"><strong>Datos de ejemplo:</strong> <code id="ct-vis-ejemplo"></code></p>
+            <p class="ct-meta"><strong>Escenario:</strong> <span id="ct-vis-scenario-label"></span></p>
+            <p class="ct-meta"><strong>JSON del escenario:</strong> <code id="ct-vis-ejemplo"></code></p>
+            <p class="ct-vis-scenario-note" id="ct-vis-scenario-note"></p>
           </div>
           <p class="ct-preview-status" id="ct-vis-status"></p>
         </aside>
@@ -89,6 +114,9 @@
         const descripcionEl = document.getElementById('ct-vis-descripcion');
         const archivoEl = document.getElementById('ct-vis-archivo');
         const ejemploEl = document.getElementById('ct-vis-ejemplo');
+        const scenarioLabelEl = document.getElementById('ct-vis-scenario-label');
+        const scenarioNoteEl = document.getElementById('ct-vis-scenario-note');
+        const exampleHelpEl = document.getElementById('ct-vis-example-help');
         const statusEl = document.getElementById('ct-vis-status');
         const frame = document.getElementById('ct-vis-frame');
 
@@ -106,15 +134,64 @@
           templateSelect.appendChild(option);
         });
 
-        examples.forEach((example) => {
-          const option = document.createElement('option');
-          option.value = example.path;
-          option.textContent = example.label;
-          exampleSelect.appendChild(option);
-        });
-
         function currentTemplate() {
           return renderable.find((t) => t.id === templateSelect.value) || renderable[0];
+        }
+
+        function scenarioByPath(path) {
+          return examples.find((example) => example.path === path);
+        }
+
+        function isCompatibleScenario(template, scenario) {
+          if (!template || !scenario) return false;
+          if (!Array.isArray(scenario.compatibleTemplates) || !scenario.compatibleTemplates.length) return true;
+          return scenario.compatibleTemplates.includes(template.id);
+        }
+
+        function compatibleScenarios(template) {
+          return examples.filter((scenario) => isCompatibleScenario(template, scenario));
+        }
+
+        function groupScenariosByType(items) {
+          return items.reduce((groups, scenario) => {
+            const key = scenario.tipo || 'Escenario';
+            if (!groups[key]) groups[key] = [];
+            groups[key].push(scenario);
+            return groups;
+          }, {});
+        }
+
+        function renderScenarioOptions(template, preferredPath) {
+          const compatible = compatibleScenarios(template);
+          const groups = groupScenariosByType(compatible);
+          exampleSelect.innerHTML = '';
+
+          Object.keys(groups).forEach((type) => {
+            const optgroup = document.createElement('optgroup');
+            optgroup.label = type;
+            groups[type].forEach((scenario) => {
+              const option = document.createElement('option');
+              option.value = scenario.path;
+              option.textContent = scenario.label;
+              optgroup.appendChild(option);
+            });
+            exampleSelect.appendChild(optgroup);
+          });
+
+          const preferred = scenarioByPath(preferredPath);
+          const templateDefault = scenarioByPath(template?.ejemplo);
+          const fallback = templateDefault && isCompatibleScenario(template, templateDefault) ? templateDefault : compatible[0];
+          const selected = preferred && isCompatibleScenario(template, preferred) ? preferred : fallback;
+          if (selected) exampleSelect.value = selected.path;
+
+          exampleSelect.disabled = compatible.length === 0;
+          exampleHelpEl.textContent = compatible.length
+            ? `${compatible.length} escenario${compatible.length !== 1 ? 's' : ''} disponible${compatible.length !== 1 ? 's' : ''} para esta plantilla.`
+            : 'Sin escenarios compatibles definidos.';
+        }
+
+        function currentScenario() {
+          return scenarioByPath(exampleSelect.value);
         }
 
         function setStatus(message, isError) {
@@ -134,35 +211,44 @@
         }
 
         function updateInfo(template) {
+          const scenario = currentScenario();
           badgesEl.innerHTML = `${CT.platformBadge(template.plataforma)}${CT.statusBadge(template.estado)}`;
           nombreEl.textContent = template.nombre;
           descripcionEl.textContent = template.descripcion;
           archivoEl.textContent = template.archivoHtml;
-          ejemploEl.textContent = exampleSelect.value;
+          scenarioLabelEl.textContent = scenario ? `${scenario.tipo || 'Escenario'} · ${scenario.label}` : 'Sin escenario seleccionado';
+          ejemploEl.textContent = scenario ? scenario.path : '';
+          scenarioNoteEl.textContent = scenario?.descripcion || '';
         }
 
         async function renderPreview() {
           const template = currentTemplate();
+          const scenario = currentScenario();
           if (!template) return;
 
           updateInfo(template);
+          if (!scenario) {
+            frame.srcdoc = '';
+            setStatus('No hay un escenario compatible para esta plantilla.', true);
+            return;
+          }
+
           setStatus('Renderizando…');
           frame.srcdoc = '';
 
           try {
             const [html, jsonText] = await Promise.all([
               CT.fetchText(BASE + template.archivoHtml),
-              CT.fetchText(BASE + exampleSelect.value),
+              CT.fetchText(BASE + scenario.path),
             ]);
             let data;
             try {
               data = JSON.parse(jsonText);
             } catch (e) {
-              throw new Error(`JSON inválido en ${exampleSelect.value}: ${e.message}`);
+              throw new Error(`JSON inválido en ${scenario.path}: ${e.message}`);
             }
             CT.renderEmailToFrame(frame, html, data);
-            const exampleLabel = examples.find((e) => e.path === exampleSelect.value)?.label || exampleSelect.value;
-            setStatus('Renderizado con: ' + exampleLabel);
+            setStatus(`Renderizado con escenario compatible: ${scenario.label}`);
           } catch (error) {
             setStatus('No se pudo renderizar la previsualización: ' + error.message, true);
           }
@@ -170,9 +256,7 @@
 
         templateSelect.addEventListener('change', () => {
           const template = currentTemplate();
-          if (template && template.ejemplo && examples.some((e) => e.path === template.ejemplo)) {
-            exampleSelect.value = template.ejemplo;
-          }
+          renderScenarioOptions(template, template?.ejemplo);
           renderPreview();
         });
 
@@ -189,13 +273,8 @@
         if (renderable.length) {
           const requestedTemplate = renderable.find((t) => t.id === requestedTemplateId);
           const initial = requestedTemplate || renderable[0];
-          const requestedExampleExists = examples.some((e) => e.path === requestedExamplePath);
           templateSelect.value = initial.id;
-          if (requestedExampleExists) {
-            exampleSelect.value = requestedExamplePath;
-          } else if (initial.ejemplo && examples.some((e) => e.path === initial.ejemplo)) {
-            exampleSelect.value = initial.ejemplo;
-          }
+          renderScenarioOptions(initial, requestedExamplePath || initial.ejemplo);
           renderPreview();
         } else {
           setStatus('Todavía no hay plantillas con HTML asociado en el catálogo.', true);
