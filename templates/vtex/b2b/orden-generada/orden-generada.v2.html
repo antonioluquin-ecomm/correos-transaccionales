@@ -10,7 +10,7 @@
       name="format-detection"
       content="telephone=no,address=no,email=no,date=no"
     />
-    <title>{{_accountInfo.TradingName}} - Orden generada</title>
+    <title>{{_accountInfo.TradingName}} — Orden generada</title>
     <style>
       html,
       body {
@@ -70,13 +70,6 @@
         line-height: 12px;
         font-size: 12px;
       }
-      .h1 {
-        font-size: 26px;
-        line-height: 32px;
-        font-weight: bold;
-        color: #ffffff;
-        margin: 0 0 10px 0;
-      }
       .h2 {
         font-size: 15px;
         line-height: 22px;
@@ -112,16 +105,6 @@
         color: #111827;
         margin: 0;
       }
-      .pill {
-        display: inline-block;
-        border: 1px solid rgba(255, 255, 255, 0.32);
-        border-radius: 999px;
-        color: #ffffff;
-        font-size: 12px;
-        line-height: 18px;
-        font-weight: bold;
-        padding: 5px 10px;
-      }
       .step-dot {
         width: 22px;
         height: 22px;
@@ -132,7 +115,7 @@
         font-weight: bold;
       }
       .step-active {
-        background: #16a34a;
+        background: #2781ab;
         color: #ffffff;
       }
       .step-pending {
@@ -177,12 +160,12 @@
         font-weight: bold;
         color: #111827;
       }
-      .green {
-        color: #16a34a;
+      .blue {
+        color: #2781ab;
       }
-      .cta-green {
+      .cta-blue {
         display: inline-block;
-        background: #16a34a;
+        background: #2781ab;
         color: #ffffff !important;
         border-radius: 10px;
         font-size: 15px;
@@ -193,7 +176,7 @@
         mso-line-height-rule: exactly;
       }
       .footer-link {
-        color: #16a34a !important;
+        color: #2781ab !important;
         font-weight: bold;
       }
 
@@ -210,9 +193,10 @@
         .outer-pad {
           padding: 12px 0 !important;
         }
-        .hero-td {
+        .hero-b2b-td {
           border-radius: 0 !important;
-          padding: 28px 16px !important;
+          padding-left: 16px !important;
+          padding-right: 16px !important;
         }
         .content-pad {
           padding-left: 16px !important;
@@ -232,7 +216,7 @@
         .two-cell-last {
           border-bottom: none !important;
         }
-        .cta-green {
+        .cta-blue {
           display: block !important;
           width: 100% !important;
           box-sizing: border-box !important;
@@ -248,6 +232,10 @@
           display: block !important;
           max-height: none !important;
           overflow: visible !important;
+        }
+        .logo-strip {
+          padding: 16px 16px 14px !important;
+          border-radius: 0 !important;
         }
         .logo-img {
           width: 132px !important;
@@ -268,7 +256,8 @@
         mso-hide: all;
       "
     >
-      Tu orden {{orderId}} fue generada y queda pendiente de validación.&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;
+      Tu orden {{orders.[0].orderId}} fue generada y queda pendiente de
+      validación.&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;
     </div>
 
     <table role="presentation" width="100%" bgcolor="#f3f4f6">
@@ -276,61 +265,149 @@
         <td align="center" class="outer-pad" style="padding: 24px 12px">
           <table role="presentation" class="wrap" width="100%">
             <tr>
-              <td style="padding: 0 0 12px 0">
-                <table role="presentation" width="100%" class="card">
-                  <tr>
-                    <td align="center" style="padding: 22px 20px">
-                      <img
-                        src="https://ventadeportiva.vtexassets.com/assets/vtex.file-manager-graphql/images/5122e380-0ce7-446c-be83-517b28f7847e___bbfc00cfe6d303279a9d856e73066919.png"
-                        alt="{{_accountInfo.TradingName}}"
-                        width="150"
-                        class="logo-img"
-                        style="width:150px;height:auto;margin:0 auto"
-                      />
-                    </td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-
-            <tr>
               <td>
+                {{#with orders.[0]}}
                 <table role="presentation" width="100%" class="card">
+                  <!-- ── Logo strip ── -->
                   <tr>
                     <td
-                      class="hero-td"
-                      bgcolor="#0f5132"
+                      align="center"
+                      class="logo-strip"
                       style="
-                        background: #0f5132;
-                        padding: 34px 32px;
+                        background: #ffffff;
                         border-radius: 12px 12px 0 0;
+                        padding: 20px 24px 16px;
                       "
                     >
-                      <span class="pill">Orden B2B generada</span>
-                      <h1 class="h1" style="font-size:26px;line-height:32px;font-weight:bold;color:#ffffff;margin:14px 0 10px 0">
+                      <a href="https://{{_accountInfo.HostName}}" target="_blank">
+                        <img
+                          src="https://ventadeportiva.vtexassets.com/assets/vtex.file-manager-graphql/images/5122e380-0ce7-446c-be83-517b28f7847e___bbfc00cfe6d303279a9d856e73066919.png"
+                          alt="{{_accountInfo.TradingName}}"
+                          width="150"
+                          class="logo-img"
+                          style="width: 150px; max-width: 150px; height: auto"
+                        />
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      class="hero-b2b-td"
+                      bgcolor="#0c3a52"
+                      style="
+                        background: #0c3a52;
+                        padding: 30px 24px 26px;
+                        text-align: center;
+                      "
+                    >
+                      <table
+                        role="presentation"
+                        cellpadding="0"
+                        cellspacing="0"
+                        border="0"
+                        align="center"
+                        style="margin: 0 auto 14px auto"
+                      >
+                        <tr>
+                          <td
+                            align="center"
+                            style="
+                              width: 56px;
+                              height: 56px;
+                              line-height: 56px;
+                              background: #1a567a;
+                              border: 2px solid #7dd3fc;
+                              border-radius: 50%;
+                              font-size: 26px;
+                              color: #ffffff;
+                              text-align: center;
+                            "
+                          >
+                            &#128203;
+                          </td>
+                        </tr>
+                      </table>
+                      <p style="text-align: center; margin: 0 0 12px 0">
+                        <span
+                          style="
+                            display: inline-block;
+                            border: 1px solid rgba(255, 255, 255, 0.32);
+                            border-radius: 999px;
+                            color: #ffffff;
+                            font-size: 12px;
+                            line-height: 18px;
+                            font-weight: bold;
+                            padding: 5px 10px;
+                          "
+                          >Orden B2B generada</span
+                        >
+                      </p>
+                      <p
+                        style="
+                          font-size: 21px;
+                          line-height: 27px;
+                          font-weight: bold;
+                          color: #ffffff;
+                          margin: 0 0 8px 0;
+                          text-align: center;
+                        "
+                      >
                         Recibimos tu orden
-                      </h1>
-                      <p style="font-size:15px;line-height:23px;color:#dcfce7;margin:0">
-                        Hola {{clientProfileData.firstName}}, la orden
-                        <strong style="color:#ffffff">N. {{orderId}}</strong>
-                        fue generada correctamente y está siendo validada por
-                        nuestro equipo comercial.
+                      </p>
+                      <p
+                        style="
+                          font-size: 13px;
+                          line-height: 18px;
+                          color: #bae6fd;
+                          margin: 0;
+                          text-align: center;
+                        "
+                      >
+                        Hola{{#if clientProfileData.firstName}},
+                        {{clientProfileData.firstName}}{{/if}} — N.°
+                        {{orderId}} en validación
                       </p>
                     </td>
                   </tr>
+
                   <tr>
                     <td style="padding: 0">
                       <table role="presentation" width="100%">
                         <tr>
-                          <td class="content-pad meta-cell" style="width:33.33%;padding:18px 20px;vertical-align:top">
+                          <td
+                            class="content-pad meta-cell"
+                            style="
+                              width: 33.33%;
+                              padding: 18px 20px;
+                              vertical-align: top;
+                            "
+                          >
                             <p class="label">Orden</p>
                             <p class="value">{{orderId}}</p>
                           </td>
-                          <td class="content-pad meta-cell-r" style="width:33.33%;padding:18px 20px;vertical-align:top;border-left:1px solid #f3f4f6">
+                          <td
+                            class="content-pad meta-cell-r"
+                            style="
+                              width: 33.33%;
+                              padding: 18px 20px;
+                              vertical-align: top;
+                              border-left: 1px solid #f3f4f6;
+                            "
+                          >
                             <p class="label">Fecha de generación</p>
-                            <p class="value">{{formatDate creationDate}}</p>
+                            <p class="value">
+                              {{#if creationDate}}{{formatDate creationDate}}{{else}}—{{/if}}
+                            </p>
                           </td>
-                          <td class="content-pad meta-cell-r meta-cell-last" style="width:33.33%;padding:18px 20px;vertical-align:top;border-left:1px solid #f3f4f6">
+                          <td
+                            class="content-pad meta-cell-r meta-cell-last"
+                            style="
+                              width: 33.33%;
+                              padding: 18px 20px;
+                              vertical-align: top;
+                              border-left: 1px solid #f3f4f6;
+                            "
+                          >
                             <p class="label">Total estimado</p>
                             <p class="value">$ {{formatCurrency value}}</p>
                           </td>
@@ -342,61 +419,152 @@
               </td>
             </tr>
 
-            <tr><td class="gap">&nbsp;</td></tr>
+            <tr>
+              <td class="gap">&nbsp;</td>
+            </tr>
 
             <tr>
               <td>
                 <table role="presentation" width="100%" class="card">
                   <tr>
                     <td class="content-pad" style="padding: 20px">
-                      <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0 0 12px 0">
+                      <p
+                        class="h2"
+                        style="
+                          font-size: 15px;
+                          line-height: 22px;
+                          font-weight: bold;
+                          color: #111827;
+                          margin: 0 0 12px 0;
+                        "
+                      >
                         Estado de la orden
                       </p>
                       <table role="presentation" width="100%">
                         <tr>
-                          <td align="center" style="width:22px">
+                          <td align="center" style="width: 22px">
                             <div class="step-dot step-active">1</div>
                           </td>
                           <td class="step-line">&nbsp;</td>
-                          <td align="center" style="width:22px">
+                          <td align="center" style="width: 22px">
                             <div class="step-dot step-pending">2</div>
                           </td>
                           <td class="step-line">&nbsp;</td>
-                          <td align="center" style="width:22px">
+                          <td align="center" style="width: 22px">
                             <div class="step-dot step-pending">3</div>
                           </td>
                           <td class="step-line">&nbsp;</td>
-                          <td align="center" style="width:22px">
+                          <td align="center" style="width: 22px">
                             <div class="step-dot step-pending">4</div>
                           </td>
                         </tr>
                         <tr>
-                          <td colspan="2" style="padding-top:8px;width:25%;vertical-align:top">
-                            <p class="text-sm" style="font-size:13px;line-height:18px;color:#16a34a;font-weight:bold;margin:0">
+                          <td
+                            colspan="2"
+                            style="
+                              padding-top: 8px;
+                              width: 25%;
+                              vertical-align: top;
+                            "
+                          >
+                            <p
+                              class="text-sm"
+                              style="
+                                font-size: 13px;
+                                line-height: 18px;
+                                color: #2781ab;
+                                font-weight: bold;
+                                margin: 0;
+                              "
+                            >
                               Orden generada
                             </p>
                           </td>
-                          <td colspan="2" style="padding-top:8px;width:25%;vertical-align:top">
-                            <p class="text-sm" style="font-size:13px;line-height:18px;color:#6b7280;margin:0">
+                          <td
+                            colspan="2"
+                            style="
+                              padding-top: 8px;
+                              width: 25%;
+                              vertical-align: top;
+                            "
+                          >
+                            <p
+                              class="text-sm"
+                              style="
+                                font-size: 13px;
+                                line-height: 18px;
+                                color: #6b7280;
+                                margin: 0;
+                              "
+                            >
                               Validación comercial
                             </p>
                           </td>
-                          <td colspan="2" style="padding-top:8px;width:25%;vertical-align:top">
-                            <p class="text-sm" style="font-size:13px;line-height:18px;color:#6b7280;margin:0">
-                              Confirmacion
+                          <td
+                            colspan="2"
+                            style="
+                              padding-top: 8px;
+                              width: 25%;
+                              vertical-align: top;
+                            "
+                          >
+                            <p
+                              class="text-sm"
+                              style="
+                                font-size: 13px;
+                                line-height: 18px;
+                                color: #6b7280;
+                                margin: 0;
+                              "
+                            >
+                              Confirmación
                             </p>
                           </td>
-                          <td style="padding-top:8px;width:25%;vertical-align:top">
-                            <p class="text-sm" style="font-size:13px;line-height:18px;color:#6b7280;margin:0">
-                              Preparacion
+                          <td
+                            style="
+                              padding-top: 8px;
+                              width: 25%;
+                              vertical-align: top;
+                            "
+                          >
+                            <p
+                              class="text-sm"
+                              style="
+                                font-size: 13px;
+                                line-height: 18px;
+                                color: #6b7280;
+                                margin: 0;
+                              "
+                            >
+                              Preparación
                             </p>
                           </td>
                         </tr>
                       </table>
-                      <table role="presentation" width="100%" style="margin-top:16px">
+                      <table
+                        role="presentation"
+                        width="100%"
+                        style="margin-top: 16px"
+                      >
                         <tr>
-                          <td bgcolor="#ecfdf5" style="background:#ecfdf5;border:1px solid #bbf7d0;border-radius:10px;padding:14px 16px">
-                            <p class="text" style="font-size:14px;line-height:22px;color:#166534;margin:0">
+                          <td
+                            bgcolor="#f0f9ff"
+                            style="
+                              background: #f0f9ff;
+                              border: 1px solid #bae6fd;
+                              border-radius: 10px;
+                              padding: 14px 16px;
+                            "
+                          >
+                            <p
+                              class="text"
+                              style="
+                                font-size: 14px;
+                                line-height: 22px;
+                                color: #0c4a6e;
+                                margin: 0;
+                              "
+                            >
                               Esta comunicación confirma la recepción de la
                               orden. La aprobación comercial, el pago y la
                               preparación se informarán en los siguientes
@@ -411,70 +579,159 @@
               </td>
             </tr>
 
-            <tr><td class="gap">&nbsp;</td></tr>
+            <tr>
+              <td class="gap">&nbsp;</td>
+            </tr>
 
             <tr>
               <td>
                 <table role="presentation" width="100%" class="card">
                   <tr>
-                    <td colspan="2" class="content-pad" style="padding:18px 20px 12px 20px;border-bottom:1px solid #f3f4f6">
-                      <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0">
+                    <td
+                      colspan="2"
+                      class="content-pad"
+                      style="
+                        padding: 18px 20px 12px 20px;
+                        border-bottom: 1px solid #f3f4f6;
+                      "
+                    >
+                      <p
+                        class="h2"
+                        style="
+                          font-size: 15px;
+                          line-height: 22px;
+                          font-weight: bold;
+                          color: #111827;
+                          margin: 0;
+                        "
+                      >
                         Datos comerciales
                       </p>
                     </td>
                   </tr>
                   <tr>
-                    <td class="content-pad two-cell" style="width:50%;padding:18px 20px;vertical-align:top">
+                    <td
+                      class="content-pad two-cell"
+                      style="width: 50%; padding: 18px 20px; vertical-align: top"
+                    >
                       <p class="label">Solicitante</p>
-                      <p class="value" style="margin-bottom:8px">
-                        {{clientProfileData.firstName}} {{clientProfileData.lastName}}
+                      <p class="value" style="margin-bottom: 8px">
+                        {{clientProfileData.firstName}}
+                        {{clientProfileData.lastName}}
                       </p>
                       <p class="text-sm">{{clientProfileData.email}}</p>
                       {{#if clientProfileData.document}}
-                      <p class="text-sm">Documento: {{clientProfileData.document}}</p>
+                      <p class="text-sm">
+                        Documento: {{clientProfileData.document}}
+                      </p>
                       {{/if}}
                     </td>
-                    <td class="content-pad two-cell-r two-cell-last" style="width:50%;padding:18px 20px;vertical-align:top;border-left:1px solid #f3f4f6">
+                    <td
+                      class="content-pad two-cell-r two-cell-last"
+                      style="
+                        width: 50%;
+                        padding: 18px 20px;
+                        vertical-align: top;
+                        border-left: 1px solid #f3f4f6;
+                      "
+                    >
                       <p class="label">Condición de pago</p>
+                      {{#if paymentData.transactions}}
                       {{#each paymentData.transactions}}
                       {{#each payments}}
-                      <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0 0 8px 0">
-                        <strong>{{paymentSystemName}}</strong>{{#if installments}} - {{installments}} cuota{{#eq installments 1}}{{else}}s{{/eq}}{{/if}}
+                      <p
+                        class="text"
+                        style="
+                          font-size: 14px;
+                          line-height: 22px;
+                          color: #374151;
+                          margin: 0 0 8px 0;
+                        "
+                      >
+                        <strong>{{paymentSystemName}}</strong>{{#if installments}}
+                        — {{installments}}
+                        cuota{{#eq installments 1}}{{else}}s{{/eq}}{{/if}}
                       </p>
-                      <p class="text-sm">Importe asociado: $ {{formatCurrency value}}</p>
+                      <p class="text-sm">
+                        Importe: $ {{formatCurrency value}}
+                      </p>
                       {{/each}}
                       {{/each}}
+                      {{else}}
+                      <p class="text-sm">
+                        A confirmar después de la validación comercial.
+                      </p>
+                      {{/if}}
                     </td>
                   </tr>
                 </table>
               </td>
             </tr>
 
-            <tr><td class="gap">&nbsp;</td></tr>
+            <tr>
+              <td class="gap">&nbsp;</td>
+            </tr>
 
             <tr>
               <td>
                 <table role="presentation" width="100%" class="card">
                   <tr>
-                    <td colspan="2" class="content-pad" style="padding:18px 20px 12px 20px;border-bottom:1px solid #f3f4f6">
-                      <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0">
+                    <td
+                      colspan="2"
+                      class="content-pad"
+                      style="
+                        padding: 18px 20px 12px 20px;
+                        border-bottom: 1px solid #f3f4f6;
+                      "
+                    >
+                      <p
+                        class="h2"
+                        style="
+                          font-size: 15px;
+                          line-height: 22px;
+                          font-weight: bold;
+                          color: #111827;
+                          margin: 0;
+                        "
+                      >
                         Entrega
                       </p>
                     </td>
                   </tr>
                   <tr>
-                    <td class="content-pad two-cell" style="width:50%;padding:18px 20px;vertical-align:top">
+                    <td
+                      class="content-pad two-cell"
+                      style="width: 50%; padding: 18px 20px; vertical-align: top"
+                    >
                       <p class="label">Dirección</p>
                       {{#with shippingData.selectedAddresses.[0]}}
-                      <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0">
-                        {{street}} {{number}}<br />
+                      <p
+                        class="text"
+                        style="
+                          font-size: 14px;
+                          line-height: 22px;
+                          color: #374151;
+                          margin: 0;
+                        "
+                      >
+                        {{street}} {{number}}{{#if complement}},
+                        {{complement}}{{/if}}<br />
                         {{city}}, {{state}}<br />
                         CP {{postalCode}}
                       </p>
                       {{else}}
                       {{#with shippingData.address}}
-                      <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0">
-                        {{street}} {{number}}<br />
+                      <p
+                        class="text"
+                        style="
+                          font-size: 14px;
+                          line-height: 22px;
+                          color: #374151;
+                          margin: 0;
+                        "
+                      >
+                        {{street}} {{number}}{{#if complement}},
+                        {{complement}}{{/if}}<br />
                         {{city}}, {{state}}<br />
                         CP {{postalCode}}
                       </p>
@@ -483,14 +740,24 @@
                       {{/with}}
                       {{/with}}
                     </td>
-                    <td class="content-pad two-cell-r two-cell-last" style="width:50%;padding:18px 20px;vertical-align:top;border-left:1px solid #f3f4f6">
+                    <td
+                      class="content-pad two-cell-r two-cell-last"
+                      style="
+                        width: 50%;
+                        padding: 18px 20px;
+                        vertical-align: top;
+                        border-left: 1px solid #f3f4f6;
+                      "
+                    >
                       <p class="label">Método</p>
-                      <p class="value" style="margin-bottom:8px">
+                      <p class="value" style="margin-bottom: 8px">
                         {{#eq shippingData.logisticsInfo.[0].selectedDeliveryChannel "pickup-in-point"}}Retiro en punto{{else}}Envío a domicilio{{/eq}}
                       </p>
                       <p class="text-sm">
                         {{#if shippingData.logisticsInfo.[0].shippingEstimateDate}}
-                        Fecha estimada: {{formatDate shippingData.logisticsInfo.[0].shippingEstimateDate}}
+                        Fecha estimada:
+                        {{formatDate
+                          shippingData.logisticsInfo.[0].shippingEstimateDate}}
                         {{else}}
                         Fecha a confirmar después de la validación.
                         {{/if}}
@@ -501,18 +768,34 @@
               </td>
             </tr>
 
-            <tr><td class="gap">&nbsp;</td></tr>
+            <tr>
+              <td class="gap">&nbsp;</td>
+            </tr>
 
             <tr>
               <td>
                 <table role="presentation" width="100%" class="card">
                   <tr>
-                    <td style="padding:18px 20px 12px 20px;border-bottom:1px solid #f3f4f6">
-                      <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0">
+                    <td
+                      style="
+                        padding: 18px 20px 12px 20px;
+                        border-bottom: 1px solid #f3f4f6;
+                      "
+                    >
+                      <p
+                        class="h2"
+                        style="
+                          font-size: 15px;
+                          line-height: 22px;
+                          font-weight: bold;
+                          color: #111827;
+                          margin: 0;
+                        "
+                      >
                         Productos de la orden
                       </p>
                       {{#if subjectItemAttachment.totalItems}}
-                      <p class="text-sm" style="margin-top:4px">
+                      <p class="text-sm" style="margin-top: 4px">
                         {{subjectItemAttachment.totalItems}} unidades en total.
                       </p>
                       {{/if}}
@@ -520,31 +803,86 @@
                   </tr>
                   {{#each items}}
                   <tr>
-                    <td style="padding:16px 20px{{#unless @first}};border-top:1px solid #f3f4f6{{/unless}}">
+                    <td
+                      style="
+                        padding: 16px 20px{{#unless @first}};
+                        border-top: 1px solid #f3f4f6{{/unless}}
+                      "
+                    >
                       <table role="presentation" width="100%">
                         <tr>
-                          <td valign="top" style="width:72px">
-                            {{#if detailUrl}}<a href="https://www.ventadeportiva.com.ar{{detailUrl}}" target="_blank" style="display:block;line-height:0">{{/if}}<img
+                          <td valign="top" style="width: 72px">
+                            {{#if detailUrl}}<a
+                              href="https://{{@root._accountInfo.HostName}}{{detailUrl}}"
+                              target="_blank"
+                              style="display: block; line-height: 0"
+                              >{{/if}}<img
                               src="{{imageUrl}}"
                               alt="{{name}}"
                               width="72"
                               height="72"
                               class="item-img"
-                              style="width:72px;height:auto;border-radius:8px"
+                              style="width: 72px; height: auto; border-radius: 8px"
                             />{{#if detailUrl}}</a>{{/if}}
                           </td>
-                          <td valign="top" style="padding-left:12px">
-                            {{#if detailUrl}}<a href="https://www.ventadeportiva.com.ar{{detailUrl}}" target="_blank" class="item-name" style="font-size:14px;line-height:20px;font-weight:bold;color:#111827;display:block;text-decoration:none;margin:0 0 3px 0">{{name}}</a>{{else}}<p class="item-name">{{name}}</p>{{/if}}
-                            {{#if skuName}}<p class="item-meta">Variante: {{skuName}}</p>{{/if}}
+                          <td valign="top" style="padding-left: 12px">
+                            {{#if detailUrl}}<a
+                              href="https://{{@root._accountInfo.HostName}}{{detailUrl}}"
+                              target="_blank"
+                              class="item-name"
+                              style="
+                                font-size: 14px;
+                                line-height: 20px;
+                                font-weight: bold;
+                                color: #111827;
+                                display: block;
+                                text-decoration: none;
+                                margin: 0 0 3px 0;
+                              "
+                              >{{name}}</a
+                            >{{else}}<p class="item-name">{{name}}</p>{{/if}}
+                            {{#if skuName}}
+                            <p class="item-meta">Variante: {{skuName}}</p>
+                            {{/if}}
                             <p class="item-meta">Cantidad: {{quantity}}</p>
-                            <p class="item-price">$ {{formatCurrency sellingPrice}}</p>
-                            <p class="m-show text-sm" style="display:none;max-height:0;overflow:hidden;margin-top:6px">
-                              Subtotal: <strong style="color:#111827">$ {{formatCurrency priceDefinition.total}}</strong>
+                            <p class="item-price">
+                              $ {{formatCurrency sellingPrice}}
+                            </p>
+                            <p
+                              class="m-show text-sm"
+                              style="
+                                display: none;
+                                max-height: 0;
+                                overflow: hidden;
+                                margin-top: 6px;
+                              "
+                            >
+                              Subtotal:
+                              <strong style="color: #111827"
+                                >$ {{formatCurrency priceDefinition.total}}</strong
+                              >
                             </p>
                           </td>
-                          <td valign="top" align="right" class="m-hide" style="white-space:nowrap;padding-left:12px">
-                            <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:0 0 4px 0">Subtotal</p>
-                            <p class="item-price" style="margin-top:0">$ {{formatCurrency priceDefinition.total}}</p>
+                          <td
+                            valign="top"
+                            align="right"
+                            class="m-hide"
+                            style="white-space: nowrap; padding-left: 12px"
+                          >
+                            <p
+                              class="text-sm"
+                              style="
+                                font-size: 13px;
+                                line-height: 20px;
+                                color: #6b7280;
+                                margin: 0 0 4px 0;
+                              "
+                            >
+                              Subtotal
+                            </p>
+                            <p class="item-price" style="margin-top: 0">
+                              $ {{formatCurrency priceDefinition.total}}
+                            </p>
                           </td>
                         </tr>
                       </table>
@@ -555,84 +893,204 @@
               </td>
             </tr>
 
-            <tr><td class="gap">&nbsp;</td></tr>
+            <tr>
+              <td class="gap">&nbsp;</td>
+            </tr>
 
             <tr>
               <td>
-                <table role="presentation" width="100%" class="card">
+                <table
+                  role="presentation"
+                  width="100%"
+                  class="card"
+                  style="border-collapse: collapse"
+                >
                   <tr>
-                    <td colspan="2" style="padding:18px 20px 12px 20px;border-bottom:1px solid #f3f4f6">
-                      <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0">
+                    <td
+                      colspan="2"
+                      style="
+                        padding: 18px 20px 12px 20px;
+                        border-bottom: 1px solid #f3f4f6;
+                      "
+                    >
+                      <p
+                        class="h2"
+                        style="
+                          font-size: 15px;
+                          line-height: 22px;
+                          font-weight: bold;
+                          color: #111827;
+                          margin: 0;
+                        "
+                      >
                         Resumen de la orden
                       </p>
                     </td>
                   </tr>
-                  {{#each totals}}
-                  {{#eq id "Items"}}
+                  {{#if totals.[0]}}
                   <tr>
-                    <td style="padding:10px 20px"><span class="tot-key">Productos</span></td>
-                    <td style="padding:10px 20px;text-align:right"><span class="tot-val">$ {{formatCurrency value}}</span></td>
-                  </tr>
-                  {{/eq}}
-                  {{#eq id "Discounts"}}{{#if value}}
-                  <tr>
-                    <td style="padding:10px 20px"><span class="tot-key">Descuentos</span></td>
-                    <td style="padding:10px 20px;text-align:right"><span class="tot-val green">$ {{formatCurrency value}}</span></td>
-                  </tr>
-                  {{/if}}{{/eq}}
-                  {{#eq id "Shipping"}}
-                  <tr>
-                    <td style="padding:10px 20px"><span class="tot-key">Envío</span></td>
-                    <td style="padding:10px 20px;text-align:right">
-                      {{#eq value 0}}<span class="tot-val green" style="font-weight:bold">Bonificado</span>{{else}}<span class="tot-val">$ {{formatCurrency value}}</span>{{/eq}}
+                    <td style="padding: 10px 20px">
+                      <span class="tot-key">Productos</span>
+                    </td>
+                    <td style="padding: 10px 20px; text-align: right">
+                      <span class="tot-val"
+                        >$ {{formatCurrency totals.[0].value}}</span
+                      >
                     </td>
                   </tr>
-                  {{/eq}}
-                  {{#eq id "Tax"}}{{#if value}}
+                  {{/if}}
+                  {{#if totals.[1]}}
                   <tr>
-                    <td style="padding:10px 20px"><span class="tot-key">Impuestos</span></td>
-                    <td style="padding:10px 20px;text-align:right"><span class="tot-val">$ {{formatCurrency value}}</span></td>
+                    <td style="padding: 10px 20px">
+                      <span class="tot-key">Descuentos</span>
+                    </td>
+                    <td style="padding: 10px 20px; text-align: right">
+                      <span class="tot-val blue"
+                        >$ {{formatCurrency totals.[1].value}}</span
+                      >
+                    </td>
                   </tr>
-                  {{/if}}{{/eq}}
-                  {{/each}}
+                  {{/if}}
+                  {{#if totals.[2]}}
                   <tr>
-                    <td style="padding:14px 20px;border-top:2px solid #f3f4f6"><span class="tot-strong">Total estimado</span></td>
-                    <td style="padding:14px 20px;border-top:2px solid #f3f4f6;text-align:right"><span class="tot-strong">$ {{formatCurrency value}}</span></td>
+                    <td style="padding: 10px 20px">
+                      <span class="tot-key">Envío</span>
+                    </td>
+                    <td style="padding: 10px 20px; text-align: right">
+                      <span class="tot-val"
+                        >$ {{formatCurrency totals.[2].value}}</span
+                      >
+                    </td>
+                  </tr>
+                  {{/if}}
+                  {{#if totals.[3]}}
+                  <tr>
+                    <td style="padding: 10px 20px">
+                      <span class="tot-key">Impuestos</span>
+                    </td>
+                    <td style="padding: 10px 20px; text-align: right">
+                      <span class="tot-val"
+                        >$ {{formatCurrency totals.[3].value}}</span
+                      >
+                    </td>
+                  </tr>
+                  {{/if}}
+                  <tr>
+                    <td
+                      style="
+                        padding: 14px 20px;
+                        border-top: 2px solid #f3f4f6;
+                      "
+                    >
+                      <span class="tot-strong">Total estimado</span>
+                    </td>
+                    <td
+                      style="
+                        padding: 14px 20px;
+                        border-top: 2px solid #f3f4f6;
+                        text-align: right;
+                      "
+                    >
+                      <span class="tot-strong"
+                        >$ {{formatCurrency value}}</span
+                      >
+                    </td>
                   </tr>
                 </table>
               </td>
             </tr>
 
-            <tr><td class="gap">&nbsp;</td></tr>
+            <tr>
+              <td class="gap">&nbsp;</td>
+            </tr>
+            {{/with}}
 
             {{#if ordersUrl}}
             <tr>
-              <td align="center" style="padding:12px 0 4px 0">
+              <td align="center" style="padding: 12px 0 4px 0">
                 <a
                   href="{{ordersUrl}}"
                   target="_blank"
-                  class="cta-green"
-                  style="display:inline-block;background:#16a34a;color:#ffffff!important;border-radius:10px;font-size:15px;line-height:48px;font-weight:bold;padding:0 28px;text-align:center"
+                  class="cta-blue"
+                  style="
+                    display: inline-block;
+                    background: #2781ab;
+                    color: #ffffff !important;
+                    border-radius: 10px;
+                    font-size: 15px;
+                    line-height: 48px;
+                    font-weight: bold;
+                    padding: 0 28px;
+                    text-align: center;
+                    mso-line-height-rule: exactly;
+                  "
                 >
                   Ver mis órdenes
                 </a>
               </td>
             </tr>
+            <tr>
+              <td class="gap">&nbsp;</td>
+            </tr>
             {{/if}}
-
-            <tr><td class="gap">&nbsp;</td></tr>
 
             <tr>
               <td align="center" style="padding: 12px 8px 8px 8px">
-                <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:0 0 6px 0">
-                  Si necesitás hacer una corrección sobre esta orden,
-                  respondé este correo o contactá a tu ejecutivo comercial.
+                <p
+                  class="text-sm"
+                  style="
+                    font-size: 13px;
+                    line-height: 20px;
+                    color: #6b7280;
+                    margin: 0 0 6px 0;
+                  "
+                >
+                  ¿Tenés alguna duda?
+                  <a
+                    href="https://{{_accountInfo.HostName}}/centro-de-ayuda"
+                    target="_blank"
+                    class="footer-link"
+                    style="color: #2781ab; font-weight: bold"
+                    >Visitá nuestro Centro de ayuda</a
+                  >.
                 </p>
-                <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:0 0 12px 0">
-                  Equipo <strong style="color:#374151">{{_accountInfo.TradingName}}</strong>
+                <p
+                  class="text-sm"
+                  style="
+                    font-size: 13px;
+                    line-height: 20px;
+                    color: #6b7280;
+                    margin: 0 0 6px 0;
+                  "
+                >
+                  Para correcciones sobre esta orden, respondé este correo o
+                  contactá a tu ejecutivo comercial.
                 </p>
-                <p class="text-sm" style="font-size:13px;line-height:20px;color:#9ca3af;margin:0">
-                  © {{_accountInfo.TradingName}}. Todos los derechos reservados.
+                <p
+                  class="text-sm"
+                  style="
+                    font-size: 13px;
+                    line-height: 20px;
+                    color: #6b7280;
+                    margin-bottom: 12px;
+                  "
+                >
+                  Equipo
+                  <strong style="color: #374151"
+                    >{{_accountInfo.TradingName}}</strong
+                  >
+                </p>
+                <p
+                  class="text-sm"
+                  style="
+                    font-size: 13px;
+                    line-height: 20px;
+                    color: #9ca3af;
+                    margin: 0;
+                  "
+                >
+                  © 2026 {{_accountInfo.TradingName}}. Todos los derechos
+                  reservados.
                 </p>
               </td>
             </tr>
