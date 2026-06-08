@@ -289,13 +289,12 @@
                               background: #166534;
                               border: 2px solid #86efac;
                               border-radius: 50%;
-                              font-size: 24px;
-                              font-weight: bold;
+                              font-size: 26px;
                               color: #ffffff;
                               text-align: center;
                             "
                           >
-                            &#10003;
+                            &#129534;
                           </td>
                         </tr>
                       </table>
@@ -428,7 +427,7 @@
                       <p class="label">Dirección</p>
                       {{#with shippingData.selectedAddresses.[0]}}
                       <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0">
-                        {{street}} {{number}}<br />
+                        {{street}} {{number}}{{#if complement}}, {{complement}}{{/if}}<br />
                         {{city}}, {{state}}<br />
                         CP {{postalCode}}
                       </p>
@@ -438,6 +437,7 @@
                     </td>
                     <td class="content-pad two-cell-r two-cell-last" style="width:50%;padding:18px 20px;vertical-align:top;border-left:1px solid #f3f4f6">
                       <p class="label">Medio de pago</p>
+                      {{#if paymentData.transactions}}
                       {{#each paymentData.transactions}}
                       {{#each payments}}
                       <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0 0 8px 0">
@@ -445,6 +445,9 @@
                       </p>
                       {{/each}}
                       {{/each}}
+                      {{else}}
+                      <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:0">—</p>
+                      {{/if}}
                     </td>
                   </tr>
                 </table>
@@ -581,7 +584,7 @@
                   Equipo <strong style="color:#374151">{{_accountInfo.TradingName}}</strong>
                 </p>
                 <p class="text-sm" style="font-size:13px;line-height:20px;color:#9ca3af;margin:0">
-                  © {{_accountInfo.TradingName}}. Todos los derechos reservados.
+                  © 2026 {{_accountInfo.TradingName}}. Todos los derechos reservados.
                 </p>
               </td>
             </tr>
