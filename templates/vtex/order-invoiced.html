@@ -1,5 +1,5 @@
+<!--Order-Invoiced — Version 2-->
 <!doctype html>
-
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -10,18 +10,20 @@
       name="format-detection"
       content="telephone=no,address=no,email=no,date=no"
     />
-    <title>{{_accountInfo.TradingName}}</title>
-
+    <title>{{_accountInfo.TradingName}} — Pedido facturado</title>
     <style>
-      /* Se mantiene tu <style> original como “mejora progresiva”.
-     La corrección real para Gmail iOS Safari queda en inline. */
       html,
       body {
         margin: 0 !important;
         padding: 0 !important;
-        height: 100% !important;
         width: 100% !important;
-        background: #f6f7f9;
+        background: #f3f4f6 !important;
+      }
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+          Arial, sans-serif;
+        color: #111827;
       }
       * {
         -ms-text-size-adjust: 100%;
@@ -29,9 +31,9 @@
       }
       table,
       td {
+        border-collapse: collapse !important;
         mso-table-lspace: 0pt !important;
         mso-table-rspace: 0pt !important;
-        border-collapse: collapse !important;
       }
       img {
         border: 0;
@@ -52,882 +54,356 @@
         padding: 0;
       }
 
-      .ext {
-        font-family:
-          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-          Arial, sans-serif;
-        color: #1f2937;
-      }
-      .container {
+      .wrap {
         width: 100%;
-        max-width: 640px;
+        max-width: 600px;
         margin: 0 auto;
       }
       .card {
-        background: #fff;
+        background: #ffffff;
         border: 1px solid #e5e7eb;
         border-radius: 12px;
+        overflow: hidden;
       }
-      .card-pad {
-        padding: 18px;
-      }
-      .h1 {
-        font-size: 20px;
-        line-height: 28px;
-        font-weight: 800;
-        margin: 0;
+      .gap {
+        height: 12px;
+        line-height: 12px;
+        font-size: 12px;
       }
       .h2 {
-        font-size: 17px;
-        line-height: 24px;
-        font-weight: 700;
-        margin: 0;
-      }
-      .txt {
         font-size: 15px;
         line-height: 22px;
+        font-weight: bold;
+        color: #111827;
+        margin: 0 0 12px 0;
+      }
+      .text {
+        font-size: 14px;
+        line-height: 22px;
+        color: #374151;
         margin: 0;
       }
-      .small {
+      .text-sm {
+        font-size: 13px;
+        line-height: 20px;
+        color: #6b7280;
+        margin: 0;
+      }
+      .label {
+        font-size: 11px;
+        line-height: 16px;
+        font-weight: bold;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        color: #6b7280;
+        margin: 0 0 4px 0;
+      }
+      .value {
+        font-size: 15px;
+        line-height: 22px;
+        font-weight: bold;
+        color: #111827;
+        margin: 0;
+      }
+      .item-name {
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: bold;
+        color: #111827;
+        margin: 0 0 3px 0;
+      }
+      .item-meta {
         font-size: 12px;
         line-height: 18px;
+        color: #6b7280;
+        margin: 0;
       }
-      .muted {
-        color: #667085;
-      }
-      .center {
-        text-align: center;
-      }
-      .right {
-        text-align: right;
-      }
-      .p8 {
-        padding: 8px;
-      }
-      .p12 {
-        padding: 12px;
-      }
-      .p16 {
-        padding: 16px;
-      }
-      .p20 {
-        padding: 20px;
-      }
-      .badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        background: #ecfdf5;
-        color: #065f46;
-        padding: 10px 14px;
-        border-radius: 10px;
-        font-weight: 800;
-        font-size: 16px;
-        line-height: 24px;
-      }
-      .badge .dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 999px;
-        background: #10b981;
-      }
-      .btn {
-        background: #22c55e;
-        color: #fff;
-        border-radius: 10px;
-        display: inline-block;
-        font-weight: 800;
-        font-size: 16px;
-        height: 48px;
-        line-height: 48px;
-        padding: 0 26px;
-        text-align: center;
-      }
-      .btn-sec {
-        background: #111827;
-        color: #fff;
-        border-radius: 10px;
-        display: inline-block;
-        font-weight: 700;
+      .item-price {
         font-size: 14px;
-        height: 40px;
-        line-height: 40px;
-        padding: 0 18px;
+        line-height: 20px;
+        font-weight: bold;
+        color: #111827;
+        margin: 4px 0 0 0;
+      }
+      .tot-key,
+      .tot-val {
+        font-size: 14px;
+        line-height: 20px;
+        color: #374151;
+      }
+      .tot-strong {
+        font-size: 16px;
+        line-height: 22px;
+        font-weight: bold;
+        color: #111827;
+      }
+      .green {
+        color: #16a34a;
+      }
+      .cta-green {
+        display: inline-block;
+        background: #16a34a;
+        color: #ffffff !important;
+        border-radius: 10px;
+        font-size: 15px;
+        line-height: 48px;
+        font-weight: bold;
+        padding: 0 28px;
         text-align: center;
+        mso-line-height-rule: exactly;
       }
-      .note {
-        background: #f0fdf4;
-        border: 1px solid #d1fadf;
-        border-radius: 12px;
+      .cta-dark {
+        display: inline-block;
+        background: #111827;
+        color: #ffffff !important;
+        border-radius: 10px;
+        font-size: 15px;
+        line-height: 48px;
+        font-weight: bold;
+        padding: 0 28px;
+        text-align: center;
+        mso-line-height-rule: exactly;
       }
-      .table-head {
-        background: #fafbfc;
-        border-bottom: 1px solid #eef2f6;
+      .footer-link {
+        color: #16a34a !important;
+        font-weight: bold;
       }
 
       @media only screen and (max-width: 600px) {
-        .container {
+        .wrap {
+          width: 100% !important;
           max-width: 100% !important;
         }
-        .card-pad,
-        .p16 {
-          padding: 16px !important;
+        .card {
+          border-radius: 0 !important;
+          border-left: none !important;
+          border-right: none !important;
         }
-        .btn {
+        .outer-pad {
+          padding: 12px 0 !important;
+        }
+        .hero-invoice-td {
+          border-radius: 0 !important;
+          padding-left: 16px !important;
+          padding-right: 16px !important;
+        }
+        .content-pad {
+          padding-left: 16px !important;
+          padding-right: 16px !important;
+        }
+        .meta-cell,
+        .meta-cell-r,
+        .two-cell,
+        .two-cell-r {
           display: block !important;
           width: 100% !important;
+          border-left: none !important;
+          border-bottom: 1px solid #f3f4f6 !important;
+          box-sizing: border-box !important;
         }
-        .stack {
+        .meta-cell-last,
+        .two-cell-last {
+          border-bottom: none !important;
+        }
+        .cta-green,
+        .cta-dark {
           display: block !important;
           width: 100% !important;
+          box-sizing: border-box !important;
+          margin-bottom: 8px !important;
         }
-        .center-m {
-          display: block !important;
-          text-align: center !important;
+        .item-img {
+          width: 60px !important;
+          height: auto !important;
         }
-        .hide-m {
+        .m-hide {
           display: none !important;
         }
-      }
-      @media screen {
-        .card {
-          box-shadow: 0 1px 3px rgba(17, 24, 39, 0.06);
+        .m-show {
+          display: block !important;
+          max-height: none !important;
+          overflow: visible !important;
+        }
+        .logo-img {
+          width: 120px !important;
         }
       }
     </style>
   </head>
 
-  <body
-    class="ext"
-    style="
-      margin: 0 !important;
-      padding: 0 !important;
-      width: 100% !important;
-      background: #f6f7f9;
-      font-family:
-        -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto,
-        Helvetica, Arial, sans-serif;
-      color: #1f2937;
-      -webkit-text-size-adjust: 100%;
-      -ms-text-size-adjust: 100%;
-    "
-  >
-    <!-- Preheader (oculto) -->
-    <div style="display: none; max-height: 0; overflow: hidden; opacity: 0">
-      Facturas del pedido {{orderId}} listas. Descargalas y seguí cada paquete.
+  <body>
+    <div
+      style="
+        display: none;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        color: transparent;
+        visibility: hidden;
+        mso-hide: all;
+      "
+    >
+      Tu pedido {{orderId}} fue facturado. Ya estamos preparando la entrega y
+      podés revisar los datos de la factura.&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;
     </div>
 
-    <table
-      role="presentation"
-      width="100%"
-      bgcolor="#f6f7f9"
-      style="width: 100%; background: #f6f7f9; border-collapse: collapse"
-    >
+    <table role="presentation" width="100%" bgcolor="#f3f4f6">
       <tr>
-        <td align="center" style="text-align: center">
-          <!-- CAMBIO CLAVE: text-align:left en el contenedor para evitar herencia de centrado en Gmail iOS Safari -->
-          <table
-            role="presentation"
-            class="container"
-            width="100%"
-            align="center"
-            bgcolor="#ffffff"
-            style="
-              width: 100%;
-              max-width: 640px;
-              margin: 0 auto;
-              border-collapse: collapse;
-              background: #ffffff;
-              text-align: left;
-            "
-          >
-            <!-- Header -->
+        <td align="center" class="outer-pad" style="padding: 24px 12px">
+          <table role="presentation" class="wrap" width="100%">
             <tr>
-              <td
-                class="p16 center"
-                align="center"
-                style="
-                  padding: 16px;
-                  border-bottom: 1px solid #eef2f6;
-                  text-align: center;
-                "
-                bgcolor="#ffffff"
-              >
-                <a
-                  href="https://{{#if _accountInfo.HostName}}{{_accountInfo.HostName}}{{else}}{{hostName}}{{/if}}"
-                  target="_blank"
-                >
+              <td align="center" style="padding: 0 0 16px 0">
+                <a href="https://{{#if _accountInfo.HostName}}{{_accountInfo.HostName}}{{else}}{{hostName}}{{/if}}" target="_blank">
                   <img
                     src="https://sporting.vteximg.com.br/arquivos/logo-mail-2.png"
                     alt="{{_accountInfo.TradingName}}"
-                    width="200"
-                    style="
-                      display: block;
-                      height: auto;
-                      margin: 4px auto;
-                      max-width: 200px;
-                    "
+                    width="150"
+                    class="logo-img"
+                    style="width: 150px; max-width: 150px; height: auto"
                   />
                 </a>
               </td>
             </tr>
 
-            <!-- Título -->
             <tr>
-              <td class="p16" bgcolor="#ffffff" style="padding: 16px">
-                <table
-                  role="presentation"
-                  width="100%"
-                  class="card"
-                  style="
-                    background: #ffffff;
-                    border: 1px solid #e5e7eb;
-                    border-radius: 12px;
-                    border-collapse: separate;
-                  "
-                >
+              <td>
+                <table role="presentation" width="100%" class="card">
                   <tr>
-                    <td class="card-pad" style="padding: 18px">
-                      <!-- Badge SIN flex/gap para mejor compatibilidad -->
-                      <div
-                        class="badge"
-                        style="
-                          display: inline-block;
-                          background: #ecfdf5;
-                          color: #065f46;
-                          padding: 10px 14px;
-                          border-radius: 10px;
-                          font-weight: 800;
-                          font-size: 16px;
-                          line-height: 24px;
-                        "
-                      >
-                        <span
-                          class="dot"
-                          style="
-                            display: inline-block;
-                            width: 10px;
-                            height: 10px;
-                            border-radius: 999px;
-                            background: #10b981;
-                            margin-right: 10px;
-                            vertical-align: middle;
-                          "
-                        ></span>
-                        <span style="vertical-align: middle"
-                          >Pedido facturado</span
-                        >
-                      </div>
-
-                      <p
-                        class="txt muted"
-                        style="
-                          margin: 10px 0 0 0;
-                          font-size: 15px;
-                          line-height: 22px;
-                          color: #667085;
-                        "
-                      >
-                        Hola <strong>{{clientProfileData.firstName}}</strong>,
-                        emitimos la(s) factura(s) de tu
-                        <strong>pedido {{orderId}}</strong>.
+                    <td
+                      class="hero-invoice-td"
+                      bgcolor="#14532d"
+                      style="
+                        background: #14532d;
+                        border-radius: 12px 12px 0 0;
+                        padding: 30px 24px 26px;
+                        text-align: center;
+                      "
+                    >
+                      <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin: 0 auto 14px auto">
+                        <tr>
+                          <td
+                            align="center"
+                            style="
+                              width: 56px;
+                              height: 56px;
+                              line-height: 56px;
+                              background: #166534;
+                              border: 2px solid #86efac;
+                              border-radius: 50%;
+                              font-size: 24px;
+                              font-weight: bold;
+                              color: #ffffff;
+                              text-align: center;
+                            "
+                          >
+                            &#10003;
+                          </td>
+                        </tr>
+                      </table>
+                      <p style="font-size: 21px; line-height: 27px; font-weight: bold; color: #ffffff; margin: 0 0 8px 0; text-align: center">
+                        Pedido facturado
+                      </p>
+                      <p style="font-size: 13px; line-height: 18px; color: #bbf7d0; margin: 0; text-align: center">
+                        Hola{{#if clientProfileData.firstName}}, {{clientProfileData.firstName}}{{/if}}
                       </p>
                     </td>
                   </tr>
-                </table>
-              </td>
-            </tr>
 
-            <!-- BLOQUES POR PAQUETE (con aviso multipaquete seguro) -->
-            {{#if packages}} {{#each packages}} {{#if @first}}{{#unless @last}}
-            <tr>
-              <td class="p12" bgcolor="#ffffff" style="padding: 12px">
-                <table
-                  role="presentation"
-                  width="100%"
-                  class="note"
-                  style="
-                    background: #f0fdf4;
-                    border: 1px solid #d1fadf;
-                    border-radius: 12px;
-                    border-collapse: separate;
-                  "
-                >
                   <tr>
-                    <td class="card-pad" style="padding: 18px">
-                      <div
-                        class="h2"
-                        style="
-                          font-size: 17px;
-                          line-height: 24px;
-                          font-weight: 700;
-                          margin: 0;
-                          color: #111827;
-                          margin-bottom: 6px;
-                        "
-                      >
-                        Envío en más de un paquete
-                      </div>
-                      <div
-                        class="txt"
-                        style="
-                          font-size: 15px;
-                          line-height: 22px;
-                          margin: 0;
-                          color: #1f2937;
-                        "
-                      >
-                        Tus productos salen de depósitos distintos: recibirás
-                        <strong>facturas y seguimientos por paquete</strong>.
-                      </div>
+                    <td class="content-pad" style="padding: 20px 24px; border-bottom: 1px solid #f3f4f6">
+                      <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin: 0 0 14px 0">
+                        Emitimos la factura de tu <strong>pedido {{orderId}}</strong>. El pedido ya está avanzando hacia la preparación o despacho.
+                      </p>
+
+                      <table role="presentation" width="100%" style="table-layout: fixed">
+                        <tr>
+                          <td style="width: 4px; background: #16a34a; border-radius: 4px 0 0 4px; padding: 0; font-size: 0; line-height: 0">&nbsp;</td>
+                          <td style="background: #f0fdf4; border-top: 1px solid #bbf7d0; border-right: 1px solid #bbf7d0; border-bottom: 1px solid #bbf7d0; border-radius: 0 8px 8px 0; padding: 12px 14px">
+                            <p style="font-size: 13px; line-height: 18px; font-weight: bold; color: #14532d; margin: 0 0 3px 0">Factura emitida</p>
+                            <p style="font-size: 13px; line-height: 18px; color: #166534; margin: 0">Te avisaremos nuevamente cuando el operador logístico informe novedades de seguimiento.</p>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td style="padding: 0">
+                      <table role="presentation" width="100%" style="table-layout: fixed">
+                        <tr>
+                          <td class="content-pad meta-cell" style="width: 50%; padding: 14px 20px; vertical-align: top; border-bottom: 1px solid #f3f4f6">
+                            <p class="label">N.º de pedido</p>
+                            <p class="value">{{orderId}}</p>
+                          </td>
+                          <td class="content-pad meta-cell-r" style="width: 50%; padding: 14px 20px; vertical-align: top; border-left: 1px solid #f3f4f6; border-bottom: 1px solid #f3f4f6">
+                            <p class="label">Fecha de compra</p>
+                            <p class="value">{{#if creationDate}}{{formatDate creationDate}}{{else}}—{{/if}}</p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="content-pad meta-cell" style="padding: 14px 20px; vertical-align: top">
+                            <p class="label">Total del pedido</p>
+                            <p class="value">$ {{formatCurrency value}}</p>
+                          </td>
+                          <td class="content-pad meta-cell-r meta-cell-last" style="padding: 14px 20px; vertical-align: top; border-left: 1px solid #f3f4f6">
+                            <p class="label">Estado</p>
+                            <p class="value">Facturado</p>
+                          </td>
+                        </tr>
+                      </table>
                     </td>
                   </tr>
                 </table>
               </td>
             </tr>
-            {{/unless}}{{/if}}
+
+            <tr><td class="gap">&nbsp;</td></tr>
 
             <tr>
-              <td class="p12" bgcolor="#ffffff" style="padding: 12px">
-                <table
-                  role="presentation"
-                  width="100%"
-                  style="width: 100%; border-collapse: collapse"
-                >
+              <td>
+                <table role="presentation" width="100%" class="card">
                   <tr>
-                    <!-- Factura -->
-                    <td
-                      width="320"
-                      style="vertical-align: top; padding: 6px; width: 320px"
-                      class="stack"
-                    >
-                      <table
-                        role="presentation"
-                        width="100%"
-                        class="card"
-                        style="
-                          background: #ffffff;
-                          border: 1px solid #e5e7eb;
-                          border-radius: 12px;
-                          border-collapse: separate;
-                        "
-                      >
+                    <td style="padding: 0">
+                      <table role="presentation" width="100%" style="table-layout: fixed">
                         <tr>
-                          <td class="card-pad" style="padding: 18px">
-                            <div
-                              class="h2"
-                              style="
-                                font-size: 17px;
-                                line-height: 24px;
-                                font-weight: 700;
-                                margin: 0;
-                                color: #111827;
-                                margin-bottom: 6px;
-                              "
-                            >
-                              Factura
-                            </div>
-
-                            {{#if invoiceNumber}}
-                            <div
-                              class="txt"
-                              style="
-                                font-size: 15px;
-                                line-height: 22px;
-                                margin: 0;
-                                color: #1f2937;
-                              "
-                            >
-                              Número: <strong>#{{invoiceNumber}}</strong>
-                            </div>
-                            {{/if}} {{#if issuanceDate}}
-                            <div
-                              class="txt"
-                              style="
-                                font-size: 15px;
-                                line-height: 22px;
-                                margin: 0;
-                                color: #1f2937;
-                              "
-                            >
-                              Fecha:
-                              <strong>{{formatDate issuanceDate}}</strong>
-                            </div>
-                            {{/if}} {{#if invoiceValue}}
-                            <div
-                              class="txt"
-                              style="
-                                font-size: 15px;
-                                line-height: 22px;
-                                margin: 0;
-                                color: #1f2937;
-                              "
-                            >
-                              Importe:
-                              <strong>$ {{formatCurrency invoiceValue}}</strong>
-                            </div>
-                            {{/if}} {{#if invoiceUrl}}
-                            <!--[if mso]>
-                              <v:roundrect
-                                xmlns:v="urn:schemas-microsoft-com:vml"
-                                href="{{invoiceUrl}}"
-                                style="
-                                  height: 40px;
-                                  v-text-anchor: middle;
-                                  width: 220px;
-                                "
-                                arcsize="12%"
-                                stroke="f"
-                                fillcolor="#22c55e"
-                                ><w:anchorlock />
-                                <center
-                                  class="ext"
-                                  style="
-                                    color: #ffffff;
-                                    font-size: 14px;
-                                    font-weight: 800;
-                                  "
-                                >
-                                  Descargar factura
-                                </center></v:roundrect
-                              >
-                            <![endif]-->
-                            <!--[if !mso]><!-- -->
-                            <div style="margin-top: 10px">
-                              <a
-                                href="{{invoiceUrl}}"
-                                target="_blank"
-                                rel="noopener"
-                                style="
-                                  background: #22c55e;
-                                  color: #ffffff;
-                                  border-radius: 10px;
-                                  display: inline-block;
-                                  font-weight: 800;
-                                  font-size: 16px;
-                                  height: 48px;
-                                  line-height: 48px;
-                                  padding: 0 26px;
-                                  text-align: center;
-                                  mso-line-height-rule: exactly;
-                                "
-                              >
-                                Descargar factura
-                              </a>
-                            </div>
-                            <!--<![endif]-->
+                          <td class="content-pad two-cell" style="width: 50%; padding: 18px 20px; vertical-align: top">
+                            <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0 0 12px 0">Factura</p>
+                            {{#with package}}
+                              {{#if invoiceNumber}}
+                              <p class="label">Número</p>
+                              <p class="value" style="margin-bottom: 10px">#{{invoiceNumber}}</p>
+                              {{/if}}
+                              {{#if issuanceDate}}
+                              <p class="label">Fecha de emisión</p>
+                              <p class="value" style="margin-bottom: 10px">{{formatDate issuanceDate}}</p>
+                              {{/if}}
+                              {{#if invoiceValue}}
+                              <p class="label">Importe facturado</p>
+                              <p class="value" style="margin-bottom: 14px">$ {{formatCurrency invoiceValue}}</p>
+                              {{/if}}
+                              {{#if invoiceUrl}}
+                              <a href="{{invoiceUrl}}" target="_blank" class="cta-green" style="display:inline-block;background:#16a34a;color:#ffffff!important;border-radius:10px;font-size:15px;line-height:48px;font-weight:bold;padding:0 22px;text-align:center">Descargar factura</a>
+                              {{else}}
+                              <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:0">La factura queda registrada en el detalle del pedido. Si necesitás el comprobante, revisá tu cuenta o contactá a soporte.</p>
+                              {{/if}}
                             {{else}}
-                            <div
-                              class="small muted"
-                              style="
-                                margin-top: 8px;
-                                font-size: 12px;
-                                line-height: 18px;
-                                color: #667085;
-                              "
-                            >
-                              La factura estará disponible en breve en
-                              <a
-                                href="https://{{#if ../../_accountInfo.HostName}}{{../../_accountInfo.HostName}}{{else}}{{../../hostName}}{{/if}}/account#/orders/{{../../orderId}}"
-                                style="color: #1a73e8"
-                              >
-                                Mis pedidos </a
-                              >.
-                            </div>
-                            {{/if}}
+                              <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:0">La factura está en proceso de emisión.</p>
+                            {{/with}}
                           </td>
-                        </tr>
-                      </table>
-                    </td>
-
-                    <!-- Envío / Retiro -->
-                    <td
-                      width="320"
-                      style="vertical-align: top; padding: 6px; width: 320px"
-                      class="stack"
-                    >
-                      <table
-                        role="presentation"
-                        width="100%"
-                        class="card"
-                        style="
-                          background: #ffffff;
-                          border: 1px solid #e5e7eb;
-                          border-radius: 12px;
-                          border-collapse: separate;
-                        "
-                      >
-                        <tr>
-                          <td class="card-pad" style="padding: 18px">
-                            <div
-                              class="h2"
-                              style="
-                                font-size: 17px;
-                                line-height: 24px;
-                                font-weight: 700;
-                                margin: 0;
-                                color: #111827;
-                                margin-bottom: 6px;
-                              "
-                            >
-                              Envío / Retiro
-                            </div>
-
-                            {{#if courier}}
-                            <div
-                              class="txt"
-                              style="
-                                font-size: 15px;
-                                line-height: 22px;
-                                margin: 0;
-                                color: #1f2937;
-                              "
-                            >
-                              Transporte: <strong>{{courier}}</strong>
-                            </div>
-                            {{/if}} {{#if trackingNumber}}
-                            <div
-                              class="txt"
-                              style="
-                                font-size: 15px;
-                                line-height: 22px;
-                                margin: 0;
-                                color: #1f2937;
-                              "
-                            >
-                              N° seguimiento:
-                              <strong>{{trackingNumber}}</strong>
-                            </div>
-                            {{/if}} {{#if trackingUrl}}
-                            <!--[if mso]>
-                              <v:roundrect
-                                xmlns:v="urn:schemas-microsoft-com:vml"
-                                href="{{trackingUrl}}"
-                                style="
-                                  height: 40px;
-                                  v-text-anchor: middle;
-                                  width: 180px;
-                                "
-                                arcsize="12%"
-                                stroke="f"
-                                fillcolor="#111827"
-                              >
-                                <w:anchorlock />
-                                <center
-                                  class="ext"
-                                  style="
-                                    color: #ffffff;
-                                    font-size: 14px;
-                                    font-weight: 700;
-                                  "
-                                >
-                                  Ver seguimiento
-                                </center>
-                              </v:roundrect>
-                            <![endif]-->
-                            <!--[if !mso]><!-- -->
-                            <div style="margin-top: 6px">
-                              <a
-                                href="{{trackingUrl}}"
-                                target="_blank"
-                                rel="noopener"
-                                style="
-                                  background: #111827;
-                                  color: #ffffff;
-                                  border-radius: 10px;
-                                  display: inline-block;
-                                  font-weight: 700;
-                                  font-size: 14px;
-                                  height: 40px;
-                                  line-height: 40px;
-                                  padding: 0 18px;
-                                  text-align: center;
-                                  mso-line-height-rule: exactly;
-                                "
-                              >
-                                Ver seguimiento
-                              </a>
-                            </div>
-                            <!--<![endif]-->
-                            {{/if}} {{#if ../../shippingData.address}}
-                            <div
-                              class="small muted"
-                              style="
-                                margin-top: 8px;
-                                font-size: 12px;
-                                line-height: 18px;
-                                color: #667085;
-                              "
-                            >
-                              Destino de referencia:
-                              {{../../shippingData.address.street}},
-                              {{../../shippingData.address.number}} ·
-                              {{../../shippingData.address.city}},
-                              {{../../shippingData.address.state}},
-                              {{../../shippingData.address.country}}
-                            </div>
-                            {{/if}} {{#if pickupFriendlyName}}
-                            <div
-                              class="small muted"
-                              style="
-                                margin-top: 4px;
-                                font-size: 12px;
-                                line-height: 18px;
-                                color: #667085;
-                              "
-                            >
-                              Punto de retiro: {{pickupFriendlyName}}
-                            </div>
+                          <td class="content-pad two-cell-r two-cell-last" style="width: 50%; padding: 18px 20px; vertical-align: top; border-left: 1px solid #f3f4f6">
+                            <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0 0 12px 0">Entrega</p>
+                            <p class="label">Operador</p>
+                            <p class="value" style="margin-bottom: 10px">
+                              {{#if package.courier}}{{package.courier}}{{else}}{{#if shippingData.logisticsInfo.[0].deliveryIds.[0].courierName}}{{shippingData.logisticsInfo.[0].deliveryIds.[0].courierName}}{{else}}A confirmar{{/if}}{{/if}}
+                            </p>
+                            {{#if package.trackingNumber}}
+                            <p class="label">Seguimiento</p>
+                            <p class="value" style="margin-bottom: 14px">{{package.trackingNumber}}</p>
                             {{/if}}
-                          </td>
-                        </tr>
-                      </table>
-                    </td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-            {{/each}} {{else}}
-            <!-- Fallback: un solo paquete (objeto "package") -->
-            <tr>
-              <td class="p12" bgcolor="#ffffff" style="padding: 12px">
-                <table
-                  role="presentation"
-                  width="100%"
-                  style="width: 100%; border-collapse: collapse"
-                >
-                  <tr>
-                    <td
-                      width="320"
-                      style="vertical-align: top; padding: 6px"
-                      class="stack"
-                    >
-                      <table
-                        role="presentation"
-                        width="100%"
-                        class="card"
-                        style="
-                          background: #ffffff;
-                          border: 1px solid #e5e7eb;
-                          border-radius: 12px;
-                          border-collapse: separate;
-                        "
-                      >
-                        <tr>
-                          <td class="card-pad" style="padding: 18px">
-                            <div
-                              class="h2"
-                              style="
-                                font-size: 17px;
-                                line-height: 24px;
-                                font-weight: 700;
-                                margin: 0;
-                                color: #111827;
-                                margin-bottom: 6px;
-                              "
-                            >
-                              Factura
-                            </div>
-                            {{#if package.invoiceNumber}}
-                            <div
-                              class="txt"
-                              style="
-                                font-size: 15px;
-                                line-height: 22px;
-                                margin: 0;
-                                color: #1f2937;
-                              "
-                            >
-                              Número:
-                              <strong>#{{package.invoiceNumber}}</strong>
-                            </div>
-                            {{/if}} {{#if package.issuanceDate}}
-                            <div
-                              class="txt"
-                              style="
-                                font-size: 15px;
-                                line-height: 22px;
-                                margin: 0;
-                                color: #1f2937;
-                              "
-                            >
-                              Fecha:
-                              <strong
-                                >{{formatDate package.issuanceDate}}</strong
-                              >
-                            </div>
-                            {{/if}} {{#if package.invoiceValue}}
-                            <div
-                              class="txt"
-                              style="
-                                font-size: 15px;
-                                line-height: 22px;
-                                margin: 0;
-                                color: #1f2937;
-                              "
-                            >
-                              Importe:
-                              <strong
-                                >$ {{formatCurrency
-                                package.invoiceValue}}</strong
-                              >
-                            </div>
-                            {{/if}} {{#if package.invoiceUrl}}
-                            <div style="margin-top: 10px">
-                              <a
-                                href="{{package.invoiceUrl}}"
-                                target="_blank"
-                                rel="noopener"
-                                style="
-                                  background: #22c55e;
-                                  color: #ffffff;
-                                  border-radius: 10px;
-                                  display: inline-block;
-                                  font-weight: 800;
-                                  font-size: 16px;
-                                  height: 48px;
-                                  line-height: 48px;
-                                  padding: 0 26px;
-                                  text-align: center;
-                                  mso-line-height-rule: exactly;
-                                "
-                              >
-                                Descargar factura
-                              </a>
-                            </div>
+                            {{#if package.trackingUrl}}
+                            <a href="{{package.trackingUrl}}" target="_blank" class="cta-dark" style="display:inline-block;background:#111827;color:#ffffff!important;border-radius:10px;font-size:15px;line-height:48px;font-weight:bold;padding:0 22px;text-align:center">Ver seguimiento</a>
                             {{else}}
-                            <div
-                              class="small muted"
-                              style="
-                                margin-top: 8px;
-                                font-size: 12px;
-                                line-height: 18px;
-                                color: #667085;
-                              "
-                            >
-                              La factura estará disponible en breve en
-                              <a
-                                href="https://{{#if _accountInfo.HostName}}{{_accountInfo.HostName}}{{else}}{{hostName}}{{/if}}/account#/orders/{{orderId}}"
-                                style="color: #1a73e8"
-                                >Mis pedidos</a
-                              >.
-                            </div>
-                            {{/if}}
-                          </td>
-                        </tr>
-                      </table>
-                    </td>
-
-                    <td
-                      width="320"
-                      style="vertical-align: top; padding: 6px"
-                      class="stack"
-                    >
-                      <table
-                        role="presentation"
-                        width="100%"
-                        class="card"
-                        style="
-                          background: #ffffff;
-                          border: 1px solid #e5e7eb;
-                          border-radius: 12px;
-                          border-collapse: separate;
-                        "
-                      >
-                        <tr>
-                          <td class="card-pad" style="padding: 18px">
-                            <div
-                              class="h2"
-                              style="
-                                font-size: 17px;
-                                line-height: 24px;
-                                font-weight: 700;
-                                margin: 0;
-                                color: #111827;
-                                margin-bottom: 6px;
-                              "
-                            >
-                              Envío / Retiro
-                            </div>
-                            {{#if package.courier}}
-                            <div
-                              class="txt"
-                              style="
-                                font-size: 15px;
-                                line-height: 22px;
-                                margin: 0;
-                                color: #1f2937;
-                              "
-                            >
-                              Transporte: <strong>{{package.courier}}</strong>
-                            </div>
-                            {{/if}} {{#if package.trackingNumber}}
-                            <div
-                              class="txt"
-                              style="
-                                font-size: 15px;
-                                line-height: 22px;
-                                margin: 0;
-                                color: #1f2937;
-                              "
-                            >
-                              N° seguimiento:
-                              <strong>{{package.trackingNumber}}</strong>
-                            </div>
-                            {{/if}} {{#if package.trackingUrl}}
-                            <!--[if !mso]><!-- -->
-                            <div style="margin-top: 6px">
-                              <a
-                                href="{{package.trackingUrl}}"
-                                target="_blank"
-                                rel="noopener"
-                                style="
-                                  background: #111827;
-                                  color: #ffffff;
-                                  border-radius: 10px;
-                                  display: inline-block;
-                                  font-weight: 700;
-                                  font-size: 14px;
-                                  height: 40px;
-                                  line-height: 40px;
-                                  padding: 0 18px;
-                                  text-align: center;
-                                  mso-line-height-rule: exactly;
-                                "
-                              >
-                                Ver seguimiento
-                              </a>
-                            </div>
-                            <!--<![endif]-->
-                            {{/if}} {{#if shippingData.address}}
-                            <div
-                              class="small muted"
-                              style="
-                                margin-top: 8px;
-                                font-size: 12px;
-                                line-height: 18px;
-                                color: #667085;
-                              "
-                            >
-                              Destino de referencia:
-                              {{shippingData.address.street}},
-                              {{shippingData.address.number}} ·
-                              {{shippingData.address.city}},
-                              {{shippingData.address.state}},
-                              {{shippingData.address.country}}
-                            </div>
-                            {{/if}} {{#if package.pickupFriendlyName}}
-                            <div
-                              class="small muted"
-                              style="
-                                margin-top: 4px;
-                                font-size: 12px;
-                                line-height: 18px;
-                                color: #667085;
-                              "
-                            >
-                              Punto de retiro: {{package.pickupFriendlyName}}
-                            </div>
+                            <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:0">Todavía no tenemos un link de seguimiento. Te avisaremos cuando esté disponible.</p>
                             {{/if}}
                           </td>
                         </tr>
@@ -937,576 +413,185 @@
                 </table>
               </td>
             </tr>
-            {{/if}}
 
-            <!-- Pago -->
+            <tr><td class="gap">&nbsp;</td></tr>
+
             <tr>
-              <td class="p12" bgcolor="#ffffff" style="padding: 12px">
-                <table
-                  role="presentation"
-                  width="100%"
-                  class="card"
-                  style="
-                    background: #ffffff;
-                    border: 1px solid #e5e7eb;
-                    border-radius: 12px;
-                    border-collapse: separate;
-                  "
-                >
+              <td>
+                <table role="presentation" width="100%" class="card">
                   <tr>
-                    <td class="card-pad" style="padding: 18px">
-                      <div
-                        class="h2"
-                        style="
-                          font-size: 17px;
-                          line-height: 24px;
-                          font-weight: 700;
-                          margin: 0;
-                          color: #111827;
-                          margin-bottom: 6px;
-                        "
-                      >
-                        Pago
-                      </div>
-
-                      {{#each paymentData.transactions}} {{#each payments}}
-                      <div
-                        class="txt"
-                        style="
-                          font-size: 15px;
-                          line-height: 22px;
-                          color: #1f2937;
-                          margin: 2px 0;
-                        "
-                      >
-                        {{paymentSystemName}}{{#if lastDigits}} (****
-                        {{lastDigits}}){{/if}}{{#if installments}} ·
-                        {{installments}} cuotas{{/if}}:
-                        <strong>$ {{formatCurrency value}}</strong>
-                      </div>
-                      {{/each}} {{/each}} {{#each paymentData.transactions}}
-                      {{#each payments}} {{#if connectorResponses.authId}}
-                      <div
-                        class="small muted"
-                        style="
-                          margin-top: 6px;
-                          font-size: 12px;
-                          line-height: 18px;
-                          color: #667085;
-                        "
-                      >
-                        Ref. de pago: {{connectorResponses.authId}} ·
-                        Adquirente: {{connectorResponses.acquirer}}
-                      </div>
-                      {{/if}} {{/each}} {{/each}} {{#if paymentData.giftCards}}
-                      {{#each paymentData.giftCards}}
-                      <div
-                        class="txt"
-                        style="
-                          font-size: 15px;
-                          line-height: 22px;
-                          margin: 6px 0 0 0;
-                          color: #1f2937;
-                        "
-                      >
-                        Gift Card {{#if giftCardName}}{{giftCardName}} –
-                        {{/if}}{{#if redemptionCode}}Código: {{redemptionCode}}
-                        – {{/if}}Importe:
-                        <strong>$ {{formatCurrency value}}</strong>
-                      </div>
-                      {{/each}} {{/if}}
+                    <td colspan="2" style="padding: 18px 20px 12px 20px; border-bottom: 1px solid #f3f4f6">
+                      <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0">Datos de entrega y pago</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="content-pad two-cell" style="width:50%;padding:18px 20px;vertical-align:top">
+                      <p class="label">Dirección</p>
+                      {{#with shippingData.selectedAddresses.[0]}}
+                      <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0">
+                        {{street}} {{number}}<br />
+                        {{city}}, {{state}}<br />
+                        CP {{postalCode}}
+                      </p>
+                      {{else}}
+                      <p class="text-sm">Dirección no informada.</p>
+                      {{/with}}
+                    </td>
+                    <td class="content-pad two-cell-r two-cell-last" style="width:50%;padding:18px 20px;vertical-align:top;border-left:1px solid #f3f4f6">
+                      <p class="label">Medio de pago</p>
+                      {{#each paymentData.transactions}}
+                      {{#each payments}}
+                      <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0 0 8px 0">
+                        <strong>{{paymentSystemName}}</strong>{{#if installments}} · {{installments}} cuota{{#eq installments 1}}{{else}}s{{/eq}}{{/if}}{{#if lastDigits}} · terminada en {{lastDigits}}{{/if}}
+                      </p>
+                      {{/each}}
+                      {{/each}}
                     </td>
                   </tr>
                 </table>
               </td>
             </tr>
 
-            <!-- Resumen -->
+            <tr><td class="gap">&nbsp;</td></tr>
+
             <tr>
-              <td class="p12" bgcolor="#ffffff" style="padding: 12px">
-                <table
-                  role="presentation"
-                  width="100%"
-                  class="card"
-                  style="
-                    background: #ffffff;
-                    border: 1px solid #e5e7eb;
-                    border-radius: 12px;
-                    border-collapse: separate;
-                  "
-                >
+              <td>
+                <table role="presentation" width="100%" class="card">
                   <tr>
-                    <td class="card-pad" style="padding: 18px">
-                      <div
-                        class="h2"
-                        style="
-                          font-size: 17px;
-                          line-height: 24px;
-                          font-weight: 700;
-                          margin: 0;
-                          color: #111827;
-                          margin-bottom: 6px;
-                        "
-                      >
-                        Resumen
-                      </div>
-                      <table
-                        role="presentation"
-                        width="100%"
-                        style="width: 100%; border-collapse: collapse"
-                      >
-                        {{#each totals}} {{#if value}}
+                    <td style="padding: 18px 20px 12px 20px; border-bottom: 1px solid #f3f4f6">
+                      <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0">Productos facturados</p>
+                    </td>
+                  </tr>
+                  {{#each items}}
+                  <tr>
+                    <td style="padding: 16px 20px{{#unless @first}}; border-top: 1px solid #f3f4f6{{/unless}}">
+                      <table role="presentation" width="100%">
                         <tr>
-                          <td
-                            class="txt"
-                            style="
-                              font-size: 15px;
-                              line-height: 22px;
-                              color: #1f2937;
-                              padding: 6px 0;
-                            "
-                          >
-                            {{#eq id "Items"}}Subtotal{{/eq}} {{#eq id
-                            "Discounts"}}Descuento{{/eq}} {{#eq id
-                            "Shipping"}}Envío{{/eq}} {{#eq id
-                            "Tax"}}Impuestos{{/eq}}
+                          <td valign="top" style="width: 72px">
+                            {{#if detailUrl}}<a href="https://{{@root.hostName}}{{detailUrl}}" target="_blank" style="display:block;line-height:0">{{/if}}<img
+                              src="{{imageUrl}}"
+                              alt="{{name}}"
+                              width="72"
+                              height="72"
+                              class="item-img"
+                              style="width:72px;height:auto;border-radius:8px"
+                            />{{#if detailUrl}}</a>{{/if}}
                           </td>
-                          <td
-                            class="txt right"
-                            align="right"
-                            style="
-                              font-size: 15px;
-                              line-height: 22px;
-                              color: #1f2937;
-                              padding: 6px 0;
-                              text-align: right;
-                            "
-                          >
-                            $ {{formatCurrency value}}
+                          <td valign="top" style="padding-left: 12px">
+                            {{#if detailUrl}}<a href="https://{{@root.hostName}}{{detailUrl}}" target="_blank" class="item-name" style="font-size:14px;line-height:20px;font-weight:bold;color:#111827;display:block;text-decoration:none;margin:0 0 3px 0">{{name}}</a>{{else}}<p class="item-name">{{name}}</p>{{/if}}
+                            {{#if additionalInfo.brandName}}<p class="item-meta">Marca: {{additionalInfo.brandName}}</p>{{/if}}
+                            {{#if skuName}}<p class="item-meta">Variante: {{skuName}}</p>{{/if}}
+                            <p class="item-meta">Cantidad: {{quantity}}</p>
+                            <p class="item-price">$ {{formatCurrency sellingPrice}}</p>
+                            <p class="m-show text-sm" style="display:none;max-height:0;overflow:hidden;margin-top:6px">
+                              Subtotal: <strong style="color:#111827">$ {{formatCurrency priceDefinition.total}}</strong>
+                            </p>
                           </td>
-                        </tr>
-                        {{/if}} {{/each}}
-
-                        <tr>
-                          <td
-                            colspan="2"
-                            style="border-top: 1px solid #e5e7eb; height: 8px"
-                          ></td>
-                        </tr>
-
-                        <tr>
-                          <td
-                            class="h2"
-                            align="left"
-                            style="
-                              font-size: 17px;
-                              line-height: 24px;
-                              font-weight: 700;
-                              color: #111827;
-                              padding-top: 6px;
-                            "
-                          >
-                            Total
-                          </td>
-                          <td
-                            class="h2 right"
-                            align="right"
-                            style="
-                              font-size: 17px;
-                              line-height: 24px;
-                              font-weight: 700;
-                              color: #111827;
-                              padding-top: 6px;
-                              text-align: right;
-                            "
-                          >
-                            $ {{formatCurrency value}}
+                          <td valign="top" align="right" class="m-hide" style="white-space:nowrap;padding-left:12px">
+                            <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-bottom:4px">Subtotal</p>
+                            <p class="item-price" style="margin-top:0">$ {{formatCurrency priceDefinition.total}}</p>
                           </td>
                         </tr>
                       </table>
                     </td>
                   </tr>
+                  {{/each}}
                 </table>
               </td>
             </tr>
 
-            <!-- Ítems -->
+            <tr><td class="gap">&nbsp;</td></tr>
+
             <tr>
-              <td class="p12" bgcolor="#ffffff" style="padding: 12px">
-                <table
-                  role="presentation"
-                  width="100%"
-                  class="card"
-                  style="
-                    background: #ffffff;
-                    border: 1px solid #e5e7eb;
-                    border-radius: 12px;
-                    border-collapse: separate;
-                  "
-                >
+              <td>
+                <table role="presentation" width="100%" class="card" style="border-collapse: collapse">
                   <tr>
-                    <td class="card-pad" style="padding: 18px">
-                      <div
-                        class="h2"
-                        style="
-                          font-size: 17px;
-                          line-height: 24px;
-                          font-weight: 700;
-                          margin: 0;
-                          color: #111827;
-                          margin-bottom: 8px;
-                        "
-                      >
-                        Tu compra
-                      </div>
-
-                      <table
-                        role="presentation"
-                        width="100%"
-                        style="width: 100%; border-collapse: collapse"
-                      >
-                        <tr
-                          class="table-head"
-                          style="
-                            background: #fafbfc;
-                            border-bottom: 1px solid #eef2f6;
-                          "
-                        >
-                          <th
-                            align="left"
-                            style="
-                              font-size: 12px;
-                              line-height: 18px;
-                              color: #667085;
-                              font-weight: 600;
-                              padding: 8px 0;
-                            "
-                          >
-                            Producto
-                          </th>
-                          <th
-                            align="center"
-                            style="
-                              font-size: 12px;
-                              line-height: 18px;
-                              color: #667085;
-                              font-weight: 600;
-                              padding: 8px 0;
-                            "
-                          >
-                            Cant.
-                          </th>
-                          <th
-                            align="right"
-                            style="
-                              font-size: 12px;
-                              line-height: 18px;
-                              color: #667085;
-                              font-weight: 600;
-                              padding: 8px 0;
-                            "
-                          >
-                            Subtotal
-                          </th>
-                        </tr>
-
-                        {{#each items}}
-                        <tr style="border-top: 1px solid #f1f5f9">
-                          <td style="padding: 10px 0; vertical-align: top">
-                            <table
-                              role="presentation"
-                              style="border-collapse: collapse"
-                            >
-                              <tr>
-                                <td style="vertical-align: top">
-                                  <img
-                                    src="{{imageUrl}}"
-                                    alt="{{name}}"
-                                    width="60"
-                                    style="
-                                      display: block;
-                                      height: 60px;
-                                      width: 60px;
-                                      object-fit: cover;
-                                      border-radius: 8px;
-                                    "
-                                  />
-                                </td>
-                                <td
-                                  style="
-                                    padding-left: 10px;
-                                    vertical-align: top;
-                                  "
-                                >
-                                  <div
-                                    class="txt"
-                                    style="
-                                      font-size: 15px;
-                                      line-height: 22px;
-                                      margin: 0;
-                                      color: #1f2937;
-                                      font-weight: 600;
-                                    "
-                                  >
-                                    {{name}}
-                                  </div>
-                                  <div
-                                    class="small muted"
-                                    style="
-                                      font-size: 12px;
-                                      line-height: 18px;
-                                      color: #667085;
-                                    "
-                                  >
-                                    {{skuName}}
-                                  </div>
-                                  {{#if seller}} {{#compare seller '!=' '1'}}
-                                  <div
-                                    class="small muted"
-                                    style="
-                                      font-size: 12px;
-                                      line-height: 18px;
-                                      color: #667085;
-                                    "
-                                  >
-                                    Vendido por: {{seller}}
-                                  </div>
-                                  {{/compare}} {{/if}}
-
-                                  <!-- Precio / descuento en la misma línea -->
-                                  <div
-                                    class="small muted"
-                                    style="
-                                      font-size: 12px;
-                                      line-height: 18px;
-                                      color: #667085;
-                                      white-space: nowrap;
-                                    "
-                                  >
-                                    {{#compare listPrice '!=' sellingPrice}}
-                                    <span
-                                      style="
-                                        text-decoration: line-through;
-                                        display: inline;
-                                      "
-                                      >$ {{formatCurrency listPrice}}</span
-                                    >
-                                    <span style="display: inline"
-                                      >&nbsp;
-                                      <strong
-                                        style="font-weight: 700; color: #111827"
-                                        >$ {{formatCurrency
-                                        sellingPrice}}</strong
-                                      ></span
-                                    >
-                                    {{else}}
-                                    <strong
-                                      style="font-weight: 700; color: #111827"
-                                      >$ {{formatCurrency sellingPrice}}</strong
-                                    >
-                                    {{/compare}}
-                                  </div>
-                                </td>
-                              </tr>
-                            </table>
-                          </td>
-
-                          <td
-                            align="center"
-                            style="
-                              font-size: 15px;
-                              line-height: 22px;
-                              color: #1f2937;
-                              vertical-align: top;
-                              padding: 10px 0;
-                            "
-                          >
-                            {{quantity}}
-                          </td>
-
-                          <td
-                            align="right"
-                            style="
-                              font-size: 12px;
-                              line-height: 22px;
-                              color: #1f2937;
-                              vertical-align: top;
-                              padding: 10px 0;
-                              text-align: right;
-                            "
-                          >
-                            <span
-                              style="
-                                white-space: nowrap;
-                                display: inline-block;
-                                font-weight: 700;
-                                color: #111827;
-                              "
-                            >
-                              {{#if priceDefinition.total}} $ {{formatCurrency
-                              priceDefinition.total}} {{else}} {{#if
-                              sellingPrice}}$ {{formatCurrency
-                              sellingPrice}}{{else}}Gratis{{/if}} {{/if}}
-                            </span>
-                          </td>
-                        </tr>
-                        {{/each}}
-                      </table>
+                    <td colspan="2" style="padding: 18px 20px 12px 20px; border-bottom: 1px solid #f3f4f6">
+                      <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0">Resumen del pedido</p>
                     </td>
+                  </tr>
+                  {{#each totals}}
+                  {{#eq id "Items"}}
+                  <tr>
+                    <td style="padding:10px 20px"><span class="tot-key">Subtotal de productos</span></td>
+                    <td style="padding:10px 20px;text-align:right"><span class="tot-val">$ {{formatCurrency value}}</span></td>
+                  </tr>
+                  {{/eq}}
+                  {{#eq id "Discounts"}}{{#if value}}
+                  <tr>
+                    <td style="padding:10px 20px"><span class="tot-key">Descuentos</span></td>
+                    <td style="padding:10px 20px;text-align:right"><span class="tot-val green">$ {{formatCurrency value}}</span></td>
+                  </tr>
+                  {{/if}}{{/eq}}
+                  {{#eq id "Shipping"}}
+                  <tr>
+                    <td style="padding:10px 20px"><span class="tot-key">Envío</span></td>
+                    <td style="padding:10px 20px;text-align:right">
+                      {{#eq value 0}}<span class="tot-val green" style="font-weight:bold">Gratis</span>{{else}}<span class="tot-val">$ {{formatCurrency value}}</span>{{/eq}}
+                    </td>
+                  </tr>
+                  {{/eq}}
+                  {{#eq id "Tax"}}{{#if value}}
+                  <tr>
+                    <td style="padding:10px 20px"><span class="tot-key">Impuestos</span></td>
+                    <td style="padding:10px 20px;text-align:right"><span class="tot-val">$ {{formatCurrency value}}</span></td>
+                  </tr>
+                  {{/if}}{{/eq}}
+                  {{/each}}
+                  <tr>
+                    <td style="padding:14px 20px;border-top:2px solid #f3f4f6"><span class="tot-strong">Total</span></td>
+                    <td style="padding:14px 20px;border-top:2px solid #f3f4f6;text-align:right"><span class="tot-strong">$ {{formatCurrency value}}</span></td>
                   </tr>
                 </table>
               </td>
             </tr>
 
-            <!-- CTA principal -->
+            <tr><td class="gap">&nbsp;</td></tr>
+
             <tr>
-              <td
-                class="p20 center"
-                align="center"
-                bgcolor="#ffffff"
-                style="padding: 20px; text-align: center"
-              >
-                <!--[if mso]>
-                  <v:roundrect
-                    xmlns:v="urn:schemas-microsoft-com:vml"
-                    href="https://{{#if _accountInfo.HostName}}{{_accountInfo.HostName}}{{else}}{{hostName}}{{/if}}/?utm_source=transactional&utm_medium=email&utm_campaign=pedido_facturado&utm_content=cta_principal#/orders/{{orderId}}"
-                    style="height: 48px; v-text-anchor: middle; width: 260px"
-                    arcsize="12%"
-                    stroke="f"
-                    fillcolor="#22c55e"
-                  >
-                    <w:anchorlock />
-                    <center
-                      class="ext"
-                      style="color: #ffffff; font-size: 16px; font-weight: 800"
-                    >
-                      Ver mi pedido
-                    </center>
-                  </v:roundrect>
-                <![endif]-->
-                <!--[if !mso]><!-- -->
+              <td align="center" style="padding: 12px 0 4px 0">
                 <a
-                  href="https://{{#if _accountInfo.HostName}}{{_accountInfo.HostName}}{{else}}{{hostName}}{{/if}}/?utm_source=transactional&utm_medium=email&utm_campaign=pedido_facturado&utm_content=cta_principal#/orders/{{orderId}}"
-                  class="btn ext"
-                  style="
-                    display: block;
-                    width: 100%;
-                    max-width: 320px;
-                    margin: 0 auto;
-                    background: #22c55e;
-                    color: #ffffff;
-                    height: 48px;
-                    line-height: 48px;
-                    text-align: center;
-                    font-weight: 800;
-                    font-size: 16px;
-                    border-radius: 10px;
-                    mso-line-height-rule: exactly;
-                  "
+                  href="https://{{#if _accountInfo.HostName}}{{_accountInfo.HostName}}{{else}}{{hostName}}{{/if}}/account#/orders/{{orderId}}"
+                  target="_blank"
+                  class="cta-green"
+                  style="display:inline-block;background:#16a34a;color:#ffffff!important;border-radius:10px;font-size:15px;line-height:48px;font-weight:bold;padding:0 28px;text-align:center"
                 >
                   Ver mi pedido
                 </a>
-                <!--<![endif]-->
-
-                <div
-                  class="small muted"
-                  style="
-                    margin-top: 8px;
-                    text-align: center;
-                    font-size: 12px;
-                    line-height: 18px;
-                    color: #667085;
-                  "
-                >
-                  Si el botón no funciona, copiá y pegá este enlace:
-                  <a
-                    href="https://{{#if _accountInfo.HostName}}{{_accountInfo.HostName}}{{else}}{{hostName}}{{/if}}/?utm_source=transactional&utm_medium=email&utm_campaign=pedido_facturado&utm_content=link_fallback#/orders/{{orderId}}"
-                    style="color: #1a73e8; word-break: break-word"
-                  >
-                    https://{{#if
-                    _accountInfo.HostName}}{{_accountInfo.HostName}}{{else}}{{hostName}}{{/if}}/#/orders/{{orderId}}
-                  </a>
-                </div>
               </td>
             </tr>
 
-            <!-- Footer -->
+            <tr><td class="gap">&nbsp;</td></tr>
+
             <tr>
-              <td
-                class="p12 center"
-                align="center"
-                style="
-                  padding: 12px;
-                  border-top: 1px solid #eef2f6;
-                  text-align: center;
-                "
-                bgcolor="#ffffff"
-              >
+              <td style="padding: 4px 0">
                 <img
-                  src="https://sporting.vteximg.com.br/arquivos/barra-footer-logos-facturado.png"
-                  alt="Beneficios {{_accountInfo.TradingName}}"
-                  style="
-                    display: block;
-                    width: 100%;
-                    max-width: 600px;
-                    height: auto;
-                    margin: 0 auto;
-                    border-radius: 10px;
-                  "
+                  src="https://sporting.vteximg.com.br/arquivos/barra-footer-logos3.png"
+                  alt="Beneficios Sporting"
+                  style="width:100%;max-width:600px;height:auto;border-radius:10px"
                 />
               </td>
             </tr>
-
             <tr>
-              <td
-                class="p16 center"
-                align="center"
-                bgcolor="#ffffff"
-                style="padding: 16px; text-align: center"
-              >
-                <div
-                  class="small muted"
-                  style="font-size: 12px; line-height: 18px; color: #667085"
-                >
-                  Copyright © {{_accountInfo.TradingName}}. Todos los derechos
-                  reservados.
-                </div>
-
-                <div
-                  class="small muted p8"
-                  style="
-                    padding: 8px;
-                    text-align: center;
-                    font-size: 12px;
-                    line-height: 18px;
-                    color: #667085;
-                  "
-                >
-                  <a
-                    href="https://{{#if _accountInfo.HostName}}{{_accountInfo.HostName}}{{else}}{{hostName}}{{/if}}/centro-de-ayuda"
-                    style="color: #667085; display: inline"
-                  >
-                    Centro de ayuda
-                  </a>
-                  <span style="display: inline"> · </span>
-                  <a
-                    href="https://{{#if _accountInfo.HostName}}{{_accountInfo.HostName}}{{else}}{{hostName}}{{/if}}/account"
-                    style="color: #667085; display: inline"
-                  >
-                    Mi cuenta
-                  </a>
-                </div>
-
+              <td align="center" style="padding: 16px 8px 8px 8px">
+                <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-bottom:6px">
+                  ¿Tenés alguna duda?
+                  <a href="https://{{#if _accountInfo.HostName}}{{_accountInfo.HostName}}{{else}}{{hostName}}{{/if}}/centro-de-ayuda" target="_blank" class="footer-link" style="color:#16a34a;font-weight:bold">Visitá nuestro Centro de ayuda</a>.
+                </p>
+                <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-bottom:12px">
+                  Equipo <strong style="color:#374151">{{_accountInfo.TradingName}}</strong>
+                </p>
+                <p class="text-sm" style="font-size:13px;line-height:20px;color:#9ca3af;margin:0">
+                  © {{_accountInfo.TradingName}}. Todos los derechos reservados.
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0 0 0">
                 <img
-                  src="https://sporting.vteximg.com.br/arquivos/barra-footer-proveedores-facturado.png"
-                  alt="Medios y sellos"
-                  style="
-                    display: block;
-                    width: 100%;
-                    max-width: 600px;
-                    height: auto;
-                    margin: 0 auto;
-                  "
+                  src="https://sporting.vteximg.com.br/arquivos/barra-footer-proveedores-v3.png"
+                  alt="Medios de pago y seguridad"
+                  style="width:100%;max-width:600px;height:auto"
                 />
               </td>
             </tr>
