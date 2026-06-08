@@ -173,8 +173,8 @@
         color: #ffffff;
       }
       .step-current {
-        background: #fef3c7;
-        color: #92400e;
+        background: #dbeafe;
+        color: #1d4ed8;
       }
       .step-next {
         background: #f3f4f6;
@@ -433,7 +433,7 @@
                               Estamos validando tu pago
                             </p>
                             <p class="text-sm">
-                              Te notificaremos por email cuando el pago quede
+                              Te avisamos por email cuando el pago quede
                               aprobado y el pedido continúe.
                             </p>
                           </td>
@@ -470,10 +470,13 @@
                             </p>
                           </td>
                           <td class="sum-cell sum-cell-r sum-last">
+                            {{#if orders.0.shippingData.logisticsInfo.[0].shippingEstimateDate}}
+                            <p class="label">Entrega estimada</p>
+                            <p class="value">{{formatDate orders.0.shippingData.logisticsInfo.[0].shippingEstimateDate}}</p>
+                            {{else}}
                             <p class="label">Próximo paso</p>
-                            <p class="value">
-                              Aprobación de pago
-                            </p>
+                            <p class="value">Aprobación de pago</p>
+                            {{/if}}
                           </td>
                         </tr>
                       </table>
@@ -515,7 +518,7 @@
                               </tr>
                             </table>
                             <div class="step-dot step-current">2</div>
-                            <p class="step-lbl" style="color: #92400e">Pago</p>
+                            <p class="step-lbl" style="color: #1d4ed8">Pago</p>
                           </td>
                           <td align="center" width="25%" valign="top">
                             <table role="presentation" width="100%">
@@ -595,7 +598,7 @@
                                 >Tu pedido se enviará en más de un
                                 paquete.</strong
                               >
-                              Te compartiremos el seguimiento de cada envío por
+                              Te mandamos el seguimiento de cada envío por
                               separado.
                             </p>
                           </td>
@@ -677,7 +680,7 @@
                             <p class="text">{{city}}, {{state}}</p>
                             {{/with}} {{/if}} {{/with}}
                             <p class="text-sm" style="margin-top: 8px">
-                              Te avisaremos cuando el pedido esté listo para retirar.
+                              Te avisamos cuando el pedido esté listo para retirar.
                             </p>
                             {{else}}
                             <p class="h2">Envío a domicilio</p>
@@ -691,12 +694,17 @@
                             </p>
                             {{/if}}
                             <p class="text">
-                              {{street}}{{#if number}}, {{number}}{{/if}}
+                              {{street}}{{#if number}}, {{number}}{{/if}}{{#if complement}}, {{complement}}{{/if}}
                             </p>
                             <p class="text">
                               {{city}}, {{state}} {{postalCode}}
                             </p>
                             {{/with}}
+                            {{#if orders.0.shippingData.logisticsInfo.[0].deliveryIds.[0].courierName}}
+                            <p class="text-sm" style="margin-top: 6px">
+                              Lo envía <strong style="color: #111827">{{orders.0.shippingData.logisticsInfo.[0].deliveryIds.[0].courierName}}</strong>
+                            </p>
+                            {{/if}}
                             <p class="text-sm" style="margin-top: 8px">
                               La fecha estimada de entrega se confirmará cuando el pago quede aprobado.
                             </p>
@@ -736,7 +744,7 @@
                       <table role="presentation" width="100%">
                         <tr>
                           <td valign="top" style="width: 72px">
-                            <img
+                            {{#if detailUrl}}<a href="https://{{@root.hostName}}{{detailUrl}}" target="_blank" style="display:block;line-height:0">{{/if}}<img
                               src="{{imageUrl}}"
                               alt="{{name}}"
                               width="72"
@@ -746,10 +754,10 @@
                                 height: auto;
                                 border-radius: 8px;
                               "
-                            />
+                            />{{#if detailUrl}}</a>{{/if}}
                           </td>
                           <td valign="top" style="padding-left: 12px">
-                            <p class="item-name">{{name}}</p>
+                            {{#if detailUrl}}<a href="https://{{@root.hostName}}{{detailUrl}}" target="_blank" class="item-name" style="display:block;font-weight:bold;color:#111827;text-decoration:none;margin:0 0 3px 0">{{name}}</a>{{else}}<p class="item-name">{{name}}</p>{{/if}}
                             {{#if additionalInfo.brandName}}
                             <p class="item-meta">
                               {{additionalInfo.brandName}}
@@ -1009,9 +1017,9 @@
                             <p class="text-sm" style="margin-top: 2px">
                               {{#eq
                               orders.0.shippingData.logisticsInfo.[0].selectedDeliveryChannel
-                              "pickup-in-point"}} Te avisaremos cuando esté
+                              "pickup-in-point"}} Te avisamos cuando esté
                               listo para retirar en la tienda. {{else}} Cuando
-                              salga del depósito te compartiremos el número de
+                              salga del depósito te mandamos el número de
                               seguimiento. {{/eq}}
                             </p>
                           </td>
@@ -1042,7 +1050,7 @@
                               <strong>Recibís tu factura electrónica</strong>
                             </p>
                             <p class="text-sm" style="margin-top: 2px">
-                              Se emite automáticamente y la recibirás por email
+                              Se emite automáticamente y la recibís por email
                               junto con la confirmación de despacho.
                             </p>
                           </td>

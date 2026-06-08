@@ -35,8 +35,8 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
 .label{font-size:11px;line-height:16px;font-weight:bold;letter-spacing:.5px;text-transform:uppercase;color:#6b7280;margin:0 0 4px 0}
 .value{font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0}
 
-/* Badge — azul para pago aprobado */
-.badge{display:inline-block;background:#eff6ff;border:1px solid #bfdbfe;border-radius:999px;padding:5px 12px;font-size:12px;line-height:16px;font-weight:bold;color:#1d4ed8}
+/* Badge — verde confirmación */
+.badge{display:inline-block;background:#ecfdf3;border:1px solid #bbf7d0;border-radius:999px;padding:5px 12px;font-size:12px;line-height:16px;font-weight:bold;color:#166534}
 
 /* Status box */
 .status-strong{font-size:14px;line-height:20px;font-weight:bold;color:#111827;margin:0 0 3px 0}
@@ -318,21 +318,26 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
                       {{#if shippingData.logisticsInfo.[0].shippingEstimateDate}}
                         Listo para retirar aprox.: {{formatDate shippingData.logisticsInfo.[0].shippingEstimateDate}}
                       {{else}}
-                        Te avisaremos cuando esté listo para retirar.
+                        Te avisamos cuando esté listo para retirar.
                       {{/if}}
                     </p>
                   {{else}}
                     <p class="h2">Envío a domicilio</p>
                     {{#with shippingData.selectedAddresses.[0]}}
                       {{#if receiverName}}<p class="text" style="font-weight:bold;margin-bottom:2px">{{receiverName}}</p>{{/if}}
-                      <p class="text">{{street}}{{#if number}}, {{number}}{{/if}}</p>
+                      <p class="text">{{street}}{{#if number}}, {{number}}{{/if}}{{#if complement}}, {{complement}}{{/if}}</p>
                       <p class="text">{{city}}, {{state}} {{postalCode}}</p>
                     {{/with}}
+                    {{#if shippingData.logisticsInfo.[0].deliveryIds.[0].courierName}}
+                    <p class="text-sm" style="margin-top: 6px">
+                      Lo envía <strong style="color: #111827">{{shippingData.logisticsInfo.[0].deliveryIds.[0].courierName}}</strong>
+                    </p>
+                    {{/if}}
                     <p class="text-sm" style="margin-top:8px">
                       {{#if shippingData.logisticsInfo.[0].shippingEstimateDate}}
                         Entrega estimada: {{formatDate shippingData.logisticsInfo.[0].shippingEstimateDate}}
                       {{else}}
-                        Te avisaremos cuando el pedido salga.
+                        Te avisamos cuando el pedido salga.
                       {{/if}}
                     </p>
                   {{/eq}}
@@ -363,11 +368,11 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
             <table role="presentation" width="100%">
               <tr>
                 <td valign="top" style="width:72px">
-                  <img src="{{imageUrl}}" alt="{{name}}" width="72" class="item-img"
-                       style="width:72px;height:auto;border-radius:8px" />
+                  {{#if detailUrl}}<a href="https://{{@root.hostName}}{{detailUrl}}" target="_blank" style="display:block;line-height:0">{{/if}}<img src="{{imageUrl}}" alt="{{name}}" width="72" class="item-img"
+                       style="width:72px;height:auto;border-radius:8px" />{{#if detailUrl}}</a>{{/if}}
                 </td>
                 <td valign="top" style="padding-left:12px">
-                  <p class="item-name">{{name}}</p>
+                  {{#if detailUrl}}<a href="https://{{@root.hostName}}{{detailUrl}}" target="_blank" class="item-name" style="display:block;font-weight:bold;color:#111827;text-decoration:none;margin:0 0 3px 0">{{name}}</a>{{else}}<p class="item-name">{{name}}</p>{{/if}}
                   {{#if additionalInfo.brandName}}<p class="item-meta">{{additionalInfo.brandName}}</p>{{/if}}
                   {{#if skuName}}<p class="item-meta">Variante: {{skuName}}</p>{{/if}}
                   <p class="item-meta">Cantidad: {{quantity}}</p>

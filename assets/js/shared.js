@@ -127,7 +127,7 @@ const CT = (() => {
 
     Handlebars.registerHelper('formatCurrency', function (value) {
       const num = Number(value || 0) / 100;
-      return num.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      return num.toLocaleString('es-AR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
     });
 
     Handlebars.registerHelper('formatDate', function (value) {

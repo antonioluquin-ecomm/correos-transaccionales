@@ -744,7 +744,7 @@
                             </p>
                             {{/if}}
                             <p class="text">
-                              {{street}}{{#if number}}, {{number}}{{/if}}
+                              {{street}}{{#if number}}, {{number}}{{/if}}{{#if complement}}, {{complement}}{{/if}}
                             </p>
                             <p class="text">
                               {{city}}, {{state}} {{postalCode}}
@@ -790,7 +790,7 @@
                       <table role="presentation" width="100%">
                         <tr>
                           <td valign="top" style="width: 72px">
-                            <img
+                            {{#if detailUrl}}<a href="https://{{@root.hostName}}{{detailUrl}}" target="_blank" style="display:block;line-height:0">{{/if}}<img
                               src="{{imageUrl}}"
                               alt="{{name}}"
                               width="72"
@@ -802,10 +802,10 @@
                                 opacity: 0.7;
                                 filter: grayscale(25%);
                               "
-                            />
+                            />{{#if detailUrl}}</a>{{/if}}
                           </td>
                           <td valign="top" style="padding-left: 12px">
-                            <p class="item-name">{{name}}</p>
+                            {{#if detailUrl}}<a href="https://{{@root.hostName}}{{detailUrl}}" target="_blank" class="item-name" style="display:block;font-weight:bold;color:#111827;text-decoration:none;margin:0 0 3px 0">{{name}}</a>{{else}}<p class="item-name">{{name}}</p>{{/if}}
                             {{#if additionalInfo.brandName}}
                             <p class="item-meta">
                               {{additionalInfo.brandName}}
@@ -1163,19 +1163,12 @@
             <tr>
               <td align="center" style="padding: 16px 8px 8px 8px">
                 <p class="text-sm" style="margin-bottom: 6px">
-                  ¿Tenés alguna duda? Visitá nuestro
+                  ¿Tenés alguna duda?
                   <a
                     href="https://www.sporting.com.ar/centro-de-ayuda"
                     target="_blank"
                     class="footer-link"
-                    >Centro de ayuda</a
-                  >
-                  o revisá
-                  <a
-                    href="https://www.sporting.com.ar/cambios-y-devoluciones"
-                    target="_blank"
-                    class="footer-link"
-                    >Cambios y devoluciones</a
+                    >Visitá nuestro Centro de ayuda</a
                   >.
                 </p>
                 <p class="text-sm" style="margin-bottom: 12px">
