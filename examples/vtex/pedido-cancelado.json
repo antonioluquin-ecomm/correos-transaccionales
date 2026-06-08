@@ -458,8 +458,8 @@
       "isUserDataVisible": false,
       "allowChangeSeller": false,
       "cancellationData": {
-        "requestedByUser": false,
-        "requestedByPaymentNotification": true,
+        "requestedByUser": true,
+        "requestedByPaymentNotification": false,
         "reason": null,
         "cancellationDate": "2025-11-07T17:51:53.7268799Z"
       }

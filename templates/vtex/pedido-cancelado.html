@@ -439,16 +439,15 @@
                           margin: 0 0 10px 0;
                         "
                       >
-                        Tu pedido fue cancelado
+                        {{#if orders.0.cancellationData.requestedByUser}}Cancelaste tu pedido{{else}}Tu pedido fue cancelado{{/if}}
                       </p>
                       <p class="text" style="margin-bottom: 14px">
-                        Tu <strong>pedido {{orders.0.orderId}}</strong> fue
-                        cancelado{{#if orders.0.cancellationData.cancellationDate}}
-                        el
-                        <strong>{{formatDate orders.0.cancellationData.cancellationDate}}</strong>{{/if}}.
-                        Ya estamos
-                        <strong>procesando el reintegro</strong>
-                        del importe abonado según tu medio de pago.
+                        {{#if orders.0.cancellationData.requestedByUser}}
+                        Cancelaste el <strong>pedido {{orders.0.orderId}}</strong>{{#if orders.0.cancellationData.cancellationDate}} el <strong>{{formatDate orders.0.cancellationData.cancellationDate}}</strong>{{/if}}.
+                        {{else}}
+                        Tu <strong>pedido {{orders.0.orderId}}</strong> fue cancelado{{#if orders.0.cancellationData.cancellationDate}} el <strong>{{formatDate orders.0.cancellationData.cancellationDate}}</strong>{{/if}}.
+                        {{/if}}
+                        Ya estamos <strong>procesando el reintegro</strong> del importe abonado según tu medio de pago.
                       </p>
 
                       {{#if orders.0.cancellationData.reason}}
@@ -794,6 +793,7 @@
                               src="{{imageUrl}}"
                               alt="{{name}}"
                               width="72"
+                              height="72"
                               class="item-img"
                               style="
                                 width: 72px;
