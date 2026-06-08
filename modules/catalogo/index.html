@@ -9,29 +9,42 @@
       .ct-library-header {
         display: grid;
         grid-template-columns: minmax(0, 1fr) auto;
-        gap: 18px;
-        align-items: end;
-        margin-bottom: 18px;
+        gap: 24px;
+        align-items: start;
+        margin-bottom: 20px;
+      }
+
+      .ct-library-header h1 {
+        font-size: 28px;
+        line-height: 34px;
+        letter-spacing: 0;
+      }
+
+      .ct-library-header .ct-subtitle {
+        max-width: 660px;
+        margin-bottom: 0;
       }
 
       .ct-library-kpis {
         display: grid;
-        grid-template-columns: repeat(4, minmax(96px, 1fr));
-        gap: 10px;
-        min-width: 430px;
+        grid-template-columns: repeat(4, minmax(106px, 1fr));
+        gap: 8px;
+        min-width: 500px;
       }
 
       .ct-kpi {
         background: #ffffff;
         border: 1px solid var(--ct-card-border);
         border-radius: 8px;
-        padding: 10px 12px;
+        padding: 12px 14px;
+        box-shadow: 0 8px 22px rgba(15, 23, 42, 0.04);
       }
 
       .ct-kpi strong {
         display: block;
-        font-size: 20px;
-        line-height: 24px;
+        font-size: 22px;
+        line-height: 26px;
+        letter-spacing: 0;
       }
 
       .ct-kpi span {
@@ -44,17 +57,18 @@
       .ct-library-shell {
         background: #ffffff;
         border: 1px solid var(--ct-card-border);
-        border-radius: 12px;
+        border-radius: 10px;
         overflow: hidden;
+        box-shadow: 0 18px 44px rgba(15, 23, 42, 0.06);
       }
 
       .ct-library-toolbar {
         display: grid;
-        grid-template-columns: minmax(220px, 1fr) repeat(4, minmax(148px, auto));
-        gap: 10px;
-        padding: 14px;
+        grid-template-columns: minmax(280px, 1fr) repeat(4, minmax(142px, auto));
+        gap: 12px;
+        padding: 16px 14px;
         border-bottom: 1px solid var(--ct-card-border);
-        background: #f9fafb;
+        background: #ffffff;
       }
 
       .ct-field {
@@ -74,13 +88,14 @@
       .ct-field input,
       .ct-field select {
         width: 100%;
-        height: 38px;
+        height: 40px;
         border: 1px solid var(--ct-card-border);
         border-radius: 8px;
         background: #ffffff;
         color: var(--ct-text);
         font-size: 14px;
-        padding: 8px 10px;
+        padding: 9px 11px;
+        transition: border-color 0.12s, box-shadow 0.12s, background 0.12s;
       }
 
       .ct-field input:focus,
@@ -97,12 +112,13 @@
         align-items: center;
         gap: 12px;
         flex-wrap: wrap;
-        padding: 12px 14px;
+        padding: 10px 14px;
         border-bottom: 1px solid var(--ct-card-border);
+        background: #f8fafc;
       }
 
       .ct-result-count {
-        color: var(--ct-text-muted);
+        color: #334155;
         font-size: 13px;
         font-weight: 700;
       }
@@ -127,24 +143,68 @@
 
       .ct-template-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 14px;
+        grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+        gap: 12px;
         padding: 14px;
+        background: #f8fafc;
       }
 
       .ct-template-card {
         display: flex;
         flex-direction: column;
-        gap: 12px;
-        min-height: 260px;
+        gap: 10px;
+        min-height: 250px;
+        padding: 0;
         border-radius: 8px;
+        overflow: hidden;
+        border-color: #dde3ea;
         transition: border-color 0.12s, box-shadow 0.12s, transform 0.12s;
       }
 
       .ct-template-card:hover {
-        border-color: #bfdbfe;
-        box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+        border-color: #93c5fd;
+        box-shadow: 0 18px 34px rgba(15, 23, 42, 0.10);
         transform: translateY(-1px);
+      }
+
+      .ct-template-card::before {
+        content: "";
+        display: block;
+        height: 4px;
+        background: #d97706;
+      }
+
+      .ct-template-card.ct-card-activo::before {
+        background: #16a34a;
+      }
+
+      .ct-template-card.ct-card-deprecado::before {
+        background: #64748b;
+      }
+
+      .ct-card-inner {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        gap: 11px;
+        padding: 14px 16px 16px;
+      }
+
+      .ct-template-card > .ct-card-top,
+      .ct-template-card > h3,
+      .ct-template-card > p,
+      .ct-template-card > .ct-card-meta,
+      .ct-template-card > .ct-card-actions {
+        margin-left: 16px;
+        margin-right: 16px;
+      }
+
+      .ct-template-card > .ct-card-top {
+        margin-top: 12px;
+      }
+
+      .ct-template-card > .ct-card-actions {
+        margin-bottom: 16px;
       }
 
       .ct-card-top {
@@ -161,26 +221,53 @@
         flex-wrap: wrap;
       }
 
+      .ct-template-id {
+        max-width: 48%;
+        padding: 3px 7px;
+        border: 1px solid #e2e8f0;
+        border-radius: 7px;
+        background: #f8fafc;
+        color: #475569;
+        font-size: 11px;
+        line-height: 16px;
+        text-align: right;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
       .ct-template-card h3 {
         margin: 0;
-        font-size: 17px;
-        line-height: 22px;
+        font-size: 18px;
+        line-height: 23px;
       }
 
       .ct-template-card p {
         flex: 1;
+        color: #475569;
+        min-height: 44px;
       }
 
       .ct-card-meta {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 8px;
-        padding: 10px;
+        gap: 6px;
+        padding: 0;
         border-radius: 8px;
-        background: #f9fafb;
+        background: transparent;
       }
 
-      .ct-card-meta span {
+      .ct-card-stat,
+      .ct-card-meta > div {
+        min-width: 0;
+        padding: 8px 9px;
+        border: 1px solid #edf2f7;
+        border-radius: 8px;
+        background: #f8fafc;
+      }
+
+      .ct-card-stat span,
+      .ct-card-meta > div span {
         display: block;
         color: var(--ct-text-muted);
         font-size: 11px;
@@ -188,12 +275,17 @@
         text-transform: uppercase;
       }
 
-      .ct-card-meta strong {
+      .ct-card-stat strong,
+      .ct-card-meta > div strong {
         display: block;
         margin-top: 2px;
-        font-size: 13px;
+        font-size: 12px;
         font-weight: 700;
         word-break: break-word;
+      }
+
+      .ct-card-stat-narrow {
+        min-width: 76px;
       }
 
       .ct-card-actions {
@@ -201,12 +293,17 @@
         gap: 8px;
         flex-wrap: wrap;
         margin-top: auto;
+        padding-top: 2px;
       }
 
       .ct-card-actions .ct-btn {
         justify-content: center;
-        min-height: 36px;
+        min-height: 38px;
         padding: 8px 12px;
+      }
+
+      .ct-card-actions .ct-btn-primary {
+        flex: 1 1 132px;
       }
 
       .ct-btn[aria-disabled="true"] {
@@ -215,8 +312,12 @@
       }
 
       .ct-btn-icon {
-        width: 36px;
+        width: 38px;
         padding: 8px;
+      }
+
+      .ct-btn-ghost {
+        background: #f8fafc;
       }
 
       .ct-empty {
@@ -227,10 +328,10 @@
         position: fixed;
         inset: 0;
         display: none;
-        align-items: flex-start;
-        justify-content: center;
-        padding: 34px 16px;
-        background: rgba(15, 23, 42, 0.48);
+        align-items: stretch;
+        justify-content: flex-end;
+        padding: 0;
+        background: rgba(15, 23, 42, 0.42);
         overflow-y: auto;
         z-index: 80;
       }
@@ -240,10 +341,11 @@
       }
 
       .ct-detail {
-        width: min(760px, 100%);
+        width: min(720px, 100%);
+        min-height: 100vh;
         background: #ffffff;
-        border-radius: 10px;
-        box-shadow: 0 24px 60px rgba(15, 23, 42, 0.22);
+        border-radius: 0;
+        box-shadow: -24px 0 60px rgba(15, 23, 42, 0.22);
       }
 
       .ct-detail-header {
@@ -251,8 +353,9 @@
         justify-content: space-between;
         align-items: flex-start;
         gap: 16px;
-        padding: 22px 22px 14px;
+        padding: 24px 26px 16px;
         border-bottom: 1px solid var(--ct-card-border);
+        background: #f8fafc;
       }
 
       .ct-detail-header h2 {
@@ -262,7 +365,7 @@
       }
 
       .ct-detail-body {
-        padding: 18px 22px 22px;
+        padding: 20px 26px 26px;
       }
 
       .ct-detail-description {
@@ -665,14 +768,16 @@
 
         function renderCard(template) {
           const card = document.createElement('article');
-          card.className = 'ct-card ct-template-card';
+          const statusSlug = normalize(template.estado || 'sin-estado').replace(/\s+/g, '-');
+          const scenario = scenarioByPath(template.ejemplo);
+          card.className = `ct-card ct-template-card ct-card-${statusSlug}`;
           card.innerHTML = `
             <div class="ct-card-top">
               <div class="ct-badges">
                 ${CT.platformBadge(template.plataforma || 'Sin plataforma')}
                 ${CT.statusBadge(template.estado || 'sin estado')}
               </div>
-              <code>${CT.escapeHtml(template.id || '')}</code>
+              <code class="ct-template-id" title="${CT.escapeHtml(template.id || '')}">${CT.escapeHtml(template.id || '')}</code>
             </div>
             <h3>${CT.escapeHtml(template.nombre || 'Sin nombre')}</h3>
             <p>${CT.escapeHtml(template.descripcion || 'Sin descripción documentada.')}</p>
@@ -695,9 +800,9 @@
               </div>
             </div>
             <div class="ct-card-actions">
-              <button class="ct-btn ct-btn-primary" type="button" data-action="detail">Ficha</button>
-              ${template.archivoHtml ? `<a class="ct-btn" href="${CT.escapeHtml(previewUrl(template))}">Preview</a>` : ''}
-              ${template.archivoHtml ? `<a class="ct-btn ct-btn-icon" href="${CT.escapeHtml(htmlUrl(template))}" target="_blank" rel="noopener" aria-label="Abrir HTML de ${CT.escapeHtml(template.nombre || 'plantilla')}">HTML</a>` : ''}
+              ${template.archivoHtml ? `<a class="ct-btn ct-btn-primary" href="${CT.escapeHtml(previewUrl(template))}">Previsualizar</a>` : ''}
+              <button class="ct-btn ct-btn-ghost" type="button" data-action="detail">Ficha</button>
+              ${template.archivoHtml ? `<a class="ct-btn ct-btn-icon" href="${CT.escapeHtml(htmlUrl(template))}" target="_blank" rel="noopener" aria-label="Abrir HTML de ${CT.escapeHtml(template.nombre || 'plantilla')}" title="Abrir HTML">HTML</a>` : ''}
             </div>
           `;
           card.querySelector('[data-action="detail"]').addEventListener('click', () => openDetail(template));
