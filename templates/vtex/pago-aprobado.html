@@ -148,7 +148,7 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
                     {{#if shippingData.logisticsInfo.[0].shippingEstimateDate}}
                       {{#eq shippingData.logisticsInfo.[0].selectedDeliveryChannel "pickup-in-point"}}Fecha estimada para retiro: <strong style="color:#111827">{{formatDate shippingData.logisticsInfo.[0].shippingEstimateDate}}</strong>{{else}}Fecha estimada de entrega: <strong style="color:#111827">{{formatDate shippingData.logisticsInfo.[0].shippingEstimateDate}}</strong>{{/eq}}
                     {{else}}
-                      Te avisaremos cuando el pedido salga con el número de seguimiento.
+                      Te avisamos cuando el pedido salga con el número de seguimiento.
                     {{/if}}
                   </p>
                 </td>
@@ -248,7 +248,7 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
         <!-- CTA -->
         <tr>
           <td align="center" style="padding:20px 24px;border-bottom:1px solid #f3f4f6">
-            <a href="https://www.sporting.com.ar/account#/orders/{{orderId}}"
+            <a href="https://{{hostName}}/account#/orders/{{orderId}}"
                class="cta-primary" target="_blank">
               Seguir mi pedido
             </a>
@@ -265,7 +265,7 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
                 <tr><td style="padding:12px 16px">
                   <p class="text" style="color:#14532d">
                     <strong>Tu pedido se enviará en más de un paquete.</strong>
-                    Te compartiremos el seguimiento de cada envío por separado.
+                    Te mandamos el seguimiento de cada envío por separado.
                   </p>
                 </td></tr>
               </table>
@@ -552,9 +552,9 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
     <td align="center" style="padding:16px 8px 8px 8px">
       <p class="text-sm" style="margin-bottom:6px">
         ¿Tenés alguna duda? Visitá nuestro
-        <a href="https://www.sporting.com.ar/centro-de-ayuda" target="_blank" class="footer-link">Centro de ayuda</a>
+        <a href="https://{{hostName}}/centro-de-ayuda" target="_blank" class="footer-link">Centro de ayuda</a>
         o revisá
-        <a href="https://www.sporting.com.ar/cambios-y-devoluciones" target="_blank" class="footer-link">Cambios y devoluciones</a>.
+        <a href="https://{{hostName}}/cambios-y-devoluciones" target="_blank" class="footer-link">Cambios y devoluciones</a>.
       </p>
       <p class="text-sm" style="margin-bottom:12px">
         Equipo <strong style="color:#374151">Sporting</strong>
