@@ -67,6 +67,12 @@
       <div class="ct-preview-tool">
         <aside class="ct-preview-controls">
           <div>
+            <label for="ct-sim-store">Tienda</label>
+            <select id="ct-sim-store" aria-label="Filtrar por tienda">
+              <option value="">Todas</option>
+            </select>
+          </div>
+          <div>
             <label for="ct-sim-template">Plantilla</label>
             <select id="ct-sim-template" aria-label="Elegir plantilla"></select>
           </div>
@@ -136,7 +142,13 @@
         CT.renderTopbar('simulador', BASE);
 
         const BASE_ORDER_PATH = 'examples/vtex/sporting/pago-aprobado.sample.json';
+        const BASE_ORDER_PATH_BY_STORE = {
+          sporting: BASE_ORDER_PATH,
+          b2b: 'examples/vtex/b2b/orden-generada.sample.json',
+          woker: BASE_ORDER_PATH,
+        };
 
+        const storeSelect = document.getElementById('ct-sim-store');
         const templateSelect = document.getElementById('ct-sim-template');
         const envioSelect = document.getElementById('ct-sim-envio');
         const productosSelect = document.getElementById('ct-sim-productos');
@@ -150,37 +162,60 @@
         const frame = document.getElementById('ct-sim-frame');
         let activeDevice = 'desktop';
 
-        baseEl.textContent = BASE_ORDER_PATH;
-
         const renderable = TEMPLATES.filter((t) => t.archivoHtml);
-        renderable.forEach((template) => {
+        CT.storeOptionsFor(renderable, CT.templateStore).forEach((store) => {
           const option = document.createElement('option');
-          option.value = template.id;
-          option.textContent = template.nombre;
-          templateSelect.appendChild(option);
+          option.value = store.id;
+          option.textContent = store.label;
+          storeSelect.appendChild(option);
         });
+
+        function filteredTemplates() {
+          return renderable.filter((template) => !storeSelect.value || CT.templateStore(template) === storeSelect.value);
+        }
+
+        function renderTemplateOptions(preferredId) {
+          const options = filteredTemplates();
+          templateSelect.innerHTML = '';
+          options.forEach((template) => {
+            const option = document.createElement('option');
+            option.value = template.id;
+            option.textContent = `${CT.storeLabel(CT.templateStore(template))} · ${template.nombre}`;
+            templateSelect.appendChild(option);
+          });
+          const selected = options.find((template) => template.id === preferredId) || options[0];
+          if (selected) templateSelect.value = selected.id;
+          templateSelect.disabled = options.length === 0;
+          return selected;
+        }
 
         function cloneDeep(value) {
           return JSON.parse(JSON.stringify(value));
         }
 
-        let baseDataPromise = null;
+        const baseDataPromises = {};
 
-        function loadBaseData() {
-          if (!baseDataPromise) {
-            baseDataPromise = CT.fetchText(BASE + BASE_ORDER_PATH).then((text) => {
+        function currentBasePath() {
+          const template = currentTemplate();
+          const store = template ? CT.templateStore(template) : storeSelect.value;
+          return BASE_ORDER_PATH_BY_STORE[store] || BASE_ORDER_PATH;
+        }
+
+        function loadBaseData(path) {
+          if (!baseDataPromises[path]) {
+            baseDataPromises[path] = CT.fetchText(BASE + path).then((text) => {
               try {
                 return JSON.parse(text);
               } catch (e) {
-                throw new Error(`JSON inválido en ${BASE_ORDER_PATH}: ${e.message}`);
+                throw new Error(`JSON inválido en ${path}: ${e.message}`);
               }
             });
           }
-          return baseDataPromise;
+          return baseDataPromises[path];
         }
 
         function currentTemplate() {
-          return renderable.find((t) => t.id === templateSelect.value) || renderable[0];
+          return filteredTemplates().find((t) => t.id === templateSelect.value) || filteredTemplates()[0];
         }
 
         function setStatus(message, isError) {
@@ -200,10 +235,11 @@
         }
 
         function updateInfo(template) {
-          badgesEl.innerHTML = `${CT.platformBadge(template.plataforma)}${CT.statusBadge(template.estado)}`;
+          badgesEl.innerHTML = `${CT.platformBadge(template.plataforma)}${CT.storeBadge(CT.templateStore(template))}${CT.statusBadge(template.estado)}`;
           nombreEl.textContent = template.nombre;
           descripcionEl.textContent = template.descripcion;
           archivoEl.textContent = template.archivoHtml;
+          baseEl.textContent = currentBasePath();
         }
 
         function isMultipackageScenario() {
@@ -346,19 +382,29 @@
           updateInfo(template);
           setStatus('Renderizando…');
           frame.srcdoc = '';
+          const basePath = currentBasePath();
 
           try {
             const [html, baseData] = await Promise.all([
               CT.fetchText(BASE + template.archivoHtml),
-              loadBaseData(),
+              loadBaseData(basePath),
             ]);
             const simulatedData = buildSimulatedData(baseData);
             CT.renderEmailToFrame(frame, html, simulatedData);
-            setStatus('Variante QA generada desde: ' + BASE_ORDER_PATH);
+            setStatus('Variante QA generada desde: ' + basePath);
           } catch (error) {
             setStatus('No se pudo renderizar la previsualización: ' + error.message, true);
           }
         }
+
+        storeSelect.addEventListener('change', () => {
+          const template = renderTemplateOptions();
+          if (template) renderPreview();
+          else {
+            frame.srcdoc = '';
+            setStatus('No hay plantillas para la tienda seleccionada.', true);
+          }
+        });
 
         envioSelect.addEventListener('change', syncProductOptions);
 
@@ -375,7 +421,8 @@
         applyDevice(activeDevice);
 
         if (renderable.length) {
-          templateSelect.value = renderable[0].id;
+          const initial = renderTemplateOptions(renderable[0].id);
+          if (initial) templateSelect.value = initial.id;
           syncProductOptions();
           renderPreview();
         } else {

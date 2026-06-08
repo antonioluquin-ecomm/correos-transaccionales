@@ -206,6 +206,12 @@
         border-color: #dc2626;
       }
 
+      .ct-flow-filter-btn.active[data-store] {
+        background: #0f766e;
+        color: #ffffff;
+        border-color: #0f766e;
+      }
+
       .ct-flow-filter-sep {
         width: 1px;
         height: 24px;
@@ -654,6 +660,12 @@
           <button class="ct-flow-filter-btn" type="button" data-filter="candidato">? Candidatos</button>
           <span class="ct-flow-filter-sep"></span>
           <button class="ct-flow-filter-btn" type="button" data-priority="alta">↑ Prioridad alta</button>
+          <span class="ct-flow-filter-sep"></span>
+          <span class="ct-flow-filter-label">Tienda</span>
+          <button class="ct-flow-filter-btn active" type="button" data-store="all">Todas</button>
+          <button class="ct-flow-filter-btn" type="button" data-store="sporting">Sporting</button>
+          <button class="ct-flow-filter-btn" type="button" data-store="woker">Woker</button>
+          <button class="ct-flow-filter-btn" type="button" data-store="b2b">B2B</button>
         </div>
 
         <div class="ct-flow-board-wrap">
@@ -725,6 +737,7 @@
               { id: 'back-in-stock', lane: 'vtex', x: 40, text: 'Volvió a stock', templateId: 'back-in-stock', status: 'existente', priority: 'media', trigger: 'SKU sin stock pasa a disponible y hay suscriptores activos.', note: 'Plantilla disponible en catálogo. Pendiente revisión de diseño.' },
               { id: 'access', lane: 'vtex', x: 170, text: 'Código de acceso a cuenta', templateId: 'access-key', status: 'existente', priority: 'baja', trigger: 'Usuario solicita ingreso o recuperación de acceso.', note: 'Plantilla disponible en catálogo. Pendiente revisión de diseño.' },
               { id: 'order', lane: 'vtex', x: 300, text: 'Pedido realizado con éxito', templateId: 'pedido-confirmado', status: 'existente', priority: 'alta', trigger: 'VTEX registra correctamente un pedido.', note: 'Plantilla real disponible y asociada al catálogo.' },
+              { id: 'b2b-order', lane: 'vtex', x: 300, y: 72, text: 'Orden generada B2B', templateId: 'b2b-orden-generada', status: 'existente', priority: 'alta', trigger: 'VTEX B2B genera una orden pendiente de validación comercial.', note: 'Plantilla B2B disponible y asociada al catálogo.' },
               { id: 'cancelled', lane: 'vtex', x: 430, y: -72, text: 'Pedido cancelado', templateId: 'pedido-cancelado', status: 'existente', priority: 'media', trigger: 'VTEX cancela o informa cancelación del pedido.', note: 'Plantilla real disponible y asociada al catálogo.' },
               { id: 'paid', lane: 'vtex', x: 430, text: 'Pago aprobado', templateId: 'pago-aprobado', status: 'existente', priority: 'alta', trigger: 'VTEX confirma autorización/aprobación de pago.', note: 'Plantilla real disponible y asociada al catálogo.' },
               { id: 'stockout', lane: 'pim', x: 430, text: 'Sin stock', status: 'faltante', priority: 'alta', trigger: 'PIM detecta falta de stock para uno o más productos.', note: 'Priorizar si impacta pedidos ya pagados o confirmados.' },
@@ -744,9 +757,11 @@
             links: [
               ['back-in-stock', 'access'],
               ['access', 'order'],
+              ['access', 'b2b-order'],
               ['order', 'cancelled'],
               ['order', 'paid'],
               ['order', 'stockout'],
+              ['b2b-order', 'paid'],
               ['paid', 'invoiced'],
               ['invoiced', 'pickup'],
               ['invoiced', 'shipped'],
@@ -850,6 +865,7 @@
         let activeFlowId = 'entrega';
         let activeStatusFilter = null;
         let activePriorityFilter = false;
+        let activeStoreFilter = null;
 
         const BOARD_WIDTH = 1420;
         const BOARD_HEIGHT = 620;
@@ -898,7 +914,7 @@
         function nodeActionUrl(node, device) {
           const template = templateById(node.templateId);
           if (template) {
-            const params = new URLSearchParams({ template: template.id });
+            const params = new URLSearchParams({ store: CT.templateStore(template), template: template.id });
             if (template.ejemplo) params.set('example', template.ejemplo);
             if (device) params.set('device', device);
             return `../visualizador/index.html?${params.toString()}`;
@@ -923,7 +939,8 @@
           boardEl.querySelectorAll('.ct-flow-node').forEach((el) => {
             const matchStatus = !activeStatusFilter || el.dataset.status === activeStatusFilter;
             const matchPriority = !activePriorityFilter || el.dataset.priority === 'alta';
-            const isVisible = matchStatus && matchPriority;
+            const matchStore = !activeStoreFilter || !el.dataset.store || el.dataset.store === activeStoreFilter;
+            const isVisible = matchStatus && matchPriority && matchStore;
             visibleNodes.set(el.dataset.node, isVisible);
             el.classList.toggle('filtered-out', !isVisible);
           });
@@ -950,7 +967,7 @@
           boardEl.querySelectorAll('.ct-flow-node.active').forEach((el) => el.classList.remove('active'));
           nodeEl.classList.add('active');
 
-          detailBadges.innerHTML = `${statusBadge(status)}${priorityBadge(node.priority || 'media')}`;
+          detailBadges.innerHTML = `${statusBadge(status)}${template ? CT.storeBadge(CT.templateStore(template)) : ''}${priorityBadge(node.priority || 'media')}`;
           detailTitle.textContent = node.text;
           detailNote.textContent = node.note || 'Sin nota operativa definida.';
           detailPlatform.textContent = lane ? lane.label : node.lane;
@@ -1070,11 +1087,13 @@
             const position = nodePosition(node);
             const status = effectiveStatus(node);
             const statusMeta = STATUS_META[status] || STATUS_META.faltante;
+            const template = templateById(node.templateId);
             const el = document.createElement('div');
             el.className = `ct-flow-node ${node.lane} status-${status}`;
             el.dataset.node = node.id;
             el.dataset.status = status;
             el.dataset.priority = node.priority || 'media';
+            if (template) el.dataset.store = CT.templateStore(template);
             el.style.left = position.left + 'px';
             el.style.top = position.top + 'px';
             el.tabIndex = 0;
@@ -1128,6 +1147,14 @@
           } else if ('priority' in btn.dataset) {
             activePriorityFilter = !activePriorityFilter;
             btn.classList.toggle('active', activePriorityFilter);
+          } else if ('store' in btn.dataset) {
+            const store = btn.dataset.store;
+            activeStoreFilter = store === 'all' || activeStoreFilter === store ? null : store;
+            document.querySelectorAll('#ct-flow-filters [data-store]').forEach((b) => b.classList.remove('active'));
+            const activeBtn = activeStoreFilter
+              ? document.querySelector(`[data-store="${activeStoreFilter}"]`)
+              : document.querySelector('[data-store="all"]');
+            if (activeBtn) activeBtn.classList.add('active');
           }
 
           applyFilter();

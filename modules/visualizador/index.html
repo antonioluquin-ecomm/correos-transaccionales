@@ -56,6 +56,12 @@
       <div class="ct-preview-tool">
         <aside class="ct-preview-controls">
           <div>
+            <label for="ct-vis-store">Tienda</label>
+            <select id="ct-vis-store" aria-label="Filtrar por tienda">
+              <option value="">Todas</option>
+            </select>
+          </div>
+          <div>
             <label for="ct-vis-template">Plantilla HTML</label>
             <select id="ct-vis-template" aria-label="Elegir plantilla"></select>
           </div>
@@ -107,6 +113,7 @@
 
         const examples = EXAMPLE_SCENARIOS;
 
+        const storeSelect = document.getElementById('ct-vis-store');
         const templateSelect = document.getElementById('ct-vis-template');
         const exampleSelect = document.getElementById('ct-vis-example');
         const badgesEl = document.getElementById('ct-vis-badges');
@@ -122,20 +129,40 @@
 
         const renderable = TEMPLATES.filter((t) => t.archivoHtml);
         const urlParams = new URLSearchParams(window.location.search);
+        const requestedStore = urlParams.get('store');
         const requestedTemplateId = urlParams.get('template');
         const requestedExamplePath = urlParams.get('example');
         const requestedDevice = urlParams.get('device');
         let activeDevice = ['desktop', 'tablet', 'mobile'].includes(requestedDevice) ? requestedDevice : 'desktop';
 
-        renderable.forEach((template) => {
+        CT.storeOptionsFor(renderable, CT.templateStore).forEach((store) => {
           const option = document.createElement('option');
-          option.value = template.id;
-          option.textContent = template.nombre;
-          templateSelect.appendChild(option);
+          option.value = store.id;
+          option.textContent = store.label;
+          storeSelect.appendChild(option);
         });
 
+        function filteredTemplates() {
+          return renderable.filter((template) => !storeSelect.value || CT.templateStore(template) === storeSelect.value);
+        }
+
+        function renderTemplateOptions(preferredId) {
+          const options = filteredTemplates();
+          templateSelect.innerHTML = '';
+          options.forEach((template) => {
+            const option = document.createElement('option');
+            option.value = template.id;
+            option.textContent = `${CT.storeLabel(CT.templateStore(template))} · ${template.nombre}`;
+            templateSelect.appendChild(option);
+          });
+          const selected = options.find((template) => template.id === preferredId) || options[0];
+          if (selected) templateSelect.value = selected.id;
+          templateSelect.disabled = options.length === 0;
+          return selected;
+        }
+
         function currentTemplate() {
-          return renderable.find((t) => t.id === templateSelect.value) || renderable[0];
+          return filteredTemplates().find((t) => t.id === templateSelect.value) || filteredTemplates()[0];
         }
 
         function scenarioByPath(path) {
@@ -145,6 +172,9 @@
         function isCompatibleScenario(template, scenario) {
           if (!template || !scenario) return false;
           if (!Array.isArray(scenario.compatibleTemplates) || !scenario.compatibleTemplates.length) return true;
+          const templateStore = CT.templateStore(template);
+          const scenarioStore = CT.scenarioStore(scenario);
+          if (scenarioStore !== 'shared' && templateStore !== scenarioStore) return false;
           return scenario.compatibleTemplates.includes(template.id);
         }
 
@@ -212,7 +242,7 @@
 
         function updateInfo(template) {
           const scenario = currentScenario();
-          badgesEl.innerHTML = `${CT.platformBadge(template.plataforma)}${CT.statusBadge(template.estado)}`;
+          badgesEl.innerHTML = `${CT.platformBadge(template.plataforma)}${CT.storeBadge(CT.templateStore(template))}${CT.statusBadge(template.estado)}`;
           nombreEl.textContent = template.nombre;
           descripcionEl.textContent = template.descripcion;
           archivoEl.textContent = template.archivoHtml;
@@ -254,6 +284,18 @@
           }
         }
 
+        storeSelect.addEventListener('change', () => {
+          const template = renderTemplateOptions();
+          if (template) {
+            renderScenarioOptions(template, template.ejemplo);
+            renderPreview();
+          } else {
+            exampleSelect.innerHTML = '';
+            frame.srcdoc = '';
+            setStatus('No hay plantillas para la tienda seleccionada.', true);
+          }
+        });
+
         templateSelect.addEventListener('change', () => {
           const template = currentTemplate();
           renderScenarioOptions(template, template?.ejemplo);
@@ -272,10 +314,15 @@
 
         if (renderable.length) {
           const requestedTemplate = renderable.find((t) => t.id === requestedTemplateId);
-          const initial = requestedTemplate || renderable[0];
-          templateSelect.value = initial.id;
-          renderScenarioOptions(initial, requestedExamplePath || initial.ejemplo);
-          renderPreview();
+          storeSelect.value = requestedStore || (requestedTemplate ? CT.templateStore(requestedTemplate) : '');
+          if (storeSelect.value && !filteredTemplates().length) storeSelect.value = '';
+          const initial = renderTemplateOptions(requestedTemplate?.id);
+          if (initial) {
+            renderScenarioOptions(initial, requestedExamplePath || initial.ejemplo);
+            renderPreview();
+          } else {
+            setStatus('No hay plantillas para la tienda seleccionada.', true);
+          }
         } else {
           setStatus('Todavía no hay plantillas con HTML asociado en el catálogo.', true);
         }

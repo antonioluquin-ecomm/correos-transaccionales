@@ -160,6 +160,11 @@ a.ct-card {
 .ct-badge.ct-platform-pim { background: var(--ct-platform-pim); color: #064e3b; }
 .ct-badge.ct-platform-otra { background: var(--ct-text-muted); }
 
+.ct-badge.ct-store-sporting { background: #5b8c2a; }
+.ct-badge.ct-store-woker { background: #111827; }
+.ct-badge.ct-store-b2b { background: #0f766e; }
+.ct-badge.ct-store-shared { background: #64748b; }
+
 .ct-badge.ct-status-activo { background: var(--ct-status-activo); }
 .ct-badge.ct-status-en-revision { background: var(--ct-status-revision); }
 .ct-badge.ct-status-faltante { background: var(--ct-status-faltante); }

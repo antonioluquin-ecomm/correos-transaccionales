@@ -14,6 +14,12 @@ const CT = (() => {
     { href: 'modules/simulador/index.html', label: 'Simulador QA', match: 'simulador' },
   ];
 
+  const STORE_OPTIONS = [
+    { id: 'sporting', label: 'Sporting' },
+    { id: 'woker', label: 'Woker' },
+    { id: 'b2b', label: 'B2B' },
+  ];
+
   function escapeHtml(value) {
     if (value === null || value === undefined) return '';
     return String(value)
@@ -50,6 +56,37 @@ const CT = (() => {
     return 'ct-status-deprecado';
   }
 
+  function storeFromPath(path) {
+    const normalized = String(path || '').replace(/\\/g, '/').toLowerCase();
+    const parts = normalized.split('/').filter(Boolean);
+    if (!['templates', 'examples'].includes(parts[0]) || parts.length < 4) return 'shared';
+    const store = slugify(parts[2]);
+    return store || 'shared';
+  }
+
+  function storeLabel(store) {
+    const slug = slugify(store || 'shared');
+    const known = STORE_OPTIONS.find((option) => option.id === slug);
+    if (known) return known.label;
+    if (slug === 'shared') return 'Compartido';
+    return String(store || slug).replace(/(^|-)([a-z])/g, (_, sep, chr) => `${sep ? ' ' : ''}${chr.toUpperCase()}`);
+  }
+
+  function templateStore(template) {
+    return slugify(template?.tienda || template?.store || storeFromPath(template?.archivoHtml) || storeFromPath(template?.ejemplo));
+  }
+
+  function scenarioStore(scenario) {
+    return slugify(scenario?.tienda || scenario?.store || storeFromPath(scenario?.path));
+  }
+
+  function storeOptionsFor(items, resolver) {
+    const actual = new Set((items || []).map((item) => resolver(item)).filter(Boolean));
+    const known = STORE_OPTIONS.map((option) => option.id);
+    const unknown = Array.from(actual).filter((id) => !known.includes(id)).sort();
+    return STORE_OPTIONS.concat(unknown.map((id) => ({ id, label: storeLabel(id) })));
+  }
+
   function badge(text, extraClass) {
     return `<span class="ct-badge ${extraClass}">${escapeHtml(text)}</span>`;
   }
@@ -60,6 +97,11 @@ const CT = (() => {
 
   function statusBadge(estado) {
     return badge(estado, statusBadgeClass(estado));
+  }
+
+  function storeBadge(store) {
+    const slug = slugify(store || 'shared');
+    return badge(storeLabel(slug), `ct-store-${slug}`);
   }
 
   /**
@@ -183,8 +225,15 @@ const CT = (() => {
   return {
     escapeHtml,
     slugify,
+    STORE_OPTIONS,
     platformBadge,
     statusBadge,
+    storeBadge,
+    storeFromPath,
+    storeLabel,
+    templateStore,
+    scenarioStore,
+    storeOptionsFor,
     renderTopbar,
     downloadFile,
     fetchText,

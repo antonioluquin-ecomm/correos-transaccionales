@@ -64,7 +64,7 @@
 
       .ct-library-toolbar {
         display: grid;
-        grid-template-columns: minmax(280px, 1fr) repeat(4, minmax(142px, auto));
+        grid-template-columns: minmax(260px, 1fr) repeat(5, minmax(128px, auto));
         gap: 12px;
         padding: 16px 14px;
         border-bottom: 1px solid var(--ct-card-border);
@@ -530,7 +530,7 @@
           </div>
           <div class="ct-kpi">
             <strong id="ct-kpi-platforms">0</strong>
-            <span>Plataformas</span>
+            <span>Tiendas</span>
           </div>
         </div>
       </section>
@@ -545,6 +545,12 @@
               placeholder="Nombre, descripción, variable, responsable o archivo"
               autocomplete="off"
             />
+          </div>
+          <div class="ct-field">
+            <label for="ct-filter-tienda">Tienda</label>
+            <select id="ct-filter-tienda">
+              <option value="">Todas</option>
+            </select>
           </div>
           <div class="ct-field">
             <label for="ct-filter-plataforma">Plataforma</label>
@@ -603,6 +609,8 @@
           <dl>
             <dt>Responsable</dt>
             <dd id="ct-detail-responsable"></dd>
+            <dt>Tienda</dt>
+            <dd id="ct-detail-tienda"></dd>
             <dt>Categoría</dt>
             <dd id="ct-detail-categoria"></dd>
             <dt>Última actualización</dt>
@@ -642,6 +650,7 @@
         const activeFiltersEl = document.getElementById('ct-active-filters');
         const clearFiltersBtn = document.getElementById('ct-clear-filters');
         const searchEl = document.getElementById('ct-search');
+        const filterTiendaEl = document.getElementById('ct-filter-tienda');
         const filterPlataformaEl = document.getElementById('ct-filter-plataforma');
         const filterCategoriaEl = document.getElementById('ct-filter-categoria');
         const filterEstadoEl = document.getElementById('ct-filter-estado');
@@ -654,6 +663,7 @@
         const badgesEl = document.getElementById('ct-detail-badges');
         const descripcionEl = document.getElementById('ct-detail-descripcion');
         const responsableEl = document.getElementById('ct-detail-responsable');
+        const tiendaEl = document.getElementById('ct-detail-tienda');
         const categoriaEl = document.getElementById('ct-detail-categoria');
         const actualizadoEl = document.getElementById('ct-detail-actualizado');
         const archivoEl = document.getElementById('ct-detail-archivo');
@@ -683,6 +693,7 @@
             template.categoria,
             template.estado,
             template.responsable,
+            CT.storeLabel(CT.templateStore(template)),
             template.archivoHtml,
             template.ejemplo,
             ...(Array.isArray(template.variables) ? template.variables : []),
@@ -691,6 +702,15 @@
 
         function uniqueValues(field) {
           return Array.from(new Set(templates.map((t) => t[field]).filter(Boolean))).sort(collator.compare);
+        }
+
+        function fillStoreSelect() {
+          CT.storeOptionsFor(templates, CT.templateStore).forEach((store) => {
+            const option = document.createElement('option');
+            option.value = store.id;
+            option.textContent = store.label;
+            filterTiendaEl.appendChild(option);
+          });
         }
 
         function fillSelect(selectEl, values, labelFn) {
@@ -713,7 +733,7 @@
         }
 
         function previewUrl(template) {
-          const params = new URLSearchParams({ template: template.id });
+          const params = new URLSearchParams({ store: CT.templateStore(template), template: template.id });
           if (template.ejemplo) params.set('example', template.ejemplo);
           return `../visualizador/index.html?${params.toString()}`;
         }
@@ -730,17 +750,18 @@
           document.getElementById('ct-kpi-total').textContent = templates.length;
           document.getElementById('ct-kpi-active').textContent = templates.filter((t) => t.estado === 'activo').length;
           document.getElementById('ct-kpi-examples').textContent = templates.filter((t) => t.ejemplo).length;
-          document.getElementById('ct-kpi-platforms').textContent = uniqueValues('plataforma').length;
+          document.getElementById('ct-kpi-platforms').textContent = CT.storeOptionsFor(templates, CT.templateStore).length;
         }
 
         function matchesFilters(template) {
           const query = normalize(searchEl.value.trim());
           const matchesQuery = !query || searchableText(template).includes(query);
+          const matchesTienda = !filterTiendaEl.value || CT.templateStore(template) === filterTiendaEl.value;
           const matchesPlataforma = !filterPlataformaEl.value || template.plataforma === filterPlataformaEl.value;
           const matchesCategoria = !filterCategoriaEl.value || template.categoria === filterCategoriaEl.value;
           const matchesEstado = !filterEstadoEl.value || template.estado === filterEstadoEl.value;
 
-          return matchesQuery && matchesPlataforma && matchesCategoria && matchesEstado;
+          return matchesQuery && matchesTienda && matchesPlataforma && matchesCategoria && matchesEstado;
         }
 
         function sortTemplates(items) {
@@ -757,6 +778,7 @@
         function renderActiveFilters() {
           const chips = [];
           if (searchEl.value.trim()) chips.push(`Búsqueda: ${searchEl.value.trim()}`);
+          if (filterTiendaEl.value) chips.push(`Tienda: ${CT.storeLabel(filterTiendaEl.value)}`);
           if (filterPlataformaEl.value) chips.push(`Plataforma: ${filterPlataformaEl.value}`);
           if (filterCategoriaEl.value) chips.push(`Categoría: ${filterCategoriaEl.value}`);
           if (filterEstadoEl.value) chips.push(`Estado: ${capitalizeFirst(filterEstadoEl.value)}`);
@@ -775,6 +797,7 @@
             <div class="ct-card-top">
               <div class="ct-badges">
                 ${CT.platformBadge(template.plataforma || 'Sin plataforma')}
+                ${CT.storeBadge(CT.templateStore(template))}
                 ${CT.statusBadge(template.estado || 'sin estado')}
               </div>
               <code class="ct-template-id" title="${CT.escapeHtml(template.id || '')}">${CT.escapeHtml(template.id || '')}</code>
@@ -830,9 +853,10 @@
           currentTemplate = template;
           lastFocusedEl = document.activeElement;
           titleEl.textContent = template.nombre || 'Sin nombre';
-          badgesEl.innerHTML = `${CT.platformBadge(template.plataforma || 'Sin plataforma')}${CT.statusBadge(template.estado || 'sin estado')}`;
+          badgesEl.innerHTML = `${CT.platformBadge(template.plataforma || 'Sin plataforma')}${CT.storeBadge(CT.templateStore(template))}${CT.statusBadge(template.estado || 'sin estado')}`;
           descripcionEl.textContent = template.descripcion || 'Sin descripción documentada.';
           responsableEl.textContent = template.responsable || 'Sin responsable';
+          tiendaEl.textContent = CT.storeLabel(CT.templateStore(template));
           categoriaEl.textContent = template.categoria || 'Sin categoría';
           actualizadoEl.textContent = formatDate(template.actualizado);
           archivoEl.innerHTML = template.archivoHtml ? `<code>${CT.escapeHtml(template.archivoHtml)}</code>` : 'Sin HTML asociado.';
@@ -907,18 +931,20 @@
           }
         }
 
+        fillStoreSelect();
         fillSelect(filterPlataformaEl, uniqueValues('plataforma'));
         fillSelect(filterCategoriaEl, uniqueValues('categoria'));
         fillSelect(filterEstadoEl, uniqueValues('estado'), capitalizeFirst);
         updateKpis();
 
-        [searchEl, filterPlataformaEl, filterCategoriaEl, filterEstadoEl, sortEl].forEach((el) => {
+        [searchEl, filterTiendaEl, filterPlataformaEl, filterCategoriaEl, filterEstadoEl, sortEl].forEach((el) => {
           el.addEventListener('input', renderResults);
           el.addEventListener('change', renderResults);
         });
 
         clearFiltersBtn.addEventListener('click', () => {
           searchEl.value = '';
+          filterTiendaEl.value = '';
           filterPlataformaEl.value = '';
           filterCategoriaEl.value = '';
           filterEstadoEl.value = '';
