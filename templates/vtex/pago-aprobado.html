@@ -127,24 +127,24 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
         <!-- Badge -->
         <tr>
           <td style="padding:24px 24px 12px 24px">
-            <span class="badge">&#10003;&nbsp; Pago aprobado</span>
+            <span class="badge" style="display:inline-block;background:#ecfdf3;border:1px solid #bbf7d0;border-radius:999px;padding:5px 12px;font-size:12px;line-height:16px;font-weight:bold;color:#166534">&#10003;&nbsp; Pago aprobado</span>
           </td>
         </tr>
 
         <!-- Titular + status box -->
         <tr>
           <td style="padding:0 24px 20px 24px;border-bottom:1px solid #f3f4f6">
-            <p class="h1">Hola{{#if clientProfileData.firstName}}, {{clientProfileData.firstName}}{{/if}}</p>
-            <p class="text" style="font-size:18px;line-height:26px;color:#111827;font-weight:bold;margin:0 0 10px 0">¡Tu pago fue aprobado!</p>
-            <p class="text" style="margin-bottom:14px">
+            <p class="h1" style="font-size:26px;line-height:32px;font-weight:bold;color:#111827;margin:0 0 8px 0">Hola{{#if clientProfileData.firstName}}, {{clientProfileData.firstName}}{{/if}}</p>
+            <p class="text" style="font-size:14px;line-height:22px;color:#374151;font-size:18px;line-height:26px;color:#111827;font-weight:bold;margin:0 0 10px 0">¡Tu pago fue aprobado!</p>
+            <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin-bottom:14px">
               El pago de tu pedido quedó confirmado. Ya estamos
               <strong>preparando tu pedido</strong> para enviártelo lo antes posible.
             </p>
             <table role="presentation" width="100%" style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px">
               <tr>
                 <td style="padding:14px 16px">
-                  <p class="status-strong" style="color:#14532d">Tu pedido ya está en preparación</p>
-                  <p class="text-sm">
+                  <p class="status-strong" style="font-size:14px;line-height:20px;font-weight:bold;color:#111827;color:#14532d">Tu pedido ya está en preparación</p>
+                  <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:0">
                     {{#if shippingData.logisticsInfo.[0].shippingEstimateDate}}
                       {{#eq shippingData.logisticsInfo.[0].selectedDeliveryChannel "pickup-in-point"}}Fecha estimada para retiro: <strong style="color:#111827">{{formatDate shippingData.logisticsInfo.[0].shippingEstimateDate}}</strong>{{else}}Fecha estimada de entrega: <strong style="color:#111827">{{formatDate shippingData.logisticsInfo.[0].shippingEstimateDate}}</strong>{{/eq}}
                     {{else}}
@@ -163,28 +163,28 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
             <table role="presentation" width="100%" style="table-layout:fixed">
               <tr>
                 <td class="sum-cell">
-                  <p class="label">N.º de pedido</p>
-                  <p class="value">{{orderId}}</p>
+                  <p class="label" style="font-size:11px;line-height:16px;font-weight:bold;letter-spacing:0.5px;text-transform:uppercase;color:#6b7280;margin:0 0 4px 0">N.º de pedido</p>
+                  <p class="value" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0">{{orderId}}</p>
                 </td>
                 <td class="sum-cell sum-cell-r">
-                  <p class="label">Fecha de compra</p>
-                  <p class="value">{{formatDate creationDate}}</p>
+                  <p class="label" style="font-size:11px;line-height:16px;font-weight:bold;letter-spacing:0.5px;text-transform:uppercase;color:#6b7280;margin:0 0 4px 0">Fecha de compra</p>
+                  <p class="value" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0">{{formatDate creationDate}}</p>
                 </td>
               </tr>
               <tr>
                 <td class="sum-cell sum-last">
-                  <p class="label">Total pagado</p>
-                  <p class="value">$ {{formatCurrency value}}</p>
+                  <p class="label" style="font-size:11px;line-height:16px;font-weight:bold;letter-spacing:0.5px;text-transform:uppercase;color:#6b7280;margin:0 0 4px 0">Total pagado</p>
+                  <p class="value" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0">$ {{formatCurrency value}}</p>
                 </td>
                 <td class="sum-cell sum-cell-r sum-last">
-                  <p class="label">
+                  <p class="label" style="font-size:11px;line-height:16px;font-weight:bold;letter-spacing:0.5px;text-transform:uppercase;color:#6b7280;margin:0 0 4px 0">
                     {{#eq shippingData.logisticsInfo.[0].selectedDeliveryChannel "pickup-in-point"}}
                       Disponible para retiro
                     {{else}}
                       Entrega estimada
                     {{/eq}}
                   </p>
-                  <p class="value">
+                  <p class="value" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0">
                     {{#if shippingData.logisticsInfo.[0].shippingEstimateDate}}
                       {{formatDate shippingData.logisticsInfo.[0].shippingEstimateDate}}
                     {{else}}
@@ -209,7 +209,7 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
                     <td width="50%" class="line-done"></td>
                   </tr></table>
                   <div class="step-dot step-done">&#10003;</div>
-                  <p class="step-lbl" style="color:#16a34a">Recibido</p>
+                  <p class="step-lbl" style="font-size:11px;font-weight:bold;text-align:center;color:#16a34a">Recibido</p>
                 </td>
                 <!-- Paso 2: Pago — done -->
                 <td align="center" width="25%" valign="top">
@@ -218,7 +218,7 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
                     <td width="50%" class="line-done"></td>
                   </tr></table>
                   <div class="step-dot step-done">&#10003;</div>
-                  <p class="step-lbl" style="color:#16a34a">Pago</p>
+                  <p class="step-lbl" style="font-size:11px;font-weight:bold;text-align:center;color:#16a34a">Pago</p>
                 </td>
                 <!-- Paso 3: Preparación — current -->
                 <td align="center" width="25%" valign="top">
@@ -227,7 +227,7 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
                     <td width="50%" class="line-next"></td>
                   </tr></table>
                   <div class="step-dot step-current">3</div>
-                  <p class="step-lbl" style="color:#1d4ed8">Preparación</p>
+                  <p class="step-lbl" style="font-size:11px;font-weight:bold;text-align:center;color:#1d4ed8">Preparación</p>
                 </td>
                 <!-- Paso 4: Entrega / Retiro — next -->
                 <td align="center" width="25%" valign="top">
@@ -236,7 +236,7 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
                     <td width="50%"></td>
                   </tr></table>
                   <div class="step-dot step-next">4</div>
-                  <p class="step-lbl" style="color:#9ca3af">
+                  <p class="step-lbl" style="font-size:11px;font-weight:bold;text-align:center;color:#9ca3af">
                     {{#eq shippingData.logisticsInfo.[0].selectedDeliveryChannel "pickup-in-point"}}Retiro{{else}}Entrega{{/eq}}
                   </p>
                 </td>
@@ -249,7 +249,7 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
         <tr>
           <td align="center" style="padding:20px 24px;border-bottom:1px solid #f3f4f6">
             <a href="https://{{hostName}}/account#/orders/{{orderId}}"
-               class="cta-primary" target="_blank">
+               class="cta-primary" style="display:inline-block;background:#16a34a;color:#ffffff;border-radius:10px;font-size:15px;line-height:48px;font-weight:bold;padding:0 32px;text-align:center" target="_blank">
               Seguir mi pedido
             </a>
           </td>
@@ -263,7 +263,7 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
             <td style="padding:16px 24px;border-bottom:1px solid #f3f4f6">
               <table role="presentation" width="100%" style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px">
                 <tr><td style="padding:12px 16px">
-                  <p class="text" style="color:#14532d">
+                  <p class="text" style="font-size:14px;line-height:22px;color:#374151;color:#14532d">
                     <strong>Tu pedido se enviará en más de un paquete.</strong>
                     Te mandamos el seguimiento de cada envío por separado.
                   </p>
@@ -280,20 +280,20 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
             <table role="presentation" width="100%" style="table-layout:fixed">
               <tr>
                 <td class="two-cell">
-                  <p class="h2">Pago</p>
+                  <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0 0 12px 0">Pago</p>
                   {{#if paymentData.transactions}}
                     {{#each paymentData.transactions}}
                       {{#each payments}}
-                        <p class="text" style="margin-bottom:2px"><strong>{{paymentSystemName}}</strong></p>
-                        <p class="text" style="margin-bottom:2px">
+                        <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin-bottom:2px"><strong>{{paymentSystemName}}</strong></p>
+                        <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin-bottom:2px">
                           $ {{formatCurrency value}}{{#if installments}}{{#eq installments 1}} en 1 pago{{else}} en {{installments}} cuotas{{/eq}}{{/if}}
                         </p>
-                        {{#if lastDigits}}<p class="text-sm">Tarjeta terminada en {{lastDigits}}</p>{{/if}}
-                        {{#if connectorResponses.authId}}<p class="text-sm">Autorización: {{connectorResponses.authId}}</p>{{/if}}
+                        {{#if lastDigits}}<p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:0">Tarjeta terminada en {{lastDigits}}</p>{{/if}}
+                        {{#if connectorResponses.authId}}<p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:0">Autorización: {{connectorResponses.authId}}</p>{{/if}}
                       {{/each}}
                     {{/each}}
                   {{else}}
-                    <p class="text-sm">Información no disponible</p>
+                    <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:0">Información no disponible</p>
                   {{/if}}
                   {{#each totals}}{{#eq id "Shipping"}}{{#eq value 0}}
                     <p class="text-sm green" style="font-weight:bold;margin-top:8px">Envío gratis aplicado</p>
@@ -301,20 +301,20 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
                 </td>
                 <td class="two-cell two-cell-r two-cell-last">
                   {{#eq shippingData.logisticsInfo.[0].selectedDeliveryChannel "pickup-in-point"}}
-                    <p class="h2">Retiro en tienda</p>
+                    <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0 0 12px 0">Retiro en tienda</p>
                     {{#with shippingData.logisticsInfo.[0].pickupStoreInfo}}
-                      {{#if friendlyName}}<p class="text" style="font-weight:bold;margin-bottom:2px">{{friendlyName}}</p>{{/if}}
+                      {{#if friendlyName}}<p class="text" style="font-size:14px;line-height:22px;color:#374151;font-weight:bold;margin-bottom:2px">{{friendlyName}}</p>{{/if}}
                       {{#if address}}
-                        <p class="text">{{address.street}}{{#if address.number}}, {{address.number}}{{/if}}</p>
-                        <p class="text">{{address.city}}, {{address.state}}</p>
+                        <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0">{{address.street}}{{#if address.number}}, {{address.number}}{{/if}}</p>
+                        <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0">{{address.city}}, {{address.state}}</p>
                       {{else}}
                         {{#with ../../shippingData.selectedAddresses.[0]}}
-                          <p class="text">{{street}}{{#if number}}, {{number}}{{/if}}</p>
-                          <p class="text">{{city}}, {{state}}</p>
+                          <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0">{{street}}{{#if number}}, {{number}}{{/if}}</p>
+                          <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0">{{city}}, {{state}}</p>
                         {{/with}}
                       {{/if}}
                     {{/with}}
-                    <p class="text-sm" style="margin-top:8px">
+                    <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-top:8px">
                       {{#if shippingData.logisticsInfo.[0].shippingEstimateDate}}
                         Listo para retirar aprox.: {{formatDate shippingData.logisticsInfo.[0].shippingEstimateDate}}
                       {{else}}
@@ -322,18 +322,18 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
                       {{/if}}
                     </p>
                   {{else}}
-                    <p class="h2">Envío a domicilio</p>
+                    <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0 0 12px 0">Envío a domicilio</p>
                     {{#with shippingData.selectedAddresses.[0]}}
-                      {{#if receiverName}}<p class="text" style="font-weight:bold;margin-bottom:2px">{{receiverName}}</p>{{/if}}
-                      <p class="text">{{street}}{{#if number}}, {{number}}{{/if}}{{#if complement}}, {{complement}}{{/if}}</p>
-                      <p class="text">{{city}}, {{state}} {{postalCode}}</p>
+                      {{#if receiverName}}<p class="text" style="font-size:14px;line-height:22px;color:#374151;font-weight:bold;margin-bottom:2px">{{receiverName}}</p>{{/if}}
+                      <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0">{{street}}{{#if number}}, {{number}}{{/if}}{{#if complement}}, {{complement}}{{/if}}</p>
+                      <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0">{{city}}, {{state}} {{postalCode}}</p>
                     {{/with}}
                     {{#if shippingData.logisticsInfo.[0].deliveryIds.[0].courierName}}
-                    <p class="text-sm" style="margin-top: 6px">
+                    <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-top: 6px">
                       Lo envía <strong style="color: #111827">{{shippingData.logisticsInfo.[0].deliveryIds.[0].courierName}}</strong>
                     </p>
                     {{/if}}
-                    <p class="text-sm" style="margin-top:8px">
+                    <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-top:8px">
                       {{#if shippingData.logisticsInfo.[0].shippingEstimateDate}}
                         Entrega estimada: {{formatDate shippingData.logisticsInfo.[0].shippingEstimateDate}}
                       {{else}}
@@ -359,7 +359,7 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
       <table role="presentation" width="100%" class="card">
         <tr>
           <td style="padding:18px 20px 12px 20px;border-bottom:1px solid #f3f4f6">
-            <p class="h2" style="margin:0">Detalle de tu compra</p>
+            <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0">Detalle de tu compra</p>
           </td>
         </tr>
         {{#each items}}
@@ -372,14 +372,14 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
                        style="width:72px;height:auto;border-radius:8px" />{{#if detailUrl}}</a>{{/if}}
                 </td>
                 <td valign="top" style="padding-left:12px">
-                  {{#if detailUrl}}<a href="https://{{@root.hostName}}{{detailUrl}}" target="_blank" class="item-name" style="display:block;font-weight:bold;color:#111827;text-decoration:none;margin:0 0 3px 0">{{name}}</a>{{else}}<p class="item-name">{{name}}</p>{{/if}}
-                  {{#if additionalInfo.brandName}}<p class="item-meta">{{additionalInfo.brandName}}</p>{{/if}}
-                  {{#if skuName}}<p class="item-meta">Variante: {{skuName}}</p>{{/if}}
-                  <p class="item-meta">Cantidad: {{quantity}}</p>
+                  {{#if detailUrl}}<a href="https://{{@root.hostName}}{{detailUrl}}" target="_blank" class="item-name" style="font-size:14px;line-height:20px;font-weight:bold;color:#111827;display:block;font-weight:bold;color:#111827;text-decoration:none;margin:0 0 3px 0">{{name}}</a>{{else}}<p class="item-name" style="font-size:14px;line-height:20px;font-weight:bold;color:#111827;margin:0 0 3px 0">{{name}}</p>{{/if}}
+                  {{#if additionalInfo.brandName}}<p class="item-meta" style="font-size:12px;line-height:18px;color:#6b7280;margin:0">{{additionalInfo.brandName}}</p>{{/if}}
+                  {{#if skuName}}<p class="item-meta" style="font-size:12px;line-height:18px;color:#6b7280;margin:0">Variante: {{skuName}}</p>{{/if}}
+                  <p class="item-meta" style="font-size:12px;line-height:18px;color:#6b7280;margin:0">Cantidad: {{quantity}}</p>
                   {{#if listPrice}}{{#eq listPrice sellingPrice}}{{else}}
-                    <p class="item-old-price">$ {{formatCurrency listPrice}}</p>
+                    <p class="item-old-price" style="font-size:12px;line-height:18px;color:#9ca3af;text-decoration:line-through;margin:2px 0 0 0">$ {{formatCurrency listPrice}}</p>
                   {{/eq}}{{/if}}
-                  <p class="item-price">$ {{formatCurrency sellingPrice}}</p>
+                  <p class="item-price" style="font-size:14px;line-height:20px;font-weight:bold;color:#111827;margin:4px 0 0 0">$ {{formatCurrency sellingPrice}}</p>
                   <!-- Subtotal mobile -->
                   <p class="m-show text-sm" style="margin-top:6px">
                     Subtotal: <strong style="color:#111827">$ {{formatCurrency priceDefinition.total}}</strong>
@@ -387,8 +387,8 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
                 </td>
                 <!-- Subtotal desktop -->
                 <td valign="top" align="right" class="m-hide" style="white-space:nowrap;padding-left:12px">
-                  <p class="text-sm" style="margin-bottom:4px">Subtotal</p>
-                  <p class="item-price" style="margin-top:0">$ {{formatCurrency priceDefinition.total}}</p>
+                  <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-bottom:4px">Subtotal</p>
+                  <p class="item-price" style="font-size:14px;line-height:20px;font-weight:bold;color:#111827;margin-top:0">$ {{formatCurrency priceDefinition.total}}</p>
                 </td>
               </tr>
             </table>
@@ -407,47 +407,47 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
       <table role="presentation" width="100%" class="card" style="border-collapse:collapse">
         <tr>
           <td colspan="2" style="padding:18px 20px 12px 20px;border-bottom:1px solid #f3f4f6">
-            <p class="h2" style="margin:0">Resumen del pedido</p>
+            <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0">Resumen del pedido</p>
           </td>
         </tr>
         {{#each totals}}
           {{#eq id "Items"}}
           <tr>
-            <td style="padding:10px 20px"><span class="tot-key">Subtotal de productos</span></td>
-            <td style="padding:10px 20px;text-align:right"><span class="tot-val">$ {{formatCurrency value}}</span></td>
+            <td style="padding:10px 20px"><span class="tot-key" style="font-size:14px;line-height:20px;color:#374151">Subtotal de productos</span></td>
+            <td style="padding:10px 20px;text-align:right"><span class="tot-val" style="font-size:14px;line-height:20px;color:#374151">$ {{formatCurrency value}}</span></td>
           </tr>
           {{/eq}}
           {{#eq id "Discounts"}}{{#if value}}
           <tr>
-            <td style="padding:10px 20px"><span class="tot-key">Descuentos</span></td>
+            <td style="padding:10px 20px"><span class="tot-key" style="font-size:14px;line-height:20px;color:#374151">Descuentos</span></td>
             <td style="padding:10px 20px;text-align:right"><span class="tot-val green">$ {{formatCurrency value}}</span></td>
           </tr>
           {{/if}}{{/eq}}
           {{#eq id "GiftCards"}}{{#if value}}
           <tr>
-            <td style="padding:10px 20px"><span class="tot-key">Gift card</span></td>
-            <td style="padding:10px 20px;text-align:right"><span class="tot-val">$ {{formatCurrency value}}</span></td>
+            <td style="padding:10px 20px"><span class="tot-key" style="font-size:14px;line-height:20px;color:#374151">Gift card</span></td>
+            <td style="padding:10px 20px;text-align:right"><span class="tot-val" style="font-size:14px;line-height:20px;color:#374151">$ {{formatCurrency value}}</span></td>
           </tr>
           {{/if}}{{/eq}}
           {{#eq id "Tax"}}{{#if value}}
           <tr>
-            <td style="padding:10px 20px"><span class="tot-key">Impuestos</span></td>
-            <td style="padding:10px 20px;text-align:right"><span class="tot-val">$ {{formatCurrency value}}</span></td>
+            <td style="padding:10px 20px"><span class="tot-key" style="font-size:14px;line-height:20px;color:#374151">Impuestos</span></td>
+            <td style="padding:10px 20px;text-align:right"><span class="tot-val" style="font-size:14px;line-height:20px;color:#374151">$ {{formatCurrency value}}</span></td>
           </tr>
           {{/if}}{{/eq}}
           {{#eq id "Shipping"}}
           <tr>
-            <td style="padding:10px 20px"><span class="tot-key">Envío</span></td>
+            <td style="padding:10px 20px"><span class="tot-key" style="font-size:14px;line-height:20px;color:#374151">Envío</span></td>
             <td style="padding:10px 20px;text-align:right">
               {{#eq value 0}}
                 {{#if alternativeTotals}}
                   {{#each alternativeTotals}}{{#eq id "AlternativeShippingTotal"}}
-                    <span class="text-sm" style="text-decoration:line-through;margin-right:6px">$ {{formatCurrency value}}</span>
+                    <span class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;text-decoration:line-through;margin-right:6px">$ {{formatCurrency value}}</span>
                   {{/eq}}{{/each}}
                 {{/if}}
                 <span class="tot-val green" style="font-weight:bold">Gratis</span>
               {{else}}
-                <span class="tot-val">$ {{formatCurrency value}}</span>
+                <span class="tot-val" style="font-size:14px;line-height:20px;color:#374151">$ {{formatCurrency value}}</span>
               {{/eq}}
             </td>
           </tr>
@@ -457,7 +457,7 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
           {{#if rateAndBenefitsIdentifiers.[0]}}
           <tr>
             <td colspan="2" style="padding:0 20px 10px 20px">
-              <p class="text-sm">Beneficio aplicado:
+              <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:0">Beneficio aplicado:
                 {{#each rateAndBenefitsIdentifiers}}
                   {{#if description}}{{description}}{{else}}{{name}}{{/if}}{{#unless @last}}, {{/unless}}
                 {{/each}}
@@ -467,8 +467,8 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
           {{/if}}
         {{/with}}
         <tr>
-          <td style="padding:14px 20px;border-top:2px solid #f3f4f6"><span class="tot-strong">Total</span></td>
-          <td style="padding:14px 20px;border-top:2px solid #f3f4f6;text-align:right"><span class="tot-strong">$ {{formatCurrency value}}</span></td>
+          <td style="padding:14px 20px;border-top:2px solid #f3f4f6"><span class="tot-strong" style="font-size:16px;line-height:22px;font-weight:bold;color:#111827">Total</span></td>
+          <td style="padding:14px 20px;border-top:2px solid #f3f4f6;text-align:right"><span class="tot-strong" style="font-size:16px;line-height:22px;font-weight:bold;color:#111827">$ {{formatCurrency value}}</span></td>
         </tr>
       </table>
     </td>
@@ -482,15 +482,15 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
       <table role="presentation" width="100%" class="card">
         <tr>
           <td style="padding:24px">
-            <p class="h2" style="font-size:16px;margin-bottom:16px">¿Qué pasa ahora?</p>
+            <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;font-size:16px;margin-bottom:16px">¿Qué pasa ahora?</p>
             <table role="presentation" width="100%">
               <tr>
                 <td valign="top" style="width:32px;padding-bottom:16px">
                   <div style="width:24px;height:24px;line-height:24px;text-align:center;border-radius:50%;background:#ecfdf3;color:#166534;font-size:11px;font-weight:bold">1</div>
                 </td>
                 <td valign="top" style="padding:0 0 16px 10px;border-bottom:1px solid #f3f4f6">
-                  <p class="text"><strong>Preparamos tu pedido</strong></p>
-                  <p class="text-sm" style="margin-top:2px">
+                  <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0"><strong>Preparamos tu pedido</strong></p>
+                  <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-top:2px">
                     {{#eq shippingData.logisticsInfo.[0].selectedDeliveryChannel "pickup-in-point"}}
                       Estamos armando tu pedido en la tienda para que puedas pasarlo a buscar.
                     {{else}}
@@ -504,7 +504,7 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
                   <div style="width:24px;height:24px;line-height:24px;text-align:center;border-radius:50%;background:#ecfdf3;color:#166534;font-size:11px;font-weight:bold">2</div>
                 </td>
                 <td valign="top" style="padding:16px 0 16px 10px;border-bottom:1px solid #f3f4f6">
-                  <p class="text">
+                  <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0">
                     <strong>
                       {{#eq shippingData.logisticsInfo.[0].selectedDeliveryChannel "pickup-in-point"}}
                         Te avisamos cuando esté listo para retirar
@@ -513,7 +513,7 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
                       {{/eq}}
                     </strong>
                   </p>
-                  <p class="text-sm" style="margin-top:2px">
+                  <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-top:2px">
                     {{#eq shippingData.logisticsInfo.[0].selectedDeliveryChannel "pickup-in-point"}}
                       Te mandamos un email cuando el pedido esté listo en la tienda.
                     {{else}}
@@ -527,8 +527,8 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
                   <div style="width:24px;height:24px;line-height:24px;text-align:center;border-radius:50%;background:#ecfdf3;color:#166534;font-size:11px;font-weight:bold">3</div>
                 </td>
                 <td valign="top" style="padding:16px 0 0 10px">
-                  <p class="text"><strong>Recibís tu factura electrónica</strong></p>
-                  <p class="text-sm" style="margin-top:2px">Se emite automáticamente y la recibís por email cuando el pedido salga.</p>
+                  <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0"><strong>Recibís tu factura electrónica</strong></p>
+                  <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-top:2px">Se emite automáticamente y la recibís por email cuando el pedido salga.</p>
                 </td>
               </tr>
             </table>
@@ -550,16 +550,16 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
   </tr>
   <tr>
     <td align="center" style="padding:16px 8px 8px 8px">
-      <p class="text-sm" style="margin-bottom:6px">
+      <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-bottom:6px">
         ¿Tenés alguna duda? Visitá nuestro
-        <a href="https://{{hostName}}/centro-de-ayuda" target="_blank" class="footer-link">Centro de ayuda</a>
+        <a href="https://{{hostName}}/centro-de-ayuda" target="_blank" class="footer-link" style="color:#16a34a;font-weight:bold">Centro de ayuda</a>
         o revisá
-        <a href="https://{{hostName}}/cambios-y-devoluciones" target="_blank" class="footer-link">Cambios y devoluciones</a>.
+        <a href="https://{{hostName}}/cambios-y-devoluciones" target="_blank" class="footer-link" style="color:#16a34a;font-weight:bold">Cambios y devoluciones</a>.
       </p>
-      <p class="text-sm" style="margin-bottom:12px">
+      <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-bottom:12px">
         Equipo <strong style="color:#374151">Sporting</strong>
       </p>
-      <p class="text-sm" style="color:#9ca3af">© {{_accountInfo.TradingName}}. Todos los derechos reservados.</p>
+      <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;color:#9ca3af">© {{_accountInfo.TradingName}}. Todos los derechos reservados.</p>
     </td>
   </tr>
   <tr>

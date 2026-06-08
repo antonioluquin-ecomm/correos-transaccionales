@@ -2,6 +2,14 @@
 
 Formato: versión, fecha, resumen del cambio principal.
 
+## v1.2.1 — 2026-06-08
+
+CSS inline en templates VTEX para compatibilidad con Gmail y clientes que stripean `<head>`:
+
+- `pedido-confirmado.html`, `pago-aprobado.html`, `pedido-cancelado.html`: ~76/74/71 elementos tipográficos y de UI reciben `style=""` inline equivalente al CSS del `<head>` (`h1`, `h2`, `text`, `text-sm`, `label`, `value`, `item-name`, `item-meta`, `item-price`, `badge`, `badge-cancel`, `cta-primary`, `cta-dark`, `step-lbl`, `footer-link`, etc.).
+- Elementos con `style=""` preexistente reciben el base prepended (sin `margin`) para no pisar overrides intencionales.
+- `scripts/inline-css.py`: script utilitario que automatiza el proceso de inlining para futuras actualizaciones de templates.
+
 ## v1.2.0 — 2026-06-08
 
 Integración de tres templates nuevos al catálogo:
