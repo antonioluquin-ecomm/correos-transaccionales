@@ -1,0 +1,702 @@
+{
+  "package": null,
+  "subjectItemAttachment": {
+    "item": "Campera adidas Essen...",
+    "totalItems": 2,
+    "extraItems": 1
+  },
+  "cancellationReason": null,
+  "paymentData": {
+    "giftCards": [],
+    "transactions": [
+      {
+        "isActive": true,
+        "transactionId": "22A63BE6D918405D96D27D5737E88726",
+        "merchantName": "S*********",
+        "payments": [
+          {
+            "id": "CEB88F2A8B6240D194691F22EC657DBC",
+            "paymentSystem": "177",
+            "paymentSystemName": "G*******",
+            "value": 14999800,
+            "installments": 1,
+            "referenceValue": 14999800,
+            "cardHolder": null,
+            "cardNumber": null,
+            "firstDigits": null,
+            "lastDigits": null,
+            "cvv2": null,
+            "expireMonth": null,
+            "expireYear": null,
+            "url": null,
+            "giftCardId": null,
+            "giftCardName": null,
+            "giftCardCaption": null,
+            "redemptionCode": null,
+            "group": "GOcuotas",
+            "tid": "3177357",
+            "dueDate": null,
+            "connectorResponses": {
+              "Tid": "3177357",
+              "ReturnCode": null,
+              "Message": null
+            },
+            "giftCardProvider": null,
+            "giftCardAsDiscount": null,
+            "koinUrl": null,
+            "accountId": null,
+            "parentAccountId": null,
+            "bankIssuedInvoiceIdentificationNumber": null,
+            "bankIssuedInvoiceIdentificationNumberFormatted": null,
+            "bankIssuedInvoiceBarCodeNumber": null,
+            "bankIssuedInvoiceBarCodeType": null,
+            "billingAddress": null,
+            "paymentOrigin": null
+          }
+        ]
+      }
+    ]
+  },
+  "cancellationRequests": null,
+  "invoiceData": null,
+  "clientProfileData": {
+    "id": "clientProfileData",
+    "email": "4*******************************@c*.v***.c**.b*",
+    "firstName": "J******",
+    "lastName": "A*****",
+    "documentType": "dni",
+    "document": "4*******",
+    "phone": "0**********",
+    "corporateName": null,
+    "tradeName": null,
+    "corporateDocument": null,
+    "stateInscription": null,
+    "corporatePhone": null,
+    "isCorporate": false,
+    "userProfileId": "84a56c9e-1416-4b25-9192-06957956ce83",
+    "userProfileVersion": null,
+    "customerClass": null,
+    "customerCode": null
+  },
+  "shippingData": {
+    "id": "shippingData",
+    "address": {
+      "addressType": "residential",
+      "receiverName": "J****** A*****",
+      "addressId": "5334735052482",
+      "versionId": null,
+      "entityId": null,
+      "postalCode": "1***",
+      "city": "E* J*****",
+      "state": "BUENOS AIRES",
+      "country": "ARG",
+      "street": "L** a******",
+      "number": "2**",
+      "neighborhood": null,
+      "complement": "P***",
+      "reference": null,
+      "geoCoordinates": [-51.4779552, -0.0039779]
+    },
+    "logisticsInfo": [
+      {
+        "itemIndex": 0,
+        "itemId": "310276524",
+        "selectedDeliveryChannel": "delivery",
+        "selectedSla": "Normal",
+        "lockTTL": "10d",
+        "price": 0,
+        "listPrice": 1090000,
+        "sellingPrice": 0,
+        "deliveryWindow": null,
+        "deliveryCompany": null,
+        "shippingEstimate": "5bd",
+        "shippingEstimateDate": "2026-06-13T10:50:00+00:00",
+        "slas": [
+          {
+            "id": "Normal",
+            "name": "N*****",
+            "shippingEstimate": "5bd",
+            "shippingEstimateDate": "2026-06-13T10:50:00+00:00",
+            "deliveryWindow": null,
+            "availableDeliveryWindows": [],
+            "deliveryIds": [
+              {
+                "courierId": "buenosaires_andreani_normal",
+                "courierName": "B*******************************",
+                "dockId": "105",
+                "quantity": 1,
+                "warehouseId": "1_105",
+                "accountCarrierName": "s*******",
+                "kitItemDetails": []
+              }
+            ],
+            "listPrice": 1090000,
+            "price": 0,
+            "deliveryChannel": "delivery",
+            "pickupStoreInfo": {
+              "additionalInfo": null,
+              "address": null,
+              "dockId": null,
+              "friendlyName": null,
+              "isPickupStore": false
+            },
+            "polygonName": "b**********",
+            "lockTTL": "10d",
+            "pickupPointId": null,
+            "transitTime": "4bd",
+            "pickupDistance": 0
+          }
+        ],
+        "shipsTo": ["ARG"],
+        "deliveryIds": [
+          {
+            "courierId": "buenosaires_andreani_normal",
+            "courierName": "B*******************************",
+            "dockId": "105",
+            "quantity": 1,
+            "warehouseId": "1_105",
+            "accountCarrierName": "s*******",
+            "kitItemDetails": []
+          }
+        ],
+        "deliveryChannels": [
+          {
+            "id": "delivery",
+            "stockBalance": 0
+          },
+          {
+            "id": "pickup-in-point",
+            "stockBalance": 0
+          }
+        ],
+        "deliveryChannel": null,
+        "pickupStoreInfo": {
+          "additionalInfo": null,
+          "address": null,
+          "dockId": null,
+          "friendlyName": null,
+          "isPickupStore": false
+        },
+        "addressId": "5334735052482",
+        "versionId": null,
+        "entityId": null,
+        "polygonName": "b**********",
+        "pickupPointId": null,
+        "transitTime": "4bd"
+      },
+      {
+        "itemIndex": 1,
+        "itemId": "310215051",
+        "selectedDeliveryChannel": "delivery",
+        "selectedSla": "Normal",
+        "lockTTL": "10d",
+        "price": 0,
+        "listPrice": 1090000,
+        "sellingPrice": 0,
+        "deliveryWindow": null,
+        "deliveryCompany": null,
+        "shippingEstimate": "4bd",
+        "shippingEstimateDate": "2026-06-12T10:50:00+00:00",
+        "slas": [
+          {
+            "id": "Normal",
+            "name": "N*****",
+            "shippingEstimate": "4bd",
+            "shippingEstimateDate": "2026-06-12T10:50:00+00:00",
+            "deliveryWindow": null,
+            "availableDeliveryWindows": [],
+            "deliveryIds": [
+              {
+                "courierId": "buenosaires_andreani_normal",
+                "courierName": "B*******************************",
+                "dockId": "104",
+                "quantity": 1,
+                "warehouseId": "1_104",
+                "accountCarrierName": "s*******",
+                "kitItemDetails": []
+              }
+            ],
+            "listPrice": 1090000,
+            "price": 0,
+            "deliveryChannel": "delivery",
+            "pickupStoreInfo": {
+              "additionalInfo": null,
+              "address": null,
+              "dockId": null,
+              "friendlyName": null,
+              "isPickupStore": false
+            },
+            "polygonName": "b**********",
+            "lockTTL": "10d",
+            "pickupPointId": null,
+            "transitTime": "4bd",
+            "pickupDistance": 0
+          }
+        ],
+        "shipsTo": ["ARG"],
+        "deliveryIds": [
+          {
+            "courierId": "buenosaires_andreani_normal",
+            "courierName": "B*******************************",
+            "dockId": "104",
+            "quantity": 1,
+            "warehouseId": "1_104",
+            "accountCarrierName": "s*******",
+            "kitItemDetails": []
+          }
+        ],
+        "deliveryChannels": [
+          {
+            "id": "delivery",
+            "stockBalance": 0
+          },
+          {
+            "id": "pickup-in-point",
+            "stockBalance": 0
+          }
+        ],
+        "deliveryChannel": null,
+        "pickupStoreInfo": {
+          "additionalInfo": null,
+          "address": null,
+          "dockId": null,
+          "friendlyName": null,
+          "isPickupStore": false
+        },
+        "addressId": "5334735052482",
+        "versionId": null,
+        "entityId": null,
+        "polygonName": "b**********",
+        "pickupPointId": null,
+        "transitTime": "4bd"
+      }
+    ],
+    "trackingHints": [],
+    "selectedAddresses": [
+      {
+        "addressId": "5334735052482",
+        "versionId": null,
+        "entityId": null,
+        "addressType": "residential",
+        "receiverName": "J****** A*****",
+        "street": "L** a******",
+        "number": "2**",
+        "complement": "P***",
+        "neighborhood": null,
+        "postalCode": "1***",
+        "city": "E* J*****",
+        "state": "BUENOS AIRES",
+        "country": "ARG",
+        "reference": null,
+        "geoCoordinates": [-51.4779552, -0.0039779]
+      }
+    ],
+    "availableAddresses": [
+      {
+        "addressId": "5334735052482",
+        "versionId": null,
+        "entityId": null,
+        "addressType": "residential",
+        "receiverName": "J****** A*****",
+        "street": "L** a******",
+        "number": "2**",
+        "complement": "P***",
+        "neighborhood": null,
+        "postalCode": "1***",
+        "city": "E* J*****",
+        "state": "BUENOS AIRES",
+        "country": "ARG",
+        "reference": null,
+        "geoCoordinates": [-51.4779552, -0.0039779]
+      }
+    ],
+    "contactInformation": [],
+    "contactsInfo": []
+  },
+  "customData": {
+    "customApps": [
+      {
+        "fields": {
+          "source": "WEB_MOBILE",
+          "uuid": "e9c8de42-c333-48eb-95ce-8c98cfb8c3ce",
+          "snrs_params": "{\"utm_source\":\"Instagram\",\"utm_medium\":\"Bio\",\"utm_campaign\":\"Linktree\"}"
+        },
+        "id": "synerise",
+        "major": 1
+      }
+    ],
+    "customFields": []
+  },
+  "purchaseAgentData": null,
+  "authorizationPolicyData": null,
+  "items": [
+    {
+      "additionalInfo": {
+        "categoriesIds": "/106/108/121/",
+        "productClusterId": "155,409,503,558,884,939,991,1023",
+        "commercialConditionId": "1",
+        "dimension": {
+          "cubicweight": 0,
+          "height": 2,
+          "length": 40,
+          "weight": 100,
+          "width": 30
+        },
+        "brandName": "A*****",
+        "brandId": "2000007",
+        "offeringInfo": null,
+        "offeringType": null,
+        "offeringTypeId": null
+      },
+      "sellerSku": "310276524",
+      "priceTable": null,
+      "priceValidUntil": "2027-06-08T10:47:37Z",
+      "callCenterOperator": null,
+      "commission": 0,
+      "freightCommission": 0,
+      "taxCode": "",
+      "catalogProvider": "vrn:vtex.catalog-api-proxy:-:sportingio:master:/proxy/authenticated/catalog/pvt/sku/stockkeepingunitbyid/310276524",
+      "uniqueId": "F1849459D0BB4AC6A7AE9FB9B78FA89D",
+      "id": "310276524",
+      "productId": "63539",
+      "productRefId": "6KD4902-000",
+      "refId": "6KD4902-000-*M",
+      "ean": "4068805274268",
+      "name": "C**********************************************************",
+      "skuName": "C**********************",
+      "modalType": null,
+      "parentItemIndex": null,
+      "parentAssemblyBinding": null,
+      "assemblies": [],
+      "tax": 0,
+      "price": 10999900,
+      "listPrice": 10999900,
+      "manualPrice": null,
+      "manualPriceAppliedBy": null,
+      "sellingPrice": 10312397,
+      "rewardValue": 0,
+      "isGift": false,
+      "preSaleDate": null,
+      "productCategoryIds": "/106/108/121/",
+      "productCategories": {
+        "106": "SPORTING",
+        "108": "INDUMENTARIA",
+        "121": "Camperas"
+      },
+      "quantity": 1,
+      "seller": "1",
+      "sellerChain": ["1"],
+      "imageUrl": "https://sporting.vteximg.com.br/arquivos/ids/2612328-150-150/6KD4902-000-1.jpg?v=639106664930200000",
+      "detailUrl": "/campera-adidas-essentials-de-hombre-6kd4902-000/p",
+      "components": [],
+      "bundleItems": [],
+      "attachments": [],
+      "attachmentOfferings": [],
+      "offerings": [],
+      "priceTags": [
+        {
+          "name": "d***************************************************************************************",
+          "value": -687503,
+          "rawValue": -6875.03,
+          "isPercentual": false,
+          "identifier": "5571dc89-92f5-4de2-9abf-f74b78f7ebf2"
+        },
+        {
+          "name": "d******************************************************************************************",
+          "value": -1090000,
+          "rawValue": -10900,
+          "isPercentual": false,
+          "identifier": "b7597e74-2e0d-4a6a-a2ea-835dc06dfde7"
+        }
+      ],
+      "availability": "available",
+      "measurementUnit": "un",
+      "unitMultiplier": 1,
+      "manufacturerCode": null,
+      "priceDefinition": {
+        "calculatedSellingPrice": 10312397,
+        "total": 10312397,
+        "sellingPrices": [
+          {
+            "value": 10312397,
+            "quantity": 1
+          }
+        ]
+      }
+    },
+    {
+      "additionalInfo": {
+        "categoriesIds": "/106/108/129/130/",
+        "productClusterId": "155,503,558,884,905,939,991,1023",
+        "commercialConditionId": "1",
+        "dimension": {
+          "cubicweight": 0.5,
+          "height": 2,
+          "length": 40,
+          "weight": 100,
+          "width": 30
+        },
+        "brandName": "A*****",
+        "brandId": "2000007",
+        "offeringInfo": null,
+        "offeringType": null,
+        "offeringTypeId": null
+      },
+      "sellerSku": "310215051",
+      "priceTable": null,
+      "priceValidUntil": "2027-06-08T10:49:07Z",
+      "callCenterOperator": null,
+      "commission": 0,
+      "freightCommission": 0,
+      "taxCode": "",
+      "catalogProvider": "vrn:vtex.catalog-api-proxy:-:sportingio:master:/proxy/authenticated/catalog/pvt/sku/stockkeepingunitbyid/310215051",
+      "uniqueId": "14DFF584D16D4CBCBA4567466F7E2AA7",
+      "id": "310215051",
+      "productId": "55033",
+      "productRefId": "6JW1949-000",
+      "refId": "6JW1949-000-*M",
+      "ean": "4067906014155",
+      "name": "R*********************************************************",
+      "skuName": "C**********************",
+      "modalType": null,
+      "parentItemIndex": null,
+      "parentAssemblyBinding": null,
+      "assemblies": [],
+      "tax": 0,
+      "price": 4999900,
+      "listPrice": 4999900,
+      "manualPrice": null,
+      "manualPriceAppliedBy": null,
+      "sellingPrice": 4687403,
+      "rewardValue": 0,
+      "isGift": false,
+      "preSaleDate": null,
+      "productCategoryIds": "/106/108/129/130/",
+      "productCategories": {
+        "106": "SPORTING",
+        "108": "INDUMENTARIA",
+        "129": "Remeras",
+        "130": "Mangas Cortas"
+      },
+      "quantity": 1,
+      "seller": "1",
+      "sellerChain": ["1"],
+      "imageUrl": "https://sporting.vteximg.com.br/arquivos/ids/2088160-150-150/6JW1949-000-1.jpg?v=638859408424300000",
+      "detailUrl": "/remera-adidas-essentials-de-hombre-6jw1949-000/p",
+      "components": [],
+      "bundleItems": [],
+      "attachments": [],
+      "attachmentOfferings": [],
+      "offerings": [],
+      "priceTags": [
+        {
+          "name": "d***************************************************************************************",
+          "value": -312497,
+          "rawValue": -3124.97,
+          "isPercentual": false,
+          "identifier": "5571dc89-92f5-4de2-9abf-f74b78f7ebf2"
+        },
+        {
+          "name": "d******************************************************************************************",
+          "value": -1090000,
+          "rawValue": -10900,
+          "isPercentual": false,
+          "identifier": "b7597e74-2e0d-4a6a-a2ea-835dc06dfde7"
+        }
+      ],
+      "availability": "available",
+      "measurementUnit": "un",
+      "unitMultiplier": 1,
+      "manufacturerCode": null,
+      "priceDefinition": {
+        "calculatedSellingPrice": 4687403,
+        "total": 4687403,
+        "sellingPrices": [
+          {
+            "value": 4687403,
+            "quantity": 1
+          }
+        ]
+      }
+    }
+  ],
+  "sellers": [
+    {
+      "subSellerId": "1",
+      "fulfillmentEndpoint": "http://fulfillment.vtexcommerce.com.br/api/fulfillment?an=sportingio",
+      "id": "1",
+      "name": "S*******",
+      "logo": ""
+    }
+  ],
+  "giftRegistryData": null,
+  "receiptData": null,
+  "contextData": null,
+  "marketPlaceOrderId": "",
+  "marketPlaceOrderGroup": null,
+  "marketplaceServicesEndpoint": null,
+  "orderFormId": "954391ec589b42aabddba50ba49bc33b",
+  "sequence": "8000860",
+  "affiliateId": "",
+  "status": "",
+  "callCenterOperator": "",
+  "userProfileId": "84a56c9e-1416-4b25-9192-06957956ce83",
+  "hostName": "s*********",
+  "creationVersion": null,
+  "creationEnvironment": null,
+  "lastChangeVersion": null,
+  "workflowInstanceId": null,
+  "marketplacePaymentValue": null,
+  "orderId": "1638038000860-01",
+  "orderGroup": "1638038000860",
+  "state": "canceled",
+  "isCheckedIn": false,
+  "sellerOrderId": "00-1638038000860-01",
+  "storeId": null,
+  "checkedInPickupPointId": null,
+  "value": 14999800,
+  "totals": [
+    {
+      "id": "Items",
+      "name": "T*****************",
+      "value": 15999800
+    },
+    {
+      "id": "Discounts",
+      "name": "T******************",
+      "value": -1000000
+    },
+    {
+      "id": "Shipping",
+      "name": "C********************",
+      "value": 0,
+      "alternativeTotals": [
+        {
+          "id": "AlternativeShippingTotal",
+          "name": "A*************************",
+          "value": 2180000
+        },
+        {
+          "id": "AlternativeShippingDiscount",
+          "name": "A****************************",
+          "value": -2180000
+        }
+      ]
+    },
+    {
+      "id": "Tax",
+      "name": "C*********************",
+      "value": 0
+    }
+  ],
+  "ratesAndBenefitsData": {
+    "rateAndBenefitsIdentifiers": [
+      {
+        "id": "5571dc89-92f5-4de2-9abf-f74b78f7ebf2",
+        "name": "S************************************************************",
+        "featured": false,
+        "description": "Promoción para cupón de 10% de descuento con tope de $10.000 para usar por synerise para suscripción de usuarios",
+        "matchedParameters": {
+          "Seller@CatalogSystem": "1|inclusive",
+          "couponCode@Marketing": "SUSCRIPCIONWP"
+        },
+        "additionalInfo": null
+      },
+      {
+        "id": "b7597e74-2e0d-4a6a-a2ea-835dc06dfde7",
+        "name": "G********************************************",
+        "featured": false,
+        "description": "Envío Gratis desde $149.990",
+        "matchedParameters": {},
+        "additionalInfo": null
+      }
+    ],
+    "teaser": []
+  },
+  "clientPreferencesData": {
+    "locale": "es-AR",
+    "optinNewsLetter": true
+  },
+  "commercialConditionData": null,
+  "marketingData": {
+    "utmSource": "Instagram",
+    "utmMedium": "Bio",
+    "utmCampaign": "Linktree",
+    "utmipage": "",
+    "utmiPart": "",
+    "utmiCampaign": "",
+    "coupon": "SUSCRIPCIONWP",
+    "marketingTags": ["Promocion adidas Pelotas", "Antecedentes"]
+  },
+  "storePreferencesData": {
+    "countryCode": "ARG",
+    "saveUserData": false,
+    "timeZone": "Argentina Standard Time",
+    "currencyCode": "ARS",
+    "currencyLocale": 11274,
+    "currencySymbol": "$",
+    "currencyFormatInfo": {
+      "currencyDecimalDigits": 0,
+      "currencyDecimalSeparator": ",",
+      "currencyGroupSeparator": ".",
+      "currencyGroupSize": 3,
+      "startsWithCurrencySymbol": true
+    }
+  },
+  "openTextField": null,
+  "itemMetadata": null,
+  "taxData": null,
+  "hooksData": null,
+  "changeData": null,
+  "subscriptionData": null,
+  "salesChannel": "1",
+  "followUpEmail": "a**********************************.v***.c**.b*",
+  "creationDate": "2026-06-08T10:51:27.4323444Z",
+  "lastChange": "2026-06-08T11:23:10.2001689Z",
+  "timeZoneCreationDate": "2026-06-08T07:51:27.4323444",
+  "timeZoneLastChange": "2026-06-08T08:23:10.2001689",
+  "isCompleted": true,
+  "merchantName": null,
+  "userType": "",
+  "roundingError": 0,
+  "allowEdition": false,
+  "allowCancellation": false,
+  "isUserDataVisible": false,
+  "allowChangeSeller": false,
+  "cancellationData": {
+    "requestedByUser": false,
+    "requestedByPaymentNotification": true,
+    "reason": null,
+    "cancellationDate": "2026-06-08T11:23:08.399426Z"
+  },
+  "_accountInfo": {
+    "MainAccountName": "s*******",
+    "AccountName": "s*********",
+    "Cnpj": "30709964360",
+    "Id": "3b50fdc9-2fa8-4ed3-b86c-5aace09d5051",
+    "AppId": "aad3c2ce-d115-4059-88c2-a0060e5acd9a",
+    "IsActive": true,
+    "IsOperating": true,
+    "CreationDate": "2017-09-13T04:00:22",
+    "OperationDate": "2018-04-12T14:44:05",
+    "CompanyName": "B*************",
+    "TradingName": "S*******",
+    "City": "San Miguel de Tucuman",
+    "Complement": null,
+    "Country": "Argentina",
+    "State": null,
+    "Address": "Avenida Siria",
+    "District": null,
+    "Number": "2345",
+    "PostalCode": "4000",
+    "Licenses": [28],
+    "ParentAccountId": null,
+    "ParentAccountName": null,
+    "InactivationDate": null,
+    "Platform": "vtex",
+    "Privacy": null,
+    "HasPiiRestriction": false,
+    "Infra": null,
+    "Sponsor": "3f29e577-433f-42b8-9ded-d2ede67d8ab3"
+  }
+}

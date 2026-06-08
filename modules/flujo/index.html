@@ -38,6 +38,10 @@
       }
 
       /* ---- Shell ---- */
+      .ct-flow-page {
+        max-width: 1600px;
+      }
+
       .ct-flow-shell {
         background: #ffffff;
         border: 1px solid var(--ct-card-border);
@@ -166,14 +170,15 @@
 
       /* ---- Board ---- */
       .ct-flow-board-wrap {
-        overflow: auto;
+        overflow: hidden;
         background: #f8fafc;
       }
 
       .ct-flow-board {
         position: relative;
-        min-width: 1180px;
+        width: 1320px;
         height: 560px;
+        transform-origin: top left;
         background:
           linear-gradient(#e5e7eb 1px, transparent 1px) 0 0 / 100% 112px,
           #f8fafc;
@@ -264,9 +269,12 @@
         font-size: 12px;
       }
 
-      .ct-flow-node.vtex,
-      .ct-flow-node.andreani {
+      .ct-flow-node.vtex {
         color: var(--ct-platform-vtex);
+      }
+
+      .ct-flow-node.andreani {
+        color: #ef4056;
       }
 
       .ct-flow-node.pim {
@@ -419,8 +427,8 @@
       }
 
       .ct-flow-detail-inner .ct-actions {
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-columns: 1fr;
         gap: 8px;
         margin-top: 18px;
       }
@@ -428,6 +436,16 @@
       .ct-flow-detail-inner .ct-actions a,
       .ct-flow-detail-inner .ct-actions button {
         justify-content: center;
+      }
+
+      .ct-flow-device-actions {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+
+      .ct-badge.ct-platform-andreani {
+        background: #ef4056;
       }
 
       .ct-flow-detail-note {
@@ -492,7 +510,7 @@
   <body>
     <header class="ct-topbar" data-ct-topbar></header>
 
-    <main class="ct-page">
+    <main class="ct-page ct-flow-page">
       <h1>Flujo de Correos</h1>
       <p class="ct-subtitle">
         Mapa operativo de correos por etapa y plataforma. Sirve para identificar qué plantillas existen,
@@ -509,8 +527,9 @@
             <p id="ct-flow-stats" class="ct-flow-stats"></p>
           </div>
           <div class="ct-flow-legend">
-            <span class="ct-badge ct-platform-vtex">VTEX / Andreani</span>
+            <span class="ct-badge ct-platform-vtex">VTEX</span>
             <span class="ct-badge ct-platform-pim">PIM</span>
+            <span class="ct-badge ct-platform-andreani">Andreani</span>
             <span class="ct-badge ct-platform-otra">Ocasa</span>
             <span class="ct-flow-legend-sep"></span>
             <span class="ct-badge ct-status-activo">✓ Existente</span>
@@ -690,6 +709,7 @@
 
         const tabsEl = document.getElementById('ct-flow-tabs');
         const boardEl = document.getElementById('ct-flow-board');
+        const boardWrapEl = document.querySelector('.ct-flow-board-wrap');
         const titleEl = document.getElementById('ct-flow-title');
         const descriptionEl = document.getElementById('ct-flow-description');
         const detailOverlay = document.getElementById('ct-flow-detail-overlay');
@@ -709,6 +729,11 @@
         let activeFlowId = 'entrega';
         let activeStatusFilter = null;
         let activePriorityFilter = false;
+
+        const BOARD_WIDTH = 1320;
+        const BOARD_HEIGHT = 560;
+        const NODE_WIDTH = 118;
+        const NODE_HEIGHT = 42;
 
         const STATUS_META = {
           existente: { label: 'Existente', icon: '✓', className: 'ct-status-activo' },
@@ -740,14 +765,25 @@
           return `<span class="ct-badge ct-platform-otra">Prioridad ${CT.escapeHtml(PRIORITY_LABELS[priority] || priority || 'media')}</span>`;
         }
 
-        function nodeActionUrl(node) {
+        function nodeActionUrl(node, device) {
           const template = templateById(node.templateId);
           if (template) {
             const params = new URLSearchParams({ template: template.id });
             if (template.ejemplo) params.set('example', template.ejemplo);
+            if (device) params.set('device', device);
             return `../visualizador/index.html?${params.toString()}`;
           }
           return '../../docs/crear-nueva-plantilla.md';
+        }
+
+        function fitBoardToViewport() {
+          if (!boardWrapEl) return;
+          const available = boardWrapEl.clientWidth;
+          const scale = Math.min(1, available / BOARD_WIDTH);
+          boardEl.style.width = BOARD_WIDTH + 'px';
+          boardEl.style.height = BOARD_HEIGHT + 'px';
+          boardEl.style.transform = `scale(${scale})`;
+          boardWrapEl.style.height = Math.ceil(BOARD_HEIGHT * scale) + 'px';
         }
 
         function applyFilter() {
@@ -783,9 +819,17 @@
           detailTrigger.textContent = node.trigger || 'Por definir.';
           detailTemplate.textContent = template ? template.nombre : 'Sin plantilla creada';
 
-          const actionLabel = template ? 'Ver preview' : 'Crear plantilla';
-          const actionClass = template ? 'ct-btn ct-btn-primary' : 'ct-btn';
-          detailActions.innerHTML = `<a class="${actionClass}" href="${CT.escapeHtml(nodeActionUrl(node))}">${CT.escapeHtml(actionLabel)}</a>`;
+          if (template) {
+            detailActions.innerHTML = `
+              <div class="ct-flow-device-actions">
+                <a class="ct-btn ct-btn-primary" href="${CT.escapeHtml(nodeActionUrl(node, 'desktop'))}">Desktop</a>
+                <a class="ct-btn" href="${CT.escapeHtml(nodeActionUrl(node, 'tablet'))}">Tablet</a>
+                <a class="ct-btn" href="${CT.escapeHtml(nodeActionUrl(node, 'mobile'))}">Mobile</a>
+              </div>
+            `;
+          } else {
+            detailActions.innerHTML = `<a class="ct-btn" href="${CT.escapeHtml(nodeActionUrl(node))}">Crear plantilla</a>`;
+          }
 
           detailOverlay.classList.add('open');
           backdrop.classList.add('open');
@@ -799,10 +843,10 @@
         function linkPath(from, to) {
           const start = nodePosition(from);
           const end = nodePosition(to);
-          const x1 = start.left + 118;
-          const y1 = start.top + 21;
+          const x1 = start.left + NODE_WIDTH;
+          const y1 = start.top + NODE_HEIGHT / 2;
           const x2 = end.left;
-          const y2 = end.top + 21;
+          const y2 = end.top + NODE_HEIGHT / 2;
           const mid = x1 + Math.max(24, (x2 - x1) / 2);
           return `M ${x1} ${y1} H ${mid} V ${y2} H ${x2}`;
         }
@@ -839,7 +883,7 @@
 
           const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
           svg.setAttribute('class', 'ct-flow-svg');
-          svg.setAttribute('viewBox', '0 0 1180 560');
+          svg.setAttribute('viewBox', `0 0 ${BOARD_WIDTH} ${BOARD_HEIGHT}`);
 
           // Arrow marker
           const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
@@ -911,6 +955,7 @@
           });
 
           applyFilter();
+          fitBoardToViewport();
         }
 
         // Filter bar
@@ -952,6 +997,7 @@
         document.addEventListener('keydown', (event) => {
           if (event.key === 'Escape' && detailOverlay.classList.contains('open')) closeDetail();
         });
+        window.addEventListener('resize', fitBoardToViewport);
 
         renderFlow('entrega');
       })();

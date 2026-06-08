@@ -296,6 +296,46 @@ a.ct-card {
   background: #ffffff;
 }
 
+.ct-device-switch {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.ct-device-switch button {
+  min-height: 34px;
+  border: 1px solid var(--ct-card-border);
+  border-radius: 8px;
+  background: #ffffff;
+  color: var(--ct-text);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.ct-device-switch button:hover {
+  border-color: var(--ct-accent);
+  color: var(--ct-accent);
+}
+
+.ct-device-switch button.active {
+  background: var(--ct-navy);
+  border-color: var(--ct-navy);
+  color: #ffffff;
+}
+
+.ct-preview-frame[data-device="desktop"] {
+  max-width: 920px;
+}
+
+.ct-preview-frame[data-device="tablet"] {
+  max-width: 768px;
+}
+
+.ct-preview-frame[data-device="mobile"] {
+  max-width: 390px;
+}
+
 .ct-preview-status {
   font-size: 13px;
   color: var(--ct-text-muted);

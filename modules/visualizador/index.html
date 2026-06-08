@@ -6,11 +6,26 @@
     <title>Visualizador de Plantillas — Correos Transaccionales</title>
     <link rel="stylesheet" href="../../assets/css/shared.css" />
     <script src="../../assets/js/vendor/handlebars-4.7.8.min.js"></script>
+    <style>
+      .ct-vis-page {
+        max-width: 1500px;
+      }
+
+      .ct-vis-page .ct-preview-pane {
+        flex: 1 1 820px;
+        min-width: 0;
+      }
+
+      .ct-vis-page .ct-preview-frame-wrap {
+        align-items: flex-start;
+        overflow: hidden;
+      }
+    </style>
   </head>
   <body>
     <header class="ct-topbar" data-ct-topbar></header>
 
-    <main class="ct-page">
+    <main class="ct-page ct-vis-page">
       <h1>Visualizador de Plantillas</h1>
       <p class="ct-subtitle">
         Revisá el HTML real de cada correo con datos de ejemplo validados, sin necesidad de enviarlo.
@@ -25,6 +40,14 @@
           <div>
             <label for="ct-vis-example">Escenario de datos</label>
             <select id="ct-vis-example" aria-label="Elegir escenario de datos"></select>
+          </div>
+          <div>
+            <label>Formato de vista</label>
+            <div class="ct-device-switch" id="ct-vis-device-switch" aria-label="Elegir formato de vista">
+              <button type="button" data-device="desktop">Desktop</button>
+              <button type="button" data-device="tablet">Tablet</button>
+              <button type="button" data-device="mobile">Mobile</button>
+            </div>
           </div>
           <div class="ct-card ct-preview-info">
             <div class="ct-badges" id="ct-vis-badges"></div>
@@ -43,6 +66,7 @@
               class="ct-preview-frame"
               title="Previsualización del correo"
               sandbox="allow-same-origin"
+              scrolling="no"
             ></iframe>
           </div>
         </div>
@@ -72,6 +96,8 @@
         const urlParams = new URLSearchParams(window.location.search);
         const requestedTemplateId = urlParams.get('template');
         const requestedExamplePath = urlParams.get('example');
+        const requestedDevice = urlParams.get('device');
+        let activeDevice = ['desktop', 'tablet', 'mobile'].includes(requestedDevice) ? requestedDevice : 'desktop';
 
         renderable.forEach((template) => {
           const option = document.createElement('option');
@@ -94,6 +120,17 @@
         function setStatus(message, isError) {
           statusEl.textContent = message || '';
           statusEl.classList.toggle('error', Boolean(isError));
+        }
+
+        function applyDevice(device) {
+          activeDevice = device;
+          frame.dataset.device = device;
+          document.querySelectorAll('#ct-vis-device-switch button').forEach((button) => {
+            const isActive = button.dataset.device === device;
+            button.classList.toggle('active', isActive);
+            button.setAttribute('aria-pressed', String(isActive));
+          });
+          window.setTimeout(() => CT.resizeEmailFrame(frame), 0);
         }
 
         function updateInfo(template) {
@@ -140,6 +177,14 @@
         });
 
         exampleSelect.addEventListener('change', renderPreview);
+
+        document.getElementById('ct-vis-device-switch').addEventListener('click', (event) => {
+          const button = event.target.closest('button[data-device]');
+          if (!button) return;
+          applyDevice(button.dataset.device);
+        });
+
+        applyDevice(activeDevice);
 
         if (renderable.length) {
           const requestedTemplate = renderable.find((t) => t.id === requestedTemplateId);

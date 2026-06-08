@@ -157,16 +157,26 @@ const CT = (() => {
     return Object.assign({}, data, order, { orders, _accountInfo: data._accountInfo || order._accountInfo });
   }
 
+  function resizeEmailFrame(frame) {
+    try {
+      const doc = frame.contentDocument;
+      const body = doc?.body;
+      const root = doc?.documentElement;
+      if (body) body.style.overflowX = 'hidden';
+      if (root) root.style.overflowX = 'hidden';
+
+      const h = Math.max(body?.scrollHeight || 0, root?.scrollHeight || 0);
+      if (h && h > 0) frame.style.height = Math.max(h, 400) + 'px';
+    } catch (e) {}
+  }
+
   function renderEmailToFrame(frame, html, data) {
     ensureEmailHelpers();
     const compiled = Handlebars.compile(html);
     frame.srcdoc = compiled(buildEmailRenderContext(data));
     frame.addEventListener('load', function onLoad() {
       frame.removeEventListener('load', onLoad);
-      try {
-        const h = frame.contentDocument?.body?.scrollHeight;
-        if (h && h > 0) frame.style.height = Math.max(h, 400) + 'px';
-      } catch (e) {}
+      resizeEmailFrame(frame);
     });
   }
 
@@ -179,6 +189,7 @@ const CT = (() => {
     downloadFile,
     fetchText,
     buildEmailRenderContext,
+    resizeEmailFrame,
     renderEmailToFrame,
   };
 })();

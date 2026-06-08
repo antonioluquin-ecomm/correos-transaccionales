@@ -6,11 +6,59 @@
     <title>Simulador QA — Correos Transaccionales</title>
     <link rel="stylesheet" href="../../assets/css/shared.css" />
     <script src="../../assets/js/vendor/handlebars-4.7.8.min.js"></script>
+    <style>
+      .ct-sim-page {
+        max-width: 1500px;
+      }
+
+      .ct-sim-page .ct-preview-tool {
+        gap: 24px;
+      }
+
+      .ct-sim-page .ct-preview-controls {
+        flex-basis: 320px;
+      }
+
+      .ct-sim-page .ct-preview-pane {
+        flex: 1 1 820px;
+        min-width: 0;
+      }
+
+      .ct-sim-page .ct-preview-frame-wrap {
+        align-items: flex-start;
+        padding: 18px;
+        overflow: hidden;
+      }
+
+      .ct-sim-page .ct-preview-frame {
+        max-width: none;
+        width: min(100%, 920px);
+      }
+
+      .ct-sim-page .ct-preview-frame[data-device="tablet"] {
+        width: min(100%, 768px);
+      }
+
+      .ct-sim-page .ct-preview-frame[data-device="mobile"] {
+        width: min(100%, 390px);
+      }
+
+      @media (max-width: 760px) {
+        .ct-sim-page .ct-preview-controls,
+        .ct-sim-page .ct-preview-pane {
+          flex-basis: 100%;
+        }
+
+        .ct-sim-page .ct-preview-frame-wrap {
+          padding: 10px;
+        }
+      }
+    </style>
   </head>
   <body>
     <header class="ct-topbar" data-ct-topbar></header>
 
-    <main class="ct-page">
+    <main class="ct-page ct-sim-page">
       <h1>Simulador QA</h1>
       <p class="ct-subtitle">
         Herramienta interna para probar variantes de envío, productos y promociones sobre un pedido base.
@@ -48,6 +96,14 @@
               <option value="con">Con promoción aplicada</option>
             </select>
           </div>
+          <div>
+            <label>Formato de vista</label>
+            <div class="ct-device-switch" id="ct-sim-device-switch" aria-label="Elegir formato de vista">
+              <button type="button" data-device="desktop">Desktop</button>
+              <button type="button" data-device="tablet">Tablet</button>
+              <button type="button" data-device="mobile">Mobile</button>
+            </div>
+          </div>
           <div class="ct-card ct-preview-info">
             <div class="ct-badges" id="ct-sim-badges"></div>
             <h3 id="ct-sim-nombre"></h3>
@@ -65,6 +121,7 @@
               class="ct-preview-frame"
               title="Previsualización simulada del correo"
               sandbox="allow-same-origin"
+              scrolling="no"
             ></iframe>
           </div>
         </div>
@@ -91,6 +148,7 @@
         const baseEl = document.getElementById('ct-sim-base');
         const statusEl = document.getElementById('ct-sim-status');
         const frame = document.getElementById('ct-sim-frame');
+        let activeDevice = 'desktop';
 
         baseEl.textContent = BASE_ORDER_PATH;
 
@@ -128,6 +186,17 @@
         function setStatus(message, isError) {
           statusEl.textContent = message || '';
           statusEl.classList.toggle('error', Boolean(isError));
+        }
+
+        function applyDevice(device) {
+          activeDevice = device;
+          frame.dataset.device = device;
+          document.querySelectorAll('#ct-sim-device-switch button').forEach((button) => {
+            const isActive = button.dataset.device === device;
+            button.classList.toggle('active', isActive);
+            button.setAttribute('aria-pressed', String(isActive));
+          });
+          window.setTimeout(() => CT.resizeEmailFrame(frame), 0);
         }
 
         function updateInfo(template) {
@@ -296,6 +365,14 @@
         [templateSelect, envioSelect, productosSelect, promocionSelect].forEach((el) => {
           el.addEventListener('change', renderPreview);
         });
+
+        document.getElementById('ct-sim-device-switch').addEventListener('click', (event) => {
+          const button = event.target.closest('button[data-device]');
+          if (!button) return;
+          applyDevice(button.dataset.device);
+        });
+
+        applyDevice(activeDevice);
 
         if (renderable.length) {
           templateSelect.value = renderable[0].id;
