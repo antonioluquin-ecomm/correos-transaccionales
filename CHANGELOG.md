@@ -2,6 +2,14 @@
 
 Formato: versión, fecha, resumen del cambio principal.
 
+## v1.2.2 — 2026-06-08
+
+Rediseño visual de `pedido-cancelado.html` (Version 3):
+
+- **Hero header**: banda roja oscura (`#7f1d1d`) en la parte superior de la card, con ícono ✕ circular, título dinámico (`Cancelaste tu pedido` / `Tu pedido fue cancelado` según `requestedByUser`) y greeting + N.º de pedido. Reemplaza el badge-pill genérico — impacto visual inmediato al abrir el correo.
+- **Barra de progreso segmentada**: cuatro pills de color con 4px de separación (verde · rojo · gris · gris) + indicador de posición `▼` sobre el segmento activo. Más moderna y compacta que la versión anterior de círculos + líneas.
+- **Callout "Reintegro en proceso"**: rediseñado con borde izquierdo de acento rojo (`4px solid #ef4444`) en lugar del box plano, patrón más consistente con estándares de UI modernos.
+
 ## v1.2.1 — 2026-06-08
 
 CSS inline en templates VTEX para compatibilidad con Gmail y clientes que stripean `<head>`:
