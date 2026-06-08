@@ -1,4 +1,4 @@
-<!--Pedido-Confirmado — Version Final-->
+<!--Pedido-Confirmado — Version 2-->
 <!doctype html>
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -350,6 +350,12 @@
         .logo-img {
           width: 120px !important;
         }
+        /* Hero: quitar border-radius en mobile */
+        .hero-confirm-td {
+          border-radius: 0 !important;
+          padding-left: 16px !important;
+          padding-right: 16px !important;
+        }
       }
     </style>
   </head>
@@ -394,48 +400,36 @@
             <tr>
               <td>
                 <table role="presentation" width="100%" class="card">
-                  <!-- Badge -->
+                  <!-- ── Hero pedido confirmado ── -->
                   <tr>
-                    <td style="padding: 24px 24px 12px 24px">
-                      <span class="badge" style="display:inline-block;background:#ecfdf3;border:1px solid #bbf7d0;border-radius:999px;padding:5px 12px;font-size:12px;line-height:16px;font-weight:bold;color:#166534">&#10003;&nbsp; Pedido recibido</span>
+                    <td class="hero-confirm-td" bgcolor="#14532d" style="background: #14532d; border-radius: 12px 12px 0 0; padding: 30px 24px 26px; text-align: center">
+                      <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin: 0 auto 14px auto">
+                        <tr>
+                          <td align="center" style="width: 56px; height: 56px; line-height: 56px; background: #166534; border: 2px solid #86efac; border-radius: 50%; font-size: 22px; font-weight: bold; color: #ffffff; text-align: center">&#10003;</td>
+                        </tr>
+                      </table>
+                      <p style="font-size: 21px; line-height: 27px; font-weight: bold; color: #ffffff; margin: 0 0 8px 0; text-align: center">
+                        Recibimos tu pedido
+                      </p>
+                      <p style="font-size: 13px; line-height: 18px; color: #86efac; margin: 0; text-align: center">
+                        Hola{{#if orders.0.clientProfileData.firstName}}, {{orders.0.clientProfileData.firstName}}{{/if}}
+                      </p>
                     </td>
                   </tr>
 
-                  <!-- Titular + status box -->
+                  <!-- ── Descripción + callout ── -->
                   <tr>
-                    <td
-                      style="
-                        padding: 0 24px 20px 24px;
-                        border-bottom: 1px solid #f3f4f6;
-                      "
-                    >
-                      <p class="h1" style="font-size:26px;line-height:32px;font-weight:bold;color:#111827;margin:0 0 8px 0">
-                        Hola{{#if orders.0.clientProfileData.firstName}},
-                        {{orders.0.clientProfileData.firstName}}{{/if}}
+                    <td style="padding: 20px 24px; border-bottom: 1px solid #f3f4f6">
+                      <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin: 0 0 14px 0">
+                        Tu compra ingresó correctamente.
                       </p>
-                      <p class="text" style="font-size:14px;line-height:22px;color:#374151;font-size:18px;line-height:26px;color:#111827;font-weight:bold;margin:0 0 10px 0">Recibimos tu pedido</p>
-                      <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin-bottom: 14px">
-                        Tu compra ingresó correctamente. Ahora estamos
-                        <strong>validando el pago</strong> para poder avanzar con la preparación y el despacho.
-                      </p>
-                      <table
-                        role="presentation"
-                        width="100%"
-                        style="
-                          background: #f9fafb;
-                          border: 1px solid #e5e7eb;
-                          border-radius: 10px;
-                        "
-                      >
+                      <!-- Callout borde izquierdo azul -->
+                      <table role="presentation" width="100%" style="table-layout: fixed">
                         <tr>
-                          <td style="padding: 14px 16px">
-                            <p class="status-strong" style="font-size:14px;line-height:20px;font-weight:bold;color:#111827;margin:0 0 3px 0">
-                              Estamos validando tu pago
-                            </p>
-                            <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:0">
-                              Te avisamos por email cuando el pago quede
-                              aprobado y el pedido continúe.
-                            </p>
+                          <td style="width: 4px; background: #3b82f6; border-radius: 4px 0 0 4px; padding: 0; font-size: 0; line-height: 0">&nbsp;</td>
+                          <td style="background: #eff6ff; border-top: 1px solid #bfdbfe; border-right: 1px solid #bfdbfe; border-bottom: 1px solid #bfdbfe; border-radius: 0 8px 8px 0; padding: 12px 14px">
+                            <p style="font-size: 13px; line-height: 18px; font-weight: bold; color: #1d4ed8; margin: 0 0 3px 0">Validando tu pago</p>
+                            <p style="font-size: 13px; line-height: 18px; color: #1e40af; margin: 0">Te avisamos cuando quede aprobado para avanzar con la preparación.</p>
                           </td>
                         </tr>
                       </table>
@@ -483,69 +477,34 @@
                     </td>
                   </tr>
 
-                  <!-- Barra de progreso -->
+                  <!-- ── Barra de progreso segmentada — paso 2 activo (Pago) ── -->
                   <tr>
-                    <td
-                      style="
-                        padding: 20px 24px;
-                        border-top: 1px solid #f3f4f6;
-                        border-bottom: 1px solid #f3f4f6;
-                      "
-                    >
-                      <table
-                        role="presentation"
-                        width="100%"
-                        style="table-layout: fixed"
-                      >
+                    <td style="padding: 18px 24px 16px; border-top: 1px solid #f3f4f6; border-bottom: 1px solid #f3f4f6">
+                      <!-- Indicador ▼ sobre el paso activo -->
+                      <table role="presentation" width="100%" style="table-layout: fixed; margin: 0 0 2px 0">
                         <tr>
-                          <td align="center" width="25%" valign="top">
-                            <table role="presentation" width="100%">
-                              <tr>
-                                <td width="50%"></td>
-                                <td width="50%" class="line-done"></td>
-                              </tr>
-                            </table>
-                            <div class="step-dot step-done">&#10003;</div>
-                            <p class="step-lbl" style="font-size:11px;font-weight:bold;text-align:center;color: #16a34a">
-                              Recibido
-                            </p>
-                          </td>
-                          <td align="center" width="25%" valign="top">
-                            <table role="presentation" width="100%">
-                              <tr>
-                                <td width="50%" class="line-done"></td>
-                                <td width="50%" class="line-next"></td>
-                              </tr>
-                            </table>
-                            <div class="step-dot step-current">2</div>
-                            <p class="step-lbl" style="font-size:11px;font-weight:bold;text-align:center;color: #1d4ed8">Pago</p>
-                          </td>
-                          <td align="center" width="25%" valign="top">
-                            <table role="presentation" width="100%">
-                              <tr>
-                                <td width="50%" class="line-next"></td>
-                                <td width="50%" class="line-next"></td>
-                              </tr>
-                            </table>
-                            <div class="step-dot step-next">3</div>
-                            <p class="step-lbl" style="font-size:11px;font-weight:bold;text-align:center;color: #9ca3af">
-                              Preparación
-                            </p>
-                          </td>
-                          <td align="center" width="25%" valign="top">
-                            <table role="presentation" width="100%">
-                              <tr>
-                                <td width="50%" class="line-next"></td>
-                                <td width="50%"></td>
-                              </tr>
-                            </table>
-                            <div class="step-dot step-next">4</div>
-                            <p class="step-lbl" style="font-size:11px;font-weight:bold;text-align:center;color: #9ca3af">
-                              {{#eq
-                              orders.0.shippingData.logisticsInfo.[0].selectedDeliveryChannel
-                              "pickup-in-point"}}Retiro{{else}}Entrega{{/eq}}
-                            </p>
-                          </td>
+                          <td width="25%" style="padding: 0"></td>
+                          <td width="25%" align="center" style="padding: 0; font-size: 9px; line-height: 12px; color: #3b82f6; text-align: center">&#9660;</td>
+                          <td width="25%" style="padding: 0"></td>
+                          <td width="25%" style="padding: 0"></td>
+                        </tr>
+                      </table>
+                      <!-- Segmentos de color -->
+                      <table role="presentation" width="100%" style="table-layout: fixed; border-collapse: separate; border-spacing: 4px 0">
+                        <tr>
+                          <td bgcolor="#16a34a" style="background: #16a34a; height: 8px; border-radius: 4px; font-size: 1px; line-height: 1px">&nbsp;</td>
+                          <td bgcolor="#3b82f6" style="background: #3b82f6; height: 8px; border-radius: 4px; font-size: 1px; line-height: 1px">&nbsp;</td>
+                          <td bgcolor="#e5e7eb" style="background: #e5e7eb; height: 8px; border-radius: 4px; font-size: 1px; line-height: 1px">&nbsp;</td>
+                          <td bgcolor="#e5e7eb" style="background: #e5e7eb; height: 8px; border-radius: 4px; font-size: 1px; line-height: 1px">&nbsp;</td>
+                        </tr>
+                      </table>
+                      <!-- Etiquetas -->
+                      <table role="presentation" width="100%" style="table-layout: fixed; margin-top: 8px">
+                        <tr>
+                          <td width="25%" align="center" style="padding: 0 2px"><p style="font-size: 11px; line-height: 15px; font-weight: bold; color: #16a34a; text-align: center; margin: 0">&#10003;&nbsp;Recibido</p></td>
+                          <td width="25%" align="center" style="padding: 0 2px"><p style="font-size: 11px; line-height: 15px; font-weight: bold; color: #3b82f6; text-align: center; margin: 0">Pago</p></td>
+                          <td width="25%" align="center" style="padding: 0 2px"><p style="font-size: 11px; line-height: 15px; color: #9ca3af; text-align: center; margin: 0">Preparación</p></td>
+                          <td width="25%" align="center" style="padding: 0 2px"><p style="font-size: 11px; line-height: 15px; color: #9ca3af; text-align: center; margin: 0">{{#eq orders.0.shippingData.logisticsInfo.[0].selectedDeliveryChannel "pickup-in-point"}}Retiro{{else}}Entrega{{/eq}}</p></td>
                         </tr>
                       </table>
                     </td>

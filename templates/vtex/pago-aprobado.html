@@ -1,4 +1,4 @@
-<!--Pago-Aprobado — Version Final-->
+<!--Pago-Aprobado — Version 2-->
 <!doctype html>
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -94,6 +94,8 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
   .m-show{display:block!important;max-height:none!important;overflow:visible!important}
   .item-img{width:60px!important;height:auto!important}
   .logo-img{width:120px!important}
+  /* Hero: quitar border-radius en mobile */
+  .hero-aprobado-td{border-radius:0!important;padding-left:16px!important;padding-right:16px!important}
 }
 </style>
 </head>
@@ -124,27 +126,36 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
     <td>
       <table role="presentation" width="100%" class="card">
 
-        <!-- Badge -->
+        <!-- ── Hero pago aprobado ── -->
         <tr>
-          <td style="padding:24px 24px 12px 24px">
-            <span class="badge" style="display:inline-block;background:#ecfdf3;border:1px solid #bbf7d0;border-radius:999px;padding:5px 12px;font-size:12px;line-height:16px;font-weight:bold;color:#166534">&#10003;&nbsp; Pago aprobado</span>
+          <td class="hero-aprobado-td" bgcolor="#14532d" style="background: #14532d; border-radius: 12px 12px 0 0; padding: 30px 24px 26px; text-align: center">
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin: 0 auto 14px auto">
+              <tr>
+                <td align="center" style="width: 56px; height: 56px; line-height: 56px; background: #166534; border: 2px solid #86efac; border-radius: 50%; font-size: 22px; font-weight: bold; color: #ffffff; text-align: center">&#10003;</td>
+              </tr>
+            </table>
+            <p style="font-size: 21px; line-height: 27px; font-weight: bold; color: #ffffff; margin: 0 0 8px 0; text-align: center">
+              ¡Tu pago fue aprobado!
+            </p>
+            <p style="font-size: 13px; line-height: 18px; color: #86efac; margin: 0; text-align: center">
+              Hola{{#if clientProfileData.firstName}}, {{clientProfileData.firstName}}{{/if}}
+            </p>
           </td>
         </tr>
 
-        <!-- Titular + status box -->
+        <!-- ── Descripción + callout ── -->
         <tr>
-          <td style="padding:0 24px 20px 24px;border-bottom:1px solid #f3f4f6">
-            <p class="h1" style="font-size:26px;line-height:32px;font-weight:bold;color:#111827;margin:0 0 8px 0">Hola{{#if clientProfileData.firstName}}, {{clientProfileData.firstName}}{{/if}}</p>
-            <p class="text" style="font-size:14px;line-height:22px;color:#374151;font-size:18px;line-height:26px;color:#111827;font-weight:bold;margin:0 0 10px 0">¡Tu pago fue aprobado!</p>
-            <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin-bottom:14px">
-              El pago de tu pedido quedó confirmado. Ya estamos
-              <strong>preparando tu pedido</strong> para enviártelo lo antes posible.
+          <td style="padding: 20px 24px; border-bottom: 1px solid #f3f4f6">
+            <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin: 0 0 14px 0">
+              Tu pago quedó confirmado. Ya estamos preparando tu pedido.
             </p>
-            <table role="presentation" width="100%" style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px">
+            <!-- Callout borde izquierdo verde -->
+            <table role="presentation" width="100%" style="table-layout: fixed">
               <tr>
-                <td style="padding:14px 16px">
-                  <p class="status-strong" style="font-size:14px;line-height:20px;font-weight:bold;color:#111827;color:#14532d">Tu pedido ya está en preparación</p>
-                  <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:0">
+                <td style="width: 4px; background: #16a34a; border-radius: 4px 0 0 4px; padding: 0; font-size: 0; line-height: 0">&nbsp;</td>
+                <td style="background: #f0fdf4; border-top: 1px solid #bbf7d0; border-right: 1px solid #bbf7d0; border-bottom: 1px solid #bbf7d0; border-radius: 0 8px 8px 0; padding: 12px 14px">
+                  <p style="font-size: 13px; line-height: 18px; font-weight: bold; color: #166534; margin: 0 0 3px 0">Tu pedido ya está en preparación</p>
+                  <p style="font-size: 13px; line-height: 18px; color: #14532d; margin: 0">
                     {{#if shippingData.logisticsInfo.[0].shippingEstimateDate}}
                       {{#eq shippingData.logisticsInfo.[0].selectedDeliveryChannel "pickup-in-point"}}Fecha estimada para retiro: <strong style="color:#111827">{{formatDate shippingData.logisticsInfo.[0].shippingEstimateDate}}</strong>{{else}}Fecha estimada de entrega: <strong style="color:#111827">{{formatDate shippingData.logisticsInfo.[0].shippingEstimateDate}}</strong>{{/eq}}
                     {{else}}
@@ -197,49 +208,34 @@ a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important
           </td>
         </tr>
 
-        <!-- Barra de progreso — paso 3 activo (Preparación) -->
+        <!-- ── Barra de progreso segmentada — paso 3 activo (Preparación) ── -->
         <tr>
-          <td style="padding:20px 24px;border-top:1px solid #f3f4f6;border-bottom:1px solid #f3f4f6">
-            <table role="presentation" width="100%" style="table-layout:fixed">
+          <td style="padding: 18px 24px 16px; border-top: 1px solid #f3f4f6; border-bottom: 1px solid #f3f4f6">
+            <!-- Indicador ▼ sobre el paso activo -->
+            <table role="presentation" width="100%" style="table-layout: fixed; margin: 0 0 2px 0">
               <tr>
-                <!-- Paso 1: Recibido — done -->
-                <td align="center" width="25%" valign="top">
-                  <table role="presentation" width="100%"><tr>
-                    <td width="50%"></td>
-                    <td width="50%" class="line-done"></td>
-                  </tr></table>
-                  <div class="step-dot step-done">&#10003;</div>
-                  <p class="step-lbl" style="font-size:11px;font-weight:bold;text-align:center;color:#16a34a">Recibido</p>
-                </td>
-                <!-- Paso 2: Pago — done -->
-                <td align="center" width="25%" valign="top">
-                  <table role="presentation" width="100%"><tr>
-                    <td width="50%" class="line-done"></td>
-                    <td width="50%" class="line-done"></td>
-                  </tr></table>
-                  <div class="step-dot step-done">&#10003;</div>
-                  <p class="step-lbl" style="font-size:11px;font-weight:bold;text-align:center;color:#16a34a">Pago</p>
-                </td>
-                <!-- Paso 3: Preparación — current -->
-                <td align="center" width="25%" valign="top">
-                  <table role="presentation" width="100%"><tr>
-                    <td width="50%" class="line-done"></td>
-                    <td width="50%" class="line-next"></td>
-                  </tr></table>
-                  <div class="step-dot step-current">3</div>
-                  <p class="step-lbl" style="font-size:11px;font-weight:bold;text-align:center;color:#1d4ed8">Preparación</p>
-                </td>
-                <!-- Paso 4: Entrega / Retiro — next -->
-                <td align="center" width="25%" valign="top">
-                  <table role="presentation" width="100%"><tr>
-                    <td width="50%" class="line-next"></td>
-                    <td width="50%"></td>
-                  </tr></table>
-                  <div class="step-dot step-next">4</div>
-                  <p class="step-lbl" style="font-size:11px;font-weight:bold;text-align:center;color:#9ca3af">
-                    {{#eq shippingData.logisticsInfo.[0].selectedDeliveryChannel "pickup-in-point"}}Retiro{{else}}Entrega{{/eq}}
-                  </p>
-                </td>
+                <td width="25%" style="padding: 0"></td>
+                <td width="25%" style="padding: 0"></td>
+                <td width="25%" align="center" style="padding: 0; font-size: 9px; line-height: 12px; color: #3b82f6; text-align: center">&#9660;</td>
+                <td width="25%" style="padding: 0"></td>
+              </tr>
+            </table>
+            <!-- Segmentos de color -->
+            <table role="presentation" width="100%" style="table-layout: fixed; border-collapse: separate; border-spacing: 4px 0">
+              <tr>
+                <td bgcolor="#16a34a" style="background: #16a34a; height: 8px; border-radius: 4px; font-size: 1px; line-height: 1px">&nbsp;</td>
+                <td bgcolor="#16a34a" style="background: #16a34a; height: 8px; border-radius: 4px; font-size: 1px; line-height: 1px">&nbsp;</td>
+                <td bgcolor="#3b82f6" style="background: #3b82f6; height: 8px; border-radius: 4px; font-size: 1px; line-height: 1px">&nbsp;</td>
+                <td bgcolor="#e5e7eb" style="background: #e5e7eb; height: 8px; border-radius: 4px; font-size: 1px; line-height: 1px">&nbsp;</td>
+              </tr>
+            </table>
+            <!-- Etiquetas -->
+            <table role="presentation" width="100%" style="table-layout: fixed; margin-top: 8px">
+              <tr>
+                <td width="25%" align="center" style="padding: 0 2px"><p style="font-size: 11px; line-height: 15px; font-weight: bold; color: #16a34a; text-align: center; margin: 0">&#10003;&nbsp;Recibido</p></td>
+                <td width="25%" align="center" style="padding: 0 2px"><p style="font-size: 11px; line-height: 15px; font-weight: bold; color: #16a34a; text-align: center; margin: 0">&#10003;&nbsp;Pago</p></td>
+                <td width="25%" align="center" style="padding: 0 2px"><p style="font-size: 11px; line-height: 15px; font-weight: bold; color: #3b82f6; text-align: center; margin: 0">Preparación</p></td>
+                <td width="25%" align="center" style="padding: 0 2px"><p style="font-size: 11px; line-height: 15px; color: #9ca3af; text-align: center; margin: 0">{{#eq shippingData.logisticsInfo.[0].selectedDeliveryChannel "pickup-in-point"}}Retiro{{else}}Entrega{{/eq}}</p></td>
               </tr>
             </table>
           </td>

@@ -2,6 +2,22 @@
 
 Formato: versión, fecha, resumen del cambio principal.
 
+## v1.2.3 — 2026-06-08
+
+Estandarización del sistema de diseño en las tres plantillas VTEX principales:
+
+**`pedido-confirmado.html` (Version 2) y `pago-aprobado.html` (Version 2)**:
+
+- **Hero header**: banda verde oscura (`#14532d`) en la parte superior de la card, con ícono ✓ circular (`#166534` + borde `#86efac`), título de acción y greeting. Reemplaza el badge-pill genérico + h1/h2 — impacto visual inmediato al abrir el correo.
+- **Barra de progreso segmentada**: cuatro pills de color con 4px de separación + indicador `▼` sobre el segmento activo. Mismo patrón que pedido-cancelado v3, colores adaptados al estado de cada email:
+  - pedido-confirmado: 🟢 Recibido · 🔵 Pago (activo) · ⬜ Preparación · ⬜ Retiro/Entrega
+  - pago-aprobado: 🟢 Recibido · 🟢 Pago · 🔵 Preparación (activo) · ⬜ Retiro/Entrega
+- **Callout con borde izquierdo de acento**: reemplaza el status box plano anterior.
+  - pedido-confirmado: borde azul (`#3b82f6`) · fondo `#eff6ff` · "Validando tu pago"
+  - pago-aprobado: borde verde (`#16a34a`) · fondo `#f0fdf4` · "Tu pedido ya está en preparación" + fecha estimada condicional (preservada)
+- **Descripción simplificada**: reducida al hecho puntual; el callout absorbe el "qué pasa ahora".
+- **Mobile fix**: clases `.hero-confirm-td` y `.hero-aprobado-td` con `border-radius: 0 !important` en `@media (max-width: 600px)`.
+
 ## v1.2.2 — 2026-06-08
 
 Rediseño visual de `pedido-cancelado.html` (Version 3):
