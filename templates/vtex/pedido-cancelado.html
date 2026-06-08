@@ -380,7 +380,7 @@
         mso-hide: all;
       "
     >
-      Tu pedido {{orders.0.orderId}} fue cancelado. Ya estamos procesando el
+      Tu pedido {{orderId}} fue cancelado. Ya estamos procesando el
       reintegro del importe
       abonado.&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;
     </div>
@@ -426,8 +426,8 @@
                       "
                     >
                       <p class="h1" style="font-size:26px;line-height:32px;font-weight:bold;color:#111827;margin:0 0 8px 0">
-                        Hola{{#if orders.0.clientProfileData.firstName}},
-                        {{orders.0.clientProfileData.firstName}}{{/if}}
+                        Hola{{#if clientProfileData.firstName}},
+                        {{clientProfileData.firstName}}{{/if}}
                       </p>
                       <p
                         class="text"
@@ -439,18 +439,18 @@
                           margin: 0 0 10px 0;
                         "
                       >
-                        {{#if orders.0.cancellationData.requestedByUser}}Cancelaste tu pedido{{else}}Tu pedido fue cancelado{{/if}}
+                        {{#if cancellationData.requestedByUser}}Cancelaste tu pedido{{else}}Tu pedido fue cancelado{{/if}}
                       </p>
                       <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin-bottom: 14px">
-                        {{#if orders.0.cancellationData.requestedByUser}}
-                        Cancelaste el <strong>pedido {{orders.0.orderId}}</strong>{{#if orders.0.cancellationData.cancellationDate}} el <strong>{{formatDate orders.0.cancellationData.cancellationDate}}</strong>{{/if}}.
+                        {{#if cancellationData.requestedByUser}}
+                        Cancelaste el <strong>pedido {{orderId}}</strong>{{#if cancellationData.cancellationDate}} el <strong>{{formatDate cancellationData.cancellationDate}}</strong>{{/if}}.
                         {{else}}
-                        Tu <strong>pedido {{orders.0.orderId}}</strong> fue cancelado{{#if orders.0.cancellationData.cancellationDate}} el <strong>{{formatDate orders.0.cancellationData.cancellationDate}}</strong>{{/if}}.
+                        Tu <strong>pedido {{orderId}}</strong> fue cancelado{{#if cancellationData.cancellationDate}} el <strong>{{formatDate cancellationData.cancellationDate}}</strong>{{/if}}.
                         {{/if}}
                         Ya estamos <strong>procesando el reintegro</strong> del importe abonado según tu medio de pago.
                       </p>
 
-                      {{#if orders.0.cancellationData.reason}}
+                      {{#if cancellationData.reason}}
                       <p
                         style="
                           display: inline-block;
@@ -464,7 +464,7 @@
                           margin: 0 0 14px 0;
                         "
                       >
-                        Motivo: {{orders.0.cancellationData.reason}}
+                        Motivo: {{cancellationData.reason}}
                       </p>
                       {{/if}}
 
@@ -512,13 +512,12 @@
                         <tr>
                           <td class="sum-cell">
                             <p class="label" style="font-size:11px;line-height:16px;font-weight:bold;letter-spacing:0.5px;text-transform:uppercase;color:#6b7280;margin:0 0 4px 0">N.º de pedido</p>
-                            <p class="value" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0">{{orders.0.orderId}}</p>
+                            <p class="value" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0">{{orderId}}</p>
                           </td>
                           <td class="sum-cell sum-cell-r">
                             <p class="label" style="font-size:11px;line-height:16px;font-weight:bold;letter-spacing:0.5px;text-transform:uppercase;color:#6b7280;margin:0 0 4px 0">Fecha de cancelación</p>
                             <p class="value" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0">
-                              {{#if orders.0.cancellationData.cancellationDate}}{{formatDate
-                              orders.0.cancellationData.cancellationDate}}{{else}}—{{/if}}
+                              {{#if cancellationData.cancellationDate}}{{formatDate cancellationData.cancellationDate}}{{else}}—{{/if}}
                             </p>
                           </td>
                         </tr>
@@ -526,13 +525,13 @@
                           <td class="sum-cell sum-last">
                             <p class="label" style="font-size:11px;line-height:16px;font-weight:bold;letter-spacing:0.5px;text-transform:uppercase;color:#6b7280;margin:0 0 4px 0">Total cancelado</p>
                             <p class="value" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0">
-                              $ {{formatCurrency orders.0.value}}
+                              $ {{formatCurrency value}}
                             </p>
                           </td>
                           <td class="sum-cell sum-cell-r sum-last">
                             <p class="label" style="font-size:11px;line-height:16px;font-weight:bold;letter-spacing:0.5px;text-transform:uppercase;color:#6b7280;margin:0 0 4px 0">Fecha de compra</p>
                             <p class="value" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0">
-                              {{formatDate orders.0.creationDate}}
+                              {{#if creationDate}}{{formatDate creationDate}}{{else}}—{{/if}}
                             </p>
                           </td>
                         </tr>
@@ -631,7 +630,7 @@
                         <tr>
                           <td style="padding: 0 6px 0 0">
                             <a
-                              href="https://{{hostName}}/account#/orders/{{orders.0.orderId}}"
+                              href="https://{{hostName}}/account#/orders/{{orderId}}"
                               class="cta-dark" style="display:inline-block;background:#111827;color:#ffffff;border-radius:10px;font-size:15px;line-height:48px;font-weight:bold;padding:0 28px;text-align:center"
                               target="_blank"
                             >
@@ -664,8 +663,8 @@
                           <!-- Columna Pago -->
                           <td class="two-cell">
                             <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0 0 12px 0">Pago</p>
-                            {{#if orders.0.paymentData.transactions}}
-                            {{#each orders.0.paymentData.transactions}}
+                            {{#if paymentData.transactions}}
+                            {{#each paymentData.transactions}}
                             {{#each payments}}
                             <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin-bottom: 2px">
                               <strong>{{paymentSystemName}}</strong>
@@ -693,7 +692,7 @@
                               Medio de pago registrado.
                             </p>
                             {{/if}}
-                            {{#each orders.0.totals}}{{#eq id
+                            {{#each totals}}{{#eq id
                             "Shipping"}}{{#eq value 0}}
                             <p
                               class="text-sm green"
@@ -706,11 +705,11 @@
                           <!-- Columna Dirección -->
                           <td class="two-cell two-cell-r two-cell-last">
                             {{#eq
-                            orders.0.shippingData.logisticsInfo.[0].selectedDeliveryChannel
+                            shippingData.logisticsInfo.[0].selectedDeliveryChannel
                             "pickup-in-point"}}
                             <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0 0 12px 0">Retiro (referencia)</p>
                             {{#with
-                            orders.0.shippingData.logisticsInfo.[0].pickupStoreInfo}}
+                            shippingData.logisticsInfo.[0].pickupStoreInfo}}
                             {{#if friendlyName}}
                             <p
                               class="text"
@@ -733,7 +732,7 @@
                             </p>
                             {{else}}
                             <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0 0 12px 0">Envío (referencia)</p>
-                            {{#with orders.0.shippingData.selectedAddresses.[0]}}
+                            {{#with shippingData.selectedAddresses.[0]}}
                             {{#if receiverName}}
                             <p
                               class="text"
@@ -781,7 +780,7 @@
                       <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin: 0">Productos cancelados</p>
                     </td>
                   </tr>
-                  {{#each orders.0.items}}
+                  {{#each items}}
                   <tr>
                     <td
                       style="padding: 16px 20px{{#unless @first}}; border-top: 1px solid #f3f4f6{{/unless}}"
@@ -883,7 +882,7 @@
                       <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin: 0">Resumen del pedido</p>
                     </td>
                   </tr>
-                  {{#each orders.0.totals}}
+                  {{#each totals}}
                   {{#eq id "Items"}}
                   <tr>
                     <td style="padding: 10px 20px">
@@ -956,7 +955,7 @@
                   </tr>
                   {{/eq}}
                   {{/each}}
-                  {{#with orders.0.ratesAndBenefitsData}}
+                  {{#with ratesAndBenefitsData}}
                   {{#if rateAndBenefitsIdentifiers.[0]}}
                   <tr>
                     <td colspan="2" style="padding: 0 20px 10px 20px">
@@ -987,7 +986,7 @@
                       "
                     >
                       <span class="tot-strong" style="font-size:16px;line-height:22px;font-weight:bold;color:#111827"
-                        >$ {{formatCurrency orders.0.value}}</span
+                        >$ {{formatCurrency value}}</span
                       >
                     </td>
                   </tr>
@@ -1091,7 +1090,7 @@
                             </p>
                           </td>
                         </tr>
-                        {{#each orders.0.paymentData.transactions}}
+                        {{#each paymentData.transactions}}
                         {{#each payments}}
                         {{#eq group "giftCard"}}
                         <!-- Item 3: Gift Card (condicional) -->
