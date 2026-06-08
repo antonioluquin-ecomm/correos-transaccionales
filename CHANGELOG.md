@@ -2,6 +2,21 @@
 
 Formato: versión, fecha, resumen del cambio principal.
 
+## v1.1.0 — 2026-06-08
+
+Nueva plantilla: **Pedido Cancelado** (`templates/vtex/pedido-cancelado.html`):
+
+- Rediseñada desde cero siguiendo el mismo estándar visual que `pedido-confirmado.html`: cards separadas, grid 2×2 de resumen, tipografía consistente (`.label`, `.value`, `.text`, `.text-sm`), responsive mobile con stacking de columnas.
+- Badge rojo "✕ Pedido cancelado" + status box "Reintegro en proceso" en lugar del overlay de la v1.
+- Barra de progreso HTML/CSS de 4 pasos: Recibido ✓ → Cancelado ✕ → Reintegro ○ → Acreditado ○ (reemplaza la imagen estática).
+- Resumen 2×2: N.º de pedido, Fecha de cancelación, Total cancelado, Fecha de compra.
+- Sección "¿Cuándo acreditan el reintegro?" con pasos numerados: débito / crédito / gift card (condicional).
+- Variables migradas a prefijo `orders.0.*` (consistente con `pedido-confirmado.html`).
+- Productos cancelados con imagen ligeramente desaturada (opacity 0.7, grayscale 25%) para reflejar que no se despacharán.
+- 2 CTAs: "Ver mi pedido" (oscuro) + "Volver a comprar" (verde) con URL dinámica `{{hostName}}`.
+- `config.js`: plantilla registrada en TEMPLATES; se agrega escenario "Pedido cancelado (2 productos, envío gratis)" a EXAMPLE_SCENARIOS.
+- `flujo/index.html`: nodo "Pedido cancelado" actualizado de `faltante` → `existente`.
+
 ## v1.0.0 — 2026-06-07
 
 Rediseño del módulo Flujo de Correos:
