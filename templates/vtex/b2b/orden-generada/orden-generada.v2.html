@@ -1,771 +1,644 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office"
-  xmlns:v="urn:schemas-microsoft-com:vml"
-  style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; box-sizing: border-box; width: 100%; height: 100%; margin: 0; padding: 0; background: #f1f1f1 !important;">
-
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Rubik: wght@400 !important;600&display=swap" rel="stylesheet">
-  <title>{{_accountInfo.TradingName}}</title>
-  <!--[if gte mso 9]>
-  <xml>
-    <o:OfficeDocumentSettings>
-    <o:AllowPNG/>
-    <o:PixelsPerInch>96</o:PixelsPerInch>
-    </o:OfficeDocumentSettings>
-  </xml>
-  <![endif]-->
-  <style>
-    a[x-apple-data-detectors] {
-      color: inherit !important;
-      text-decoration: none !important;
-      font-size: inherit !important;
-      font-family: inherit !important;
-      font-weight: inherit !important;
-      line-height: inherit !important;
-    }
-  </style>
-  <style>
-    @media (max-width: 600px) {
+<!--B2B Orden Generada - Version 2-->
+<!doctype html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta name="x-apple-disable-message-reformatting" />
+    <meta
+      name="format-detection"
+      content="telephone=no,address=no,email=no,date=no"
+    />
+    <title>{{_accountInfo.TradingName}} - Orden generada</title>
+    <style>
+      html,
+      body {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+        background: #f3f4f6 !important;
+      }
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+          Arial, sans-serif;
+        color: #111827;
+      }
+      * {
+        -ms-text-size-adjust: 100%;
+        -webkit-text-size-adjust: 100%;
+      }
+      table,
+      td {
+        border-collapse: collapse !important;
+        mso-table-lspace: 0pt !important;
+        mso-table-rspace: 0pt !important;
+      }
       img {
-        max-width: 100% !important;
-        height: auto !important;
+        border: 0;
+        outline: none;
+        text-decoration: none;
+        -ms-interpolation-mode: bicubic;
+        display: block;
       }
-    }
-
-    @media (max-width: 30rem) {
-      .dn-s {
-        display: none !important;
+      a {
+        text-decoration: none;
+        color: inherit;
       }
-    }
-  </style>
-  <style>
-    @media screen and (min-width: 30em) {
-      .mw2-ns {
-        max-width: 2rem !important;
+      a[x-apple-data-detectors] {
+        color: inherit !important;
+        text-decoration: none !important;
       }
-
-      .pr4-ns {
-        padding-right: 2rem !important;
+      #outlook a {
+        padding: 0;
       }
 
-      .pb2-ns {
-        padding-bottom: .5rem !important;
+      .wrap {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      .card {
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        overflow: hidden;
+      }
+      .gap {
+        height: 12px;
+        line-height: 12px;
+        font-size: 12px;
+      }
+      .h1 {
+        font-size: 26px;
+        line-height: 32px;
+        font-weight: bold;
+        color: #ffffff;
+        margin: 0 0 10px 0;
+      }
+      .h2 {
+        font-size: 15px;
+        line-height: 22px;
+        font-weight: bold;
+        color: #111827;
+        margin: 0 0 12px 0;
+      }
+      .text {
+        font-size: 14px;
+        line-height: 22px;
+        color: #374151;
+        margin: 0;
+      }
+      .text-sm {
+        font-size: 13px;
+        line-height: 20px;
+        color: #6b7280;
+        margin: 0;
+      }
+      .label {
+        font-size: 11px;
+        line-height: 16px;
+        font-weight: bold;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        color: #6b7280;
+        margin: 0 0 4px 0;
+      }
+      .value {
+        font-size: 15px;
+        line-height: 22px;
+        font-weight: bold;
+        color: #111827;
+        margin: 0;
+      }
+      .pill {
+        display: inline-block;
+        border: 1px solid rgba(255, 255, 255, 0.32);
+        border-radius: 999px;
+        color: #ffffff;
+        font-size: 12px;
+        line-height: 18px;
+        font-weight: bold;
+        padding: 5px 10px;
+      }
+      .step-dot {
+        width: 22px;
+        height: 22px;
+        border-radius: 999px;
+        text-align: center;
+        font-size: 12px;
+        line-height: 22px;
+        font-weight: bold;
+      }
+      .step-active {
+        background: #16a34a;
+        color: #ffffff;
+      }
+      .step-pending {
+        background: #e5e7eb;
+        color: #6b7280;
+      }
+      .step-line {
+        height: 2px;
+        background: #e5e7eb;
+        line-height: 2px;
+        font-size: 2px;
+      }
+      .item-name {
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: bold;
+        color: #111827;
+        margin: 0 0 3px 0;
+      }
+      .item-meta {
+        font-size: 12px;
+        line-height: 18px;
+        color: #6b7280;
+        margin: 0;
+      }
+      .item-price {
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: bold;
+        color: #111827;
+        margin: 4px 0 0 0;
+      }
+      .tot-key,
+      .tot-val {
+        font-size: 14px;
+        line-height: 20px;
+        color: #374151;
+      }
+      .tot-strong {
+        font-size: 16px;
+        line-height: 22px;
+        font-weight: bold;
+        color: #111827;
+      }
+      .green {
+        color: #16a34a;
+      }
+      .cta-green {
+        display: inline-block;
+        background: #16a34a;
+        color: #ffffff !important;
+        border-radius: 10px;
+        font-size: 15px;
+        line-height: 48px;
+        font-weight: bold;
+        padding: 0 28px;
+        text-align: center;
+        mso-line-height-rule: exactly;
+      }
+      .footer-link {
+        color: #16a34a !important;
+        font-weight: bold;
       }
 
-      .ph4-ns {
-        padding-left: 2rem !important;
-        padding-right: 2rem !important;
+      @media only screen and (max-width: 600px) {
+        .wrap {
+          width: 100% !important;
+          max-width: 100% !important;
+        }
+        .card {
+          border-radius: 0 !important;
+          border-left: none !important;
+          border-right: none !important;
+        }
+        .outer-pad {
+          padding: 12px 0 !important;
+        }
+        .hero-td {
+          border-radius: 0 !important;
+          padding: 28px 16px !important;
+        }
+        .content-pad {
+          padding-left: 16px !important;
+          padding-right: 16px !important;
+        }
+        .meta-cell,
+        .meta-cell-r,
+        .two-cell,
+        .two-cell-r {
+          display: block !important;
+          width: 100% !important;
+          border-left: none !important;
+          border-bottom: 1px solid #f3f4f6 !important;
+          box-sizing: border-box !important;
+        }
+        .meta-cell-last,
+        .two-cell-last {
+          border-bottom: none !important;
+        }
+        .cta-green {
+          display: block !important;
+          width: 100% !important;
+          box-sizing: border-box !important;
+        }
+        .item-img {
+          width: 60px !important;
+          height: auto !important;
+        }
+        .m-hide {
+          display: none !important;
+        }
+        .m-show {
+          display: block !important;
+          max-height: none !important;
+          overflow: visible !important;
+        }
+        .logo-img {
+          width: 132px !important;
+        }
       }
+    </style>
+  </head>
 
-      .mv1-ns {
-        margin-top: .25rem !important;
-        margin-bottom: .25rem !important;
-      }
+  <body>
+    <div
+      style="
+        display: none;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        color: transparent;
+        visibility: hidden;
+        mso-hide: all;
+      "
+    >
+      Tu orden {{orderId}} fue generada y queda pendiente de validación.&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;
+    </div>
 
-      .mv4-ns {
-        margin-top: 2rem !important;
-        margin-bottom: 2rem !important;
-      }
-    }
-  </style>
-</head>
-
-<body
-  style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; box-sizing: border-box; width: 100%; height: 100%; margin: 0; padding: 0; background: #f1f1f1 !important; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
-  <table width="100%" border="0" cellpadding="0" cellspacing="0"
-    style="box-sizing: border-box; margin: 0; padding: 0; background: #f1f1f1; border-collapse: collapse; border-spacing: 0; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; width: 100%; height: 100%; line-height: 100% !important;">
-    <tr style="box-sizing: border-box !important;">
-      <td align="left" valign="top"
-        style="font-size: 14px; line-height: 20px; box-sizing: border-box; border-collapse: collapse; text-align: left !important; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
-        <table class="mv4-ns" width="100%" align="center" border="0" cellpadding="0" cellspacing="0"
-          style="box-sizing: border-box; max-width: 56.25rem; width: 100%; background-color: #fff; border-collapse: collapse; border-spacing: 0; mso-table-lspace: 0pt; mso-table-rspace: 0pt !important; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;"
-          bgcolor="#fff">
-          <tr style="box-sizing: border-box !important;">
-            <td class="ph4-ns"
-              style="font-size: 14px; line-height: 20px; box-sizing: border-box; border-collapse: collapse; border-bottom-style: solid; border-bottom-width: 1px; border-color: #eee; width: 100%; padding-left: .5rem; padding-right: .5rem; padding-bottom: 0; text-align: center !important; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;"
-              align="center">
-              <div
-                style="box-sizing: border-box; width: 8rem; margin-bottom: 1rem; margin-top: 1rem; margin-right: auto; margin-left: auto !important;">
-                <a href="http://{{_accountInfo.HostName}}" style="box-sizing: border-box !important;">
-                  <img border="0" width="auto" alt="Logo"
-                    src="https://ventadeportiva.vtexassets.com/assets/vtex.file-manager-graphql/images/5122e380-0ce7-446c-be83-517b28f7847e___bbfc00cfe6d303279a9d856e73066919.png"
-                    style="vertical-align: top; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; max-width: 100%; border: none; max-height: 80px !important;">
-                </a>
-              </div>
-            </td>
-          </tr>
-          <tr style="box-sizing: border-box !important;">
-            <td class="ph4-ns"
-              style="font-size: 14px; line-height: 20px; box-sizing: border-box; border-collapse: collapse; width: 50%; padding-bottom: 0; padding-left: .5rem; padding-right: .5rem; text-align: center !important; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;"
-              align="center">
-              <div
-                style="box-sizing: border-box; clear: both; float: none; padding-top: .25rem; padding-bottom: .25rem !important;">
-                <table class width="100%" border="0" cellpadding="0" cellspacing="0"
-                  style="box-sizing: border-box; border-collapse: collapse; border-spacing: 0; mso-table-lspace: 0pt; mso-table-rspace: 0pt !important; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
-                  <thead>
-                  </thead>
-                  <tbody>
-                    <tr style="box-sizing: border-box !important;">
-                      <td
-                        style="font-size: 14px; line-height: 20px; box-sizing: border-box; border-collapse: collapse; text-align: left; width: 4rem; padding-right: .5rem; vertical-align: middle !important; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;"
-                        align="left" valign="middle">
-                        <img src="https://topperio.vteximg.com.br/arquivos/check-email-icon.png" alt="Check"
-                          style="outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; max-width: 100%; vertical-align: middle !important;">
-                      </td>
-                      <td
-                        style="font-size: 14px; line-height: 20px; box-sizing: border-box; border-collapse: collapse; text-align: left; padding-top: 1rem; vertical-align: middle !important; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;"
-                        align="left" valign="middle">
-                        <div style="box-sizing: border-box !important;">
-                          <div class="mv1-ns"
-                            style="box-sizing: border-box; font-weight: 600; line-height: 1.25; font-size: 1.5rem !important;">
-                            Orden de Pedido Generada</div>
-                          <div style="box-sizing: border-box; font-size: 1rem !important;">Tu Orden de pedido fue realizada exitosamente
-                          </div>
-                          <br>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </td>
-          </tr>
-          <tr style="box-sizing: border-box !important;">
-            <td class="ph4-ns"
-              style="font-size: 14px; line-height: 20px; box-sizing: border-box; border-collapse: collapse; text-align: left; width: 100%; padding-left: .5rem; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; padding-right: .5rem !important;"
-              align="left">
-              <p
-                style="box-sizing: border-box; padding-bottom: 1rem; padding-top: 2rem; text-align: center !important;">
-                <span style="font-weight: 600 !important;"></span>
-                <span style="font-weight: 600 !important;">¡Hola {{orders.[0].clientProfileData.firstName}}! </span>Tu orden de
-                pedido
-                <span style="font-weight: 600 !important;">Nº {{orders.[0].orderId}}</span>
-                ha sido generada y está siendo validada.<br>
-              </p>
-            </td>
-          </tr>
-          <tr style="box-sizing: border-box !important;">
-            <td class="ph4-ns"
-              style="max-width: 360px; background-color: #fff; font-size: 14px; line-height: 20px; box-sizing: border-box; border-collapse: collapse; text-align: left; padding-left: 2rem; padding-right: 2rem; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; width: 100% !important;"
-              align="left" bgcolor="#fff">
-              {{#compare state "!=" "canceled"}}
-              <div style="padding: 20px 0; box-sizing: border-box !important;">
-                {{#if orders}}
-                {{#each orders}}
-                {{#if @first}}
-                {{#richShippingData shippingData}}
-                {{#group logisticsInfo by="addessId"}}
-                {{#group items by="packageId"}}
-                <div
-                  style="box-sizing: border-box; display: flex; align-items: center; font-family: 'Inter',Sans-serif,Geneva,Trebuchet MS; font-style: normal; font-weight: bold; font-size: 14.8px; line-height: 18px; color: #000; color: #32BE00; padding: 0 !important;">
-                  <div
-                    style="box-sizing: border-box; display: flex; align-items: center; width: 18px; height: 18px; margin-top: 5px; margin-bottom: 5px; margin-right: 9px !important;">
-                    <img src="https://i.ibb.co/CKqtrvb/Vector.png" alt="status-ok"
-                      style="vertical-align: top; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; max-width: inherit !important;">
-                  </div>
-                  <p style="color: #2781ab; box-sizing: border-box; margin: 0 !important;">Orden de Pedido Generada</p>
-                </div>
-                <div
-                  style="box-sizing: border-box; height: 18px; width: 2px; background-color: #D2D2D7; margin-left: 8px !important;">
-                </div>
-                <div
-                  style="box-sizing: border-box; display: flex; align-items: center; font-family: 'Inter',Sans-serif,Geneva,Trebuchet MS; font-style: normal; font-size: 14.8px; line-height: 18px; padding: 0; color: #7D7D82; font-weight: normal !important;">
-                  <div
-                    style="box-sizing: border-box; display: flex; align-items: center; width: 18px; height: 18px; margin-top: 5px; margin-bottom: 5px; margin-right: 9px !important;">
-                    <img src="https://i.ibb.co/2YcJ5HK/espera.png" alt="espera"
-                      style="vertical-align: top; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; max-width: inherit !important;">
-                  </div>
-                  <p style="box-sizing: border-box; margin: 0 !important;">Orden de Pedido Confirmada</p>
-                </div>
-                <div
-                  style="box-sizing: border-box; height: 18px; width: 2px; background-color: #D2D2D7; margin-left: 8px !important;">
-                </div>
-                {{#compare ../../../state "==" "invoiced"}}
-                <div
-                  style="box-sizing: border-box; display: flex; align-items: center; font-family: 'Inter',Sans-serif,Geneva,Trebuchet MS; font-style: normal; font-weight: bold; font-size: 14.8px; line-height: 18px; color: #000; color: #32BE00; padding: 0 !important;">
-                  <div
-                    style="box-sizing: border-box; display: flex; align-items: center; width: 18px; height: 18px; margin-top: 5px; margin-bottom: 5px; margin-right: 9px !important;">
-                    <img src="https://i.ibb.co/CKqtrvb/Vector.png" alt="status-ok"
-                      style="vertical-align: top; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; max-width: inherit !important;">
-                  </div>
-                  {{#compare items.0.selectedDeliveryChannel '==' 'pickup-in-point'}}
-                  <p style="box-sizing: border-box; margin: 0 !important;">Pedido listo para retirar</p>
-                  {{else}}
-                  <p style="box-sizing: border-box; margin: 0 !important;">Pedido despachado</p>
-                  {{/compare}}
-                </div>
-                {{else}}
-                <div
-                  style="box-sizing: border-box; display: flex; align-items: center; font-family: 'Inter',Sans-serif,Geneva,Trebuchet MS; font-style: normal; font-size: 14.8px; line-height: 18px; padding: 0; color: #7D7D82; font-weight: normal !important;">
-                  <div
-                    style="box-sizing: border-box; display: flex; align-items: center; width: 18px; height: 18px; margin-top: 5px; margin-bottom: 5px; margin-right: 9px !important;">
-                    <img src="https://i.ibb.co/2YcJ5HK/espera.png" alt="espera"
-                      style="vertical-align: top; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; max-width: inherit !important;">
-                  </div>
-                  {{#compare items.0.selectedDeliveryChannel '==' 'pickup-in-point'}}
-                  <p style="box-sizing: border-box; margin: 0 !important;">Pedido listo para retirar</p>
-                  {{else}}
-                  <p style="box-sizing: border-box; margin: 0 !important;">Pedido despachado</p>
-                  {{/compare}}
-                </div>
-                {{/compare}}
-                <div
-                  style="box-sizing: border-box; height: 18px; width: 2px; background-color: #D2D2D7; margin-left: 8px !important;">
-                </div>
-                <div
-                  style="box-sizing: border-box; display: flex; align-items: center; font-family: 'Inter',Sans-serif,Geneva,Trebuchet MS; font-style: normal; font-size: 14.8px; line-height: 18px; padding: 0; color: #7D7D82; font-weight: normal !important;">
-                  <div
-                    style="box-sizing: border-box; display: flex; align-items: center; width: 18px; height: 18px; margin-top: 5px; margin-bottom: 5px; margin-right: 9px !important;">
-                    <img src="https://i.ibb.co/2YcJ5HK/espera.png" alt="espera"
-                      style="vertical-align: top; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; max-width: inherit !important;">
-                  </div>
-                  {{#compare items.0.selectedDeliveryChannel '==' 'pickup-in-point'}}
-                  <p style="box-sizing: border-box; margin: 0 !important;">Pedido retirado</p>
-                  {{else}}
-                  <p style="box-sizing: border-box; margin: 0 !important;">Pedido entregado</p>
-                  {{/compare}}
-                </div>
-                {{/group}}
-                {{/group}}
-                {{/richShippingData}}
-                {{else}}
-                {{/if}}
-                {{/each}}
-                {{else}}
-                {{#richShippingData shippingData}}
-                {{#group logisticsInfo by="addessId"}}
-                {{#group items by="packageId"}}
-                <div
-                  style="box-sizing: border-box; display: flex; align-items: center; font-family: 'Inter',Sans-serif,Geneva,Trebuchet MS; font-style: normal; font-weight: bold; font-size: 14.8px; line-height: 18px; color: #000; color: #32BE00; padding: 0 !important;">
-                  <div
-                    style="box-sizing: border-box; display: flex; align-items: center; width: 18px; height: 18px; margin-top: 5px; margin-bottom: 5px; margin-right: 9px !important;">
-                    <img src="https://i.ibb.co/CKqtrvb/Vector.png" alt="status-ok"
-                      style="vertical-align: top; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; max-width: inherit !important;">
-                  </div>
-                  <p style="color: #2781ab; box-sizing: border-box; margin: 0 !important;">Pedido confirmado</p>
-                </div>
-                <div
-                  style="box-sizing: border-box; height: 18px; width: 2px; background-color: #D2D2D7; margin-left: 8px !important;">
-                </div>
-                <div
-                  style="box-sizing: border-box; display: flex; align-items: center; font-family: 'Inter',Sans-serif,Geneva,Trebuchet MS; font-style: normal; font-weight: bold; font-size: 14.8px; line-height: 18px; color: #000; color: #32BE00; padding: 0 !important;">
-                  <div
-                    style="box-sizing: border-box; display: flex; align-items: center; width: 18px; height: 18px; margin-top: 5px; margin-bottom: 5px; margin-right: 9px !important;">
-                    <img src="https://i.ibb.co/CKqtrvb/Vector.png" alt="status-ok"
-                      style="vertical-align: top; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; max-width: inherit !important;">
-                  </div>
-                  <p style="box-sizing: border-box; margin: 0 !important;">Pago aprobado</p>
-                </div>
-                <div
-                  style="box-sizing: border-box; height: 18px; width: 2px; background-color: #D2D2D7; margin-left: 8px !important;">
-                </div>
-                {{!-- ACA COMPARA SI ES INVOICED Y SI ES TRUE SE ACTIVA EL STATUS CORRESPONDIENTE --}}
-                {{#compare ../../../state "==" "invoiced"}}
-                <div
-                  style="box-sizing: border-box; display: flex; align-items: center; font-family: 'Inter',Sans-serif,Geneva,Trebuchet MS; font-style: normal; font-weight: bold; font-size: 14.8px; line-height: 18px; color: #000; color: #32BE00; padding: 0 !important;">
-                  <div
-                    style="box-sizing: border-box; display: flex; align-items: center; width: 18px; height: 18px; margin-top: 5px; margin-bottom: 5px; margin-right: 9px !important;">
-                    <img src="https://i.ibb.co/CKqtrvb/Vector.png" alt="status-ok"
-                      style="vertical-align: top; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; max-width: inherit !important;">
-                  </div>
-                  {{#compare items.0.selectedDeliveryChannel '==' 'pickup-in-point'}}
-                  <p style="box-sizing: border-box; margin: 0 !important;">Pedido listo para retirar</p>
-                  {{else}}
-                  <p style="box-sizing: border-box; margin: 0 !important;">Pedido despachado</p>
-                  {{/compare}}
-                </div>
-                {{else}}
-                <div
-                  style="box-sizing: border-box; display: flex; align-items: center; font-family: 'Inter',Sans-serif,Geneva,Trebuchet MS; font-style: normal; font-size: 14.8px; line-height: 18px; padding: 0; color: #7D7D82; font-weight: normal !important;">
-                  <div
-                    style="box-sizing: border-box; display: flex; align-items: center; width: 18px; height: 18px; margin-top: 5px; margin-bottom: 5px; margin-right: 9px !important;">
-                    <img src="https://i.ibb.co/2YcJ5HK/espera.png" alt="espera"
-                      style="vertical-align: top; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; max-width: inherit !important;">
-                  </div>
-                  {{#compare items.0.selectedDeliveryChannel '==' 'pickup-in-point'}}
-                  <p style="box-sizing: border-box; margin: 0 !important;">Pedido listo para retirar</p>
-                  {{else}}
-                  <p style="box-sizing: border-box; margin: 0 !important;">Pedido despachado</p>
-                  {{/compare}}
-                </div>
-                {{/compare}}
-                <div
-                  style="box-sizing: border-box; height: 18px; width: 2px; background-color: #D2D2D7; margin-left: 8px !important;">
-                </div>
-                {{!-- ACA COMPARA SI ES INVOICED Y SI EL PEDIDO TERMINÓ , SE ACTIVA EL STATUS CORRESPONDIENTE --}}
-                {{#compare ../../../state "==" "invoiced"}}
-                {{#compare ../../.././package/courierStatus.status "==" "ok"}}
-                {{#compare ../../.././package/courierStatus.finished "==" true}}
-                <div class="status"
-                  style="box-sizing: border-box; display: flex; align-items: center; font-family: 'Inter',Sans-serif,Geneva,Trebuchet MS; font-style: normal; font-weight: bold; font-size: 14.8px; line-height: 18px; color: #000; color: #32BE00; padding: 0 !important;">
-                  <div
-                    style="box-sizing: border-box; display: flex; align-items: center; width: 18px; height: 18px; margin-top: 5px; margin-bottom: 5px; margin-right: 9px !important;">
-                    <img src="https://i.ibb.co/CKqtrvb/Vector.png" alt="status-ok"
-                      style="vertical-align: top; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; max-width: inherit !important;">
-                  </div>
-                  {{#compare items.0.selectedDeliveryChannel '==' 'pickup-in-point'}}
-                  <p style="box-sizing: border-box; margin: 0 !important;">Pedido retirado</p>
-                  {{else}}
-                  <p style="box-sizing: border-box; margin: 0 !important;">Pedido entregado</p>
-                  {{/compare}}
-                </div>
-                {{else}}
-                <div
-                  style="box-sizing: border-box; display: flex; align-items: center; font-family: 'Inter',Sans-serif,Geneva,Trebuchet MS; font-style: normal; font-size: 14.8px; line-height: 18px; padding: 0; color: #7D7D82; font-weight: normal !important;">
-                  <div
-                    style="box-sizing: border-box; display: flex; align-items: center; width: 18px; height: 18px; margin-top: 5px; margin-bottom: 5px; margin-right: 9px !important;">
-                    <img src="https://i.ibb.co/2YcJ5HK/espera.png" alt="espera"
-                      style="vertical-align: top; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; max-width: inherit !important;">
-                  </div>
-                  {{#compare items.0.selectedDeliveryChannel '==' 'pickup-in-point'}}
-                  <p style="box-sizing: border-box; margin: 0 !important;">Pedido retirado</p>
-                  {{else}}
-                  <p style="box-sizing: border-box; margin: 0 !important;">Pedido entregado</p>
-                  {{/compare}}
-                </div>
-                {{/compare}}
-                {{else}}
-                <div
-                  style="box-sizing: border-box; display: flex; align-items: center; font-family: 'Inter',Sans-serif,Geneva,Trebuchet MS; font-style: normal; font-size: 14.8px; line-height: 18px; padding: 0; color: #7D7D82; font-weight: normal !important;">
-                  <div
-                    style="box-sizing: border-box; display: flex; align-items: center; width: 18px; height: 18px; margin-top: 5px; margin-bottom: 5px; margin-right: 9px !important;">
-                    <img src="https://i.ibb.co/2YcJ5HK/espera.png" alt="espera"
-                      style="vertical-align: top; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; max-width: inherit !important;">
-                  </div>
-                  {{#compare items.0.selectedDeliveryChannel '==' 'pickup-in-point'}}
-                  <p style="box-sizing: border-box; margin: 0 !important;">Pedido retirado</p>
-                  {{else}}
-                  <p style="box-sizing: border-box; margin: 0 !important;">Pedido entregado</p>
-                  {{/compare}}
-                </div>
-                {{/compare}}
-                {{else}}
-                <div
-                  style="box-sizing: border-box; display: flex; align-items: center; font-family: 'Inter',Sans-serif,Geneva,Trebuchet MS; font-style: normal; font-size: 14.8px; line-height: 18px; padding: 0; color: #7D7D82; font-weight: normal !important;">
-                  <div
-                    style="box-sizing: border-box; display: flex; align-items: center; width: 18px; height: 18px; margin-top: 5px; margin-bottom: 5px; margin-right: 9px !important;">
-                    <img src="https://i.ibb.co/2YcJ5HK/espera.png" alt="espera"
-                      style="vertical-align: top; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; max-width: inherit !important;">
-                  </div>
-                  {{#compare items.0.selectedDeliveryChannel '==' 'pickup-in-point'}}
-                  <p style="box-sizing: border-box; margin: 0 !important;">Pedido retirado</p>
-                  {{else}}
-                  <p style="box-sizing: border-box; margin: 0 !important;">Pedido entregado</p>
-                  {{/compare}}
-                </div>
-                {{/compare}}
-                {{/group}}
-                {{/group}}
-                {{/richShippingData}}
-                {{/if}}
-              </div>
-              {{else}}
-              {{!-- ORDER ERROR --}}
-              <div style="padding: 20px 0; box-sizing: border-box !important;">
-                {{#richShippingData shippingData}}
-                {{#group logisticsInfo by="addessId"}}
-                {{#group items by="packageId"}}
-                <div
-                  style="box-sizing: border-box; display: flex; align-items: center; font-family: 'Inter',Sans-serif,Geneva,Trebuchet MS; font-style: normal; font-weight: bold; font-size: 14.8px; line-height: 18px; color: #000; color: #32BE00; padding: 0 !important;">
-                  <div
-                    style="box-sizing: border-box; display: flex; align-items: center; width: 18px; height: 18px; margin-top: 5px; margin-bottom: 5px; margin-right: 9px !important;">
-                    <img src="https://i.ibb.co/CKqtrvb/Vector.png" alt="status-ok"
-                      style="vertical-align: top; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; max-width: inherit !important;">
-                  </div>
-                  <p style="color: #2781ab; box-sizing: border-box; margin: 0 !important;">Pedido confirmado</p>
-                </div>
-                <div
-                  style="box-sizing: border-box; height: 18px; width: 2px; background-color: #D2D2D7; margin-left: 8px !important;">
-                </div>
-                <div
-                  style="box-sizing: border-box; display: flex; align-items: center; font-family: 'Inter',Sans-serif,Geneva,Trebuchet MS; font-style: normal; font-weight: bold; font-size: 14.8px; line-height: 18px; color: #000; color: #32BE00; padding: 0 !important;">
-                  <div
-                    style="box-sizing: border-box; display: flex; align-items: center; width: 18px; height: 18px; margin-top: 5px; margin-bottom: 5px; margin-right: 9px !important;">
-                    <img src="https://i.ibb.co/CKqtrvb/Vector.png" alt="espera"
-                      style="vertical-align: top; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; max-width: inherit !important;">
-                  </div>
-                  <p style="box-sizing: border-box; margin: 0 !important;">Pago aprobado</p>
-                </div>
-                <div
-                  style="box-sizing: border-box; height: 18px; width: 2px; background-color: #D2D2D7; margin-left: 8px !important;">
-                </div>
-                <div
-                  style="box-sizing: border-box; display: flex; align-items: center; font-family: 'Inter',Sans-serif,Geneva,Trebuchet MS; font-style: normal; font-weight: bold; font-size: 14.8px; line-height: 18px; padding: 0; color: #FA0019 !important;">
-                  <div
-                    style="box-sizing: border-box; display: flex; align-items: center; width: 18px; height: 18px; margin-top: 5px; margin-bottom: 5px; margin-right: 9px !important;">
-                    <img src="https://i.ibb.co/Pcpm65v/error.png" alt="error" border="0"
-                      style="vertical-align: top; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; max-width: inherit !important;">
-                  </div>
-                  <p style="box-sizing: border-box; margin: 0 !important;">Pedido cancelado</p>
-                </div>
-                <div
-                  style="box-sizing: border-box; height: 18px; width: 2px; background-color: #D2D2D7; margin-left: 8px !important;">
-                </div>
-                <div
-                  style="box-sizing: border-box; display: flex; align-items: center; font-family: 'Inter',Sans-serif,Geneva,Trebuchet MS; font-style: normal; font-size: 14.8px; line-height: 18px; padding: 0; color: #7D7D82; font-weight: normal !important;">
-                  <div
-                    style="box-sizing: border-box; display: flex; align-items: center; width: 18px; height: 18px; margin-top: 5px; margin-bottom: 5px; margin-right: 9px !important;">
-                    <img src="https://i.ibb.co/2YcJ5HK/espera.png" alt="espera"
-                      style="vertical-align: top; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; max-width: inherit !important;">
-                  </div>
-                  {{#compare items.0.selectedDeliveryChannel '==' 'pickup-in-point'}}
-                  <p style="box-sizing: border-box; margin: 0 !important;">Pedido retirado</p>
-                  {{else}}
-                  <p style="box-sizing: border-box; margin: 0 !important;">Pedido entregado</p>
-                  {{/compare}}
-                </div>
-                {{/group}}
-                {{/group}}
-                {{/richShippingData}}
-              </div>
-              {{!-- ORDER ERROR --}}
-              {{/compare}}
-            </td>
-          </tr>
-          <tr style="box-sizing: border-box !important;">
-            <td
-              style="font-size: 14px; line-height: 20px; box-sizing: border-box; border-collapse: collapse; border-bottom: solid 1px #d2d2d2; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; text-align: left !important;"
-              align="left">&nbsp;</td>
-          </tr>
-          <tr style="box-sizing: border-box !important;">
-            <td class="ph4-ns"
-          </tr>
-          <tr style="box-sizing: border-box !important;">
-            <td class="ph4-ns"
-              style="font-size: 14px; line-height: 20px; box-sizing: border-box; border-collapse: collapse; text-align: left; width: 100%; padding-left: .5rem; padding-right: .5rem; padding-top: 0; padding-bottom: 0 !important; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;"
-              align="left">
-              {{#each orders}}
-              <div style="box-sizing: border-box !important;">
-                <table
-                  style="box-sizing: border-box; border-collapse: collapse; border-spacing: 0; mso-table-lspace: 0pt; mso-table-rspace: 0pt !important; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
-                  <tr style="box-sizing: border-box !important;">
-                    <td
-                      style="font-size: 14px; line-height: 20px; box-sizing: border-box; border-collapse: collapse; text-align: left; width: 100%; padding-top: 1rem; padding-bottom: 1rem !important; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;"
-                      align="left">
-                      <div
-                        style="box-sizing: border-box; font-weight: 600; padding-bottom: .5rem; font-size: 18px; color: #2781ab !important;">
-                        Orden {{orderId}}</div>
-                      <div style="box-sizing: border-box; color: #9f9f9f !important;">Realizada el
-                        {{formatDate creationDate}}</div>
+    <table role="presentation" width="100%" bgcolor="#f3f4f6">
+      <tr>
+        <td align="center" class="outer-pad" style="padding: 24px 12px">
+          <table role="presentation" class="wrap" width="100%">
+            <tr>
+              <td style="padding: 0 0 12px 0">
+                <table role="presentation" width="100%" class="card">
+                  <tr>
+                    <td align="center" style="padding: 22px 20px">
+                      <img
+                        src="https://ventadeportiva.vtexassets.com/assets/vtex.file-manager-graphql/images/5122e380-0ce7-446c-be83-517b28f7847e___bbfc00cfe6d303279a9d856e73066919.png"
+                        alt="{{_accountInfo.TradingName}}"
+                        width="150"
+                        class="logo-img"
+                        style="width:150px;height:auto;margin:0 auto"
+                      />
                     </td>
                   </tr>
                 </table>
-              </div>
-              <div style="box-sizing: border-box !important;">
-                <table
-                  style="box-sizing: border-box; width: 100%; border-collapse: collapse; border-spacing: 0; mso-table-lspace: 0pt; mso-table-rspace: 0pt !important; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
-                  <tr
-                    style="box-sizing: border-box; border-style: solid; border-width: 1px; border-color: #d2d2d2 !important;">
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <table role="presentation" width="100%" class="card">
+                  <tr>
                     <td
-                      style="font-size: 14px; line-height: 20px; box-sizing: border-box; border-collapse: collapse; text-align: left; padding-left: 2rem; padding-right: .5rem; padding-top: 2rem; padding-bottom: 2rem; vertical-align: top !important; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;"
-                      align="left" valign="top">
-                      <div style="box-sizing: border-box; color: #9f9f9f; width: 100%; text-align: left !important;">
-                        {{#eq ../split false}}
-                        <div
-                          style="box-sizing: border-box; font-weight: 600; color: #000; margin-bottom: .5rem; font-size: 1rem !important;">
-                          Pago</div>
-                        {{#each paymentData.transactions}}
-                        {{#each payments}}
-                        <div style="box-sizing: border-box !important;">
-                          <span>{{paymentSystemName}} $ {{formatCurrency value}} </span>
-                        </div>
-                        {{/each}}
-                        {{/each}}
-                        {{/eq}}
-                        {{#eq ../split true}}
-                        {{#each paymentData.transactions}}
-                        {{#each payments}}
-                        <div style="box-sizing: border-box !important;">
-                          <div
-                            style="box-sizing: border-box; font-weight: 600; color: #000; margin-bottom: .5rem; font-size: 1rem !important;">
-                            Pago</div>
-                          <span>{{paymentSystemName}} $ {{formatCurrency referenceValue}}</span>
-                        </div>
-                        {{/each}}
-                        {{/each}}
-                        {{/eq}}
-                      </div>
+                      class="hero-td"
+                      bgcolor="#0f5132"
+                      style="
+                        background: #0f5132;
+                        padding: 34px 32px;
+                        border-radius: 12px 12px 0 0;
+                      "
+                    >
+                      <span class="pill">Orden B2B generada</span>
+                      <h1 class="h1" style="font-size:26px;line-height:32px;font-weight:bold;color:#ffffff;margin:14px 0 10px 0">
+                        Recibimos tu orden
+                      </h1>
+                      <p style="font-size:15px;line-height:23px;color:#dcfce7;margin:0">
+                        Hola {{clientProfileData.firstName}}, la orden
+                        <strong style="color:#ffffff">N. {{orderId}}</strong>
+                        fue generada correctamente y está siendo validada por
+                        nuestro equipo comercial.
+                      </p>
                     </td>
-                    <td
-                      style="font-size: 14px; line-height: 20px; box-sizing: border-box; border-collapse: collapse; text-align: left; padding-left: .5rem; padding-right: 2rem; padding-top: 2rem; padding-bottom: 2rem; vertical-align: top !important; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;"
-                      align="left" valign="top">
-                      <div style="box-sizing: border-box; color: #9f9f9f !important;">
-                        <div style="box-sizing: border-box; width: 100% !important;">
-                          {{#richShippingData shippingData}}
-                          {{#group logisticsInfo by='packageId'}}
-                          {{#each items}}
-                          {{#compare @index '==' 0}}
-                          {{#eq selectedDeliveryChannel 'pickup-in-point'}}
-                          <div
-                            style="box-sizing: border-box; font-weight: 600; color: #000; margin-bottom: .5rem; font-size: 1rem !important;">
-                            Retiro</div>
-                          {{else}}
-                          <div
-                            style="box-sizing: border-box; font-weight: 600; color: #000; margin-bottom: .5rem; font-size: 1rem !important;">
-                            Envío</div>
-                          {{/eq}}
-                          {{#eq selectedDeliveryChannel "pickup-in-point"}}
-                          {{#each slas}}
-                          {{#compare ../selectedSla '==' id}}
-                          {{pickupStoreInfo.friendlyName}}
-                          {{/compare}}
-                          {{/each}}
-                          {{/eq}}
-                          {{#each ../../availableAddresses}}
-                          {{#eq ../addressId addressId}}
-                          <div style="box-sizing: border-box !important;">{{street}}, {{number}}</div>
-                          <div style="box-sizing: border-box !important;">{{city}}, {{country}}</div>
-                          {{/eq}}
-                          {{/each}}
-                          <div style="box-sizing: border-box !important;">
-                            {{#each ../../../totals}}
-                            {{#eq id 'Shipping'}}
-                            ${{formatCurrency value}}
-                            {{/eq}}
-                            {{/each}}
-                          </div>
-                          {{/compare}}
-                          {{/each}}
-                          {{/group}}
-                          {{/richShippingData}}
-                        </div>
-                      </div>
+                  </tr>
+                  <tr>
+                    <td style="padding: 0">
+                      <table role="presentation" width="100%">
+                        <tr>
+                          <td class="content-pad meta-cell" style="width:33.33%;padding:18px 20px;vertical-align:top">
+                            <p class="label">Orden</p>
+                            <p class="value">{{orderId}}</p>
+                          </td>
+                          <td class="content-pad meta-cell-r" style="width:33.33%;padding:18px 20px;vertical-align:top;border-left:1px solid #f3f4f6">
+                            <p class="label">Fecha de generación</p>
+                            <p class="value">{{formatDate creationDate}}</p>
+                          </td>
+                          <td class="content-pad meta-cell-r meta-cell-last" style="width:33.33%;padding:18px 20px;vertical-align:top;border-left:1px solid #f3f4f6">
+                            <p class="label">Total estimado</p>
+                            <p class="value">$ {{formatCurrency value}}</p>
+                          </td>
+                        </tr>
+                      </table>
                     </td>
                   </tr>
                 </table>
-              </div>
-              <div
-                style="box-sizing: border-box; font-weight: 600; background-color: #eee; padding-top: 1rem; padding-bottom: 1rem; padding-left: 2rem; padding-right: 2rem; font-size: 1rem !important;">
-                Resumen</div>
-              <div
-                style="box-sizing: border-box; background-color: #eee; padding-left: 2rem; padding-right: 2rem !important;">
-                <table width="100%" border="0" cellpadding="0" cellspacing="0"
-                  style="box-sizing: border-box; color: #9f9f9f; border-collapse: collapse; border-spacing: 0; mso-table-lspace: 0pt; mso-table-rspace: 0pt !important; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
-                  {{#each totals}}
-                  {{#if value}}
-                  <tr style="box-sizing: border-box !important;">
-                    <td class="pb2-ns"
-                      style="font-size: 14px; line-height: 20px; box-sizing: border-box; border-collapse: collapse; text-align: left !important; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;"
-                      align="left">
-                      {{#eq id "Items"}}Productos:{{/eq}}
-                      {{#eq id "Discounts"}}Descuento{{/eq}}
-                      {{#eq id "Shipping"}}Envío{{/eq}}
-                      {{#eq id "Tax"}}Impuestos{{/eq}}
+              </td>
+            </tr>
+
+            <tr><td class="gap">&nbsp;</td></tr>
+
+            <tr>
+              <td>
+                <table role="presentation" width="100%" class="card">
+                  <tr>
+                    <td class="content-pad" style="padding: 20px">
+                      <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0 0 12px 0">
+                        Estado de la orden
+                      </p>
+                      <table role="presentation" width="100%">
+                        <tr>
+                          <td align="center" style="width:22px">
+                            <div class="step-dot step-active">1</div>
+                          </td>
+                          <td class="step-line">&nbsp;</td>
+                          <td align="center" style="width:22px">
+                            <div class="step-dot step-pending">2</div>
+                          </td>
+                          <td class="step-line">&nbsp;</td>
+                          <td align="center" style="width:22px">
+                            <div class="step-dot step-pending">3</div>
+                          </td>
+                          <td class="step-line">&nbsp;</td>
+                          <td align="center" style="width:22px">
+                            <div class="step-dot step-pending">4</div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" style="padding-top:8px;width:25%;vertical-align:top">
+                            <p class="text-sm" style="font-size:13px;line-height:18px;color:#16a34a;font-weight:bold;margin:0">
+                              Orden generada
+                            </p>
+                          </td>
+                          <td colspan="2" style="padding-top:8px;width:25%;vertical-align:top">
+                            <p class="text-sm" style="font-size:13px;line-height:18px;color:#6b7280;margin:0">
+                              Validación comercial
+                            </p>
+                          </td>
+                          <td colspan="2" style="padding-top:8px;width:25%;vertical-align:top">
+                            <p class="text-sm" style="font-size:13px;line-height:18px;color:#6b7280;margin:0">
+                              Confirmacion
+                            </p>
+                          </td>
+                          <td style="padding-top:8px;width:25%;vertical-align:top">
+                            <p class="text-sm" style="font-size:13px;line-height:18px;color:#6b7280;margin:0">
+                              Preparacion
+                            </p>
+                          </td>
+                        </tr>
+                      </table>
+                      <table role="presentation" width="100%" style="margin-top:16px">
+                        <tr>
+                          <td bgcolor="#ecfdf5" style="background:#ecfdf5;border:1px solid #bbf7d0;border-radius:10px;padding:14px 16px">
+                            <p class="text" style="font-size:14px;line-height:22px;color:#166534;margin:0">
+                              Esta comunicación confirma la recepción de la
+                              orden. La aprobación comercial, el pago y la
+                              preparación se informarán en los siguientes
+                              correos del flujo.
+                            </p>
+                          </td>
+                        </tr>
+                      </table>
                     </td>
-                    <td class="pb2-ns" align="right"
-                      style="line-height: 20px; box-sizing: border-box; border-collapse: collapse; text-align: right; font-size: .875rem !important; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
-                      $ {{formatCurrency value}}</td>
                   </tr>
-                  {{/if}}
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="gap">&nbsp;</td></tr>
+
+            <tr>
+              <td>
+                <table role="presentation" width="100%" class="card">
+                  <tr>
+                    <td colspan="2" class="content-pad" style="padding:18px 20px 12px 20px;border-bottom:1px solid #f3f4f6">
+                      <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0">
+                        Datos comerciales
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="content-pad two-cell" style="width:50%;padding:18px 20px;vertical-align:top">
+                      <p class="label">Solicitante</p>
+                      <p class="value" style="margin-bottom:8px">
+                        {{clientProfileData.firstName}} {{clientProfileData.lastName}}
+                      </p>
+                      <p class="text-sm">{{clientProfileData.email}}</p>
+                      {{#if clientProfileData.document}}
+                      <p class="text-sm">Documento: {{clientProfileData.document}}</p>
+                      {{/if}}
+                    </td>
+                    <td class="content-pad two-cell-r two-cell-last" style="width:50%;padding:18px 20px;vertical-align:top;border-left:1px solid #f3f4f6">
+                      <p class="label">Condición de pago</p>
+                      {{#each paymentData.transactions}}
+                      {{#each payments}}
+                      <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0 0 8px 0">
+                        <strong>{{paymentSystemName}}</strong>{{#if installments}} - {{installments}} cuota{{#eq installments 1}}{{else}}s{{/eq}}{{/if}}
+                      </p>
+                      <p class="text-sm">Importe asociado: $ {{formatCurrency value}}</p>
+                      {{/each}}
+                      {{/each}}
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="gap">&nbsp;</td></tr>
+
+            <tr>
+              <td>
+                <table role="presentation" width="100%" class="card">
+                  <tr>
+                    <td colspan="2" class="content-pad" style="padding:18px 20px 12px 20px;border-bottom:1px solid #f3f4f6">
+                      <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0">
+                        Entrega
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="content-pad two-cell" style="width:50%;padding:18px 20px;vertical-align:top">
+                      <p class="label">Dirección</p>
+                      {{#with shippingData.selectedAddresses.[0]}}
+                      <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0">
+                        {{street}} {{number}}<br />
+                        {{city}}, {{state}}<br />
+                        CP {{postalCode}}
+                      </p>
+                      {{else}}
+                      {{#with shippingData.address}}
+                      <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0">
+                        {{street}} {{number}}<br />
+                        {{city}}, {{state}}<br />
+                        CP {{postalCode}}
+                      </p>
+                      {{else}}
+                      <p class="text-sm">Dirección no informada.</p>
+                      {{/with}}
+                      {{/with}}
+                    </td>
+                    <td class="content-pad two-cell-r two-cell-last" style="width:50%;padding:18px 20px;vertical-align:top;border-left:1px solid #f3f4f6">
+                      <p class="label">Método</p>
+                      <p class="value" style="margin-bottom:8px">
+                        {{#eq shippingData.logisticsInfo.[0].selectedDeliveryChannel "pickup-in-point"}}Retiro en punto{{else}}Envío a domicilio{{/eq}}
+                      </p>
+                      <p class="text-sm">
+                        {{#if shippingData.logisticsInfo.[0].shippingEstimateDate}}
+                        Fecha estimada: {{formatDate shippingData.logisticsInfo.[0].shippingEstimateDate}}
+                        {{else}}
+                        Fecha a confirmar después de la validación.
+                        {{/if}}
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="gap">&nbsp;</td></tr>
+
+            <tr>
+              <td>
+                <table role="presentation" width="100%" class="card">
+                  <tr>
+                    <td style="padding:18px 20px 12px 20px;border-bottom:1px solid #f3f4f6">
+                      <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0">
+                        Productos de la orden
+                      </p>
+                      {{#if subjectItemAttachment.totalItems}}
+                      <p class="text-sm" style="margin-top:4px">
+                        {{subjectItemAttachment.totalItems}} unidades en total.
+                      </p>
+                      {{/if}}
+                    </td>
+                  </tr>
+                  {{#each items}}
+                  <tr>
+                    <td style="padding:16px 20px{{#unless @first}};border-top:1px solid #f3f4f6{{/unless}}">
+                      <table role="presentation" width="100%">
+                        <tr>
+                          <td valign="top" style="width:72px">
+                            {{#if detailUrl}}<a href="https://www.ventadeportiva.com.ar{{detailUrl}}" target="_blank" style="display:block;line-height:0">{{/if}}<img
+                              src="{{imageUrl}}"
+                              alt="{{name}}"
+                              width="72"
+                              height="72"
+                              class="item-img"
+                              style="width:72px;height:auto;border-radius:8px"
+                            />{{#if detailUrl}}</a>{{/if}}
+                          </td>
+                          <td valign="top" style="padding-left:12px">
+                            {{#if detailUrl}}<a href="https://www.ventadeportiva.com.ar{{detailUrl}}" target="_blank" class="item-name" style="font-size:14px;line-height:20px;font-weight:bold;color:#111827;display:block;text-decoration:none;margin:0 0 3px 0">{{name}}</a>{{else}}<p class="item-name">{{name}}</p>{{/if}}
+                            {{#if skuName}}<p class="item-meta">Variante: {{skuName}}</p>{{/if}}
+                            <p class="item-meta">Cantidad: {{quantity}}</p>
+                            <p class="item-price">$ {{formatCurrency sellingPrice}}</p>
+                            <p class="m-show text-sm" style="display:none;max-height:0;overflow:hidden;margin-top:6px">
+                              Subtotal: <strong style="color:#111827">$ {{formatCurrency priceDefinition.total}}</strong>
+                            </p>
+                          </td>
+                          <td valign="top" align="right" class="m-hide" style="white-space:nowrap;padding-left:12px">
+                            <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:0 0 4px 0">Subtotal</p>
+                            <p class="item-price" style="margin-top:0">$ {{formatCurrency priceDefinition.total}}</p>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
                   {{/each}}
-                  {{#if value}}
-                  <tr
-                    style="box-sizing: border-box; border-top-style: solid; border-top-width: 1px; border-color: #E9E9E9 !important;">
-                    <td
-                      style="font-size: 14px; line-height: 20px; box-sizing: border-box; border-collapse: collapse; text-align: left; padding-top: 1rem; padding-bottom: 1rem !important; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;"
-                      align="left">Cantidad:</td>
-                    <td
-                      style="font-size: 14px; line-height: 20px; box-sizing: border-box; border-collapse: collapse; padding-top: 1rem; padding-bottom: 1rem; text-align: right !important; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;"
-                      align="right">$ {{formatCurrency value}}</td>
-                  </tr>
-                  <tr
-                  style="box-sizing: border-box; border-top-style: solid; border-top-width: 1px; border-color: #E9E9E9 !important;">
-                  <td
-                    style="font-size: 14px; line-height: 20px; box-sizing: border-box; border-collapse: collapse; text-align: left; padding-top: 1rem; padding-bottom: 1rem !important; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;"
-                    align="left">Monto total:</td>
-                  <td
-                    style="font-size: 14px; line-height: 20px; box-sizing: border-box; border-collapse: collapse; padding-top: 1rem; padding-bottom: 1rem; text-align: right !important; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;"
-                    align="right">$ {{formatCurrency value}}</td>
-                    </tr>
-                  {{/if}}
                 </table>
-              </div>
-              {{#richShippingData shippingData}}
-              {{#group logisticsInfo by='addessId'}}
-              <div
-                style="box-sizing: border-box; clear: both; float: none; padding: .25rem; margin-top: 1rem; margin-bottom: 1rem !important;">
-                {{#group items by='packageId'}}
-                <div
-                  style="box-sizing: border-box; font-weight: 600; margin-bottom: 2rem; margin-top: 1rem; font-size: 1.5rem !important;">
-                  Tu compra</div>
-                {{#compare item.length '>' 1}}
-                <h3
-                  style="margin: 0; font-size: 20px; line-height: 36px; text-transform: uppercase; letter-spacing: 1.2pt; font-weight: 300; margin-top: 16px; box-sizing: border-box; margin-bottom: .5rem !important;">
-                  Paquete {{#math index '+' 1}}{{/math}}</h3>
-                {{/compare}}
-                <table width="100%" border="0" cellpadding="0" cellspacing="0"
-                  style="box-sizing: border-box; clear: both; float: none; border-collapse: collapse; border-spacing: 0; mso-table-lspace: 0pt; mso-table-rspace: 0pt !important; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
-                  <thead>
-                    <tr
-                      style="box-sizing: border-box; padding-bottom: 2rem !important; border-bottom: solid 1px #D2D2D2;">
-                      <th
-                        style="box-sizing: border-box; color: #9f9f9f; font-weight: 400; padding-bottom: 1rem; text-align: left; font-size: .875rem !important;"
-                        align="left">Producto</th>
-                      <th class="dn-s"
-                        style="box-sizing: border-box; color: #9f9f9f; font-weight: 400; padding-left: .25rem; padding-bottom: 1rem; text-align: center; font-size: .875rem !important;"
-                        align="center">Precio</th>
-                      <th
-                        style="box-sizing: border-box; color: #9f9f9f; font-weight: 400; padding-left: .25rem; padding-bottom: 1rem; text-align: center; font-size: .875rem !important;"
-                        align="center">Cantidad</th>
-                      <th class="mw2-ns"
-                        style="box-sizing: border-box; color: #9f9f9f; font-weight: 400; padding-left: .25rem; padding-bottom: 1rem; text-align: right; font-size: .875rem !important;"
-                        align="right">Cantidad</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {{#each items}}
-                    {{#each ../../../../items}}
-                    {{#eq id ../itemId}}
-                    <tr style="box-sizing: border-box; height: 100px !important; border-bottom: solid 1px #EFEFEF;">
-                      <td
-                        style="font-size: 14px; line-height: 20px; box-sizing: border-box; border-collapse: collapse; text-align: left; width: 450px !important; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;"
-                        align="left">
-                        <div style="box-sizing: border-box !important;">
-                          <table
-                            style="box-sizing: border-box; border-collapse: collapse; border-spacing: 0; mso-table-lspace: 0pt; mso-table-rspace: 0pt !important; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
-                            <tbody>
-                              <tr style="box-sizing: border-box !important;">
-                                <td
-                                  style="font-size: 14px; line-height: 20px; box-sizing: border-box; border-collapse: collapse; text-align: left !important; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;"
-                                  align="left">
-                                  <img alt="Producto" src="{{imageUrl}}"
-                                    style="outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; max-width: 100%; vertical-align: top; height: 80px; object-fit: cover !important;">
-                                </td>
-                                <td
-                                  style="font-size: 14px; line-height: 20px; box-sizing: border-box; border-collapse: collapse; text-align: left !important; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;"
-                                  align="left">
-                                  <div style="box-sizing: border-box; padding-left: 1rem; max-width: 225px !important;">
-                                    <span class="mv1-ns"
-                                      style="color: #9f9f9f; font-size: .75rem !important;">{{name}}</span>
-                                  </div>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </td>
-                      <td class="dn-s"
-                        style="font-size: 14px; line-height: 20px; box-sizing: border-box; border-collapse: collapse; text-align: left !important; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;"
-                        align="left">
-                        <div style="box-sizing: border-box; text-align: center !important;">
-                          {{#compare listPrice '!=' sellingPrice}}
-                          <span class="f7 darkgray strike"
-                            style="color: #9f9f9f; text-decoration: line-through; font-size: .75rem !important;">${{formatCurrency
-                            listPrice}}</span><br>
-                          <span class>${{formatCurrency sellingPrice}}</span>
-                          {{else}}
-                          <span class>${{formatCurrency sellingPrice}}</span>
-                          {{/compare}}
-                        </div>
-                      </td>
-                      <td align="center" class="tc"
-                        style="font-size: 14px; line-height: 20px; box-sizing: border-box; border-collapse: collapse; text-align: center !important; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
-                        {{quantity}}</td>
-                      <td align="right" class="mw2-ns"
-                        style="font-size: 14px; line-height: 20px; box-sizing: border-box; border-collapse: collapse; font-weight: 600; text-align: right !important; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
-                        <span>
-                          {{#if sellingPrice}}
-                          ${{formatCurrency sellingPrice}}
-                          {{else}}
-                          Gratis
-                          {{/if}}
-                        </span>
-                      </td>
-                    </tr>
-                    {{#each bundleItems}}
-                    {{#if name}}
-                    <tr style="box-sizing: border-box !important;">
-                      <td
-                        style="font-size: 14px; line-height: 20px; box-sizing: border-box; border-collapse: collapse; padding: .5rem; text-align: left; vertical-align: top; width: 4rem; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;"
-                        align="left" valign="top"><img alt src="{{imageUrl}}"
-                          style="text-decoration: none; vertical-align: top; outline: none; -ms-interpolation-mode: bicubic; max-width: 100% !important;">
-                      </td>
-                      <td
-                        style="font-size: 14px; line-height: 20px; box-sizing: border-box; border-collapse: collapse; padding: .5rem; text-align: left; vertical-align: top; width: 4rem !important; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;"
-                        align="left" valign="top">
-                        <div class="mv1-ns"
-                          style="box-sizing: border-box; font-size: 1.25rem; line-height: 1.25 !important;">{{name}}
-                        </div>
-                        <div style="box-sizing: border-box !important;">
-                          {{quantity}}
-                          un.
-                          {{#if price}}
-                          $
-                          {{formatCurrency price}}
-                          {{else}}
-                          Gratis
-                          {{/if}}
-                        </div>
-                      </td>
-                    </tr>
-                    {{/if}}
-                    {{/each}}
-                    {{/eq}}
-                    {{/each}}
-                    {{/each}}
-                  </tbody>
-                </table>
-                {{/group}}
-              </div>
-              {{/group}}
-              {{/richShippingData}}
-              {{/each}}
-            </td>
-          </tr>
-          <tr class="pr4-ns"
-            style="box-sizing: border-box; float: right; _display: inline; padding-right: .5rem; padding-bottom: 4rem; padding-top: 1rem !important;">
-            <td
-              style="font-size: 14px; line-height: 20px; box-sizing: border-box; border-collapse: collapse; text-align: left !important; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;"
-              align="left">
-              <div style="box-sizing: border-box !important;">
-                <a href="{{ordersUrl}}"
-                  style="box-sizing: border-box; border-style: solid; border-width: 1px; border-radius: .125rem; display: block; color: #000; text-decoration: none; text-align: center; font-size: 1rem; vertical-align: middle; width: 200px; height: 40px; line-height: 40px !important;">
-                  Ir a mis pedidos
-                </a>
-              </div>
-            </td>
-          </tr>
-          <tr>
-          <td style="font-size: 14px; line-height: 20px; box-sizing: border-box; text-align: center; padding-top: 0.5rem; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;"
-          align="center">
-          <p style="margin: 0; font-size: 16px; line-height: 20px;">
-            <strong>Información Importante:</strong><br>
-            Tu pedido está en revisión para confirmar stock y otros detalles. Si se realizan ajustes, te notificaremos. Recibirás un correo de confirmación final una vez que todo esté aprobado.<br><br>
-          </p>
-          <p style="margin-top: 0.5rem; font-size: 16px; line-height: 20px;">
-            ¡Gracias por elegirnos!<br><br>
-          </p>
-        </td>
-      </tr>          
-          <tr style="box-sizing: border-box !important;">
-            <td class="ph4-ns"
-              style="font-size: 14px; line-height: 20px; box-sizing: border-box; border-collapse: collapse; text-align: left; border-top-style: solid; border-top-width: 1px; border-color: #eee !important; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;"
-              align="left">
-              <table
-                style="box-sizing: border-box; width: 100%; border-collapse: collapse; border-spacing: 0; mso-table-lspace: 0pt; mso-table-rspace: 0pt !important; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
-                <tr height="64px" style="box-sizing: border-box !important;">
-                  <td
-                    style="font-size: 14px; line-height: 20px; box-sizing: border-box; border-collapse: collapse; vertical-align: middle; text-align: center !important; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;"
-                    align="center" valign="middle">
-                    <span
-                      style="color: #9f9f9f; font-size: .75rem; display: inline-block; line-height: 15px; height: 30px; text-align: center; width: 340px !important; padding: 5px 10px 5px 10px;">
-                      Copyright © Venta Deportiva. Todos los derechos reservados.
-                    </span>
-                    <span style="width: 240px; padding: 0 10px; display: inline-block !important; vertical-align: top">
-                      <img src="https://ventadeportiva.vteximg.com.br/arquivos/logos-footer-newsletter.png" alt="Logos"
-                        style="vertical-align: top; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; max-width: 100% !important;">
-                    </span>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
-</body>
+              </td>
+            </tr>
 
+            <tr><td class="gap">&nbsp;</td></tr>
+
+            <tr>
+              <td>
+                <table role="presentation" width="100%" class="card">
+                  <tr>
+                    <td colspan="2" style="padding:18px 20px 12px 20px;border-bottom:1px solid #f3f4f6">
+                      <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0">
+                        Resumen de la orden
+                      </p>
+                    </td>
+                  </tr>
+                  {{#each totals}}
+                  {{#eq id "Items"}}
+                  <tr>
+                    <td style="padding:10px 20px"><span class="tot-key">Productos</span></td>
+                    <td style="padding:10px 20px;text-align:right"><span class="tot-val">$ {{formatCurrency value}}</span></td>
+                  </tr>
+                  {{/eq}}
+                  {{#eq id "Discounts"}}{{#if value}}
+                  <tr>
+                    <td style="padding:10px 20px"><span class="tot-key">Descuentos</span></td>
+                    <td style="padding:10px 20px;text-align:right"><span class="tot-val green">$ {{formatCurrency value}}</span></td>
+                  </tr>
+                  {{/if}}{{/eq}}
+                  {{#eq id "Shipping"}}
+                  <tr>
+                    <td style="padding:10px 20px"><span class="tot-key">Envío</span></td>
+                    <td style="padding:10px 20px;text-align:right">
+                      {{#eq value 0}}<span class="tot-val green" style="font-weight:bold">Bonificado</span>{{else}}<span class="tot-val">$ {{formatCurrency value}}</span>{{/eq}}
+                    </td>
+                  </tr>
+                  {{/eq}}
+                  {{#eq id "Tax"}}{{#if value}}
+                  <tr>
+                    <td style="padding:10px 20px"><span class="tot-key">Impuestos</span></td>
+                    <td style="padding:10px 20px;text-align:right"><span class="tot-val">$ {{formatCurrency value}}</span></td>
+                  </tr>
+                  {{/if}}{{/eq}}
+                  {{/each}}
+                  <tr>
+                    <td style="padding:14px 20px;border-top:2px solid #f3f4f6"><span class="tot-strong">Total estimado</span></td>
+                    <td style="padding:14px 20px;border-top:2px solid #f3f4f6;text-align:right"><span class="tot-strong">$ {{formatCurrency value}}</span></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="gap">&nbsp;</td></tr>
+
+            {{#if ordersUrl}}
+            <tr>
+              <td align="center" style="padding:12px 0 4px 0">
+                <a
+                  href="{{ordersUrl}}"
+                  target="_blank"
+                  class="cta-green"
+                  style="display:inline-block;background:#16a34a;color:#ffffff!important;border-radius:10px;font-size:15px;line-height:48px;font-weight:bold;padding:0 28px;text-align:center"
+                >
+                  Ver mis órdenes
+                </a>
+              </td>
+            </tr>
+            {{/if}}
+
+            <tr><td class="gap">&nbsp;</td></tr>
+
+            <tr>
+              <td align="center" style="padding: 12px 8px 8px 8px">
+                <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:0 0 6px 0">
+                  Si necesitás hacer una corrección sobre esta orden,
+                  respondé este correo o contactá a tu ejecutivo comercial.
+                </p>
+                <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:0 0 12px 0">
+                  Equipo <strong style="color:#374151">{{_accountInfo.TradingName}}</strong>
+                </p>
+                <p class="text-sm" style="font-size:13px;line-height:20px;color:#9ca3af;margin:0">
+                  © {{_accountInfo.TradingName}}. Todos los derechos reservados.
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
 </html>

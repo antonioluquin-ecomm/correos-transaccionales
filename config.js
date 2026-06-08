@@ -171,6 +171,32 @@ const TEMPLATES = [
       'paymentData.transactions[].payments[] (paymentSystemName, installments)',
     ],
   },
+  {
+    id: 'b2b-orden-generada',
+    nombre: 'Orden generada B2B',
+    plataforma: 'VTEX',
+    categoria: 'Logística de Entrega',
+    estado: 'en revisión',
+    actualizado: '2026-06-08',
+    responsable: 'Por definir',
+    descripcion: 'Confirma a un comprador B2B que la orden fue generada y queda pendiente de validación comercial antes de avanzar al resto del flujo.',
+    archivoHtml: 'templates/vtex/b2b/orden-generada/orden-generada.v2.html',
+    ejemplo: 'examples/vtex/b2b/orden-generada.sample.json',
+    variables: [
+      '_accountInfo.TradingName',
+      'ordersUrl',
+      'orderId',
+      'creationDate',
+      'clientProfileData.firstName / lastName / email / document',
+      'value (formatCurrency)',
+      'items[] (name, skuName, quantity, sellingPrice, priceDefinition.total, imageUrl, detailUrl)',
+      'subjectItemAttachment.totalItems',
+      'totals[] (Items, Discounts, Shipping, Tax)',
+      'shippingData.selectedAddresses[0] / shippingData.address',
+      'shippingData.logisticsInfo[0] (selectedDeliveryChannel, shippingEstimateDate)',
+      'paymentData.transactions[].payments[] (paymentSystemName, group, value, installments)',
+    ],
+  },
 ];
 
 const EXAMPLE_SCENARIOS = [
@@ -238,15 +264,24 @@ const EXAMPLE_SCENARIOS = [
     descripcion: 'Pedido facturado con paquete, factura y datos de tracking.',
     compatibleTemplates: ['order-invoiced'],
   },
+  {
+    id: 'b2b-orden-generada-base',
+    path: 'examples/vtex/b2b/orden-generada.sample.json',
+    label: 'B2B - orden generada',
+    tipo: 'B2B',
+    descripcion: 'Orden B2B recibida con pago a validar, varios productos y entrega a domicilio.',
+    compatibleTemplates: ['b2b-orden-generada'],
+  },
 ];
 
 const VERSION = {
-  number: '1.2.0',
+  number: '1.3.0',
   date: '2026-06-08',
-  summary: 'Sprint de calidad en templates VTEX + integración de access-key, back-in-stock y order-invoiced al catálogo.',
+  summary: 'Se suma la nueva plantilla VTEX B2B de orden generada con escenario de datos propio.',
 };
 
 const CHANGELOG = [
+  { version: '1.3.0', date: '2026-06-08', summary: 'Nueva plantilla orden generada B2B y escenario específico para previsualización.' },
   { version: '0.7.0', date: '2026-06-07', summary: 'Flujo de Correos suma estados por nodo, ficha operativa, acciones para previsualización/creación y soporte de query params en Visualizador.' },
   { version: '0.6.0', date: '2026-06-06', summary: 'Módulo Flujo de Correos con mapa por pestañas para entrega, cambio, devolución y garantía, organizado por plataforma.' },
   { version: '0.5.0', date: '2026-06-06', summary: 'Se priorizan Biblioteca y Visualizador como flujo principal; Simulador queda rotulado como QA interno y se documenta el flujo para crear nuevas plantillas con JSON representativo.' },

@@ -105,6 +105,13 @@
         color: #111827;
         margin: 0;
       }
+      .product-name {
+        font-size: 18px;
+        line-height: 24px;
+        font-weight: bold;
+        color: #111827;
+        margin: 0 0 6px 0;
+      }
       .cta-green {
         display: inline-block;
         background: #16a34a;
@@ -251,13 +258,12 @@
                               background: #166534;
                               border: 2px solid #86efac;
                               border-radius: 50%;
-                              font-size: 24px;
-                              font-weight: bold;
+                              font-size: 26px;
                               color: #ffffff;
                               text-align: center;
                             "
                           >
-                            &#10003;
+                            &#128276;
                           </td>
                         </tr>
                       </table>
@@ -335,6 +341,7 @@
                             style="padding-left: 18px"
                           >
                             <p
+                              class="product-name"
                               style="
                                 font-size: 18px;
                                 line-height: 24px;
@@ -359,21 +366,20 @@
                             </p>
                             {{/if}}
                             {{#if SkuContext.BrandName}}
-                            <p
-                              style="
-                                display: inline-block;
-                                background: #f0fdf4;
-                                border: 1px solid #bbf7d0;
-                                border-radius: 999px;
-                                color: #166534;
-                                font-size: 12px;
-                                line-height: 16px;
-                                font-weight: bold;
-                                margin: 0 0 14px 0;
-                                padding: 5px 10px;
-                              "
-                            >
-                              {{SkuContext.BrandName}}
+                            <p style="margin: 0 0 14px 0">
+                              <span
+                                style="
+                                  display: inline-block;
+                                  background: #f0fdf4;
+                                  border: 1px solid #bbf7d0;
+                                  border-radius: 999px;
+                                  color: #166534;
+                                  font-size: 12px;
+                                  line-height: 16px;
+                                  font-weight: bold;
+                                  padding: 5px 10px;
+                                "
+                              >{{SkuContext.BrandName}}</span>
                             </p>
                             {{/if}}
                             <p style="margin: 0">
@@ -428,42 +434,20 @@
                       <table role="presentation" width="100%" style="table-layout: fixed">
                         <tr>
                           <td
-                            class="content-pad meta-cell"
+                            class="content-pad meta-cell meta-cell-last"
                             style="
                               width: 50%;
                               padding: 14px 20px;
                               vertical-align: top;
-                              border-bottom: 1px solid #f3f4f6;
                             "
                           >
                             <p class="label">Aviso solicitado</p>
-                            <p class="value">{{#if NotifyRequest.createdAt}}{{formatDate NotifyRequest.createdAt}}{{else}}Stock disponible{{/if}}</p>
-                          </td>
-                          <td
-                            class="content-pad meta-cell-r"
-                            style="
-                              width: 50%;
-                              padding: 14px 20px;
-                              vertical-align: top;
-                              border-left: 1px solid #f3f4f6;
-                              border-bottom: 1px solid #f3f4f6;
-                            "
-                          >
-                            <p class="label">SKU</p>
-                            <p class="value">{{SkuContext.Id}}</p>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            class="content-pad meta-cell"
-                            style="padding: 14px 20px; vertical-align: top"
-                          >
-                            <p class="label">Email</p>
-                            <p class="value">{{NotifyRequest.email}}</p>
+                            <p class="value">{{#if NotifyRequest.createdAt}}{{formatDate NotifyRequest.createdAt}}{{else}}—{{/if}}</p>
                           </td>
                           <td
                             class="content-pad meta-cell-r meta-cell-last"
                             style="
+                              width: 50%;
                               padding: 14px 20px;
                               vertical-align: top;
                               border-left: 1px solid #f3f4f6;
@@ -590,10 +574,27 @@
                     font-size: 13px;
                     line-height: 20px;
                     color: #9ca3af;
+                    margin-bottom: 8px;
+                  "
+                >
+                  Si ya no querés recibir estos avisos,
+                  <a
+                    href="{{NotifyRequest.unsubscribeLink}}"
+                    target="_blank"
+                    style="color: #9ca3af; text-decoration: underline"
+                    >cancelá tu suscripción</a
+                  >.
+                </p>
+                <p
+                  class="text-sm"
+                  style="
+                    font-size: 13px;
+                    line-height: 20px;
+                    color: #9ca3af;
                     margin: 0;
                   "
                 >
-                  © {{_accountInfo.TradingName}}. Todos los derechos reservados.
+                  © 2026 {{_accountInfo.TradingName}}. Todos los derechos reservados.
                 </p>
               </td>
             </tr>
