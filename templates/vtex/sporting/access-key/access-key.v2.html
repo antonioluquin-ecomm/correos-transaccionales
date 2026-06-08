@@ -220,13 +220,12 @@
                               background: #166534;
                               border: 2px solid #86efac;
                               border-radius: 50%;
-                              font-size: 24px;
-                              font-weight: bold;
+                              font-size: 26px;
                               color: #ffffff;
                               text-align: center;
                             "
                           >
-                            &#10003;
+                            &#128273;
                           </td>
                         </tr>
                       </table>
@@ -336,7 +335,7 @@
                                 margin: 0 0 3px 0;
                               "
                             >
-                              Este código es personal
+                              Este código vence en 15 minutos
                             </p>
                             <p
                               style="
@@ -346,7 +345,7 @@
                                 margin: 0;
                               "
                             >
-                              No lo compartas con nadie. Si no pediste este
+                              Es personal, no lo compartas. Si no pediste este
                               acceso, podés ignorar este correo.
                             </p>
                           </td>
@@ -360,51 +359,27 @@
                       <table role="presentation" width="100%" style="table-layout: fixed">
                         <tr>
                           <td
-                            class="content-pad meta-cell"
+                            class="content-pad meta-cell meta-cell-last"
                             style="
                               width: 50%;
                               padding: 14px 20px;
                               vertical-align: top;
-                              border-bottom: 1px solid #f3f4f6;
                             "
                           >
                             <p class="label">Solicitud</p>
                             <p class="value">Acceso a cuenta</p>
                           </td>
                           <td
-                            class="content-pad meta-cell-r"
+                            class="content-pad meta-cell-r meta-cell-last"
                             style="
                               width: 50%;
                               padding: 14px 20px;
                               vertical-align: top;
                               border-left: 1px solid #f3f4f6;
-                              border-bottom: 1px solid #f3f4f6;
                             "
-                          >
-                            <p class="label">Plataforma</p>
-                            <p class="value">{{_accountInfo.TradingName}}</p>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            class="content-pad meta-cell"
-                            style="padding: 14px 20px; vertical-align: top"
                           >
                             <p class="label">Destino</p>
-                            <p class="value">{{to.0.email}}</p>
-                          </td>
-                          <td
-                            class="content-pad meta-cell-r meta-cell-last"
-                            style="
-                              padding: 14px 20px;
-                              vertical-align: top;
-                              border-left: 1px solid #f3f4f6;
-                            "
-                          >
-                            <p class="label">Dispositivo</p>
-                            <p class="value">
-                              {{#if aditionalData.userAgent}}{{aditionalData.userAgent}}{{else}}No informado{{/if}}
-                            </p>
+                            <p class="value">{{#if to.0.email}}{{to.0.email}}{{else}}—{{/if}}</p>
                           </td>
                         </tr>
                       </table>
@@ -525,7 +500,7 @@
                     margin: 0;
                   "
                 >
-                  © {{_accountInfo.TradingName}}. Todos los derechos reservados.
+                  © 2026 {{_accountInfo.TradingName}}. Todos los derechos reservados.
                 </p>
               </td>
             </tr>
