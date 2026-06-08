@@ -2,6 +2,18 @@
 
 Formato: versión, fecha, resumen del cambio principal.
 
+## v1.2.0 — 2026-06-08
+
+Integración de tres templates nuevos al catálogo:
+
+- **access-key** (`templates/vtex/access-key.html`): Código de acceso a cuenta (verificación de identidad). Variables: `to[0].name`, `aditionalData.accessKey`, `_accountInfo.*`.
+- **back-in-stock** (`templates/vtex/back-in-stock.html`): Notificación de restock para suscriptores. Variables: `NotifyRequest.*`, `SkuContext.*`.
+- **order-invoiced** (`templates/vtex/order-invoiced.html`): Factura emitida con datos de seguimiento. Variables: `orderId`, `packages[]`, `package.*`, `trackingNumber`, `trackingUrl`.
+- Los tres templates quedan en estado `en revisión` (pendiente rediseño para alinear al sistema de diseño).
+- `config.js`: 3 nuevas entradas en TEMPLATES, 3 nuevos escenarios en EXAMPLE_SCENARIOS, VERSION → 1.2.0.
+- `flujo/index.html`: nodos `access-key` y `order-invoiced` actualizados a `existente`; nuevo nodo `back-in-stock` agregado al carril VTEX.
+- `examples/vtex/pedido-estandar.json`: `deliveryIds[0].courierName` = `"Andreani"` (el visualizador ahora muestra el courier en pedido-confirmado.html); `complement` = `"Piso 3, Depto B"` para probar el campo en el visualizador.
+
 ## v1.1.0 — 2026-06-08
 
 Nueva plantilla: **Pedido Cancelado** (`templates/vtex/pedido-cancelado.html`):

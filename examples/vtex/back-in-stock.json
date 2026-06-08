@@ -1,0 +1,309 @@
+{
+  "SkuContext": {
+    "Id": 211465,
+    "ProductId": 38502,
+    "NameComplete": "O****************************************************",
+    "ProductName": "O******************************************",
+    "ProductDescription": "Relajáte después de la sesión de piscina con esta Ojotas ideales para la ducha. Su diseño sencillo muestra el auténtico legado de adidas con las emblemáticas 3 Rayas. Incorporan una mediasuela cómoda y suave que reconforta los pies cansados.",
+    "ProductRefId": null,
+    "TaxCode": null,
+    "SkuName": "3********",
+    "IsActive": true,
+    "IsTransported": true,
+    "IsInventoried": true,
+    "IsGiftCardRecharge": false,
+    "ImageUrl": "https://sporting.vteximg.com.br/arquivos/ids/1088526-150-150/image-b3bd74e6d5d44f969b40123c95290b91.jpg?v=638455023785900000",
+    "DetailUrl": "/ojotas-adilette-aqua--unisex--38502/p",
+    "CSCIdentification": null,
+    "BrandId": "2000007",
+    "BrandName": "A*****",
+    "IsBrandActive": true,
+    "Dimension": {
+      "cubicweight": 0,
+      "height": 10,
+      "length": 10,
+      "weight": 1000,
+      "width": 10
+    },
+    "RealDimension": {
+      "realCubicWeight": 0,
+      "realHeight": 0,
+      "realLength": 0,
+      "realWeight": 0,
+      "realWidth": 0
+    },
+    "ManufacturerCode": "F35542",
+    "IsKit": false,
+    "KitItems": [],
+    "Services": [],
+    "Categories": [],
+    "CategoriesFullPath": ["/106/107/111/", "/106/107/", "/106/"],
+    "Attachments": [],
+    "Collections": [],
+    "SkuSellers": [
+      {
+        "SellerId": "1",
+        "StockKeepingUnitId": 211465,
+        "SellerStockKeepingUnitId": "211465",
+        "IsActive": true,
+        "FreightCommissionPercentage": 0,
+        "ProductCommissionPercentage": 0
+      },
+      {
+        "SellerId": "aradidas",
+        "StockKeepingUnitId": 211465,
+        "SellerStockKeepingUnitId": "8071",
+        "IsActive": true,
+        "FreightCommissionPercentage": 0,
+        "ProductCommissionPercentage": 0
+      }
+    ],
+    "SalesChannels": [1, 3],
+    "Images": [
+      {
+        "ImageUrl": "https://sporting.vteximg.com.br/arquivos/ids/1088524/image-eb16a825ccae49a59acf40974b8e8bd7.jpg?v=638455023785100000",
+        "ImageName": null,
+        "FileId": 1088524
+      },
+      {
+        "ImageUrl": "https://sporting.vteximg.com.br/arquivos/ids/1088525/image-7342fc96081d4e1fa5f9cffea4a6fcd5.jpg?v=638455023785900000",
+        "ImageName": null,
+        "FileId": 1088525
+      },
+      {
+        "ImageUrl": "https://sporting.vteximg.com.br/arquivos/ids/1088526/image-b3bd74e6d5d44f969b40123c95290b91.jpg?v=638455023785900000",
+        "ImageName": null,
+        "FileId": 1088526
+      },
+      {
+        "ImageUrl": "https://sporting.vteximg.com.br/arquivos/ids/1088527/image-7dadfd1a0f3e46e28f0e08fa5c049bbc.jpg?v=638455023786200000",
+        "ImageName": null,
+        "FileId": 1088527
+      },
+      {
+        "ImageUrl": "https://sporting.vteximg.com.br/arquivos/ids/1088528/image-1cdae7cd53284f9d93735d9bd62f0dad.jpg?v=638455023786370000",
+        "ImageName": null,
+        "FileId": 1088528
+      },
+      {
+        "ImageUrl": "https://sporting.vteximg.com.br/arquivos/ids/1088529/image-f46656b9ad2545de90d4932480985761.jpg?v=638455023786370000",
+        "ImageName": null,
+        "FileId": 1088529
+      },
+      {
+        "ImageUrl": "https://sporting.vteximg.com.br/arquivos/ids/1088530/image-9503ce58b3fe4fbd96d256dbb1926033.jpg?v=638455023786670000",
+        "ImageName": null,
+        "FileId": 1088530
+      },
+      {
+        "ImageUrl": "https://sporting.vteximg.com.br/arquivos/ids/1088531/image-7fdd20e50d7a4944bfd466cfd6f37f68.jpg?v=638455023786670000",
+        "ImageName": null,
+        "FileId": 1088531
+      },
+      {
+        "ImageUrl": "https://sporting.vteximg.com.br/arquivos/ids/1088532/image-bd2b2036cdf046e287cf2e747a6129fe.jpg?v=638455023787130000",
+        "ImageName": null,
+        "FileId": 1088532
+      },
+      {
+        "ImageUrl": "https://sporting.vteximg.com.br/arquivos/ids/1088533/image-381eb12dc6be43ab86d8c2145662c4ad.jpg?v=638455023787470000",
+        "ImageName": null,
+        "FileId": 1088533
+      }
+    ],
+    "Videos": [],
+    "SkuSpecifications": [
+      {
+        "FieldId": 29,
+        "FieldName": "T****",
+        "FieldValueIds": [285],
+        "FieldValues": ["39"],
+        "IsFilter": true,
+        "FieldGroupId": 11,
+        "FieldGroupName": "E***************"
+      }
+    ],
+    "ProductSpecifications": [
+      {
+        "FieldId": 36,
+        "FieldName": "G*****",
+        "FieldValueIds": [386],
+        "FieldValues": ["Hombre"],
+        "IsFilter": true,
+        "FieldGroupId": 11,
+        "FieldGroupName": "E***************"
+      },
+      {
+        "FieldId": 38,
+        "FieldName": "D*********",
+        "FieldValueIds": [464],
+        "FieldValues": ["Moda"],
+        "IsFilter": true,
+        "FieldGroupId": 11,
+        "FieldGroupName": "E***************"
+      },
+      {
+        "FieldId": 188,
+        "FieldName": "S*****",
+        "FieldValueIds": [1407],
+        "FieldValues": ["adidas"],
+        "IsFilter": false,
+        "FieldGroupId": 11,
+        "FieldGroupName": "E***************"
+      },
+      {
+        "FieldId": 40,
+        "FieldName": "C******",
+        "FieldValueIds": [497],
+        "FieldValues": ["Azul"],
+        "IsFilter": true,
+        "FieldGroupId": 11,
+        "FieldGroupName": "E***************"
+      },
+      {
+        "FieldId": 130,
+        "FieldName": "G*************",
+        "FieldValueIds": [871253],
+        "FieldValues": ["calzado-general-info"],
+        "IsFilter": false,
+        "FieldGroupId": 11,
+        "FieldGroupName": "E***************"
+      },
+      {
+        "FieldId": 116,
+        "FieldName": "M*****",
+        "FieldValueIds": [778701],
+        "FieldValues": ["F35542"],
+        "IsFilter": false,
+        "FieldGroupId": 11,
+        "FieldGroupName": "E***************"
+      },
+      {
+        "FieldId": 154,
+        "FieldName": "b*******",
+        "FieldValueIds": [778694],
+        "FieldValues": ["Horma clásica"],
+        "IsFilter": false,
+        "FieldGroupId": 15,
+        "FieldGroupName": "A********"
+      },
+      {
+        "FieldId": 155,
+        "FieldName": "b*******",
+        "FieldValueIds": [778695],
+        "FieldValues": ["Diseño fácil de poner y quitar"],
+        "IsFilter": false,
+        "FieldGroupId": 15,
+        "FieldGroupName": "A********"
+      },
+      {
+        "FieldId": 156,
+        "FieldName": "b*******",
+        "FieldValueIds": [778696],
+        "FieldValues": ["Banda de EVA moldeada de una sola pieza"],
+        "IsFilter": false,
+        "FieldGroupId": 15,
+        "FieldGroupName": "A********"
+      },
+      {
+        "FieldId": 157,
+        "FieldName": "b*******",
+        "FieldValueIds": [778697],
+        "FieldValues": ["Suela de EVA"],
+        "IsFilter": false,
+        "FieldGroupId": 15,
+        "FieldGroupName": "A********"
+      },
+      {
+        "FieldId": 158,
+        "FieldName": "b*******",
+        "FieldValueIds": [778698],
+        "FieldValues": ["Plantilla Cloudfoam suave"],
+        "IsFilter": false,
+        "FieldGroupId": 15,
+        "FieldGroupName": "A********"
+      },
+      {
+        "FieldId": 159,
+        "FieldName": "b*******",
+        "FieldValueIds": [778699],
+        "FieldValues": ["Diseño ligero; material de secado rápido"],
+        "IsFilter": false,
+        "FieldGroupId": 15,
+        "FieldGroupName": "A********"
+      }
+    ],
+    "ProductClustersIds": "151,155,503,557,651,843,884",
+    "PositionsInClusters": {},
+    "ProductCategoryIds": "/106/107/111/",
+    "IsDirectCategoryActive": true,
+    "ProductGlobalCategoryId": 187,
+    "ProductCategories": {
+      "106": "SPORTING",
+      "107": "CALZADO",
+      "111": "Ojotas y Chinelas"
+    },
+    "CommercialConditionId": 9,
+    "RewardValue": 0,
+    "AlternateIds": {
+      "RefId": "F35542_600"
+    },
+    "AlternateIdValues": ["4060509397304", "F35542_600"],
+    "EstimatedDateArrival": null,
+    "MeasurementUnit": "un",
+    "UnitMultiplier": 1,
+    "InformationSource": "Dataplane",
+    "ModalType": null,
+    "KeyWords": "F35542",
+    "ReleaseDate": "2024-01-01T00:00:00",
+    "ProductIsVisible": true,
+    "ShowIfNotAvailable": false,
+    "IsProductActive": true,
+    "ProductFinalScore": 0
+  },
+  "NotifyRequest": {
+    "id": "2eb83c09-1d23-44d6-a513-a3eb6e715e00",
+    "name": "A******",
+    "email": "a*******@h******.c**",
+    "skuId": "211465",
+    "createdAt": "2026-01-20T15:22:16.95Z",
+    "notificationSend": "false",
+    "locale": "es-AR",
+    "seller": {
+      "sellerId": "1",
+      "sellerName": "S*******",
+      "addToCartLink": "https://portal.vtexcommercestable.com.br/checkout/cart/add?sku=211465&qty=1&seller=1&sc=1&price=0&cv=_&sc=1",
+      "sellerDefault": true
+    }
+  },
+  "_accountInfo": {
+    "MainAccountName": "s*******",
+    "AccountName": "s*********",
+    "Cnpj": "30709964360",
+    "Id": "3b50fdc9-2fa8-4ed3-b86c-5aace09d5051",
+    "AppId": "aad3c2ce-d115-4059-88c2-a0060e5acd9a",
+    "IsActive": true,
+    "IsOperating": true,
+    "CreationDate": "2017-09-13T04:00:22",
+    "OperationDate": "2018-04-12T14:44:05",
+    "CompanyName": "B*************",
+    "TradingName": "S*******",
+    "City": "San Miguel de Tucuman",
+    "Complement": null,
+    "Country": "Argentina",
+    "State": null,
+    "Address": "Avenida Siria",
+    "District": null,
+    "Number": "2345",
+    "PostalCode": "4000",
+    "Licenses": [28],
+    "ParentAccountId": null,
+    "ParentAccountName": null,
+    "InactivationDate": null,
+    "Platform": "vtex",
+    "Privacy": null,
+    "HasPiiRestriction": false,
+    "Infra": null,
+    "Sponsor": "3f29e577-433f-42b8-9ded-d2ede67d8ab3"
+  }
+}

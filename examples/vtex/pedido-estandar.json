@@ -147,7 +147,17 @@
               "MX",
               "BR"
             ],
-            "deliveryIds": [],
+            "deliveryIds": [
+              {
+                "courierId": "courier-example-1",
+                "courierName": "Andreani",
+                "dockId": "dock-example-1",
+                "quantity": 1,
+                "warehouseId": "deposito-principal",
+                "accountCarrierName": "s*******",
+                "kitItemDetails": []
+              }
+            ],
             "deliveryChannels": [
               {
                 "id": "delivery",
@@ -180,7 +190,7 @@
             "receiverName": "Cliente Ejemplo 1",
             "street": "Calle Ejemplo",
             "number": "123",
-            "complement": null,
+            "complement": "Piso 3, Depto B",
             "neighborhood": "Barrio Ejemplo",
             "postalCode": "0000",
             "city": "Ciudad Ejemplo",

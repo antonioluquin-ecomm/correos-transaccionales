@@ -1,0 +1,43 @@
+{
+  "to": [
+    {
+      "name": "E*********",
+      "email": "e*************@g****.c**"
+    }
+  ],
+  "aditionalData": {
+    "accessKey": "0*****",
+    "locale": "es-AR",
+    "userAgent": "Mobile Safari, iOS"
+  },
+  "_accountInfo": {
+    "MainAccountName": "s*******",
+    "AccountName": "s*********",
+    "Cnpj": "30709964360",
+    "Id": "3b50fdc9-2fa8-4ed3-b86c-5aace09d5051",
+    "AppId": "aad3c2ce-d115-4059-88c2-a0060e5acd9a",
+    "IsActive": true,
+    "IsOperating": true,
+    "CreationDate": "2017-09-13T04:00:22",
+    "OperationDate": "2018-04-12T14:44:05",
+    "CompanyName": "B*************",
+    "TradingName": "S*******",
+    "City": "San Miguel de Tucuman",
+    "Complement": null,
+    "Country": "Argentina",
+    "State": null,
+    "Address": "Avenida Siria",
+    "District": null,
+    "Number": "2345",
+    "PostalCode": "4000",
+    "Licenses": [28],
+    "ParentAccountId": null,
+    "ParentAccountName": null,
+    "InactivationDate": null,
+    "Platform": "vtex",
+    "Privacy": null,
+    "HasPiiRestriction": false,
+    "Infra": null,
+    "Sponsor": "3f29e577-433f-42b8-9ded-d2ede67d8ab3"
+  }
+}
