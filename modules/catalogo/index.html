@@ -6,40 +6,233 @@
     <title>Biblioteca de Plantillas — Correos Transaccionales</title>
     <link rel="stylesheet" href="../../assets/css/shared.css" />
     <style>
-      .ct-template-card {
-        text-align: left;
-        cursor: pointer;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
+      .ct-library-header {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 18px;
+        align-items: end;
+        margin-bottom: 18px;
       }
 
-      .ct-template-card .ct-badges {
+      .ct-library-kpis {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(96px, 1fr));
+        gap: 10px;
+        min-width: 430px;
+      }
+
+      .ct-kpi {
+        background: #ffffff;
+        border: 1px solid var(--ct-card-border);
+        border-radius: 8px;
+        padding: 10px 12px;
+      }
+
+      .ct-kpi strong {
+        display: block;
+        font-size: 20px;
+        line-height: 24px;
+      }
+
+      .ct-kpi span {
+        color: var(--ct-text-muted);
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+
+      .ct-library-shell {
+        background: #ffffff;
+        border: 1px solid var(--ct-card-border);
+        border-radius: 12px;
+        overflow: hidden;
+      }
+
+      .ct-library-toolbar {
+        display: grid;
+        grid-template-columns: minmax(220px, 1fr) repeat(4, minmax(148px, auto));
+        gap: 10px;
+        padding: 14px;
+        border-bottom: 1px solid var(--ct-card-border);
+        background: #f9fafb;
+      }
+
+      .ct-field {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .ct-field label {
+        color: var(--ct-text-muted);
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.4px;
+        text-transform: uppercase;
+      }
+
+      .ct-field input,
+      .ct-field select {
+        width: 100%;
+        height: 38px;
+        border: 1px solid var(--ct-card-border);
+        border-radius: 8px;
+        background: #ffffff;
+        color: var(--ct-text);
+        font-size: 14px;
+        padding: 8px 10px;
+      }
+
+      .ct-field input:focus,
+      .ct-field select:focus,
+      .ct-template-card:focus-within,
+      .ct-close:focus-visible {
+        outline: 3px solid rgba(37, 99, 235, 0.28);
+        outline-offset: 2px;
+      }
+
+      .ct-library-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        padding: 12px 14px;
+        border-bottom: 1px solid var(--ct-card-border);
+      }
+
+      .ct-result-count {
+        color: var(--ct-text-muted);
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .ct-active-filters {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+
+      .ct-filter-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 9px;
+        border-radius: 999px;
+        background: #eef2ff;
+        color: #1e3a8a;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .ct-template-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 14px;
+        padding: 14px;
+      }
+
+      .ct-template-card {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        min-height: 260px;
+        border-radius: 8px;
+        transition: border-color 0.12s, box-shadow 0.12s, transform 0.12s;
+      }
+
+      .ct-template-card:hover {
+        border-color: #bfdbfe;
+        box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+        transform: translateY(-1px);
+      }
+
+      .ct-card-top {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        align-items: flex-start;
+      }
+
+      .ct-card-top .ct-badges,
+      .ct-detail-header .ct-badges {
         display: flex;
         gap: 6px;
         flex-wrap: wrap;
       }
 
       .ct-template-card h3 {
-        font-size: 16px;
+        margin: 0;
+        font-size: 17px;
+        line-height: 22px;
       }
 
-      .ct-template-card .ct-meta {
-        font-size: 12px;
+      .ct-template-card p {
+        flex: 1;
+      }
+
+      .ct-card-meta {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        padding: 10px;
+        border-radius: 8px;
+        background: #f9fafb;
+      }
+
+      .ct-card-meta span {
+        display: block;
         color: var(--ct-text-muted);
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
       }
 
-      /* Ficha de detalle */
+      .ct-card-meta strong {
+        display: block;
+        margin-top: 2px;
+        font-size: 13px;
+        font-weight: 700;
+        word-break: break-word;
+      }
+
+      .ct-card-actions {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: auto;
+      }
+
+      .ct-card-actions .ct-btn {
+        justify-content: center;
+        min-height: 36px;
+        padding: 8px 12px;
+      }
+
+      .ct-btn[aria-disabled="true"] {
+        opacity: 0.55;
+        pointer-events: none;
+      }
+
+      .ct-btn-icon {
+        width: 36px;
+        padding: 8px;
+      }
+
+      .ct-empty {
+        background: #ffffff;
+      }
+
       .ct-detail-overlay {
         position: fixed;
         inset: 0;
-        background: rgba(17, 24, 39, 0.45);
         display: none;
         align-items: flex-start;
         justify-content: center;
-        padding: 40px 16px;
-        z-index: 50;
+        padding: 34px 16px;
+        background: rgba(15, 23, 42, 0.48);
         overflow-y: auto;
+        z-index: 80;
       }
 
       .ct-detail-overlay.open {
@@ -47,11 +240,10 @@
       }
 
       .ct-detail {
+        width: min(760px, 100%);
         background: #ffffff;
-        border-radius: 12px;
-        max-width: 640px;
-        width: 100%;
-        padding: 24px;
+        border-radius: 10px;
+        box-shadow: 0 24px 60px rgba(15, 23, 42, 0.22);
       }
 
       .ct-detail-header {
@@ -59,55 +251,152 @@
         justify-content: space-between;
         align-items: flex-start;
         gap: 16px;
-        margin-bottom: 12px;
+        padding: 22px 22px 14px;
+        border-bottom: 1px solid var(--ct-card-border);
+      }
+
+      .ct-detail-header h2 {
+        margin: 10px 0 0;
+        font-size: 22px;
+        line-height: 28px;
+      }
+
+      .ct-detail-body {
+        padding: 18px 22px 22px;
+      }
+
+      .ct-detail-description {
+        margin: 0 0 16px;
+        color: var(--ct-text-muted);
+        line-height: 22px;
       }
 
       .ct-detail dl {
         display: grid;
-        grid-template-columns: 140px 1fr;
-        gap: 8px 16px;
-        font-size: 14px;
+        grid-template-columns: 150px 1fr;
+        gap: 9px 16px;
         margin: 16px 0;
+        font-size: 14px;
       }
 
       .ct-detail dt {
         color: var(--ct-text-muted);
-        font-weight: 600;
+        font-weight: 700;
       }
 
       .ct-detail dd {
         margin: 0;
+        min-width: 0;
+        word-break: break-word;
       }
 
-      .ct-detail .ct-variables {
-        font-size: 13px;
-        line-height: 20px;
-        background: var(--ct-bg);
-        border-radius: 8px;
-        padding: 12px 16px;
+      .ct-detail code,
+      .ct-template-card code {
+        font-size: 12px;
+      }
+
+      .ct-variables {
         max-height: 220px;
         overflow-y: auto;
+        padding: 12px 16px;
+        border: 1px solid var(--ct-card-border);
+        border-radius: 8px;
+        background: #f9fafb;
+        font-size: 13px;
+        line-height: 20px;
       }
 
-      .ct-detail .ct-actions {
+      .ct-variables ul {
+        margin: 0;
+        padding-left: 18px;
+      }
+
+      .ct-detail-actions {
         display: flex;
+        align-items: center;
         gap: 8px;
         flex-wrap: wrap;
         margin-top: 16px;
       }
 
-      .ct-close {
-        border: none;
-        background: transparent;
-        font-size: 20px;
-        line-height: 1;
-        cursor: pointer;
+      .ct-detail-status {
         color: var(--ct-text-muted);
-        padding: 4px;
+        font-size: 13px;
+        min-height: 18px;
+      }
+
+      .ct-detail-status.error {
+        color: #b91c1c;
+      }
+
+      .ct-close {
+        flex-shrink: 0;
+        width: 36px;
+        height: 36px;
+        border: 1px solid var(--ct-card-border);
+        border-radius: 8px;
+        background: #ffffff;
+        color: var(--ct-text-muted);
+        cursor: pointer;
+        font-size: 22px;
+        line-height: 1;
       }
 
       .ct-close:hover {
+        background: #f3f4f6;
         color: var(--ct-text);
+      }
+
+      @media (max-width: 980px) {
+        .ct-library-header {
+          grid-template-columns: 1fr;
+        }
+
+        .ct-library-kpis {
+          min-width: 0;
+        }
+
+        .ct-library-toolbar {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .ct-field-search {
+          grid-column: 1 / -1;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .ct-library-kpis,
+        .ct-library-toolbar,
+        .ct-card-meta,
+        .ct-detail dl {
+          grid-template-columns: 1fr;
+        }
+
+        .ct-template-grid {
+          grid-template-columns: 1fr;
+          padding: 10px;
+        }
+
+        .ct-library-meta {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .ct-detail-overlay {
+          padding: 0;
+        }
+
+        .ct-detail {
+          min-height: 100vh;
+          border-radius: 0;
+        }
+
+        .ct-detail-header,
+        .ct-detail-body {
+          padding-left: 16px;
+          padding-right: 16px;
+        }
       }
     </style>
   </head>
@@ -115,60 +404,122 @@
     <header class="ct-topbar" data-ct-topbar></header>
 
     <main class="ct-page">
-      <h1>Biblioteca de Plantillas</h1>
-      <p class="ct-subtitle">
-        Catálogo central de las plantillas de correo existentes: nombre, plataforma, categoría,
-        estado, responsable y descripción funcional. Hacé clic en una para ver su ficha completa.
-      </p>
+      <section class="ct-library-header" aria-labelledby="ct-page-title">
+        <div>
+          <h1 id="ct-page-title">Biblioteca de Plantillas</h1>
+          <p class="ct-subtitle">
+            Catálogo central de plantillas transaccionales con estado, metadata, datos de ejemplo y
+            accesos rápidos para revisar o descargar el HTML real.
+          </p>
+        </div>
+        <div class="ct-library-kpis" aria-label="Resumen de biblioteca">
+          <div class="ct-kpi">
+            <strong id="ct-kpi-total">0</strong>
+            <span>Plantillas</span>
+          </div>
+          <div class="ct-kpi">
+            <strong id="ct-kpi-active">0</strong>
+            <span>Activas</span>
+          </div>
+          <div class="ct-kpi">
+            <strong id="ct-kpi-examples">0</strong>
+            <span>Con ejemplo</span>
+          </div>
+          <div class="ct-kpi">
+            <strong id="ct-kpi-platforms">0</strong>
+            <span>Plataformas</span>
+          </div>
+        </div>
+      </section>
 
-      <div class="ct-toolbar">
-        <input type="search" id="ct-search" placeholder="Buscar por nombre o descripción…" aria-label="Buscar plantilla" />
-        <select id="ct-filter-plataforma" aria-label="Filtrar por plataforma">
-          <option value="">Plataforma: todas</option>
-        </select>
-        <select id="ct-filter-categoria" aria-label="Filtrar por categoría">
-          <option value="">Categoría: todas</option>
-        </select>
-        <select id="ct-filter-estado" aria-label="Filtrar por estado">
-          <option value="">Estado: todos</option>
-        </select>
-      </div>
+      <section class="ct-library-shell" aria-label="Explorar plantillas">
+        <div class="ct-library-toolbar">
+          <div class="ct-field ct-field-search">
+            <label for="ct-search">Buscar</label>
+            <input
+              type="search"
+              id="ct-search"
+              placeholder="Nombre, descripción, variable, responsable o archivo"
+              autocomplete="off"
+            />
+          </div>
+          <div class="ct-field">
+            <label for="ct-filter-plataforma">Plataforma</label>
+            <select id="ct-filter-plataforma">
+              <option value="">Todas</option>
+            </select>
+          </div>
+          <div class="ct-field">
+            <label for="ct-filter-categoria">Categoría</label>
+            <select id="ct-filter-categoria">
+              <option value="">Todas</option>
+            </select>
+          </div>
+          <div class="ct-field">
+            <label for="ct-filter-estado">Estado</label>
+            <select id="ct-filter-estado">
+              <option value="">Todos</option>
+            </select>
+          </div>
+          <div class="ct-field">
+            <label for="ct-sort">Orden</label>
+            <select id="ct-sort">
+              <option value="updated-desc">Última actualización</option>
+              <option value="name-asc">Nombre A-Z</option>
+              <option value="platform-asc">Plataforma</option>
+              <option value="status-asc">Estado</option>
+            </select>
+          </div>
+        </div>
 
-      <div id="ct-results" class="ct-grid"></div>
-      <div id="ct-empty" class="ct-empty" hidden>
-        <p><strong>No se encontraron plantillas con esos filtros.</strong></p>
-        <p>Probá ajustar la búsqueda o limpiar los filtros.</p>
-        <button class="ct-btn" id="ct-clear-filters">Limpiar filtros</button>
-      </div>
+        <div class="ct-library-meta">
+          <div id="ct-result-count" class="ct-result-count" aria-live="polite"></div>
+          <div class="ct-active-filters" id="ct-active-filters"></div>
+          <button class="ct-btn" id="ct-clear-filters" type="button">Limpiar filtros</button>
+        </div>
+
+        <div id="ct-results" class="ct-template-grid"></div>
+        <div id="ct-empty" class="ct-empty" hidden>
+          <p><strong>No se encontraron plantillas con esos filtros.</strong></p>
+          <p>Probá ajustar la búsqueda o limpiar los filtros.</p>
+        </div>
+      </section>
     </main>
 
     <div class="ct-detail-overlay" id="ct-detail-overlay">
-      <div class="ct-detail" role="dialog" aria-modal="true" aria-labelledby="ct-detail-title">
+      <article class="ct-detail" role="dialog" aria-modal="true" aria-labelledby="ct-detail-title" tabindex="-1">
         <div class="ct-detail-header">
           <div>
             <div class="ct-badges" id="ct-detail-badges"></div>
             <h2 id="ct-detail-title"></h2>
           </div>
-          <button class="ct-close" id="ct-detail-close" aria-label="Cerrar ficha">&times;</button>
+          <button class="ct-close" id="ct-detail-close" type="button" aria-label="Cerrar ficha">&times;</button>
         </div>
-        <p id="ct-detail-descripcion"></p>
-        <dl>
-          <dt>Responsable</dt>
-          <dd id="ct-detail-responsable"></dd>
-          <dt>Última actualización</dt>
-          <dd id="ct-detail-actualizado"></dd>
-          <dt>Plantilla HTML</dt>
-          <dd id="ct-detail-archivo"></dd>
-          <dt>Datos de ejemplo</dt>
-          <dd id="ct-detail-ejemplo"></dd>
-        </dl>
-        <h3>Variables y datos que utiliza</h3>
-        <div class="ct-variables" id="ct-detail-variables"></div>
-        <div class="ct-actions">
-          <a class="ct-btn ct-btn-primary" id="ct-detail-ver" target="_blank" rel="noopener">Ver HTML</a>
-          <button class="ct-btn" id="ct-detail-descargar">Descargar HTML</button>
+        <div class="ct-detail-body">
+          <p class="ct-detail-description" id="ct-detail-descripcion"></p>
+          <dl>
+            <dt>Responsable</dt>
+            <dd id="ct-detail-responsable"></dd>
+            <dt>Categoría</dt>
+            <dd id="ct-detail-categoria"></dd>
+            <dt>Última actualización</dt>
+            <dd id="ct-detail-actualizado"></dd>
+            <dt>Plantilla HTML</dt>
+            <dd id="ct-detail-archivo"></dd>
+            <dt>Datos de ejemplo</dt>
+            <dd id="ct-detail-ejemplo"></dd>
+          </dl>
+          <h3>Variables y datos que utiliza</h3>
+          <div class="ct-variables" id="ct-detail-variables"></div>
+          <div class="ct-detail-actions">
+            <a class="ct-btn ct-btn-primary" id="ct-detail-preview">Previsualizar</a>
+            <a class="ct-btn" id="ct-detail-ver" target="_blank" rel="noopener">Abrir HTML</a>
+            <button class="ct-btn" id="ct-detail-copy-path" type="button">Copiar ruta</button>
+            <button class="ct-btn" id="ct-detail-descargar" type="button">Descargar HTML</button>
+          </div>
+          <p class="ct-detail-status" id="ct-detail-status" aria-live="polite"></p>
         </div>
-      </div>
+      </article>
     </div>
 
     <script src="../../config.js"></script>
@@ -178,15 +529,64 @@
         const BASE = '../../';
         CT.renderTopbar('catalogo', BASE);
 
+        const templates = typeof TEMPLATES !== 'undefined' && Array.isArray(TEMPLATES) ? TEMPLATES : [];
+        const collator = new Intl.Collator('es', { sensitivity: 'base' });
+
         const resultsEl = document.getElementById('ct-results');
         const emptyEl = document.getElementById('ct-empty');
+        const resultCountEl = document.getElementById('ct-result-count');
+        const activeFiltersEl = document.getElementById('ct-active-filters');
+        const clearFiltersBtn = document.getElementById('ct-clear-filters');
         const searchEl = document.getElementById('ct-search');
         const filterPlataformaEl = document.getElementById('ct-filter-plataforma');
         const filterCategoriaEl = document.getElementById('ct-filter-categoria');
         const filterEstadoEl = document.getElementById('ct-filter-estado');
+        const sortEl = document.getElementById('ct-sort');
+
+        const overlay = document.getElementById('ct-detail-overlay');
+        const detailEl = overlay.querySelector('.ct-detail');
+        const closeBtn = document.getElementById('ct-detail-close');
+        const titleEl = document.getElementById('ct-detail-title');
+        const badgesEl = document.getElementById('ct-detail-badges');
+        const descripcionEl = document.getElementById('ct-detail-descripcion');
+        const responsableEl = document.getElementById('ct-detail-responsable');
+        const categoriaEl = document.getElementById('ct-detail-categoria');
+        const actualizadoEl = document.getElementById('ct-detail-actualizado');
+        const archivoEl = document.getElementById('ct-detail-archivo');
+        const ejemploEl = document.getElementById('ct-detail-ejemplo');
+        const variablesEl = document.getElementById('ct-detail-variables');
+        const previewBtn = document.getElementById('ct-detail-preview');
+        const verBtn = document.getElementById('ct-detail-ver');
+        const copyPathBtn = document.getElementById('ct-detail-copy-path');
+        const descargarBtn = document.getElementById('ct-detail-descargar');
+        const detailStatusEl = document.getElementById('ct-detail-status');
+
+        let currentTemplate = null;
+        let lastFocusedEl = null;
+
+        function normalize(value) {
+          return String(value || '')
+            .toLowerCase()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '');
+        }
+
+        function searchableText(template) {
+          return normalize([
+            template.nombre,
+            template.descripcion,
+            template.plataforma,
+            template.categoria,
+            template.estado,
+            template.responsable,
+            template.archivoHtml,
+            template.ejemplo,
+            ...(Array.isArray(template.variables) ? template.variables : []),
+          ].join(' '));
+        }
 
         function uniqueValues(field) {
-          return Array.from(new Set(TEMPLATES.map((t) => t[field]).filter(Boolean))).sort();
+          return Array.from(new Set(templates.map((t) => t[field]).filter(Boolean))).sort(collator.compare);
         }
 
         function fillSelect(selectEl, values, labelFn) {
@@ -203,21 +603,31 @@
         }
 
         function formatDate(isoDate) {
-          const d = new Date(isoDate + 'T00:00:00');
+          const d = new Date(`${isoDate || ''}T00:00:00`);
+          if (Number.isNaN(d.getTime())) return 'Sin fecha';
           return d.toLocaleDateString('es-AR', { day: 'numeric', month: 'short', year: 'numeric' });
         }
 
-        fillSelect(filterPlataformaEl, uniqueValues('plataforma'));
-        fillSelect(filterCategoriaEl, uniqueValues('categoria'));
-        fillSelect(filterEstadoEl, uniqueValues('estado'), capitalizeFirst);
+        function previewUrl(template) {
+          const params = new URLSearchParams({ template: template.id });
+          if (template.ejemplo) params.set('example', template.ejemplo);
+          return `../visualizador/index.html?${params.toString()}`;
+        }
+
+        function htmlUrl(template) {
+          return template.archivoHtml ? BASE + template.archivoHtml : '';
+        }
+
+        function updateKpis() {
+          document.getElementById('ct-kpi-total').textContent = templates.length;
+          document.getElementById('ct-kpi-active').textContent = templates.filter((t) => t.estado === 'activo').length;
+          document.getElementById('ct-kpi-examples').textContent = templates.filter((t) => t.ejemplo).length;
+          document.getElementById('ct-kpi-platforms').textContent = uniqueValues('plataforma').length;
+        }
 
         function matchesFilters(template) {
-          const query = searchEl.value.trim().toLowerCase();
-          const matchesQuery =
-            !query ||
-            template.nombre.toLowerCase().includes(query) ||
-            template.descripcion.toLowerCase().includes(query);
-
+          const query = normalize(searchEl.value.trim());
+          const matchesQuery = !query || searchableText(template).includes(query);
           const matchesPlataforma = !filterPlataformaEl.value || template.plataforma === filterPlataformaEl.value;
           const matchesCategoria = !filterCategoriaEl.value || template.categoria === filterCategoriaEl.value;
           const matchesEstado = !filterEstadoEl.value || template.estado === filterEstadoEl.value;
@@ -225,101 +635,194 @@
           return matchesQuery && matchesPlataforma && matchesCategoria && matchesEstado;
         }
 
+        function sortTemplates(items) {
+          const sorted = items.slice();
+          sorted.sort((a, b) => {
+            if (sortEl.value === 'name-asc') return collator.compare(a.nombre || '', b.nombre || '');
+            if (sortEl.value === 'platform-asc') return collator.compare(a.plataforma || '', b.plataforma || '');
+            if (sortEl.value === 'status-asc') return collator.compare(a.estado || '', b.estado || '');
+            return String(b.actualizado || '').localeCompare(String(a.actualizado || ''));
+          });
+          return sorted;
+        }
+
+        function renderActiveFilters() {
+          const chips = [];
+          if (searchEl.value.trim()) chips.push(`Búsqueda: ${searchEl.value.trim()}`);
+          if (filterPlataformaEl.value) chips.push(`Plataforma: ${filterPlataformaEl.value}`);
+          if (filterCategoriaEl.value) chips.push(`Categoría: ${filterCategoriaEl.value}`);
+          if (filterEstadoEl.value) chips.push(`Estado: ${capitalizeFirst(filterEstadoEl.value)}`);
+          if (sortEl.value !== 'updated-desc') chips.push(`Orden: ${sortEl.selectedOptions[0]?.textContent || 'Personalizado'}`);
+
+          activeFiltersEl.innerHTML = chips.map((chip) => `<span class="ct-filter-chip">${CT.escapeHtml(chip)}</span>`).join('');
+          clearFiltersBtn.hidden = chips.length === 0 && sortEl.value === 'updated-desc';
+        }
+
         function renderCard(template) {
-          const card = document.createElement('button');
-          card.type = 'button';
+          const card = document.createElement('article');
           card.className = 'ct-card ct-template-card';
           card.innerHTML = `
-            <div class="ct-badges">
-              ${CT.platformBadge(template.plataforma)}
-              ${CT.statusBadge(template.estado)}
+            <div class="ct-card-top">
+              <div class="ct-badges">
+                ${CT.platformBadge(template.plataforma || 'Sin plataforma')}
+                ${CT.statusBadge(template.estado || 'sin estado')}
+              </div>
+              <code>${CT.escapeHtml(template.id || '')}</code>
             </div>
-            <h3>${CT.escapeHtml(template.nombre)}</h3>
-            <p>${CT.escapeHtml(template.descripcion)}</p>
-            <div class="ct-meta">${CT.escapeHtml(template.categoria)} · actualizado ${CT.escapeHtml(formatDate(template.actualizado))}</div>
+            <h3>${CT.escapeHtml(template.nombre || 'Sin nombre')}</h3>
+            <p>${CT.escapeHtml(template.descripcion || 'Sin descripción documentada.')}</p>
+            <div class="ct-card-meta">
+              <div>
+                <span>Categoría</span>
+                <strong>${CT.escapeHtml(template.categoria || 'Sin categoría')}</strong>
+              </div>
+              <div>
+                <span>Actualizado</span>
+                <strong>${CT.escapeHtml(formatDate(template.actualizado))}</strong>
+              </div>
+              <div>
+                <span>Responsable</span>
+                <strong>${CT.escapeHtml(template.responsable || 'Sin responsable')}</strong>
+              </div>
+              <div>
+                <span>Variables</span>
+                <strong>${Array.isArray(template.variables) ? template.variables.length : 0}</strong>
+              </div>
+            </div>
+            <div class="ct-card-actions">
+              <button class="ct-btn ct-btn-primary" type="button" data-action="detail">Ficha</button>
+              ${template.archivoHtml ? `<a class="ct-btn" href="${CT.escapeHtml(previewUrl(template))}">Preview</a>` : ''}
+              ${template.archivoHtml ? `<a class="ct-btn ct-btn-icon" href="${CT.escapeHtml(htmlUrl(template))}" target="_blank" rel="noopener" aria-label="Abrir HTML de ${CT.escapeHtml(template.nombre || 'plantilla')}">HTML</a>` : ''}
+            </div>
           `;
-          card.addEventListener('click', () => openDetail(template));
+          card.querySelector('[data-action="detail"]').addEventListener('click', () => openDetail(template));
           return card;
         }
 
         function renderResults() {
-          const filtered = TEMPLATES.filter(matchesFilters);
-          resultsEl.innerHTML = '';
-          filtered.forEach((template) => resultsEl.appendChild(renderCard(template)));
+          const filtered = sortTemplates(templates.filter(matchesFilters));
+          const fragment = document.createDocumentFragment();
+          filtered.forEach((template) => fragment.appendChild(renderCard(template)));
+
+          resultsEl.replaceChildren(fragment);
           emptyEl.hidden = filtered.length > 0;
           resultsEl.hidden = filtered.length === 0;
+          resultCountEl.textContent = `${filtered.length} de ${templates.length} plantilla${templates.length !== 1 ? 's' : ''}`;
+          renderActiveFilters();
         }
 
-        [searchEl, filterPlataformaEl, filterCategoriaEl, filterEstadoEl].forEach((el) => {
-          el.addEventListener('input', renderResults);
-          el.addEventListener('change', renderResults);
-        });
-
-        document.getElementById('ct-clear-filters').addEventListener('click', () => {
-          searchEl.value = '';
-          filterPlataformaEl.value = '';
-          filterCategoriaEl.value = '';
-          filterEstadoEl.value = '';
-          renderResults();
-        });
-
-        // Ficha de detalle
-        const overlay = document.getElementById('ct-detail-overlay');
-        const closeBtn = document.getElementById('ct-detail-close');
-        const titleEl = document.getElementById('ct-detail-title');
-        const badgesEl = document.getElementById('ct-detail-badges');
-        const descripcionEl = document.getElementById('ct-detail-descripcion');
-        const responsableEl = document.getElementById('ct-detail-responsable');
-        const actualizadoEl = document.getElementById('ct-detail-actualizado');
-        const archivoEl = document.getElementById('ct-detail-archivo');
-        const ejemploEl = document.getElementById('ct-detail-ejemplo');
-        const variablesEl = document.getElementById('ct-detail-variables');
-        const verBtn = document.getElementById('ct-detail-ver');
-        const descargarBtn = document.getElementById('ct-detail-descargar');
-
-        let currentTemplate = null;
+        function setDetailStatus(message, isError) {
+          detailStatusEl.textContent = message || '';
+          detailStatusEl.classList.toggle('error', Boolean(isError));
+        }
 
         function openDetail(template) {
           currentTemplate = template;
-          titleEl.textContent = template.nombre;
-          badgesEl.innerHTML = `${CT.platformBadge(template.plataforma)}${CT.statusBadge(template.estado)}`;
-          descripcionEl.textContent = template.descripcion;
-          responsableEl.textContent = template.responsable;
+          lastFocusedEl = document.activeElement;
+          titleEl.textContent = template.nombre || 'Sin nombre';
+          badgesEl.innerHTML = `${CT.platformBadge(template.plataforma || 'Sin plataforma')}${CT.statusBadge(template.estado || 'sin estado')}`;
+          descripcionEl.textContent = template.descripcion || 'Sin descripción documentada.';
+          responsableEl.textContent = template.responsable || 'Sin responsable';
+          categoriaEl.textContent = template.categoria || 'Sin categoría';
           actualizadoEl.textContent = formatDate(template.actualizado);
-          archivoEl.innerHTML = `<code>${CT.escapeHtml(template.archivoHtml)}</code>`;
-          ejemploEl.innerHTML = template.ejemplo
-            ? `<code>${CT.escapeHtml(template.ejemplo)}</code>`
-            : 'Sin dato de ejemplo asociado todavía.';
-          variablesEl.innerHTML = template.variables.length
+          archivoEl.innerHTML = template.archivoHtml ? `<code>${CT.escapeHtml(template.archivoHtml)}</code>` : 'Sin HTML asociado.';
+          ejemploEl.innerHTML = template.ejemplo ? `<code>${CT.escapeHtml(template.ejemplo)}</code>` : 'Sin dato de ejemplo asociado todavía.';
+          variablesEl.innerHTML = Array.isArray(template.variables) && template.variables.length
             ? `<ul>${template.variables.map((v) => `<li><code>${CT.escapeHtml(v)}</code></li>`).join('')}</ul>`
             : '<p>Sin variables documentadas todavía.</p>';
-          verBtn.href = BASE + template.archivoHtml;
+          verBtn.href = htmlUrl(template) || '#';
+          previewBtn.href = template.archivoHtml ? previewUrl(template) : '#';
+          verBtn.toggleAttribute('aria-disabled', !template.archivoHtml);
+          previewBtn.toggleAttribute('aria-disabled', !template.archivoHtml);
+          descargarBtn.disabled = !template.archivoHtml;
+          copyPathBtn.disabled = !template.archivoHtml;
+          setDetailStatus('');
 
           overlay.classList.add('open');
+          document.body.style.overflow = 'hidden';
+          closeBtn.focus();
         }
 
         function closeDetail() {
           overlay.classList.remove('open');
+          document.body.style.overflow = '';
           currentTemplate = null;
+          if (lastFocusedEl && typeof lastFocusedEl.focus === 'function') lastFocusedEl.focus();
         }
 
+        async function copyCurrentPath() {
+          if (!currentTemplate?.archivoHtml) return;
+          try {
+            await navigator.clipboard.writeText(currentTemplate.archivoHtml);
+            setDetailStatus('Ruta copiada al portapapeles.');
+          } catch (error) {
+            setDetailStatus('No se pudo copiar la ruta. Seleccioná el texto manualmente.', true);
+          }
+        }
+
+        async function downloadCurrentHtml() {
+          if (!currentTemplate?.archivoHtml) return;
+          const originalText = descargarBtn.textContent;
+          descargarBtn.disabled = true;
+          descargarBtn.textContent = 'Descargando...';
+          setDetailStatus('');
+          try {
+            const html = await CT.fetchText(BASE + currentTemplate.archivoHtml);
+            const filename = currentTemplate.archivoHtml.split('/').pop() || `${currentTemplate.id || 'plantilla'}.html`;
+            CT.downloadFile(filename, html, 'text/html');
+            setDetailStatus(`Descarga iniciada: ${filename}`);
+          } catch (error) {
+            setDetailStatus('No se pudo descargar el HTML: ' + error.message, true);
+          } finally {
+            descargarBtn.disabled = false;
+            descargarBtn.textContent = originalText;
+          }
+        }
+
+        function trapFocus(event) {
+          if (event.key !== 'Tab' || !overlay.classList.contains('open')) return;
+          const focusable = Array.from(detailEl.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'));
+          if (!focusable.length) return;
+          const first = focusable[0];
+          const last = focusable[focusable.length - 1];
+          if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last.focus();
+          } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first.focus();
+          }
+        }
+
+        fillSelect(filterPlataformaEl, uniqueValues('plataforma'));
+        fillSelect(filterCategoriaEl, uniqueValues('categoria'));
+        fillSelect(filterEstadoEl, uniqueValues('estado'), capitalizeFirst);
+        updateKpis();
+
+        [searchEl, filterPlataformaEl, filterCategoriaEl, filterEstadoEl, sortEl].forEach((el) => {
+          el.addEventListener('input', renderResults);
+          el.addEventListener('change', renderResults);
+        });
+
+        clearFiltersBtn.addEventListener('click', () => {
+          searchEl.value = '';
+          filterPlataformaEl.value = '';
+          filterCategoriaEl.value = '';
+          filterEstadoEl.value = '';
+          sortEl.value = 'updated-desc';
+          renderResults();
+          searchEl.focus();
+        });
+
         closeBtn.addEventListener('click', closeDetail);
+        copyPathBtn.addEventListener('click', copyCurrentPath);
+        descargarBtn.addEventListener('click', downloadCurrentHtml);
         overlay.addEventListener('click', (event) => {
           if (event.target === overlay) closeDetail();
         });
         document.addEventListener('keydown', (event) => {
           if (event.key === 'Escape' && overlay.classList.contains('open')) closeDetail();
-        });
-
-        descargarBtn.addEventListener('click', async () => {
-          if (!currentTemplate) return;
-          try {
-            const html = await CT.fetchText(BASE + currentTemplate.archivoHtml);
-            const filename = currentTemplate.archivoHtml.split('/').pop();
-            CT.downloadFile(filename, html, 'text/html');
-          } catch (error) {
-            alert('No se pudo descargar el HTML: ' + error.message);
-          }
+          trapFocus(event);
         });
 
         renderResults();
