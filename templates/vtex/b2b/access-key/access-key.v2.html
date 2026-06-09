@@ -1,502 +1,285 @@
-<html
-  xmlns="http://www.w3.org/1999/xhtml"
-  xmlns:o="urn:schemas-microsoft-com:office:office"
-  xmlns:v="urn:schemas-microsoft-com:vml"
-  style="
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    box-sizing: border-box;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0 !important;
-    background: #f1f1f1 !important;
-  "
->
+<!--B2B Access-Key - Version 2-->
+<!doctype html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Rubik: wght@400 !important;600&display=swap"
-      rel="stylesheet"
-    />
-    <title>{{_accountInfo.TradingName}}</title>
-    <!--[if gte mso 9]>
-      <xml>
-        <o:OfficeDocumentSettings>
-          <o:AllowPNG />
-          <o:PixelsPerInch>96</o:PixelsPerInch>
-        </o:OfficeDocumentSettings>
-      </xml>
-    <![endif]-->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta name="x-apple-disable-message-reformatting" />
+    <meta name="format-detection" content="telephone=no,address=no,email=no,date=no" />
+    <title>{{_accountInfo.TradingName}} - Código de acceso</title>
     <style>
-      @media (max-width: 600px) {
-        img {
-          max-width: 100% !important;
-          height: auto !important;
-        }
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&display=swap');
+
+      html, body {
+        margin: 0 !important; padding: 0 !important;
+        width: 100% !important; background: #e8e8e8 !important;
       }
-    </style>
-    <style>
-      @media screen and (min-width: 30em) {
-        .ph5-ns {
-          padding-left: 4rem !important;
-          padding-right: 4rem !important;
-        }
+      body {
+        font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        color: #111827;
+      }
+      * { -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; }
+      table, td { border-collapse: collapse !important; mso-table-lspace: 0pt !important; mso-table-rspace: 0pt !important; }
+      img { border: 0; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; display: block; }
+      a { text-decoration: none; color: inherit; }
+      a[x-apple-data-detectors] { color: inherit !important; text-decoration: none !important; }
+      #outlook a { padding: 0; }
+
+      .wrap { width: 100%; max-width: 600px; margin: 0 auto; }
+      .card { background: #ffffff; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden; }
+      .gap { height: 12px; line-height: 12px; font-size: 12px; }
+
+      .h2 { font-size: 15px; line-height: 22px; font-weight: bold; color: #111827; margin: 0 0 12px 0; }
+      .text { font-size: 14px; line-height: 22px; color: #374151; margin: 0; }
+      .text-sm { font-size: 13px; line-height: 20px; color: #6b7280; margin: 0; }
+
+      .access-code {
+        background: linear-gradient(135deg, #eff8ff 0%, #e0f2fe 100%);
+        border: 1px solid #bae6fd;
+        border-radius: 10px;
+        box-sizing: border-box;
+        color: #0c4a6e;
+        font-family: 'Poppins', -apple-system, sans-serif;
+        font-size: 42px;
+        line-height: 48px;
+        font-weight: 800;
+        letter-spacing: 7px;
+        padding: 20px 14px;
+        text-align: center;
+      }
+
+      .cta-primary {
+        display: block; width: 100%; box-sizing: border-box;
+        background: linear-gradient(135deg, #0c4a6e 0%, #2781ab 100%);
+        color: #ffffff !important; border-radius: 8px;
+        font-family: 'Poppins', -apple-system, sans-serif;
+        font-size: 13px; line-height: 52px; font-weight: 700;
+        letter-spacing: 1px; text-transform: uppercase; text-align: center;
+      }
+
+      @media only screen and (max-width: 600px) {
+        .wrap { width: 100% !important; max-width: 100% !important; }
+        .card { border-radius: 0 !important; border-left: none !important; border-right: none !important; }
+        .outer-pad { padding: 0 !important; }
+        .footer-td { border-radius: 0 !important; }
+        .hero-td { padding: 32px 20px 28px !important; }
+        .content-pad { padding-left: 16px !important; padding-right: 16px !important; }
+        .access-code { font-size: 34px !important; line-height: 42px !important; letter-spacing: 5px !important; padding: 18px 10px !important; }
+        .h1 { font-size: 22px !important; line-height: 28px !important; }
+        .main-card { border-radius: 0 0 12px 12px !important; }
+        .header-logo { width: 132px !important; }
       }
     </style>
   </head>
+  <body>
+    <!-- Preheader -->
+    <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;visibility:hidden;mso-hide:all">
+      Tu código de acceso para ingresar a {{_accountInfo.TradingName}} es {{aditionalData.accessKey}}.&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;
+    </div>
 
-  <body
-    style="
-      -webkit-text-size-adjust: 100%;
-      -ms-text-size-adjust: 100%;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      box-sizing: border-box;
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      padding: 0 !important;
-      background: #f1f1f1 !important;
-      font-family:
-        &quot;Rubik&quot;,
-        -apple-system,
-        BlinkMacSystemFont,
-        &quot;Segoe UI&quot;,
-        Roboto,
-        Helvetica,
-        Arial,
-        sans-serif;
-    "
-  >
-    <table
-      width="100%"
-      border="0"
-      cellpadding="0"
-      cellspacing="0"
-      style="
-        padding: 0;
-        background: #f1f1f1;
-        max-width: 800px;
-        box-sizing: border-box;
-        margin: auto;
-        border-collapse: collapse;
-        border-spacing: 0;
-        mso-table-lspace: 0pt;
-        mso-table-rspace: 0pt;
-        font-family:
-          &quot;Rubik&quot;,
-          -apple-system,
-          BlinkMacSystemFont,
-          &quot;Segoe UI&quot;,
-          Roboto,
-          Helvetica,
-          Arial,
-          sans-serif;
-        width: 100%;
-        height: 100% !important;
-        line-height: 100% !important;
-      "
-    >
-      <tr style="box-sizing: border-box !important">
-        <td
-          align="left"
-          valign="top"
-          style="
-            font-size: 14px;
-            line-height: 20px;
-            box-sizing: border-box;
-            border-collapse: collapse !important;
-            text-align: left !important;
-            font-family:
-              &quot;Rubik&quot;,
-              -apple-system,
-              BlinkMacSystemFont,
-              &quot;Segoe UI&quot;,
-              Roboto,
-              Helvetica,
-              Arial,
-              sans-serif;
-          "
-        >
-          <table
-            width="100%"
-            align="center"
-            border="0"
-            cellpadding="0"
-            cellspacing="0"
-            style="
-              box-sizing: border-box;
-              max-width: 56.25rem;
-              width: 100%;
-              background-color: #fff;
-              border-collapse: collapse;
-              border-spacing: 0;
-              mso-table-lspace: 0pt !important;
-              mso-table-rspace: 0pt !important;
-              font-family:
-                &quot;Rubik&quot;,
-                -apple-system,
-                BlinkMacSystemFont,
-                &quot;Segoe UI&quot;,
-                Roboto,
-                Helvetica,
-                Arial,
-                sans-serif;
-            "
-            bgcolor="#fff"
-          >
-            <tr style="box-sizing: border-box !important">
-              <td
-                class="ph5-ns"
-                style="
-                  font-size: 14px;
-                  line-height: 20px;
-                  box-sizing: border-box;
-                  border-collapse: collapse;
-                  border-bottom-style: solid;
-                  border-bottom-width: 1px;
-                  width: 100%;
-                  padding-left: 0.5rem;
-                  padding-right: 0.5rem;
-                  padding-bottom: 0 !important;
-                  text-align: center !important;
-                  border-bottom: 1px solid #eeeeee;
-                  font-family:
-                    &quot;Rubik&quot;,
-                    -apple-system,
-                    BlinkMacSystemFont,
-                    &quot;Segoe UI&quot;,
-                    Roboto,
-                    Helvetica,
-                    Arial,
-                    sans-serif;
-                "
-                align="center"
-              >
-                <div style="margin: 1rem 0">
-                  <div>
-                    <a href="http://{{_accountInfo.HostName}}">
-                      <img
-                        border="0"
-                        width="auto"
-                        alt="Logo"
-                        src="https://ventadeportiva.vtexassets.com/assets/vtex.file-manager-graphql/images/5122e380-0ce7-446c-be83-517b28f7847e___bbfc00cfe6d303279a9d856e73066919.png"
-                        style="max-height: 80px"
-                      />
-                    </a>
-                  </div>
-                </div>
+    <table role="presentation" width="100%" bgcolor="#e8e8e8">
+      <tr>
+        <td align="center" class="outer-pad" style="padding:24px 12px 48px">
+          <table role="presentation" class="wrap" width="100%">
+
+            <!-- MAIN CARD -->
+            <tr>
+              <td>
+                <table role="presentation" width="100%" class="card main-card">
+
+                  <!-- HEADER -->
+                  <tr>
+                    <td bgcolor="#ffffff" style="background:#ffffff;padding:20px 24px 16px;border-bottom:1px solid #eef2f7">
+                      <a href="https://{{#if _accountInfo.HostName}}{{_accountInfo.HostName}}{{else}}{{_accountInfo.AccountName}}.vtexcommercestable.com.br{{/if}}" target="_blank" style="display:inline-block">
+                        <img src="https://ventadeportiva.vtexassets.com/assets/vtex.file-manager-graphql/images/5122e380-0ce7-446c-be83-517b28f7847e___bbfc00cfe6d303279a9d856e73066919.png"
+                             alt="{{_accountInfo.TradingName}}" width="150"
+                             class="header-logo"
+                             style="width:150px;height:auto;display:block" />
+                      </a>
+                    </td>
+                  </tr>
+
+                  <!-- HERO -->
+                  <tr>
+                    <td class="hero-td" bgcolor="#0c4a6e" style="background:linear-gradient(150deg,#082f49 0%,#0c4a6e 42%,#2781ab 100%);padding:40px 28px 36px;text-align:center">
+                      <table cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 16px auto">
+                        <tr>
+                          <td align="center" valign="middle" width="80" height="80" bgcolor="#1d5f85" style="width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.12)">
+                            <table cellpadding="0" cellspacing="0" border="0" align="center">
+                              <tr>
+                                <td align="center" valign="middle" width="52" height="52" style="width:52px;height:52px;border-radius:50%;background:#ffffff;font-size:22px;line-height:52px;font-weight:bold;color:#0c4a6e;text-align:center">&#128273;</td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+                      <p style="font-family:'Poppins',-apple-system,sans-serif;font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.65);margin:0 0 10px 0;text-align:center">Acceso B2B</p>
+                      <p class="h1" style="font-family:'Poppins',-apple-system,sans-serif;font-size:28px;line-height:1.1;font-weight:800;color:#fff;margin:0 0 8px 0;text-align:center;text-shadow:0 2px 16px rgba(0,0,0,.15)">Tu código de acceso</p>
+                      <p style="font-family:'Poppins',-apple-system,sans-serif;font-size:13px;color:rgba(255,255,255,.82);margin:0;text-align:center">
+                        Hola{{#if to.[0].name}}, {{to.[0].name}}{{/if}} - usalo para completar el ingreso.
+                      </p>
+                    </td>
+                  </tr>
+
+                  <!-- CODE BLOCK -->
+                  <tr>
+                    <td class="content-pad" style="padding:22px 24px 0">
+                      <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0 0 16px 0">
+                        Recibimos una solicitud para ingresar a tu cuenta B2B de <strong>{{_accountInfo.TradingName}}</strong>.
+                        Volvé a la ventana donde pediste el acceso e ingresá este código:
+                      </p>
+                      <table role="presentation" width="100%" style="width:100%;table-layout:fixed">
+                        <tr>
+                          <td style="padding:0">
+                            <table role="presentation" width="100%" bgcolor="#eff8ff" style="width:100%;table-layout:fixed;background:linear-gradient(135deg,#eff8ff 0%,#e0f2fe 100%);border:1px solid #bae6fd;border-radius:10px;border-collapse:separate!important">
+                              <tr>
+                                <td align="center" class="access-code" style="background:transparent;border:none;border-radius:10px;box-sizing:border-box;color:#0c4a6e;font-family:'Poppins',-apple-system,sans-serif;font-size:42px;line-height:48px;font-weight:800;letter-spacing:7px;padding:20px 14px;text-align:center">
+                                  {{aditionalData.accessKey}}
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+
+                  <!-- CALLOUT -->
+                  <tr>
+                    <td class="content-pad" style="padding:16px 24px 24px">
+                      <table role="presentation" width="100%" bgcolor="#f0f9ff" style="background:#f0f9ff;border-radius:10px">
+                        <tr>
+                          <td valign="middle" width="56" style="padding:14px 0 14px 16px">
+                            <table cellpadding="0" cellspacing="0" border="0">
+                              <tr>
+                                <td align="center" valign="middle" width="36" height="36" style="width:36px;height:36px;border-radius:10px;background:#0c4a6e;font-size:18px;line-height:36px;text-align:center">&#9203;</td>
+                              </tr>
+                            </table>
+                          </td>
+                          <td valign="middle" style="padding:14px 16px">
+                            <p style="font-family:'Poppins',-apple-system,sans-serif;font-size:12.5px;font-weight:700;color:#075985;margin:0 0 3px 0">Código temporal</p>
+                            <p style="font-family:'Poppins',-apple-system,sans-serif;font-size:11.5px;color:#0c4a6e;line-height:1.55;margin:0">Este código vence en 15 minutos. Si no pediste este acceso, podés ignorar este correo.</p>
+                            {{#if aditionalData.userAgent}}
+                            <p style="font-family:'Poppins',-apple-system,sans-serif;font-size:11px;color:#6b7280;line-height:1.5;margin:6px 0 0 0">Solicitud desde: <strong style="color:#374151">{{aditionalData.userAgent}}</strong></p>
+                            {{/if}}
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+
+                </table>
               </td>
             </tr>
-            <tr style="box-sizing: border-box !important">
-              <td
-                class="ph5-ns"
-                style="
-                  font-size: 14px;
-                  line-height: 20px;
-                  box-sizing: border-box;
-                  border-collapse: collapse;
-                  width: 50%;
-                  padding-bottom: 0;
-                  padding-left: 0.5rem;
-                  padding-right: 0.5rem !important;
-                  text-align: center !important;
-                  font-family:
-                    &quot;Rubik&quot;,
-                    -apple-system,
-                    BlinkMacSystemFont,
-                    &quot;Segoe UI&quot;,
-                    Roboto,
-                    Helvetica,
-                    Arial,
-                    sans-serif;
-                "
-                align="center"
-              >
-                <p
-                  style="
-                    box-sizing: border-box;
-                    margin-bottom: 2rem;
-                    border-spacing: 0;
-                    text-align: left;
-                    font-size: 24px;
-                    font-family: Arial, Helvetica, sans-serif;
-                    font-weight: bolder;
-                    color: #000000 !important;
-                    margin-top: 3rem !important;
-                  "
-                >
-                  Hola, {{to.0.name}}.
-                </p>
-              </td>
-            </tr>
-            <tr style="box-sizing: border-box !important">
-              <td
-                class="ph5-ns"
-                style="
-                  font-size: 14px;
-                  line-height: 20px;
-                  box-sizing: border-box;
-                  border-collapse: collapse;
-                  text-align: left;
-                  width: 100%;
-                  padding-left: 0.5rem;
-                  padding-right: 0.5rem;
-                  padding-top: 0.5rem !important;
-                  padding-bottom: 0.5rem !important;
-                  font-family:
-                    &quot;Rubik&quot;,
-                    -apple-system,
-                    BlinkMacSystemFont,
-                    &quot;Segoe UI&quot;,
-                    Roboto,
-                    Helvetica,
-                    Arial,
-                    sans-serif;
-                "
-                align="left"
-              >
-                <p
-                  style="
-                    box-sizing: border-box;
-                    font-size: 14px;
-                    font-weight: 300;
-                    line-height: 20px;
-                    margin-bottom: 1.5rem !important;
-                    color: #000000 !important;
-                  "
-                >
-                  Necesitamos tu confirmación para poder permitirte entrar a la
-                  página que estás solicitando.
-                </p>
-                <p
-                  style="
-                    box-sizing: border-box;
-                    font-size: 14px;
-                    font-weight: 300;
-                    line-height: 20px !important;
-                    color: #000000 !important;
-                  "
-                >
-                  Retorná a la página e ingresá el siguiente código:
-                </p>
-              </td>
-            </tr>
-            <tr style="box-sizing: border-box !important">
-              <td
-                class="ph5-ns"
-                style="
-                  font-size: 14px;
-                  line-height: 20px;
-                  box-sizing: border-box;
-                  border-collapse: collapse;
-                  text-align: left;
-                  width: 100%;
-                  padding-left: 0.5rem;
-                  padding-right: 0.5rem;
-                  padding-top: 1rem !important;
-                  padding-bottom: 1rem !important;
-                  font-family:
-                    &quot;Rubik&quot;,
-                    -apple-system,
-                    BlinkMacSystemFont,
-                    &quot;Segoe UI&quot;,
-                    Roboto,
-                    Helvetica,
-                    Arial,
-                    sans-serif;
-                "
-                align="left"
-              >
-                <div
-                  style="
-                    box-sizing: border-box;
-                    background: #2781ab;
-                    border: 1px solid #ffffff;
-                    color: #ffffff;
-                    text-align: center;
-                    font-size: 42px !important;
-                    padding: 20px !important;
-                  "
-                >
-                  <strong>{{aditionalData.accessKey}}</strong>
-                </div>
-              </td>
-            </tr>
-            <tr style="box-sizing: border-box !important">
-              <td
-                class="ph5-ns"
-                style="
-                  font-size: 14px;
-                  line-height: 20px;
-                  box-sizing: border-box;
-                  border-collapse: collapse;
-                  text-align: left;
-                  width: 100%;
-                  padding-left: 0.5rem;
-                  padding-right: 0.5rem;
-                  padding-top: 0.5rem !important;
-                  padding-bottom: 0.5rem !important;
-                  font-family:
-                    &quot;Rubik&quot;,
-                    -apple-system,
-                    BlinkMacSystemFont,
-                    &quot;Segoe UI&quot;,
-                    Roboto,
-                    Helvetica,
-                    Arial,
-                    sans-serif;
-                "
-                align="left"
-              >
-                <p style="box-sizing: border-box !important">
-                  <strong>Este es un procedimiento 100% seguro.</strong>
-                </p>
-              </td>
-            </tr>
-            <tr style="box-sizing: border-box !important">
-              <td
-                class="ph5-ns"
-                style="
-                  font-size: 14px;
-                  line-height: 20px;
-                  box-sizing: border-box;
-                  border-collapse: collapse;
-                  text-align: left;
-                  width: 100%;
-                  padding-left: 0.5rem;
-                  padding-right: 0.5rem;
-                  padding-top: 0.5rem !important;
-                  padding-bottom: 0.5rem !important;
-                  font-family:
-                    &quot;Rubik&quot;,
-                    -apple-system,
-                    BlinkMacSystemFont,
-                    &quot;Segoe UI&quot;,
-                    Roboto,
-                    Helvetica,
-                    Arial,
-                    sans-serif;
-                "
-                align="left"
-              >
-                <strong>Atentamente,</strong><br />
-                <strong>Venta Deportiva</strong><br /><br />
-              </td>
-            </tr>
-            <tr style="box-sizing: border-box !important">
-              <td
-                class="ph5-ns"
-                style="
-                  font-size: 14px;
-                  line-height: 20px;
-                  box-sizing: border-box;
-                  border-collapse: collapse;
-                  text-align: left;
-                  width: 100%;
-                  padding-left: 0.5rem;
-                  padding-right: 0.5rem;
-                  padding-top: 0.5rem !important;
-                  padding-bottom: 0.5rem !important;
-                  border-top: 1px solid #eeeeee;
-                  font-family:
-                    &quot;Rubik&quot;,
-                    -apple-system,
-                    BlinkMacSystemFont,
-                    &quot;Segoe UI&quot;,
-                    Roboto,
-                    Helvetica,
-                    Arial,
-                    sans-serif;
-                "
-                align="left"
-              >
-                <table
-                  style="
-                    box-sizing: border-box;
-                    width: 100%;
-                    border-collapse: collapse;
-                    border-spacing: 0;
-                    mso-table-lspace: 0pt !important;
-                    mso-table-rspace: 0pt !important;
-                    font-family:
-                      &quot;Rubik&quot;,
-                      -apple-system,
-                      BlinkMacSystemFont,
-                      &quot;Segoe UI&quot;,
-                      Roboto,
-                      Helvetica,
-                      Arial,
-                      sans-serif;
-                  "
-                >
-                  <tr height="64px" style="box-sizing: border-box !important">
-                    <td
-                      style="
-                        font-size: 14px;
-                        line-height: 20px;
-                        box-sizing: border-box;
-                        border-collapse: collapse;
-                        vertical-align: middle !important;
-                        text-align: center !important;
-                        font-family:
-                          &quot;Rubik&quot;,
-                          -apple-system,
-                          BlinkMacSystemFont,
-                          &quot;Segoe UI&quot;,
-                          Roboto,
-                          Helvetica,
-                          Arial,
-                          sans-serif;
-                      "
-                      align="center"
-                      valign="middle"
-                    >
-                      <span
-                        style="
-                          color: #757575;
-                          font-size: 0.75rem;
-                          display: inline-block;
-                          line-height: 15px;
-                          height: 30px;
-                          text-align: center !important;
-                          width: 340px !important;
-                          padding: 5px 10px 5px 10px;
-                        "
-                      >
-                        Copyright © Venta Deportiva. Todos los derechos
-                        reservados.
-                      </span>
-                      <span
-                        style="
-                          width: 240px !important;
-                          padding: 0 10px;
-                          display: inline-block !important;
-                          vertical-align: top;
-                        "
-                      >
-                        <img
-                          src="https://ventadeportiva.vteximg.com.br/arquivos/logos-footer-newsletter.png"
-                          alt="Logos"
-                          style="
-                            vertical-align: top;
-                            outline: none;
-                            text-decoration: none;
-                            -ms-interpolation-mode: bicubic !important;
-                            max-width: 100% !important;
-                          "
-                        />
-                      </span>
+
+            <tr><td class="gap">&nbsp;</td></tr>
+
+            <!-- SECURITY INFO -->
+            <tr>
+              <td>
+                <table role="presentation" width="100%" class="card">
+                  <tr>
+                    <td style="padding:24px">
+                      <p class="h2" style="font-size:16px;line-height:22px;font-weight:bold;color:#111827;margin-bottom:16px">Cuida tu cuenta</p>
+                      <table role="presentation" width="100%">
+                        <tr>
+                          <td valign="top" style="width:32px;padding-bottom:16px">
+                            <div style="width:24px;height:24px;line-height:24px;text-align:center;border-radius:50%;background:#e0f2fe;color:#0c4a6e;font-size:11px;font-weight:bold">1</div>
+                          </td>
+                          <td valign="top" style="padding:0 0 16px 10px;border-bottom:1px solid #f3f4f6">
+                            <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0"><strong>No compartas el código</strong></p>
+                            <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-top:2px">Nuestro equipo comercial nunca te va a pedir este código por teléfono, chat o redes sociales.</p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td valign="top" style="width:32px;padding:16px 0">
+                            <div style="width:24px;height:24px;line-height:24px;text-align:center;border-radius:50%;background:#e0f2fe;color:#0c4a6e;font-size:11px;font-weight:bold">2</div>
+                          </td>
+                          <td valign="top" style="padding:16px 0 16px 10px;border-bottom:1px solid #f3f4f6">
+                            <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0"><strong>Usalo solo en el portal oficial</strong></p>
+                            <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-top:2px">Ingresá el código solamente en la ventana donde solicitaste acceder a tu cuenta.</p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td valign="top" style="width:32px;padding-top:16px">
+                            <div style="width:24px;height:24px;line-height:24px;text-align:center;border-radius:50%;background:#e0f2fe;color:#0c4a6e;font-size:11px;font-weight:bold">3</div>
+                          </td>
+                          <td valign="top" style="padding:16px 0 0 10px">
+                            <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0"><strong>Si no fuiste vos, ignora este email</strong></p>
+                            <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-top:2px">La solicitud queda sin efecto cuando vence el código.</p>
+                          </td>
+                        </tr>
+                      </table>
                     </td>
                   </tr>
                 </table>
               </td>
             </tr>
+
+            <tr><td class="gap">&nbsp;</td></tr>
+
+            <!-- HELP CTA -->
+            <tr>
+              <td>
+                <table role="presentation" width="100%" class="card">
+                  <tr>
+                    <td style="padding:22px 24px">
+                      <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0 0 8px 0">¿Necesitás ayuda?</p>
+                      <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:0 0 16px 0">Si tenés dudas sobre tu cuenta B2B, podés contactar al equipo comercial.</p>
+                      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                        <tr>
+                          <td bgcolor="#0c4a6e" style="border-radius:8px">
+                            <a href="https://{{#if _accountInfo.HostName}}{{_accountInfo.HostName}}{{else}}{{_accountInfo.AccountName}}.vtexcommercestable.com.br{{/if}}/contacto"
+                               class="cta-primary"
+                               style="display:block;width:100%;box-sizing:border-box;background:linear-gradient(135deg,#0c4a6e 0%,#2781ab 100%);color:#ffffff;border-radius:8px;font-family:'Poppins',-apple-system,sans-serif;font-size:13px;line-height:52px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-align:center;text-decoration:none"
+                               target="_blank">
+                              Contactar soporte &nbsp;&#8594;
+                            </a>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="gap">&nbsp;</td></tr>
+
+            <!-- DARK FOOTER -->
+            <tr>
+              <td class="footer-td" bgcolor="#1c1c1c" style="background:#1c1c1c;border-radius:10px;padding:22px 24px 20px">
+                <table role="presentation" width="100%">
+                  <tr>
+                    <td align="center" style="padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,.08)">
+                      <img src="https://ventadeportiva.vtexassets.com/assets/vtex.file-manager-graphql/images/5122e380-0ce7-446c-be83-517b28f7847e___bbfc00cfe6d303279a9d856e73066919.png"
+                           alt="{{_accountInfo.TradingName}}" width="150"
+                           style="width:150px;height:auto;display:block;margin:0 auto" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding:16px 0 14px;border-bottom:1px solid rgba(255,255,255,.08)">
+                      <table role="presentation" width="100%">
+                        <tr>
+                          <td valign="middle" align="center">
+                            <a href="https://{{#if _accountInfo.HostName}}{{_accountInfo.HostName}}{{else}}{{_accountInfo.AccountName}}.vtexcommercestable.com.br{{/if}}/contacto" target="_blank" style="font-family:'Poppins',-apple-system,sans-serif;font-size:11px;color:rgba(255,255,255,.45);text-decoration:none;font-weight:500">Contacto</a>
+                            &nbsp;&nbsp;
+                            <a href="https://{{#if _accountInfo.HostName}}{{_accountInfo.HostName}}{{else}}{{_accountInfo.AccountName}}.vtexcommercestable.com.br{{/if}}/centro-de-ayuda" target="_blank" style="font-family:'Poppins',-apple-system,sans-serif;font-size:11px;color:rgba(255,255,255,.45);text-decoration:none;font-weight:500">Ayuda</a>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="center" style="padding-top:14px">
+                      <p style="font-family:'Poppins',-apple-system,sans-serif;font-size:10.5px;color:rgba(255,255,255,.25);text-align:center;margin:0;line-height:1.6">&copy; {{_accountInfo.TradingName}} - Todos los derechos reservados</p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
           </table>
         </td>
       </tr>
