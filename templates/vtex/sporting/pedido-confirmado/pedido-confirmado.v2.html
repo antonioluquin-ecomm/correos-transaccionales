@@ -92,6 +92,12 @@
         .item-img { width: 60px !important; height: auto !important; }
         .main-card { border-radius: 0 0 12px 12px !important; }
         .trust-logos { border-radius: 0 !important; }
+        .header-logo { width: 128px !important; }
+        .status-pill { padding: 4px 9px !important; }
+        .status-pill-text { font-size: 9px !important; }
+        .brand-logo-sporting { width: 88px !important; }
+        .brand-logo-woker { width: 64px !important; }
+        .brand-logo-luquin { width: 78px !important; }
       }
     </style>
   </head>
@@ -111,19 +117,22 @@
               <td>
                 <table role="presentation" width="100%" class="card main-card">
 
-                  <!-- NAVBAR verde -->
+                  <!-- HEADER -->
                   <tr>
-                    <td bgcolor="#25B60C" style="background:#25B60C;padding:14px 24px">
+                    <td bgcolor="#ffffff" style="background:#ffffff;padding:20px 24px 16px;border-bottom:1px solid #eef2f7">
                       <table role="presentation" width="100%">
                         <tr>
                           <td valign="middle">
-                            <p style="font-family:'Poppins',-apple-system,sans-serif;font-size:18px;font-weight:800;letter-spacing:3px;color:#fff;text-transform:uppercase;margin:0;text-shadow:0 1px 6px rgba(0,0,0,.15)">Sporting</p>
+                            <img src="https://sporting.vteximg.com.br/arquivos/logo-mail-2.png"
+                                 alt="Sporting" width="150"
+                                 class="header-logo"
+                                 style="width:150px;height:auto;display:block" />
                           </td>
                           <td valign="middle" align="right">
                             <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="right">
                               <tr>
-                                <td bgcolor="#1d8e09" style="background:rgba(0,0,0,.22);border-radius:20px;padding:4px 12px">
-                                  <p style="font-family:'Poppins',-apple-system,sans-serif;font-size:10px;font-weight:600;color:#fff;margin:0;white-space:nowrap">&#9679;&nbsp;Pedido recibido</p>
+                                <td bgcolor="#e9fbe7" class="status-pill" style="background:#e9fbe7;border-radius:20px;padding:5px 12px">
+                                  <p class="status-pill-text" style="font-family:'Poppins',-apple-system,sans-serif;font-size:10px;font-weight:700;color:#1a7a0a;margin:0;white-space:nowrap">&#9679;&nbsp;Pedido recibido</p>
                                 </td>
                               </tr>
                             </table>
@@ -516,16 +525,19 @@
                           <td align="center" valign="middle" style="padding:0 8px">
                             <img src="https://sporting.vteximg.com.br/arquivos/logo-sporting-white.png"
                                  alt="Sporting" width="110"
+                                 class="brand-logo-sporting"
                                  style="width:110px;height:auto;display:block;margin:0 auto" />
                           </td>
                           <td align="center" valign="middle" style="padding:0 8px">
                             <img src="https://sporting.vteximg.com.br/arquivos/logo-woker-white.png"
                                  alt="Woker" width="80"
+                                 class="brand-logo-woker"
                                  style="width:80px;height:auto;display:block;margin:0 auto" />
                           </td>
                           <td align="center" valign="middle" style="padding:0 8px">
                             <img src="https://sporting.vteximg.com.br/arquivos/logo-luquin-white.png"
                                  alt="Antonio Luquin" width="100"
+                                 class="brand-logo-luquin"
                                  style="width:100px;height:auto;display:block;margin:0 auto" />
                           </td>
                         </tr>
@@ -533,15 +545,12 @@
                     </td>
                   </tr>
 
-                  <!-- Wordmark + links -->
+                  <!-- Links -->
                   <tr>
                     <td style="padding:16px 0 14px;border-bottom:1px solid rgba(255,255,255,.08)">
                       <table role="presentation" width="100%">
                         <tr>
-                          <td valign="middle">
-                            <p style="font-family:'Poppins',-apple-system,sans-serif;font-size:13px;font-weight:800;letter-spacing:3px;color:#25B60C;text-transform:uppercase;margin:0">Sporting</p>
-                          </td>
-                          <td valign="middle" align="right">
+                          <td valign="middle" align="center">
                             <a href="https://{{hostName}}/contacto" target="_blank" style="font-family:'Poppins',-apple-system,sans-serif;font-size:11px;color:rgba(255,255,255,.45);text-decoration:none;font-weight:500">Contacto</a>
                             &nbsp;&nbsp;
                             <a href="https://{{hostName}}/centro-de-ayuda" target="_blank" style="font-family:'Poppins',-apple-system,sans-serif;font-size:11px;color:rgba(255,255,255,.45);text-decoration:none;font-weight:500">Ayuda</a>
