@@ -49,11 +49,11 @@
       .tot-key { font-size: 14px; line-height: 20px; color: #374151; }
       .tot-val { font-size: 14px; line-height: 20px; color: #374151; }
       .tot-strong { font-size: 16px; line-height: 22px; font-weight: bold; color: #111827; }
-      .green { color: #1a7a0a; }
+      .green { color: #d83f16; }
 
       .cta-primary {
         display: block; width: 100%; box-sizing: border-box;
-        background: linear-gradient(135deg, #1a7a0a 0%, #25B60C 100%);
+        background: linear-gradient(135deg, #d83f16 0%, #fc5226 100%);
         color: #ffffff !important; border-radius: 8px;
         font-family: 'Poppins', -apple-system, sans-serif;
         font-size: 13px; line-height: 52px; font-weight: 700;
@@ -123,23 +123,23 @@
                   <!-- HEADER -->
                   <tr>
                     <td bgcolor="#ffffff" style="background:#ffffff;padding:20px 24px 16px;border-bottom:1px solid #eef2f7">
-                      <img src="https://sporting.vteximg.com.br/arquivos/logo-mail-2.png"
-                           alt="Sporting" width="150"
+                      <img src="https://woker.vtexcommercestable.com.br/arquivos/logo-mail.png"
+                           alt="Woker" width="130"
                            class="header-logo"
-                           style="width:150px;height:auto;display:block" />
+                           style="width:130px;height:auto;display:block" />
                     </td>
                   </tr>
 
                   <!-- HERO -->
                   <tr>
-                    <td class="hero-td" bgcolor="#1a7a0a" style="background:linear-gradient(150deg,#0d4f06 0%,#1a7a0a 35%,#25B60C 75%,#4fe82a 100%);padding:40px 28px 36px;text-align:center">
+                    <td class="hero-td" bgcolor="#fc5226" style="background:linear-gradient(150deg,#9f2d11 0%,#d83f16 38%,#fc5226 78%,#ff875f 100%);padding:40px 28px 36px;text-align:center">
                       <!-- Check: outer ring -->
                       <table cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 16px auto">
                         <tr>
-                          <td align="center" valign="middle" width="80" height="80" bgcolor="#358a27" style="width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.12)">
+                          <td align="center" valign="middle" width="80" height="80" bgcolor="#e45a31" style="width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.16)">
                             <table cellpadding="0" cellspacing="0" border="0" align="center">
                               <tr>
-                                <td align="center" valign="middle" width="52" height="52" style="width:52px;height:52px;border-radius:50%;background:#ffffff;font-size:22px;line-height:52px;font-weight:bold;color:#1a7a0a;text-align:center">&#10003;</td>
+                                <td align="center" valign="middle" width="52" height="52" style="width:52px;height:52px;border-radius:50%;background:#ffffff;font-size:22px;line-height:52px;font-weight:bold;color:#fc5226;text-align:center">&#10003;</td>
                               </tr>
                             </table>
                           </td>
@@ -159,18 +159,18 @@
                   <!-- CALLOUT: En preparación -->
                   <tr>
                     <td style="padding:22px 24px 0">
-                      <table role="presentation" width="100%" bgcolor="#f0fdf4" style="background:#f0fdf4;border-radius:10px">
+                      <table role="presentation" width="100%" bgcolor="#fff3ef" style="background:#fff3ef;border-radius:10px">
                         <tr>
                           <td valign="middle" width="56" style="padding:14px 0 14px 16px">
                             <table cellpadding="0" cellspacing="0" border="0">
                               <tr>
-                                <td align="center" valign="middle" width="36" height="36" style="width:36px;height:36px;border-radius:10px;background:#1a7a0a;font-size:18px;line-height:36px;text-align:center;color:#ffffff;font-weight:bold">&#10003;</td>
+                                <td align="center" valign="middle" width="36" height="36" style="width:36px;height:36px;border-radius:10px;background:#fc5226;font-size:18px;line-height:36px;text-align:center;color:#ffffff;font-weight:bold">&#10003;</td>
                               </tr>
                             </table>
                           </td>
                           <td valign="middle" style="padding:14px 16px">
-                            <p style="font-family:'Poppins',-apple-system,sans-serif;font-size:12.5px;font-weight:700;color:#166534;margin:0 0 3px 0">Tu pedido ya está en preparación</p>
-                            <p style="font-family:'Poppins',-apple-system,sans-serif;font-size:11.5px;color:#14532d;line-height:1.55;margin:0">
+                            <p style="font-family:'Poppins',-apple-system,sans-serif;font-size:12.5px;font-weight:700;color:#d83f16;margin:0 0 3px 0">Tu pedido ya está en preparación</p>
+                            <p style="font-family:'Poppins',-apple-system,sans-serif;font-size:11.5px;color:#9f2d11;line-height:1.55;margin:0">
                               {{#if shippingData.logisticsInfo.[0].shippingEstimateDate}}
                                 {{#eq shippingData.logisticsInfo.[0].selectedDeliveryChannel "pickup-in-point"}}Fecha estimada para retiro: <strong>{{formatDate shippingData.logisticsInfo.[0].shippingEstimateDate}}</strong>{{else}}Fecha estimada de entrega: <strong>{{formatDate shippingData.logisticsInfo.[0].shippingEstimateDate}}</strong>{{/eq}}
                               {{else}}
@@ -198,9 +198,9 @@
                           </td>
                         </tr>
                         <tr>
-                          <td class="sum-cell sum-last" bgcolor="#f0faf0" style="width:50%;padding:16px 18px;vertical-align:top;background:linear-gradient(135deg,#f0faf0 0%,#e8f7e6 100%)">
-                            <p style="font-size:9.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#5aad50;margin:0 0 5px 0">Total pagado</p>
-                            <p style="font-size:20px;line-height:26px;font-weight:800;color:#1a7a0a;letter-spacing:-0.3px;margin:0">$ {{formatCurrency value}}</p>
+                          <td class="sum-cell sum-last" bgcolor="#fff3ef" style="width:50%;padding:16px 18px;vertical-align:top;background:linear-gradient(135deg,#fff3ef 0%,#ffe6dd 100%)">
+                            <p style="font-size:9.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#d83f16;margin:0 0 5px 0">Total pagado</p>
+                            <p style="font-size:20px;line-height:26px;font-weight:800;color:#d83f16;letter-spacing:-0.3px;margin:0">$ {{formatCurrency value}}</p>
                           </td>
                           <td class="sum-cell sum-cell-r sum-last" style="width:50%;padding:16px 18px;vertical-align:top;border-left:1px solid #f3f4f6">
                             <p style="font-size:9.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#b0b0b0;margin:0 0 5px 0">
@@ -221,18 +221,18 @@
                       <table role="presentation" width="100%" style="table-layout:fixed">
                         <tr>
                           <td width="28" align="center" valign="top" style="width:28px;padding:0">
-                            <div style="width:28px;height:28px;line-height:28px;border-radius:50%;background:#25B60C;text-align:center;font-size:13px;font-weight:bold;color:#fff;margin:0 auto">&#10003;</div>
-                            <p class="step-lbl" style="font-family:'Poppins',-apple-system,sans-serif;font-size:10px;font-weight:700;color:#1a7a0a;text-align:center;margin:5px 0 0;white-space:nowrap">&#10003; Recibido</p>
+                            <div style="width:28px;height:28px;line-height:28px;border-radius:50%;background:#fc5226;text-align:center;font-size:13px;font-weight:bold;color:#fff;margin:0 auto">&#10003;</div>
+                            <p class="step-lbl" style="font-family:'Poppins',-apple-system,sans-serif;font-size:10px;font-weight:700;color:#d83f16;text-align:center;margin:5px 0 0;white-space:nowrap">&#10003; Recibido</p>
                           </td>
                           <td valign="top" style="padding:14px 4px 0">
-                            <div style="height:3px;background:#25B60C;border-radius:2px;font-size:0;line-height:0">&nbsp;</div>
+                            <div style="height:3px;background:#fc5226;border-radius:2px;font-size:0;line-height:0">&nbsp;</div>
                           </td>
                           <td width="28" align="center" valign="top" style="width:28px;padding:0">
-                            <div style="width:28px;height:28px;line-height:28px;border-radius:50%;background:#25B60C;text-align:center;font-size:13px;font-weight:bold;color:#fff;margin:0 auto">&#10003;</div>
-                            <p class="step-lbl" style="font-family:'Poppins',-apple-system,sans-serif;font-size:10px;font-weight:700;color:#1a7a0a;text-align:center;margin:5px 0 0;white-space:nowrap">&#10003; Pago</p>
+                            <div style="width:28px;height:28px;line-height:28px;border-radius:50%;background:#fc5226;text-align:center;font-size:13px;font-weight:bold;color:#fff;margin:0 auto">&#10003;</div>
+                            <p class="step-lbl" style="font-family:'Poppins',-apple-system,sans-serif;font-size:10px;font-weight:700;color:#d83f16;text-align:center;margin:5px 0 0;white-space:nowrap">&#10003; Pago</p>
                           </td>
                           <td valign="top" style="padding:14px 4px 0">
-                            <div style="height:3px;background:#25B60C;border-radius:2px;font-size:0;line-height:0">&nbsp;</div>
+                            <div style="height:3px;background:#fc5226;border-radius:2px;font-size:0;line-height:0">&nbsp;</div>
                           </td>
                           <td width="28" align="center" valign="top" style="width:28px;padding:0">
                             <div style="width:28px;height:28px;line-height:28px;border-radius:50%;background:#3b82f6;text-align:center;font-size:11px;font-weight:bold;color:#fff;margin:0 auto">3</div>
@@ -255,10 +255,10 @@
                     <td style="padding:4px 24px 24px">
                       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
                         <tr>
-                          <td bgcolor="#1a7a0a" style="border-radius:8px">
+                          <td bgcolor="#fc5226" style="border-radius:8px">
                             <a href="https://{{hostName}}/account#/orders/{{orderId}}"
                                class="cta-primary"
-                               style="display:block;width:100%;box-sizing:border-box;background:linear-gradient(135deg,#1a7a0a 0%,#25B60C 100%);color:#ffffff;border-radius:8px;font-family:'Poppins',-apple-system,sans-serif;font-size:13px;line-height:52px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-align:center;text-decoration:none"
+                               style="display:block;width:100%;box-sizing:border-box;background:linear-gradient(135deg,#d83f16 0%,#fc5226 100%);color:#ffffff;border-radius:8px;font-family:'Poppins',-apple-system,sans-serif;font-size:13px;line-height:52px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-align:center;text-decoration:none"
                                target="_blank">
                               Seguir mi pedido &nbsp;&#8594;
                             </a>
@@ -273,10 +273,10 @@
                   {{else}}
                   <tr>
                     <td style="padding:0 24px 20px">
-                      <table role="presentation" width="100%" bgcolor="#f0fdf4" style="background:#f0fdf4;border-radius:10px">
+                      <table role="presentation" width="100%" bgcolor="#fff3ef" style="background:#fff3ef;border-radius:10px">
                         <tr>
                           <td style="padding:12px 16px">
-                            <p class="text" style="font-size:14px;line-height:22px;color:#14532d;margin:0">
+                            <p class="text" style="font-size:14px;line-height:22px;color:#9f2d11;margin:0">
                               <strong>Tu pedido se enviará en más de un paquete.</strong>
                               Te mandamos el seguimiento de cada envío por separado.
                             </p>
@@ -303,7 +303,7 @@
                             <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:0">Información no disponible</p>
                             {{/if}}
                             {{#each totals}}{{#eq id "Shipping"}}{{#eq value 0}}
-                            <p class="text-sm" style="font-weight:bold;margin-top:8px;color:#1a7a0a">Envío gratis aplicado</p>
+                            <p class="text-sm" style="font-weight:bold;margin-top:8px;color:#d83f16">Envío gratis aplicado</p>
                             {{/eq}}{{/eq}}{{/each}}
                           </td>
                           <td class="two-cell two-cell-r two-cell-last" style="width:50%;padding:18px 20px;vertical-align:top;border-left:1px solid #f3f4f6">
@@ -411,7 +411,7 @@
                   {{#eq id "Discounts"}}{{#if value}}
                   <tr>
                     <td style="padding:10px 20px"><span class="tot-key" style="font-size:14px;line-height:20px;color:#374151">Descuentos</span></td>
-                    <td style="padding:10px 20px;text-align:right;white-space:nowrap;width:1%"><span class="tot-val green" style="color:#1a7a0a">$ {{formatCurrency value}}</span></td>
+                    <td style="padding:10px 20px;text-align:right;white-space:nowrap;width:1%"><span class="tot-val green" style="color:#d83f16">$ {{formatCurrency value}}</span></td>
                   </tr>
                   {{/if}}{{/eq}}
                   {{#eq id "GiftCards"}}{{#if value}}
@@ -432,7 +432,7 @@
                     <td style="padding:10px 20px;text-align:right;white-space:nowrap;width:1%">
                       {{#eq value 0}}
                       {{#if alternativeTotals}} {{#each alternativeTotals}}{{#eq id "AlternativeShippingTotal"}}<span class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;text-decoration:line-through;margin-right:6px">$ {{formatCurrency value}}</span>{{/eq}}{{/each}} {{/if}}
-                      <span class="tot-val" style="font-weight:bold;color:#1a7a0a">Gratis</span>
+                      <span class="tot-val" style="font-weight:bold;color:#d83f16">Gratis</span>
                       {{else}}
                       <span class="tot-val" style="font-size:14px;line-height:20px;color:#374151">$ {{formatCurrency value}}</span>
                       {{/eq}}
@@ -467,7 +467,7 @@
                       <table role="presentation" width="100%">
                         <tr>
                           <td valign="top" style="width:32px;padding-bottom:16px">
-                            <div style="width:24px;height:24px;line-height:24px;text-align:center;border-radius:50%;background:#ecfdf3;color:#166534;font-size:11px;font-weight:bold">1</div>
+                            <div style="width:24px;height:24px;line-height:24px;text-align:center;border-radius:50%;background:#fff3ef;color:#d83f16;font-size:11px;font-weight:bold">1</div>
                           </td>
                           <td valign="top" style="padding:0 0 16px 10px;border-bottom:1px solid #f3f4f6">
                             <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0"><strong>Preparamos tu pedido</strong></p>
@@ -478,7 +478,7 @@
                         </tr>
                         <tr>
                           <td valign="top" style="width:32px;padding:16px 0">
-                            <div style="width:24px;height:24px;line-height:24px;text-align:center;border-radius:50%;background:#ecfdf3;color:#166534;font-size:11px;font-weight:bold">2</div>
+                            <div style="width:24px;height:24px;line-height:24px;text-align:center;border-radius:50%;background:#fff3ef;color:#d83f16;font-size:11px;font-weight:bold">2</div>
                           </td>
                           <td valign="top" style="padding:16px 0 16px 10px;border-bottom:1px solid #f3f4f6">
                             <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0">
@@ -491,7 +491,7 @@
                         </tr>
                         <tr>
                           <td valign="top" style="width:32px;padding-top:16px">
-                            <div style="width:24px;height:24px;line-height:24px;text-align:center;border-radius:50%;background:#ecfdf3;color:#166534;font-size:11px;font-weight:bold">3</div>
+                            <div style="width:24px;height:24px;line-height:24px;text-align:center;border-radius:50%;background:#fff3ef;color:#d83f16;font-size:11px;font-weight:bold">3</div>
                           </td>
                           <td valign="top" style="padding:16px 0 0 10px">
                             <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0"><strong>Recibís tu factura electrónica</strong></p>

@@ -49,11 +49,11 @@
       .tot-key { font-size: 14px; line-height: 20px; color: #374151; }
       .tot-val { font-size: 14px; line-height: 20px; color: #374151; }
       .tot-strong { font-size: 16px; line-height: 22px; font-weight: bold; color: #111827; }
-      .green { color: #1a7a0a; }
+      .green { color: #d83f16; }
 
       .cta-primary {
         display: block; width: 100%; box-sizing: border-box;
-        background: #111827;
+        background: linear-gradient(135deg, #d83f16 0%, #fc5226 100%);
         color: #ffffff !important; border-radius: 8px;
         font-family: 'Poppins', -apple-system, sans-serif;
         font-size: 13px; line-height: 52px; font-weight: 700;
@@ -125,10 +125,10 @@
                   <!-- HEADER -->
                   <tr>
                     <td bgcolor="#ffffff" style="background:#ffffff;padding:20px 24px 16px;border-bottom:1px solid #eef2f7">
-                      <img src="https://sporting.vteximg.com.br/arquivos/logo-mail-2.png"
-                           alt="Sporting" width="150"
+                      <img src="https://woker.vtexcommercestable.com.br/arquivos/logo-mail.png"
+                           alt="Woker" width="130"
                            class="header-logo"
-                           style="width:150px;height:auto;display:block" />
+                           style="width:130px;height:auto;display:block" />
                     </td>
                   </tr>
 
@@ -216,8 +216,8 @@
                         <tr>
                           <!-- Step 1: Recibido (verde ✓) -->
                           <td width="28" align="center" valign="top" style="width:28px;padding:0">
-                            <div style="width:28px;height:28px;line-height:28px;border-radius:50%;background:#25B60C;text-align:center;font-size:13px;font-weight:bold;color:#fff;margin:0 auto">&#10003;</div>
-                            <p class="step-lbl" style="font-family:'Poppins',-apple-system,sans-serif;font-size:10px;font-weight:700;color:#1a7a0a;text-align:center;margin:5px 0 0;white-space:nowrap">&#10003; Recibido</p>
+                            <div style="width:28px;height:28px;line-height:28px;border-radius:50%;background:#fc5226;text-align:center;font-size:13px;font-weight:bold;color:#fff;margin:0 auto">&#10003;</div>
+                            <p class="step-lbl" style="font-family:'Poppins',-apple-system,sans-serif;font-size:10px;font-weight:700;color:#d83f16;text-align:center;margin:5px 0 0;white-space:nowrap">&#10003; Recibido</p>
                           </td>
                           <!-- Conector 1→2: rojo (lleva a cancelado) -->
                           <td valign="top" style="padding:14px 4px 0">
@@ -256,10 +256,10 @@
                     <td style="padding:4px 24px 24px">
                       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
                         <tr>
-                          <td bgcolor="#111827" style="border-radius:8px">
+                          <td bgcolor="#fc5226" style="border-radius:8px">
                             <a href="https://{{hostName}}/account#/orders/{{orderId}}"
                                class="cta-primary"
-                               style="display:block;width:100%;box-sizing:border-box;background:#111827;color:#ffffff;border-radius:8px;font-family:'Poppins',-apple-system,sans-serif;font-size:13px;line-height:52px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-align:center;text-decoration:none"
+                               style="display:block;width:100%;box-sizing:border-box;background:linear-gradient(135deg,#d83f16 0%,#fc5226 100%);color:#ffffff;border-radius:8px;font-family:'Poppins',-apple-system,sans-serif;font-size:13px;line-height:52px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-align:center;text-decoration:none"
                                target="_blank">
                               Ver mi pedido &nbsp;&#8594;
                             </a>
@@ -405,7 +405,7 @@
                   {{#eq id "Discounts"}}{{#if value}}
                   <tr>
                     <td style="padding:10px 20px"><span class="tot-key" style="font-size:14px;line-height:20px;color:#374151">Descuentos</span></td>
-                    <td style="padding:10px 20px;text-align:right;white-space:nowrap;width:1%"><span class="tot-val green" style="color:#1a7a0a">$ {{formatCurrency value}}</span></td>
+                    <td style="padding:10px 20px;text-align:right;white-space:nowrap;width:1%"><span class="tot-val green" style="color:#d83f16">$ {{formatCurrency value}}</span></td>
                   </tr>
                   {{/if}}{{/eq}}
                   {{#eq id "GiftCards"}}{{#if value}}
@@ -426,7 +426,7 @@
                     <td style="padding:10px 20px;text-align:right;white-space:nowrap;width:1%">
                       {{#eq value 0}}
                       {{#if alternativeTotals}} {{#each alternativeTotals}}{{#eq id "AlternativeShippingTotal"}}<span class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;text-decoration:line-through;margin-right:6px">$ {{formatCurrency value}}</span>{{/eq}}{{/each}} {{/if}}
-                      <span class="tot-val" style="font-weight:bold;color:#1a7a0a">Gratis</span>
+                      <span class="tot-val" style="font-weight:bold;color:#d83f16">Gratis</span>
                       {{else}}
                       <span class="tot-val" style="font-size:14px;line-height:20px;color:#374151">$ {{formatCurrency value}}</span>
                       {{/eq}}
