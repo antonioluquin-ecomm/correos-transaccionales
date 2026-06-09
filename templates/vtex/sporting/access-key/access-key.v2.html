@@ -1,4 +1,4 @@
-<!--Access-Key — Version 2-->
+<!--Access-Key - Version 2-->
 <!doctype html>
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -6,513 +6,365 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <meta name="x-apple-disable-message-reformatting" />
-    <meta
-      name="format-detection"
-      content="telephone=no,address=no,email=no,date=no"
-    />
-    <title>{{_accountInfo.TradingName}} — Tu código de acceso</title>
+    <meta name="format-detection" content="telephone=no,address=no,email=no,date=no" />
+    <title>{{_accountInfo.TradingName}} - Tu codigo de acceso</title>
     <style>
-      html,
-      body {
-        margin: 0 !important;
-        padding: 0 !important;
-        width: 100% !important;
-        background: #f3f4f6 !important;
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&display=swap');
+
+      html, body {
+        margin: 0 !important; padding: 0 !important;
+        width: 100% !important; background: #e8e8e8 !important;
       }
       body {
-        font-family:
-          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-          Arial, sans-serif;
+        font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         color: #111827;
       }
-      * {
-        -ms-text-size-adjust: 100%;
-        -webkit-text-size-adjust: 100%;
-      }
-      table,
-      td {
-        border-collapse: collapse !important;
-        mso-table-lspace: 0pt !important;
-        mso-table-rspace: 0pt !important;
-      }
-      img {
-        border: 0;
-        outline: none;
-        text-decoration: none;
-        -ms-interpolation-mode: bicubic;
-        display: block;
-      }
-      a {
-        text-decoration: none;
-        color: inherit;
-      }
-      a[x-apple-data-detectors] {
-        color: inherit !important;
-        text-decoration: none !important;
-      }
-      #outlook a {
-        padding: 0;
+      * { -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; }
+      table, td { border-collapse: collapse !important; mso-table-lspace: 0pt !important; mso-table-rspace: 0pt !important; }
+      img { border: 0; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; display: block; }
+      a { text-decoration: none; color: inherit; }
+      a[x-apple-data-detectors] { color: inherit !important; text-decoration: none !important; }
+      #outlook a { padding: 0; }
+
+      .wrap { width: 100%; max-width: 600px; margin: 0 auto; }
+      .card { background: #ffffff; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden; }
+      .gap { height: 12px; line-height: 12px; font-size: 12px; }
+
+      .h2 { font-size: 15px; line-height: 22px; font-weight: bold; color: #111827; margin: 0 0 12px 0; }
+      .text { font-size: 14px; line-height: 22px; color: #374151; margin: 0; }
+      .text-sm { font-size: 13px; line-height: 20px; color: #6b7280; margin: 0; }
+
+      .sum-cell { width: 50%; padding: 16px 18px; vertical-align: top; border-bottom: 1px solid #f3f4f6; }
+      .sum-cell-r { border-left: 1px solid #f3f4f6; }
+      .sum-last { border-bottom: none !important; }
+
+      .access-code {
+        background: linear-gradient(135deg, #f0faf0 0%, #e8f7e6 100%);
+        border: 1px solid #bbf7d0;
+        border-radius: 10px;
+        color: #1a7a0a;
+        font-family: 'Poppins', -apple-system, sans-serif;
+        font-size: 42px;
+        line-height: 48px;
+        font-weight: 800;
+        letter-spacing: 7px;
+        padding: 20px 14px;
+        text-align: center;
       }
 
-      .wrap {
-        width: 100%;
-        max-width: 600px;
-        margin: 0 auto;
-      }
-      .card {
-        background: #ffffff;
-        border: 1px solid #e5e7eb;
-        border-radius: 12px;
-        overflow: hidden;
-      }
-      .gap {
-        height: 12px;
-        line-height: 12px;
-        font-size: 12px;
-      }
-      .h2 {
-        font-size: 15px;
-        line-height: 22px;
-        font-weight: bold;
-        color: #111827;
-        margin: 0 0 12px 0;
-      }
-      .text {
-        font-size: 14px;
-        line-height: 22px;
-        color: #374151;
-        margin: 0;
-      }
-      .text-sm {
-        font-size: 13px;
-        line-height: 20px;
-        color: #6b7280;
-        margin: 0;
-      }
-      .label {
-        font-size: 11px;
-        line-height: 16px;
-        font-weight: bold;
-        letter-spacing: 0.5px;
-        text-transform: uppercase;
-        color: #6b7280;
-        margin: 0 0 4px 0;
-      }
-      .value {
-        font-size: 15px;
-        line-height: 22px;
-        font-weight: bold;
-        color: #111827;
-        margin: 0;
-      }
-      .footer-link {
-        color: #16a34a !important;
-        font-weight: bold;
+      .cta-primary {
+        display: block; width: 100%; box-sizing: border-box;
+        background: linear-gradient(135deg, #1a7a0a 0%, #25B60C 100%);
+        color: #ffffff !important; border-radius: 8px;
+        font-family: 'Poppins', -apple-system, sans-serif;
+        font-size: 13px; line-height: 52px; font-weight: 700;
+        letter-spacing: 1px; text-transform: uppercase; text-align: center;
       }
 
       @media only screen and (max-width: 600px) {
-        .wrap {
-          width: 100% !important;
-          max-width: 100% !important;
+        .wrap { width: 100% !important; max-width: 100% !important; }
+        .card { border-radius: 0 !important; border-left: none !important; border-right: none !important; }
+        .outer-pad { padding: 0 !important; }
+        .footer-td { border-radius: 0 !important; }
+        .hero-td { padding: 32px 20px 28px !important; }
+        .content-pad { padding-left: 16px !important; padding-right: 16px !important; }
+        .sum-cell, .sum-cell-r, .sum-last {
+          display: block !important; width: 100% !important;
+          border-left: none !important; border-bottom: 1px solid #f3f4f6 !important;
+          padding: 14px 16px !important; box-sizing: border-box !important;
         }
-        .card {
-          border-radius: 0 !important;
-          border-left: none !important;
-          border-right: none !important;
-        }
-        .outer-pad {
-          padding: 12px 0 !important;
-        }
-        .hero-access-td {
-          border-radius: 0 !important;
-          padding-left: 16px !important;
-          padding-right: 16px !important;
-        }
-        .content-pad {
-          padding-left: 16px !important;
-          padding-right: 16px !important;
-        }
-        .meta-cell,
-        .meta-cell-r {
-          display: block !important;
-          width: 100% !important;
-          border-left: none !important;
-          border-bottom: 1px solid #f3f4f6 !important;
-          box-sizing: border-box !important;
-        }
-        .meta-cell-last {
-          border-bottom: none !important;
-        }
-        .code-box {
-          font-size: 34px !important;
-          letter-spacing: 5px !important;
-          padding: 18px 12px !important;
-        }
-        .logo-strip {
-          padding: 16px 16px 14px !important;
-          border-radius: 0 !important;
-        }
-        .logo-img {
-          width: 120px !important;
-        }
+        .sum-last-mobile { border-bottom: none !important; }
+        .access-code { font-size: 34px !important; line-height: 42px !important; letter-spacing: 5px !important; padding: 18px 10px !important; }
+        .h1 { font-size: 22px !important; line-height: 28px !important; }
+        .main-card { border-radius: 0 0 12px 12px !important; }
+        .trust-logos { border-radius: 0 !important; }
+        .header-logo { width: 128px !important; }
+        .brand-logo-sporting { width: 88px !important; }
+        .brand-logo-woker { width: 64px !important; }
+        .brand-logo-luquin { width: 78px !important; }
       }
     </style>
   </head>
-
   <body>
-    <div
-      style="
-        display: none;
-        max-height: 0;
-        overflow: hidden;
-        opacity: 0;
-        color: transparent;
-        visibility: hidden;
-        mso-hide: all;
-      "
-    >
-      Tu código de acceso para ingresar a {{_accountInfo.TradingName}} es
-      {{aditionalData.accessKey}}.&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;
+    <!-- Preheader -->
+    <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;visibility:hidden;mso-hide:all">
+      Tu codigo de acceso para ingresar a {{_accountInfo.TradingName}} es {{aditionalData.accessKey}}.&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;
     </div>
 
-    <table role="presentation" width="100%" bgcolor="#f3f4f6">
+    <table role="presentation" width="100%" bgcolor="#e8e8e8">
       <tr>
-        <td align="center" class="outer-pad" style="padding: 24px 12px">
+        <td align="center" class="outer-pad" style="padding:24px 12px 48px">
           <table role="presentation" class="wrap" width="100%">
+
+            <!-- MAIN CARD -->
             <tr>
               <td>
-                <table role="presentation" width="100%" class="card">
-                  <!-- ── Logo strip ── -->
+                <table role="presentation" width="100%" class="card main-card">
+
+                  <!-- HEADER -->
                   <tr>
-                    <td align="center" class="logo-strip" style="background: #ffffff; border-radius: 12px 12px 0 0; padding: 20px 24px 16px;">
-                      <a href="https://{{_accountInfo.HostName}}" target="_blank">
+                    <td bgcolor="#ffffff" style="background:#ffffff;padding:20px 24px 16px;border-bottom:1px solid #eef2f7">
+                      <a href="https://{{#if _accountInfo.HostName}}{{_accountInfo.HostName}}{{else}}{{_accountInfo.AccountName}}.vtexcommercestable.com.br{{/if}}" target="_blank" style="display:inline-block">
                         <img src="https://sporting.vteximg.com.br/arquivos/logo-mail-2.png"
-                             alt="{{_accountInfo.TradingName}}" width="150" class="logo-img"
-                             style="width: 150px; max-width: 150px; height: auto" />
+                             alt="Sporting" width="150"
+                             class="header-logo"
+                             style="width:150px;height:auto;display:block" />
                       </a>
                     </td>
                   </tr>
+
+                  <!-- HERO -->
                   <tr>
-                    <td
-                      class="hero-access-td"
-                      bgcolor="#14532d"
-                      style="
-                        background: #14532d;
-                        padding: 30px 24px 26px;
-                        text-align: center;
-                      "
-                    >
-                      <table
-                        role="presentation"
-                        cellpadding="0"
-                        cellspacing="0"
-                        border="0"
-                        align="center"
-                        style="margin: 0 auto 14px auto"
-                      >
+                    <td class="hero-td" bgcolor="#1a7a0a" style="background:linear-gradient(150deg,#0d4f06 0%,#1a7a0a 35%,#25B60C 75%,#4fe82a 100%);padding:40px 28px 36px;text-align:center">
+                      <table cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 16px auto">
                         <tr>
-                          <td
-                            align="center"
-                            style="
-                              width: 56px;
-                              height: 56px;
-                              line-height: 56px;
-                              background: #166534;
-                              border: 2px solid #86efac;
-                              border-radius: 50%;
-                              font-size: 26px;
-                              color: #ffffff;
-                              text-align: center;
-                            "
-                          >
-                            &#128273;
+                          <td align="center" valign="middle" width="80" height="80" bgcolor="#358a27" style="width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.12)">
+                            <table cellpadding="0" cellspacing="0" border="0" align="center">
+                              <tr>
+                                <td align="center" valign="middle" width="52" height="52" style="width:52px;height:52px;border-radius:50%;background:#ffffff;font-size:22px;line-height:52px;font-weight:bold;color:#1a7a0a;text-align:center">&#128273;</td>
+                              </tr>
+                            </table>
                           </td>
                         </tr>
                       </table>
-                      <p
-                        style="
-                          font-size: 21px;
-                          line-height: 27px;
-                          font-weight: bold;
-                          color: #ffffff;
-                          margin: 0 0 8px 0;
-                          text-align: center;
-                        "
-                      >
-                        Tu código de acceso
-                      </p>
-                      <p
-                        style="
-                          font-size: 13px;
-                          line-height: 18px;
-                          color: #bbf7d0;
-                          margin: 0;
-                          text-align: center;
-                        "
-                      >
-                        Hola{{#if to.0.name}}, {{to.0.name}}{{/if}}
+                      <p style="font-family:'Poppins',-apple-system,sans-serif;font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.6);margin:0 0 10px 0;text-align:center">Acceso a cuenta</p>
+                      <p class="h1" style="font-family:'Poppins',-apple-system,sans-serif;font-size:28px;line-height:1.1;font-weight:800;color:#fff;margin:0 0 8px 0;text-align:center;text-shadow:0 2px 16px rgba(0,0,0,.15)">Tu codigo de acceso</p>
+                      <p style="font-family:'Poppins',-apple-system,sans-serif;font-size:13px;color:rgba(255,255,255,.8);margin:0;text-align:center">
+                        Hola{{#if to.0.name}}, {{to.0.name}}{{/if}} - usalo para completar el ingreso.
                       </p>
                     </td>
                   </tr>
 
+                  <!-- CODE BLOCK -->
                   <tr>
-                    <td
-                      class="content-pad"
-                      style="padding: 22px 24px; border-bottom: 1px solid #f3f4f6"
-                    >
-                      <p
-                        class="text"
-                        style="
-                          font-size: 14px;
-                          line-height: 22px;
-                          color: #374151;
-                          margin: 0 0 14px 0;
-                        "
-                      >
-                        Recibimos una solicitud para ingresar a tu cuenta de
-                        <strong>{{_accountInfo.TradingName}}</strong>. Para
-                        continuar, volvé a la ventana donde solicitaste el
-                        acceso e ingresá este código:
+                    <td class="content-pad" style="padding:22px 24px 0">
+                      <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0 0 16px 0">
+                        Recibimos una solicitud para ingresar a tu cuenta de <strong>{{_accountInfo.TradingName}}</strong>.
+                        Volve a la ventana donde pediste el acceso e ingresa este codigo:
                       </p>
-
                       <table role="presentation" width="100%">
                         <tr>
-                          <td
-                            align="center"
-                            class="code-box"
-                            style="
-                              background: #f0fdf4;
-                              border: 1px solid #bbf7d0;
-                              border-radius: 10px;
-                              color: #14532d;
-                              font-size: 42px;
-                              line-height: 48px;
-                              font-weight: bold;
-                              letter-spacing: 7px;
-                              padding: 20px 14px;
-                              text-align: center;
-                            "
-                          >
+                          <td align="center" class="access-code" style="background:linear-gradient(135deg,#f0faf0 0%,#e8f7e6 100%);border:1px solid #bbf7d0;border-radius:10px;color:#1a7a0a;font-family:'Poppins',-apple-system,sans-serif;font-size:42px;line-height:48px;font-weight:800;letter-spacing:7px;padding:20px 14px;text-align:center">
                             {{aditionalData.accessKey}}
                           </td>
                         </tr>
                       </table>
-
-                      <table
-                        role="presentation"
-                        width="100%"
-                        style="table-layout: fixed; margin-top: 16px"
-                      >
-                        <tr>
-                          <td
-                            style="
-                              width: 4px;
-                              background: #16a34a;
-                              border-radius: 4px 0 0 4px;
-                              padding: 0;
-                              font-size: 0;
-                              line-height: 0;
-                            "
-                          >
-                            &nbsp;
-                          </td>
-                          <td
-                            style="
-                              background: #f0fdf4;
-                              border-top: 1px solid #bbf7d0;
-                              border-right: 1px solid #bbf7d0;
-                              border-bottom: 1px solid #bbf7d0;
-                              border-radius: 0 8px 8px 0;
-                              padding: 12px 14px;
-                            "
-                          >
-                            <p
-                              style="
-                                font-size: 13px;
-                                line-height: 18px;
-                                font-weight: bold;
-                                color: #14532d;
-                                margin: 0 0 3px 0;
-                              "
-                            >
-                              Este código vence en 15 minutos
-                            </p>
-                            <p
-                              style="
-                                font-size: 13px;
-                                line-height: 18px;
-                                color: #166534;
-                                margin: 0;
-                              "
-                            >
-                              Es personal, no lo compartas. Si no pediste este
-                              acceso, podés ignorar este correo.
-                            </p>
-                          </td>
-                        </tr>
-                      </table>
                     </td>
                   </tr>
 
+                  <!-- CALLOUT -->
                   <tr>
-                    <td style="padding: 0">
-                      <table role="presentation" width="100%" style="table-layout: fixed">
+                    <td class="content-pad" style="padding:16px 24px 0">
+                      <table role="presentation" width="100%" bgcolor="#eff6ff" style="background:#eff6ff;border-radius:10px">
                         <tr>
-                          <td
-                            class="content-pad meta-cell meta-cell-last"
-                            style="
-                              width: 50%;
-                              padding: 14px 20px;
-                              vertical-align: top;
-                            "
-                          >
-                            <p class="label">Solicitud</p>
-                            <p class="value">Acceso a cuenta</p>
+                          <td valign="middle" width="56" style="padding:14px 0 14px 16px">
+                            <table cellpadding="0" cellspacing="0" border="0">
+                              <tr>
+                                <td align="center" valign="middle" width="36" height="36" style="width:36px;height:36px;border-radius:10px;background:#2563eb;font-size:18px;line-height:36px;text-align:center">&#9203;</td>
+                              </tr>
+                            </table>
                           </td>
-                          <td
-                            class="content-pad meta-cell-r meta-cell-last"
-                            style="
-                              width: 50%;
-                              padding: 14px 20px;
-                              vertical-align: top;
-                              border-left: 1px solid #f3f4f6;
-                            "
-                          >
-                            <p class="label">Destino</p>
-                            <p class="value">{{#if to.0.email}}{{to.0.email}}{{else}}—{{/if}}</p>
+                          <td valign="middle" style="padding:14px 16px">
+                            <p style="font-family:'Poppins',-apple-system,sans-serif;font-size:12.5px;font-weight:700;color:#1d4ed8;margin:0 0 3px 0">Codigo temporal</p>
+                            <p style="font-family:'Poppins',-apple-system,sans-serif;font-size:11.5px;color:#3b5bdb;line-height:1.55;margin:0">Este codigo vence en 15 minutos. Si no pediste este acceso, podes ignorar este correo.</p>
                           </td>
                         </tr>
                       </table>
                     </td>
                   </tr>
+
+                  <!-- META GRID -->
+                  <tr>
+                    <td style="padding:20px 24px 24px">
+                      <table role="presentation" width="100%" style="table-layout:fixed;border-radius:10px;overflow:hidden">
+                        <tr>
+                          <td class="sum-cell" style="width:50%;padding:16px 18px;vertical-align:top;border-bottom:1px solid #f3f4f6">
+                            <p style="font-size:9.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#b0b0b0;margin:0 0 5px 0">Solicitud</p>
+                            <p style="font-size:15px;line-height:22px;font-weight:700;color:#111827;margin:0">Acceso a cuenta</p>
+                          </td>
+                          <td class="sum-cell sum-cell-r" style="width:50%;padding:16px 18px;vertical-align:top;border-bottom:1px solid #f3f4f6;border-left:1px solid #f3f4f6">
+                            <p style="font-size:9.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#b0b0b0;margin:0 0 5px 0">Destino</p>
+                            <p style="font-size:15px;line-height:22px;font-weight:700;color:#111827;margin:0;word-break:break-word">{{#if to.0.email}}{{to.0.email}}{{else}}No informado{{/if}}</p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="sum-cell sum-last" bgcolor="#f0faf0" style="width:50%;padding:16px 18px;vertical-align:top;background:linear-gradient(135deg,#f0faf0 0%,#e8f7e6 100%)">
+                            <p style="font-size:9.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#5aad50;margin:0 0 5px 0">Validez</p>
+                            <p style="font-size:20px;line-height:26px;font-weight:800;color:#1a7a0a;margin:0">15 minutos</p>
+                          </td>
+                          <td class="sum-cell sum-cell-r sum-last sum-last-mobile" style="width:50%;padding:16px 18px;vertical-align:top;border-left:1px solid #f3f4f6">
+                            <p style="font-size:9.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#b0b0b0;margin:0 0 5px 0">Dispositivo</p>
+                            <p style="font-size:15px;line-height:22px;font-weight:700;color:#111827;margin:0">{{#if aditionalData.userAgent}}{{aditionalData.userAgent}}{{else}}No informado{{/if}}</p>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+
                 </table>
               </td>
             </tr>
 
-            <tr>
-              <td class="gap">&nbsp;</td>
-            </tr>
+            <tr><td class="gap">&nbsp;</td></tr>
 
+            <!-- SECURITY INFO -->
             <tr>
               <td>
                 <table role="presentation" width="100%" class="card">
                   <tr>
-                    <td class="content-pad" style="padding: 22px 24px">
-                      <p
-                        class="h2"
-                        style="
-                          font-size: 15px;
-                          line-height: 22px;
-                          font-weight: bold;
-                          color: #111827;
-                          margin: 0 0 12px 0;
-                        "
-                      >
-                        ¿Por qué recibiste este correo?
-                      </p>
-                      <p
-                        class="text"
-                        style="
-                          font-size: 14px;
-                          line-height: 22px;
-                          color: #374151;
-                          margin: 0 0 12px 0;
-                        "
-                      >
-                        Enviamos este mensaje porque alguien solicitó ingresar
-                        a una cuenta asociada a este email.
-                      </p>
-                      <p
-                        class="text-sm"
-                        style="
-                          font-size: 13px;
-                          line-height: 20px;
-                          color: #6b7280;
-                          margin: 0;
-                        "
-                      >
-                        El código solo sirve para completar esta solicitud de
-                        acceso. Nuestro equipo nunca te va a pedir que lo
-                        compartas por teléfono, chat o redes sociales.
-                      </p>
+                    <td style="padding:24px">
+                      <p class="h2" style="font-size:16px;line-height:22px;font-weight:bold;color:#111827;margin-bottom:16px">Cuida tu cuenta</p>
+                      <table role="presentation" width="100%">
+                        <tr>
+                          <td valign="top" style="width:32px;padding-bottom:16px">
+                            <div style="width:24px;height:24px;line-height:24px;text-align:center;border-radius:50%;background:#ecfdf3;color:#166534;font-size:11px;font-weight:bold">1</div>
+                          </td>
+                          <td valign="top" style="padding:0 0 16px 10px;border-bottom:1px solid #f3f4f6">
+                            <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0"><strong>No compartas el codigo</strong></p>
+                            <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-top:2px">Nuestro equipo nunca te va a pedir este codigo por telefono, chat o redes sociales.</p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td valign="top" style="width:32px;padding:16px 0">
+                            <div style="width:24px;height:24px;line-height:24px;text-align:center;border-radius:50%;background:#ecfdf3;color:#166534;font-size:11px;font-weight:bold">2</div>
+                          </td>
+                          <td valign="top" style="padding:16px 0 16px 10px;border-bottom:1px solid #f3f4f6">
+                            <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0"><strong>Usalo solo en el sitio oficial</strong></p>
+                            <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-top:2px">Ingresa el codigo solamente en la ventana donde solicitaste acceder a tu cuenta.</p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td valign="top" style="width:32px;padding-top:16px">
+                            <div style="width:24px;height:24px;line-height:24px;text-align:center;border-radius:50%;background:#ecfdf3;color:#166534;font-size:11px;font-weight:bold">3</div>
+                          </td>
+                          <td valign="top" style="padding:16px 0 0 10px">
+                            <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0"><strong>Si no fuiste vos, ignora este email</strong></p>
+                            <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-top:2px">La solicitud queda sin efecto cuando vence el codigo.</p>
+                          </td>
+                        </tr>
+                      </table>
                     </td>
                   </tr>
                 </table>
               </td>
             </tr>
 
+            <tr><td class="gap">&nbsp;</td></tr>
+
+            <!-- CTA -->
             <tr>
-              <td class="gap">&nbsp;</td>
+              <td>
+                <table role="presentation" width="100%" class="card">
+                  <tr>
+                    <td style="padding:22px 24px">
+                      <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0 0 8px 0">Necesitas ayuda?</p>
+                      <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:0 0 16px 0">Si tenes dudas sobre tu cuenta, podes visitar nuestro centro de ayuda.</p>
+                      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                        <tr>
+                          <td bgcolor="#1a7a0a" style="border-radius:8px">
+                            <a href="https://{{#if _accountInfo.HostName}}{{_accountInfo.HostName}}{{else}}{{_accountInfo.AccountName}}.vtexcommercestable.com.br{{/if}}/centro-de-ayuda"
+                               class="cta-primary"
+                               style="display:block;width:100%;box-sizing:border-box;background:linear-gradient(135deg,#1a7a0a 0%,#25B60C 100%);color:#ffffff;border-radius:8px;font-family:'Poppins',-apple-system,sans-serif;font-size:13px;line-height:52px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-align:center;text-decoration:none"
+                               target="_blank">
+                              Ir al centro de ayuda &nbsp;&#8594;
+                            </a>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </td>
             </tr>
 
+            <tr><td class="gap">&nbsp;</td></tr>
+
+            <!-- DARK FOOTER -->
             <tr>
-              <td style="padding: 4px 0">
-                <img
-                  src="https://sporting.vteximg.com.br/arquivos/barra-footer-logos3.png"
-                  alt="Beneficios Sporting"
-                  style="
-                    width: 100%;
-                    max-width: 600px;
-                    height: auto;
-                    border-radius: 10px;
-                  "
-                />
+              <td class="footer-td" bgcolor="#1c1c1c" style="background:#1c1c1c;border-radius:10px;padding:22px 24px 20px">
+                <table role="presentation" width="100%">
+
+                  <!-- Brand logos -->
+                  <tr>
+                    <td style="padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,.08)">
+                      <table role="presentation" width="100%" style="table-layout:fixed">
+                        <tr>
+                          <td align="center" valign="middle" style="padding:0 8px">
+                            <img src="https://sporting.vteximg.com.br/arquivos/logo-sporting-white.png"
+                                 alt="Sporting" width="110"
+                                 class="brand-logo-sporting"
+                                 style="width:110px;height:auto;display:block;margin:0 auto" />
+                          </td>
+                          <td align="center" valign="middle" style="padding:0 8px">
+                            <img src="https://sporting.vteximg.com.br/arquivos/logo-woker-white.png"
+                                 alt="Woker" width="80"
+                                 class="brand-logo-woker"
+                                 style="width:80px;height:auto;display:block;margin:0 auto" />
+                          </td>
+                          <td align="center" valign="middle" style="padding:0 8px">
+                            <img src="https://sporting.vteximg.com.br/arquivos/logo-luquin-white.png"
+                                 alt="Antonio Luquin" width="100"
+                                 class="brand-logo-luquin"
+                                 style="width:100px;height:auto;display:block;margin:0 auto" />
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+
+                  <!-- Links -->
+                  <tr>
+                    <td style="padding:16px 0 14px;border-bottom:1px solid rgba(255,255,255,.08)">
+                      <table role="presentation" width="100%">
+                        <tr>
+                          <td valign="middle" align="center">
+                            <a href="https://{{#if _accountInfo.HostName}}{{_accountInfo.HostName}}{{else}}{{_accountInfo.AccountName}}.vtexcommercestable.com.br{{/if}}/contacto" target="_blank" style="font-family:'Poppins',-apple-system,sans-serif;font-size:11px;color:rgba(255,255,255,.45);text-decoration:none;font-weight:500">Contacto</a>
+                            &nbsp;&nbsp;
+                            <a href="https://{{#if _accountInfo.HostName}}{{_accountInfo.HostName}}{{else}}{{_accountInfo.AccountName}}.vtexcommercestable.com.br{{/if}}/centro-de-ayuda" target="_blank" style="font-family:'Poppins',-apple-system,sans-serif;font-size:11px;color:rgba(255,255,255,.45);text-decoration:none;font-weight:500">Ayuda</a>
+                            &nbsp;&nbsp;
+                            <a href="https://{{#if _accountInfo.HostName}}{{_accountInfo.HostName}}{{else}}{{_accountInfo.AccountName}}.vtexcommercestable.com.br{{/if}}/cambios-y-devoluciones" target="_blank" style="font-family:'Poppins',-apple-system,sans-serif;font-size:11px;color:rgba(255,255,255,.45);text-decoration:none;font-weight:500">Devoluciones</a>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+
+                  <!-- Copyright -->
+                  <tr>
+                    <td align="center" style="padding-top:14px">
+                      <p style="font-family:'Poppins',-apple-system,sans-serif;font-size:10.5px;color:rgba(255,255,255,.25);text-align:center;margin:0;line-height:1.6">&copy; {{_accountInfo.TradingName}} - Todos los derechos reservados</p>
+                    </td>
+                  </tr>
+
+                </table>
               </td>
             </tr>
+
+            <!-- TRUST LOGOS -->
             <tr>
-              <td align="center" style="padding: 16px 8px 8px 8px">
-                <p
-                  class="text-sm"
-                  style="
-                    font-size: 13px;
-                    line-height: 20px;
-                    color: #6b7280;
-                    margin-bottom: 6px;
-                  "
-                >
-                  ¿Tenés alguna duda?
-                  <a
-                    href="https://{{_accountInfo.HostName}}/centro-de-ayuda"
-                    target="_blank"
-                    class="footer-link"
-                    style="color: #16a34a; font-weight: bold"
-                    >Visitá nuestro Centro de ayuda</a
-                  >.
-                </p>
-                <p
-                  class="text-sm"
-                  style="
-                    font-size: 13px;
-                    line-height: 20px;
-                    color: #6b7280;
-                    margin-bottom: 12px;
-                  "
-                >
-                  Equipo
-                  <strong style="color: #374151">{{_accountInfo.TradingName}}</strong>
-                </p>
-                <p
-                  class="text-sm"
-                  style="
-                    font-size: 13px;
-                    line-height: 20px;
-                    color: #9ca3af;
-                    margin: 0;
-                  "
-                >
-                  © 2026 {{_accountInfo.TradingName}}. Todos los derechos reservados.
-                </p>
+              <td style="padding:8px 0 0">
+                <table role="presentation" width="100%" class="trust-logos" bgcolor="#f4f4f4" style="background:#f4f4f4;border-radius:10px;table-layout:fixed">
+                  <tr>
+                    <td align="center" valign="middle" style="padding:18px 8px">
+                      <img src="https://sporting.vteximg.com.br/arquivos/logo-cace.png"
+                           alt="CACE" width="56"
+                           style="width:56px;height:auto;display:block;margin:0 auto" />
+                    </td>
+                    <td align="center" valign="middle" style="padding:18px 8px">
+                      <img src="https://sporting.vteximg.com.br/arquivos/logo-mercadopago.png"
+                           alt="Mercado Pago" width="110"
+                           style="width:110px;height:auto;display:block;margin:0 auto" />
+                    </td>
+                    <td align="center" valign="middle" style="padding:18px 8px">
+                      <img src="https://sporting.vteximg.com.br/arquivos/logo-infracommerce.png"
+                           alt="Infracommerce" width="100"
+                           style="width:100px;height:auto;display:block;margin:0 auto" />
+                    </td>
+                  </tr>
+                </table>
               </td>
             </tr>
-            <tr>
-              <td style="padding: 8px 0 0 0">
-                <img
-                  src="https://sporting.vteximg.com.br/arquivos/barra-footer-proveedores-v3.png"
-                  alt="Medios de pago y seguridad"
-                  style="width: 100%; max-width: 600px; height: auto"
-                />
-              </td>
-            </tr>
+
           </table>
         </td>
       </tr>

@@ -113,7 +113,7 @@ const TEMPLATES = [
     plataforma: 'VTEX',
     categoria: 'Logística de Entrega',
     estado: 'en revisión',
-    actualizado: '2026-06-08',
+    actualizado: '2026-06-09',
     responsable: 'Por definir',
     descripcion: 'Envía un código de verificación al cliente cuando solicita ingresar o recuperar acceso a su cuenta.',
     archivoHtml: 'templates/vtex/sporting/access-key/access-key.v2.html',
