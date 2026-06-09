@@ -163,9 +163,9 @@
                         Si todavía lo querés, podés comprarlo ahora.
                       </p>
 
-                      <table role="presentation" width="100%">
+                      <table role="presentation" width="100%" style="table-layout:fixed">
                         <tr>
-                          <td class="product-img-cell" valign="top" style="width:188px;padding:0 20px 0 0">
+                          <td class="product-img-cell" valign="top" style="width:208px;padding:0 20px 0 0">
                             {{#if SkuContext.DetailUrl}}<a href="https://{{#if _accountInfo.HostName}}{{_accountInfo.HostName}}{{else}}{{_accountInfo.AccountName}}.vtexcommercestable.com.br{{/if}}{{SkuContext.DetailUrl}}" target="_blank" style="display:block;line-height:0">{{/if}}
                             <img src="{{#if SkuContext.Images.[0].ImageUrl}}{{SkuContext.Images.[0].ImageUrl}}{{else}}{{SkuContext.ImageUrl}}{{/if}}"
                                  alt="{{SkuContext.ProductName}}"
