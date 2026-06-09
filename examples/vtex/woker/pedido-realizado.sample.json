@@ -1,0 +1,685 @@
+{
+  "orders": [
+    {
+      "package": null,
+      "subjectItemAttachment": {
+        "item": "Campera adidas Fireb...",
+        "totalItems": 2,
+        "extraItems": 1
+      },
+      "cancellationReason": null,
+      "paymentData": {
+        "giftCards": [],
+        "transactions": [
+          {
+            "isActive": true,
+            "transactionId": "D3DBC0112BFD468AAC14B4C21E298A0F",
+            "merchantName": "W******",
+            "payments": [
+              {
+                "id": "A7650682F02E46888BF3B9E691D8709E",
+                "paymentSystem": "2",
+                "paymentSystemName": "V***",
+                "value": 26999800,
+                "installments": 6,
+                "referenceValue": 26999800,
+                "cardHolder": null,
+                "cardNumber": null,
+                "firstDigits": "454073",
+                "lastDigits": "2122",
+                "cvv2": null,
+                "expireMonth": null,
+                "expireYear": null,
+                "url": null,
+                "giftCardId": null,
+                "giftCardName": null,
+                "giftCardCaption": null,
+                "redemptionCode": null,
+                "group": "creditCard",
+                "tid": "1638331924977-1",
+                "dueDate": null,
+                "connectorResponses": {
+                  "Tid": "1638331924977-1",
+                  "ReturnCode": "200",
+                  "Message": "Transaction Approved",
+                  "authId": "005641",
+                  "nsu": "4014",
+                  "acquirer": "Payway"
+                },
+                "giftCardProvider": null,
+                "giftCardAsDiscount": null,
+                "koinUrl": null,
+                "accountId": "1760660C474348E69ED06EC92000B38C",
+                "parentAccountId": null,
+                "bankIssuedInvoiceIdentificationNumber": null,
+                "bankIssuedInvoiceIdentificationNumberFormatted": null,
+                "bankIssuedInvoiceBarCodeNumber": null,
+                "bankIssuedInvoiceBarCodeType": null,
+                "billingAddress": {
+                  "postalCode": "1***",
+                  "city": "J*** C******* P**",
+                  "state": "BUENOS AIRES",
+                  "country": "ARG",
+                  "street": "C****** C*******",
+                  "number": "1***",
+                  "neighborhood": null,
+                  "complement": null,
+                  "reference": null,
+                  "geoCoordinates": [-51.4779552, -0.0039779]
+                },
+                "paymentOrigin": null
+              }
+            ]
+          }
+        ]
+      },
+      "cancellationRequests": null,
+      "invoiceData": null,
+      "clientProfileData": {
+        "id": "clientProfileData",
+        "email": "j****************@g****.c****************.c*.v***.c**.b*",
+        "firstName": "J******",
+        "lastName": "O*******",
+        "documentType": "dni",
+        "document": "3*******",
+        "phone": "1*",
+        "corporateName": null,
+        "tradeName": null,
+        "corporateDocument": null,
+        "stateInscription": null,
+        "corporatePhone": null,
+        "isCorporate": false,
+        "userProfileId": "55fe7e61-ea24-4d9b-ba0c-e2b00b13e1b5",
+        "userProfileVersion": null,
+        "customerClass": null,
+        "customerCode": null
+      },
+      "shippingData": {
+        "id": "shippingData",
+        "address": {
+          "addressType": "residential",
+          "receiverName": "J****** O*******",
+          "addressId": "4,7911E+12",
+          "versionId": null,
+          "entityId": null,
+          "postalCode": "1***",
+          "city": "J*** C******* P**",
+          "state": "BUENOS AIRES",
+          "country": "ARG",
+          "street": "C****** C*******",
+          "number": "1***",
+          "neighborhood": null,
+          "complement": null,
+          "reference": null,
+          "geoCoordinates": [-51.4779552, -0.0039779]
+        },
+        "logisticsInfo": [
+          {
+            "itemIndex": 0,
+            "itemId": "310214057",
+            "selectedDeliveryChannel": "delivery",
+            "selectedSla": "Normal",
+            "lockTTL": "10d",
+            "price": 0,
+            "listPrice": 545000,
+            "sellingPrice": 0,
+            "deliveryWindow": null,
+            "deliveryCompany": null,
+            "shippingEstimate": "6bd",
+            "shippingEstimateDate": "2026-06-16T16:34:00+00:00",
+            "slas": [
+              {
+                "id": "Normal",
+                "name": "N*****",
+                "shippingEstimate": "6bd",
+                "shippingEstimateDate": "2026-06-16T16:34:00+00:00",
+                "deliveryWindow": null,
+                "availableDeliveryWindows": [],
+                "deliveryIds": [
+                  {
+                    "courierId": "catamarca_andreani_normal",
+                    "courierName": "C****************************",
+                    "dockId": "25",
+                    "quantity": 1,
+                    "warehouseId": "1_25",
+                    "accountCarrierName": "w****",
+                    "kitItemDetails": []
+                  }
+                ],
+                "listPrice": 545000,
+                "price": 0,
+                "deliveryChannel": "delivery",
+                "pickupStoreInfo": {
+                  "additionalInfo": null,
+                  "address": null,
+                  "dockId": null,
+                  "friendlyName": null,
+                  "isPickupStore": false
+                },
+                "polygonName": "b**********",
+                "lockTTL": "10d",
+                "pickupPointId": null,
+                "transitTime": "5bd",
+                "pickupDistance": 0
+              }
+            ],
+            "shipsTo": ["ARG"],
+            "deliveryIds": [
+              {
+                "courierId": "catamarca_andreani_normal",
+                "courierName": "C****************************",
+                "dockId": "25",
+                "quantity": 1,
+                "warehouseId": "1_25",
+                "accountCarrierName": "w****",
+                "kitItemDetails": []
+              }
+            ],
+            "deliveryChannels": [
+              {
+                "id": "delivery",
+                "stockBalance": 0
+              }
+            ],
+            "deliveryChannel": null,
+            "pickupStoreInfo": {
+              "additionalInfo": null,
+              "address": null,
+              "dockId": null,
+              "friendlyName": null,
+              "isPickupStore": false
+            },
+            "addressId": "4,7911E+12",
+            "versionId": null,
+            "entityId": null,
+            "polygonName": "b**********",
+            "pickupPointId": null,
+            "transitTime": "5bd"
+          },
+          {
+            "itemIndex": 1,
+            "itemId": "310214053",
+            "selectedDeliveryChannel": "delivery",
+            "selectedSla": "Normal",
+            "lockTTL": "10d",
+            "price": 0,
+            "listPrice": 545000,
+            "sellingPrice": 0,
+            "deliveryWindow": null,
+            "deliveryCompany": null,
+            "shippingEstimate": "6bd",
+            "shippingEstimateDate": "2026-06-16T16:34:00+00:00",
+            "slas": [
+              {
+                "id": "Normal",
+                "name": "N*****",
+                "shippingEstimate": "6bd",
+                "shippingEstimateDate": "2026-06-16T16:34:00+00:00",
+                "deliveryWindow": null,
+                "availableDeliveryWindows": [],
+                "deliveryIds": [
+                  {
+                    "courierId": "catamarca_andreani_normal",
+                    "courierName": "C****************************",
+                    "dockId": "25",
+                    "quantity": 1,
+                    "warehouseId": "1_25",
+                    "accountCarrierName": "w****",
+                    "kitItemDetails": []
+                  }
+                ],
+                "listPrice": 545000,
+                "price": 0,
+                "deliveryChannel": "delivery",
+                "pickupStoreInfo": {
+                  "additionalInfo": null,
+                  "address": null,
+                  "dockId": null,
+                  "friendlyName": null,
+                  "isPickupStore": false
+                },
+                "polygonName": "b**********",
+                "lockTTL": "10d",
+                "pickupPointId": null,
+                "transitTime": "5bd",
+                "pickupDistance": 0
+              }
+            ],
+            "shipsTo": ["ARG"],
+            "deliveryIds": [
+              {
+                "courierId": "catamarca_andreani_normal",
+                "courierName": "C****************************",
+                "dockId": "25",
+                "quantity": 1,
+                "warehouseId": "1_25",
+                "accountCarrierName": "w****",
+                "kitItemDetails": []
+              }
+            ],
+            "deliveryChannels": [
+              {
+                "id": "delivery",
+                "stockBalance": 0
+              },
+              {
+                "id": "pickup-in-point",
+                "stockBalance": 0
+              }
+            ],
+            "deliveryChannel": null,
+            "pickupStoreInfo": {
+              "additionalInfo": null,
+              "address": null,
+              "dockId": null,
+              "friendlyName": null,
+              "isPickupStore": false
+            },
+            "addressId": "4,7911E+12",
+            "versionId": null,
+            "entityId": null,
+            "polygonName": "b**********",
+            "pickupPointId": null,
+            "transitTime": "5bd"
+          }
+        ],
+        "trackingHints": [],
+        "selectedAddresses": [
+          {
+            "addressId": "4,7911E+12",
+            "versionId": null,
+            "entityId": null,
+            "addressType": "residential",
+            "receiverName": "J****** O*******",
+            "street": "C****** C*******",
+            "number": "1***",
+            "complement": null,
+            "neighborhood": null,
+            "postalCode": "1***",
+            "city": "J*** C******* P**",
+            "state": "BUENOS AIRES",
+            "country": "ARG",
+            "reference": null,
+            "geoCoordinates": [-51.4779552, -0.0039779]
+          }
+        ],
+        "availableAddresses": [
+          {
+            "addressId": "4,7911E+12",
+            "versionId": null,
+            "entityId": null,
+            "addressType": "residential",
+            "receiverName": "J****** O*******",
+            "street": "C****** C*******",
+            "number": "1***",
+            "complement": null,
+            "neighborhood": null,
+            "postalCode": "1***",
+            "city": "J*** C******* P**",
+            "state": "BUENOS AIRES",
+            "country": "ARG",
+            "reference": null,
+            "geoCoordinates": [-51.4779552, -0.0039779]
+          }
+        ],
+        "contactInformation": [],
+        "contactsInfo": []
+      },
+      "customData": {
+        "customApps": [
+          {
+            "fields": {
+              "source": "WEB_DESKTOP",
+              "uuid": "cc3f47b2-3f40-4254-b594-214542541f7e"
+            },
+            "id": "synerise",
+            "major": 1
+          }
+        ],
+        "customFields": []
+      },
+      "purchaseAgentData": null,
+      "authorizationPolicyData": null,
+      "items": [
+        {
+          "additionalInfo": {
+            "categoriesIds": "/72/75/90/",
+            "productClusterId": "139,305,486",
+            "commercialConditionId": "1",
+            "dimension": {
+              "cubicweight": 0,
+              "height": 2,
+              "length": 40,
+              "weight": 100,
+              "width": 30
+            },
+            "brandName": "A***************",
+            "brandId": "2000000",
+            "offeringInfo": null,
+            "offeringType": null,
+            "offeringTypeId": null
+          },
+          "sellerSku": "310214057",
+          "priceTable": null,
+          "priceValidUntil": "2027-06-09T16:34:35Z",
+          "callCenterOperator": null,
+          "commission": 0,
+          "freightCommission": 0,
+          "taxCode": "",
+          "catalogProvider": "vrn:vtex.catalog-api-proxy:-:wokerio:master:/proxy/authenticated/catalog/pvt/sku/stockkeepingunitbyid/310214057",
+          "uniqueId": "D4726C7B6E4D43CAB34DC456E5118FC9",
+          "id": "310214057",
+          "productId": "48745",
+          "productRefId": "6KS8502-000",
+          "refId": "6KS8502-000-*M",
+          "ean": "4068815882705",
+          "name": "C*********************************************************************",
+          "skuName": "C****************************",
+          "modalType": null,
+          "parentItemIndex": null,
+          "parentAssemblyBinding": null,
+          "assemblies": [],
+          "tax": 0,
+          "price": 13999900,
+          "listPrice": 13999900,
+          "manualPrice": null,
+          "manualPriceAppliedBy": null,
+          "sellingPrice": 13999900,
+          "rewardValue": 0,
+          "isGift": false,
+          "preSaleDate": null,
+          "productCategoryIds": "/72/75/90/",
+          "productCategories": {
+            "72": "woker",
+            "75": "Indumentaria",
+            "90": "Camperas"
+          },
+          "quantity": 1,
+          "seller": "1",
+          "sellerChain": ["1"],
+          "imageUrl": "https://woker.vteximg.com.br/arquivos/ids/661558-150-150/6KS8502-000-1.jpg?v=639033861840270000",
+          "detailUrl": "/campera-adidas-firebird-classic-de-mujer-6ks8502-000/p",
+          "components": [],
+          "bundleItems": [],
+          "attachments": [],
+          "attachmentOfferings": [],
+          "offerings": [],
+          "priceTags": [
+            {
+              "name": "d******************************************************************************************",
+              "value": -545000,
+              "rawValue": -5450,
+              "isPercentual": false,
+              "identifier": "e4f640bc-72e0-4524-b51d-499e93749260"
+            }
+          ],
+          "availability": "available",
+          "measurementUnit": "un",
+          "unitMultiplier": 1,
+          "manufacturerCode": null,
+          "priceDefinition": {
+            "calculatedSellingPrice": 13999900,
+            "total": 13999900,
+            "sellingPrices": [
+              {
+                "value": 13999900,
+                "quantity": 1
+              }
+            ]
+          }
+        },
+        {
+          "additionalInfo": {
+            "categoriesIds": "/72/75/95/121/",
+            "productClusterId": "139,305,486",
+            "commercialConditionId": "1",
+            "dimension": {
+              "cubicweight": 0,
+              "height": 2,
+              "length": 40,
+              "weight": 100,
+              "width": 30
+            },
+            "brandName": "A***************",
+            "brandId": "2000000",
+            "offeringInfo": null,
+            "offeringType": null,
+            "offeringTypeId": null
+          },
+          "sellerSku": "310214053",
+          "priceTable": null,
+          "priceValidUntil": "2027-06-09T16:32:04Z",
+          "callCenterOperator": null,
+          "commission": 0,
+          "freightCommission": 0,
+          "taxCode": "",
+          "catalogProvider": "vrn:vtex.catalog-api-proxy:-:wokerio:master:/proxy/authenticated/catalog/pvt/sku/stockkeepingunitbyid/310214053",
+          "uniqueId": "EF7F15C42DE64B36AC1A7495A9EDD7A9",
+          "id": "310214053",
+          "productId": "48744",
+          "productRefId": "6KS8501-000",
+          "refId": "6KS8501-000-*M",
+          "ean": "4068815846332",
+          "name": "P**********************************************************************",
+          "skuName": "C****************************",
+          "modalType": null,
+          "parentItemIndex": null,
+          "parentAssemblyBinding": null,
+          "assemblies": [],
+          "tax": 0,
+          "price": 12999900,
+          "listPrice": 12999900,
+          "manualPrice": null,
+          "manualPriceAppliedBy": null,
+          "sellingPrice": 12999900,
+          "rewardValue": 0,
+          "isGift": false,
+          "preSaleDate": null,
+          "productCategoryIds": "/72/75/95/121/",
+          "productCategories": {
+            "72": "woker",
+            "75": "Indumentaria",
+            "95": "Pantalones",
+            "121": "Jogging"
+          },
+          "quantity": 1,
+          "seller": "1",
+          "sellerChain": ["1"],
+          "imageUrl": "https://woker.vteximg.com.br/arquivos/ids/661545-150-150/6KS8501-000-1.jpg?v=639033857962230000",
+          "detailUrl": "/pantalon-adidas-firebird-classic-de-mujer-6ks8501-000/p",
+          "components": [],
+          "bundleItems": [],
+          "attachments": [],
+          "attachmentOfferings": [],
+          "offerings": [],
+          "priceTags": [
+            {
+              "name": "d******************************************************************************************",
+              "value": -545000,
+              "rawValue": -5450,
+              "isPercentual": false,
+              "identifier": "e4f640bc-72e0-4524-b51d-499e93749260"
+            }
+          ],
+          "availability": "available",
+          "measurementUnit": "un",
+          "unitMultiplier": 1,
+          "manufacturerCode": null,
+          "priceDefinition": {
+            "calculatedSellingPrice": 12999900,
+            "total": 12999900,
+            "sellingPrices": [
+              {
+                "value": 12999900,
+                "quantity": 1
+              }
+            ]
+          }
+        }
+      ],
+      "sellers": [
+        {
+          "subSellerId": "1",
+          "fulfillmentEndpoint": "http://fulfillment.vtexcommerce.com.br/api/fulfillment?an=wokerio",
+          "id": "1",
+          "name": "W****",
+          "logo": ""
+        }
+      ],
+      "giftRegistryData": null,
+      "receiptData": null,
+      "contextData": null,
+      "marketPlaceOrderId": "",
+      "marketPlaceOrderGroup": null,
+      "marketplaceServicesEndpoint": null,
+      "orderFormId": "b1dfa0f084e1490a8634d4d31112d727",
+      "sequence": "1924977",
+      "affiliateId": "",
+      "status": "",
+      "callCenterOperator": "",
+      "userProfileId": "55fe7e61-ea24-4d9b-ba0c-e2b00b13e1b5",
+      "hostName": "w******",
+      "creationVersion": null,
+      "creationEnvironment": null,
+      "lastChangeVersion": null,
+      "workflowInstanceId": null,
+      "marketplacePaymentValue": null,
+      "orderId": "1638331924977-01",
+      "orderGroup": "1638331924977",
+      "state": "payment-pending",
+      "isCheckedIn": false,
+      "sellerOrderId": "00-1638331924977-01",
+      "storeId": null,
+      "checkedInPickupPointId": null,
+      "value": 26999800,
+      "totals": [
+        {
+          "id": "Items",
+          "name": "T*****************",
+          "value": 26999800
+        },
+        {
+          "id": "Discounts",
+          "name": "T******************",
+          "value": 0
+        },
+        {
+          "id": "Shipping",
+          "name": "C********************",
+          "value": 0,
+          "alternativeTotals": [
+            {
+              "id": "AlternativeShippingTotal",
+              "name": "A*************************",
+              "value": 1090000
+            },
+            {
+              "id": "AlternativeShippingDiscount",
+              "name": "A****************************",
+              "value": -1090000
+            }
+          ]
+        },
+        {
+          "id": "Tax",
+          "name": "C*********************",
+          "value": 0
+        }
+      ],
+      "ratesAndBenefitsData": {
+        "rateAndBenefitsIdentifiers": [
+          {
+            "id": "e4f640bc-72e0-4524-b51d-499e93749260",
+            "name": "G********************************************",
+            "featured": false,
+            "description": "Aplica envío gratis para pedidos que cumplan con las condiciones definidas en la promoción.",
+            "matchedParameters": {},
+            "additionalInfo": null
+          }
+        ],
+        "teaser": []
+      },
+      "clientPreferencesData": {
+        "locale": "es-AR",
+        "optinNewsLetter": true
+      },
+      "commercialConditionData": null,
+      "marketingData": null,
+      "storePreferencesData": {
+        "countryCode": "ARG",
+        "saveUserData": false,
+        "timeZone": "Argentina Standard Time",
+        "currencyCode": "ARS",
+        "currencyLocale": 11274,
+        "currencySymbol": "$",
+        "currencyFormatInfo": {
+          "currencyDecimalDigits": 0,
+          "currencyDecimalSeparator": ",",
+          "currencyGroupSeparator": ".",
+          "currencyGroupSize": 3,
+          "startsWithCurrencySymbol": true
+        }
+      },
+      "openTextField": null,
+      "itemMetadata": null,
+      "taxData": null,
+      "hooksData": null,
+      "changeData": null,
+      "subscriptionData": null,
+      "salesChannel": "1",
+      "followUpEmail": "6**********************************.v***.c**.b*",
+      "creationDate": "2026-06-09T16:35:24.040813Z",
+      "lastChange": "2026-06-09T16:35:34.7104769Z",
+      "timeZoneCreationDate": "2026-06-09T13:35:24.040813",
+      "timeZoneLastChange": "2026-06-09T13:35:34.7104769",
+      "isCompleted": true,
+      "merchantName": null,
+      "userType": "",
+      "roundingError": 0,
+      "allowEdition": false,
+      "allowCancellation": false,
+      "isUserDataVisible": false,
+      "allowChangeSeller": false
+    }
+  ],
+  "ordersUrl": "http://www.wokerbysporting.com.ar/account#/orders",
+  "orderGroup": "1638331924977",
+  "subjectItemAttachment": {
+    "item": "Campera adidas Fireb...",
+    "totalItems": 2,
+    "extraItems": 1
+  },
+  "split": false,
+  "totalValue": 26999800,
+  "callCenterOperatorData": null,
+  "_accountInfo": {
+    "MainAccountName": "w****",
+    "AccountName": "w******",
+    "Cnpj": "30709964360",
+    "Id": "56343e21-8075-4492-bfbd-15d4da315b0e",
+    "AppId": "e90c276b-eb93-466f-80dd-826091ba2899",
+    "IsActive": true,
+    "IsOperating": true,
+    "CreationDate": "2017-09-13T04:00:20",
+    "OperationDate": "2018-09-05T13:43:19",
+    "CompanyName": "B*************",
+    "TradingName": "W****",
+    "City": "San Miguel de Tucuman",
+    "Complement": null,
+    "Country": "Argentina",
+    "State": null,
+    "Address": "Avenida Siria 2345",
+    "District": null,
+    "Number": null,
+    "PostalCode": "4000",
+    "Licenses": [28],
+    "ParentAccountId": null,
+    "ParentAccountName": null,
+    "InactivationDate": null,
+    "Platform": "vtex",
+    "Privacy": null,
+    "HasPiiRestriction": false,
+    "Infra": null,
+    "Sponsor": "3f29e577-433f-42b8-9ded-d2ede67d8ab3"
+  }
+}

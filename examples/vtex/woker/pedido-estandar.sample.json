@@ -1,0 +1,511 @@
+{
+  "orders": [
+    {
+      "package": null,
+      "subjectItemAttachment": {
+        "item": "Botines adidas Nemez...",
+        "totalItems": 5,
+        "extraItems": 4
+      },
+      "cancellationReason": null,
+      "paymentData": {
+        "giftCards": [],
+        "transactions": [
+          {
+            "isActive": true,
+            "transactionId": "E5E298929E8F4FF19EA1CADEE0FD5D8D",
+            "merchantName": "TIENDA-EJEMPLO",
+            "payments": [
+              {
+                "id": "957E6116686A408598D683423D8F09CC",
+                "paymentSystem": "17",
+                "paymentSystemName": "P*********",
+                "value": 1249500,
+                "installments": 1,
+                "referenceValue": 1249500,
+                "cardHolder": null,
+                "cardNumber": null,
+                "firstDigits": null,
+                "lastDigits": null,
+                "cvv2": null,
+                "expireMonth": null,
+                "expireYear": null,
+                "url": null,
+                "giftCardId": null,
+                "giftCardName": null,
+                "giftCardCaption": null,
+                "redemptionCode": null,
+                "group": "promissory",
+                "tid": "TID-EXAMPLE-1",
+                "dueDate": null,
+                "connectorResponses": {
+                  "Tid": "TID-EXAMPLE-1",
+                  "authId": "AUTH-EXAMPLE-1",
+                  "nsu": "NSU-EXAMPLE-1"
+                },
+                "giftCardProvider": null,
+                "giftCardAsDiscount": null,
+                "koinUrl": null,
+                "accountId": null,
+                "parentAccountId": null,
+                "bankIssuedInvoiceIdentificationNumber": null,
+                "bankIssuedInvoiceIdentificationNumberFormatted": null,
+                "bankIssuedInvoiceBarCodeNumber": null,
+                "bankIssuedInvoiceBarCodeType": null,
+                "billingAddress": null,
+                "paymentOrigin": null
+              }
+            ]
+          }
+        ]
+      },
+      "cancellationRequests": null,
+      "invoiceData": null,
+      "clientProfileData": {
+        "id": "clientProfileData",
+        "email": "cliente-1@example.invalid",
+        "firstName": "Cliente",
+        "lastName": "Ejemplo 1",
+        "documentType": "dni",
+        "document": "00000000",
+        "phone": "+540000000000",
+        "corporateName": null,
+        "tradeName": null,
+        "corporateDocument": null,
+        "stateInscription": null,
+        "corporatePhone": null,
+        "isCorporate": false,
+        "userProfileId": "00000000-0000-4000-8000-000000000001",
+        "userProfileVersion": null,
+        "customerClass": null,
+        "customerCode": null
+      },
+      "shippingData": {
+        "id": "shippingData",
+        "address": {
+          "addressType": "residential",
+          "receiverName": "Cliente Ejemplo 1",
+          "addressId": "ADDR-EXAMPLE-1",
+          "versionId": null,
+          "entityId": null,
+          "postalCode": "0000",
+          "city": "Ciudad Ejemplo",
+          "state": "Provincia Ejemplo",
+          "country": "ARG",
+          "street": "Calle Ejemplo",
+          "number": "123",
+          "neighborhood": "Barrio Ejemplo",
+          "complement": null,
+          "reference": null,
+          "geoCoordinates": [
+            -51.4779552,
+            -0.0039779
+          ]
+        },
+        "logisticsInfo": [
+          {
+            "itemIndex": 0,
+            "itemId": "657",
+            "selectedDeliveryChannel": "delivery",
+            "selectedSla": "Envío domicilio",
+            "lockTTL": "12d",
+            "price": 0,
+            "listPrice": 899900,
+            "sellingPrice": 0,
+            "deliveryWindow": null,
+            "deliveryCompany": null,
+            "shippingEstimate": "1bd",
+            "shippingEstimateDate": "2026-04-16T15:19:57.2106729Z",
+            "slas": [
+              {
+                "id": "Envío domicilio",
+                "name": "E**************",
+                "shippingEstimate": "1bd",
+                "shippingEstimateDate": "2026-04-16T15:19:57.2106729Z",
+                "deliveryWindow": null,
+                "availableDeliveryWindows": [],
+                "deliveryIds": [],
+                "listPrice": 899900,
+                "price": 0,
+                "deliveryChannel": "delivery",
+                "pickupStoreInfo": {
+                  "additionalInfo": null,
+                  "address": null,
+                  "dockId": null,
+                  "friendlyName": null,
+                  "isPickupStore": false
+                },
+                "polygonName": null,
+                "lockTTL": "12d",
+                "pickupPointId": null,
+                "transitTime": null,
+                "pickupDistance": null
+              }
+            ],
+            "shipsTo": [
+              "AR",
+              "MX",
+              "BR"
+            ],
+            "deliveryIds": [
+              {
+                "courierId": "courier-example-1",
+                "courierName": "Andreani",
+                "dockId": "dock-example-1",
+                "quantity": 1,
+                "warehouseId": "deposito-principal",
+                "accountCarrierName": "s*******",
+                "kitItemDetails": []
+              }
+            ],
+            "deliveryChannels": [
+              {
+                "id": "delivery",
+                "stockBalance": 0
+              }
+            ],
+            "deliveryChannel": null,
+            "pickupStoreInfo": {
+              "additionalInfo": null,
+              "address": null,
+              "dockId": null,
+              "friendlyName": null,
+              "isPickupStore": false
+            },
+            "addressId": "ADDR-EXAMPLE-1",
+            "versionId": null,
+            "entityId": null,
+            "polygonName": null,
+            "pickupPointId": null,
+            "transitTime": null
+          }
+        ],
+        "trackingHints": [],
+        "selectedAddresses": [
+          {
+            "addressId": "ADDR-EXAMPLE-1",
+            "versionId": null,
+            "entityId": null,
+            "addressType": "residential",
+            "receiverName": "Cliente Ejemplo 1",
+            "street": "Calle Ejemplo",
+            "number": "123",
+            "complement": "Piso 3, Depto B",
+            "neighborhood": "Barrio Ejemplo",
+            "postalCode": "0000",
+            "city": "Ciudad Ejemplo",
+            "state": "Provincia Ejemplo",
+            "country": "ARG",
+            "reference": null,
+            "geoCoordinates": [
+              -51.4779552,
+              -0.0039779
+            ]
+          }
+        ],
+        "availableAddresses": [
+          {
+            "addressId": "ADDR-EXAMPLE-1",
+            "versionId": null,
+            "entityId": null,
+            "addressType": "residential",
+            "receiverName": "Cliente Ejemplo 1",
+            "street": "Calle Ejemplo",
+            "number": "123",
+            "complement": null,
+            "neighborhood": "Barrio Ejemplo",
+            "postalCode": "0000",
+            "city": "Ciudad Ejemplo",
+            "state": "Provincia Ejemplo",
+            "country": "ARG",
+            "reference": null,
+            "geoCoordinates": [
+              -51.4779552,
+              -0.0039779
+            ]
+          }
+        ],
+        "contactInformation": [],
+        "contactsInfo": []
+      },
+      "customData": null,
+      "purchaseAgentData": null,
+      "authorizationPolicyData": {
+        "Status": "accepted",
+        "DeniedPolicies": [],
+        "PendingPolicies": []
+      },
+      "items": [
+        {
+          "additionalInfo": {
+            "categoriesIds": "/1/2/4/14/",
+            "productClusterId": "145",
+            "commercialConditionId": "1",
+            "dimension": {
+              "cubicweight": 0.2083,
+              "height": 10,
+              "length": 10,
+              "weight": 0.001,
+              "width": 10
+            },
+            "brandName": "A*****",
+            "brandId": "2000000",
+            "offeringInfo": null,
+            "offeringType": null,
+            "offeringTypeId": null,
+            "catalogProvider": "example-catalog-provider"
+          },
+          "sellerSku": "SKU-EXAMPLE-1-1",
+          "priceTable": null,
+          "priceValidUntil": null,
+          "callCenterOperator": null,
+          "commission": 0,
+          "freightCommission": 0,
+          "taxCode": null,
+          "catalogProvider": "example-catalog-provider",
+          "uniqueId": "UNIQUE-EXAMPLE-1-1",
+          "id": "SKU-EXAMPLE-1-1",
+          "productId": "PRODUCT-EXAMPLE-1-1",
+          "productRefId": "PRODUCT-REF-EXAMPLE-1-1",
+          "refId": "REF-EXAMPLE-1-1",
+          "ean": "0000000000000",
+          "name": "B**************************************************",
+          "skuName": "4*",
+          "modalType": null,
+          "parentItemIndex": null,
+          "parentAssemblyBinding": null,
+          "assemblies": [],
+          "tax": 0,
+          "price": 249900,
+          "listPrice": 249900,
+          "manualPrice": null,
+          "manualPriceAppliedBy": null,
+          "sellingPrice": 249900,
+          "rewardValue": 0,
+          "isGift": false,
+          "preSaleDate": null,
+          "productCategoryIds": "/1/2/4/14/",
+          "productCategories": {
+            "1": "SPORTING",
+            "2": "CALZADO",
+            "4": "Botines",
+            "14": "Con Tapones"
+          },
+          "quantity": 5,
+          "seller": "SELLER-EXAMPLE",
+          "sellerChain": [
+            "productecaadidasqa"
+          ],
+          "imageUrl": "https://sportingioqa.vteximg.com.br/arquivos/ids/164020-55-55/image-a3e2892fbd7142bb829989b788f0f918.jpg?v=638906262524030000",
+          "detailUrl": "/producto-ejemplo-1-1/p",
+          "components": [],
+          "bundleItems": [],
+          "attachments": [],
+          "attachmentOfferings": [],
+          "offerings": [],
+          "priceTags": [
+            {
+              "name": "d******************************************************************************************",
+              "value": -899900,
+              "rawValue": -8999,
+              "isPercentual": false,
+              "identifier": "BENEFIT-EXAMPLE-1"
+            }
+          ],
+          "availability": "available",
+          "measurementUnit": "un",
+          "unitMultiplier": 1,
+          "manufacturerCode": null,
+          "priceDefinition": {
+            "calculatedSellingPrice": 249900,
+            "total": 1249500,
+            "sellingPrices": [
+              {
+                "value": 249900,
+                "quantity": 5
+              }
+            ]
+          }
+        }
+      ],
+      "sellers": [
+        {
+          "subSellerId": "1",
+          "fulfillmentEndpoint": "https://apps.producteca.com/sporting/api/vtex/250225",
+          "id": "SELLER-EXAMPLE",
+          "name": "Tienda Ejemplo",
+          "logo": ""
+        }
+      ],
+      "giftRegistryData": null,
+      "receiptData": null,
+      "contextData": null,
+      "marketPlaceOrderId": "",
+      "marketPlaceOrderGroup": null,
+      "marketplaceServicesEndpoint": null,
+      "orderFormId": "31ea232164f143ab9fae444c9d891944",
+      "sequence": "500336",
+      "affiliateId": "",
+      "status": "",
+      "callCenterOperator": "",
+      "userProfileId": "00000000-0000-4000-8000-000000000001",
+      "hostName": "tienda-ejemplo.example.invalid",
+      "creationVersion": null,
+      "creationEnvironment": null,
+      "lastChangeVersion": null,
+      "workflowInstanceId": null,
+      "marketplacePaymentValue": null,
+      "orderId": "TEST-1001-01",
+      "orderGroup": "TEST-1001",
+      "state": "payment-approved",
+      "isCheckedIn": false,
+      "sellerOrderId": "TEST-1001-SELLER",
+      "storeId": null,
+      "checkedInPickupPointId": null,
+      "value": 1249500,
+      "totals": [
+        {
+          "id": "Items",
+          "name": "T*****************",
+          "value": 1249500
+        },
+        {
+          "id": "Discounts",
+          "name": "T******************",
+          "value": 0
+        },
+        {
+          "id": "Shipping",
+          "name": "C********************",
+          "value": 0,
+          "alternativeTotals": [
+            {
+              "id": "AlternativeShippingTotal",
+              "name": "A*************************",
+              "value": 899900
+            },
+            {
+              "id": "AlternativeShippingDiscount",
+              "name": "A****************************",
+              "value": -899900
+            }
+          ]
+        },
+        {
+          "id": "Tax",
+          "name": "C*********************",
+          "value": 0
+        }
+      ],
+      "ratesAndBenefitsData": {
+        "rateAndBenefitsIdentifiers": [
+          {
+            "id": "00000000-0000-4000-8000-000000000501",
+            "name": "E************************",
+            "featured": false,
+            "description": "",
+            "matchedParameters": {
+              "Seller@CatalogSystem": "productecaadidasqa|inclusive"
+            },
+            "additionalInfo": null
+          }
+        ],
+        "teaser": []
+      },
+      "clientPreferencesData": {
+        "locale": "es-AR",
+        "optinNewsLetter": false
+      },
+      "commercialConditionData": null,
+      "marketingData": {
+        "utmSource": null,
+        "utmMedium": null,
+        "utmCampaign": null,
+        "utmipage": null,
+        "utmiPart": null,
+        "utmiCampaign": null,
+        "coupon": null,
+        "marketingTags": [
+          "Antecedentes"
+        ]
+      },
+      "storePreferencesData": {
+        "countryCode": "ARG",
+        "saveUserData": false,
+        "timeZone": "Argentina Standard Time",
+        "currencyCode": "ARS",
+        "currencyLocale": 11274,
+        "currencySymbol": "$",
+        "currencyFormatInfo": {
+          "currencyDecimalDigits": 2,
+          "currencyDecimalSeparator": ",",
+          "currencyGroupSeparator": ".",
+          "currencyGroupSize": 3,
+          "startsWithCurrencySymbol": true
+        }
+      },
+      "openTextField": null,
+      "itemMetadata": null,
+      "taxData": null,
+      "hooksData": null,
+      "changeData": null,
+      "subscriptionData": null,
+      "salesChannel": "1",
+      "followUpEmail": "seguimiento-1@example.invalid",
+      "creationDate": "2026-04-15T15:19:49.6736633Z",
+      "lastChange": "2026-04-15T15:19:57.2106866Z",
+      "timeZoneCreationDate": "2026-04-15T12:19:49.6736633",
+      "timeZoneLastChange": "2026-04-15T12:19:57.2106866",
+      "isCompleted": true,
+      "merchantName": "TIENDA-EJEMPLO",
+      "userType": "",
+      "roundingError": 0,
+      "allowEdition": false,
+      "allowCancellation": false,
+      "isUserDataVisible": false,
+      "allowChangeSeller": false
+    }
+  ],
+  "ordersUrl": "https://tienda-ejemplo.example.invalid/account#/orders",
+  "orderGroup": "TEST-1001",
+  "subjectItemAttachment": {
+    "item": "Botines adidas Nemez...",
+    "totalItems": 5,
+    "extraItems": 4
+  },
+  "split": false,
+  "totalValue": 1249500,
+  "callCenterOperatorData": null,
+  "_accountInfo": {
+    "MainAccountName": "tienda-ejemplo",
+    "AccountName": "tienda-ejemplo",
+    "Cnpj": "00000000000000",
+    "Id": "00000000-0000-4000-8000-000000000101",
+    "AppId": "00000000-0000-4000-8000-000000000201",
+    "IsActive": true,
+    "IsOperating": false,
+    "CreationDate": "2022-12-07T14:49:59.3778486Z",
+    "OperationDate": null,
+    "CompanyName": "T****************************",
+    "TradingName": "Tienda Ejemplo",
+    "City": null,
+    "Complement": null,
+    "Country": null,
+    "State": null,
+    "Address": null,
+    "District": null,
+    "Number": null,
+    "PostalCode": null,
+    "Licenses": [
+      7
+    ],
+    "ParentAccountId": null,
+    "ParentAccountName": null,
+    "InactivationDate": null,
+    "Platform": "vtex",
+    "Privacy": null,
+    "HasPiiRestriction": false,
+    "Infra": null,
+    "Sponsor": "00000000-0000-4000-8000-000000000401"
+  }
+}

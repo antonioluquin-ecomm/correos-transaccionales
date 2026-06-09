@@ -1,0 +1,674 @@
+{
+  "package": null,
+  "subjectItemAttachment": {
+    "item": "Zapatillas DC Comman...",
+    "totalItems": 2,
+    "extraItems": 1
+  },
+  "cancellationReason": null,
+  "paymentData": {
+    "giftCards": [],
+    "transactions": [
+      {
+        "isActive": true,
+        "transactionId": "872EF3F2D685458AB91D4ECFD65D2282",
+        "merchantName": "W******",
+        "payments": [
+          {
+            "id": "476A12F317F34BACB743AFE4481EEBD7",
+            "paymentSystem": "503",
+            "paymentSystemName": "T**************",
+            "value": 19999800,
+            "installments": 6,
+            "referenceValue": 19999800,
+            "cardHolder": null,
+            "cardNumber": null,
+            "firstDigits": "627893",
+            "lastDigits": "0001",
+            "cvv2": null,
+            "expireMonth": null,
+            "expireYear": null,
+            "url": null,
+            "giftCardId": null,
+            "giftCardName": null,
+            "giftCardCaption": null,
+            "redemptionCode": null,
+            "group": "creditCard",
+            "tid": "1638111924511-1",
+            "dueDate": null,
+            "connectorResponses": {
+              "Tid": "1638111924511-1",
+              "ReturnCode": "200",
+              "Message": "Transaction Approved",
+              "authId": "252261",
+              "nsu": "3934",
+              "acquirer": "Payway"
+            },
+            "giftCardProvider": null,
+            "giftCardAsDiscount": null,
+            "koinUrl": null,
+            "accountId": "964E638D57AF40BFA70199D89A4823BE",
+            "parentAccountId": "964E638D57AF40BFA70199D89A4823BE",
+            "bankIssuedInvoiceIdentificationNumber": null,
+            "bankIssuedInvoiceIdentificationNumberFormatted": null,
+            "bankIssuedInvoiceBarCodeNumber": null,
+            "bankIssuedInvoiceBarCodeType": null,
+            "billingAddress": {
+              "postalCode": "5***",
+              "city": "S** M*****",
+              "state": "MENDOZA",
+              "country": "ARG",
+              "street": "M****** m***** 1*** q***** C** m****** G c*** 1*",
+              "number": "1***",
+              "neighborhood": null,
+              "complement": null,
+              "reference": null,
+              "geoCoordinates": [-51.4779552, -0.0039779]
+            },
+            "paymentOrigin": null
+          }
+        ]
+      }
+    ]
+  },
+  "cancellationRequests": null,
+  "invoiceData": null,
+  "clientProfileData": {
+    "id": "clientProfileData",
+    "email": "t************@g****.c****************.c*.v***.c**.b*",
+    "firstName": "T**** A*****",
+    "lastName": "R**** O******",
+    "documentType": "dni",
+    "document": "3*******",
+    "phone": "0**********",
+    "corporateName": null,
+    "tradeName": null,
+    "corporateDocument": null,
+    "stateInscription": null,
+    "corporatePhone": null,
+    "isCorporate": false,
+    "userProfileId": "c8d964a4-2a3c-4732-9beb-6dcd95aab0a6",
+    "userProfileVersion": null,
+    "customerClass": null,
+    "customerCode": null
+  },
+  "shippingData": {
+    "id": "shippingData",
+    "address": {
+      "addressType": "residential",
+      "receiverName": "T**** R****",
+      "addressId": "8903002679070",
+      "versionId": null,
+      "entityId": null,
+      "postalCode": "5***",
+      "city": "S** M*****",
+      "state": "MENDOZA",
+      "country": "ARG",
+      "street": "M****** m***** 1*** q***** C** m****** G c*** 1*",
+      "number": "1***",
+      "neighborhood": null,
+      "complement": null,
+      "reference": null,
+      "geoCoordinates": [-51.4779552, -0.0039779]
+    },
+    "logisticsInfo": [
+      {
+        "itemIndex": 0,
+        "itemId": "310217124",
+        "selectedDeliveryChannel": "delivery",
+        "selectedSla": "Normal",
+        "lockTTL": "15d",
+        "price": 0,
+        "listPrice": 1090000,
+        "sellingPrice": 0,
+        "deliveryWindow": null,
+        "deliveryCompany": null,
+        "shippingEstimate": "6bd",
+        "shippingEstimateDate": "2026-06-15T19:20:00+00:00",
+        "slas": [
+          {
+            "id": "Normal",
+            "name": "N*****",
+            "shippingEstimate": "6bd",
+            "shippingEstimateDate": "2026-06-15T19:20:00+00:00",
+            "deliveryWindow": null,
+            "availableDeliveryWindows": [],
+            "deliveryIds": [
+              {
+                "courierId": "salta_andreani_normal",
+                "courierName": "S************************",
+                "dockId": "19",
+                "quantity": 1,
+                "warehouseId": "1_19",
+                "accountCarrierName": "w****",
+                "kitItemDetails": []
+              }
+            ],
+            "listPrice": 1090000,
+            "price": 0,
+            "deliveryChannel": "delivery",
+            "pickupStoreInfo": {
+              "additionalInfo": null,
+              "address": null,
+              "dockId": null,
+              "friendlyName": null,
+              "isPickupStore": false
+            },
+            "polygonName": "m******",
+            "lockTTL": "15d",
+            "pickupPointId": null,
+            "transitTime": "5bd",
+            "pickupDistance": 0
+          }
+        ],
+        "shipsTo": ["ARG"],
+        "deliveryIds": [
+          {
+            "courierId": "salta_andreani_normal",
+            "courierName": "S************************",
+            "dockId": "19",
+            "quantity": 1,
+            "warehouseId": "1_19",
+            "accountCarrierName": "w****",
+            "kitItemDetails": []
+          }
+        ],
+        "deliveryChannels": [
+          {
+            "id": "delivery",
+            "stockBalance": 0
+          }
+        ],
+        "deliveryChannel": null,
+        "pickupStoreInfo": {
+          "additionalInfo": null,
+          "address": null,
+          "dockId": null,
+          "friendlyName": null,
+          "isPickupStore": false
+        },
+        "addressId": "8903002679070",
+        "versionId": null,
+        "entityId": null,
+        "polygonName": "m******",
+        "pickupPointId": null,
+        "transitTime": "5bd"
+      },
+      {
+        "itemIndex": 1,
+        "itemId": "310216561",
+        "selectedDeliveryChannel": "delivery",
+        "selectedSla": "Normal",
+        "lockTTL": "15d",
+        "price": 0,
+        "listPrice": 1090000,
+        "sellingPrice": 0,
+        "deliveryWindow": null,
+        "deliveryCompany": null,
+        "shippingEstimate": "6bd",
+        "shippingEstimateDate": "2026-06-15T19:20:00+00:00",
+        "slas": [
+          {
+            "id": "Normal",
+            "name": "N*****",
+            "shippingEstimate": "6bd",
+            "shippingEstimateDate": "2026-06-15T19:20:00+00:00",
+            "deliveryWindow": null,
+            "availableDeliveryWindows": [],
+            "deliveryIds": [
+              {
+                "courierId": "tucuman1_andreani_normal",
+                "courierName": "T***************************",
+                "dockId": "15",
+                "quantity": 1,
+                "warehouseId": "1_15",
+                "accountCarrierName": "w****",
+                "kitItemDetails": []
+              }
+            ],
+            "listPrice": 1090000,
+            "price": 0,
+            "deliveryChannel": "delivery",
+            "pickupStoreInfo": {
+              "additionalInfo": null,
+              "address": null,
+              "dockId": null,
+              "friendlyName": null,
+              "isPickupStore": false
+            },
+            "polygonName": "m******",
+            "lockTTL": "15d",
+            "pickupPointId": null,
+            "transitTime": "5bd",
+            "pickupDistance": 0
+          }
+        ],
+        "shipsTo": ["ARG"],
+        "deliveryIds": [
+          {
+            "courierId": "tucuman1_andreani_normal",
+            "courierName": "T***************************",
+            "dockId": "15",
+            "quantity": 1,
+            "warehouseId": "1_15",
+            "accountCarrierName": "w****",
+            "kitItemDetails": []
+          }
+        ],
+        "deliveryChannels": [
+          {
+            "id": "delivery",
+            "stockBalance": 0
+          }
+        ],
+        "deliveryChannel": null,
+        "pickupStoreInfo": {
+          "additionalInfo": null,
+          "address": null,
+          "dockId": null,
+          "friendlyName": null,
+          "isPickupStore": false
+        },
+        "addressId": "8903002679070",
+        "versionId": null,
+        "entityId": null,
+        "polygonName": "m******",
+        "pickupPointId": null,
+        "transitTime": "5bd"
+      }
+    ],
+    "trackingHints": [],
+    "selectedAddresses": [
+      {
+        "addressId": "8903002679070",
+        "versionId": null,
+        "entityId": null,
+        "addressType": "residential",
+        "receiverName": "T**** R****",
+        "street": "M****** m***** 1*** q***** C** m****** G c*** 1*",
+        "number": "1***",
+        "complement": null,
+        "neighborhood": null,
+        "postalCode": "5***",
+        "city": "S** M*****",
+        "state": "MENDOZA",
+        "country": "ARG",
+        "reference": null,
+        "geoCoordinates": [-51.4779552, -0.0039779]
+      }
+    ],
+    "availableAddresses": [
+      {
+        "addressId": "8903002679070",
+        "versionId": null,
+        "entityId": null,
+        "addressType": "residential",
+        "receiverName": "T**** R****",
+        "street": "M****** m***** 1*** q***** C** m****** G c*** 1*",
+        "number": "1***",
+        "complement": null,
+        "neighborhood": null,
+        "postalCode": "5***",
+        "city": "S** M*****",
+        "state": "MENDOZA",
+        "country": "ARG",
+        "reference": null,
+        "geoCoordinates": [-51.4779552, -0.0039779]
+      }
+    ],
+    "contactInformation": [],
+    "contactsInfo": []
+  },
+  "customData": {
+    "customApps": [
+      {
+        "fields": {
+          "uuid": "ede5a4f3-af70-4b6c-9afe-fd578cfc190c",
+          "source": "WEB_MOBILE",
+          "snrs_params": "{\"snrs_cp\":\"2060fc36-3056-461c-a6d2-5ec26a8a53d6\",\"snrs_var\":\"686586\"}"
+        },
+        "id": "synerise",
+        "major": 1
+      }
+    ],
+    "customFields": []
+  },
+  "purchaseAgentData": null,
+  "authorizationPolicyData": null,
+  "items": [
+    {
+      "additionalInfo": {
+        "categoriesIds": "/72/74/76/",
+        "productClusterId": "139,485",
+        "commercialConditionId": "1",
+        "dimension": {
+          "cubicweight": 0,
+          "height": 11,
+          "length": 33,
+          "weight": 300,
+          "width": 20
+        },
+        "brandName": "D*******",
+        "brandId": "2000028",
+        "offeringInfo": null,
+        "offeringType": null,
+        "offeringTypeId": null
+      },
+      "sellerSku": "310217124",
+      "priceTable": null,
+      "priceValidUntil": "2027-06-08T19:17:58Z",
+      "callCenterOperator": null,
+      "commission": 0,
+      "freightCommission": 0,
+      "taxCode": "",
+      "catalogProvider": "vrn:vtex.catalog-api-proxy:-:wokerio:master:/proxy/authenticated/catalog/pvt/sku/stockkeepingunitbyid/310217124",
+      "uniqueId": "1DBF04730F46447B8AF9E96FE94C530F",
+      "id": "310217124",
+      "productId": "49329",
+      "productRefId": "126211205012-000",
+      "refId": "126211205012-000-10",
+      "ean": "1262112050!12!10",
+      "name": "Z******************************************************",
+      "skuName": "C**********************",
+      "modalType": null,
+      "parentItemIndex": null,
+      "parentAssemblyBinding": null,
+      "assemblies": [],
+      "tax": 0,
+      "price": 16999900,
+      "listPrice": 19999900,
+      "manualPrice": null,
+      "manualPriceAppliedBy": null,
+      "sellingPrice": 16999900,
+      "rewardValue": 0,
+      "isGift": false,
+      "preSaleDate": null,
+      "productCategoryIds": "/72/74/76/",
+      "productCategories": {
+        "72": "woker",
+        "74": "Calzado",
+        "76": "Zapatillas"
+      },
+      "quantity": 1,
+      "seller": "1",
+      "sellerChain": ["1"],
+      "imageUrl": "https://woker.vteximg.com.br/arquivos/ids/679472-150-150/126211205012-000-1.jpg?v=639089299261530000",
+      "detailUrl": "/zapatillas-dc-command-de-hombre-126211205012-000/p",
+      "components": [],
+      "bundleItems": [],
+      "attachments": [],
+      "attachmentOfferings": [],
+      "offerings": [],
+      "priceTags": [
+        {
+          "name": "d******************************************************************************************",
+          "value": -1090000,
+          "rawValue": -10900,
+          "isPercentual": false,
+          "identifier": "e4f640bc-72e0-4524-b51d-499e93749260"
+        }
+      ],
+      "availability": "available",
+      "measurementUnit": "un",
+      "unitMultiplier": 1,
+      "manufacturerCode": null,
+      "priceDefinition": {
+        "calculatedSellingPrice": 16999900,
+        "total": 16999900,
+        "sellingPrices": [
+          {
+            "value": 16999900,
+            "quantity": 1
+          }
+        ]
+      }
+    },
+    {
+      "additionalInfo": {
+        "categoriesIds": "/72/73/79/127/",
+        "productClusterId": "139,305",
+        "commercialConditionId": "1",
+        "dimension": {
+          "cubicweight": 0,
+          "height": 2,
+          "length": 30,
+          "weight": 100,
+          "width": 30
+        },
+        "brandName": "R*****",
+        "brandId": "2000004",
+        "offeringInfo": null,
+        "offeringType": null,
+        "offeringTypeId": null
+      },
+      "sellerSku": "310216561",
+      "priceTable": null,
+      "priceValidUntil": "2027-06-08T19:17:53Z",
+      "callCenterOperator": null,
+      "commission": 0,
+      "freightCommission": 0,
+      "taxCode": "",
+      "catalogProvider": "vrn:vtex.catalog-api-proxy:-:wokerio:master:/proxy/authenticated/catalog/pvt/sku/stockkeepingunitbyid/310216561",
+      "uniqueId": "0AA2DD8EEED54C519A2A62230EC8CF17",
+      "id": "310216561",
+      "productId": "49210",
+      "productRefId": "60223AZN-UNICO",
+      "refId": "60223AZN-UNICO-UNICO",
+      "ean": "4790010602238",
+      "name": "M*********************************************",
+      "skuName": "C*************************",
+      "modalType": null,
+      "parentItemIndex": null,
+      "parentAssemblyBinding": null,
+      "assemblies": [],
+      "tax": 0,
+      "price": 2999900,
+      "listPrice": 2999900,
+      "manualPrice": null,
+      "manualPriceAppliedBy": null,
+      "sellingPrice": 2999900,
+      "rewardValue": 0,
+      "isGift": false,
+      "preSaleDate": null,
+      "productCategoryIds": "/72/73/79/127/",
+      "productCategories": {
+        "72": "woker",
+        "73": "Accesorios",
+        "79": "Bolsos",
+        "127": "Morral"
+      },
+      "quantity": 1,
+      "seller": "1",
+      "sellerChain": ["1"],
+      "imageUrl": "https://woker.vteximg.com.br/arquivos/ids/676376-150-150/60223AZN-000-1.jpg?v=639083185767270000",
+      "detailUrl": "/morral-reebok-2-5-l--60223azn-unico/p",
+      "components": [],
+      "bundleItems": [],
+      "attachments": [],
+      "attachmentOfferings": [],
+      "offerings": [],
+      "priceTags": [
+        {
+          "name": "d******************************************************************************************",
+          "value": -1090000,
+          "rawValue": -10900,
+          "isPercentual": false,
+          "identifier": "e4f640bc-72e0-4524-b51d-499e93749260"
+        }
+      ],
+      "availability": "available",
+      "measurementUnit": "un",
+      "unitMultiplier": 1,
+      "manufacturerCode": null,
+      "priceDefinition": {
+        "calculatedSellingPrice": 2999900,
+        "total": 2999900,
+        "sellingPrices": [
+          {
+            "value": 2999900,
+            "quantity": 1
+          }
+        ]
+      }
+    }
+  ],
+  "sellers": [
+    {
+      "subSellerId": "1",
+      "fulfillmentEndpoint": "http://fulfillment.vtexcommerce.com.br/api/fulfillment?an=wokerio",
+      "id": "1",
+      "name": "W****",
+      "logo": ""
+    }
+  ],
+  "giftRegistryData": null,
+  "receiptData": null,
+  "contextData": null,
+  "marketPlaceOrderId": "",
+  "marketPlaceOrderGroup": null,
+  "marketplaceServicesEndpoint": null,
+  "orderFormId": "18b071f0e2aa43f9a0062bd0b761e7b5",
+  "sequence": "1924511",
+  "affiliateId": "",
+  "status": "",
+  "callCenterOperator": "",
+  "userProfileId": "c8d964a4-2a3c-4732-9beb-6dcd95aab0a6",
+  "hostName": "w******",
+  "creationVersion": null,
+  "creationEnvironment": null,
+  "lastChangeVersion": null,
+  "workflowInstanceId": null,
+  "marketplacePaymentValue": null,
+  "orderId": "1638111924511-01",
+  "orderGroup": "1638111924511",
+  "state": "canceled",
+  "isCheckedIn": false,
+  "sellerOrderId": "00-1638111924511-01",
+  "storeId": null,
+  "checkedInPickupPointId": null,
+  "value": 19999800,
+  "totals": [
+    {
+      "id": "Items",
+      "name": "T*****************",
+      "value": 19999800
+    },
+    {
+      "id": "Discounts",
+      "name": "T******************",
+      "value": 0
+    },
+    {
+      "id": "Shipping",
+      "name": "C********************",
+      "value": 0,
+      "alternativeTotals": [
+        {
+          "id": "AlternativeShippingTotal",
+          "name": "A*************************",
+          "value": 2180000
+        },
+        {
+          "id": "AlternativeShippingDiscount",
+          "name": "A****************************",
+          "value": -2180000
+        }
+      ]
+    },
+    {
+      "id": "Tax",
+      "name": "C*********************",
+      "value": 0
+    }
+  ],
+  "ratesAndBenefitsData": {
+    "rateAndBenefitsIdentifiers": [
+      {
+        "id": "e4f640bc-72e0-4524-b51d-499e93749260",
+        "name": "G********************************************",
+        "featured": false,
+        "description": "Aplica envío gratis para pedidos que cumplan con las condiciones definidas en la promoción.",
+        "matchedParameters": {},
+        "additionalInfo": null
+      }
+    ],
+    "teaser": []
+  },
+  "clientPreferencesData": {
+    "locale": "es-AR",
+    "optinNewsLetter": true
+  },
+  "commercialConditionData": null,
+  "marketingData": null,
+  "storePreferencesData": {
+    "countryCode": "ARG",
+    "saveUserData": false,
+    "timeZone": "Argentina Standard Time",
+    "currencyCode": "ARS",
+    "currencyLocale": 11274,
+    "currencySymbol": "$",
+    "currencyFormatInfo": {
+      "currencyDecimalDigits": 0,
+      "currencyDecimalSeparator": ",",
+      "currencyGroupSeparator": ".",
+      "currencyGroupSize": 3,
+      "startsWithCurrencySymbol": true
+    }
+  },
+  "openTextField": null,
+  "itemMetadata": null,
+  "taxData": null,
+  "hooksData": null,
+  "changeData": null,
+  "subscriptionData": null,
+  "salesChannel": "1",
+  "followUpEmail": "c**********************************.v***.c**.b*",
+  "creationDate": "2026-06-08T19:22:22.5236714Z",
+  "lastChange": "2026-06-09T16:22:58.5391106Z",
+  "timeZoneCreationDate": "2026-06-08T16:22:22.5236714",
+  "timeZoneLastChange": "2026-06-09T13:22:58.5391106",
+  "isCompleted": true,
+  "merchantName": null,
+  "userType": "",
+  "roundingError": 0,
+  "allowEdition": false,
+  "allowCancellation": false,
+  "isUserDataVisible": false,
+  "allowChangeSeller": false,
+  "cancellationData": {
+    "requestedByUser": false,
+    "requestedByPaymentNotification": true,
+    "reason": null,
+    "cancellationDate": "2026-06-09T16:22:56.6498889Z"
+  },
+  "_accountInfo": {
+    "MainAccountName": "w****",
+    "AccountName": "w******",
+    "Cnpj": "30709964360",
+    "Id": "56343e21-8075-4492-bfbd-15d4da315b0e",
+    "AppId": "e90c276b-eb93-466f-80dd-826091ba2899",
+    "IsActive": true,
+    "IsOperating": true,
+    "CreationDate": "2017-09-13T04:00:20",
+    "OperationDate": "2018-09-05T13:43:19",
+    "CompanyName": "B*************",
+    "TradingName": "W****",
+    "City": "San Miguel de Tucuman",
+    "Complement": null,
+    "Country": "Argentina",
+    "State": null,
+    "Address": "Avenida Siria 2345",
+    "District": null,
+    "Number": null,
+    "PostalCode": "4000",
+    "Licenses": [28],
+    "ParentAccountId": null,
+    "ParentAccountName": null,
+    "InactivationDate": null,
+    "Platform": "vtex",
+    "Privacy": null,
+    "HasPiiRestriction": false,
+    "Infra": null,
+    "Sponsor": "3f29e577-433f-42b8-9ded-d2ede67d8ab3"
+  }
+}

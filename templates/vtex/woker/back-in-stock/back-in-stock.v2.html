@@ -1,0 +1,390 @@
+<!--Back-In-Stock — Version 2-->
+<!doctype html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta name="x-apple-disable-message-reformatting" />
+    <meta name="format-detection" content="telephone=no,address=no,email=no,date=no" />
+    <title>{{_accountInfo.TradingName}} — Volvió a estar disponible</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&display=swap');
+
+      html, body {
+        margin: 0 !important; padding: 0 !important;
+        width: 100% !important; background: #e8e8e8 !important;
+      }
+      body {
+        font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        color: #111827;
+      }
+      * { -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; }
+      table, td { border-collapse: collapse !important; mso-table-lspace: 0pt !important; mso-table-rspace: 0pt !important; }
+      img { border: 0; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; display: block; }
+      a { text-decoration: none; color: inherit; }
+      a[x-apple-data-detectors] { color: inherit !important; text-decoration: none !important; }
+      #outlook a { padding: 0; }
+
+      .wrap { width: 100%; max-width: 600px; margin: 0 auto; }
+      .card { background: #ffffff; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden; }
+      .gap { height: 12px; line-height: 12px; font-size: 12px; }
+
+      .h2 { font-size: 15px; line-height: 22px; font-weight: bold; color: #111827; margin: 0 0 12px 0; }
+      .text { font-size: 14px; line-height: 22px; color: #374151; margin: 0; }
+      .text-sm { font-size: 13px; line-height: 20px; color: #6b7280; margin: 0; }
+
+      .sum-cell { width: 50%; padding: 16px 18px; vertical-align: top; border-bottom: 1px solid #f3f4f6; }
+      .sum-cell-r { border-left: 1px solid #f3f4f6; }
+      .sum-last { border-bottom: none !important; }
+
+      .product-name {
+        font-size: 20px;
+        line-height: 26px;
+        font-weight: 800;
+        color: #111827;
+        margin: 0 0 6px 0;
+        word-break: break-word;
+        overflow-wrap: break-word;
+      }
+      .product-img {
+        width: 176px;
+        max-width: 176px;
+        height: auto;
+        border-radius: 10px;
+        border: 1px solid #e5e7eb;
+      }
+      .badge-orange {
+        display: inline-block;
+        background: #fff3ef;
+        border: 1px solid #ffd5c7;
+        border-radius: 999px;
+        color: #d83f16;
+        font-size: 11px;
+        line-height: 16px;
+        font-weight: 700;
+        padding: 5px 10px;
+      }
+
+      .cta-primary {
+        display: block; width: 100%; box-sizing: border-box;
+        background: linear-gradient(135deg, #d83f16 0%, #fc5226 100%);
+        color: #ffffff !important; border-radius: 8px;
+        font-family: 'Poppins', -apple-system, sans-serif;
+        font-size: 13px; line-height: 52px; font-weight: 700;
+        letter-spacing: 1px; text-transform: uppercase; text-align: center;
+      }
+
+      @media only screen and (max-width: 600px) {
+        .wrap { width: 100% !important; max-width: 100% !important; }
+        .card { border-radius: 0 !important; border-left: none !important; border-right: none !important; }
+        .outer-pad { padding: 0 !important; }
+        .footer-td { border-radius: 0 !important; }
+        .hero-td { padding: 32px 20px 28px !important; }
+        .content-pad { padding-left: 16px !important; padding-right: 16px !important; }
+        .product-img-cell, .product-info-cell {
+          display: block !important; width: 100% !important;
+          box-sizing: border-box !important;
+        }
+        .product-img-cell { padding: 0 0 16px 0 !important; }
+        .product-info-cell { padding-left: 0 !important; text-align: center !important; }
+        .product-img { width: 188px !important; max-width: 188px !important; margin: 0 auto !important; }
+        .sum-cell, .sum-cell-r, .sum-last {
+          display: block !important; width: 100% !important;
+          border-left: none !important; border-bottom: 1px solid #f3f4f6 !important;
+          padding: 14px 16px !important; box-sizing: border-box !important;
+        }
+        .sum-last-mobile { border-bottom: none !important; }
+        .h1 { font-size: 22px !important; line-height: 28px !important; }
+        .main-card { border-radius: 0 0 12px 12px !important; }
+        .trust-logos { border-radius: 0 !important; }
+        .header-logo { width: 128px !important; }
+        .brand-logo-sporting { width: 88px !important; }
+        .brand-logo-woker { width: 64px !important; }
+        .brand-logo-luquin { width: 78px !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Preheader -->
+    <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;visibility:hidden;mso-hide:all">
+      {{SkuContext.ProductName}} volvió a estar disponible. Compralo antes de que se agote nuevamente.&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;
+    </div>
+
+    <table role="presentation" width="100%" bgcolor="#e8e8e8">
+      <tr>
+        <td align="center" class="outer-pad" style="padding:24px 12px 48px">
+          <table role="presentation" class="wrap" width="100%">
+
+            <!-- MAIN CARD -->
+            <tr>
+              <td>
+                <table role="presentation" width="100%" class="card main-card">
+
+                  <!-- HEADER -->
+                  <tr>
+                    <td bgcolor="#ffffff" style="background:#ffffff;padding:20px 24px 16px;border-bottom:1px solid #eef2f7">
+                      <a href="https://{{#if _accountInfo.HostName}}{{_accountInfo.HostName}}{{else}}{{_accountInfo.AccountName}}.vtexcommercestable.com.br{{/if}}" target="_blank" style="display:inline-block">
+                        <img src="https://woker.vtexcommercestable.com.br/arquivos/logo-mail.png"
+                             alt="Woker" width="130"
+                             class="header-logo"
+                             style="width:130px;height:auto;display:block" />
+                      </a>
+                    </td>
+                  </tr>
+
+                  <!-- HERO -->
+                  <tr>
+                    <td class="hero-td" bgcolor="#fc5226" style="background:linear-gradient(150deg,#9f2d11 0%,#d83f16 38%,#fc5226 78%,#ff875f 100%);padding:40px 28px 36px;text-align:center">
+                      <table cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 16px auto">
+                        <tr>
+                          <td align="center" valign="middle" width="80" height="80" bgcolor="#e45a31" style="width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.16)">
+                            <table cellpadding="0" cellspacing="0" border="0" align="center">
+                              <tr>
+                                <td align="center" valign="middle" width="52" height="52" style="width:52px;height:52px;border-radius:50%;background:#ffffff;font-size:22px;line-height:52px;font-weight:bold;color:#fc5226;text-align:center">&#128276;</td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+                      <p style="font-family:'Poppins',-apple-system,sans-serif;font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.6);margin:0 0 10px 0;text-align:center">Aviso de stock</p>
+                      <p class="h1" style="font-family:'Poppins',-apple-system,sans-serif;font-size:28px;line-height:1.1;font-weight:800;color:#fff;margin:0 0 8px 0;text-align:center;text-shadow:0 2px 16px rgba(0,0,0,.15)">Volvió a estar disponible</p>
+                      <p style="font-family:'Poppins',-apple-system,sans-serif;font-size:13px;color:rgba(255,255,255,.8);margin:0;text-align:center">
+                        Hola{{#if NotifyRequest.name}}, {{NotifyRequest.name}}{{/if}} — el producto que esperabas ya tiene stock.
+                      </p>
+                    </td>
+                  </tr>
+
+                  <!-- PRODUCT -->
+                  <tr>
+                    <td class="content-pad" style="padding:22px 24px 0">
+                      <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0 0 16px 0">
+                        Te avisamos porque pediste recibir una notificación cuando este producto volviera a estar disponible.
+                        Si todavía lo querés, podés comprarlo ahora.
+                      </p>
+
+                      <table role="presentation" width="100%" style="table-layout:fixed">
+                        <tr>
+                          <td class="product-img-cell" valign="top" style="width:208px;padding:0 20px 0 0">
+                            {{#if SkuContext.DetailUrl}}<a href="https://{{#if _accountInfo.HostName}}{{_accountInfo.HostName}}{{else}}{{_accountInfo.AccountName}}.vtexcommercestable.com.br{{/if}}{{SkuContext.DetailUrl}}" target="_blank" style="display:block;line-height:0">{{/if}}
+                            <img src="{{#if SkuContext.Images.[0].ImageUrl}}{{SkuContext.Images.[0].ImageUrl}}{{else}}{{SkuContext.ImageUrl}}{{/if}}"
+                                 alt="{{SkuContext.ProductName}}"
+                                 width="176"
+                                 class="product-img"
+                                 style="width:176px;max-width:176px;height:auto;border-radius:10px;border:1px solid #e5e7eb" />
+                            {{#if SkuContext.DetailUrl}}</a>{{/if}}
+                          </td>
+                          <td class="product-info-cell" valign="top" style="padding-left:0">
+                            <p class="product-name" style="font-size:20px;line-height:26px;font-weight:800;color:#111827;margin:0 0 6px 0;word-break:break-word;overflow-wrap:break-word">
+                              {{#if SkuContext.NameComplete}}{{SkuContext.NameComplete}}{{else}}{{SkuContext.ProductName}}{{/if}}
+                            </p>
+                            {{#if SkuContext.BrandName}}
+                            <p style="margin:0 0 10px 0">
+                              <span class="badge-orange" style="display:inline-block;background:#fff3ef;border:1px solid #ffd5c7;border-radius:999px;color:#d83f16;font-size:11px;line-height:16px;font-weight:700;padding:5px 10px">{{SkuContext.BrandName}}</span>
+                            </p>
+                            {{/if}}
+                            {{#if SkuContext.SkuName}}
+                            <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:0 0 8px 0">Variante: {{SkuContext.SkuName}}</p>
+                            {{/if}}
+                            {{#if SkuContext.ManufacturerCode}}
+                            <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:0 0 14px 0">Código: {{SkuContext.ManufacturerCode}}</p>
+                            {{/if}}
+                            <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:0">El stock puede agotarse otra vez según la demanda.</p>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+
+                  <!-- CTA -->
+                  <tr>
+                    <td style="padding:20px 24px 24px">
+                      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                        <tr>
+                          <td bgcolor="#fc5226" style="border-radius:8px">
+                            {{#if NotifyRequest.seller.addToCartLink}}
+                            <a href="{{NotifyRequest.seller.addToCartLink}}"
+                               class="cta-primary"
+                               style="display:block;width:100%;box-sizing:border-box;background:linear-gradient(135deg,#d83f16 0%,#fc5226 100%);color:#ffffff;border-radius:8px;font-family:'Poppins',-apple-system,sans-serif;font-size:13px;line-height:52px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-align:center;text-decoration:none"
+                               target="_blank">
+                              Comprar ahora &nbsp;&#8594;
+                            </a>
+                            {{else}}
+                            <a href="https://{{#if _accountInfo.HostName}}{{_accountInfo.HostName}}{{else}}{{_accountInfo.AccountName}}.vtexcommercestable.com.br{{/if}}{{SkuContext.DetailUrl}}"
+                               class="cta-primary"
+                               style="display:block;width:100%;box-sizing:border-box;background:linear-gradient(135deg,#d83f16 0%,#fc5226 100%);color:#ffffff;border-radius:8px;font-family:'Poppins',-apple-system,sans-serif;font-size:13px;line-height:52px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-align:center;text-decoration:none"
+                               target="_blank">
+                              Ver producto &nbsp;&#8594;
+                            </a>
+                            {{/if}}
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+
+                </table>
+              </td>
+            </tr>
+
+            {{#if _showBackInStockInfo}}
+            <tr><td class="gap">&nbsp;</td></tr>
+
+            <!-- INFO -->
+            <tr>
+              <td>
+                <table role="presentation" width="100%" class="card">
+                  <tr>
+                    <td style="padding:24px">
+                      <p class="h2" style="font-size:16px;line-height:22px;font-weight:bold;color:#111827;margin-bottom:16px">Tenelo en cuenta</p>
+                      <table role="presentation" width="100%">
+                        <tr>
+                          <td valign="top" style="width:32px;padding-bottom:16px">
+                            <div style="width:24px;height:24px;line-height:24px;text-align:center;border-radius:50%;background:#fff3ef;color:#d83f16;font-size:11px;font-weight:bold">1</div>
+                          </td>
+                          <td valign="top" style="padding:0 0 16px 10px;border-bottom:1px solid #f3f4f6">
+                            <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0"><strong>La disponibilidad puede cambiar</strong></p>
+                            <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-top:2px">El stock se confirma cuando completas la compra.</p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td valign="top" style="width:32px;padding:16px 0">
+                            <div style="width:24px;height:24px;line-height:24px;text-align:center;border-radius:50%;background:#fff3ef;color:#d83f16;font-size:11px;font-weight:bold">2</div>
+                          </td>
+                          <td valign="top" style="padding:16px 0 16px 10px;border-bottom:1px solid #f3f4f6">
+                            <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0"><strong>El aviso no reserva unidades</strong></p>
+                            <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-top:2px">Te notificamos apenas vuelve, pero otros clientes también pueden comprarlo.</p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td valign="top" style="width:32px;padding-top:16px">
+                            <div style="width:24px;height:24px;line-height:24px;text-align:center;border-radius:50%;background:#fff3ef;color:#d83f16;font-size:11px;font-weight:bold">3</div>
+                          </td>
+                          <td valign="top" style="padding:16px 0 0 10px">
+                            <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0"><strong>Recibiste este correo por tu solicitud</strong></p>
+                            <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-top:2px">Nos pediste avisarte cuando este SKU volviera a estar disponible.</p>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            {{/if}}
+
+            {{#if NotifyRequest.unsubscribeLink}}
+            <tr><td class="gap">&nbsp;</td></tr>
+
+            <!-- UNSUBSCRIBE -->
+            <tr>
+              <td>
+                <table role="presentation" width="100%" class="card">
+                  <tr>
+                    <td style="padding:18px 20px">
+                      <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:0;text-align:center">
+                        Si ya no querés recibir estos avisos,
+                        <a href="{{NotifyRequest.unsubscribeLink}}" target="_blank" style="color:#fc5226;text-decoration:underline;font-weight:700">cancelá tu suscripción</a>.
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            {{/if}}
+
+            <tr><td class="gap">&nbsp;</td></tr>
+
+            <!-- DARK FOOTER -->
+            <tr>
+              <td class="footer-td" bgcolor="#1c1c1c" style="background:#1c1c1c;border-radius:10px;padding:22px 24px 20px">
+                <table role="presentation" width="100%">
+
+                  <!-- Brand logos -->
+                  <tr>
+                    <td style="padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,.08)">
+                      <table role="presentation" width="100%" style="table-layout:fixed">
+                        <tr>
+                          <td align="center" valign="middle" style="padding:0 8px">
+                            <img src="https://sporting.vteximg.com.br/arquivos/logo-sporting-white.png"
+                                 alt="Sporting" width="110"
+                                 class="brand-logo-sporting"
+                                 style="width:110px;height:auto;display:block;margin:0 auto" />
+                          </td>
+                          <td align="center" valign="middle" style="padding:0 8px">
+                            <img src="https://sporting.vteximg.com.br/arquivos/logo-woker-white.png"
+                                 alt="Woker" width="80"
+                                 class="brand-logo-woker"
+                                 style="width:80px;height:auto;display:block;margin:0 auto" />
+                          </td>
+                          <td align="center" valign="middle" style="padding:0 8px">
+                            <img src="https://sporting.vteximg.com.br/arquivos/logo-luquin-white.png"
+                                 alt="Antonio Luquin" width="100"
+                                 class="brand-logo-luquin"
+                                 style="width:100px;height:auto;display:block;margin:0 auto" />
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+
+                  <!-- Links -->
+                  <tr>
+                    <td style="padding:16px 0 14px;border-bottom:1px solid rgba(255,255,255,.08)">
+                      <table role="presentation" width="100%">
+                        <tr>
+                          <td valign="middle" align="center">
+                            <a href="https://{{#if _accountInfo.HostName}}{{_accountInfo.HostName}}{{else}}{{_accountInfo.AccountName}}.vtexcommercestable.com.br{{/if}}/contacto" target="_blank" style="font-family:'Poppins',-apple-system,sans-serif;font-size:11px;color:rgba(255,255,255,.45);text-decoration:none;font-weight:500">Contacto</a>
+                            &nbsp;&nbsp;
+                            <a href="https://{{#if _accountInfo.HostName}}{{_accountInfo.HostName}}{{else}}{{_accountInfo.AccountName}}.vtexcommercestable.com.br{{/if}}/centro-de-ayuda" target="_blank" style="font-family:'Poppins',-apple-system,sans-serif;font-size:11px;color:rgba(255,255,255,.45);text-decoration:none;font-weight:500">Ayuda</a>
+                            &nbsp;&nbsp;
+                            <a href="https://{{#if _accountInfo.HostName}}{{_accountInfo.HostName}}{{else}}{{_accountInfo.AccountName}}.vtexcommercestable.com.br{{/if}}/cambios-y-devoluciones" target="_blank" style="font-family:'Poppins',-apple-system,sans-serif;font-size:11px;color:rgba(255,255,255,.45);text-decoration:none;font-weight:500">Devoluciones</a>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+
+                  <!-- Copyright -->
+                  <tr>
+                    <td align="center" style="padding-top:14px">
+                      <p style="font-family:'Poppins',-apple-system,sans-serif;font-size:10.5px;color:rgba(255,255,255,.25);text-align:center;margin:0;line-height:1.6">&copy; {{_accountInfo.TradingName}} — Todos los derechos reservados</p>
+                    </td>
+                  </tr>
+
+                </table>
+              </td>
+            </tr>
+
+            <!-- TRUST LOGOS -->
+            <tr>
+              <td style="padding:8px 0 0">
+                <table role="presentation" width="100%" class="trust-logos" bgcolor="#f4f4f4" style="background:#f4f4f4;border-radius:10px;table-layout:fixed">
+                  <tr>
+                    <td align="center" valign="middle" style="padding:18px 8px">
+                      <img src="https://sporting.vteximg.com.br/arquivos/logo-cace.png"
+                           alt="CACE" width="56"
+                           style="width:56px;height:auto;display:block;margin:0 auto" />
+                    </td>
+                    <td align="center" valign="middle" style="padding:18px 8px">
+                      <img src="https://sporting.vteximg.com.br/arquivos/logo-mercadopago.png"
+                           alt="Mercado Pago" width="110"
+                           style="width:110px;height:auto;display:block;margin:0 auto" />
+                    </td>
+                    <td align="center" valign="middle" style="padding:18px 8px">
+                      <img src="https://sporting.vteximg.com.br/arquivos/logo-infracommerce.png"
+                           alt="Infracommerce" width="100"
+                           style="width:100px;height:auto;display:block;margin:0 auto" />
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

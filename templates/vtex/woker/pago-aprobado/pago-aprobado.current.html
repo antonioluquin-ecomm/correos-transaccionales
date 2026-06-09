@@ -1,0 +1,780 @@
+<!doctype html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="x-apple-disable-message-reformatting">
+  <meta name="format-detection" content="telephone=no,address=no,email=no,date=no">
+  <title>{{_accountInfo.TradingName}}</title>
+  <style>
+    html,
+    body {
+      margin: 0 !important;
+      padding: 0 !important;
+      height: 100% !important;
+      width: 100% !important;
+      background: #f6f7f9;
+    }
+
+    * {
+      -ms-text-size-adjust: 100%;
+      -webkit-text-size-adjust: 100%
+    }
+
+    table,
+    td {
+      mso-table-lspace: 0pt !important;
+      mso-table-rspace: 0pt !important;
+      border-collapse: collapse !important
+    }
+
+    img {
+      border: 0;
+      outline: none;
+      text-decoration: none;
+      -ms-interpolation-mode: bicubic;
+      display: block
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit
+    }
+
+    a[x-apple-data-detectors] {
+      color: inherit !important;
+      text-decoration: none !important
+    }
+
+    #outlook a {
+      padding: 0
+    }
+
+    .ext {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #1f2937
+    }
+
+    .container {
+      width: 100%;
+      max-width: 640px;
+      margin: 0 auto
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px
+    }
+
+    .card-pad {
+      padding: 18px
+    }
+
+    .h1 {
+      font-size: 20px;
+      line-height: 28px;
+      font-weight: 800;
+      margin: 0
+    }
+
+    .h2 {
+      font-size: 17px;
+      line-height: 24px;
+      font-weight: 700;
+      margin: 0
+    }
+
+    .txt {
+      font-size: 15px;
+      line-height: 22px;
+      margin: 0
+    }
+
+    .small {
+      font-size: 12px;
+      line-height: 18px
+    }
+
+    .muted {
+      color: #667085
+    }
+
+    .center {
+      text-align: center
+    }
+
+    .right {
+      text-align: right
+    }
+
+    .p8 {
+      padding: 8px
+    }
+
+    .p12 {
+      padding: 12px
+    }
+
+    .p16 {
+      padding: 16px
+    }
+
+    .p20 {
+      padding: 20px
+    }
+
+    .row-b {
+      border-bottom: 1px solid #eef2f6
+    }
+
+    .thead {
+      background: #fafbfc;
+      border-bottom: 1px solid #eef2f6
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #dcfce7;
+      color: #166534;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 16px;
+      line-height: 24px
+    }
+
+    .itm-img {
+      width: 88px;
+      height: 88px;
+      object-fit: cover;
+      border-radius: 10px
+    }
+
+    .th {
+      font-weight: 650;
+      color: #475467;
+      padding: 10px 0
+    }
+
+    .btn {
+      background: #22c55e;
+      color: #fff;
+      border-radius: 10px;
+      display: inline-block;
+      font-weight: 800;
+      font-size: 16px;
+      height: 48px;
+      line-height: 48px;
+      padding: 0 26px;
+      text-align: center
+    }
+
+    .show-sm {
+      display: none;
+      max-height: 0;
+      overflow: hidden
+    }
+
+    .stack {
+      display: table-cell;
+      width: 50%;
+      vertical-align: top
+    }
+
+    @media only screen and (max-width:600px) {
+      .container {
+        max-width: 100% !important
+      }
+
+      .stack {
+        display: block !important;
+        width: 100% !important
+      }
+
+      .right {
+        text-align: left !important
+      }
+
+      .card-pad,
+      .p16 {
+        padding: 16px !important
+      }
+
+      .btn {
+        display: block !important;
+        width: 100% !important
+      }
+
+      .itm-img {
+        width: 72px !important;
+        height: 72px !important
+      }
+
+      .hide-sm {
+        display: none !important
+      }
+
+      .show-sm {
+        display: block !important;
+        max-height: none !important
+      }
+    }
+
+    @media screen {
+      .card {
+        box-shadow: 0 1px 3px rgba(17, 24, 39, .06)
+      }
+    }
+  </style>
+</head>
+
+<body class="ext">
+  <table role="presentation" width="100%" bgcolor="#f6f7f9">
+    <tr>
+      <td align="center">
+        <table role="presentation" width="100%" class="container" bgcolor="#ffffff">
+          
+          <!-- Preheader -->
+          <div style="display:none;max-height:0;overflow:hidden;opacity:0;">
+            ¡Pago aprobado! Pedido {{orderId}} — Total $ {{formatCurrency value}} — ETA {{#if
+            shippingData.logisticsInfo.[0].shippingEstimateDate}}{{formatDate
+            shippingData.logisticsInfo.[0].shippingEstimateDate}}{{/if}}
+          </div>
+           <tr>
+            <td align="center">
+              <table role="presentation" width="100%" bgcolor="#f6f7f9" style="color: #000;">
+            <tr>
+              <td align="center">
+                <table role="presentation" class="container" width="100%" align="center" bgcolor="#ffffff">
+
+                  <!-- Header -->
+                  <tr>
+                    <td class="p16 center" align="center"
+                      style="border-bottom:1px solid #eef2f6;text-align:center; padding:16px;" bgcolor="#ffffff"
+                      align="center">
+                      <a href="https://{{_accountInfo.HostName}}" target="_blank">
+                        <img src="https://woker.vtexcommercestable.com.br/arquivos/logo-mail.png" alt="Sporting"
+                          width="200" style="height:auto;margin:4px auto;max-width:200px;margin:0 auto;">
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td height="5" style="font-size:0;background:#ffffff;">&nbsp;</td>
+                  </tr>
+
+                  <!-- Éxito -->
+                  <tr>
+                    <td class="p16" bgcolor="#ffffff">
+                      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0"
+                        style="border-collapse:collapse;">
+                        <tr>
+                          <td style="border:1px solid #e5e7eb; border-radius:12px; background:#ffffff; padding:18px;">
+                            <div class="badge"
+                              style="display: inline-flex; background: #dcfce7;color: #166534;padding: 10px 14px;border-radius: 10px;font-weight: 800;font-size: 16px;line-height: 24px;">
+                              <img src="https://sporting.vteximg.com.br/arquivos/logo-check.png" width="20" height="20"
+                                alt="Pago aprobado" style="margin-right: 5px;align-self: self-end;margin-top: 5px;">
+                              Pago aprobado
+                            </div>
+                            <p class="txt muted" style="margin:10px 0 0 0">
+                              Hola <strong>{{clientProfileData.firstName}}</strong>, el pago de tu <strong>pedido
+                                {{orderId}}</strong> fue aprobado. Ya estamos preparando el despacho.
+                            </p>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td height="5" style="font-size:0;background:#ffffff;">&nbsp;</td>
+                  </tr>
+
+                  <!-- Tabla contenedora -->
+                 <tr>
+                    <td class="p12">
+                      <table role="presentation" width="100%">
+                        <tr>
+                          <td style="border:1px solid #e5e7eb;padding:10px;background:#ffffff">
+                            <!-- Wrapper que iOS sí convierte a vertical -->
+                            <div style="display:block; max-width:643px;">
+
+                              <!-- Columna 1 -->
+                              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+                                style="display:block; margin-bottom:16px;">
+                                <tr>
+                                  <td style="padding:8px; ">
+                                    <div class="small muted" style="font-size: 12px;line-height: 18px;">N.º de pedido</div>
+                                    <div class="h2" style="margin-top:2px;font-weight: 700;">{{orderId}}</div>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td style="padding:8px;">
+                                    <div class="small muted" style="font-size: 12px;line-height: 18px;">Total</div>
+                                    <div class="h2" style="margin-top:2px;font-weight: 700;">$ {{formatCurrency value}}
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td style="padding:8px;">
+                                    <div class="small muted" style="font-size: 12px;line-height: 18px;">Entrega estimada
+                                    </div>
+                                    <div class="h2" style="margin-top:2px;font-weight: 700;">
+                                      {{#if shippingData.logisticsInfo.[0].shippingEstimateDate}}
+                                      {{formatDate shippingData.logisticsInfo.[0].shippingEstimateDate}}
+                                      {{else}}
+                                      {{shippingData.logisticsInfo.[0].shippingEstimate}}
+                                      {{/if}}
+                                    </div>
+                                  </td>
+                                </tr>
+                              </table>
+                            </div>
+
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  
+                  <tr>
+                    <td height="10" style="font-size:0;background:#ffffff;">&nbsp;</td>
+                  </tr>
+
+                  <!-- Progreso -->
+                  <tr>
+                    <td class="p12" bgcolor="#ffffff">
+                      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0"
+                        style="border-collapse:collapse;">
+                        <tr>
+                          <td style="border:1px solid #e5e7eb; border-radius:12px; background:#ffffff; padding:18px;"
+                            class="center">
+                            <img src="https://woker.vteximg.com.br/arquivos/status-payment-approved-v4.png"
+                              alt="Estado: Pedido confirmado y pago aprobado"
+                              style="width:100%;max-width:520px;height:auto;margin:0 auto">
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td height="10" style="font-size:0;background:#ffffff;">&nbsp;</td>
+                  </tr>
+
+                  <!-- Multipaque por almacén (best-effort) -->
+                  {{#if shippingData.logisticsInfo.[1]}}
+                  {{#eq shippingData.logisticsInfo.[0].deliveryIds.[0].warehouseId
+                  shippingData.logisticsInfo.[1].deliveryIds.[0].warehouseId}}
+                  {{!-- mismo depósito: no mostramos --}}
+                  {{else}}
+                  <tr>
+                    <td class="p12" bgcolor="#ffffff">
+                      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0"
+                        style="border-collapse:collapse;background:#f0fdf4;border-color:#d1fadf">
+                        <tr>
+                          <td style="border:1px solid #d1fadf; border-radius:12px; background:#f0fdf4; padding:18px;">
+                            <div class="txt" style="font-weight:700;margin-bottom:6px">Envío en más de un paquete</div>
+                            <div class="txt">Tu pedido incluye varios productos, por lo que podrían enviarse en
+                              <strong>paquetes separados</strong>. Recibirás seguimiento y <strong>factura</strong> por
+                              cada uno.</div>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  {{/eq}}
+                  {{/if}}
+                  <tr>
+                    <td height="10" style="font-size:0;background:#ffffff;">&nbsp;</td>
+                  </tr>
+
+                  <!-- Detalles + Pago/Envío (con retiro) -->
+                  <tr>
+                    <td class="p12" bgcolor="#ffffff">
+                      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0"
+                        style="border-collapse:collapse;">
+                        <tr>
+                          <td style="border:1px solid #e5e7eb; border-radius:12px; background:#ffffff; padding:18px;">
+                            <div class="h2" style="margin-bottom:8px;font-weight: 700;font-size: 17px;">Detalles del
+                              pedido</div>
+                            <p class="txt"><strong>Pedido {{orderId}}</strong></p>
+                            <p class="small muted" style="margin:6px 0 0 0">Realizado el {{formatDate creationDate}}</p>
+
+                            <table role="presentation" width="100%" style="margin-top:12px">
+                              <tr>
+                                <!-- Pago -->
+                                <td class="stack p16" width="50%" valign="top">
+                                  <div class="h2" style="font-weight: 700;font-size: 17px;">Pago</div>
+                                  <div class="txt p8">
+                                    {{#each paymentData.transactions}}
+                                    {{#each payments}}
+                                    <div>
+                                      {{paymentSystemName}} — $ {{formatCurrency value}}
+                                      {{#if installments}} en {{installments}} {{#eq installments
+                                      1}}cuota{{else}}cuotas{{/eq}}{{/if}}
+                                      {{#if lastDigits}} · **** {{lastDigits}}{{/if}}
+                                    </div>
+                                    {{#if connectorResponses.authId}}
+                                    <div class="small muted">Autorización: {{connectorResponses.authId}} · Adquirente:
+                                      {{connectorResponses.acquirer}}</div>
+                                    {{/if}}
+                                    {{/each}}
+                                    {{/each}}
+                                    {{#each totals}}{{#eq id "Shipping"}}{{#eq value 0}}
+                                    <div class="small muted"
+                                      style="margin-top:6px;font-weight: 700;font-size: 17px;color: #667085;">Envío:
+                                      <strong>Gratis</strong></div>
+                                    {{/eq}}{{/eq}}{{/each}}
+                                  </div>
+                                </td>
+
+                                <!-- Envío / Retiro -->
+                                <td class="stack p16" width="50%" valign="top">
+                                  {{#eq shippingData.logisticsInfo.[0].selectedDeliveryChannel "pickup-in-point"}}
+                                  <div class="h2">Retiro en tienda</div>
+                                  <div class="txt p8">
+                                    {{#with shippingData.logisticsInfo.[0].pickupStoreInfo}}
+                                    {{#if friendlyName}}<div><strong>{{friendlyName}}</strong></div>{{/if}}
+                                    {{#if address}}
+                                    <div>{{address.street}}, {{address.number}}</div>
+                                    <div>{{address.city}}, {{address.state}}, {{address.country}}</div>
+                                    {{else}}
+                                    {{#with ../../shippingData.selectedAddresses.[0]}}
+                                    <div>{{street}}, {{number}}</div>
+                                    <div>{{city}}, {{state}}, {{country}} {{postalCode}}</div>
+                                    {{/with}}
+                                    {{/if}}
+                                    {{/with}}
+                                    <div class="small muted p8" style="padding-left:0">
+                                      {{#if shippingData.logisticsInfo.[0].shippingEstimateDate}}
+                                      Listo para retirar aprox.: {{formatDate
+                                      shippingData.logisticsInfo.[0].shippingEstimateDate}}
+                                      {{else}}
+                                      Estimación: {{shippingData.logisticsInfo.[0].shippingEstimate}}
+                                      {{/if}}
+                                    </div>
+                                  </div>
+                                  {{else}}
+                                  <div class="h2" style="margin-top:6px;font-weight: 700;font-size: 17px;">Envío</div>
+                                  <div class="txt p8">
+                                    {{#with shippingData.selectedAddresses.[0]}}
+                                    <div>{{street}}, {{number}}</div>
+                                    <div>{{city}}, {{state}}, {{country}} {{postalCode}}</div>
+                                    {{/with}}
+                                    <div class="small muted p8" style="padding-left:0">
+                                      {{#if shippingData.logisticsInfo.[0].shippingEstimateDate}}
+                                      Estimado: {{formatDate shippingData.logisticsInfo.[0].shippingEstimateDate}}
+                                      {{else}}
+                                      Estimación de envío: {{shippingData.logisticsInfo.[0].shippingEstimate}}
+                                      {{/if}}
+                                    </div>
+                                  </div>
+                                  {{/eq}}
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td height="10" style="font-size:0;background:#ffffff;">&nbsp;</td>
+                  </tr>
+
+                  <!-- Resumen (incluye descuentos/impuestos/promos) -->
+                  <tr>
+                    <td class="p12" bgcolor="#ffffff">
+                      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0"
+                        style="border-collapse:collapse;">
+                        <tr>
+                          <td style="border:1px solid #e5e7eb; border-radius:12px; background:#ffffff; padding:18px;">
+                            <div class="h2" style="margin-bottom:6px;font-weight: 700;font-size: 17px;">Resumen</div>
+                            <table role="presentation" width="100%">
+                              {{#each totals}}
+                              {{#if value}}
+                              <tr class="row-b">
+                                <td class="txt" style="padding:10px 0">
+                                  {{#eq id "Items"}}Subtotal{{/eq}}
+                                  {{#eq id "Discounts"}}Descuento{{/eq}}
+                                  {{#eq id "Shipping"}}Envío{{/eq}}
+                                  {{#eq id "Tax"}}Impuestos{{/eq}}
+                                </td>
+                                <td class="txt right" align="right" style="padding:10px 0">$ {{formatCurrency value}}
+                                </td>
+                              </tr>
+                              {{/if}}
+                              {{/each}}
+                              <tr>
+                                <td class="txt" style="padding-top:12px"><strong>Total</strong></td>
+                                <td class="txt right" align="right" style="padding-top:12px"><strong>$ {{formatCurrency
+                                    value}}</strong></td>
+                              </tr>
+                            </table>
+
+                            {{!-- Notas de envío bonificado / promo aplicada --}}
+                            {{#each totals}}
+                            {{#eq id "Shipping"}}
+                            {{#if alternativeTotals}}
+                            {{#each alternativeTotals}}
+                            {{#eq id "AlternativeShippingTotal"}}
+                            <div class="small muted" align="right" style="margin-top:6px;text-align: right;">Envío
+                              (antes): $ {{formatCurrency value}}</div>
+                            {{/eq}}
+                            {{#eq id "AlternativeShippingDiscount"}}
+                            <div class="small muted" align="right" style="margin-top:6px;text-align: right;">Descuento
+                              envío: $ {{formatCurrency value}}</div>
+                            {{/eq}}
+                            {{/each}}
+                            {{/if}}
+                            {{/eq}}
+                            {{/each}}
+
+                            {{#if ratesAndBenefitsData.rateAndBenefitsIdentifiers.[0]}}
+                            <div class="small muted" align="right" style="margin-top:6px;text-align: right;">
+                              Promo aplicada:
+                              {{#each ratesAndBenefitsData.rateAndBenefitsIdentifiers}}
+                              {{#if description}}{{description}}{{else}}{{name}}{{/if}}{{#unless @last}}, {{/unless}}
+                              {{/each}}
+                            </div>
+                            {{/if}}
+
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td height="10" style="font-size:0;background:#ffffff;">&nbsp;</td>
+                  </tr>
+
+                  <!-- Ítems -->
+                  <tr>
+                    <td class="p12" bgcolor="#ffffff">
+                      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0"
+                        style="border-collapse:collapse;">
+                        <tr>
+                          <td style="border:1px solid #e5e7eb; border-radius:12px; background:#ffffff; padding:18px;">
+                            <div class="h2"
+                              style="margin-bottom:6px;font-size: 17px;line-height: 24px;font-weight: 700;margin: 0;">Tu
+                              compra</div>
+
+                            <table role="presentation" width="100%" class="hide-sm">
+                              <thead class="thead" style="background: #fafbfc; border-bottom: 1px solid #eef2f6;">
+                                <tr>
+                                  <th align="left" class="th ext">Producto</th>
+                                  <th align="right" class="th ext">Precio</th>
+                                  <th align="right" class="th ext">Cant.</th>
+                                  <th align="center" class="th ext">Subtotal</th>
+                                </tr>
+                              </thead>
+                            </table>
+
+                            <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0"
+                              style="border-collapse:collapse;">
+                              <tbody>
+                                {{#each items}}
+                                <tr>
+                                  <td class="p12 row-b"
+                                    style="border-bottom: 1px solid #eef2f6; border-radius:12px; background:#ffffff; padding:18px;">
+                                    <table role="presentation" width="100%">
+                                      <tr>
+                                        <td valign="top" style="width:88px">
+                                          <img src="{{imageUrl}}" alt="Producto: {{name}}" width="88" height="88"
+                                            class="itm-img" style="display:block; border:0;">
+                                        </td>
+                                        <td valign="top" class="p8" style="padding-left:12px">
+                                          <!-- <div class="txt" style="font-weight:600">{{name}}</div> -->
+                                          <!-- Nombre -->
+                                          <table role="presentation" width="100%">
+                                            <tr>
+                                              <td style="font-weight:600; font-size:16px; color:#000; line-height:1.3;">
+                                                {{name}}
+                                              </td>
+                                            </tr>
+                                          </table>
+
+                                          <!-- Versión desktop/iOS (con columnas) -->
+                                          <table role="presentation" width="320" align="right" class="hide-sm"
+                                            style="width:320px;">
+                                            <tr>
+                                              <td class="txt center nowrap" style="width:140px;">
+                                                {{#if listPrice}}
+                                                {{#eq listPrice sellingPrice}}{{else}}
+                                                <span class="small muted"
+                                                  style="text-decoration:line-through">${{formatCurrency
+                                                  listPrice}}</span><br>
+                                                {{/eq}}
+                                                {{/if}}
+                                                ${{formatCurrency sellingPrice}}
+                                              </td>
+                                              <td class="txt center nowrap" style="width:60px">{{quantity}}</td>
+                                              <td class="txt center nowrap" style="width:120px">
+                                                <strong>
+                                                  {{#if sellingPrice}}${{formatCurrency
+                                                  sellingPrice}}{{else}}Gratis{{/if}}
+                                                </strong>
+                                              </td>
+                                            </tr>
+                                          </table>
+
+                                          <!-- Versión mobile (fluida para Android/iOS) -->
+                                          <table role="presentation" width="100%" class="show-sm"
+                                            style="display:none; max-height:0; overflow:hidden; mso-hide:all;">
+                                            <tr>
+                                              <td style="padding-top:6px; font-size:14px; color:#777;">
+                                                {{#if listPrice}}
+                                                {{#eq listPrice sellingPrice}}{{else}}
+                                                <span style="text-decoration:line-through;">${{formatCurrency
+                                                  listPrice}}</span> ·
+                                                {{/eq}}
+                                                {{/if}}
+                                                <strong>${{formatCurrency sellingPrice}}</strong><br>
+                                                Cant: {{quantity}}<br>
+                                                Subtotal:
+                                                <strong>{{#if sellingPrice}}${{formatCurrency
+                                                  sellingPrice}}{{else}}Gratis{{/if}}</strong>
+                                              </td>
+                                            </tr>
+                                          </table>
+                                        </td>
+                                      </tr>
+                                    </table>
+                                  </td>
+                                </tr>
+                                {{/each}}
+                              </tbody>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td height="10" style="font-size:0;background:#ffffff;">&nbsp;</td>
+                  </tr>
+
+                  <!-- CTA -->
+                  <tr>
+                    <td align="center" bgcolor="#ffffff" style="padding:20px;background:#ffffff;">
+                      <!-- Tabla contenedora del botón con el mismo ancho que el mail -->
+                      <table role="presentation" width="600" bgcolor="#ffffff" border="0" cellspacing="0"
+                        cellpadding="0" align="center">
+                        <tr>
+                          <td align="center">
+                            <!-- Botón -->
+                            <table role="presentation" border="0" cellspacing="0" cellpadding="0">
+                              <tr>
+                                <td bgcolor="#FC5226" style="border-radius:10px; text-align:center;">
+                                  <a href="https://www.sporting.com.ar/account#/orders/{{orderId}}"
+                                    style="display:inline-block; padding:0 24px; line-height:48px; font-family:Arial, sans-serif; font-weight:800; font-size:16px; color:#ffffff; text-decoration:none;">
+                                    Ver mi pedido
+                                  </a>
+                                </td>
+                              </tr>
+                            </table>
+
+                            <!-- Texto de respaldo debajo del botón -->
+                            <div
+                              style="margin-top:8px; font-family:Arial, sans-serif; font-size:12px; color:#555555; text-align:center; max-width:360px;">
+                              Si el botón no funciona, copiá y pegá este enlace:
+                              <a href="https://www.sporting.com.ar/account#/orders/{{orderId}}"
+                                style="color:#1a73e8; word-break:break-all;">
+                                https://www.sporting.com.ar/account#/orders/{{orderId}}
+                              </a>
+                            </div>
+
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td height="10" style="font-size:0;background:#ffffff;">&nbsp;</td>
+                  </tr>
+
+                  <!-- Ayuda -->
+                  <tr>
+                    <td class="p6" bgcolor="#ffffff">
+                      <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                        <tr>
+                          <!-- Columna emoji -->
+                          <td style="vertical-align:top; padding-top:2px; padding-right:6px;padding-left: 14px;">
+                            <span
+                              style="font-size:16px; line-height:20px; font-family:'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','Noto Color Emoji', Arial, Helvetica, sans-serif;">
+                              📦
+                            </span>
+                          </td>
+                          <td style="font-size:16px; line-height:20px; font-family: Arial, Helvetica, sans-serif;">
+                            Mirá nuestro plazo de envío:
+                            <a href="https://www.sporting.com.ar/politicas-de-envio" style="color:#1a73e8">Políticas de
+                              envío</a> ↗
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td height="10" style="font-size:0;background:#ffffff;">&nbsp;</td>
+                  </tr>
+
+                  <!-- Cierre -->
+                  <tr>
+                    <td class="p12" bgcolor="#ffffff">
+                      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0"
+                        style="border-collapse:collapse;">
+                        <tr>
+                          <td style="border:1px solid #e5e7eb; border-radius:12px; background:#ffffff; padding:18px;">
+                            <p class="txt" style="margin:0 0 6px 0">Ante cualquier consulta, estamos para ayudarte.</p>
+                            <p class="txt" style="margin:0"><strong>Equipo Woker</strong></p>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td height="10" style="font-size:0;background:#ffffff;">&nbsp;</td>
+                  </tr>
+
+                  <!-- Beneficios + Footer -->
+                  <tr>
+                    <td class="p12 center" style="border-top:1px solid #eef2f6" bgcolor="#ffffff">
+                      <img src="https://woker.vteximg.com.br/arquivos/barra-footer-logos3.png" alt="Beneficios Sporting"
+                        style="width:100%;max-width:600px;height:auto;margin:0 auto;border-radius:10px">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="p16 center" bgcolor="#ffffff" style="text-align: center;font-size: 12px;">
+                      <div class="small muted" style="color:#667085;font-size: 12px;">Copyright © Sporting. Todos los
+                        derechos reservados.</div>
+                      <div class="small muted p8">
+                        <a href="https://www.sporting.com.ar/cambios-y-devoluciones"
+                          style="color:#667085;font-size: 12px;">Cambios y devoluciones</a> ·
+                        <a href="https://www.sporting.com.ar/centro-de-ayuda"
+                          style="color:#667085;font-size: 12px;">Centro de ayuda</a> ·
+                        <a href="https://www.sporting.com.ar/account" style="color:#667085;font-size: 12px;">Mi
+                          cuenta</a>
+                      </div>
+                      <img src="https://woker.vteximg.com.br/arquivos/barra-footer-proveedores1.png"
+                        alt="Medios y sellos" style="width:100%;max-width:600px;height:auto;margin:0 auto">
+                    </td>
+                  </tr>
+
+                </table>
+              </td>
+            </tr>
+          </table>
+            </td>
+           </tr>
+          
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+
+</html>
