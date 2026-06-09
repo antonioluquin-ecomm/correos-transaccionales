@@ -34,10 +34,6 @@
       .text { font-size: 14px; line-height: 22px; color: #374151; margin: 0; }
       .text-sm { font-size: 13px; line-height: 20px; color: #6b7280; margin: 0; }
 
-      .sum-cell { width: 50%; padding: 16px 18px; vertical-align: top; border-bottom: 1px solid #f3f4f6; }
-      .sum-cell-r { border-left: 1px solid #f3f4f6; }
-      .sum-last { border-bottom: none !important; }
-
       .access-code {
         background: linear-gradient(135deg, #f0faf0 0%, #e8f7e6 100%);
         border: 1px solid #bbf7d0;
@@ -68,12 +64,6 @@
         .footer-td { border-radius: 0 !important; }
         .hero-td { padding: 32px 20px 28px !important; }
         .content-pad { padding-left: 16px !important; padding-right: 16px !important; }
-        .sum-cell, .sum-cell-r, .sum-last {
-          display: block !important; width: 100% !important;
-          border-left: none !important; border-bottom: 1px solid #f3f4f6 !important;
-          padding: 14px 16px !important; box-sizing: border-box !important;
-        }
-        .sum-last-mobile { border-bottom: none !important; }
         .access-code { font-size: 34px !important; line-height: 42px !important; letter-spacing: 5px !important; padding: 18px 10px !important; }
         .h1 { font-size: 22px !important; line-height: 28px !important; }
         .main-card { border-radius: 0 0 12px 12px !important; }
@@ -152,7 +142,7 @@
 
                   <!-- CALLOUT -->
                   <tr>
-                    <td class="content-pad" style="padding:16px 24px 0">
+                    <td class="content-pad" style="padding:16px 24px 24px">
                       <table role="presentation" width="100%" bgcolor="#eff6ff" style="background:#eff6ff;border-radius:10px">
                         <tr>
                           <td valign="middle" width="56" style="padding:14px 0 14px 16px">
@@ -165,34 +155,9 @@
                           <td valign="middle" style="padding:14px 16px">
                             <p style="font-family:'Poppins',-apple-system,sans-serif;font-size:12.5px;font-weight:700;color:#1d4ed8;margin:0 0 3px 0">Código temporal</p>
                             <p style="font-family:'Poppins',-apple-system,sans-serif;font-size:11.5px;color:#3b5bdb;line-height:1.55;margin:0">Este código vence en 15 minutos. Si no pediste este acceso, podés ignorar este correo.</p>
-                          </td>
-                        </tr>
-                      </table>
-                    </td>
-                  </tr>
-
-                  <!-- META GRID -->
-                  <tr>
-                    <td style="padding:20px 24px 24px">
-                      <table role="presentation" width="100%" style="table-layout:fixed;border-radius:10px;overflow:hidden">
-                        <tr>
-                          <td class="sum-cell" style="width:50%;padding:16px 18px;vertical-align:top;border-bottom:1px solid #f3f4f6">
-                            <p style="font-size:9.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#b0b0b0;margin:0 0 5px 0">Solicitud</p>
-                            <p style="font-size:15px;line-height:22px;font-weight:700;color:#111827;margin:0">Acceso a cuenta</p>
-                          </td>
-                          <td class="sum-cell sum-cell-r" style="width:50%;padding:16px 18px;vertical-align:top;border-bottom:1px solid #f3f4f6;border-left:1px solid #f3f4f6">
-                            <p style="font-size:9.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#b0b0b0;margin:0 0 5px 0">Destino</p>
-                            <p style="font-size:15px;line-height:22px;font-weight:700;color:#111827;margin:0;word-break:break-word">{{#if to.0.email}}{{to.0.email}}{{else}}No informado{{/if}}</p>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="sum-cell sum-last" bgcolor="#f0faf0" style="width:50%;padding:16px 18px;vertical-align:top;background:linear-gradient(135deg,#f0faf0 0%,#e8f7e6 100%)">
-                            <p style="font-size:9.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#5aad50;margin:0 0 5px 0">Validez</p>
-                            <p style="font-size:20px;line-height:26px;font-weight:800;color:#1a7a0a;margin:0">15 minutos</p>
-                          </td>
-                          <td class="sum-cell sum-cell-r sum-last sum-last-mobile" style="width:50%;padding:16px 18px;vertical-align:top;border-left:1px solid #f3f4f6">
-                            <p style="font-size:9.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#b0b0b0;margin:0 0 5px 0">Dispositivo</p>
-                            <p style="font-size:15px;line-height:22px;font-weight:700;color:#111827;margin:0">{{#if aditionalData.userAgent}}{{aditionalData.userAgent}}{{else}}No informado{{/if}}</p>
+                            {{#if aditionalData.userAgent}}
+                            <p style="font-family:'Poppins',-apple-system,sans-serif;font-size:11px;color:#6b7280;line-height:1.5;margin:6px 0 0 0">Solicitud desde: <strong style="color:#374151">{{aditionalData.userAgent}}</strong></p>
+                            {{/if}}
                           </td>
                         </tr>
                       </table>
@@ -237,7 +202,7 @@
                           </td>
                           <td valign="top" style="padding:16px 0 0 10px">
                             <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0"><strong>Si no fuiste vos, ignora este email</strong></p>
-                            <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-top:2px">La solicitud queda sin efecto cuando vence el codigo.</p>
+                            <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-top:2px">La solicitud queda sin efecto cuando vence el código.</p>
                           </td>
                         </tr>
                       </table>
