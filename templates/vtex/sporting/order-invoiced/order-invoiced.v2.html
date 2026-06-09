@@ -6,400 +6,354 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <meta name="x-apple-disable-message-reformatting" />
-    <meta
-      name="format-detection"
-      content="telephone=no,address=no,email=no,date=no"
-    />
+    <meta name="format-detection" content="telephone=no,address=no,email=no,date=no" />
     <title>{{_accountInfo.TradingName}} — Pedido facturado</title>
     <style>
-      html,
-      body {
-        margin: 0 !important;
-        padding: 0 !important;
-        width: 100% !important;
-        background: #f3f4f6 !important;
-      }
-      body {
-        font-family:
-          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-          Arial, sans-serif;
-        color: #111827;
-      }
-      * {
-        -ms-text-size-adjust: 100%;
-        -webkit-text-size-adjust: 100%;
-      }
-      table,
-      td {
-        border-collapse: collapse !important;
-        mso-table-lspace: 0pt !important;
-        mso-table-rspace: 0pt !important;
-      }
-      img {
-        border: 0;
-        outline: none;
-        text-decoration: none;
-        -ms-interpolation-mode: bicubic;
-        display: block;
-      }
-      a {
-        text-decoration: none;
-        color: inherit;
-      }
-      a[x-apple-data-detectors] {
-        color: inherit !important;
-        text-decoration: none !important;
-      }
-      #outlook a {
-        padding: 0;
-      }
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&display=swap');
 
-      .wrap {
-        width: 100%;
-        max-width: 600px;
-        margin: 0 auto;
+      html, body {
+        margin: 0 !important; padding: 0 !important;
+        width: 100% !important; background: #e8e8e8 !important;
       }
-      .card {
-        background: #ffffff;
-        border: 1px solid #e5e7eb;
-        border-radius: 12px;
-        overflow: hidden;
-      }
-      .gap {
-        height: 12px;
-        line-height: 12px;
-        font-size: 12px;
-      }
-      .h2 {
-        font-size: 15px;
-        line-height: 22px;
-        font-weight: bold;
-        color: #111827;
-        margin: 0 0 12px 0;
-      }
-      .text {
-        font-size: 14px;
-        line-height: 22px;
-        color: #374151;
-        margin: 0;
-      }
-      .text-sm {
-        font-size: 13px;
-        line-height: 20px;
-        color: #6b7280;
-        margin: 0;
-      }
-      .label {
-        font-size: 11px;
-        line-height: 16px;
-        font-weight: bold;
-        letter-spacing: 0.5px;
-        text-transform: uppercase;
-        color: #6b7280;
-        margin: 0 0 4px 0;
-      }
-      .value {
-        font-size: 15px;
-        line-height: 22px;
-        font-weight: bold;
-        color: #111827;
-        margin: 0;
-      }
-      .item-name {
-        font-size: 14px;
-        line-height: 20px;
-        font-weight: bold;
-        color: #111827;
-        margin: 0 0 3px 0;
-      }
-      .item-meta {
-        font-size: 12px;
-        line-height: 18px;
-        color: #6b7280;
-        margin: 0;
-      }
-      .item-price {
-        font-size: 14px;
-        line-height: 20px;
-        font-weight: bold;
-        color: #111827;
-        margin: 4px 0 0 0;
-      }
-      .tot-key,
-      .tot-val {
-        font-size: 14px;
-        line-height: 20px;
-        color: #374151;
-      }
-      .tot-strong {
-        font-size: 16px;
-        line-height: 22px;
-        font-weight: bold;
+      body {
+        font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         color: #111827;
       }
-      .green {
-        color: #16a34a;
-      }
-      .cta-green {
-        display: inline-block;
-        background: #16a34a;
-        color: #ffffff !important;
-        border-radius: 10px;
-        font-size: 15px;
-        line-height: 48px;
-        font-weight: bold;
-        padding: 0 28px;
-        text-align: center;
-        mso-line-height-rule: exactly;
+      * { -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; }
+      table, td { border-collapse: collapse !important; mso-table-lspace: 0pt !important; mso-table-rspace: 0pt !important; }
+      img { border: 0; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; display: block; }
+      a { text-decoration: none; color: inherit; }
+      a[x-apple-data-detectors] { color: inherit !important; text-decoration: none !important; }
+      #outlook a { padding: 0; }
+
+      .wrap { width: 100%; max-width: 600px; margin: 0 auto; }
+      .card { background: #ffffff; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden; }
+      .gap { height: 12px; line-height: 12px; font-size: 12px; }
+
+      .h2 { font-size: 15px; line-height: 22px; font-weight: bold; color: #111827; margin: 0 0 12px 0; }
+      .text { font-size: 14px; line-height: 22px; color: #374151; margin: 0; }
+      .text-sm { font-size: 13px; line-height: 20px; color: #6b7280; margin: 0; }
+
+      .sum-cell { width: 50%; padding: 16px 18px; vertical-align: top; border-bottom: 1px solid #f3f4f6; }
+      .sum-cell-r { border-left: 1px solid #f3f4f6; }
+      .sum-last { border-bottom: none !important; }
+
+      .two-cell { width: 50%; padding: 18px 20px; vertical-align: top; }
+      .two-cell-r { border-left: 1px solid #f3f4f6; }
+
+      .item-name { font-size: 14px; line-height: 20px; font-weight: bold; color: #111827; margin: 0 0 3px 0; }
+      .item-meta { font-size: 12px; line-height: 18px; color: #6b7280; margin: 0; }
+      .item-price { font-size: 14px; line-height: 20px; font-weight: bold; color: #111827; margin: 4px 0 0 0; }
+      .item-old-price { font-size: 12px; line-height: 18px; color: #9ca3af; text-decoration: line-through; margin: 2px 0 0 0; }
+
+      .tot-key { font-size: 14px; line-height: 20px; color: #374151; }
+      .tot-val { font-size: 14px; line-height: 20px; color: #374151; }
+      .tot-strong { font-size: 16px; line-height: 22px; font-weight: bold; color: #111827; }
+      .green { color: #1a7a0a; }
+
+      .step-lbl { font-size: 10px; }
+      .step-lbl-last { text-align: center; }
+
+      .cta-primary {
+        display: block; width: 100%; box-sizing: border-box;
+        background: linear-gradient(135deg, #1a7a0a 0%, #25B60C 100%);
+        color: #ffffff !important; border-radius: 8px;
+        font-family: 'Poppins', -apple-system, sans-serif;
+        font-size: 13px; line-height: 52px; font-weight: 700;
+        letter-spacing: 1px; text-transform: uppercase; text-align: center;
       }
       .cta-dark {
-        display: inline-block;
+        display: block; width: 100%; box-sizing: border-box;
         background: #111827;
-        color: #ffffff !important;
-        border-radius: 10px;
-        font-size: 15px;
-        line-height: 48px;
-        font-weight: bold;
-        padding: 0 28px;
-        text-align: center;
-        mso-line-height-rule: exactly;
-      }
-      .footer-link {
-        color: #16a34a !important;
-        font-weight: bold;
+        color: #ffffff !important; border-radius: 8px;
+        font-family: 'Poppins', -apple-system, sans-serif;
+        font-size: 13px; line-height: 52px; font-weight: 700;
+        letter-spacing: 1px; text-transform: uppercase; text-align: center;
       }
 
+      .m-hide { display: table-cell; }
+      .m-show { display: none; max-height: 0; overflow: hidden; mso-hide: all; }
+
       @media only screen and (max-width: 600px) {
-        .wrap {
-          width: 100% !important;
-          max-width: 100% !important;
+        .wrap { width: 100% !important; max-width: 100% !important; }
+        .card { border-radius: 0 !important; border-left: none !important; border-right: none !important; }
+        .outer-pad { padding: 0 !important; }
+        .footer-td { border-radius: 0 !important; }
+        .hero-td { padding: 32px 20px 28px !important; }
+        .sum-cell, .sum-cell-r {
+          display: block !important; width: 100% !important;
+          border-left: none !important; border-bottom: 1px solid #f3f4f6 !important;
+          padding: 14px 16px !important; box-sizing: border-box !important;
         }
-        .card {
-          border-radius: 0 !important;
-          border-left: none !important;
-          border-right: none !important;
+        .sum-last {
+          display: block !important; width: 100% !important;
+          border-left: none !important; border-bottom: none !important;
+          padding: 14px 16px !important; box-sizing: border-box !important;
         }
-        .outer-pad {
-          padding: 12px 0 !important;
+        .two-cell, .two-cell-r {
+          display: block !important; width: 100% !important;
+          border-left: none !important; border-bottom: 1px solid #f3f4f6 !important;
+          padding: 14px 16px !important; box-sizing: border-box !important;
         }
-        .hero-invoice-td {
-          border-radius: 0 !important;
-          padding-left: 16px !important;
-          padding-right: 16px !important;
-        }
-        .content-pad {
-          padding-left: 16px !important;
-          padding-right: 16px !important;
-        }
-        .meta-cell,
-        .meta-cell-r,
-        .two-cell,
-        .two-cell-r {
-          display: block !important;
-          width: 100% !important;
-          border-left: none !important;
-          border-bottom: 1px solid #f3f4f6 !important;
-          box-sizing: border-box !important;
-        }
-        .meta-cell-last,
-        .two-cell-last {
-          border-bottom: none !important;
-        }
-        .cta-green,
-        .cta-dark {
-          display: block !important;
-          width: 100% !important;
-          box-sizing: border-box !important;
-          margin-bottom: 8px !important;
-        }
-        .item-img {
-          width: 60px !important;
-          height: auto !important;
-        }
-        .m-hide {
-          display: none !important;
-        }
-        .m-show {
-          display: block !important;
-          max-height: none !important;
-          overflow: visible !important;
-        }
-        .logo-strip {
-          padding: 16px 16px 14px !important;
-          border-radius: 0 !important;
-        }
-        .logo-img {
-          width: 120px !important;
-        }
+        .two-cell-last { border-bottom: none !important; }
+        .cta-primary, .cta-dark { line-height: 52px !important; }
+        .stepper-td { padding-left: 14px !important; padding-right: 14px !important; }
+        .step-lbl { font-size: 9px !important; }
+        .step-lbl-last { text-align: right !important; }
+        .h1 { font-size: 22px !important; line-height: 28px !important; }
+        .m-hide { display: none !important; }
+        .m-show { display: block !important; max-height: none !important; overflow: visible !important; }
+        .item-img { width: 60px !important; height: auto !important; }
+        .main-card { border-radius: 0 0 12px 12px !important; }
+        .trust-logos { border-radius: 0 !important; }
+        .header-logo { width: 128px !important; }
+        .brand-logo-sporting { width: 88px !important; }
+        .brand-logo-woker { width: 64px !important; }
+        .brand-logo-luquin { width: 78px !important; }
       }
     </style>
   </head>
-
   <body>
-    <div
-      style="
-        display: none;
-        max-height: 0;
-        overflow: hidden;
-        opacity: 0;
-        color: transparent;
-        visibility: hidden;
-        mso-hide: all;
-      "
-    >
-      Tu pedido {{orderId}} fue facturado. Ya estamos preparando la entrega y
-      podés revisar los datos de la factura.&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;
+    <!-- Preheader -->
+    <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;visibility:hidden;mso-hide:all">
+      Tu pedido {{orderId}} fue facturado. Ya podés revisar la factura y el seguimiento del envío.&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;
     </div>
 
-    <table role="presentation" width="100%" bgcolor="#f3f4f6">
+    <table role="presentation" width="100%" bgcolor="#e8e8e8">
       <tr>
-        <td align="center" class="outer-pad" style="padding: 24px 12px">
+        <td align="center" class="outer-pad" style="padding:24px 12px 48px">
           <table role="presentation" class="wrap" width="100%">
+
+            <!-- MAIN CARD -->
             <tr>
               <td>
-                <table role="presentation" width="100%" class="card">
-                  <!-- ── Logo strip ── -->
+                <table role="presentation" width="100%" class="card main-card">
+
+                  <!-- HEADER -->
                   <tr>
-                    <td align="center" class="logo-strip" style="background: #ffffff; border-radius: 12px 12px 0 0; padding: 20px 24px 16px;">
-                      <a href="https://{{#if _accountInfo.HostName}}{{_accountInfo.HostName}}{{else}}{{hostName}}{{/if}}" target="_blank">
+                    <td bgcolor="#ffffff" style="background:#ffffff;padding:20px 24px 16px;border-bottom:1px solid #eef2f7">
+                      <a href="https://{{#if _accountInfo.HostName}}{{_accountInfo.HostName}}{{else}}{{#if hostName}}{{hostName}}{{else}}{{_accountInfo.AccountName}}.vtexcommercestable.com.br{{/if}}{{/if}}" target="_blank" style="display:inline-block">
                         <img src="https://sporting.vteximg.com.br/arquivos/logo-mail-2.png"
-                             alt="{{_accountInfo.TradingName}}" width="150" class="logo-img"
-                             style="width: 150px; max-width: 150px; height: auto" />
+                             alt="Sporting" width="150"
+                             class="header-logo"
+                             style="width:150px;height:auto;display:block" />
                       </a>
                     </td>
                   </tr>
+
+                  <!-- HERO -->
                   <tr>
-                    <td
-                      class="hero-invoice-td"
-                      bgcolor="#14532d"
-                      style="
-                        background: #14532d;
-                        padding: 30px 24px 26px;
-                        text-align: center;
-                      "
-                    >
-                      <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin: 0 auto 14px auto">
+                    <td class="hero-td" bgcolor="#1a7a0a" style="background:linear-gradient(150deg,#0d4f06 0%,#1a7a0a 35%,#25B60C 75%,#4fe82a 100%);padding:40px 28px 36px;text-align:center">
+                      <table cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 16px auto">
                         <tr>
-                          <td
-                            align="center"
-                            style="
-                              width: 56px;
-                              height: 56px;
-                              line-height: 56px;
-                              background: #166534;
-                              border: 2px solid #86efac;
-                              border-radius: 50%;
-                              font-size: 26px;
-                              color: #ffffff;
-                              text-align: center;
-                            "
-                          >
-                            &#129534;
+                          <td align="center" valign="middle" width="80" height="80" bgcolor="#358a27" style="width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.12)">
+                            <table cellpadding="0" cellspacing="0" border="0" align="center">
+                              <tr>
+                                <td align="center" valign="middle" width="52" height="52" style="width:52px;height:52px;border-radius:50%;background:#ffffff;font-size:22px;line-height:52px;font-weight:bold;color:#1a7a0a;text-align:center">&#129534;</td>
+                              </tr>
+                            </table>
                           </td>
                         </tr>
                       </table>
-                      <p style="font-size: 21px; line-height: 27px; font-weight: bold; color: #ffffff; margin: 0 0 8px 0; text-align: center">
-                        Pedido facturado
-                      </p>
-                      <p style="font-size: 13px; line-height: 18px; color: #bbf7d0; margin: 0; text-align: center">
-                        Hola{{#if clientProfileData.firstName}}, {{clientProfileData.firstName}}{{/if}}
+                      <p style="font-family:'Poppins',-apple-system,sans-serif;font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.6);margin:0 0 10px 0;text-align:center">Pedido facturado</p>
+                      <p class="h1" style="font-family:'Poppins',-apple-system,sans-serif;font-size:28px;line-height:1.1;font-weight:800;color:#fff;margin:0 0 8px 0;text-align:center;text-shadow:0 2px 16px rgba(0,0,0,.15)">Tu factura ya fue emitida</p>
+                      <p style="font-family:'Poppins',-apple-system,sans-serif;font-size:13px;color:rgba(255,255,255,.8);margin:0;text-align:center">
+                        Hola{{#if clientProfileData.firstName}}, {{clientProfileData.firstName}}{{/if}} — tu pedido {{orderId}} sigue avanzando.
                       </p>
                     </td>
                   </tr>
 
+                  <!-- CALLOUT -->
                   <tr>
-                    <td class="content-pad" style="padding: 20px 24px; border-bottom: 1px solid #f3f4f6">
-                      <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin: 0 0 14px 0">
-                        Emitimos la factura de tu <strong>pedido {{orderId}}</strong>. El pedido ya está avanzando hacia la preparación o despacho.
-                      </p>
-
-                      <table role="presentation" width="100%" style="table-layout: fixed">
+                    <td style="padding:22px 24px 0">
+                      <table role="presentation" width="100%" bgcolor="#eff6ff" style="background:#eff6ff;border-radius:10px">
                         <tr>
-                          <td style="width: 4px; background: #16a34a; border-radius: 4px 0 0 4px; padding: 0; font-size: 0; line-height: 0">&nbsp;</td>
-                          <td style="background: #f0fdf4; border-top: 1px solid #bbf7d0; border-right: 1px solid #bbf7d0; border-bottom: 1px solid #bbf7d0; border-radius: 0 8px 8px 0; padding: 12px 14px">
-                            <p style="font-size: 13px; line-height: 18px; font-weight: bold; color: #14532d; margin: 0 0 3px 0">Factura emitida</p>
-                            <p style="font-size: 13px; line-height: 18px; color: #166534; margin: 0">Te avisaremos nuevamente cuando el operador logístico informe novedades de seguimiento.</p>
+                          <td valign="middle" width="56" style="padding:14px 0 14px 16px">
+                            <table cellpadding="0" cellspacing="0" border="0">
+                              <tr>
+                                <td align="center" valign="middle" width="36" height="36" style="width:36px;height:36px;border-radius:10px;background:#2563eb;font-size:18px;line-height:36px;text-align:center">&#128666;</td>
+                              </tr>
+                            </table>
+                          </td>
+                          <td valign="middle" style="padding:14px 16px">
+                            <p style="font-family:'Poppins',-apple-system,sans-serif;font-size:12.5px;font-weight:700;color:#1d4ed8;margin:0 0 3px 0">Próximo paso: despacho</p>
+                            <p style="font-family:'Poppins',-apple-system,sans-serif;font-size:11.5px;color:#3b5bdb;line-height:1.55;margin:0">Te compartimos la factura y, si ya está disponible, el número de seguimiento del envío.</p>
                           </td>
                         </tr>
                       </table>
                     </td>
                   </tr>
 
+                  <!-- META GRID -->
                   <tr>
-                    <td style="padding: 0">
-                      <table role="presentation" width="100%" style="table-layout: fixed">
+                    <td style="padding:20px 24px 0">
+                      <table role="presentation" width="100%" style="table-layout:fixed;border-radius:10px;overflow:hidden">
                         <tr>
-                          <td class="content-pad meta-cell" style="width: 50%; padding: 14px 20px; vertical-align: top; border-bottom: 1px solid #f3f4f6">
-                            <p class="label">N.º de pedido</p>
-                            <p class="value">{{orderId}}</p>
+                          <td class="sum-cell" style="width:50%;padding:16px 18px;vertical-align:top;border-bottom:1px solid #f3f4f6">
+                            <p style="font-size:9.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#b0b0b0;margin:0 0 5px 0">N.º de pedido</p>
+                            <p style="font-size:15px;line-height:22px;font-weight:700;color:#111827;margin:0">{{orderId}}</p>
                           </td>
-                          <td class="content-pad meta-cell-r" style="width: 50%; padding: 14px 20px; vertical-align: top; border-left: 1px solid #f3f4f6; border-bottom: 1px solid #f3f4f6">
-                            <p class="label">Fecha de compra</p>
-                            <p class="value">{{#if creationDate}}{{formatDate creationDate}}{{else}}—{{/if}}</p>
+                          <td class="sum-cell sum-cell-r" style="width:50%;padding:16px 18px;vertical-align:top;border-bottom:1px solid #f3f4f6;border-left:1px solid #f3f4f6">
+                            <p style="font-size:9.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#b0b0b0;margin:0 0 5px 0">Fecha de compra</p>
+                            <p style="font-size:15px;line-height:22px;font-weight:700;color:#111827;margin:0">{{#if creationDate}}{{formatDate creationDate}}{{else}}No informada{{/if}}</p>
                           </td>
                         </tr>
                         <tr>
-                          <td class="content-pad meta-cell" style="padding: 14px 20px; vertical-align: top">
-                            <p class="label">Total del pedido</p>
-                            <p class="value">$ {{formatCurrency value}}</p>
-                          </td>
-                          <td class="content-pad meta-cell-r meta-cell-last" style="padding: 14px 20px; vertical-align: top; border-left: 1px solid #f3f4f6">
-                            <p class="label">Estado</p>
-                            <p class="value">Facturado</p>
+                          <td class="sum-cell sum-last" colspan="2" bgcolor="#f0faf0" style="padding:16px 18px;vertical-align:top;background:linear-gradient(135deg,#f0faf0 0%,#e8f7e6 100%)">
+                            <p style="font-size:9.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#5aad50;margin:0 0 5px 0">Total del pedido</p>
+                            <p style="font-size:20px;line-height:26px;font-weight:800;color:#1a7a0a;letter-spacing:-0.3px;margin:0">$ {{formatCurrency value}}</p>
                           </td>
                         </tr>
                       </table>
                     </td>
                   </tr>
+
+                  <!-- STEPPER -->
+                  <tr>
+                    <td class="stepper-td" style="padding:24px 24px 16px">
+                      <table role="presentation" width="100%" style="table-layout:fixed">
+                        <tr>
+                          <td width="28" align="center" valign="top" style="width:28px;padding:0">
+                            <div style="width:28px;height:28px;line-height:28px;border-radius:50%;background:#25B60C;text-align:center;font-size:13px;font-weight:bold;color:#fff;margin:0 auto">&#10003;</div>
+                            <p class="step-lbl" style="font-family:'Poppins',-apple-system,sans-serif;font-size:10px;font-weight:700;color:#1a7a0a;text-align:center;margin:5px 0 0;white-space:nowrap">Pago</p>
+                          </td>
+                          <td valign="top" style="padding:14px 4px 0">
+                            <div style="height:3px;background:#25B60C;border-radius:2px;font-size:0;line-height:0">&nbsp;</div>
+                          </td>
+                          <td width="28" align="center" valign="top" style="width:28px;padding:0">
+                            <div style="width:28px;height:28px;line-height:28px;border-radius:50%;background:#25B60C;text-align:center;font-size:13px;font-weight:bold;color:#fff;margin:0 auto">&#10003;</div>
+                            <p class="step-lbl" style="font-family:'Poppins',-apple-system,sans-serif;font-size:10px;font-weight:700;color:#1a7a0a;text-align:center;margin:5px 0 0;white-space:nowrap">Factura</p>
+                          </td>
+                          <td valign="top" style="padding:14px 4px 0">
+                            <div style="height:3px;background:#25B60C;border-radius:2px;font-size:0;line-height:0">&nbsp;</div>
+                          </td>
+                          <td width="28" align="center" valign="top" style="width:28px;padding:0">
+                            <div style="width:28px;height:28px;line-height:28px;border-radius:50%;background:#3b82f6;text-align:center;font-size:11px;font-weight:bold;color:#fff;margin:0 auto">3</div>
+                            <p class="step-lbl" style="font-family:'Poppins',-apple-system,sans-serif;font-size:10px;font-weight:700;color:#3b82f6;text-align:center;margin:5px 0 0;white-space:nowrap">Despacho</p>
+                          </td>
+                          <td valign="top" style="padding:14px 4px 0">
+                            <div style="height:3px;background:#e5e7eb;border-radius:2px;font-size:0;line-height:0">&nbsp;</div>
+                          </td>
+                          <td width="28" align="center" valign="top" style="width:28px;padding:0">
+                            <div style="width:28px;height:28px;line-height:28px;border-radius:50%;background:#ebebeb;text-align:center;font-size:11px;font-weight:bold;color:#ccc;margin:0 auto">4</div>
+                            <p class="step-lbl step-lbl-last" style="font-family:'Poppins',-apple-system,sans-serif;font-size:10px;color:#9ca3af;text-align:center;margin:5px 0 0;white-space:nowrap">Entrega</p>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+
+                  <!-- CTA -->
+                  <tr>
+                    <td style="padding:4px 24px 24px">
+                      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                        <tr>
+                          <td bgcolor="#1a7a0a" style="border-radius:8px">
+                            <a href="https://{{#if _accountInfo.HostName}}{{_accountInfo.HostName}}{{else}}{{#if hostName}}{{hostName}}{{else}}{{_accountInfo.AccountName}}.vtexcommercestable.com.br{{/if}}{{/if}}/account#/orders/{{orderId}}"
+                               class="cta-primary"
+                               style="display:block;width:100%;box-sizing:border-box;background:linear-gradient(135deg,#1a7a0a 0%,#25B60C 100%);color:#ffffff;border-radius:8px;font-family:'Poppins',-apple-system,sans-serif;font-size:13px;line-height:52px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-align:center;text-decoration:none"
+                               target="_blank">
+                              Ver mi pedido &nbsp;&#8594;
+                            </a>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+
                 </table>
               </td>
             </tr>
 
             <tr><td class="gap">&nbsp;</td></tr>
 
+            <!-- FACTURA + ENTREGA -->
             <tr>
               <td>
                 <table role="presentation" width="100%" class="card">
+                  {{#if packages}}
                   <tr>
-                    <td style="padding: 0">
-                      <table role="presentation" width="100%" style="table-layout: fixed">
+                    <td colspan="2" style="padding:18px 20px 12px;border-bottom:1px solid #f3f4f6">
+                      <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0">Facturas y seguimiento</p>
+                      <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-top:4px">Revisá la factura y el seguimiento de cada envío disponible.</p>
+                    </td>
+                  </tr>
+                  {{#each packages}}
+                  <tr>
+                    <td style="padding:18px 20px{{#unless @first}};border-top:1px solid #f3f4f6{{/unless}}">
+                      <table role="presentation" width="100%">
                         <tr>
-                          <td class="content-pad two-cell" style="width: 50%; padding: 18px 20px; vertical-align: top">
+                          <td valign="top" width="32" style="width:32px">
+                            <div style="width:24px;height:24px;line-height:24px;text-align:center;border-radius:50%;background:#ecfdf3;color:#166534;font-size:11px;font-weight:bold">{{#if @first}}1{{else}}2{{/if}}</div>
+                          </td>
+                          <td valign="top" style="padding-left:10px">
+                            <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0 0 8px 0">Paquete {{#if @first}}1{{else}}2{{/if}}</p>
+                            {{#if invoiceNumber}}<p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0"><strong>Factura:</strong> #{{invoiceNumber}}</p>{{/if}}
+                            {{#if issuanceDate}}<p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:2px 0 0">Emitida el {{formatDate issuanceDate}}</p>{{/if}}
+                            {{#if invoiceValue}}<p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:8px 0 0"><strong>Importe:</strong> $ {{formatCurrency invoiceValue}}</p>{{/if}}
+                            {{#if courier}}<p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:8px 0 0"><strong>Operador:</strong> {{courier}}</p>{{/if}}
+                            {{#if trackingNumber}}<p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0"><strong>Seguimiento:</strong> {{trackingNumber}}</p>{{/if}}
+                            <table role="presentation" width="100%" style="margin-top:14px">
+                              <tr>
+                                {{#if invoiceUrl}}
+                                <td valign="top" style="padding:0 6px 8px 0">
+                                  <a href="{{invoiceUrl}}" target="_blank" class="cta-primary" style="display:block;width:100%;box-sizing:border-box;background:linear-gradient(135deg,#1a7a0a 0%,#25B60C 100%);color:#ffffff;border-radius:8px;font-family:'Poppins',-apple-system,sans-serif;font-size:12px;line-height:44px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;text-align:center;text-decoration:none">Descargar factura</a>
+                                </td>
+                                {{/if}}
+                                {{#if trackingUrl}}
+                                <td valign="top" style="padding:0 0 8px 6px">
+                                  <a href="{{trackingUrl}}" target="_blank" class="cta-dark" style="display:block;width:100%;box-sizing:border-box;background:#111827;color:#ffffff;border-radius:8px;font-family:'Poppins',-apple-system,sans-serif;font-size:12px;line-height:44px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;text-align:center;text-decoration:none">Ver seguimiento</a>
+                                </td>
+                                {{/if}}
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  {{/each}}
+                  {{else}}
+                  <tr>
+                    <td style="padding:0">
+                      <table role="presentation" width="100%" style="table-layout:fixed">
+                        <tr>
+                          <td class="two-cell" style="width:50%;padding:18px 20px;vertical-align:top">
                             <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0 0 12px 0">Factura</p>
                             {{#with package}}
                               {{#if invoiceNumber}}
-                              <p class="label">Número</p>
-                              <p class="value" style="margin-bottom: 10px">#{{invoiceNumber}}</p>
+                              <p style="font-size:9.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#b0b0b0;margin:0 0 5px 0">Número</p>
+                              <p style="font-size:15px;line-height:22px;font-weight:700;color:#111827;margin:0 0 10px 0">#{{invoiceNumber}}</p>
                               {{/if}}
                               {{#if issuanceDate}}
-                              <p class="label">Fecha de emisión</p>
-                              <p class="value" style="margin-bottom: 10px">{{formatDate issuanceDate}}</p>
+                              <p style="font-size:9.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#b0b0b0;margin:0 0 5px 0">Fecha de emisión</p>
+                              <p style="font-size:15px;line-height:22px;font-weight:700;color:#111827;margin:0 0 10px 0">{{formatDate issuanceDate}}</p>
                               {{/if}}
                               {{#if invoiceValue}}
-                              <p class="label">Importe facturado</p>
-                              <p class="value" style="margin-bottom: 14px">$ {{formatCurrency invoiceValue}}</p>
+                              <p style="font-size:9.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#b0b0b0;margin:0 0 5px 0">Importe facturado</p>
+                              <p style="font-size:15px;line-height:22px;font-weight:700;color:#111827;margin:0 0 14px 0">$ {{formatCurrency invoiceValue}}</p>
                               {{/if}}
                               {{#if invoiceUrl}}
-                              <a href="{{invoiceUrl}}" target="_blank" class="cta-green" style="display:inline-block;background:#16a34a;color:#ffffff!important;border-radius:10px;font-size:15px;line-height:48px;font-weight:bold;padding:0 22px;text-align:center">Descargar factura</a>
+                              <a href="{{invoiceUrl}}" target="_blank" class="cta-primary" style="display:block;width:100%;box-sizing:border-box;background:linear-gradient(135deg,#1a7a0a 0%,#25B60C 100%);color:#ffffff;border-radius:8px;font-family:'Poppins',-apple-system,sans-serif;font-size:12px;line-height:44px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;text-align:center;text-decoration:none">Descargar factura</a>
                               {{else}}
-                              <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:0">La factura queda registrada en el detalle del pedido. Si necesitás el comprobante, revisá tu cuenta o contactá a soporte.</p>
+                              <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:0">La factura queda registrada en el detalle del pedido.</p>
                               {{/if}}
                             {{else}}
                               <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:0">La factura está en proceso de emisión.</p>
                             {{/with}}
                           </td>
-                          <td class="content-pad two-cell-r two-cell-last" style="width: 50%; padding: 18px 20px; vertical-align: top; border-left: 1px solid #f3f4f6">
+                          <td class="two-cell two-cell-r two-cell-last" style="width:50%;padding:18px 20px;vertical-align:top;border-left:1px solid #f3f4f6">
                             <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0 0 12px 0">Entrega</p>
-                            <p class="label">Operador</p>
-                            <p class="value" style="margin-bottom: 10px">
+                            <p style="font-size:9.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#b0b0b0;margin:0 0 5px 0">Operador</p>
+                            <p style="font-size:15px;line-height:22px;font-weight:700;color:#111827;margin:0 0 10px 0">
                               {{#if package.courier}}{{package.courier}}{{else}}{{#if shippingData.logisticsInfo.[0].deliveryIds.[0].courierName}}{{shippingData.logisticsInfo.[0].deliveryIds.[0].courierName}}{{else}}A confirmar{{/if}}{{/if}}
                             </p>
                             {{#if package.trackingNumber}}
-                            <p class="label">Seguimiento</p>
-                            <p class="value" style="margin-bottom: 14px">{{package.trackingNumber}}</p>
+                            <p style="font-size:9.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#b0b0b0;margin:0 0 5px 0">Seguimiento</p>
+                            <p style="font-size:15px;line-height:22px;font-weight:700;color:#111827;margin:0 0 14px 0">{{package.trackingNumber}}</p>
                             {{/if}}
                             {{#if package.trackingUrl}}
-                            <a href="{{package.trackingUrl}}" target="_blank" class="cta-dark" style="display:inline-block;background:#111827;color:#ffffff!important;border-radius:10px;font-size:15px;line-height:48px;font-weight:bold;padding:0 22px;text-align:center">Ver seguimiento</a>
+                            <a href="{{package.trackingUrl}}" target="_blank" class="cta-dark" style="display:block;width:100%;box-sizing:border-box;background:#111827;color:#ffffff;border-radius:8px;font-family:'Poppins',-apple-system,sans-serif;font-size:12px;line-height:44px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;text-align:center;text-decoration:none">Ver seguimiento</a>
                             {{else}}
                             <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:0">Todavía no tenemos un link de seguimiento. Te avisaremos cuando esté disponible.</p>
                             {{/if}}
@@ -408,35 +362,41 @@
                       </table>
                     </td>
                   </tr>
+                  {{/if}}
                 </table>
               </td>
             </tr>
 
             <tr><td class="gap">&nbsp;</td></tr>
 
+            <!-- DATOS DE ENTREGA Y PAGO -->
             <tr>
               <td>
                 <table role="presentation" width="100%" class="card">
                   <tr>
-                    <td colspan="2" style="padding: 18px 20px 12px 20px; border-bottom: 1px solid #f3f4f6">
+                    <td colspan="2" style="padding:18px 20px 12px;border-bottom:1px solid #f3f4f6">
                       <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0">Datos de entrega y pago</p>
                     </td>
                   </tr>
                   <tr>
-                    <td class="content-pad two-cell" style="width:50%;padding:18px 20px;vertical-align:top">
-                      <p class="label">Dirección</p>
+                    <td class="two-cell" style="width:50%;padding:18px 20px;vertical-align:top">
+                      <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0 0 12px 0">Entrega</p>
                       {{#with shippingData.selectedAddresses.[0]}}
-                      <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0">
-                        {{street}} {{number}}{{#if complement}}, {{complement}}{{/if}}<br />
-                        {{city}}, {{state}}<br />
-                        CP {{postalCode}}
-                      </p>
+                      {{#if receiverName}}<p class="text" style="font-size:14px;line-height:22px;color:#374151;font-weight:bold;margin:0 0 2px 0">{{receiverName}}</p>{{/if}}
+                      <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0">{{street}}{{#if number}}, {{number}}{{/if}}{{#if complement}}, {{complement}}{{/if}}</p>
+                      <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0">{{city}}, {{state}} {{postalCode}}</p>
                       {{else}}
-                      <p class="text-sm">Dirección no informada.</p>
+                      {{#with shippingData.address}}
+                      {{#if receiverName}}<p class="text" style="font-size:14px;line-height:22px;color:#374151;font-weight:bold;margin:0 0 2px 0">{{receiverName}}</p>{{/if}}
+                      <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0">{{street}}{{#if number}}, {{number}}{{/if}}{{#if complement}}, {{complement}}{{/if}}</p>
+                      <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0">{{city}}, {{state}} {{postalCode}}</p>
+                      {{else}}
+                      <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:0">Dirección no informada.</p>
+                      {{/with}}
                       {{/with}}
                     </td>
-                    <td class="content-pad two-cell-r two-cell-last" style="width:50%;padding:18px 20px;vertical-align:top;border-left:1px solid #f3f4f6">
-                      <p class="label">Medio de pago</p>
+                    <td class="two-cell two-cell-r two-cell-last" style="width:50%;padding:18px 20px;vertical-align:top;border-left:1px solid #f3f4f6">
+                      <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0 0 12px 0">Pago</p>
                       {{#if paymentData.transactions}}
                       {{#each paymentData.transactions}}
                       {{#each payments}}
@@ -446,7 +406,7 @@
                       {{/each}}
                       {{/each}}
                       {{else}}
-                      <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:0">—</p>
+                      <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:0">Medio de pago no informado.</p>
                       {{/if}}
                     </td>
                   </tr>
@@ -456,42 +416,39 @@
 
             <tr><td class="gap">&nbsp;</td></tr>
 
+            <!-- PRODUCTOS -->
             <tr>
               <td>
                 <table role="presentation" width="100%" class="card">
                   <tr>
-                    <td style="padding: 18px 20px 12px 20px; border-bottom: 1px solid #f3f4f6">
+                    <td style="padding:18px 20px 12px;border-bottom:1px solid #f3f4f6">
                       <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0">Productos facturados</p>
                     </td>
                   </tr>
                   {{#each items}}
                   <tr>
-                    <td style="padding: 16px 20px{{#unless @first}}; border-top: 1px solid #f3f4f6{{/unless}}">
+                    <td style="padding:16px 20px{{#unless @first}};border-top:1px solid #f3f4f6{{/unless}}">
                       <table role="presentation" width="100%">
                         <tr>
-                          <td valign="top" style="width: 72px">
-                            {{#if detailUrl}}<a href="https://{{@root.hostName}}{{detailUrl}}" target="_blank" style="display:block;line-height:0">{{/if}}<img
-                              src="{{imageUrl}}"
-                              alt="{{name}}"
-                              width="72"
-                              height="72"
-                              class="item-img"
-                              style="width:72px;height:auto;border-radius:8px"
-                            />{{#if detailUrl}}</a>{{/if}}
+                          <td valign="top" style="width:72px">
+                            {{#if detailUrl}}<a href="https://{{#if @root._accountInfo.HostName}}{{@root._accountInfo.HostName}}{{else}}{{#if @root.hostName}}{{@root.hostName}}{{else}}{{@root._accountInfo.AccountName}}.vtexcommercestable.com.br{{/if}}{{/if}}{{detailUrl}}" target="_blank" style="display:block;line-height:0">{{/if}}
+                            <img src="{{imageUrl}}" alt="{{name}}" width="72" height="72" class="item-img" style="width:72px;height:auto;border-radius:8px" />
+                            {{#if detailUrl}}</a>{{/if}}
                           </td>
-                          <td valign="top" style="padding-left: 12px">
-                            {{#if detailUrl}}<a href="https://{{@root.hostName}}{{detailUrl}}" target="_blank" class="item-name" style="font-size:14px;line-height:20px;font-weight:bold;color:#111827;display:block;text-decoration:none;margin:0 0 3px 0">{{name}}</a>{{else}}<p class="item-name">{{name}}</p>{{/if}}
-                            {{#if additionalInfo.brandName}}<p class="item-meta">Marca: {{additionalInfo.brandName}}</p>{{/if}}
-                            {{#if skuName}}<p class="item-meta">Variante: {{skuName}}</p>{{/if}}
-                            <p class="item-meta">Cantidad: {{quantity}}</p>
-                            <p class="item-price">$ {{formatCurrency sellingPrice}}</p>
-                            <p class="m-show text-sm" style="display:none;max-height:0;overflow:hidden;margin-top:6px">
-                              Subtotal: <strong style="color:#111827">$ {{formatCurrency priceDefinition.total}}</strong>
-                            </p>
+                          <td valign="top" style="padding-left:12px">
+                            {{#if detailUrl}}<a href="https://{{#if @root._accountInfo.HostName}}{{@root._accountInfo.HostName}}{{else}}{{#if @root.hostName}}{{@root.hostName}}{{else}}{{@root._accountInfo.AccountName}}.vtexcommercestable.com.br{{/if}}{{/if}}{{detailUrl}}" target="_blank" class="item-name" style="font-size:14px;line-height:20px;font-weight:bold;color:#111827;display:block;text-decoration:none;margin:0 0 3px 0;word-break:break-word;overflow-wrap:break-word">{{name}}</a>{{else}}<p class="item-name" style="font-size:14px;line-height:20px;font-weight:bold;color:#111827;margin:0 0 3px 0;word-break:break-word;overflow-wrap:break-word">{{name}}</p>{{/if}}
+                            {{#if additionalInfo.brandName}}<p class="item-meta" style="font-size:12px;line-height:18px;color:#6b7280;margin:0">{{additionalInfo.brandName}}</p>{{/if}}
+                            {{#if skuName}}<p class="item-meta" style="font-size:12px;line-height:18px;color:#6b7280;margin:0">Variante: {{skuName}}</p>{{/if}}
+                            <p class="item-meta" style="font-size:12px;line-height:18px;color:#6b7280;margin:0">Cantidad: {{quantity}}</p>
+                            {{#if listPrice}}{{#eq listPrice sellingPrice}}{{else}}
+                            <p class="item-old-price" style="font-size:12px;line-height:18px;color:#9ca3af;text-decoration:line-through;margin:2px 0 0 0">$ {{formatCurrency listPrice}}</p>
+                            {{/eq}}{{/if}}
+                            <p class="item-price" style="font-size:14px;line-height:20px;font-weight:bold;color:#111827;margin:4px 0 0 0">$ {{formatCurrency sellingPrice}}</p>
+                            <p class="m-show text-sm" style="margin-top:6px">Subtotal: <strong style="color:#111827">$ {{formatCurrency priceDefinition.total}}</strong></p>
                           </td>
                           <td valign="top" align="right" class="m-hide" style="white-space:nowrap;padding-left:12px">
                             <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-bottom:4px">Subtotal</p>
-                            <p class="item-price" style="margin-top:0">$ {{formatCurrency priceDefinition.total}}</p>
+                            <p class="item-price" style="font-size:14px;line-height:20px;font-weight:bold;color:#111827;margin:0">$ {{formatCurrency priceDefinition.total}}</p>
                           </td>
                         </tr>
                       </table>
@@ -504,45 +461,50 @@
 
             <tr><td class="gap">&nbsp;</td></tr>
 
+            <!-- RESUMEN -->
             <tr>
               <td>
-                <table role="presentation" width="100%" class="card" style="border-collapse: collapse">
+                <table role="presentation" width="100%" class="card" style="border-collapse:collapse">
                   <tr>
-                    <td colspan="2" style="padding: 18px 20px 12px 20px; border-bottom: 1px solid #f3f4f6">
+                    <td colspan="2" style="padding:18px 20px 12px;border-bottom:1px solid #f3f4f6">
                       <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0">Resumen del pedido</p>
                     </td>
                   </tr>
                   {{#each totals}}
                   {{#eq id "Items"}}
                   <tr>
-                    <td style="padding:10px 20px"><span class="tot-key">Subtotal de productos</span></td>
-                    <td style="padding:10px 20px;text-align:right"><span class="tot-val">$ {{formatCurrency value}}</span></td>
+                    <td style="padding:10px 20px"><span class="tot-key" style="font-size:14px;line-height:20px;color:#374151">Subtotal de productos</span></td>
+                    <td style="padding:10px 20px;text-align:right;white-space:nowrap;width:1%"><span class="tot-val" style="font-size:14px;line-height:20px;color:#374151">$ {{formatCurrency value}}</span></td>
                   </tr>
                   {{/eq}}
                   {{#eq id "Discounts"}}{{#if value}}
                   <tr>
-                    <td style="padding:10px 20px"><span class="tot-key">Descuentos</span></td>
-                    <td style="padding:10px 20px;text-align:right"><span class="tot-val green">$ {{formatCurrency value}}</span></td>
+                    <td style="padding:10px 20px"><span class="tot-key" style="font-size:14px;line-height:20px;color:#374151">Descuentos</span></td>
+                    <td style="padding:10px 20px;text-align:right;white-space:nowrap;width:1%"><span class="tot-val green" style="color:#1a7a0a">$ {{formatCurrency value}}</span></td>
+                  </tr>
+                  {{/if}}{{/eq}}
+                  {{#eq id "Tax"}}{{#if value}}
+                  <tr>
+                    <td style="padding:10px 20px"><span class="tot-key" style="font-size:14px;line-height:20px;color:#374151">Impuestos</span></td>
+                    <td style="padding:10px 20px;text-align:right;white-space:nowrap;width:1%"><span class="tot-val" style="font-size:14px;line-height:20px;color:#374151">$ {{formatCurrency value}}</span></td>
                   </tr>
                   {{/if}}{{/eq}}
                   {{#eq id "Shipping"}}
                   <tr>
-                    <td style="padding:10px 20px"><span class="tot-key">Envío</span></td>
-                    <td style="padding:10px 20px;text-align:right">
-                      {{#eq value 0}}<span class="tot-val green" style="font-weight:bold">Gratis</span>{{else}}<span class="tot-val">$ {{formatCurrency value}}</span>{{/eq}}
+                    <td style="padding:10px 20px"><span class="tot-key" style="font-size:14px;line-height:20px;color:#374151">Envío</span></td>
+                    <td style="padding:10px 20px;text-align:right;white-space:nowrap;width:1%">
+                      {{#eq value 0}}
+                      <span class="tot-val" style="font-weight:bold;color:#1a7a0a">Gratis</span>
+                      {{else}}
+                      <span class="tot-val" style="font-size:14px;line-height:20px;color:#374151">$ {{formatCurrency value}}</span>
+                      {{/eq}}
                     </td>
                   </tr>
                   {{/eq}}
-                  {{#eq id "Tax"}}{{#if value}}
-                  <tr>
-                    <td style="padding:10px 20px"><span class="tot-key">Impuestos</span></td>
-                    <td style="padding:10px 20px;text-align:right"><span class="tot-val">$ {{formatCurrency value}}</span></td>
-                  </tr>
-                  {{/if}}{{/eq}}
                   {{/each}}
                   <tr>
-                    <td style="padding:14px 20px;border-top:2px solid #f3f4f6"><span class="tot-strong">Total</span></td>
-                    <td style="padding:14px 20px;border-top:2px solid #f3f4f6;text-align:right"><span class="tot-strong">$ {{formatCurrency value}}</span></td>
+                    <td style="padding:14px 20px;border-top:2px solid #f3f4f6"><span class="tot-strong" style="font-size:16px;line-height:22px;font-weight:bold;color:#111827">Total</span></td>
+                    <td style="padding:14px 20px;border-top:2px solid #f3f4f6;text-align:right;white-space:nowrap;width:1%"><span class="tot-strong" style="font-size:16px;line-height:22px;font-weight:bold;color:#111827">$ {{formatCurrency value}}</span></td>
                   </tr>
                 </table>
               </td>
@@ -550,53 +512,136 @@
 
             <tr><td class="gap">&nbsp;</td></tr>
 
+            <!-- QUE PASA AHORA -->
             <tr>
-              <td align="center" style="padding: 12px 0 4px 0">
-                <a
-                  href="https://{{#if _accountInfo.HostName}}{{_accountInfo.HostName}}{{else}}{{hostName}}{{/if}}/account#/orders/{{orderId}}"
-                  target="_blank"
-                  class="cta-green"
-                  style="display:inline-block;background:#16a34a;color:#ffffff!important;border-radius:10px;font-size:15px;line-height:48px;font-weight:bold;padding:0 28px;text-align:center"
-                >
-                  Ver mi pedido
-                </a>
+              <td>
+                <table role="presentation" width="100%" class="card">
+                  <tr>
+                    <td style="padding:24px">
+                      <p class="h2" style="font-size:16px;line-height:22px;font-weight:bold;color:#111827;margin-bottom:16px">¿Qué pasa ahora?</p>
+                      <table role="presentation" width="100%">
+                        <tr>
+                          <td valign="top" style="width:32px;padding-bottom:16px">
+                            <div style="width:24px;height:24px;line-height:24px;text-align:center;border-radius:50%;background:#ecfdf3;color:#166534;font-size:11px;font-weight:bold">1</div>
+                          </td>
+                          <td valign="top" style="padding:0 0 16px 10px;border-bottom:1px solid #f3f4f6">
+                            <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0"><strong>Preparamos el despacho</strong></p>
+                            <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-top:2px">El operador logístico toma el envío o confirma el próximo movimiento.</p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td valign="top" style="width:32px;padding:16px 0">
+                            <div style="width:24px;height:24px;line-height:24px;text-align:center;border-radius:50%;background:#ecfdf3;color:#166534;font-size:11px;font-weight:bold">2</div>
+                          </td>
+                          <td valign="top" style="padding:16px 0 16px 10px;border-bottom:1px solid #f3f4f6">
+                            <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0"><strong>Seguís el envío</strong></p>
+                            <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-top:2px">Si ya hay tracking, podés verlo desde este correo. Si no, te avisamos cuando esté disponible.</p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td valign="top" style="width:32px;padding-top:16px">
+                            <div style="width:24px;height:24px;line-height:24px;text-align:center;border-radius:50%;background:#ecfdf3;color:#166534;font-size:11px;font-weight:bold">3</div>
+                          </td>
+                          <td valign="top" style="padding:16px 0 0 10px">
+                            <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0"><strong>Recibís tu compra</strong></p>
+                            <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-top:2px">La entrega se confirma según la información del operador asignado.</p>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
               </td>
             </tr>
 
             <tr><td class="gap">&nbsp;</td></tr>
 
+            <!-- DARK FOOTER -->
             <tr>
-              <td style="padding: 4px 0">
-                <img
-                  src="https://sporting.vteximg.com.br/arquivos/barra-footer-logos3.png"
-                  alt="Beneficios Sporting"
-                  style="width:100%;max-width:600px;height:auto;border-radius:10px"
-                />
+              <td class="footer-td" bgcolor="#1c1c1c" style="background:#1c1c1c;border-radius:10px;padding:22px 24px 20px">
+                <table role="presentation" width="100%">
+
+                  <!-- Logos de marcas -->
+                  <tr>
+                    <td style="padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,.08)">
+                      <table role="presentation" width="100%" style="table-layout:fixed">
+                        <tr>
+                          <td align="center" valign="middle" style="padding:0 8px">
+                            <img src="https://sporting.vteximg.com.br/arquivos/logo-sporting-white.png"
+                                 alt="Sporting" width="110"
+                                 class="brand-logo-sporting"
+                                 style="width:110px;height:auto;display:block;margin:0 auto" />
+                          </td>
+                          <td align="center" valign="middle" style="padding:0 8px">
+                            <img src="https://sporting.vteximg.com.br/arquivos/logo-woker-white.png"
+                                 alt="Woker" width="80"
+                                 class="brand-logo-woker"
+                                 style="width:80px;height:auto;display:block;margin:0 auto" />
+                          </td>
+                          <td align="center" valign="middle" style="padding:0 8px">
+                            <img src="https://sporting.vteximg.com.br/arquivos/logo-luquin-white.png"
+                                 alt="Antonio Luquin" width="100"
+                                 class="brand-logo-luquin"
+                                 style="width:100px;height:auto;display:block;margin:0 auto" />
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+
+                  <!-- Links -->
+                  <tr>
+                    <td style="padding:16px 0 14px;border-bottom:1px solid rgba(255,255,255,.08)">
+                      <table role="presentation" width="100%">
+                        <tr>
+                          <td valign="middle" align="center">
+                            <a href="https://{{#if _accountInfo.HostName}}{{_accountInfo.HostName}}{{else}}{{#if hostName}}{{hostName}}{{else}}{{_accountInfo.AccountName}}.vtexcommercestable.com.br{{/if}}{{/if}}/contacto" target="_blank" style="font-family:'Poppins',-apple-system,sans-serif;font-size:11px;color:rgba(255,255,255,.45);text-decoration:none;font-weight:500">Contacto</a>
+                            &nbsp;&nbsp;
+                            <a href="https://{{#if _accountInfo.HostName}}{{_accountInfo.HostName}}{{else}}{{#if hostName}}{{hostName}}{{else}}{{_accountInfo.AccountName}}.vtexcommercestable.com.br{{/if}}{{/if}}/centro-de-ayuda" target="_blank" style="font-family:'Poppins',-apple-system,sans-serif;font-size:11px;color:rgba(255,255,255,.45);text-decoration:none;font-weight:500">Ayuda</a>
+                            &nbsp;&nbsp;
+                            <a href="https://{{#if _accountInfo.HostName}}{{_accountInfo.HostName}}{{else}}{{#if hostName}}{{hostName}}{{else}}{{_accountInfo.AccountName}}.vtexcommercestable.com.br{{/if}}{{/if}}/cambios-y-devoluciones" target="_blank" style="font-family:'Poppins',-apple-system,sans-serif;font-size:11px;color:rgba(255,255,255,.45);text-decoration:none;font-weight:500">Devoluciones</a>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+
+                  <!-- Copyright -->
+                  <tr>
+                    <td align="center" style="padding-top:14px">
+                      <p style="font-family:'Poppins',-apple-system,sans-serif;font-size:10.5px;color:rgba(255,255,255,.25);text-align:center;margin:0;line-height:1.6">&copy; {{_accountInfo.TradingName}} — Todos los derechos reservados</p>
+                    </td>
+                  </tr>
+
+                </table>
               </td>
             </tr>
+
+            <!-- TRUST LOGOS -->
             <tr>
-              <td align="center" style="padding: 16px 8px 8px 8px">
-                <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-bottom:6px">
-                  ¿Tenés alguna duda?
-                  <a href="https://{{#if _accountInfo.HostName}}{{_accountInfo.HostName}}{{else}}{{hostName}}{{/if}}/centro-de-ayuda" target="_blank" class="footer-link" style="color:#16a34a;font-weight:bold">Visitá nuestro Centro de ayuda</a>.
-                </p>
-                <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-bottom:12px">
-                  Equipo <strong style="color:#374151">{{_accountInfo.TradingName}}</strong>
-                </p>
-                <p class="text-sm" style="font-size:13px;line-height:20px;color:#9ca3af;margin:0">
-                  © 2026 {{_accountInfo.TradingName}}. Todos los derechos reservados.
-                </p>
+              <td style="padding:8px 0 0">
+                <table role="presentation" width="100%" class="trust-logos" bgcolor="#f4f4f4" style="background:#f4f4f4;border-radius:10px;table-layout:fixed">
+                  <tr>
+                    <td align="center" valign="middle" style="padding:18px 8px">
+                      <img src="https://sporting.vteximg.com.br/arquivos/logo-cace.png"
+                           alt="CACE" width="56"
+                           style="width:56px;height:auto;display:block;margin:0 auto" />
+                    </td>
+                    <td align="center" valign="middle" style="padding:18px 8px">
+                      <img src="https://sporting.vteximg.com.br/arquivos/logo-mercadopago.png"
+                           alt="Mercado Pago" width="110"
+                           style="width:110px;height:auto;display:block;margin:0 auto" />
+                    </td>
+                    <td align="center" valign="middle" style="padding:18px 8px">
+                      <img src="https://sporting.vteximg.com.br/arquivos/logo-infracommerce.png"
+                           alt="Infracommerce" width="100"
+                           style="width:100px;height:auto;display:block;margin:0 auto" />
+                    </td>
+                  </tr>
+                </table>
               </td>
             </tr>
-            <tr>
-              <td style="padding: 8px 0 0 0">
-                <img
-                  src="https://sporting.vteximg.com.br/arquivos/barra-footer-proveedores-v3.png"
-                  alt="Medios de pago y seguridad"
-                  style="width:100%;max-width:600px;height:auto"
-                />
-              </td>
-            </tr>
+
           </table>
         </td>
       </tr>
