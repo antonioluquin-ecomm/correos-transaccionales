@@ -9,7 +9,7 @@
     <meta name="format-detection" content="telephone=no,address=no,email=no,date=no" />
     <title>{{_accountInfo.TradingName}} — Recibimos tu pedido</title>
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&display=swap');
 
       html, body {
         margin: 0 !important; padding: 0 !important;
@@ -93,8 +93,6 @@
         .main-card { border-radius: 0 0 12px 12px !important; }
         .trust-logos { border-radius: 0 !important; }
         .header-logo { width: 128px !important; }
-        .status-pill { padding: 4px 9px !important; }
-        .status-pill-text { font-size: 9px !important; }
         .brand-logo-sporting { width: 88px !important; }
         .brand-logo-woker { width: 64px !important; }
         .brand-logo-luquin { width: 78px !important; }
@@ -120,25 +118,10 @@
                   <!-- HEADER -->
                   <tr>
                     <td bgcolor="#ffffff" style="background:#ffffff;padding:20px 24px 16px;border-bottom:1px solid #eef2f7">
-                      <table role="presentation" width="100%">
-                        <tr>
-                          <td valign="middle">
-                            <img src="https://sporting.vteximg.com.br/arquivos/logo-mail-2.png"
-                                 alt="Sporting" width="150"
-                                 class="header-logo"
-                                 style="width:150px;height:auto;display:block" />
-                          </td>
-                          <td valign="middle" align="right">
-                            <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="right">
-                              <tr>
-                                <td bgcolor="#e9fbe7" class="status-pill" style="background:#e9fbe7;border-radius:20px;padding:5px 12px">
-                                  <p class="status-pill-text" style="font-family:'Poppins',-apple-system,sans-serif;font-size:10px;font-weight:700;color:#1a7a0a;margin:0;white-space:nowrap">&#9679;&nbsp;Pedido recibido</p>
-                                </td>
-                              </tr>
-                            </table>
-                          </td>
-                        </tr>
-                      </table>
+                      <img src="https://sporting.vteximg.com.br/arquivos/logo-mail-2.png"
+                           alt="Sporting" width="150"
+                           class="header-logo"
+                           style="width:150px;height:auto;display:block" />
                     </td>
                   </tr>
 
@@ -225,39 +208,34 @@
                   <!-- STEPPER (dots + lines) -->
                   <tr>
                     <td style="padding:24px 24px 16px">
-                      <!-- Dots + connecting lines -->
-                      <table role="presentation" width="100%" style="table-layout:fixed;margin-bottom:10px">
-                        <tr>
-                          <td width="28" align="center" valign="middle" style="width:28px;padding:0">
-                            <div style="width:28px;height:28px;line-height:28px;border-radius:50%;background:#25B60C;text-align:center;font-size:13px;font-weight:bold;color:#fff;margin:0 auto">&#10003;</div>
-                          </td>
-                          <td valign="middle" style="padding:0 4px">
-                            <div style="height:3px;background:#25B60C;border-radius:2px;font-size:0;line-height:0">&nbsp;</div>
-                          </td>
-                          <td width="28" align="center" valign="middle" style="width:28px;padding:0">
-                            <div style="width:28px;height:28px;line-height:28px;border-radius:50%;background:#3b82f6;text-align:center;font-size:11px;font-weight:bold;color:#fff;margin:0 auto">2</div>
-                          </td>
-                          <td valign="middle" style="padding:0 4px">
-                            <div style="height:3px;background:#e5e7eb;border-radius:2px;font-size:0;line-height:0">&nbsp;</div>
-                          </td>
-                          <td width="28" align="center" valign="middle" style="width:28px;padding:0">
-                            <div style="width:28px;height:28px;line-height:28px;border-radius:50%;background:#ebebeb;text-align:center;font-size:11px;font-weight:bold;color:#ccc;margin:0 auto">3</div>
-                          </td>
-                          <td valign="middle" style="padding:0 4px">
-                            <div style="height:3px;background:#e5e7eb;border-radius:2px;font-size:0;line-height:0">&nbsp;</div>
-                          </td>
-                          <td width="28" align="center" valign="middle" style="width:28px;padding:0">
-                            <div style="width:28px;height:28px;line-height:28px;border-radius:50%;background:#ebebeb;text-align:center;font-size:11px;font-weight:bold;color:#ccc;margin:0 auto">4</div>
-                          </td>
-                        </tr>
-                      </table>
-                      <!-- Labels -->
+                      <!-- Stepper (dots + etiquetas unificados, misma tabla 7 columnas) -->
                       <table role="presentation" width="100%" style="table-layout:fixed">
                         <tr>
-                          <td width="25%" align="center" style="padding:0 2px"><p style="font-family:'Poppins',-apple-system,sans-serif;font-size:10px;font-weight:700;color:#1a7a0a;text-align:center;margin:0">&#10003; Recibido</p></td>
-                          <td width="25%" align="center" style="padding:0 2px"><p style="font-family:'Poppins',-apple-system,sans-serif;font-size:10px;font-weight:700;color:#3b82f6;text-align:center;margin:0">Pago</p></td>
-                          <td width="25%" align="center" style="padding:0 2px"><p style="font-family:'Poppins',-apple-system,sans-serif;font-size:10px;color:#9ca3af;text-align:center;margin:0">Preparación</p></td>
-                          <td width="25%" align="center" style="padding:0 2px"><p style="font-family:'Poppins',-apple-system,sans-serif;font-size:10px;color:#9ca3af;text-align:center;margin:0">{{#eq orders.0.shippingData.logisticsInfo.[0].selectedDeliveryChannel "pickup-in-point"}}Retiro{{else}}Entrega{{/eq}}</p></td>
+                          <td width="28" align="center" valign="top" style="width:28px;padding:0">
+                            <div style="width:28px;height:28px;line-height:28px;border-radius:50%;background:#25B60C;text-align:center;font-size:13px;font-weight:bold;color:#fff;margin:0 auto">&#10003;</div>
+                            <p style="font-family:'Poppins',-apple-system,sans-serif;font-size:10px;font-weight:700;color:#1a7a0a;text-align:center;margin:5px 0 0;white-space:nowrap">&#10003; Recibido</p>
+                          </td>
+                          <td valign="top" style="padding:14px 4px 0">
+                            <div style="height:3px;background:#25B60C;border-radius:2px;font-size:0;line-height:0">&nbsp;</div>
+                          </td>
+                          <td width="28" align="center" valign="top" style="width:28px;padding:0">
+                            <div style="width:28px;height:28px;line-height:28px;border-radius:50%;background:#3b82f6;text-align:center;font-size:11px;font-weight:bold;color:#fff;margin:0 auto">2</div>
+                            <p style="font-family:'Poppins',-apple-system,sans-serif;font-size:10px;font-weight:700;color:#3b82f6;text-align:center;margin:5px 0 0;white-space:nowrap">Pago</p>
+                          </td>
+                          <td valign="top" style="padding:14px 4px 0">
+                            <div style="height:3px;background:#e5e7eb;border-radius:2px;font-size:0;line-height:0">&nbsp;</div>
+                          </td>
+                          <td width="28" align="center" valign="top" style="width:28px;padding:0">
+                            <div style="width:28px;height:28px;line-height:28px;border-radius:50%;background:#ebebeb;text-align:center;font-size:11px;font-weight:bold;color:#ccc;margin:0 auto">3</div>
+                            <p style="font-family:'Poppins',-apple-system,sans-serif;font-size:10px;color:#9ca3af;text-align:center;margin:5px 0 0;white-space:nowrap">Preparación</p>
+                          </td>
+                          <td valign="top" style="padding:14px 4px 0">
+                            <div style="height:3px;background:#e5e7eb;border-radius:2px;font-size:0;line-height:0">&nbsp;</div>
+                          </td>
+                          <td width="28" align="center" valign="top" style="width:28px;padding:0">
+                            <div style="width:28px;height:28px;line-height:28px;border-radius:50%;background:#ebebeb;text-align:center;font-size:11px;font-weight:bold;color:#ccc;margin:0 auto">4</div>
+                            <p style="font-family:'Poppins',-apple-system,sans-serif;font-size:10px;color:#9ca3af;text-align:center;margin:5px 0 0;white-space:nowrap">{{#eq orders.0.shippingData.logisticsInfo.[0].selectedDeliveryChannel "pickup-in-point"}}Retiro{{else}}Entrega{{/eq}}</p>
+                          </td>
                         </tr>
                       </table>
                     </td>
@@ -376,7 +354,7 @@
                             {{#if detailUrl}}</a>{{/if}}
                           </td>
                           <td valign="top" style="padding-left:12px">
-                            {{#if detailUrl}}<a href="https://{{@root.hostName}}{{detailUrl}}" target="_blank" class="item-name" style="font-size:14px;line-height:20px;font-weight:bold;color:#111827;display:block;text-decoration:none;margin:0 0 3px 0">{{name}}</a>{{else}}<p class="item-name" style="font-size:14px;line-height:20px;font-weight:bold;color:#111827;margin:0 0 3px 0">{{name}}</p>{{/if}}
+                            {{#if detailUrl}}<a href="https://{{@root.hostName}}{{detailUrl}}" target="_blank" class="item-name" style="font-size:14px;line-height:20px;font-weight:bold;color:#111827;display:block;text-decoration:none;margin:0 0 3px 0;word-break:break-word;overflow-wrap:break-word">{{name}}</a>{{else}}<p class="item-name" style="font-size:14px;line-height:20px;font-weight:bold;color:#111827;margin:0 0 3px 0;word-break:break-word;overflow-wrap:break-word">{{name}}</p>{{/if}}
                             {{#if additionalInfo.brandName}}<p class="item-meta" style="font-size:12px;line-height:18px;color:#6b7280;margin:0">{{additionalInfo.brandName}}</p>{{/if}}
                             {{#if skuName}}<p class="item-meta" style="font-size:12px;line-height:18px;color:#6b7280;margin:0">Variante: {{skuName}}</p>{{/if}}
                             <p class="item-meta" style="font-size:12px;line-height:18px;color:#6b7280;margin:0">Cantidad: {{quantity}}</p>
@@ -414,31 +392,31 @@
                   {{#eq id "Items"}}
                   <tr>
                     <td style="padding:10px 20px"><span class="tot-key" style="font-size:14px;line-height:20px;color:#374151">Subtotal de productos</span></td>
-                    <td style="padding:10px 20px;text-align:right"><span class="tot-val" style="font-size:14px;line-height:20px;color:#374151">$ {{formatCurrency value}}</span></td>
+                    <td style="padding:10px 20px;text-align:right;white-space:nowrap;width:1%"><span class="tot-val" style="font-size:14px;line-height:20px;color:#374151">$ {{formatCurrency value}}</span></td>
                   </tr>
                   {{/eq}}
                   {{#eq id "Discounts"}}{{#if value}}
                   <tr>
                     <td style="padding:10px 20px"><span class="tot-key" style="font-size:14px;line-height:20px;color:#374151">Descuentos</span></td>
-                    <td style="padding:10px 20px;text-align:right"><span class="tot-val green" style="color:#1a7a0a">$ {{formatCurrency value}}</span></td>
+                    <td style="padding:10px 20px;text-align:right;white-space:nowrap;width:1%"><span class="tot-val green" style="color:#1a7a0a">$ {{formatCurrency value}}</span></td>
                   </tr>
                   {{/if}}{{/eq}}
                   {{#eq id "GiftCards"}}{{#if value}}
                   <tr>
                     <td style="padding:10px 20px"><span class="tot-key" style="font-size:14px;line-height:20px;color:#374151">Gift card</span></td>
-                    <td style="padding:10px 20px;text-align:right"><span class="tot-val" style="font-size:14px;line-height:20px;color:#374151">$ {{formatCurrency value}}</span></td>
+                    <td style="padding:10px 20px;text-align:right;white-space:nowrap;width:1%"><span class="tot-val" style="font-size:14px;line-height:20px;color:#374151">$ {{formatCurrency value}}</span></td>
                   </tr>
                   {{/if}}{{/eq}}
                   {{#eq id "Tax"}}{{#if value}}
                   <tr>
                     <td style="padding:10px 20px"><span class="tot-key" style="font-size:14px;line-height:20px;color:#374151">Impuestos</span></td>
-                    <td style="padding:10px 20px;text-align:right"><span class="tot-val" style="font-size:14px;line-height:20px;color:#374151">$ {{formatCurrency value}}</span></td>
+                    <td style="padding:10px 20px;text-align:right;white-space:nowrap;width:1%"><span class="tot-val" style="font-size:14px;line-height:20px;color:#374151">$ {{formatCurrency value}}</span></td>
                   </tr>
                   {{/if}}{{/eq}}
                   {{#eq id "Shipping"}}
                   <tr>
                     <td style="padding:10px 20px"><span class="tot-key" style="font-size:14px;line-height:20px;color:#374151">Envío</span></td>
-                    <td style="padding:10px 20px;text-align:right">
+                    <td style="padding:10px 20px;text-align:right;white-space:nowrap;width:1%">
                       {{#eq value 0}}
                       {{#if alternativeTotals}} {{#each alternativeTotals}}{{#eq id "AlternativeShippingTotal"}}<span class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;text-decoration:line-through;margin-right:6px">$ {{formatCurrency value}}</span>{{/eq}}{{/each}} {{/if}}
                       <span class="tot-val" style="font-weight:bold;color:#1a7a0a">Gratis</span>
@@ -458,7 +436,7 @@
                   {{/if}} {{/with}}
                   <tr>
                     <td style="padding:14px 20px;border-top:2px solid #f3f4f6"><span class="tot-strong" style="font-size:16px;line-height:22px;font-weight:bold;color:#111827">Total</span></td>
-                    <td style="padding:14px 20px;border-top:2px solid #f3f4f6;text-align:right"><span class="tot-strong" style="font-size:16px;line-height:22px;font-weight:bold;color:#111827">$ {{formatCurrency orders.0.value}}</span></td>
+                    <td style="padding:14px 20px;border-top:2px solid #f3f4f6;text-align:right;white-space:nowrap;width:1%"><span class="tot-strong" style="font-size:16px;line-height:22px;font-weight:bold;color:#111827">$ {{formatCurrency orders.0.value}}</span></td>
                   </tr>
                 </table>
               </td>
