@@ -1,4 +1,4 @@
-<!--Pedido-Cancelado — Version 3-->
+<!--Pedido-Cancelado — Version 2-->
 <!doctype html>
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -6,578 +6,257 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <meta name="x-apple-disable-message-reformatting" />
-    <meta
-      name="format-detection"
-      content="telephone=no,address=no,email=no,date=no"
-    />
+    <meta name="format-detection" content="telephone=no,address=no,email=no,date=no" />
     <title>{{_accountInfo.TradingName}} — Tu pedido fue cancelado</title>
     <style>
-      /* ── Reset ─────────────────────────────────── */
-      html,
-      body {
-        margin: 0 !important;
-        padding: 0 !important;
-        width: 100% !important;
-        background: #f3f4f6 !important;
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&display=swap');
+
+      html, body {
+        margin: 0 !important; padding: 0 !important;
+        width: 100% !important; background: #e8e8e8 !important;
       }
       body {
-        font-family:
-          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-          Arial, sans-serif;
+        font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         color: #111827;
       }
-      * {
-        -ms-text-size-adjust: 100%;
-        -webkit-text-size-adjust: 100%;
-      }
-      table,
-      td {
-        border-collapse: collapse !important;
-        mso-table-lspace: 0pt !important;
-        mso-table-rspace: 0pt !important;
-      }
-      img {
-        border: 0;
-        outline: none;
-        text-decoration: none;
-        -ms-interpolation-mode: bicubic;
-        display: block;
-      }
-      a {
-        text-decoration: none;
-        color: inherit;
-      }
-      a[x-apple-data-detectors] {
-        color: inherit !important;
-        text-decoration: none !important;
-      }
-      #outlook a {
-        padding: 0;
-      }
+      * { -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; }
+      table, td { border-collapse: collapse !important; mso-table-lspace: 0pt !important; mso-table-rspace: 0pt !important; }
+      img { border: 0; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; display: block; }
+      a { text-decoration: none; color: inherit; }
+      a[x-apple-data-detectors] { color: inherit !important; text-decoration: none !important; }
+      #outlook a { padding: 0; }
 
-      /* ── Layout ─────────────────────────────────── */
-      .wrap {
-        width: 100%;
-        max-width: 600px;
-        margin: 0 auto;
-      }
+      .wrap { width: 100%; max-width: 600px; margin: 0 auto; }
+      .card { background: #ffffff; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden; }
+      .gap { height: 12px; line-height: 12px; font-size: 12px; }
 
-      /* ── Cards ──────────────────────────────────── */
-      .card {
-        background: #ffffff;
-        border: 1px solid #e5e7eb;
-        border-radius: 12px;
-        overflow: hidden;
-      }
+      .h2 { font-size: 15px; line-height: 22px; font-weight: bold; color: #111827; margin: 0 0 12px 0; }
+      .text { font-size: 14px; line-height: 22px; color: #374151; margin: 0; }
+      .text-sm { font-size: 13px; line-height: 20px; color: #6b7280; margin: 0; }
 
-      /* ── Gaps ────────────────────────────────────── */
-      .gap {
-        height: 12px;
-        line-height: 12px;
-        font-size: 12px;
-      }
+      .sum-cell { width: 50%; padding: 16px 18px; vertical-align: top; border-bottom: 1px solid #f3f4f6; }
+      .sum-cell-r { border-left: 1px solid #f3f4f6; }
+      .sum-last { border-bottom: none !important; }
 
-      /* ── Tipografía ─────────────────────────────── */
-      .h1 {
-        font-size: 26px;
-        line-height: 32px;
-        font-weight: bold;
-        color: #111827;
-        margin: 0 0 8px 0;
-      }
-      .h2 {
-        font-size: 15px;
-        line-height: 22px;
-        font-weight: bold;
-        color: #111827;
-        margin: 0 0 12px 0;
-      }
-      .text {
-        font-size: 14px;
-        line-height: 22px;
-        color: #374151;
-        margin: 0;
-      }
-      .text-sm {
-        font-size: 13px;
-        line-height: 20px;
-        color: #6b7280;
-        margin: 0;
-      }
-      .label {
-        font-size: 11px;
-        line-height: 16px;
-        font-weight: bold;
-        letter-spacing: 0.5px;
-        text-transform: uppercase;
-        color: #6b7280;
-        margin: 0 0 4px 0;
-      }
-      .value {
-        font-size: 15px;
-        line-height: 22px;
-        font-weight: bold;
-        color: #111827;
-        margin: 0;
-      }
+      .two-cell { width: 50%; padding: 18px 20px; vertical-align: top; }
+      .two-cell-r { border-left: 1px solid #f3f4f6; }
 
-      /* ── Badge cancelado ─────────────────────────── */
-      .badge-cancel {
-        display: inline-block;
-        background: #fee2e2;
-        border: 1px solid #fecaca;
-        border-radius: 999px;
-        padding: 5px 12px;
-        font-size: 12px;
-        line-height: 16px;
-        font-weight: bold;
-        color: #991b1b;
-      }
+      .item-name { font-size: 14px; line-height: 20px; font-weight: bold; color: #111827; margin: 0 0 3px 0; }
+      .item-meta { font-size: 12px; line-height: 18px; color: #6b7280; margin: 0; }
+      .item-price { font-size: 14px; line-height: 20px; font-weight: bold; color: #111827; margin: 4px 0 0 0; }
+      .item-old-price { font-size: 12px; line-height: 18px; color: #9ca3af; text-decoration: line-through; margin: 2px 0 0 0; }
 
-      /* ── Resumen 2x2 ─────────────────────────────── */
-      .sum-cell {
-        width: 50%;
-        padding: 14px 20px;
-        vertical-align: top;
-        border-bottom: 1px solid #f3f4f6;
-      }
-      .sum-cell-r {
-        border-left: 1px solid #f3f4f6;
-      }
-      .sum-last {
-        border-bottom: none !important;
-      }
+      .tot-key { font-size: 14px; line-height: 20px; color: #374151; }
+      .tot-val { font-size: 14px; line-height: 20px; color: #374151; }
+      .tot-strong { font-size: 16px; line-height: 22px; font-weight: bold; color: #111827; }
+      .green { color: #1a7a0a; }
 
-      /* ── Progress steps ──────────────────────────── */
-      .step-dot {
-        width: 28px;
-        height: 28px;
-        line-height: 28px;
-        border-radius: 50%;
-        text-align: center;
-        font-size: 11px;
-        font-weight: bold;
-        margin: 0 auto 6px auto;
-        display: block;
-      }
-      .step-done {
-        background: #16a34a;
-        color: #ffffff;
-      }
-      .step-cancel {
-        background: #ef4444;
-        color: #ffffff;
-      }
-      .step-next {
-        background: #f3f4f6;
-        color: #9ca3af;
-      }
-      .step-lbl {
-        font-size: 11px;
-        font-weight: bold;
-        text-align: center;
-        margin: 0;
-      }
-      .line-done {
-        height: 2px;
-        background: #16a34a;
-      }
-      .line-cancel {
-        height: 2px;
-        background: #ef4444;
-      }
-      .line-next {
-        height: 2px;
-        background: #e5e7eb;
-      }
-
-      /* ── Pago / Envío 2 col ──────────────────────── */
-      .two-cell {
-        width: 50%;
-        padding: 18px 20px;
-        vertical-align: top;
-      }
-      .two-cell-r {
-        border-left: 1px solid #f3f4f6;
-      }
-
-      /* ── Ítems ───────────────────────────────────── */
-      .item-name {
-        font-size: 14px;
-        line-height: 20px;
-        font-weight: bold;
-        color: #111827;
-        margin: 0 0 3px 0;
-      }
-      .item-meta {
-        font-size: 12px;
-        line-height: 18px;
-        color: #6b7280;
-        margin: 0;
-      }
-      .item-price {
-        font-size: 14px;
-        line-height: 20px;
-        font-weight: bold;
-        color: #111827;
-        margin: 4px 0 0 0;
-      }
-      .item-old-price {
-        font-size: 12px;
-        line-height: 18px;
-        color: #9ca3af;
-        text-decoration: line-through;
-        margin: 2px 0 0 0;
-      }
-
-      /* ── Totales ─────────────────────────────────── */
-      .tot-key {
-        font-size: 14px;
-        line-height: 20px;
-        color: #374151;
-      }
-      .tot-val {
-        font-size: 14px;
-        line-height: 20px;
-        color: #374151;
-      }
-      .tot-strong {
-        font-size: 16px;
-        line-height: 22px;
-        font-weight: bold;
-        color: #111827;
-      }
-      .green {
-        color: #16a34a;
-      }
-
-      /* ── CTAs ────────────────────────────────────── */
-      .cta-dark {
-        display: inline-block;
+      .cta-primary {
+        display: block; width: 100%; box-sizing: border-box;
         background: #111827;
-        color: #ffffff !important;
-        border-radius: 10px;
-        font-size: 15px;
-        line-height: 48px;
-        font-weight: bold;
-        padding: 0 28px;
-        text-align: center;
-        mso-line-height-rule: exactly;
-      }
-      .cta-green {
-        display: inline-block;
-        background: #16a34a;
-        color: #ffffff !important;
-        border-radius: 10px;
-        font-size: 15px;
-        line-height: 48px;
-        font-weight: bold;
-        padding: 0 28px;
-        text-align: center;
-        mso-line-height-rule: exactly;
+        color: #ffffff !important; border-radius: 8px;
+        font-family: 'Poppins', -apple-system, sans-serif;
+        font-size: 13px; line-height: 52px; font-weight: 700;
+        letter-spacing: 1px; text-transform: uppercase; text-align: center;
       }
 
-      /* ── Footer ──────────────────────────────────── */
-      .footer-link {
-        color: #16a34a !important;
-        font-weight: bold;
-      }
-
-      /* ── Mobile ──────────────────────────────────── */
-      .m-hide {
-        display: table-cell;
-      }
-      .m-show {
-        display: none;
-        max-height: 0;
-        overflow: hidden;
-        mso-hide: all;
-      }
+      .m-hide { display: table-cell; }
+      .m-show { display: none; max-height: 0; overflow: hidden; mso-hide: all; }
 
       @media only screen and (max-width: 600px) {
-        .wrap {
-          width: 100% !important;
-          max-width: 100% !important;
-        }
-        .card {
-          border-radius: 0 !important;
-          border-left: none !important;
-          border-right: none !important;
-        }
-        .outer-pad {
-          padding: 12px 0 !important;
-        }
-        .sum-cell,
-        .sum-cell-r {
-          display: block !important;
-          width: 100% !important;
-          border-left: none !important;
-          border-bottom: 1px solid #f3f4f6 !important;
-          padding: 12px 16px !important;
-          box-sizing: border-box !important;
+        .wrap { width: 100% !important; max-width: 100% !important; }
+        .card { border-radius: 0 !important; border-left: none !important; border-right: none !important; }
+        .outer-pad { padding: 0 !important; }
+        .footer-td { border-radius: 0 !important; }
+        .hero-td { padding: 32px 20px 28px !important; }
+        .sum-cell, .sum-cell-r {
+          display: block !important; width: 100% !important;
+          border-left: none !important; border-bottom: 1px solid #f3f4f6 !important;
+          padding: 14px 16px !important; box-sizing: border-box !important;
         }
         .sum-last {
-          display: block !important;
-          width: 100% !important;
-          border-left: none !important;
-          border-bottom: none !important;
-          padding: 12px 16px !important;
-          box-sizing: border-box !important;
+          display: block !important; width: 100% !important;
+          border-left: none !important; border-bottom: none !important;
+          padding: 14px 16px !important; box-sizing: border-box !important;
         }
-        .two-cell,
-        .two-cell-r {
-          display: block !important;
-          width: 100% !important;
-          border-left: none !important;
-          border-bottom: 1px solid #f3f4f6 !important;
-          padding: 14px 16px !important;
-          box-sizing: border-box !important;
+        .two-cell, .two-cell-r {
+          display: block !important; width: 100% !important;
+          border-left: none !important; border-bottom: 1px solid #f3f4f6 !important;
+          padding: 14px 16px !important; box-sizing: border-box !important;
         }
-        .two-cell-last {
-          border-bottom: none !important;
-        }
-        .cta-dark,
-        .cta-green {
-          display: block !important;
-          width: 100% !important;
-          box-sizing: border-box !important;
-          margin-bottom: 8px !important;
-          text-align: center !important;
-        }
-        .h1 {
-          font-size: 22px !important;
-          line-height: 28px !important;
-        }
-        .m-hide {
-          display: none !important;
-        }
-        .m-show {
-          display: block !important;
-          max-height: none !important;
-          overflow: visible !important;
-        }
-        .item-img {
-          width: 60px !important;
-          height: auto !important;
-        }
-        .logo-strip {
-          padding: 16px 16px 14px !important;
-          border-radius: 0 !important;
-        }
-        .logo-img {
-          width: 120px !important;
-        }
-        /* Hero: quitar border-radius en mobile (la card ya va edge-to-edge) */
-        .hero-cancel-td {
-          border-radius: 0 !important;
-          padding-left: 16px !important;
-          padding-right: 16px !important;
-        }
+        .two-cell-last { border-bottom: none !important; }
+        .cta-primary { line-height: 52px !important; }
+        .h1 { font-size: 22px !important; line-height: 28px !important; }
+        .m-hide { display: none !important; }
+        .m-show { display: block !important; max-height: none !important; overflow: visible !important; }
+        .item-img { width: 60px !important; height: auto !important; }
+        .main-card { border-radius: 0 0 12px 12px !important; }
+        .trust-logos { border-radius: 0 !important; }
+        .header-logo { width: 128px !important; }
+        .brand-logo-sporting { width: 88px !important; }
+        .brand-logo-woker { width: 64px !important; }
+        .brand-logo-luquin { width: 78px !important; }
       }
     </style>
   </head>
-
   <body>
     <!-- Preheader -->
-    <div
-      style="
-        display: none;
-        max-height: 0;
-        overflow: hidden;
-        opacity: 0;
-        color: transparent;
-        visibility: hidden;
-        mso-hide: all;
-      "
-    >
-      Tu pedido {{orderId}} fue cancelado. Ya estamos procesando el
-      reintegro del importe
-      abonado.&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;
+    <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;visibility:hidden;mso-hide:all">
+      Tu pedido {{orderId}} fue cancelado. Ya estamos procesando el reintegro del importe abonado.&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;
     </div>
 
-    <table role="presentation" width="100%" bgcolor="#f3f4f6">
+    <table role="presentation" width="100%" bgcolor="#e8e8e8">
       <tr>
-        <td align="center" class="outer-pad" style="padding: 24px 12px">
+        <td align="center" class="outer-pad" style="padding:24px 12px 48px">
           <table role="presentation" class="wrap" width="100%">
 
-            <!-- ═══ CARD PRINCIPAL ═══ -->
+            <!-- ══════════════════════════════════════════
+                 CARD PRINCIPAL
+            ══════════════════════════════════════════ -->
             <tr>
               <td>
-                <table role="presentation" width="100%" class="card">
+                <table role="presentation" width="100%" class="card main-card">
 
-                  <!-- ── Logo strip ── -->
+                  <!-- HEADER -->
                   <tr>
-                    <td align="center" class="logo-strip" style="background: #ffffff; border-radius: 12px 12px 0 0; padding: 20px 24px 16px;">
-                      <a href="https://{{hostName}}" target="_blank">
-                        <img src="https://sporting.vteximg.com.br/arquivos/logo-mail-2.png"
-                             alt="Sporting" width="150" class="logo-img"
-                             style="width: 150px; max-width: 150px; height: auto" />
-                      </a>
+                    <td bgcolor="#ffffff" style="background:#ffffff;padding:20px 24px 16px;border-bottom:1px solid #eef2f7">
+                      <img src="https://sporting.vteximg.com.br/arquivos/logo-mail-2.png"
+                           alt="Sporting" width="150"
+                           class="header-logo"
+                           style="width:150px;height:auto;display:block" />
                     </td>
                   </tr>
 
-                  <!-- ── Hero cancelación ── -->
+                  <!-- HERO -->
                   <tr>
-                    <td class="hero-cancel-td" bgcolor="#7f1d1d" style="background: #7f1d1d; padding: 30px 24px 26px; text-align: center">
-                      <!-- Ícono ✕ -->
-                      <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin: 0 auto 14px auto">
+                    <td class="hero-td" bgcolor="#7f1d1d" style="background:linear-gradient(150deg,#3d0a0a 0%,#7f1d1d 35%,#991b1b 75%,#dc2626 100%);padding:40px 28px 36px;text-align:center">
+                      <!-- ✕ icono con anillo exterior -->
+                      <table cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 16px auto">
                         <tr>
-                          <td align="center" style="width: 56px; height: 56px; line-height: 56px; background: #991b1b; border: 2px solid #fca5a5; border-radius: 50%; font-size: 22px; font-weight: bold; color: #ffffff; text-align: center">&#10005;</td>
+                          <td align="center" valign="middle" width="80" height="80" bgcolor="#991b1b" style="width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.12)">
+                            <table cellpadding="0" cellspacing="0" border="0" align="center">
+                              <tr>
+                                <td align="center" valign="middle" width="52" height="52" style="width:52px;height:52px;border-radius:50%;background:#ffffff;font-size:22px;line-height:52px;font-weight:bold;color:#991b1b;text-align:center">&#10005;</td>
+                              </tr>
+                            </table>
+                          </td>
                         </tr>
                       </table>
-                      <!-- Título -->
-                      <p style="font-size: 21px; line-height: 27px; font-weight: bold; color: #ffffff; margin: 0 0 8px 0; text-align: center">
-                        {{#if cancellationData.requestedByUser}}Cancelaste tu pedido{{else}}Tu pedido fue cancelado{{/if}}
+                      <!-- Eyebrow -->
+                      <p style="font-family:'Poppins',-apple-system,sans-serif;font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.6);margin:0 0 10px 0;text-align:center">Pedido cancelado</p>
+                      <!-- Título condicional -->
+                      <p class="h1" style="font-family:'Poppins',-apple-system,sans-serif;font-size:28px;line-height:1.1;font-weight:800;color:#fff;letter-spacing:-0.3px;margin:0 0 8px 0;text-align:center;text-shadow:0 2px 16px rgba(0,0,0,.2)">
+                        {{#if cancellationData.requestedByUser}}¡Cancelaste tu pedido!{{else}}Tu pedido fue cancelado{{/if}}
                       </p>
-                      <!-- Greeting -->
-                      <p style="font-size: 13px; line-height: 18px; color: #fca5a5; margin: 0; text-align: center">
-                        Hola{{#if clientProfileData.firstName}}, {{clientProfileData.firstName}}{{/if}}
+                      <!-- Sub -->
+                      <p style="font-family:'Poppins',-apple-system,sans-serif;font-size:13px;color:rgba(255,255,255,.8);margin:0;text-align:center">
+                        Hola{{#if clientProfileData.firstName}}, {{clientProfileData.firstName}}{{/if}} — ya procesamos la cancelación.
                       </p>
                     </td>
                   </tr>
 
-                  <!-- ── Descripción + callout ── -->
+                  <!-- CALLOUT: Reintegro en proceso -->
                   <tr>
-                    <td style="padding: 20px 24px; border-bottom: 1px solid #f3f4f6">
-                      <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin: 0 0 14px 0">
-                        {{#if cancellationData.requestedByUser}}
-                        Cancelaste el <strong>pedido {{orderId}}</strong>{{#if cancellationData.cancellationDate}} el <strong>{{formatDate cancellationData.cancellationDate}}</strong>{{/if}}.
-                        {{else}}
-                        Tu <strong>pedido {{orderId}}</strong> fue cancelado{{#if cancellationData.cancellationDate}} el <strong>{{formatDate cancellationData.cancellationDate}}</strong>{{/if}}.
-                        {{/if}}
-                      </p>
-
-                      {{#if cancellationData.reason}}
-                      <p style="display: inline-block; background: #fef2f2; border: 1px solid #fecaca; border-radius: 6px; padding: 4px 10px; font-size: 13px; line-height: 20px; color: #991b1b; margin: 0 0 14px 0">
-                        Motivo: {{cancellationData.reason}}
-                      </p>
-                      {{/if}}
-
-                      <!-- Callout con borde izquierdo de acento -->
-                      <table role="presentation" width="100%" style="table-layout: fixed">
+                    <td style="padding:22px 24px 0">
+                      <table role="presentation" width="100%" bgcolor="#fef2f2" style="background:#fef2f2;border-radius:10px">
                         <tr>
-                          <td style="width: 4px; background: #ef4444; border-radius: 4px 0 0 4px; padding: 0; font-size: 0; line-height: 0">&nbsp;</td>
-                          <td style="background: #fef2f2; border-top: 1px solid #fecaca; border-right: 1px solid #fecaca; border-bottom: 1px solid #fecaca; border-radius: 0 8px 8px 0; padding: 12px 14px">
-                            <p style="font-size: 13px; line-height: 18px; font-weight: bold; color: #991b1b; margin: 0 0 3px 0">Reintegro en proceso</p>
-                            <p style="font-size: 13px; line-height: 18px; color: #7f1d1d; margin: 0">El importe abonado se reintegrará automáticamente según tu medio de pago. No necesitás hacer nada.</p>
+                          <td valign="middle" width="56" style="padding:14px 0 14px 16px">
+                            <table cellpadding="0" cellspacing="0" border="0">
+                              <tr>
+                                <td align="center" valign="middle" width="36" height="36" style="width:36px;height:36px;border-radius:10px;background:#dc2626;font-size:18px;line-height:36px;text-align:center;color:#ffffff;font-weight:bold">&#10005;</td>
+                              </tr>
+                            </table>
+                          </td>
+                          <td valign="middle" style="padding:14px 16px">
+                            <p style="font-family:'Poppins',-apple-system,sans-serif;font-size:12.5px;font-weight:700;color:#991b1b;margin:0 0 3px 0">Reintegro en proceso</p>
+                            <p style="font-family:'Poppins',-apple-system,sans-serif;font-size:11.5px;color:#7f1d1d;line-height:1.55;margin:0">El importe abonado se reintegrará automáticamente según tu medio de pago. No necesitás hacer nada.</p>
                           </td>
                         </tr>
                       </table>
                     </td>
                   </tr>
 
-                  <!-- Resumen 2x2 -->
+                  <!-- META GRID 2×2 -->
                   <tr>
-                    <td style="padding: 0">
-                      <table
-                        role="presentation"
-                        width="100%"
-                        style="table-layout: fixed"
-                      >
+                    <td style="padding:20px 24px 0">
+                      <table role="presentation" width="100%" style="table-layout:fixed;border-radius:10px;overflow:hidden">
                         <tr>
-                          <td class="sum-cell">
-                            <p class="label" style="font-size:11px;line-height:16px;font-weight:bold;letter-spacing:0.5px;text-transform:uppercase;color:#6b7280;margin:0 0 4px 0">N.º de pedido</p>
-                            <p class="value" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0">{{orderId}}</p>
+                          <td class="sum-cell" style="width:50%;padding:16px 18px;vertical-align:top;border-bottom:1px solid #f3f4f6">
+                            <p style="font-size:9.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#b0b0b0;margin:0 0 5px 0">N.º de pedido</p>
+                            <p style="font-size:15px;line-height:22px;font-weight:700;color:#111827;margin:0">{{orderId}}</p>
                           </td>
-                          <td class="sum-cell sum-cell-r">
-                            <p class="label" style="font-size:11px;line-height:16px;font-weight:bold;letter-spacing:0.5px;text-transform:uppercase;color:#6b7280;margin:0 0 4px 0">Fecha de cancelación</p>
-                            <p class="value" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0">
-                              {{#if cancellationData.cancellationDate}}{{formatDate cancellationData.cancellationDate}}{{else}}—{{/if}}
-                            </p>
+                          <td class="sum-cell sum-cell-r" style="width:50%;padding:16px 18px;vertical-align:top;border-bottom:1px solid #f3f4f6;border-left:1px solid #f3f4f6">
+                            <p style="font-size:9.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#b0b0b0;margin:0 0 5px 0">Fecha de cancelación</p>
+                            <p style="font-size:15px;line-height:22px;font-weight:700;color:#111827;margin:0">{{#if cancellationData.cancellationDate}}{{formatDate cancellationData.cancellationDate}}{{else}}—{{/if}}</p>
                           </td>
                         </tr>
                         <tr>
-                          <td class="sum-cell sum-last">
-                            <p class="label" style="font-size:11px;line-height:16px;font-weight:bold;letter-spacing:0.5px;text-transform:uppercase;color:#6b7280;margin:0 0 4px 0">Total cancelado</p>
-                            <p class="value" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0">
-                              $ {{formatCurrency value}}
-                            </p>
+                          <td class="sum-cell sum-last" bgcolor="#fef2f2" style="width:50%;padding:16px 18px;vertical-align:top;background:#fef2f2">
+                            <p style="font-size:9.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#f87171;margin:0 0 5px 0">Total cancelado</p>
+                            <p style="font-size:20px;line-height:26px;font-weight:800;color:#991b1b;letter-spacing:-0.3px;margin:0">$ {{formatCurrency value}}</p>
                           </td>
-                          <td class="sum-cell sum-cell-r sum-last">
-                            <p class="label" style="font-size:11px;line-height:16px;font-weight:bold;letter-spacing:0.5px;text-transform:uppercase;color:#6b7280;margin:0 0 4px 0">Fecha de compra</p>
-                            <p class="value" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0">
-                              {{#if creationDate}}{{formatDate creationDate}}{{else}}—{{/if}}
-                            </p>
+                          <td class="sum-cell sum-cell-r sum-last" style="width:50%;padding:16px 18px;vertical-align:top;border-left:1px solid #f3f4f6">
+                            <p style="font-size:9.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#b0b0b0;margin:0 0 5px 0">Fecha de compra</p>
+                            <p style="font-size:15px;line-height:22px;font-weight:700;color:#111827;margin:0">{{#if creationDate}}{{formatDate creationDate}}{{else}}—{{/if}}</p>
                           </td>
                         </tr>
                       </table>
                     </td>
                   </tr>
 
-                  <!-- Barra de progreso — segmentada -->
+                  <!-- STEPPER — tabla unificada 7 columnas -->
                   <tr>
-                    <td style="padding: 18px 24px 16px; border-top: 1px solid #f3f4f6; border-bottom: 1px solid #f3f4f6">
-                      <!-- Indicador de paso actual (▼ sobre el segmento activo) -->
-                      <table role="presentation" width="100%" style="table-layout: fixed; margin: 0 0 2px 0">
+                    <td style="padding:24px 24px 16px">
+                      <table role="presentation" width="100%" style="table-layout:fixed">
                         <tr>
-                          <td width="25%" style="padding: 0"></td>
-                          <td width="25%" align="center" style="padding: 0; font-size: 9px; line-height: 12px; color: #ef4444; text-align: center">&#9660;</td>
-                          <td width="25%" style="padding: 0"></td>
-                          <td width="25%" style="padding: 0"></td>
-                        </tr>
-                      </table>
-                      <!-- Segmentos de color -->
-                      <table role="presentation" width="100%" style="table-layout: fixed; border-collapse: separate; border-spacing: 4px 0">
-                        <tr>
-                          <td bgcolor="#16a34a" style="background: #16a34a; height: 8px; border-radius: 4px; font-size: 1px; line-height: 1px">&nbsp;</td>
-                          <td bgcolor="#ef4444" style="background: #ef4444; height: 8px; border-radius: 4px; font-size: 1px; line-height: 1px">&nbsp;</td>
-                          <td bgcolor="#e5e7eb" style="background: #e5e7eb; height: 8px; border-radius: 4px; font-size: 1px; line-height: 1px">&nbsp;</td>
-                          <td bgcolor="#e5e7eb" style="background: #e5e7eb; height: 8px; border-radius: 4px; font-size: 1px; line-height: 1px">&nbsp;</td>
-                        </tr>
-                      </table>
-                      <!-- Labels -->
-                      <table role="presentation" width="100%" style="table-layout: fixed; margin-top: 8px">
-                        <tr>
-                          <td width="25%" align="center" style="padding: 0 2px">
-                            <p style="font-size: 11px; line-height: 15px; font-weight: bold; color: #16a34a; text-align: center; margin: 0">&#10003;&nbsp;Recibido</p>
+                          <!-- Step 1: Recibido (verde ✓) -->
+                          <td width="28" align="center" valign="top" style="width:28px;padding:0">
+                            <div style="width:28px;height:28px;line-height:28px;border-radius:50%;background:#25B60C;text-align:center;font-size:13px;font-weight:bold;color:#fff;margin:0 auto">&#10003;</div>
+                            <p style="font-family:'Poppins',-apple-system,sans-serif;font-size:10px;font-weight:700;color:#1a7a0a;text-align:center;margin:5px 0 0;white-space:nowrap">&#10003; Recibido</p>
                           </td>
-                          <td width="25%" align="center" style="padding: 0 2px">
-                            <p style="font-size: 11px; line-height: 15px; font-weight: bold; color: #ef4444; text-align: center; margin: 0">&#10005;&nbsp;Cancelado</p>
+                          <!-- Conector 1→2: rojo (lleva a cancelado) -->
+                          <td valign="top" style="padding:14px 4px 0">
+                            <div style="height:3px;background:#dc2626;border-radius:2px;font-size:0;line-height:0">&nbsp;</div>
                           </td>
-                          <td width="25%" align="center" style="padding: 0 2px">
-                            <p style="font-size: 11px; line-height: 15px; color: #9ca3af; text-align: center; margin: 0">Reintegro</p>
+                          <!-- Step 2: Cancelado (rojo ✕, estado terminal) -->
+                          <td width="28" align="center" valign="top" style="width:28px;padding:0">
+                            <div style="width:28px;height:28px;line-height:28px;border-radius:50%;background:#dc2626;text-align:center;font-size:13px;font-weight:bold;color:#fff;margin:0 auto">&#10005;</div>
+                            <p style="font-family:'Poppins',-apple-system,sans-serif;font-size:10px;font-weight:700;color:#dc2626;text-align:center;margin:5px 0 0;white-space:nowrap">&#10005; Cancelado</p>
                           </td>
-                          <td width="25%" align="center" style="padding: 0 2px">
-                            <p style="font-size: 11px; line-height: 15px; color: #9ca3af; text-align: center; margin: 0">Acreditado</p>
+                          <!-- Conector 2→3: gris -->
+                          <td valign="top" style="padding:14px 4px 0">
+                            <div style="height:3px;background:#e5e7eb;border-radius:2px;font-size:0;line-height:0">&nbsp;</div>
+                          </td>
+                          <!-- Step 3: Reintegro (gris, pendiente) -->
+                          <td width="28" align="center" valign="top" style="width:28px;padding:0">
+                            <div style="width:28px;height:28px;line-height:28px;border-radius:50%;background:#ebebeb;text-align:center;font-size:11px;font-weight:bold;color:#ccc;margin:0 auto">3</div>
+                            <p style="font-family:'Poppins',-apple-system,sans-serif;font-size:10px;color:#9ca3af;text-align:center;margin:5px 0 0;white-space:nowrap">Reintegro</p>
+                          </td>
+                          <!-- Conector 3→4: gris -->
+                          <td valign="top" style="padding:14px 4px 0">
+                            <div style="height:3px;background:#e5e7eb;border-radius:2px;font-size:0;line-height:0">&nbsp;</div>
+                          </td>
+                          <!-- Step 4: Acreditado (gris, pendiente) -->
+                          <td width="28" align="center" valign="top" style="width:28px;padding:0">
+                            <div style="width:28px;height:28px;line-height:28px;border-radius:50%;background:#ebebeb;text-align:center;font-size:11px;font-weight:bold;color:#ccc;margin:0 auto">4</div>
+                            <p style="font-family:'Poppins',-apple-system,sans-serif;font-size:10px;color:#9ca3af;text-align:center;margin:5px 0 0;white-space:nowrap">Acreditado</p>
                           </td>
                         </tr>
                       </table>
                     </td>
                   </tr>
 
-                  <!-- CTAs -->
+                  <!-- CTA -->
                   <tr>
-                    <td
-                      align="center"
-                      style="
-                        padding: 20px 24px;
-                        border-bottom: 1px solid #f3f4f6;
-                      "
-                    >
-                      <table
-                        role="presentation"
-                        cellpadding="0"
-                        cellspacing="0"
-                        border="0"
-                        style="margin: 0 auto"
-                      >
+                    <td style="padding:4px 24px 24px">
+                      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
                         <tr>
-                          <td style="padding: 0 6px 0 0">
-                            <a
-                              href="https://{{hostName}}/account#/orders/{{orderId}}"
-                              class="cta-dark" style="display:inline-block;background:#111827;color:#ffffff;border-radius:10px;font-size:15px;line-height:48px;font-weight:bold;padding:0 28px;text-align:center"
-                              target="_blank"
-                            >
-                              Ver mi pedido
-                            </a>
-                          </td>
-                          <td style="padding: 0 0 0 6px">
-                            <a
-                              href="https://{{hostName}}/"
-                              class="cta-green" style="display:inline-block;background:#16a34a;color:#ffffff;border-radius:10px;font-size:15px;line-height:48px;font-weight:bold;padding:0 28px;text-align:center"
-                              target="_blank"
-                            >
-                              Volver a comprar
+                          <td bgcolor="#111827" style="border-radius:8px">
+                            <a href="https://{{hostName}}/account#/orders/{{orderId}}"
+                               class="cta-primary"
+                               style="display:block;width:100%;box-sizing:border-box;background:#111827;color:#ffffff;border-radius:8px;font-family:'Poppins',-apple-system,sans-serif;font-size:13px;line-height:52px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-align:center;text-decoration:none"
+                               target="_blank">
+                              Ver mi pedido &nbsp;&#8594;
                             </a>
                           </td>
                         </tr>
@@ -585,106 +264,60 @@
                     </td>
                   </tr>
 
-                  <!-- Pago + Dirección -->
+                  <!-- Motivo de cancelación (condicional) -->
+                  {{#if cancellationData.reason}}
                   <tr>
-                    <td style="padding: 0">
-                      <table
-                        role="presentation"
-                        width="100%"
-                        style="table-layout: fixed"
-                      >
+                    <td style="padding:0 24px 20px">
+                      <table role="presentation" width="100%" bgcolor="#fef2f2" style="background:#fef2f2;border-radius:10px">
+                        <tr>
+                          <td style="padding:12px 16px">
+                            <p class="text" style="font-size:14px;line-height:22px;color:#991b1b;margin:0">
+                              <strong>Motivo:</strong> {{cancellationData.reason}}
+                            </p>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  {{/if}}
+
+                  <!-- Pago + Envío / Retiro -->
+                  <tr>
+                    <td style="padding:0;border-top:1px solid #f3f4f6">
+                      <table role="presentation" width="100%" style="table-layout:fixed">
                         <tr>
                           <!-- Columna Pago -->
-                          <td class="two-cell">
+                          <td class="two-cell" style="width:50%;padding:18px 20px;vertical-align:top">
                             <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0 0 12px 0">Pago</p>
-                            {{#if paymentData.transactions}}
-                            {{#each paymentData.transactions}}
-                            {{#each payments}}
-                            <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin-bottom: 2px">
-                              <strong>{{paymentSystemName}}</strong>
-                            </p>
-                            <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin-bottom: 2px">
-                              $ {{formatCurrency value}}{{#if
-                              installments}}{{#eq installments 1}} en 1
-                              pago{{else}} en {{installments}}
-                              cuotas{{/eq}}{{/if}}
-                            </p>
-                            {{#if lastDigits}}
-                            <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:0">
-                              Tarjeta terminada en {{lastDigits}}
-                            </p>
+                            {{#if paymentData.transactions}} {{#each paymentData.transactions}} {{#each payments}}
+                            <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin-bottom:2px"><strong>{{paymentSystemName}}</strong></p>
+                            <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin-bottom:2px">$ {{formatCurrency value}}{{#if installments}}{{#eq installments 1}} en 1 pago{{else}} en {{installments}} cuotas{{/eq}}{{/if}}</p>
+                            {{#if lastDigits}}<p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:0">Tarjeta terminada en {{lastDigits}}</p>{{/if}}
+                            {{#if connectorResponses.authId}}<p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:0">Autorización: {{connectorResponses.authId}}</p>{{/if}}
+                            {{/each}} {{/each}} {{else}}
+                            <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:0">Medio de pago registrado.</p>
                             {{/if}}
-                            {{#if connectorResponses.authId}}
-                            <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:0">
-                              Autorización: {{connectorResponses.authId}}
-                            </p>
-                            {{/if}}
-                            {{/each}}
-                            {{/each}}
-                            {{else}}
-                            <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:0">
-                              Medio de pago registrado.
-                            </p>
-                            {{/if}}
-                            {{#each totals}}{{#eq id
-                            "Shipping"}}{{#eq value 0}}
-                            <p
-                              class="text-sm green"
-                              style="font-weight: bold; margin-top: 8px"
-                            >
-                              Envío gratis aplicado
-                            </p>
-                            {{/eq}}{{/eq}}{{/each}}
                           </td>
-                          <!-- Columna Dirección -->
-                          <td class="two-cell two-cell-r two-cell-last">
-                            {{#eq
-                            shippingData.logisticsInfo.[0].selectedDeliveryChannel
-                            "pickup-in-point"}}
+                          <!-- Columna Envío / Retiro -->
+                          <td class="two-cell two-cell-r two-cell-last" style="width:50%;padding:18px 20px;vertical-align:top;border-left:1px solid #f3f4f6">
+                            {{#eq shippingData.logisticsInfo.[0].selectedDeliveryChannel "pickup-in-point"}}
                             <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0 0 12px 0">Punto de retiro</p>
-                            {{#with
-                            shippingData.logisticsInfo.[0].pickupStoreInfo}}
-                            {{#if friendlyName}}
-                            <p
-                              class="text"
-                              style="font-size:14px;line-height:22px;color:#374151;font-weight: bold; margin-bottom: 2px"
-                            >
-                              {{friendlyName}}
-                            </p>
-                            {{/if}}
+                            {{#with shippingData.logisticsInfo.[0].pickupStoreInfo}}
+                            {{#if friendlyName}}<p class="text" style="font-size:14px;line-height:22px;color:#374151;font-weight:bold;margin-bottom:2px">{{friendlyName}}</p>{{/if}}
                             {{#if address}}
-                            <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0">
-                              {{address.street}}, {{address.number}}
-                            </p>
-                            <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0">
-                              {{address.city}}, {{address.state}}
-                            </p>
+                            <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0">{{address.street}}, {{address.number}}</p>
+                            <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0">{{address.city}}, {{address.state}}</p>
                             {{/if}}
                             {{/with}}
-                            <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-top: 8px">
-                              El pedido no será preparado por la cancelación.
-                            </p>
+                            <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-top:8px">El pedido no será preparado por la cancelación.</p>
                             {{else}}
                             <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0 0 12px 0">Dirección de envío</p>
                             {{#with shippingData.selectedAddresses.[0]}}
-                            {{#if receiverName}}
-                            <p
-                              class="text"
-                              style="font-size:14px;line-height:22px;color:#374151;font-weight: bold; margin-bottom: 2px"
-                            >
-                              {{receiverName}}
-                            </p>
-                            {{/if}}
-                            <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0">
-                              {{street}}{{#if number}}, {{number}}{{/if}}{{#if complement}}, {{complement}}{{/if}}
-                            </p>
-                            <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0">
-                              {{city}}, {{state}} {{postalCode}}
-                            </p>
+                            {{#if receiverName}}<p class="text" style="font-size:14px;line-height:22px;color:#374151;font-weight:bold;margin-bottom:2px">{{receiverName}}</p>{{/if}}
+                            <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0">{{street}}{{#if number}}, {{number}}{{/if}}{{#if complement}}, {{complement}}{{/if}}</p>
+                            <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0">{{city}}, {{state}} {{postalCode}}</p>
                             {{/with}}
-                            <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-top: 8px">
-                              No se realizará el despacho por la cancelación.
-                            </p>
+                            <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-top:8px">No se realizará el despacho por la cancelación.</p>
                             {{/eq}}
                           </td>
                         </tr>
@@ -696,92 +329,44 @@
               </td>
             </tr>
 
-            <tr>
-              <td class="gap">&nbsp;</td>
-            </tr>
+            <tr><td class="gap">&nbsp;</td></tr>
 
-            <!-- ═══ PRODUCTOS CANCELADOS ═══ -->
+            <!-- ══════════════════════════════════════════
+                 PRODUCTOS CANCELADOS
+            ══════════════════════════════════════════ -->
             <tr>
               <td>
                 <table role="presentation" width="100%" class="card">
                   <tr>
-                    <td
-                      style="
-                        padding: 18px 20px 12px 20px;
-                        border-bottom: 1px solid #f3f4f6;
-                      "
-                    >
-                      <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin: 0">Productos cancelados</p>
+                    <td style="padding:18px 20px 12px;border-bottom:1px solid #f3f4f6">
+                      <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0">Productos cancelados</p>
                     </td>
                   </tr>
                   {{#each items}}
                   <tr>
-                    <td
-                      style="padding: 16px 20px{{#unless @first}}; border-top: 1px solid #f3f4f6{{/unless}}"
-                    >
+                    <td style="padding:16px 20px{{#unless @first}};border-top:1px solid #f3f4f6{{/unless}}">
                       <table role="presentation" width="100%">
                         <tr>
-                          <td valign="top" style="width: 72px">
-                            {{#if detailUrl}}<a href="https://{{@root.hostName}}{{detailUrl}}" target="_blank" style="display:block;line-height:0">{{/if}}<img
-                              src="{{imageUrl}}"
-                              alt="{{name}}"
-                              width="72"
-                              height="72"
-                              class="item-img"
-                              style="
-                                width: 72px;
-                                height: auto;
-                                border-radius: 8px;
-                                opacity: 0.7;
-                                filter: grayscale(25%);
-                              "
-                            />{{#if detailUrl}}</a>{{/if}}
+                          <td valign="top" style="width:72px">
+                            {{#if detailUrl}}<a href="https://{{@root.hostName}}{{detailUrl}}" target="_blank" style="display:block;line-height:0">{{/if}}
+                            <img src="{{imageUrl}}" alt="{{name}}" width="72" height="72" class="item-img"
+                                 style="width:72px;height:auto;border-radius:8px;opacity:0.7;filter:grayscale(30%)" />
+                            {{#if detailUrl}}</a>{{/if}}
                           </td>
-                          <td valign="top" style="padding-left: 12px">
-                            {{#if detailUrl}}<a href="https://{{@root.hostName}}{{detailUrl}}" target="_blank" class="item-name" style="font-size:14px;line-height:20px;font-weight:bold;color:#111827;display:block;font-weight:bold;color:#111827;text-decoration:none;margin:0 0 3px 0">{{name}}</a>{{else}}<p class="item-name" style="font-size:14px;line-height:20px;font-weight:bold;color:#111827;margin:0 0 3px 0">{{name}}</p>{{/if}}
-                            {{#if additionalInfo.brandName}}
-                            <p class="item-meta" style="font-size:12px;line-height:18px;color:#6b7280;margin:0">
-                              {{additionalInfo.brandName}}
-                            </p>
-                            {{/if}}
-                            {{#if skuName}}
-                            <p class="item-meta" style="font-size:12px;line-height:18px;color:#6b7280;margin:0">Variante: {{skuName}}</p>
-                            {{/if}}
+                          <td valign="top" style="padding-left:12px">
+                            {{#if detailUrl}}<a href="https://{{@root.hostName}}{{detailUrl}}" target="_blank" class="item-name" style="font-size:14px;line-height:20px;font-weight:bold;color:#111827;display:block;text-decoration:none;margin:0 0 3px 0;word-break:break-word;overflow-wrap:break-word">{{name}}</a>{{else}}<p class="item-name" style="font-size:14px;line-height:20px;font-weight:bold;color:#111827;margin:0 0 3px 0;word-break:break-word;overflow-wrap:break-word">{{name}}</p>{{/if}}
+                            {{#if additionalInfo.brandName}}<p class="item-meta" style="font-size:12px;line-height:18px;color:#6b7280;margin:0">{{additionalInfo.brandName}}</p>{{/if}}
+                            {{#if skuName}}<p class="item-meta" style="font-size:12px;line-height:18px;color:#6b7280;margin:0">Variante: {{skuName}}</p>{{/if}}
                             <p class="item-meta" style="font-size:12px;line-height:18px;color:#6b7280;margin:0">Cantidad: {{quantity}}</p>
-                            {{#if listPrice}}{{#eq listPrice
-                            sellingPrice}}{{else}}
-                            <p class="item-old-price" style="font-size:12px;line-height:18px;color:#9ca3af;text-decoration:line-through;margin:2px 0 0 0">
-                              $ {{formatCurrency listPrice}}
-                            </p>
+                            {{#if listPrice}}{{#eq listPrice sellingPrice}}{{else}}
+                            <p class="item-old-price" style="font-size:12px;line-height:18px;color:#9ca3af;text-decoration:line-through;margin:2px 0 0 0">$ {{formatCurrency listPrice}}</p>
                             {{/eq}}{{/if}}
-                            <p class="item-price" style="font-size:14px;line-height:20px;font-weight:bold;color:#111827;margin:4px 0 0 0">
-                              $ {{formatCurrency sellingPrice}}
-                            </p>
-                            <!-- Subtotal mobile -->
-                            <p
-                              class="m-show text-sm"
-                              style="margin-top: 6px"
-                            >
-                              Subtotal:
-                              <strong style="color: #111827"
-                                >$ {{formatCurrency
-                                priceDefinition.total}}</strong
-                              >
-                            </p>
+                            <p class="item-price" style="font-size:14px;line-height:20px;font-weight:bold;color:#111827;margin:4px 0 0 0">$ {{formatCurrency sellingPrice}}</p>
+                            <p class="m-show text-sm" style="margin-top:6px">Subtotal: <strong style="color:#111827">$ {{formatCurrency priceDefinition.total}}</strong></p>
                           </td>
-                          <!-- Subtotal desktop -->
-                          <td
-                            valign="top"
-                            align="right"
-                            class="m-hide"
-                            style="white-space: nowrap; padding-left: 12px"
-                          >
-                            <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-bottom: 4px">
-                              Subtotal
-                            </p>
-                            <p class="item-price" style="font-size:14px;line-height:20px;font-weight:bold;color:#111827;margin-top: 0">
-                              $ {{formatCurrency priceDefinition.total}}
-                            </p>
+                          <td valign="top" align="right" class="m-hide" style="white-space:nowrap;padding-left:12px">
+                            <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-bottom:4px">Subtotal</p>
+                            <p class="item-price" style="font-size:14px;line-height:20px;font-weight:bold;color:#111827;margin:0">$ {{formatCurrency priceDefinition.total}}</p>
                           </td>
                         </tr>
                       </table>
@@ -792,96 +377,51 @@
               </td>
             </tr>
 
-            <tr>
-              <td class="gap">&nbsp;</td>
-            </tr>
+            <tr><td class="gap">&nbsp;</td></tr>
 
-            <!-- ═══ RESUMEN DE PRECIOS ═══ -->
+            <!-- ══════════════════════════════════════════
+                 RESUMEN DE PRECIOS
+            ══════════════════════════════════════════ -->
             <tr>
               <td>
-                <table
-                  role="presentation"
-                  width="100%"
-                  class="card"
-                  style="border-collapse: collapse"
-                >
+                <table role="presentation" width="100%" class="card" style="border-collapse:collapse">
                   <tr>
-                    <td
-                      colspan="2"
-                      style="
-                        padding: 18px 20px 12px 20px;
-                        border-bottom: 1px solid #f3f4f6;
-                      "
-                    >
-                      <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin: 0">Resumen del pedido</p>
+                    <td colspan="2" style="padding:18px 20px 12px;border-bottom:1px solid #f3f4f6">
+                      <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0">Resumen del pedido</p>
                     </td>
                   </tr>
                   {{#each totals}}
                   {{#eq id "Items"}}
                   <tr>
-                    <td style="padding: 10px 20px">
-                      <span class="tot-key" style="font-size:14px;line-height:20px;color:#374151">Subtotal de productos</span>
-                    </td>
-                    <td style="padding: 10px 20px; text-align: right">
-                      <span class="tot-val" style="font-size:14px;line-height:20px;color:#374151">$ {{formatCurrency value}}</span>
-                    </td>
+                    <td style="padding:10px 20px"><span class="tot-key" style="font-size:14px;line-height:20px;color:#374151">Subtotal de productos</span></td>
+                    <td style="padding:10px 20px;text-align:right;white-space:nowrap;width:1%"><span class="tot-val" style="font-size:14px;line-height:20px;color:#374151">$ {{formatCurrency value}}</span></td>
                   </tr>
                   {{/eq}}
                   {{#eq id "Discounts"}}{{#if value}}
                   <tr>
-                    <td style="padding: 10px 20px">
-                      <span class="tot-key" style="font-size:14px;line-height:20px;color:#374151">Descuentos</span>
-                    </td>
-                    <td style="padding: 10px 20px; text-align: right">
-                      <span class="tot-val green"
-                        >$ {{formatCurrency value}}</span
-                      >
-                    </td>
+                    <td style="padding:10px 20px"><span class="tot-key" style="font-size:14px;line-height:20px;color:#374151">Descuentos</span></td>
+                    <td style="padding:10px 20px;text-align:right;white-space:nowrap;width:1%"><span class="tot-val green" style="color:#1a7a0a">$ {{formatCurrency value}}</span></td>
                   </tr>
                   {{/if}}{{/eq}}
                   {{#eq id "GiftCards"}}{{#if value}}
                   <tr>
-                    <td style="padding: 10px 20px">
-                      <span class="tot-key" style="font-size:14px;line-height:20px;color:#374151">Gift card</span>
-                    </td>
-                    <td style="padding: 10px 20px; text-align: right">
-                      <span class="tot-val" style="font-size:14px;line-height:20px;color:#374151">$ {{formatCurrency value}}</span>
-                    </td>
+                    <td style="padding:10px 20px"><span class="tot-key" style="font-size:14px;line-height:20px;color:#374151">Gift card</span></td>
+                    <td style="padding:10px 20px;text-align:right;white-space:nowrap;width:1%"><span class="tot-val" style="font-size:14px;line-height:20px;color:#374151">$ {{formatCurrency value}}</span></td>
                   </tr>
                   {{/if}}{{/eq}}
                   {{#eq id "Tax"}}{{#if value}}
                   <tr>
-                    <td style="padding: 10px 20px">
-                      <span class="tot-key" style="font-size:14px;line-height:20px;color:#374151">Impuestos</span>
-                    </td>
-                    <td style="padding: 10px 20px; text-align: right">
-                      <span class="tot-val" style="font-size:14px;line-height:20px;color:#374151">$ {{formatCurrency value}}</span>
-                    </td>
+                    <td style="padding:10px 20px"><span class="tot-key" style="font-size:14px;line-height:20px;color:#374151">Impuestos</span></td>
+                    <td style="padding:10px 20px;text-align:right;white-space:nowrap;width:1%"><span class="tot-val" style="font-size:14px;line-height:20px;color:#374151">$ {{formatCurrency value}}</span></td>
                   </tr>
                   {{/if}}{{/eq}}
                   {{#eq id "Shipping"}}
                   <tr>
-                    <td style="padding: 10px 20px">
-                      <span class="tot-key" style="font-size:14px;line-height:20px;color:#374151">Envío</span>
-                    </td>
-                    <td style="padding: 10px 20px; text-align: right">
+                    <td style="padding:10px 20px"><span class="tot-key" style="font-size:14px;line-height:20px;color:#374151">Envío</span></td>
+                    <td style="padding:10px 20px;text-align:right;white-space:nowrap;width:1%">
                       {{#eq value 0}}
-                      {{#if alternativeTotals}}
-                      {{#each alternativeTotals}}{{#eq id
-                      "AlternativeShippingTotal"}}
-                      <span
-                        class="text-sm"
-                        style="font-size:13px;line-height:20px;color:#6b7280;
-                          text-decoration: line-through;
-                          margin-right: 6px;
-                        "
-                        >$ {{formatCurrency value}}</span
-                      >
-                      {{/eq}}{{/each}}
-                      {{/if}}
-                      <span class="tot-val green" style="font-weight: bold"
-                        >Gratis</span
-                      >
+                      {{#if alternativeTotals}} {{#each alternativeTotals}}{{#eq id "AlternativeShippingTotal"}}<span class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;text-decoration:line-through;margin-right:6px">$ {{formatCurrency value}}</span>{{/eq}}{{/each}} {{/if}}
+                      <span class="tot-val" style="font-weight:bold;color:#1a7a0a">Gratis</span>
                       {{else}}
                       <span class="tot-val" style="font-size:14px;line-height:20px;color:#374151">$ {{formatCurrency value}}</span>
                       {{/eq}}
@@ -889,230 +429,160 @@
                   </tr>
                   {{/eq}}
                   {{/each}}
-                  {{#with ratesAndBenefitsData}}
-                  {{#if rateAndBenefitsIdentifiers.[0]}}
+                  {{#with ratesAndBenefitsData}}{{#if rateAndBenefitsIdentifiers.[0]}}
                   <tr>
-                    <td colspan="2" style="padding: 0 20px 10px 20px">
-                      <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:0">
-                        Beneficio aplicado:
-                        {{#each rateAndBenefitsIdentifiers}}{{#if
-                        description}}{{description}}{{else}}{{name}}{{/if}}{{#unless
-                        @last}}, {{/unless}}{{/each}}
-                      </p>
+                    <td colspan="2" style="padding:0 20px 10px">
+                      <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:0">Beneficio aplicado: {{#each rateAndBenefitsIdentifiers}}{{#if description}}{{description}}{{else}}{{name}}{{/if}}{{#unless @last}}, {{/unless}} {{/each}}</p>
                     </td>
                   </tr>
-                  {{/if}}
-                  {{/with}}
+                  {{/if}} {{/with}}
                   <tr>
-                    <td
-                      style="
-                        padding: 14px 20px;
-                        border-top: 2px solid #f3f4f6;
-                      "
-                    >
-                      <span class="tot-strong" style="font-size:16px;line-height:22px;font-weight:bold;color:#111827">Total cancelado</span>
-                    </td>
-                    <td
-                      style="
-                        padding: 14px 20px;
-                        border-top: 2px solid #f3f4f6;
-                        text-align: right;
-                      "
-                    >
-                      <span class="tot-strong" style="font-size:16px;line-height:22px;font-weight:bold;color:#111827"
-                        >$ {{formatCurrency value}}</span
-                      >
-                    </td>
+                    <td style="padding:14px 20px;border-top:2px solid #f3f4f6"><span class="tot-strong" style="font-size:16px;line-height:22px;font-weight:bold;color:#111827">Total cancelado</span></td>
+                    <td style="padding:14px 20px;border-top:2px solid #f3f4f6;text-align:right;white-space:nowrap;width:1%"><span class="tot-strong" style="font-size:16px;line-height:22px;font-weight:bold;color:#991b1b">$ {{formatCurrency value}}</span></td>
                   </tr>
                 </table>
               </td>
             </tr>
 
-            <tr>
-              <td class="gap">&nbsp;</td>
-            </tr>
+            <tr><td class="gap">&nbsp;</td></tr>
 
-            <!-- ═══ ESTADO DEL REINTEGRO ═══ -->
+            <!-- ══════════════════════════════════════════
+                 ¿CUÁNDO ACREDITAN EL REINTEGRO?
+            ══════════════════════════════════════════ -->
             <tr>
               <td>
                 <table role="presentation" width="100%" class="card">
                   <tr>
-                    <td style="padding: 24px">
-                      <p
-                        class="h2"
-                        style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;font-size: 16px; margin-bottom: 14px"
-                      >
-                        ¿Cuándo acreditan el reintegro?
-                      </p>
-                      <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin-bottom: 16px">
-                        Los tiempos de acreditación dependen de tu medio de pago:
-                      </p>
-
-                      <!-- Item 1: Débito -->
+                    <td style="padding:24px">
+                      <p class="h2" style="font-size:16px;line-height:22px;font-weight:bold;color:#111827;margin-bottom:16px">¿Cuándo acreditan el reintegro?</p>
+                      <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin-bottom:16px">Los tiempos de acreditación dependen de tu medio de pago:</p>
                       <table role="presentation" width="100%">
+                        <!-- Débito -->
                         <tr>
-                          <td
-                            valign="top"
-                            style="width: 32px; padding-bottom: 16px"
-                          >
-                            <div
-                              style="
-                                width: 24px;
-                                height: 24px;
-                                line-height: 24px;
-                                text-align: center;
-                                border-radius: 50%;
-                                background: #fef2f2;
-                                color: #991b1b;
-                                font-size: 11px;
-                                font-weight: bold;
-                              "
-                            >
-                              1
-                            </div>
+                          <td valign="top" style="width:32px;padding-bottom:16px">
+                            <div style="width:24px;height:24px;line-height:24px;text-align:center;border-radius:50%;background:#fef2f2;color:#991b1b;font-size:11px;font-weight:bold">1</div>
                           </td>
-                          <td
-                            valign="top"
-                            style="
-                              padding: 0 0 16px 10px;
-                              border-bottom: 1px solid #f3f4f6;
-                            "
-                          >
-                            <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0">
-                              <strong>Tarjeta de débito</strong>
-                            </p>
-                            <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-top: 2px">
-                              El importe se acredita entre 5 y 11 días hábiles.
-                            </p>
+                          <td valign="top" style="padding:0 0 16px 10px;border-bottom:1px solid #f3f4f6">
+                            <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0"><strong>Tarjeta de débito</strong></p>
+                            <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-top:2px">El importe se acredita entre 5 y 11 días hábiles.</p>
                           </td>
                         </tr>
-                        <!-- Item 2: Crédito -->
+                        <!-- Crédito -->
                         <tr>
-                          <td
-                            valign="top"
-                            style="width: 32px; padding: 16px 0"
-                          >
-                            <div
-                              style="
-                                width: 24px;
-                                height: 24px;
-                                line-height: 24px;
-                                text-align: center;
-                                border-radius: 50%;
-                                background: #fef2f2;
-                                color: #991b1b;
-                                font-size: 11px;
-                                font-weight: bold;
-                              "
-                            >
-                              2
-                            </div>
+                          <td valign="top" style="width:32px;padding:16px 0">
+                            <div style="width:24px;height:24px;line-height:24px;text-align:center;border-radius:50%;background:#fef2f2;color:#991b1b;font-size:11px;font-weight:bold">2</div>
                           </td>
-                          <td
-                            valign="top"
-                            style="
-                              padding: 16px 0 16px 10px;
-                              border-bottom: 1px solid #f3f4f6;
-                            "
-                          >
-                            <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0">
-                              <strong>Tarjeta de crédito</strong>
-                            </p>
-                            <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-top: 2px">
-                              Lo verás reflejado según el cierre de tu tarjeta.
-                            </p>
+                          <td valign="top" style="padding:16px 0 16px 10px;border-bottom:1px solid #f3f4f6">
+                            <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0"><strong>Tarjeta de crédito</strong></p>
+                            <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-top:2px">Lo verás reflejado según el cierre de tu tarjeta.</p>
                           </td>
                         </tr>
-                        {{#each paymentData.transactions}}
-                        {{#each payments}}
-                        {{#eq group "giftCard"}}
-                        <!-- Item 3: Gift Card (condicional) -->
+                        <!-- Gift Card (condicional — solo si el pedido usó una) -->
+                        {{#each paymentData.transactions}} {{#each payments}} {{#eq group "giftCard"}}
                         <tr>
-                          <td
-                            valign="top"
-                            style="width: 32px; padding-top: 16px"
-                          >
-                            <div
-                              style="
-                                width: 24px;
-                                height: 24px;
-                                line-height: 24px;
-                                text-align: center;
-                                border-radius: 50%;
-                                background: #fef2f2;
-                                color: #991b1b;
-                                font-size: 11px;
-                                font-weight: bold;
-                              "
-                            >
-                              3
-                            </div>
+                          <td valign="top" style="width:32px;padding-top:16px">
+                            <div style="width:24px;height:24px;line-height:24px;text-align:center;border-radius:50%;background:#fef2f2;color:#991b1b;font-size:11px;font-weight:bold">3</div>
                           </td>
-                          <td valign="top" style="padding: 16px 0 0 10px">
+                          <td valign="top" style="padding:16px 0 0 10px">
                             <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0"><strong>Gift Card</strong></p>
-                            <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-top: 2px">
-                              El saldo se reintegra directamente a la misma
-                              tarjeta.
-                            </p>
+                            <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-top:2px">El saldo se reintegra directamente a la misma tarjeta.</p>
                           </td>
                         </tr>
-                        {{/eq}}
-                        {{/each}}
-                        {{/each}}
+                        {{/eq}} {{/each}} {{/each}}
                       </table>
-
                     </td>
                   </tr>
                 </table>
               </td>
             </tr>
 
+            <tr><td class="gap">&nbsp;</td></tr>
+
+            <!-- ══════════════════════════════════════════
+                 DARK FOOTER
+            ══════════════════════════════════════════ -->
             <tr>
-              <td class="gap">&nbsp;</td>
+              <td class="footer-td" bgcolor="#1c1c1c" style="background:#1c1c1c;border-radius:10px;padding:22px 24px 20px">
+                <table role="presentation" width="100%">
+
+                  <!-- Logos de marcas -->
+                  <tr>
+                    <td style="padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,.08)">
+                      <table role="presentation" width="100%" style="table-layout:fixed">
+                        <tr>
+                          <td align="center" valign="middle" style="padding:0 8px">
+                            <img src="https://sporting.vteximg.com.br/arquivos/logo-sporting-white.png"
+                                 alt="Sporting" width="110"
+                                 class="brand-logo-sporting"
+                                 style="width:110px;height:auto;display:block;margin:0 auto" />
+                          </td>
+                          <td align="center" valign="middle" style="padding:0 8px">
+                            <img src="https://sporting.vteximg.com.br/arquivos/logo-woker-white.png"
+                                 alt="Woker" width="80"
+                                 class="brand-logo-woker"
+                                 style="width:80px;height:auto;display:block;margin:0 auto" />
+                          </td>
+                          <td align="center" valign="middle" style="padding:0 8px">
+                            <img src="https://sporting.vteximg.com.br/arquivos/logo-luquin-white.png"
+                                 alt="Antonio Luquin" width="100"
+                                 class="brand-logo-luquin"
+                                 style="width:100px;height:auto;display:block;margin:0 auto" />
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+
+                  <!-- Links -->
+                  <tr>
+                    <td style="padding:16px 0 14px;border-bottom:1px solid rgba(255,255,255,.08)">
+                      <table role="presentation" width="100%">
+                        <tr>
+                          <td valign="middle" align="center">
+                            <a href="https://{{hostName}}/contacto" target="_blank" style="font-family:'Poppins',-apple-system,sans-serif;font-size:11px;color:rgba(255,255,255,.45);text-decoration:none;font-weight:500">Contacto</a>
+                            &nbsp;&nbsp;
+                            <a href="https://{{hostName}}/centro-de-ayuda" target="_blank" style="font-family:'Poppins',-apple-system,sans-serif;font-size:11px;color:rgba(255,255,255,.45);text-decoration:none;font-weight:500">Ayuda</a>
+                            &nbsp;&nbsp;
+                            <a href="https://{{hostName}}/cambios-y-devoluciones" target="_blank" style="font-family:'Poppins',-apple-system,sans-serif;font-size:11px;color:rgba(255,255,255,.45);text-decoration:none;font-weight:500">Devoluciones</a>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+
+                  <!-- Copyright -->
+                  <tr>
+                    <td align="center" style="padding-top:14px">
+                      <p style="font-family:'Poppins',-apple-system,sans-serif;font-size:10.5px;color:rgba(255,255,255,.25);text-align:center;margin:0;line-height:1.6">© {{_accountInfo.TradingName}} — Todos los derechos reservados</p>
+                    </td>
+                  </tr>
+
+                </table>
+              </td>
             </tr>
 
-            <!-- ═══ FOOTER ═══ -->
+            <!-- TRUST LOGOS (CACE · MercadoPago · Infracommerce) -->
             <tr>
-              <td style="padding: 4px 0">
-                <img
-                  src="https://sporting.vteximg.com.br/arquivos/barra-footer-logos3.png"
-                  alt="Beneficios Sporting"
-                  style="
-                    width: 100%;
-                    max-width: 600px;
-                    height: auto;
-                    border-radius: 10px;
-                  "
-                />
-              </td>
-            </tr>
-            <tr>
-              <td align="center" style="padding: 16px 8px 8px 8px">
-                <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-bottom: 6px">
-                  ¿Tenés alguna duda?
-                  <a
-                    href="https://{{hostName}}/centro-de-ayuda"
-                    target="_blank"
-                    class="footer-link" style="color:#16a34a;font-weight:bold"
-                    >Visitá nuestro Centro de ayuda</a
-                  >.
-                </p>
-                <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin-bottom: 12px">
-                  Equipo
-                  <strong style="color: #374151">Sporting</strong>
-                </p>
-                <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;color: #9ca3af">
-                  © {{_accountInfo.TradingName}}. Todos los derechos reservados.
-                </p>
-              </td>
-            </tr>
-            <tr>
-              <td style="padding: 8px 0 0 0">
-                <img
-                  src="https://sporting.vteximg.com.br/arquivos/barra-footer-proveedores-v3.png"
-                  alt="Medios de pago y seguridad"
-                  style="width: 100%; max-width: 600px; height: auto"
-                />
+              <td style="padding:8px 0 0">
+                <table role="presentation" width="100%" class="trust-logos" bgcolor="#f4f4f4" style="background:#f4f4f4;border-radius:10px;table-layout:fixed">
+                  <tr>
+                    <td align="center" valign="middle" style="padding:18px 8px">
+                      <img src="https://sporting.vteximg.com.br/arquivos/logo-cace.png"
+                           alt="CACE" width="56"
+                           style="width:56px;height:auto;display:block;margin:0 auto" />
+                    </td>
+                    <td align="center" valign="middle" style="padding:18px 8px">
+                      <img src="https://sporting.vteximg.com.br/arquivos/logo-mercadopago.png"
+                           alt="Mercado Pago" width="110"
+                           style="width:110px;height:auto;display:block;margin:0 auto" />
+                    </td>
+                    <td align="center" valign="middle" style="padding:18px 8px">
+                      <img src="https://sporting.vteximg.com.br/arquivos/logo-infracommerce.png"
+                           alt="Infracommerce" width="100"
+                           style="width:100px;height:auto;display:block;margin:0 auto" />
+                    </td>
+                  </tr>
+                </table>
               </td>
             </tr>
 
