@@ -38,6 +38,7 @@
         background: linear-gradient(135deg, #f0faf0 0%, #e8f7e6 100%);
         border: 1px solid #bbf7d0;
         border-radius: 10px;
+        box-sizing: border-box;
         color: #1a7a0a;
         font-family: 'Poppins', -apple-system, sans-serif;
         font-size: 42px;
@@ -130,10 +131,16 @@
                         Recibimos una solicitud para ingresar a tu cuenta de <strong>{{_accountInfo.TradingName}}</strong>.
                         Volvé a la ventana donde pediste el acceso e ingresá este código:
                       </p>
-                      <table role="presentation" width="100%">
+                      <table role="presentation" width="100%" style="width:100%;table-layout:fixed">
                         <tr>
-                          <td align="center" class="access-code" style="background:linear-gradient(135deg,#f0faf0 0%,#e8f7e6 100%);border:1px solid #bbf7d0;border-radius:10px;color:#1a7a0a;font-family:'Poppins',-apple-system,sans-serif;font-size:42px;line-height:48px;font-weight:800;letter-spacing:7px;padding:20px 14px;text-align:center">
-                            {{aditionalData.accessKey}}
+                          <td style="padding:0">
+                            <table role="presentation" width="100%" bgcolor="#f0faf0" style="width:100%;table-layout:fixed;background:linear-gradient(135deg,#f0faf0 0%,#e8f7e6 100%);border:1px solid #bbf7d0;border-radius:10px;border-collapse:separate!important">
+                              <tr>
+                                <td align="center" class="access-code" style="background:transparent;border:none;border-radius:10px;box-sizing:border-box;color:#1a7a0a;font-family:'Poppins',-apple-system,sans-serif;font-size:42px;line-height:48px;font-weight:800;letter-spacing:7px;padding:20px 14px;text-align:center">
+                                  {{aditionalData.accessKey}}
+                                </td>
+                              </tr>
+                            </table>
                           </td>
                         </tr>
                       </table>

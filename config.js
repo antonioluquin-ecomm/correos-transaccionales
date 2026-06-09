@@ -177,7 +177,7 @@ const TEMPLATES = [
     plataforma: 'VTEX',
     categoria: 'Logística de Entrega',
     estado: 'en revisión',
-    actualizado: '2026-06-08',
+    actualizado: '2026-06-09',
     responsable: 'Por definir',
     descripcion: 'Confirma a un comprador B2B que la orden fue generada y queda pendiente de validación comercial antes de avanzar al resto del flujo.',
     archivoHtml: 'templates/vtex/b2b/orden-generada/orden-generada.v2.html',

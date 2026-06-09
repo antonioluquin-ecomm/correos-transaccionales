@@ -165,7 +165,7 @@
                         <tr>
                           <td class="product-img-cell" valign="top" style="width:188px;padding:0 20px 0 0">
                             {{#if SkuContext.DetailUrl}}<a href="https://{{#if _accountInfo.HostName}}{{_accountInfo.HostName}}{{else}}{{_accountInfo.AccountName}}.vtexcommercestable.com.br{{/if}}{{SkuContext.DetailUrl}}" target="_blank" style="display:block;line-height:0">{{/if}}
-                            <img src="{{SkuContext.ImageUrl}}"
+                            <img src="{{#if SkuContext.Images.[0].ImageUrl}}{{SkuContext.Images.[0].ImageUrl}}{{else}}{{SkuContext.ImageUrl}}{{/if}}"
                                  alt="{{SkuContext.ProductName}}"
                                  width="176"
                                  class="product-img"
@@ -196,7 +196,7 @@
 
                   <!-- CTA -->
                   <tr>
-                    <td style="padding:20px 24px 0">
+                    <td style="padding:20px 24px 24px">
                       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
                         <tr>
                           <td bgcolor="#1a7a0a" style="border-radius:8px">
@@ -221,28 +221,11 @@
                     </td>
                   </tr>
 
-                  <!-- META GRID -->
-                  <tr>
-                    <td style="padding:20px 24px 24px">
-                      <table role="presentation" width="100%" style="table-layout:fixed;border-radius:10px;overflow:hidden">
-                        <tr>
-                          <td class="sum-cell sum-last" style="width:50%;padding:16px 18px;vertical-align:top">
-                            <p style="font-size:9.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#b0b0b0;margin:0 0 5px 0">Aviso solicitado</p>
-                            <p style="font-size:15px;line-height:22px;font-weight:700;color:#111827;margin:0">{{#if NotifyRequest.createdAt}}{{formatDate NotifyRequest.createdAt}}{{else}}No informado{{/if}}</p>
-                          </td>
-                          <td class="sum-cell sum-cell-r sum-last sum-last-mobile" style="width:50%;padding:16px 18px;vertical-align:top;border-left:1px solid #f3f4f6">
-                            <p style="font-size:9.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#b0b0b0;margin:0 0 5px 0">Vendedor</p>
-                            <p style="font-size:15px;line-height:22px;font-weight:700;color:#111827;margin:0">{{#if NotifyRequest.seller.sellerName}}{{NotifyRequest.seller.sellerName}}{{else}}{{_accountInfo.TradingName}}{{/if}}</p>
-                          </td>
-                        </tr>
-                      </table>
-                    </td>
-                  </tr>
-
                 </table>
               </td>
             </tr>
 
+            {{#if _showBackInStockInfo}}
             <tr><td class="gap">&nbsp;</td></tr>
 
             <!-- INFO -->
@@ -286,6 +269,8 @@
                 </table>
               </td>
             </tr>
+
+            {{/if}}
 
             {{#if NotifyRequest.unsubscribeLink}}
             <tr><td class="gap">&nbsp;</td></tr>
