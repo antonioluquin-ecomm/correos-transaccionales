@@ -2,6 +2,15 @@
 
 Formato: versión, fecha, resumen del cambio principal.
 
+## v1.6.1 — 2026-06-10
+
+Auditoría de consistencia de las plantillas PIM y el mapa de flujo:
+
+- **`config.js`**: `pim-nuevo-envio` agrega `Tienda.Nombre` a su lista de variables (la v2 la usa en título, footer y nota y faltaba). Se renombra a **"Pedido despachado (nuevo envío)"** para que el catálogo coincida con el título del email y el nodo del flujo (antes "Nuevo envío"). Los 8 escenarios de ese correo pasan al grupo **"PIM — pedido despachado"**.
+- **`modules/flujo/index.html`**: el mapa de flujo se reconcilia con el catálogo. Los nodos cuyas plantillas ya existen quedan enlazados con su `templateId` (y por lo tanto marcados `existente`, abriendo el visualizador): `Pedido despachado` → `pim-nuevo-envio`, `Pedido listo para retirar` → `pim-despacho-pickup`, `Recepción por cambio` → `pim-recepcion-cambio`, `Recepción de devolución` → `pim-recepcion-devolucion`, `Recepción por garantía` → `pim-recepcion-garantia`, `Giftcard` (cambio y garantía) → `pim-giftcard`. El nodo de pickup se renombra a "Pedido listo para retirar" para coincidir.
+- Verificado: config sin errores de sintaxis, 0 rutas rotas (52 paths de `archivoHtml`/`ejemplo`/escenarios), sin huérfanos en `templates/pim` ni `examples/pim`, y sin errores de consola en visualizador ni flujo.
+- Pendientes detectados (no bloqueantes, sin nodo en el mapa aún): `confirmacion-multideposito` como origen del flujo de entrega, y los flujos de `reembolso` / `etiqueta-devolucion` / `factura-disponible` / `despacho-b2b`.
+
 ## v1.6.0 — 2026-06-10
 
 Plantilla PIM **Pedido listo para retirar (pickup)** `despacho-pickup.v2` + limpieza de `nuevo-pickup`:
