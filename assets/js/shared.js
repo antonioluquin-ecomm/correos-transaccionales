@@ -258,17 +258,68 @@ const CT = (() => {
       }, context);
   }
 
+  // Tokeniza una expresion PIM respetando comillas y grupos entre parentesis.
+  // Ej: 'or (hasPrefix .X "UR") (hasPrefix .X "AD")' -> ['or','(hasPrefix .X "UR")','(hasPrefix .X "AD")']
+  function tokenizePimExpr(source) {
+    const tokens = [];
+    const s = String(source || '');
+    let i = 0;
+    while (i < s.length) {
+      const ch = s[i];
+      if (ch === ' ' || ch === '\t' || ch === '\n' || ch === '\r') { i += 1; continue; }
+      if (ch === '(') {
+        let depth = 0; const start = i;
+        for (; i < s.length; i += 1) {
+          if (s[i] === '(') depth += 1;
+          else if (s[i] === ')') { depth -= 1; if (depth === 0) { i += 1; break; } }
+        }
+        tokens.push(s.slice(start, i));
+      } else if (ch === '"' || ch === "'") {
+        const start = i; i += 1;
+        for (; i < s.length && s[i] !== ch; i += 1) { /* avanzar */ }
+        i += 1; tokens.push(s.slice(start, i));
+      } else {
+        const start = i;
+        for (; i < s.length && !' \t\n\r'.includes(s[i]); i += 1) { /* avanzar */ }
+        tokens.push(s.slice(start, i));
+      }
+    }
+    return tokens;
+  }
+
+  // Resuelve un token a su VALOR (path, literal o funcion de valor como len).
+  function evalPimValue(context, token) {
+    const expr = normalizePimExpression(token);
+    const tokens = tokenizePimExpr(expr);
+    if (tokens.length > 1 && tokens[0] === 'len') {
+      return String(getPimValue(context, tokens[1]) ?? '').length;
+    }
+    return getPimValue(context, expr);
+  }
+
+  // Evalua una expresion PIM como CONDICION (booleano).
+  // Soporta: eq, ne, not, and, or, hasPrefix, hasSuffix, gt, lt, ge, le, len.
   function evalPimCondition(context, expression) {
     const expr = normalizePimExpression(expression);
-    if (expr.startsWith('eq ')) {
-      const args = splitPimArgs(expr.slice(3));
-      return getPimValue(context, args[0]) === getPimValue(context, args[1]);
+    const tokens = tokenizePimExpr(expr);
+    if (tokens.length === 0) return false;
+    const fn = tokens[0];
+    const args = tokens.slice(1);
+    const num = (t) => Number(evalPimValue(context, t));
+    switch (fn) {
+      case 'eq': return evalPimValue(context, args[0]) === evalPimValue(context, args[1]);
+      case 'ne': return evalPimValue(context, args[0]) !== evalPimValue(context, args[1]);
+      case 'not': return !evalPimCondition(context, args[0]);
+      case 'and': return args.length > 0 && args.every((a) => evalPimCondition(context, a));
+      case 'or': return args.some((a) => evalPimCondition(context, a));
+      case 'hasPrefix': return String(evalPimValue(context, args[0]) ?? '').startsWith(String(evalPimValue(context, args[1]) ?? ''));
+      case 'hasSuffix': return String(evalPimValue(context, args[0]) ?? '').endsWith(String(evalPimValue(context, args[1]) ?? ''));
+      case 'gt': return num(args[0]) > num(args[1]);
+      case 'lt': return num(args[0]) < num(args[1]);
+      case 'ge': return num(args[0]) >= num(args[1]);
+      case 'le': return num(args[0]) <= num(args[1]);
+      default: return Boolean(getPimValue(context, expr));
     }
-    if (expr.startsWith('ne ')) {
-      const args = splitPimArgs(expr.slice(3));
-      return getPimValue(context, args[0]) !== getPimValue(context, args[1]);
-    }
-    return Boolean(getPimValue(context, expr));
   }
 
   function findPimBlockEnd(source, startIndex) {
