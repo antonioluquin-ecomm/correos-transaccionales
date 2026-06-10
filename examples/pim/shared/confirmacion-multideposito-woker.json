@@ -1,0 +1,30 @@
+{
+  "Tienda": {
+    "Nombre": "Woker",
+    "Datos": {
+      "NotificacionesConfig": {
+        "HeaderURL": "https://www.woker.com.ar",
+        "HeaderImage": "https://ventadeportiva.vteximg.com.br/arquivos/logo-mail-woker.png"
+      }
+    }
+  },
+  "Pedido": {
+    "NroPedidoCanal": "WOK-880102337",
+    "FechaPedido": "10 de junio de 2026",
+    "TotalLineas": "38.500",
+    "DatosEnvio": {
+      "Destinatario": {
+        "Nombres": "Cliente"
+      }
+    },
+    "LineasPedido": [
+      {
+        "Producto": "Campera Rompeviento Urbana",
+        "SKU": "WOK-CAM-220",
+        "Importe": "38.500",
+        "Cantidad": 1,
+        "Subtotal": "38.500"
+      }
+    ]
+  }
+}

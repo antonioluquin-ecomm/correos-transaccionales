@@ -362,6 +362,32 @@ const TEMPLATES = [
     ],
   },
   {
+    id: 'pim-confirmacion-multideposito',
+    nombre: 'Confirmación de compra (Venta Multidepósito)',
+    plataforma: 'PIM',
+    categoria: 'Confirmación de Compra',
+    estado: 'en revisión',
+    actualizado: '2026-06-10',
+    responsable: 'Por definir',
+    descripcion: 'Confirmación inicial de compra para ventas multidepósito (compra en sucursal con envío posterior). Centraliza compra registrada, pago aprobado, pedido generado y factura adjunta; explica próximas etapas e informa políticas de cambios y reembolsos. Reemplaza a los correos VTEX de pedido realizado, pago aprobado y pedido facturado.',
+    archivoHtml: 'templates/pim/shared/confirmacion-multideposito/confirmacion-multideposito.v2.html',
+    ejemplo: 'examples/pim/shared/confirmacion-multideposito-sporting.json',
+    variables: [
+      'Tienda.Nombre',
+      'Tienda.Datos.NotificacionesConfig.HeaderURL',
+      'Tienda.Datos.NotificacionesConfig.HeaderImage',
+      'Pedido.NroPedidoCanal',
+      'Pedido.FechaPedido',
+      'Pedido.DatosEnvio.Destinatario.Nombres',
+      'Pedido.LineasPedido[].Producto',
+      'Pedido.LineasPedido[].SKU',
+      'Pedido.LineasPedido[].Importe',
+      'Pedido.LineasPedido[].Cantidad',
+      'Pedido.LineasPedido[].Subtotal',
+      'Pedido.TotalLineas',
+    ],
+  },
+  {
     id: 'pim-nuevo-pickup',
     nombre: 'Nuevo pickup',
     plataforma: 'PIM',
@@ -777,12 +803,30 @@ const EXAMPLE_SCENARIOS = [
     descripcion: 'Despacho con logística propia. Sin botón de tracking; muestra mensaje de coordinación de entrega.',
     compatibleTemplates: ['pim-nuevo-envio'],
   },
+  {
+    id: 'pim-confirmacion-multideposito-sporting',
+    path: 'examples/pim/shared/confirmacion-multideposito-sporting.json',
+    store: 'shared',
+    label: 'Sporting (2 productos)',
+    tipo: 'PIM — confirmación multidepósito',
+    descripcion: 'Confirmación de compra multidepósito de Sporting con dos productos y portal de gestión propio.',
+    compatibleTemplates: ['pim-confirmacion-multideposito'],
+  },
+  {
+    id: 'pim-confirmacion-multideposito-woker',
+    path: 'examples/pim/shared/confirmacion-multideposito-woker.json',
+    store: 'shared',
+    label: 'Woker (1 producto)',
+    tipo: 'PIM — confirmación multidepósito',
+    descripcion: 'Confirmación de compra multidepósito de Woker con un producto; valida la marca dinámica y el portal de gestión de Woker.',
+    compatibleTemplates: ['pim-confirmacion-multideposito'],
+  },
 ];
 
 const VERSION = {
-  number: '1.4.2',
+  number: '1.5.0',
   date: '2026-06-10',
-  summary: 'Escenarios completos para nuevo-envio PIM: Andreani, Producteca (4 carriers), OCASA, Propia.',
+  summary: 'Nueva plantilla PIM confirmación multidepósito (tabla de productos) y motor PIM con soporte range/with.',
 };
 
 const CHANGELOG = [

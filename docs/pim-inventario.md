@@ -8,11 +8,13 @@ Inventario inicial para estandarizar las plantillas PIM compartidas por Sporting
 - Assets actuales: URLs remotas ya presentes en los HTML productivos.
 - Pendiente: recibir SVG, PNG u originales de logos/footer y lineamientos especificos para comunicaciones PIM.
 - Primera base visual: `nuevo-envio.v2.html`.
+- Motor de render del Visualizador (`assets/js/shared.js`): soporta sintaxis Go `{{ if/else if/else }}`, `{{ with }}` y `{{ range }}` (con rama `{{ else }}` para listas vacías), además de funciones `eq/ne/not/and/or/hasPrefix/hasSuffix/gt/lt/ge/le/len`. Las tablas de productos (`range .Pedido.LineasPedido`) se renderizan en vivo.
 
 ## Plantillas
 
 | Plantilla | Prioridad | Estado de trabajo | Variables clave | Recursos graficos actuales | Oportunidades |
 | --- | --- | --- | --- | --- | --- |
+| `confirmacion-multideposito` | Alta | Base v2 (nueva) | `Tienda.Nombre`, `HeaderURL`, `HeaderImage`, `Pedido.NroPedidoCanal`, `Pedido.FechaPedido`, `Pedido.DatosEnvio.Destinatario.Nombres`, `Pedido.LineasPedido[]` (`Producto`/`SKU`/`Importe`/`Cantidad`/`Subtotal`), `Pedido.TotalLineas` | Header dinamico, footer VTEX, tabla de productos, portal por marca | Confirmar URL del portal de Woker; validar variables reales de PIM para venta en sucursal |
 | `nuevo-envio` | Alta | Base v2 inicial | `Tienda.Datos.NotificacionesConfig.HeaderURL`, `HeaderImage`, `Pedido.NroPedidoCanal`, `Pedido.Logistica`, `Pedido.DatosEnvio.Etiqueta.NroSeguimiento`, `Pedido.DatosEnvio.Destinatario.Nombres` | Header dinamico, footer banner, logos footer | Ordenar tracking, CTA por operador, fallback sin seguimiento, tono mas claro |
 | `nuevo-pickup` | Alta | Pendiente | `HeaderURL`, `HeaderImage`, `Pedido.LineasPedido[0].Deposito` | Header dinamico, footer banner, logos footer | Mejorar instrucciones de retiro, sucursal, horarios y requisitos |
 | `despacho-pickup` | Alta | Pendiente | `Pedido.NroPedidoCanal`, `Pedido.FechaPedido`, `Pedido.LineasPedido[]`, `Deposito.DatosDeposito.DatosPickup.*`, `Pedido.TotalLineas` | Header dinamico, iconos check/circle, logos footer | Reusar componentes de resumen, tabla de productos, datos de pickup y progreso |

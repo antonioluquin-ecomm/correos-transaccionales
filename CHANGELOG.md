@@ -2,6 +2,15 @@
 
 Formato: versión, fecha, resumen del cambio principal.
 
+## v1.5.0 — 2026-06-10
+
+Nueva plantilla PIM **Confirmación de compra (Venta Multidepósito)** y motor PIM con loops:
+
+- **`templates/pim/shared/confirmacion-multideposito/confirmacion-multideposito.v2.html`**: confirmación inicial de compra para ventas en sucursal con envío posterior desde otro depósito. Centraliza en un solo correo lo que en e-commerce envía VTEX en tres (pedido realizado + pago aprobado + pedido facturado): checklist de compra registrada / pago procesado / pedido generado / factura adjunta, resumen con tabla de productos y total, próximas etapas (preparación → despacho → entrega), secciones de **Cambios** y **Reembolsos**, y CTA al **Portal de Gestión de Pedidos** con URL dinámica por marca. Reutiliza el sistema visual de `nuevo-envio.v2` (hero slate, footer oscuro VTEX con 6 logos, trust logos).
+- **`assets/js/shared.js`**: el motor PIM ahora interpreta `{{ range }}` y `{{ with }}` (antes los descartaba). Render recursivo que arrastra el contexto por ítem, con soporte de rama `{{ else }}` para listas vacías y truthiness estilo Go. Habilita tablas de productos para esta y futuras plantillas (`despacho-pickup`, `recepcion-*`, etc.).
+- **`config.js`**: alta de `pim-confirmacion-multideposito` (categoría "Confirmación de Compra") + 2 escenarios (Sporting 2 productos / Woker 1 producto) para validar marca dinámica y portal por marca. VERSION → 1.5.0.
+- **`examples/pim/shared/confirmacion-multideposito-{sporting,woker}.json`**: escenarios representativos sanitizados.
+
 ## v1.4.1 — 2026-06-10
 
 Auditoría de alineación Woker vs Sporting + correcciones:

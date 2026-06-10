@@ -1,0 +1,346 @@
+<!-- PIM · confirmacion-multideposito — Version 2 (base canónica compartida Sporting/Woker) -->
+<!-- Flujo Venta Multidepósito: confirmación inicial de compra en sucursal con envío posterior. -->
+<!-- Reemplaza a los correos VTEX de pedido-realizado + pago-aprobado + pedido-facturado. -->
+<!doctype html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta name="x-apple-disable-message-reformatting" />
+    <meta name="format-detection" content="telephone=no,address=no,email=no,date=no" />
+    <title>{{ .Tienda.Nombre }} — Confirmación de compra</title>
+    <!--[if mso]>
+      <xml><o:OfficeDocumentSettings><o:AllowPNG/><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml>
+    <![endif]-->
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&display=swap');
+
+      html, body { margin:0 !important; padding:0 !important; width:100% !important; background:#f3f4f6 !important; }
+      body { font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; color:#111827; }
+      * { -ms-text-size-adjust:100%; -webkit-text-size-adjust:100%; }
+      table, td { border-collapse:collapse !important; mso-table-lspace:0pt !important; mso-table-rspace:0pt !important; }
+      img { border:0; outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; display:block; }
+      a { text-decoration:none; }
+
+      @media only screen and (max-width:600px) {
+        .wrap { width:100% !important; max-width:100% !important; }
+        .card { border-radius:0 !important; border-left:none !important; border-right:none !important; }
+        .outer-pad { padding:12px 0 !important; }
+        .hero-td { padding:30px 22px 26px !important; }
+        .body-td { padding:24px 22px !important; }
+        .foot-pad { padding:0 22px 22px !important; }
+        .h1 { font-size:24px !important; line-height:30px !important; }
+        .step-col { display:block !important; width:100% !important; }
+        .col-precio { display:none !important; }
+        .brand-logo-sporting { width:96px !important; }
+        .brand-logo-woker { width:70px !important; }
+        .brand-logo-luquin { width:88px !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Preheader -->
+    <div style="display:none;max-height:0;overflow:hidden;opacity:0;mso-hide:all;font-size:1px;line-height:1px;color:#f3f4f6;">
+      Tu compra {{ .Pedido.NroPedidoCanal }} fue registrada y el pago se procesó correctamente. La factura está adjunta a este correo.
+    </div>
+
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;background:#f3f4f6;border-collapse:collapse;">
+      <tr>
+        <td align="center" class="outer-pad" style="padding:24px 12px;">
+          <table role="presentation" class="wrap card" width="600" cellspacing="0" cellpadding="0" border="0" style="width:100%;max-width:600px;background:#ffffff;border:1px solid #e5e7eb;border-radius:12px;border-collapse:separate;overflow:hidden;">
+
+            <!-- Header / logo dinámico por tienda -->
+            <tr>
+              <td align="center" style="padding:26px 24px 20px;border-bottom:1px solid #e5e7eb;">
+                <a href="{{ .Tienda.Datos.NotificacionesConfig.HeaderURL }}" target="_blank" style="display:inline-block;text-decoration:none;">
+                  <img src="{{ .Tienda.Datos.NotificacionesConfig.HeaderImage }}" width="140" alt="{{ .Tienda.Nombre }}" style="width:140px;max-width:60%;height:auto;" />
+                </a>
+              </td>
+            </tr>
+
+            <!-- Hero -->
+            <tr>
+              <td class="hero-td" bgcolor="#0f172a" style="background:#0f172a;padding:38px 28px 34px;text-align:center;">
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" style="margin:0 auto 18px;border-collapse:collapse;">
+                  <tr>
+                    <td align="center" valign="middle" width="76" height="76" style="width:76px;height:76px;border-radius:50%;background:rgba(34,197,94,.18);">
+                      <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center"><tr>
+                        <td align="center" valign="middle" width="50" height="50" style="width:50px;height:50px;border-radius:50%;background:#22c55e;font-size:26px;line-height:50px;text-align:center;color:#ffffff;font-weight:800;">&#10003;</td>
+                      </tr></table>
+                    </td>
+                  </tr>
+                </table>
+                <p style="margin:0 0 8px;font-size:12px;line-height:16px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#86efac;">Compra confirmada</p>
+                <h1 class="h1" style="margin:0;font-size:27px;line-height:34px;font-weight:800;color:#ffffff;">¡Gracias por tu compra!</h1>
+                <p style="margin:12px auto 0;max-width:430px;font-size:14px;line-height:21px;color:#cbd5e1;">Registramos tu compra y procesamos el pago. Preparamos tu pedido para enviártelo a domicilio desde nuestro depósito.</p>
+              </td>
+            </tr>
+
+            <!-- Body -->
+            <tr>
+              <td class="body-td" style="padding:28px;">
+                <p style="margin:0 0 16px;font-size:15px;line-height:23px;color:#374151;">Hola {{ .Pedido.DatosEnvio.Destinatario.Nombres }},</p>
+                <p style="margin:0 0 22px;font-size:15px;line-height:23px;color:#374151;">Tu compra quedó registrada con éxito. En este correo concentramos toda la información inicial de tu pedido <strong style="color:#111827;">{{ .Pedido.NroPedidoCanal }}</strong>.</p>
+
+                <!-- Checklist de confirmación -->
+                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;border-collapse:separate;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;">
+                  <tr>
+                    <td style="padding:18px 20px;">
+                      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;border-collapse:collapse;">
+                        <tr>
+                          <td valign="top" width="26" style="width:26px;padding:0 0 10px;font-size:15px;line-height:21px;color:#16a34a;font-weight:800;">&#10003;</td>
+                          <td valign="top" style="padding:0 0 10px;font-size:13px;line-height:21px;color:#166534;">Tu compra fue <strong>registrada correctamente</strong>.</td>
+                        </tr>
+                        <tr>
+                          <td valign="top" width="26" style="width:26px;padding:0 0 10px;font-size:15px;line-height:21px;color:#16a34a;font-weight:800;">&#10003;</td>
+                          <td valign="top" style="padding:0 0 10px;font-size:13px;line-height:21px;color:#166534;">El <strong>pago fue procesado</strong> con éxito.</td>
+                        </tr>
+                        <tr>
+                          <td valign="top" width="26" style="width:26px;padding:0 0 10px;font-size:15px;line-height:21px;color:#16a34a;font-weight:800;">&#10003;</td>
+                          <td valign="top" style="padding:0 0 10px;font-size:13px;line-height:21px;color:#166534;">El <strong>pedido fue generado</strong> y entró en preparación.</td>
+                        </tr>
+                        <tr>
+                          <td valign="top" width="26" style="width:26px;padding:0;font-size:15px;line-height:21px;color:#16a34a;font-weight:800;">&#10003;</td>
+                          <td valign="top" style="padding:0;font-size:13px;line-height:21px;color:#166534;">La <strong>factura está adjunta</strong> a este correo.</td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- Resumen del pedido -->
+                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;margin-top:24px;border-collapse:separate;background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;">
+                  <tr>
+                    <td style="padding:18px 20px 6px;">
+                      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;border-collapse:collapse;">
+                        <tr>
+                          <td style="font-size:11px;line-height:16px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#64748b;">N.&deg; de pedido</td>
+                          <td align="right" style="font-size:11px;line-height:16px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#64748b;">Fecha</td>
+                        </tr>
+                        <tr>
+                          <td style="padding-top:2px;font-size:15px;line-height:22px;font-weight:800;color:#0f172a;">{{ .Pedido.NroPedidoCanal }}</td>
+                          <td align="right" style="padding-top:2px;font-size:13px;line-height:22px;color:#334155;">{{ .Pedido.FechaPedido }}</td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding:8px 20px 4px;">
+                      <!-- Tabla de productos -->
+                      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;border-collapse:collapse;">
+                        <tr>
+                          <td style="padding:10px 0 8px;border-bottom:1px solid #e2e8f0;font-size:10.5px;line-height:14px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#94a3b8;">Producto</td>
+                          <td class="col-precio" align="right" style="padding:10px 8px 8px;border-bottom:1px solid #e2e8f0;font-size:10.5px;line-height:14px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#94a3b8;">Precio</td>
+                          <td align="center" style="padding:10px 8px 8px;border-bottom:1px solid #e2e8f0;font-size:10.5px;line-height:14px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#94a3b8;">Cant.</td>
+                          <td align="right" style="padding:10px 0 8px;border-bottom:1px solid #e2e8f0;font-size:10.5px;line-height:14px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#94a3b8;">Subtotal</td>
+                        </tr>
+                        {{ with .Pedido.LineasPedido }}
+                          {{ range . }}
+                          <tr>
+                            <td valign="top" style="padding:10px 0;border-bottom:1px solid #eef2f6;font-size:13px;line-height:18px;color:#1e293b;">{{ .Producto }}<br /><span style="font-size:11px;line-height:16px;color:#94a3b8;">SKU {{ .SKU }}</span></td>
+                            <td class="col-precio" valign="top" align="right" style="padding:10px 8px;border-bottom:1px solid #eef2f6;font-size:13px;line-height:18px;color:#475569;white-space:nowrap;">$ {{ .Importe }}</td>
+                            <td valign="top" align="center" style="padding:10px 8px;border-bottom:1px solid #eef2f6;font-size:13px;line-height:18px;color:#475569;">{{ .Cantidad }}</td>
+                            <td valign="top" align="right" style="padding:10px 0;border-bottom:1px solid #eef2f6;font-size:13px;line-height:18px;font-weight:700;color:#0f172a;white-space:nowrap;">$ {{ .Subtotal }}</td>
+                          </tr>
+                          {{ end }}
+                        {{ else }}
+                          <tr><td colspan="4" style="padding:14px 0;font-size:13px;line-height:20px;color:#64748b;">El detalle de productos se encuentra en la factura adjunta.</td></tr>
+                        {{ end }}
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding:4px 20px 18px;">
+                      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;border-collapse:collapse;">
+                        <tr>
+                          <td style="padding-top:10px;font-size:14px;line-height:20px;font-weight:800;color:#0f172a;">Total</td>
+                          <td align="right" style="padding-top:10px;font-size:16px;line-height:20px;font-weight:800;color:#0f172a;white-space:nowrap;">$ {{ .Pedido.TotalLineas }}</td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- Próximas etapas -->
+                <p style="margin:28px 0 14px;font-size:15px;line-height:22px;font-weight:800;color:#0f172a;">¿Qué sigue ahora?</p>
+                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;border-collapse:collapse;">
+                  <tr>
+                    <td class="step-col" valign="top" width="33.33%" style="width:33.33%;padding:0 6px 0 0;">
+                      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;border-collapse:separate;background:#f8fafc;border:1px solid #e5e7eb;border-radius:8px;">
+                        <tr><td align="center" style="padding:16px 10px;">
+                          <div style="font-size:22px;line-height:28px;">&#128230;</div>
+                          <p style="margin:6px 0 2px;font-size:12px;line-height:16px;font-weight:700;color:#0f172a;">1. Preparación</p>
+                          <p style="margin:0;font-size:11px;line-height:16px;color:#64748b;">Armamos tu pedido en el depósito.</p>
+                        </td></tr>
+                      </table>
+                    </td>
+                    <td class="step-col" valign="top" width="33.33%" style="width:33.33%;padding:0 3px;">
+                      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;border-collapse:separate;background:#f8fafc;border:1px solid #e5e7eb;border-radius:8px;">
+                        <tr><td align="center" style="padding:16px 10px;">
+                          <div style="font-size:22px;line-height:28px;">&#128666;</div>
+                          <p style="margin:6px 0 2px;font-size:12px;line-height:16px;font-weight:700;color:#0f172a;">2. Despacho</p>
+                          <p style="margin:0;font-size:11px;line-height:16px;color:#64748b;">Lo entregamos al operador logístico.</p>
+                        </td></tr>
+                      </table>
+                    </td>
+                    <td class="step-col" valign="top" width="33.33%" style="width:33.33%;padding:0 0 0 6px;">
+                      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;border-collapse:separate;background:#f8fafc;border:1px solid #e5e7eb;border-radius:8px;">
+                        <tr><td align="center" style="padding:16px 10px;">
+                          <div style="font-size:22px;line-height:28px;">&#127968;</div>
+                          <p style="margin:6px 0 2px;font-size:12px;line-height:16px;font-weight:700;color:#0f172a;">3. Entrega</p>
+                          <p style="margin:0;font-size:11px;line-height:16px;color:#64748b;">Llega a la dirección indicada.</p>
+                        </td></tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- Callout: aviso de despacho -->
+                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;margin-top:20px;border-collapse:separate;background:#eff6ff;border-radius:8px;">
+                  <tr>
+                    <td style="padding:16px 18px;border-left:4px solid #2563eb;border-radius:8px;">
+                      <p style="margin:0;font-size:13px;line-height:21px;color:#1e3a8a;">Cuando tu pedido sea despachado vas a recibir el correo de <strong>Pedido Despachado</strong> con el número de seguimiento para rastrear el envío.</p>
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- Cambios -->
+                <p style="margin:28px 0 10px;font-size:15px;line-height:22px;font-weight:800;color:#0f172a;">Cambios</p>
+                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;border-collapse:separate;background:#f8fafc;border:1px solid #e5e7eb;border-radius:8px;">
+                  <tr>
+                    <td style="padding:16px 18px;">
+                      <p style="margin:0 0 8px;font-size:13px;line-height:21px;color:#374151;">Podés gestionar un cambio de dos maneras:</p>
+                      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;border-collapse:collapse;">
+                        <tr>
+                          <td valign="top" width="20" style="width:20px;padding:0 0 6px;font-size:13px;line-height:21px;color:#2563eb;font-weight:800;">&bull;</td>
+                          <td valign="top" style="padding:0 0 6px;font-size:13px;line-height:21px;color:#374151;">Desde el <strong>Portal de Gestión de Pedidos</strong>.</td>
+                        </tr>
+                        <tr>
+                          <td valign="top" width="20" style="width:20px;padding:0;font-size:13px;line-height:21px;color:#2563eb;font-weight:800;">&bull;</td>
+                          <td valign="top" style="padding:0;font-size:13px;line-height:21px;color:#374151;">En <strong>cualquier sucursal</strong> de la cadena, donde podés cambiar el producto por otro disponible.</td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- Reembolsos -->
+                <p style="margin:24px 0 10px;font-size:15px;line-height:22px;font-weight:800;color:#0f172a;">Reembolsos</p>
+                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;border-collapse:separate;background:#fffbeb;border-radius:8px;">
+                  <tr>
+                    <td style="padding:16px 18px;border-left:4px solid #f59e0b;border-radius:8px;">
+                      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;border-collapse:collapse;">
+                        <tr>
+                          <td valign="top" width="20" style="width:20px;padding:0 0 6px;font-size:13px;line-height:21px;color:#b45309;font-weight:800;">&bull;</td>
+                          <td valign="top" style="padding:0 0 6px;font-size:13px;line-height:21px;color:#92400e;">No se realizan <strong>reembolsos digitales</strong>.</td>
+                        </tr>
+                        <tr>
+                          <td valign="top" width="20" style="width:20px;padding:0 0 6px;font-size:13px;line-height:21px;color:#b45309;font-weight:800;">&bull;</td>
+                          <td valign="top" style="padding:0 0 6px;font-size:13px;line-height:21px;color:#92400e;">Los reembolsos <strong>no</strong> pueden gestionarse desde el Portal de Gestión de Pedidos.</td>
+                        </tr>
+                        <tr>
+                          <td valign="top" width="20" style="width:20px;padding:0;font-size:13px;line-height:21px;color:#b45309;font-weight:800;">&bull;</td>
+                          <td valign="top" style="padding:0;font-size:13px;line-height:21px;color:#92400e;">El reintegro debe solicitarse <strong>exclusivamente en la sucursal</strong> donde se realizó el pago original.</td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- CTA Portal de Gestión de Pedidos (URL dinámica por marca) -->
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" style="margin:28px auto 0;border-collapse:separate;">
+                  <tr>
+                    <td bgcolor="#0f172a" style="background:#0f172a;border-radius:8px;">
+                      <!-- TODO: confirmar URL del Portal de Gestión de Pedidos de Woker -->
+                      <a href="{{ if (eq .Tienda.Nombre "Woker") }}https://gestiondepedidos.woker.com.ar/login{{ else }}https://gestiondepedidos.sporting.com.ar/login{{ end }}" target="_blank" style="display:inline-block;padding:14px 30px;color:#ffffff;font-size:13px;line-height:18px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;text-decoration:none;border-radius:8px;">Portal de Gestión de Pedidos &nbsp;&#8594;</a>
+                    </td>
+                  </tr>
+                </table>
+                <p style="margin:14px 0 0;font-size:12px;line-height:19px;color:#64748b;text-align:center;">Desde el portal podés consultar el estado de tu pedido y gestionar las opciones habilitadas.</p>
+
+                <p style="margin:26px 0 0;font-size:12px;line-height:19px;color:#94a3b8;">Este es un mensaje automático enviado desde una casilla que no recibe respuestas. Si necesitás ayuda, escribinos a través de los canales de atención de {{ .Tienda.Nombre }}.</p>
+              </td>
+            </tr>
+
+            <!-- Footer oscuro (estilo VTEX) -->
+            <tr>
+              <td class="foot-pad" style="padding:0 28px 12px;">
+                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#1c1c1c" style="width:100%;background:#1c1c1c;border-radius:10px;border-collapse:separate;">
+                  <tr>
+                    <td style="padding:22px 24px 20px;">
+
+                      <!-- Logos de marca -->
+                      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;table-layout:fixed;border-collapse:collapse;">
+                        <tr>
+                          <td style="padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,.08);">
+                            <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;table-layout:fixed;">
+                              <tr>
+                                <td align="center" valign="middle" style="padding:0 8px;">
+                                  <img src="https://sporting.vteximg.com.br/arquivos/logo-sporting-white.png" alt="Sporting" width="110" class="brand-logo-sporting" style="width:110px;height:auto;margin:0 auto;" />
+                                </td>
+                                <td align="center" valign="middle" style="padding:0 8px;">
+                                  <img src="https://sporting.vteximg.com.br/arquivos/logo-woker-white.png" alt="Woker" width="80" class="brand-logo-woker" style="width:80px;height:auto;margin:0 auto;" />
+                                </td>
+                                <td align="center" valign="middle" style="padding:0 8px;">
+                                  <img src="https://sporting.vteximg.com.br/arquivos/logo-luquin-white.png" alt="Antonio Luquin" width="100" class="brand-logo-luquin" style="width:100px;height:auto;margin:0 auto;" />
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+
+                      <!-- Links -->
+                      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;border-collapse:collapse;">
+                        <tr>
+                          <td align="center" valign="middle" style="padding:16px 0 14px;border-bottom:1px solid rgba(255,255,255,.08);">
+                            <a href="{{ .Tienda.Datos.NotificacionesConfig.HeaderURL }}/contacto" target="_blank" style="font-size:11px;color:rgba(255,255,255,.45);text-decoration:none;font-weight:500;">Contacto</a>
+                            &nbsp;&nbsp;
+                            <a href="{{ .Tienda.Datos.NotificacionesConfig.HeaderURL }}/centro-de-ayuda" target="_blank" style="font-size:11px;color:rgba(255,255,255,.45);text-decoration:none;font-weight:500;">Ayuda</a>
+                            &nbsp;&nbsp;
+                            <a href="{{ .Tienda.Datos.NotificacionesConfig.HeaderURL }}/cambios-y-devoluciones" target="_blank" style="font-size:11px;color:rgba(255,255,255,.45);text-decoration:none;font-weight:500;">Devoluciones</a>
+                          </td>
+                        </tr>
+                      </table>
+
+                      <!-- Copyright -->
+                      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;border-collapse:collapse;">
+                        <tr>
+                          <td align="center" style="padding-top:14px;">
+                            <p style="font-size:10.5px;color:rgba(255,255,255,.25);text-align:center;margin:0;line-height:1.6;">&copy; {{ .Tienda.Nombre }} — Todos los derechos reservados</p>
+                          </td>
+                        </tr>
+                      </table>
+
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- Trust logos -->
+            <tr>
+              <td style="padding:0 28px 24px;">
+                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#f4f4f4" style="width:100%;background:#f4f4f4;border-radius:10px;table-layout:fixed;border-collapse:separate;">
+                  <tr>
+                    <td align="center" valign="middle" style="padding:18px 8px;">
+                      <img src="https://sporting.vteximg.com.br/arquivos/logo-cace.png" alt="CACE" width="56" style="width:56px;height:auto;margin:0 auto;" />
+                    </td>
+                    <td align="center" valign="middle" style="padding:18px 8px;">
+                      <img src="https://sporting.vteximg.com.br/arquivos/logo-mercadopago.png" alt="Mercado Pago" width="110" style="width:110px;height:auto;margin:0 auto;" />
+                    </td>
+                    <td align="center" valign="middle" style="padding:18px 8px;">
+                      <img src="https://sporting.vteximg.com.br/arquivos/logo-infracommerce.png" alt="Infracommerce" width="100" style="width:100px;height:auto;margin:0 auto;" />
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

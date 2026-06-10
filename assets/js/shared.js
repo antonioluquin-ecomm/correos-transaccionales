@@ -323,7 +323,8 @@ const CT = (() => {
   }
 
   function findPimBlockEnd(source, startIndex) {
-    const tagRegex = /\{\{\s*(?:(if\b[^}]*)|(end))\s*\}\}/g;
+    // if / range / with abren bloque; end lo cierra. Todos cuentan profundidad.
+    const tagRegex = /\{\{\s*(?:((?:if|range|with)\b[^}]*)|(end))\s*\}\}/g;
     tagRegex.lastIndex = startIndex;
     let depth = 1;
     let match;
@@ -340,7 +341,7 @@ const CT = (() => {
 
   function splitPimBranches(firstCondition, inner) {
     const branches = [];
-    const tagRegex = /\{\{\s*(?:(if\b[^}]*)|(else if\b[^}]*)|(else)|(end))\s*\}\}/g;
+    const tagRegex = /\{\{\s*(?:((?:if|range|with)\b[^}]*)|(else if\b[^}]*)|(else)|(end))\s*\}\}/g;
     let depth = 0;
     let cursor = 0;
     let condition = firstCondition;
@@ -366,31 +367,79 @@ const CT = (() => {
     return branches;
   }
 
-  function renderPimControlBlocks(source, context) {
-    const openRegex = /\{\{\s*if\s+([^}]+?)\s*\}\}/;
-    const match = openRegex.exec(source);
-    if (!match) return source;
+  // "Truthiness" estilo Go template: array vacio, '', 0, null/undefined y false son falsy.
+  function isTruthyPim(value) {
+    if (Array.isArray(value)) return value.length > 0;
+    if (value === null || value === undefined) return false;
+    if (value === '' || value === 0 || value === false) return false;
+    return true;
+  }
 
+  // Separa el cuerpo de un bloque {{ with }} o {{ range }} en su parte principal
+  // y su rama {{ else }} de nivel superior (si existe).
+  function splitPimElse(inner) {
+    const tagRegex = /\{\{\s*(?:((?:if|range|with)\b[^}]*)|(else)|(end))\s*\}\}/g;
+    let depth = 0;
+    let match;
+    while ((match = tagRegex.exec(inner))) {
+      if (match[1]) { depth += 1; continue; }
+      if (match[3]) { depth -= 1; continue; }
+      if (match[2] && depth === 0) {
+        return { body: inner.slice(0, match.index), elseBody: inner.slice(tagRegex.lastIndex) };
+      }
+    }
+    return { body: inner, elseBody: '' };
+  }
+
+  // Resuelve los tags scalar ({{ .Path }}, {{ literal }}) contra el contexto actual.
+  function resolvePimScalars(source, context) {
+    return source.replace(/\{\{\s*([^{}]+?)\s*\}\}/g, (full, expression) => {
+      const expr = String(expression || '').trim();
+      if (/^(else|end|if|range|with)\b/.test(expr)) return '';
+      const value = getPimValue(context, expr);
+      return escapeHtml(value === null || value === undefined ? '' : value);
+    });
+  }
+
+  // Render recursivo que arrastra el contexto. Soporta if/else if/else, with y range.
+  function renderPimNodes(source, context) {
+    const openRegex = /\{\{\s*(if|range|with)\s+([^}]+?)\s*\}\}/;
+    const match = openRegex.exec(source);
+    if (!match) return resolvePimScalars(source, context);
+
+    const kind = match[1];
+    const arg = match[2];
     const before = source.slice(0, match.index);
     const block = findPimBlockEnd(source, match.index + match[0].length);
     const inner = source.slice(match.index + match[0].length, block.start);
     const after = source.slice(block.end);
-    const branches = splitPimBranches(match[1], inner);
-    const selected = branches.find((branch) => branch.condition === null || evalPimCondition(context, branch.condition));
 
-    return before
-      + renderPimControlBlocks(selected ? selected.html : '', context)
-      + renderPimControlBlocks(after, context);
+    let middle = '';
+    if (kind === 'if') {
+      const branches = splitPimBranches(arg, inner);
+      const selected = branches.find((branch) => branch.condition === null || evalPimCondition(context, branch.condition));
+      middle = renderPimNodes(selected ? selected.html : '', context);
+    } else if (kind === 'with') {
+      const parts = splitPimElse(inner);
+      const value = getPimValue(context, arg);
+      middle = isTruthyPim(value)
+        ? renderPimNodes(parts.body, value)
+        : renderPimNodes(parts.elseBody, context);
+    } else if (kind === 'range') {
+      const parts = splitPimElse(inner);
+      const value = getPimValue(context, arg);
+      if (Array.isArray(value) && value.length) {
+        middle = value.map((item) => renderPimNodes(parts.body, item)).join('');
+      } else {
+        middle = renderPimNodes(parts.elseBody, context);
+      }
+    }
+
+    return resolvePimScalars(before, context) + middle + renderPimNodes(after, context);
   }
 
   function renderPimTemplate(html, data) {
-    const withoutBlocks = renderPimControlBlocks(html, data || {});
-    return withoutBlocks.replace(/\{\{\s*([^{}]+?)\s*\}\}/g, (full, expression) => {
-      const expr = String(expression || '').trim();
-      if (/^(else|end|if|range|with)\b/.test(expr)) return '';
-      const value = getPimValue(data || {}, expr);
-      return escapeHtml(value === null || value === undefined ? '' : value);
-    });
+    return renderPimNodes(html, data || {});
   }
 
   function renderPimEmailToFrame(frame, html, data) {
