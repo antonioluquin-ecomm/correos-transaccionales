@@ -2,6 +2,16 @@
 
 Formato: versión, fecha, resumen del cambio principal.
 
+## v1.4.1 — 2026-06-10
+
+Auditoría de alineación Woker vs Sporting + correcciones:
+
+- **`access-key.v2` Woker**: corrige media query con selector `.header-logo` duplicado. Se restauran las reglas `.brand-logo-sporting/woker/luquin` que necesita el footer para escalar los tres logos corporativos en mobile.
+- **`pedido-cancelado.v2` Woker**: botón CTA pasado de gradiente naranja a `#111827` neutro, alineando la decisión UX de Sporting (CTA sobrio en correos de cancelación).
+- **`config.js` (metadata Sporting)**: categoría de `access-key` corregida a `'Cuenta'`; agregada variable `aditionalData.userAgent` que faltaba; prefijo `orders.0.*` removido de `pedido-cancelado` (el HTML real usa variables planas).
+- **`docs/decisions/2026-06-10-alineacion-marcas.md`**: formaliza las reglas de diseño descubiertas durante la auditoría.
+- **`docs/crear-nueva-plantilla.md`**: nueva sección "Variantes de marca" con checklist de alineación inter-marca.
+
 ## v1.4.0 - 2026-06-09
 
 Base inicial para plantillas PIM compartidas:

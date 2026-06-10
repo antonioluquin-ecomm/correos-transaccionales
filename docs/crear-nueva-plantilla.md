@@ -35,3 +35,35 @@ El JSON es necesario para garantizar que el HTML sea funcional. Puede estar sani
 ## Nota operativa
 
 Si no hay JSON disponible, se puede crear una maqueta visual, pero no debe marcarse como plantilla funcional hasta validarla contra un ejemplo real o representativo.
+
+---
+
+## Variantes de marca
+
+Cuando una plantilla ya existe para una marca (ej. Sporting) y se adapta a otra (ej. Woker), el flujo es el mismo pero agrega una etapa de auditoría cruzada.
+
+### Qué cambiar en la variante
+
+| Elemento | Valor de origen | Valor de destino |
+|---|---|---|
+| Logo `src` | URL del CDN de la marca base | URL del CDN de la marca nueva |
+| Logo `alt` / `width` | Nombre y ancho de la marca base | Nombre y ancho de la marca nueva |
+| Colores de marca | Paleta de la marca base | Paleta de la marca nueva |
+| Nombre de clases de color | `.badge-green`, `.green`, etc. | Renombrar si el semántico cambia (`.badge-orange`) |
+| Metadata en `config.js` | Id, nombre, descripción, ejemplo | Versión de la marca nueva; mismo esquema de variables |
+
+### Qué NO cambiar (reglas fijas entre marcas)
+
+- **Botón CTA en `pedido-cancelado`**: siempre `#111827` neutro oscuro, independiente del color de marca. Ver `docs/decisions/2026-06-10-alineacion-marcas.md`.
+- **Media query de logos**: el bloque `@media (max-width: 600px)` debe conservar las cuatro reglas `.header-logo` + `.brand-logo-sporting/woker/luquin`. No reemplazarlas por una sola regla.
+- **Estructura HTML**: tablas, clases de layout, preheader, footer corporativo. Solo cambian los valores visuales.
+
+### Checklist de cierre para variantes
+
+Antes de publicar, ejecutar una búsqueda de colores residuales de la marca base:
+
+```
+grep -rniE "#COLOR_BASE_1|#COLOR_BASE_2" templates/vtex/<nueva-marca>/
+```
+
+Y verificar la lista completa en `docs/decisions/2026-06-10-alineacion-marcas.md`.
