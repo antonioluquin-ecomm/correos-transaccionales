@@ -2,6 +2,14 @@
 
 Formato: versión, fecha, resumen del cambio principal.
 
+## v1.5.1 — 2026-06-10
+
+Alineación de `nuevo-envio.v2` (Pedido despachado) al estándar visual VTEX:
+
+- **`templates/pim/shared/nuevo-envio/nuevo-envio.v2.html`**: reestructurada del single-card slate al mismo molde multi-card que `confirmacion-multideposito.v2` y las plantillas VTEX (`pedido-confirmado.v2`): layout sobre `#e8e8e8`, header con logo dinámico, hero con ícono + eyebrow + título, callout "Seguí tu envío", meta-grid (N.° pedido / operador logístico / número de seguimiento), **stepper de 4 pasos** (Compra ✓ · Preparación ✓ · Despacho ✓ · Entrega), CTA full-width por operador, card **¿Qué pasa ahora?**, nota multipaquete + correo automático, footer oscuro VTEX + trust logos. Paleta neutra slate (compartida Sporting/Woker).
+- Se conserva toda la lógica de carriers (Andreani, Producteca→Urbano/Correo Argentino/OCA/TRF por formato de tracking, OCASA, Propia, fallback) y **solo** las variables reales del flujo (`HeaderURL`/`HeaderImage`, `Tienda.Nombre`, `NroPedidoCanal`, `Logistica`, `DatosEnvio.Etiqueta.NroSeguimiento`, `DatosEnvio.Destinatario.Nombres`). No se agregan productos/fecha/total: ese flujo PIM no los expone.
+- Las dos plantillas PIM v2 (`nuevo-envio` y `confirmacion-multideposito`) quedan visualmente consistentes entre sí y con VTEX.
+
 ## v1.5.0 — 2026-06-10
 
 Nueva plantilla PIM **Confirmación de compra (Venta Multidepósito)** y motor PIM con loops:

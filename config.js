@@ -824,9 +824,9 @@ const EXAMPLE_SCENARIOS = [
 ];
 
 const VERSION = {
-  number: '1.5.0',
+  number: '1.5.1',
   date: '2026-06-10',
-  summary: 'Nueva plantilla PIM confirmación multidepósito (tabla de productos) y motor PIM con soporte range/with.',
+  summary: 'nuevo-envio.v2 alineado al estándar visual VTEX; dos plantillas PIM v2 consistentes entre sí.',
 };
 
 const CHANGELOG = [
