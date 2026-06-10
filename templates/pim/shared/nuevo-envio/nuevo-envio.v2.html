@@ -38,7 +38,7 @@
   <body>
     <!-- Preheader -->
     <div style="display:none;max-height:0;overflow:hidden;opacity:0;mso-hide:all;font-size:1px;line-height:1px;color:#f3f4f6;">
-      Tu pedido {{ .Pedido.NroPedidoCanal }} fue despachado por {{ if (eq .Pedido.Logistica "Producteca") }}{{ if (or (hasPrefix .Pedido.DatosEnvio.Etiqueta.NroSeguimiento "UR") (hasPrefix .Pedido.DatosEnvio.Etiqueta.NroSeguimiento "AD")) }}Urbano{{ else if (hasPrefix .Pedido.DatosEnvio.Etiqueta.NroSeguimiento "CA") }}Correo Argentino{{ else if (gt (len .Pedido.DatosEnvio.Etiqueta.NroSeguimiento) 12) }}OCA{{ else }}TRF{{ end }}{{ else }}{{ .Pedido.Logistica }}{{ end }}. Seguí el envío desde acá.
+      Tu pedido {{ .Pedido.NroPedidoCanal }} fue despachado por {{ if (eq .Pedido.Logistica "Producteca") }}{{ if .Pedido.DatosEnvio.Etiqueta.NroSeguimiento }}{{ if (or (hasPrefix .Pedido.DatosEnvio.Etiqueta.NroSeguimiento "UR") (hasPrefix .Pedido.DatosEnvio.Etiqueta.NroSeguimiento "AD")) }}Urbano{{ else if (hasPrefix .Pedido.DatosEnvio.Etiqueta.NroSeguimiento "CA") }}Correo Argentino{{ else if (gt (len .Pedido.DatosEnvio.Etiqueta.NroSeguimiento) 12) }}OCA{{ else }}TRF{{ end }}{{ else }}Producteca{{ end }}{{ else }}{{ .Pedido.Logistica }}{{ end }}. Seguí el envío desde acá.
     </div>
 
     <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;background:#f3f4f6;border-collapse:collapse;">
@@ -77,7 +77,7 @@
             <tr>
               <td class="body-td" style="padding:28px;">
                 <p style="margin:0 0 16px;font-size:15px;line-height:23px;color:#374151;">Hola {{ .Pedido.DatosEnvio.Destinatario.Nombres }},</p>
-                <p style="margin:0 0 22px;font-size:15px;line-height:23px;color:#374151;">Tu pedido <strong style="color:#111827;">{{ .Pedido.NroPedidoCanal }}</strong> fue despachado por <strong style="color:#111827;">{{ if (eq .Pedido.Logistica "Producteca") }}{{ if (or (hasPrefix .Pedido.DatosEnvio.Etiqueta.NroSeguimiento "UR") (hasPrefix .Pedido.DatosEnvio.Etiqueta.NroSeguimiento "AD")) }}Urbano{{ else if (hasPrefix .Pedido.DatosEnvio.Etiqueta.NroSeguimiento "CA") }}Correo Argentino{{ else if (gt (len .Pedido.DatosEnvio.Etiqueta.NroSeguimiento) 12) }}OCA{{ else }}TRF{{ end }}{{ else }}{{ .Pedido.Logistica }}{{ end }}</strong>.</p>
+                <p style="margin:0 0 22px;font-size:15px;line-height:23px;color:#374151;">Tu pedido <strong style="color:#111827;">{{ .Pedido.NroPedidoCanal }}</strong> fue despachado por <strong style="color:#111827;">{{ if (eq .Pedido.Logistica "Producteca") }}{{ if .Pedido.DatosEnvio.Etiqueta.NroSeguimiento }}{{ if (or (hasPrefix .Pedido.DatosEnvio.Etiqueta.NroSeguimiento "UR") (hasPrefix .Pedido.DatosEnvio.Etiqueta.NroSeguimiento "AD")) }}Urbano{{ else if (hasPrefix .Pedido.DatosEnvio.Etiqueta.NroSeguimiento "CA") }}Correo Argentino{{ else if (gt (len .Pedido.DatosEnvio.Etiqueta.NroSeguimiento) 12) }}OCA{{ else }}TRF{{ end }}{{ else }}Producteca{{ end }}{{ else }}{{ .Pedido.Logistica }}{{ end }}</strong>.</p>
 
                 <!-- Tracking -->
                 <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;border-collapse:separate;background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;">
