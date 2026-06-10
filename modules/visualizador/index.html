@@ -277,7 +277,11 @@
             } catch (e) {
               throw new Error(`JSON inválido en ${scenario.path}: ${e.message}`);
             }
-            CT.renderEmailToFrame(frame, html, data);
+            if (CT.slugify(template.plataforma) === 'pim') {
+              CT.renderPimEmailToFrame(frame, html, data);
+            } else {
+              CT.renderEmailToFrame(frame, html, data);
+            }
             setStatus(`Renderizado con escenario compatible: ${scenario.label}`);
           } catch (error) {
             setStatus('No se pudo renderizar la previsualización: ' + error.message, true);

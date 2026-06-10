@@ -2,6 +2,16 @@
 
 Formato: versión, fecha, resumen del cambio principal.
 
+## v1.4.0 - 2026-06-09
+
+Base inicial para plantillas PIM compartidas:
+
+- Se inventarian las 14 plantillas PIM existentes en `docs/pim-inventario.md`, con prioridad, variables, assets actuales y oportunidades de mejora.
+- `config.js`: se agregan las 14 plantillas PIM compartidas al catalogo sin cambiar el esquema existente.
+- `templates/pim/shared/nuevo-envio/nuevo-envio.v2.html`: primera plantilla base PIM optimizada, con marca dinamica por sitio, tracking, CTA por operador logistico y fallback sin numero de seguimiento.
+- `examples/pim/shared/nuevo-envio.sample.json`: escenario representativo y sanitizado para validar `pim-nuevo-envio`.
+- `assets/js/shared.js` y `modules/visualizador/index.html`: soporte minimo de render para sintaxis PIM tipo Go, manteniendo Handlebars para VTEX.
+
 ## v1.2.3 — 2026-06-08
 
 Estandarización del sistema de diseño en las tres plantillas VTEX principales:

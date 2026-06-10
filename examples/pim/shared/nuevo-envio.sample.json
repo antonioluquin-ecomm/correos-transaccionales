@@ -1,0 +1,23 @@
+{
+  "Tienda": {
+    "Nombre": "Sporting",
+    "Datos": {
+      "NotificacionesConfig": {
+        "HeaderURL": "https://www.sporting.com.ar",
+        "HeaderImage": "https://ventadeportiva.vteximg.com.br/arquivos/logo-mail.png"
+      }
+    }
+  },
+  "Pedido": {
+    "NroPedidoCanal": "SPO-123456789",
+    "Logistica": "Andreani",
+    "DatosEnvio": {
+      "Destinatario": {
+        "Nombres": "Cliente"
+      },
+      "Etiqueta": {
+        "NroSeguimiento": "360001234567890"
+      }
+    }
+  }
+}

@@ -222,6 +222,134 @@ const CT = (() => {
     });
   }
 
+  function splitPimArgs(source) {
+    const args = [];
+    const regex = /"([^"]*)"|'([^']*)'|(\S+)/g;
+    let match;
+    while ((match = regex.exec(source))) {
+      args.push(match[1] ?? match[2] ?? match[3]);
+    }
+    return args;
+  }
+
+  function normalizePimExpression(expression) {
+    let value = String(expression || '').trim();
+    while (value.startsWith('(') && value.endsWith(')')) {
+      value = value.slice(1, -1).trim();
+    }
+    return value;
+  }
+
+  function getPimValue(context, expression) {
+    const expr = normalizePimExpression(expression);
+    if (!expr) return '';
+    if ((expr.startsWith('"') && expr.endsWith('"')) || (expr.startsWith("'") && expr.endsWith("'"))) {
+      return expr.slice(1, -1);
+    }
+    if (!expr.startsWith('.')) return expr;
+
+    return expr
+      .slice(1)
+      .split('.')
+      .filter(Boolean)
+      .reduce((current, key) => {
+        if (current === null || current === undefined) return '';
+        return current[key];
+      }, context);
+  }
+
+  function evalPimCondition(context, expression) {
+    const expr = normalizePimExpression(expression);
+    if (expr.startsWith('eq ')) {
+      const args = splitPimArgs(expr.slice(3));
+      return getPimValue(context, args[0]) === getPimValue(context, args[1]);
+    }
+    if (expr.startsWith('ne ')) {
+      const args = splitPimArgs(expr.slice(3));
+      return getPimValue(context, args[0]) !== getPimValue(context, args[1]);
+    }
+    return Boolean(getPimValue(context, expr));
+  }
+
+  function findPimBlockEnd(source, startIndex) {
+    const tagRegex = /\{\{\s*(?:(if\b[^}]*)|(end))\s*\}\}/g;
+    tagRegex.lastIndex = startIndex;
+    let depth = 1;
+    let match;
+
+    while ((match = tagRegex.exec(source))) {
+      if (match[1]) depth += 1;
+      if (match[2]) depth -= 1;
+      if (depth === 0) {
+        return { start: match.index, end: tagRegex.lastIndex };
+      }
+    }
+    throw new Error('Bloque PIM sin cierre {{ end }}.');
+  }
+
+  function splitPimBranches(firstCondition, inner) {
+    const branches = [];
+    const tagRegex = /\{\{\s*(?:(if\b[^}]*)|(else if\b[^}]*)|(else)|(end))\s*\}\}/g;
+    let depth = 0;
+    let cursor = 0;
+    let condition = firstCondition;
+    let match;
+
+    while ((match = tagRegex.exec(inner))) {
+      if (match[1]) {
+        depth += 1;
+        continue;
+      }
+      if (match[4]) {
+        depth -= 1;
+        continue;
+      }
+      if (depth !== 0 || (!match[2] && !match[3])) continue;
+
+      branches.push({ condition, html: inner.slice(cursor, match.index) });
+      condition = match[2] ? match[2].replace(/^else if\s+/, '').trim() : null;
+      cursor = tagRegex.lastIndex;
+    }
+
+    branches.push({ condition, html: inner.slice(cursor) });
+    return branches;
+  }
+
+  function renderPimControlBlocks(source, context) {
+    const openRegex = /\{\{\s*if\s+([^}]+?)\s*\}\}/;
+    const match = openRegex.exec(source);
+    if (!match) return source;
+
+    const before = source.slice(0, match.index);
+    const block = findPimBlockEnd(source, match.index + match[0].length);
+    const inner = source.slice(match.index + match[0].length, block.start);
+    const after = source.slice(block.end);
+    const branches = splitPimBranches(match[1], inner);
+    const selected = branches.find((branch) => branch.condition === null || evalPimCondition(context, branch.condition));
+
+    return before
+      + renderPimControlBlocks(selected ? selected.html : '', context)
+      + renderPimControlBlocks(after, context);
+  }
+
+  function renderPimTemplate(html, data) {
+    const withoutBlocks = renderPimControlBlocks(html, data || {});
+    return withoutBlocks.replace(/\{\{\s*([^{}]+?)\s*\}\}/g, (full, expression) => {
+      const expr = String(expression || '').trim();
+      if (/^(else|end|if|range|with)\b/.test(expr)) return '';
+      const value = getPimValue(data || {}, expr);
+      return escapeHtml(value === null || value === undefined ? '' : value);
+    });
+  }
+
+  function renderPimEmailToFrame(frame, html, data) {
+    frame.srcdoc = renderPimTemplate(html, data);
+    frame.addEventListener('load', function onLoad() {
+      frame.removeEventListener('load', onLoad);
+      resizeEmailFrame(frame);
+    });
+  }
+
   return {
     escapeHtml,
     slugify,
@@ -240,5 +368,7 @@ const CT = (() => {
     buildEmailRenderContext,
     resizeEmailFrame,
     renderEmailToFrame,
+    renderPimTemplate,
+    renderPimEmailToFrame,
   };
 })();

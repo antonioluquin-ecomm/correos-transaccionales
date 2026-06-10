@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="es">
+  <body style="margin:0;padding:0;background:#f3f4f6;color:#111827;font-family:Arial,Helvetica,sans-serif;">
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;background:#f3f4f6;border-collapse:collapse;">
+      <tr>
+        <td align="center" style="padding:24px 12px;">
+          <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;max-width:640px;background:#ffffff;border-collapse:collapse;border:1px solid #e5e7eb;">
+            <tr>
+              <td align="center" style="padding:28px 24px 20px;border-bottom:1px solid #e5e7eb;">
+                <a href="{{ .Tienda.Datos.NotificacionesConfig.HeaderURL }}" target="_blank" style="display:inline-block;text-decoration:none;">
+                  <img src="{{ .Tienda.Datos.NotificacionesConfig.HeaderImage }}" width="132" alt="Logo" style="display:block;width:132px;max-width:70%;height:auto;border:0;outline:none;text-decoration:none;">
+                </a>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:0;background:#0f172a;">
+                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;border-collapse:collapse;">
+                  <tr>
+                    <td style="padding:28px 28px 26px;color:#ffffff;">
+                      <p style="margin:0 0 8px;font-size:13px;line-height:18px;font-weight:700;text-transform:uppercase;color:#93c5fd;">Pedido despachado</p>
+                      <h1 style="margin:0;font-size:28px;line-height:34px;font-weight:700;color:#ffffff;">Tu pedido ya esta en camino</h1>
+                      <p style="margin:12px 0 0;font-size:15px;line-height:22px;color:#dbeafe;">Te avisamos cuando el operador logistico toma el envio para que puedas seguirlo desde el canal correspondiente.</p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:28px;">
+                <p style="margin:0 0 18px;font-size:16px;line-height:24px;color:#374151;">Hola {{ .Pedido.DatosEnvio.Destinatario.Nombres }},</p>
+                <p style="margin:0 0 22px;font-size:16px;line-height:24px;color:#374151;">Tu pedido <strong style="color:#111827;">{{ .Pedido.NroPedidoCanal }}</strong> fue despachado por <strong style="color:#111827;">{{ .Pedido.Logistica }}</strong>.</p>
+
+                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;border-collapse:collapse;background:#f8fafc;border:1px solid #e5e7eb;">
+                  <tr>
+                    <td style="padding:18px 20px;">
+                      <p style="margin:0 0 6px;font-size:12px;line-height:16px;font-weight:700;text-transform:uppercase;color:#64748b;">Numero de seguimiento</p>
+                      {{ if .Pedido.DatosEnvio.Etiqueta.NroSeguimiento }}
+                      <p style="margin:0;font-size:22px;line-height:28px;font-weight:700;color:#111827;">{{ .Pedido.DatosEnvio.Etiqueta.NroSeguimiento }}</p>
+                      {{ else }}
+                      <p style="margin:0;font-size:15px;line-height:22px;color:#475569;">El codigo todavia no esta disponible. Puede demorar unas horas en activarse.</p>
+                      {{ end }}
+                    </td>
+                  </tr>
+                </table>
+
+                {{ if (eq .Pedido.Logistica "Andreani") }}
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin:24px 0 0;border-collapse:collapse;">
+                  <tr>
+                    <td bgcolor="#111827" style="background:#111827;">
+                      <a href="https://www.andreani.com/#!/personas" target="_blank" style="display:inline-block;padding:13px 18px;color:#ffffff;font-size:14px;line-height:18px;font-weight:700;text-decoration:none;">Seguir envio</a>
+                    </td>
+                  </tr>
+                </table>
+                <p style="margin:16px 0 0;font-size:14px;line-height:22px;color:#64748b;">El codigo de seguimiento puede demorar hasta 72 horas en actualizarse en el sitio de Andreani.</p>
+                {{ else if (eq .Pedido.Logistica "Urbano") }}
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin:24px 0 0;border-collapse:collapse;">
+                  <tr>
+                    <td bgcolor="#111827" style="background:#111827;">
+                      <a href="https://www.urbano.com.ar/" target="_blank" style="display:inline-block;padding:13px 18px;color:#ffffff;font-size:14px;line-height:18px;font-weight:700;text-decoration:none;">Seguir envio</a>
+                    </td>
+                  </tr>
+                </table>
+                {{ else }}
+                <p style="margin:22px 0 0;font-size:14px;line-height:22px;color:#64748b;">El operador logistico informara el avance del envio cuando el seguimiento este activo.</p>
+                {{ end }}
+
+                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;margin-top:24px;border-collapse:collapse;background:#eff6ff;border-left:4px solid #2563eb;">
+                  <tr>
+                    <td style="padding:16px 18px;">
+                      <p style="margin:0;font-size:14px;line-height:22px;color:#1e3a8a;"><strong>Recordatorio:</strong> si tu pedido tiene mas de un producto, puede llegar en paquetes separados y con distintos codigos de seguimiento.</p>
+                    </td>
+                  </tr>
+                </table>
+
+                <p style="margin:24px 0 0;font-size:14px;line-height:22px;color:#64748b;">Este es un correo automatico. Por favor, no respondas este mensaje.</p>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:0 28px 24px;">
+                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;border-collapse:collapse;border-top:1px solid #e5e7eb;">
+                  <tr>
+                    <td align="center" style="padding:18px 0 10px;">
+                      <img src="https://ventadeportiva.vteximg.com.br/arquivos/email-footer-banner.png" alt="" width="584" style="display:block;width:100%;max-width:584px;height:auto;border:0;">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="center" style="padding:8px 0 0;">
+                      <p style="margin:0 0 10px;font-size:12px;line-height:18px;color:#9ca3af;">Copyright &copy; Sporting. Todos los derechos reservados.</p>
+                      <img src="https://ventadeportiva.vteximg.com.br/arquivos/logos-footer-newsletter.png" alt="Logos" width="240" style="display:block;width:240px;max-width:90%;height:auto;border:0;">
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
