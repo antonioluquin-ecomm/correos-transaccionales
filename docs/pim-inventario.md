@@ -16,8 +16,7 @@ Inventario inicial para estandarizar las plantillas PIM compartidas por Sporting
 | --- | --- | --- | --- | --- | --- |
 | `confirmacion-multideposito` | Alta | Base v2 (nueva) | `Tienda.Nombre`, `HeaderURL`, `HeaderImage`, `Pedido.NroPedidoCanal`, `Pedido.FechaPedido`, `Pedido.DatosEnvio.Destinatario.Nombres`, `Pedido.LineasPedido[]` (`Producto`/`SKU`/`Importe`/`Cantidad`/`Subtotal`), `Pedido.TotalLineas` | Header dinamico, footer VTEX, tabla de productos, portal por marca | Confirmar URL del portal de Woker; validar variables reales de PIM para venta en sucursal |
 | `nuevo-envio` | Alta | Base v2 inicial | `Tienda.Datos.NotificacionesConfig.HeaderURL`, `HeaderImage`, `Pedido.NroPedidoCanal`, `Pedido.Logistica`, `Pedido.DatosEnvio.Etiqueta.NroSeguimiento`, `Pedido.DatosEnvio.Destinatario.Nombres` | Header dinamico, footer banner, logos footer | Ordenar tracking, CTA por operador, fallback sin seguimiento, tono mas claro |
-| `nuevo-pickup` | Alta | Pendiente | `HeaderURL`, `HeaderImage`, `Pedido.LineasPedido[0].Deposito` | Header dinamico, footer banner, logos footer | Mejorar instrucciones de retiro, sucursal, horarios y requisitos |
-| `despacho-pickup` | Alta | Pendiente | `Pedido.NroPedidoCanal`, `Pedido.FechaPedido`, `Pedido.LineasPedido[]`, `Deposito.DatosDeposito.DatosPickup.*`, `Pedido.TotalLineas` | Header dinamico, iconos check/circle, logos footer | Reusar componentes de resumen, tabla de productos, datos de pickup y progreso |
+| `despacho-pickup` | Alta | Base v2 (nueva) | `Tienda.Nombre`, `HeaderURL`, `HeaderImage`, `Pedido.NroPedidoCanal`, `Pedido.FechaPedido`, `Pedido.DatosEnvio.Destinatario.Nombres`, `Pedido.LineasPedido[]` (`Producto`/`SKU`/`Importe`/`Cantidad`/`Subtotal`), `Pedido.TotalLineas`, `Deposito.DatosDeposito.DatosPickup.*` (`NombrePublico`/`Direccion`/`Localidad`/`Horario`) | Header dinamico, footer VTEX, stepper, tabla de productos, datos de pickup | Validar variables reales de pickup |
 | `giftcard` | Alta | Pendiente | `Proveedor.GetEmailHeaderURL`, `Proveedor.GetEmailHeaderImage`, `Giftcard.Codigo`, `Giftcard.SaldoInicial`, `Giftcard.Descripcion` | Header dinamico de proveedor, footer banner, logos footer | Hacer visible codigo, monto, instrucciones y politica de uso |
 | `recepcion-cambio` | Alta | Pendiente | `HeaderURL`, `HeaderImage`, `Pedido.LineasPedido[]`, `Producto`, `SKU`, `Cantidad`, `Estado`, `Historial[0].Observaciones` | Header dinamico, footer banner, logos footer | Separar aceptados/rechazados, explicar proximos pasos |
 | `recepcion-devolucion` | Alta | Pendiente | `HeaderURL`, `HeaderImage`, `Pedido.LineasPedido[]`, `Producto`, `SKU`, `Cantidad`, `Estado`, `Historial[0].Observaciones` | Header dinamico, footer banner, logos footer | Aclarar estado de revision y plazos de reintegro |
@@ -32,8 +31,11 @@ Inventario inicial para estandarizar las plantillas PIM compartidas por Sporting
 
 ## Orden recomendado
 
-1. `nuevo-envio`: fija header, hero, tracking, CTA logistico y footer.
-2. `nuevo-pickup`: adapta la base a retiro en sucursal.
-3. `giftcard`: valida componentes de codigo/monto para flujo inverso.
-4. `recepcion-cambio`, `recepcion-devolucion`, `recepcion-garantia`: migran estados de revision y motivos.
-5. `despacho-pickup` y `despacho-b2b`: migran tablas/resumen cuando la base simple ya este validada.
+1. `nuevo-envio`: fija header, hero, tracking, CTA logistico y footer. (Listo v2)
+2. `confirmacion-multideposito`: confirmacion de compra venta multideposito. (Listo v2)
+3. `despacho-pickup`: pedido listo para retirar en sucursal, con datos de pickup. (Listo v2)
+4. `giftcard`: valida componentes de codigo/monto para flujo inverso.
+5. `recepcion-cambio`, `recepcion-devolucion`, `recepcion-garantia`: migran estados de revision y motivos.
+6. `despacho-b2b`: migra tablas/resumen del flujo B2B.
+
+> Nota: `nuevo-pickup` se eliminó (2026-06-10). Era una version vieja y redundante con `despacho-pickup`, que es la plantilla correcta de retiro en sucursal.

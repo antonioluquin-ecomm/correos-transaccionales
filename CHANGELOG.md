@@ -2,6 +2,15 @@
 
 Formato: versión, fecha, resumen del cambio principal.
 
+## v1.6.0 — 2026-06-10
+
+Plantilla PIM **Pedido listo para retirar (pickup)** `despacho-pickup.v2` + limpieza de `nuevo-pickup`:
+
+- **`templates/pim/shared/despacho-pickup/despacho-pickup.v2.html`**: nueva versión alineada al estándar visual VTEX (mismo molde que `nuevo-envio.v2` y `confirmacion-multideposito.v2`): layout multi-card, hero, callout, meta-grid (N.° pedido / fecha / sucursal de retiro), **stepper de 4 pasos** (Generada ✓ · Confirmada ✓ · Preparado ✓ · Retiro), card **Lugar de retiro** (nombre, dirección, localidad, horario), card **Para retirar tu pedido** (requisitos: DNI + medio de pago), card **Detalle de tu compra** (tabla de productos + total), footer oscuro VTEX + trust logos. Paleta neutra slate. Solo variables PIM reales: `Tienda.Nombre`, `HeaderURL`/`HeaderImage`, `Pedido.NroPedidoCanal`, `FechaPedido`, `DatosEnvio.Destinatario.Nombres`, `LineasPedido[]` (`Producto`/`SKU`/`Importe`/`Cantidad`/`Subtotal`), `TotalLineas`, `Deposito.DatosDeposito.DatosPickup.*` (`NombrePublico`/`Direccion`/`Localidad`/`Horario`).
+- **`examples/pim/shared/despacho-pickup-sporting.json`**: escenario representativo (2 productos, sucursal con dirección y horario).
+- **Se elimina `nuevo-pickup`**: plantilla vieja y redundante con `despacho-pickup` (la correcta de retiro en sucursal). Se borra `templates/pim/shared/nuevo-pickup/` y su entrada del catálogo.
+- **`config.js`**: `pim-despacho-pickup` apunta a la v2 con su escenario; se quita `pim-nuevo-pickup`. VERSION → 1.6.0.
+
 ## v1.5.1 — 2026-06-10
 
 Alineación de `nuevo-envio.v2` (Pedido despachado) al estándar visual VTEX:
