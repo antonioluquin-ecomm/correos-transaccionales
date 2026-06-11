@@ -565,12 +565,14 @@ const TEMPLATES = [
     estado: 'en revisión',
     actualizado: '2026-06-09',
     responsable: 'Por definir',
-    descripcion: 'Notifica al cliente que su factura ya esta disponible.',
-    archivoHtml: 'templates/pim/shared/factura-disponible/factura-disponible.current.html',
-    ejemplo: null,
+    descripcion: 'Notifica que la factura electronica esta disponible y adjunta al correo. Muestra el N° de pedido si el flujo lo expone.',
+    archivoHtml: 'templates/pim/shared/factura-disponible/factura-disponible.v2.html',
+    ejemplo: 'examples/pim/shared/factura-disponible-sporting.json',
     variables: [
+      'Tienda.Nombre',
       'Tienda.Datos.NotificacionesConfig.HeaderURL',
       'Tienda.Datos.NotificacionesConfig.HeaderImage',
+      'Pedido.NroPedidoCanal (opcional / condicional)',
     ],
   },
   {
@@ -871,12 +873,21 @@ const EXAMPLE_SCENARIOS = [
     descripcion: 'Orden B2B confirmada y en preparación, con datos de envío y dos packs mayoristas.',
     compatibleTemplates: ['pim-despacho-b2b'],
   },
+  {
+    id: 'pim-factura-disponible-sporting',
+    path: 'examples/pim/shared/factura-disponible-sporting.json',
+    store: 'shared',
+    label: 'Con N° de pedido',
+    tipo: 'PIM — factura disponible',
+    descripcion: 'Aviso de factura electrónica disponible/adjunta, con N° de pedido.',
+    compatibleTemplates: ['pim-factura-disponible'],
+  },
 ];
 
 const VERSION = {
-  number: '1.11.0',
+  number: '1.12.0',
   date: '2026-06-10',
-  summary: 'despacho-b2b.v2 alineado a VTEX; se eliminan las 3 plantillas Andreani fuera del estándar PIM.',
+  summary: 'factura-disponible.v2 alineada a VTEX (factura adjunta + N° de pedido condicional). 10/10 plantillas PIM en v2.',
 };
 
 const CHANGELOG = [

@@ -2,6 +2,15 @@
 
 Formato: versión, fecha, resumen del cambio principal.
 
+## v1.12.0 — 2026-06-10
+
+Plantilla PIM **Factura disponible** `factura-disponible.v2` — cierra el estándar PIM (10/10 en v2):
+
+- **`templates/pim/shared/factura-disponible/factura-disponible.v2.html`**: reescrita desde la versión mínima (2 líneas) al estándar visual VTEX (header dinámico, hero, callout **"Factura adjunta a este correo"**, cuerpo explicativo, footer VTEX + trust logos). La factura viaja adjunta (PIM no expone URL de factura). Se agrega el **N.° de pedido como bloque condicional** (`{{ if .Pedido.NroPedidoCanal }}`): si el flujo lo expone, se muestra; si no, se oculta sin romper. Variables: `Tienda.Nombre`, `HeaderURL`/`HeaderImage`, `Pedido.NroPedidoCanal` (opcional).
+- **`examples/pim/shared/factura-disponible-sporting.json`**: escenario con N.° de pedido.
+- **`config.js`**: `pim-factura-disponible` → v2 + escenario; VERSION → 1.12.0.
+- Con esta plantilla, **las 10 plantillas PIM compartidas quedan en v2** alineadas al estándar visual VTEX.
+
 ## v1.11.0 — 2026-06-10
 
 Plantilla PIM **Despacho B2B** `despacho-b2b.v2` + limpieza de plantillas Andreani:
