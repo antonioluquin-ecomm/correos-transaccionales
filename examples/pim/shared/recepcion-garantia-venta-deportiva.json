@@ -1,0 +1,33 @@
+{
+  "Tienda": {
+    "Nombre": "Venta Deportiva",
+    "Datos": {
+      "NotificacionesConfig": {
+        "HeaderURL": "https://www.ventadeportiva.com.ar",
+        "HeaderImage": "https://ventadeportiva.vteximg.com.br/arquivos/logo-mail-vd.png"
+      }
+    }
+  },
+  "Pedido": {
+    "LineasPedido": [
+      {
+        "Producto": "Zapatillas Running Pro",
+        "SKU": "VD-RUN-001",
+        "Cantidad": 1,
+        "Estado": "O",
+        "Historial": []
+      },
+      {
+        "Producto": "Botines Fútbol Campo",
+        "SKU": "VD-BOT-302",
+        "Cantidad": 1,
+        "Estado": "R",
+        "Historial": [
+          {
+            "Observaciones": "La falla reportada corresponde a desgaste por uso, no cubierto por garantía."
+          }
+        ]
+      }
+    ]
+  }
+}

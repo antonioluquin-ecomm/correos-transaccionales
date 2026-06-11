@@ -1,0 +1,33 @@
+{
+  "Tienda": {
+    "Nombre": "Woker",
+    "Datos": {
+      "NotificacionesConfig": {
+        "HeaderURL": "https://www.wokerbysporting.com.ar",
+        "HeaderImage": "https://ventadeportiva.vteximg.com.br/arquivos/logo-mail-woker.png"
+      }
+    }
+  },
+  "Pedido": {
+    "LineasPedido": [
+      {
+        "Producto": "Zapatillas Running Pro",
+        "SKU": "WOK-RUN-001",
+        "Cantidad": 1,
+        "Estado": "O",
+        "Historial": []
+      },
+      {
+        "Producto": "Botines Fútbol Campo",
+        "SKU": "WOK-BOT-302",
+        "Cantidad": 1,
+        "Estado": "R",
+        "Historial": [
+          {
+            "Observaciones": "La falla reportada corresponde a desgaste por uso, no cubierto por garantía."
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "Tienda": {
+    "Nombre": "Venta Deportiva",
+    "Datos": {
+      "NotificacionesConfig": {
+        "HeaderURL": "https://www.ventadeportiva.com.ar",
+        "HeaderImage": "https://ventadeportiva.vteximg.com.br/arquivos/logo-mail-vd.png"
+      }
+    }
+  },
+  "Pedido": {
+    "NroPedidoCanal": "VD-552314009"
+  }
+}

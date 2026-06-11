@@ -1,0 +1,33 @@
+{
+  "Tienda": {
+    "Nombre": "Woker",
+    "Datos": {
+      "NotificacionesConfig": {
+        "HeaderURL": "https://www.wokerbysporting.com.ar",
+        "HeaderImage": "https://ventadeportiva.vteximg.com.br/arquivos/logo-mail-woker.png"
+      }
+    }
+  },
+  "Pedido": {
+    "LineasPedido": [
+      {
+        "Producto": "Campera Rompeviento",
+        "SKU": "WOK-CAM-330",
+        "Cantidad": 1,
+        "Estado": "O",
+        "Historial": []
+      },
+      {
+        "Producto": "Gorra Trucker",
+        "SKU": "WOK-GOR-012",
+        "Cantidad": 1,
+        "Estado": "R",
+        "Historial": [
+          {
+            "Observaciones": "El producto fue devuelto fuera del plazo permitido."
+          }
+        ]
+      }
+    ]
+  }
+}

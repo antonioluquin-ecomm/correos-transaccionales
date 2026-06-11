@@ -1,0 +1,25 @@
+{
+  "Tienda": {
+    "Nombre": "Venta Deportiva",
+    "Datos": {
+      "NotificacionesConfig": {
+        "HeaderURL": "https://www.ventadeportiva.com.ar",
+        "HeaderImage": "https://ventadeportiva.vteximg.com.br/arquivos/logo-mail-vd.png"
+      }
+    }
+  },
+  "Pedido": {
+    "LineasPedido": [
+      {
+        "Producto": "Remera Algodón Básica",
+        "SKU": "VD-REM-205",
+        "Cantidad": 1
+      },
+      {
+        "Producto": "Short Deportivo",
+        "SKU": "VD-SHO-088",
+        "Cantidad": 1
+      }
+    ]
+  }
+}

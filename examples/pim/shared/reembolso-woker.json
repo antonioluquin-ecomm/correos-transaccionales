@@ -1,0 +1,28 @@
+{
+  "Tienda": {
+    "Nombre": "Woker",
+    "Datos": {
+      "NotificacionesConfig": {
+        "HeaderURL": "https://www.wokerbysporting.com.ar",
+        "HeaderImage": "https://ventadeportiva.vteximg.com.br/arquivos/logo-mail-woker.png"
+      }
+    }
+  },
+  "Pedido": {
+    "NroPedidoCanal": "WOK-771045820",
+    "LineasPedido": [
+      {
+        "Producto": "Buzo Canguro Algodón",
+        "SKU": "WOK-BUZ-209",
+        "Cantidad": 1,
+        "Estado": "B"
+      },
+      {
+        "Producto": "Pantalón Jogger",
+        "SKU": "WOK-PAN-141",
+        "Cantidad": 2,
+        "Estado": "B"
+      }
+    ]
+  }
+}

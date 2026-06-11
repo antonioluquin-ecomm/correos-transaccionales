@@ -1,0 +1,33 @@
+{
+  "Tienda": {
+    "Nombre": "Woker",
+    "Datos": {
+      "NotificacionesConfig": {
+        "HeaderURL": "https://www.wokerbysporting.com.ar",
+        "HeaderImage": "https://ventadeportiva.vteximg.com.br/arquivos/logo-mail-woker.png"
+      }
+    }
+  },
+  "Pedido": {
+    "LineasPedido": [
+      {
+        "Producto": "Remera Training Dry",
+        "SKU": "WOK-REM-118",
+        "Cantidad": 1,
+        "Estado": "O",
+        "Historial": []
+      },
+      {
+        "Producto": "Calza Larga Performance",
+        "SKU": "WOK-CAL-074",
+        "Cantidad": 1,
+        "Estado": "R",
+        "Historial": [
+          {
+            "Observaciones": "El producto presenta signos de uso y no conserva la etiqueta original."
+          }
+        ]
+      }
+    ]
+  }
+}

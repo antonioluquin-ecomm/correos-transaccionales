@@ -1,0 +1,33 @@
+{
+  "Tienda": {
+    "Nombre": "Venta Deportiva",
+    "Datos": {
+      "NotificacionesConfig": {
+        "HeaderURL": "https://www.ventadeportiva.com.ar",
+        "HeaderImage": "https://ventadeportiva.vteximg.com.br/arquivos/logo-mail-vd.png"
+      }
+    }
+  },
+  "Pedido": {
+    "LineasPedido": [
+      {
+        "Producto": "Remera Training Dry",
+        "SKU": "VD-REM-118",
+        "Cantidad": 1,
+        "Estado": "O",
+        "Historial": []
+      },
+      {
+        "Producto": "Calza Larga Performance",
+        "SKU": "VD-CAL-074",
+        "Cantidad": 1,
+        "Estado": "R",
+        "Historial": [
+          {
+            "Observaciones": "El producto presenta signos de uso y no conserva la etiqueta original."
+          }
+        ]
+      }
+    ]
+  }
+}

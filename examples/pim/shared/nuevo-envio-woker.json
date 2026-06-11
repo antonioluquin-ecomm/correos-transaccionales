@@ -1,0 +1,33 @@
+{
+  "Tienda": {
+    "Nombre": "Woker",
+    "Datos": {
+      "NotificacionesConfig": {
+        "HeaderURL": "https://www.wokerbysporting.com.ar",
+        "HeaderImage": "https://ventadeportiva.vteximg.com.br/arquivos/logo-mail-woker.png"
+      }
+    }
+  },
+  "Pedido": {
+    "NroPedidoCanal": "WOK-123456789",
+    "Logistica": "Andreani",
+    "DatosEnvio": {
+      "Destinatario": {
+        "Nombres": "Cliente"
+      },
+      "Etiqueta": {
+        "NroSeguimiento": "360001234567890"
+      }
+    },
+    "LineasPedido": [
+      {
+        "SKU": "WOK-RUN-001",
+        "Cantidad": 1
+      },
+      {
+        "SKU": "WOK-MED-014",
+        "Cantidad": 2
+      }
+    ]
+  }
+}

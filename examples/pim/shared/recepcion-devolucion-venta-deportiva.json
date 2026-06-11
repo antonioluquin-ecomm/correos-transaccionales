@@ -1,0 +1,33 @@
+{
+  "Tienda": {
+    "Nombre": "Venta Deportiva",
+    "Datos": {
+      "NotificacionesConfig": {
+        "HeaderURL": "https://www.ventadeportiva.com.ar",
+        "HeaderImage": "https://ventadeportiva.vteximg.com.br/arquivos/logo-mail-vd.png"
+      }
+    }
+  },
+  "Pedido": {
+    "LineasPedido": [
+      {
+        "Producto": "Campera Rompeviento",
+        "SKU": "VD-CAM-330",
+        "Cantidad": 1,
+        "Estado": "O",
+        "Historial": []
+      },
+      {
+        "Producto": "Gorra Trucker",
+        "SKU": "VD-GOR-012",
+        "Cantidad": 1,
+        "Estado": "R",
+        "Historial": [
+          {
+            "Observaciones": "El producto fue devuelto fuera del plazo permitido."
+          }
+        ]
+      }
+    ]
+  }
+}

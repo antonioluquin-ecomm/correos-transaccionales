@@ -1,0 +1,49 @@
+{
+  "Tienda": {
+    "Nombre": "Sporting",
+    "Datos": {
+      "NotificacionesConfig": {
+        "HeaderURL": "https://www.sporting.com.ar",
+        "HeaderImage": "https://ventadeportiva.vteximg.com.br/arquivos/logo-mail.png"
+      }
+    }
+  },
+  "Pedido": {
+    "NroPedidoCanal": "SPO-552314009",
+    "FechaPedido": "10 de junio de 2026",
+    "TotalLineas": "74.980",
+    "DatosEnvio": {
+      "Destinatario": {
+        "Nombres": "Cliente"
+      }
+    },
+    "LineasPedido": [
+      {
+        "Producto": "Zapatillas Running Pro",
+        "SKU": "SPO-RUN-001",
+        "Importe": "49.990",
+        "Cantidad": 1,
+        "Subtotal": "49.990",
+        "Estado": "B"
+      },
+      {
+        "Producto": "Medias Deportivas Pack x3",
+        "SKU": "SPO-MED-014",
+        "Importe": "12.495",
+        "Cantidad": 2,
+        "Subtotal": "24.990",
+        "Estado": "B"
+      }
+    ]
+  },
+  "Deposito": {
+    "DatosDeposito": {
+      "DatosPickup": {
+        "NombrePublico": "Sporting Abasto",
+        "Direccion": "Av. Corrientes 3247",
+        "Localidad": "Ciudad Autonoma de Buenos Aires",
+        "Horario": "Lunes a sabados de 10 a 21 h"
+      }
+    }
+  }
+}
