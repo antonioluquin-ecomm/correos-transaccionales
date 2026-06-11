@@ -28,6 +28,7 @@ Validación base para cambios en el sitio estático.
 | Visualizador con `?template=pedido-confirmado` | Selecciona la plantilla indicada y renderiza su preview. |
 | Visualizador con `?template=pedido-confirmado&example=examples/vtex/pedido-estandar.json` | Selecciona plantilla y escenario indicados si existen. |
 | Visualizador acciones rápidas | Abrir HTML, descargar HTML y copiar HTML funcionan para la plantilla seleccionada. |
+| Visualizador con `pim-sin-stock-pv` | Renderiza el escenario `sin-stock-pv-sporting`, muestra las tres alternativas y no informa reembolso automatico. |
 | Simulador QA con domicilio, retiro y escenarios multipaquete | El iframe renderiza contenido y recalcula totales. |
 | Simulador QA con escenario multipaquete | El selector fuerza dos productos para evitar datos imposibles. |
 | Simulador QA con promoción aplicada | El resumen muestra beneficio/promoción y totales actualizados. |

@@ -2,6 +2,15 @@
 
 Formato: versión, fecha, resumen del cambio principal.
 
+## v1.15.0 - 2026-06-11
+
+Plantilla PIM **Sin stock PV** para quiebres de stock en Punto de Venta:
+
+- **`templates/pim/shared/sin-stock-pv/sin-stock-pv.v2.html`**: nueva plantilla alineada al estandar visual PIM/VTEX. No promete reembolso automatico; ofrece tres alternativas claras: cambio en sucursal, reembolso presencial en la sucursal de compra o giftcard para comprar online en Sporting/Woker.
+- **`examples/pim/shared/sin-stock-pv-sporting.json`**: escenario representativo con productos dados de baja (`Estado: "B"`) y datos de sucursal.
+- **`config.js`**: se agrega `pim-sin-stock-pv` como PIM + Punto de Venta + Sporting/Woker, evento `sin-stock-pv` y etapa `Cancelacion / Reembolso`.
+- **Flujo de Correos**: el nodo **Sin stock PV** pasa de faltante a existente y queda conectado al flujo general.
+
 ## v1.14.0 — 2026-06-11
 
 Consolidación funcional posterior al modelo de canal/tienda:

@@ -31,6 +31,7 @@ Esta auditoria resume la cobertura real disponible en `EXAMPLE_SCENARIOS`. No se
 | Orden generada B2B | VTEX | ecommerce | B2B | Compra / Pedido | 1 | Suficiente como base B2B. |
 | Pedido despachado PIM | PIM | ecommerce, PV | Sporting, Woker | Despacho / Retiro | 8 | Cobertura fuerte por operador logistico. |
 | Confirmacion Multideposito | PIM | PV | Sporting, Woker | Compra / Pedido | 2 | Correcto: cubre ambas marcas PV actuales. |
+| Sin stock PV | PIM | PV | Sporting, Woker | Cancelacion / Reembolso | 1 | Cubre Sporting con dos productos en baja y alternativas operativas; falta Woker si el copy o header difiere. |
 | Pedido listo para retirar | PIM | ecommerce, PV | Sporting, Woker | Despacho / Retiro | 1 | Falta Woker si el flujo real difiere. |
 | Despacho B2B | PIM | ecommerce | B2B | Preparacion | 1 | Suficiente como base mayorista. |
 | Giftcard | PIM | ecommerce, PV | Sporting, Woker | Inversa | 1 | Falta validar variantes sin saldo u observaciones si existen. |
@@ -45,6 +46,7 @@ Esta auditoria resume la cobertura real disponible en `EXAMPLE_SCENARIOS`. No se
 
 1. Completar motivos de cancelacion VTEX con JSON reales: cliente, stock y operativa.
 2. Sumar Woker para `pim-despacho-pickup` solo si el payload real o copy difiere de Sporting.
-3. Validar si `order-invoiced` necesita variantes sin tracking o multiples facturas.
-4. Revisar si B2B access-key debe tener JSON propio o puede seguir compartiendo estructura.
-5. Mantener `pim-nuevo-envio` como referencia de cobertura: operador real, fallback y caso sin tracking.
+3. Sumar Woker para `pim-sin-stock-pv` solo si el payload real, header o copy difiere de Sporting.
+4. Validar si `order-invoiced` necesita variantes sin tracking o multiples facturas.
+5. Revisar si B2B access-key debe tener JSON propio o puede seguir compartiendo estructura.
+6. Mantener `pim-nuevo-envio` como referencia de cobertura: operador real, fallback y caso sin tracking.
