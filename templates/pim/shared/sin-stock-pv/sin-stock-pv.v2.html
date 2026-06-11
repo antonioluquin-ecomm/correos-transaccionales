@@ -1,8 +1,8 @@
-﻿<!-- PIM · quiebre-stock — Version 2 (base canónica compartida Sporting/Woker) -->
-<!-- Flujo Quiebre de stock: error de inventario que impide completar el pedido (Estado "B"). -->
-<!-- Informa los artículos no disponibles y confirma el reembolso automático al medio de pago. -->
-<!-- Variables reales: Tienda.Nombre, HeaderURL/Image, Pedido.NroPedidoCanal, -->
-<!-- Pedido.LineasPedido[] (Producto/SKU/Cantidad/Estado; "B" = Baja). -->
+<!-- PIM · sin-stock-pv — Version 2 (base canonica compartida Sporting/Woker) -->
+<!-- Flujo Punto de Venta: quiebre de stock posterior a una compra PV/multideposito. -->
+<!-- No informa reembolso automatico: ofrece cambio en sucursal, reembolso presencial -->
+<!-- en la sucursal de compra o giftcard para compra online. -->
+<!-- Variables reales PIM: Tienda.*, Pedido.*, Pedido.LineasPedido[], Deposito.* condicional. -->
 <!doctype html>
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <meta name="x-apple-disable-message-reformatting" />
     <meta name="format-detection" content="telephone=no,address=no,email=no,date=no" />
-    <title>{{ .Tienda.Nombre }} — Novedades sobre tu pedido</title>
+    <title>{{ .Tienda.Nombre }} — Alternativas por falta de stock</title>
     <!--[if mso]>
       <xml><o:OfficeDocumentSettings><o:AllowPNG/><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml>
     <![endif]-->
@@ -31,6 +31,7 @@
       .h2 { font-size:15px; line-height:22px; font-weight:bold; color:#111827; margin:0; }
       .text { font-size:14px; line-height:22px; color:#374151; margin:0; }
       .text-sm { font-size:13px; line-height:20px; color:#6b7280; margin:0; }
+      .cta { display:block; width:100%; box-sizing:border-box; background:#0c4a6e; color:#ffffff !important; border-radius:8px; font-size:13px; line-height:52px; font-weight:700; letter-spacing:1px; text-transform:uppercase; text-align:center; text-decoration:none; }
 
       @media only screen and (max-width:600px) {
         .wrap { width:100% !important; max-width:100% !important; }
@@ -38,8 +39,8 @@
         .outer-pad { padding:0 !important; }
         .hero-td { padding:32px 20px 28px !important; }
         .h1 { font-size:22px !important; line-height:28px !important; }
-        .sum-cell, .sum-cell-r { display:block !important; width:100% !important; border-left:none !important; border-bottom:1px solid #f3f4f6 !important; padding:14px 16px !important; box-sizing:border-box !important; }
-        .sum-last { border-bottom:none !important; }
+        .option-cell { display:block !important; width:100% !important; box-sizing:border-box !important; border-left:none !important; border-top:1px solid #e5e7eb !important; }
+        .option-cell-first { border-top:none !important; }
         .footer-td { border-radius:0 !important; }
         .trust-logos { border-radius:0 !important; }
         .header-logo { width:128px !important; }
@@ -52,7 +53,7 @@
   <body>
     <!-- Preheader -->
     <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;visibility:hidden;mso-hide:all;">
-      Uno o más artículos de tu pedido {{ .Pedido.NroPedidoCanal }} no están disponibles. Procesamos el reembolso automáticamente.&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;
+      No pudimos completar tu pedido {{ .Pedido.NroPedidoCanal }} por falta de stock. Te contamos las alternativas disponibles.&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;
     </div>
 
     <table role="presentation" width="100%" bgcolor="#e8e8e8" style="background:#e8e8e8;">
@@ -60,12 +61,10 @@
         <td align="center" class="outer-pad" style="padding:24px 12px 48px;">
           <table role="presentation" class="wrap" width="100%" style="width:100%;max-width:600px;">
 
-            <!-- ── MAIN CARD ── -->
+            <!-- MAIN CARD -->
             <tr>
               <td>
                 <table role="presentation" width="100%" class="card">
-
-                  <!-- HEADER / logo dinámico por tienda -->
                   <tr>
                     <td bgcolor="#ffffff" style="background:#ffffff;padding:20px 24px 16px;border-bottom:1px solid #eef2f7;">
                       <a href="{{ .Tienda.Datos.NotificacionesConfig.HeaderURL }}" target="_blank" style="display:inline-block;text-decoration:none;">
@@ -74,28 +73,26 @@
                     </td>
                   </tr>
 
-                  <!-- HERO (slate neutro: plantilla compartida) -->
                   <tr>
                     <td class="hero-td" bgcolor="#0c4a6e" style="background:linear-gradient(135deg,#0c4a6e 0%,#2781ab 100%);padding:40px 28px 36px;text-align:center;">
                       <table cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 16px auto;">
                         <tr>
                           <td align="center" valign="middle" width="80" height="80" style="width:80px;height:80px;border-radius:50%;background:rgba(12,74,110,.25);">
                             <table cellpadding="0" cellspacing="0" border="0" align="center"><tr>
-                              <td align="center" valign="middle" width="52" height="52" style="width:52px;height:52px;border-radius:50%;background:#ffffff;font-size:24px;line-height:52px;text-align:center;">&#128184;</td>
+                              <td align="center" valign="middle" width="52" height="52" style="width:52px;height:52px;border-radius:50%;background:#ffffff;font-size:24px;line-height:52px;text-align:center;">&#9888;</td>
                             </tr></table>
                           </td>
                         </tr>
                       </table>
-                      <p style="font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:#93c5fd;margin:0 0 10px 0;text-align:center;">Sin stock</p>
-                      <p class="h1" style="font-size:28px;line-height:1.1;font-weight:800;color:#ffffff;letter-spacing:-0.3px;margin:0 0 8px 0;text-align:center;text-shadow:0 2px 16px rgba(0,0,0,.15);">No pudimos completar tu pedido</p>
-                      <p style="font-size:13px;color:rgba(255,255,255,.8);margin:0;text-align:center;">Uno o más artículos no están disponibles por un error de inventario. Te devolvemos el importe abonado.</p>
+                      <p style="font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:#7dd3fc;margin:0 0 10px 0;text-align:center;">Falta de stock</p>
+                      <p class="h1" style="font-size:28px;line-height:1.1;font-weight:800;color:#ffffff;letter-spacing:-0.3px;margin:0 0 8px 0;text-align:center;text-shadow:0 2px 16px rgba(0,0,0,.15);">Tenemos que resolver tu pedido</p>
+                      <p style="font-size:13px;color:rgba(255,255,255,.8);margin:0;text-align:center;">Hola {{ .Pedido.DatosEnvio.Destinatario.Nombres }} — uno o más productos de tu compra no están disponibles.</p>
                     </td>
                   </tr>
 
-                  <!-- Intro + N° de pedido -->
                   <tr>
                     <td style="padding:24px 24px 0;">
-                      <p class="text" style="font-size:15px;line-height:23px;color:#374151;margin:0 0 16px 0;">Lamentamos informarte que, debido a un error de inventario, tu pedido no pudo procesarse correctamente: algunos artículos no están disponibles en este momento.</p>
+                      <p class="text" style="font-size:15px;line-height:23px;color:#374151;margin:0 0 16px 0;">Te pedimos disculpas. Como esta compra fue realizada en Punto de Venta, no podemos hacer el reembolso automático del dinero desde este correo. Para resolverlo, podés elegir una de estas alternativas:</p>
                       <table role="presentation" width="100%" bgcolor="#f8fafc" style="background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;">
                         <tr>
                           <td style="padding:14px 18px;">
@@ -107,19 +104,68 @@
                     </td>
                   </tr>
 
+                  <tr>
+                    <td style="padding:18px 24px 24px;">
+                      <table role="presentation" width="100%" bgcolor="#e0f2fe" style="background:#e0f2fe;border-radius:10px;border-left:4px solid #0c4a6e;">
+                        <tr>
+                          <td style="padding:14px 16px;">
+                            <p style="font-size:13px;line-height:21px;color:#075985;margin:0;"><strong>No necesitás tener el producto afectado para hacer el cambio:</strong> como no pudimos entregarlo, podés acercarte y elegir otra alternativa disponible.</p>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
                 </table>
               </td>
             </tr>
 
             <tr><td class="gap">&nbsp;</td></tr>
 
-            <!-- ARTÍCULOS NO DISPONIBLES -->
+            <!-- OPCIONES -->
             <tr>
               <td>
                 <table role="presentation" width="100%" class="card">
                   <tr>
                     <td style="padding:18px 20px 12px;border-bottom:1px solid #f3f4f6;">
-                      <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0;">Artículos no disponibles</p>
+                      <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0;">Alternativas disponibles</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding:0;">
+                      <table role="presentation" width="100%" style="width:100%;table-layout:fixed;">
+                        <tr>
+                          <td class="option-cell option-cell-first" width="33.33%" valign="top" style="width:33.33%;padding:18px 16px;">
+                            <p style="font-size:22px;line-height:26px;margin:0 0 10px 0;">&#8635;</p>
+                            <p style="font-size:13px;line-height:19px;font-weight:800;color:#111827;margin:0 0 6px 0;">Cambiar en sucursal</p>
+                            <p class="text-sm" style="font-size:12.5px;line-height:19px;color:#6b7280;margin:0;">Podés acercarte a una sucursal y cambiar por cualquier otro producto disponible.</p>
+                          </td>
+                          <td class="option-cell" width="33.33%" valign="top" style="width:33.33%;padding:18px 16px;border-left:1px solid #e5e7eb;">
+                            <p style="font-size:22px;line-height:26px;margin:0 0 10px 0;">&#36;</p>
+                            <p style="font-size:13px;line-height:19px;font-weight:800;color:#111827;margin:0 0 6px 0;">Reembolso presencial</p>
+                            <p class="text-sm" style="font-size:12.5px;line-height:19px;color:#6b7280;margin:0;">Si preferís el dinero, acercate a la misma sucursal donde realizaste el pedido.</p>
+                          </td>
+                          <td class="option-cell" width="33.33%" valign="top" style="width:33.33%;padding:18px 16px;border-left:1px solid #e5e7eb;">
+                            <p style="font-size:22px;line-height:26px;margin:0 0 10px 0;">&#127873;</p>
+                            <p style="font-size:13px;line-height:19px;font-weight:800;color:#111827;margin:0 0 6px 0;">Giftcard online</p>
+                            <p class="text-sm" style="font-size:12.5px;line-height:19px;color:#6b7280;margin:0;">Podemos generarte una giftcard para usar en nuestras tiendas online.</p>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="gap">&nbsp;</td></tr>
+
+            <!-- ARTICULOS NO DISPONIBLES -->
+            <tr>
+              <td>
+                <table role="presentation" width="100%" class="card">
+                  <tr>
+                    <td style="padding:18px 20px 12px;border-bottom:1px solid #f3f4f6;">
+                      <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0;">Productos sin stock</p>
                     </td>
                   </tr>
                   {{ with .Pedido.LineasPedido }}
@@ -131,8 +177,8 @@
                             <tr>
                               <td valign="top" width="26" style="width:26px;font-size:15px;line-height:20px;color:#b45309;font-weight:bold;">&#9888;</td>
                               <td valign="top" style="padding-right:10px;">
-                                <p class="item-name" style="font-size:14px;line-height:20px;font-weight:bold;color:#111827;margin:0 0 2px 0;">{{ .Producto }}</p>
-                                <p class="item-meta" style="font-size:12px;line-height:18px;color:#6b7280;margin:0;">SKU {{ .SKU }} &middot; Cantidad: {{ .Cantidad }}</p>
+                                <p style="font-size:14px;line-height:20px;font-weight:bold;color:#111827;margin:0 0 2px 0;word-break:break-word;overflow-wrap:break-word;">{{ .Producto }}</p>
+                                <p style="font-size:12px;line-height:18px;color:#6b7280;margin:0;">SKU {{ .SKU }} &middot; Cantidad: {{ .Cantidad }}</p>
                               </td>
                               <td valign="top" align="right" style="white-space:nowrap;"><span style="display:inline-block;font-size:11px;font-weight:700;color:#92400e;background:#fef3c7;border-radius:6px;padding:4px 10px;">Sin stock</span></td>
                             </tr>
@@ -150,38 +196,53 @@
 
             <tr><td class="gap">&nbsp;</td></tr>
 
-            <!-- INFORMACIÓN IMPORTANTE / REEMBOLSO -->
+            <!-- SUCURSAL -->
             <tr>
               <td>
                 <table role="presentation" width="100%" class="card">
                   <tr>
                     <td style="padding:18px 20px 12px;border-bottom:1px solid #f3f4f6;">
-                      <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0;">Sobre tu reembolso</p>
+                      <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0;">Dónde resolverlo</p>
                     </td>
                   </tr>
                   <tr>
                     <td style="padding:16px 20px;">
-                      <table role="presentation" width="100%" bgcolor="#e0f2fe" style="background:#e0f2fe;border-radius:8px;">
+                      {{ if .Deposito.DatosDeposito.DatosPickup.NombrePublico }}
+                      <table role="presentation" width="100%" bgcolor="#f8fafc" style="background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;">
                         <tr>
-                          <td style="padding:14px 16px;border-left:4px solid #0c4a6e;border-radius:8px;">
-                            <p style="font-size:13px;line-height:21px;color:#075985;margin:0;">Realizamos el reembolso del importe abonado a través del <strong>mismo medio de pago</strong> con el que hiciste la compra. <strong>No necesitás hacer ninguna gestión ni reclamo adicional.</strong></p>
+                          <td style="padding:14px 18px;">
+                            <p style="font-size:9.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#b0b0b0;margin:0 0 4px 0;">Sucursal de compra</p>
+                            <p style="font-size:15px;line-height:22px;font-weight:800;color:#111827;margin:0;">{{ .Deposito.DatosDeposito.DatosPickup.NombrePublico }}</p>
+                            {{ if .Deposito.DatosDeposito.DatosPickup.Direccion }}
+                            <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:4px 0 0;">{{ .Deposito.DatosDeposito.DatosPickup.Direccion }}{{ if .Deposito.DatosDeposito.DatosPickup.Localidad }}, {{ .Deposito.DatosDeposito.DatosPickup.Localidad }}{{ end }}</p>
+                            {{ end }}
+                            {{ if .Deposito.DatosDeposito.DatosPickup.Horario }}
+                            <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:2px 0 0;">Horario: {{ .Deposito.DatosDeposito.DatosPickup.Horario }}</p>
+                            {{ end }}
                           </td>
                         </tr>
                       </table>
+                      <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:12px 0 0;">Para el cambio podés consultar también en otra sucursal. Para el reembolso del dinero, acercate a la sucursal donde realizaste el pedido.</p>
+                      {{ else }}
+                      <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0;">Para hacer el cambio, acercate a una sucursal de {{ .Tienda.Nombre }}. Para pedir el reembolso del dinero, acercate a la sucursal donde realizaste el pedido.</p>
+                      {{ end }}
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
 
-                      <p style="font-size:13px;line-height:21px;font-weight:bold;color:#111827;margin:16px 0 6px;">Plazos según el medio de pago</p>
-                      <table role="presentation" width="100%">
-                        <tr>
-                          <td valign="top" width="18" style="width:18px;font-size:13px;line-height:21px;color:#0c4a6e;font-weight:bold;">&bull;</td>
-                          <td valign="top" style="padding-bottom:6px;"><p class="text-sm" style="font-size:13px;line-height:21px;color:#374151;margin:0;"><strong>Tarjeta de débito:</strong> puede tardar entre 5 y 11 días hábiles en reflejarse en tu cuenta.</p></td>
-                        </tr>
-                        <tr>
-                          <td valign="top" width="18" style="width:18px;font-size:13px;line-height:21px;color:#0c4a6e;font-weight:bold;">&bull;</td>
-                          <td valign="top"><p class="text-sm" style="font-size:13px;line-height:21px;color:#374151;margin:0;"><strong>Tarjeta de crédito:</strong> verás el monto en el próximo resumen de tu tarjeta, según la fecha de cierre.</p></td>
-                        </tr>
-                      </table>
+            <tr><td class="gap">&nbsp;</td></tr>
 
-                      <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:16px 0 0;">Te pedimos disculpas por los inconvenientes y agradecemos tu comprensión.</p>
+            <!-- GIFTCARD CTA -->
+            <tr>
+              <td>
+                <table role="presentation" width="100%" class="card">
+                  <tr>
+                    <td style="padding:20px 24px;">
+                      <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0 0 8px 0;">Si preferís una giftcard</p>
+                      <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0 0 16px 0;">Contactanos por los canales de atención de {{ .Tienda.Nombre }} y te ayudamos a generar una giftcard para usar en nuestras tiendas online.</p>
+                      <a href="{{ .Tienda.Datos.NotificacionesConfig.HeaderURL }}/contacto" target="_blank" class="cta" style="display:block;width:100%;box-sizing:border-box;background:#0c4a6e;color:#ffffff;border-radius:8px;font-size:13px;line-height:52px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-align:center;text-decoration:none;">Contactar atención al cliente &nbsp;&#8594;</a>
                     </td>
                   </tr>
                 </table>
@@ -209,7 +270,6 @@
             <tr>
               <td class="footer-td" bgcolor="#1c1c1c" style="background:#1c1c1c;border-radius:10px;padding:22px 24px 20px;">
                 <table role="presentation" width="100%">
-                  <!-- Logos de marcas -->
                   <tr>
                     <td style="padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,.08);">
                       <table role="presentation" width="100%" style="width:100%;table-layout:fixed;">
@@ -227,20 +287,17 @@
                       </table>
                     </td>
                   </tr>
-                  <!-- Links -->
                   <tr>
                     <td style="padding:16px 0 14px;border-bottom:1px solid rgba(255,255,255,.08);">
                       <table role="presentation" width="100%"><tr>
                         <td valign="middle" align="center">
                           <a href="{{ .Tienda.Datos.NotificacionesConfig.HeaderURL }}/contacto" target="_blank" style="font-size:11px;color:rgba(255,255,255,.45);text-decoration:none;font-weight:500;">Contacto</a>
-
                           &nbsp;&nbsp;
                           <a href="{{ .Tienda.Datos.NotificacionesConfig.HeaderURL }}/politicas-de-cambio-y-devolucion" target="_blank" style="font-size:11px;color:rgba(255,255,255,.45);text-decoration:none;font-weight:500;">Cambios y devoluciones</a>
                         </td>
                       </tr></table>
                     </td>
                   </tr>
-                  <!-- Copyright -->
                   <tr>
                     <td align="center" style="padding-top:14px;">
                       <p style="font-size:10.5px;color:rgba(255,255,255,.25);text-align:center;margin:0;line-height:1.6;">&copy; {{ .Tienda.Nombre }} — Todos los derechos reservados</p>
@@ -250,7 +307,6 @@
               </td>
             </tr>
 
-            <!-- TRUST LOGOS -->
             <tr>
               <td style="padding:8px 0 0;">
                 <table role="presentation" width="100%" class="trust-logos" bgcolor="#f4f4f4" style="background:#f4f4f4;border-radius:10px;table-layout:fixed;">
