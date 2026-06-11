@@ -64,7 +64,7 @@
 
       .ct-library-toolbar {
         display: grid;
-        grid-template-columns: minmax(260px, 1fr) repeat(5, minmax(128px, auto));
+        grid-template-columns: minmax(260px, 1fr) repeat(6, minmax(118px, auto));
         gap: 12px;
         padding: 16px 14px;
         border-bottom: 1px solid var(--ct-card-border);
@@ -530,7 +530,7 @@
           </div>
           <div class="ct-kpi">
             <strong id="ct-kpi-platforms">0</strong>
-            <span>Tiendas</span>
+            <span>Canales</span>
           </div>
         </div>
       </section>
@@ -547,14 +547,20 @@
             />
           </div>
           <div class="ct-field">
-            <label for="ct-filter-tienda">Tienda</label>
-            <select id="ct-filter-tienda">
+            <label for="ct-filter-plataforma">Plataforma</label>
+            <select id="ct-filter-plataforma">
               <option value="">Todas</option>
             </select>
           </div>
           <div class="ct-field">
-            <label for="ct-filter-plataforma">Plataforma</label>
-            <select id="ct-filter-plataforma">
+            <label for="ct-filter-canal">Canal</label>
+            <select id="ct-filter-canal">
+              <option value="">Todos</option>
+            </select>
+          </div>
+          <div class="ct-field">
+            <label for="ct-filter-tienda">Tienda</label>
+            <select id="ct-filter-tienda">
               <option value="">Todas</option>
             </select>
           </div>
@@ -609,6 +615,8 @@
           <dl>
             <dt>Responsable</dt>
             <dd id="ct-detail-responsable"></dd>
+            <dt>Canal</dt>
+            <dd id="ct-detail-canal"></dd>
             <dt>Tienda</dt>
             <dd id="ct-detail-tienda"></dd>
             <dt>Categoría</dt>
@@ -651,6 +659,7 @@
         const clearFiltersBtn = document.getElementById('ct-clear-filters');
         const searchEl = document.getElementById('ct-search');
         const filterTiendaEl = document.getElementById('ct-filter-tienda');
+        const filterCanalEl = document.getElementById('ct-filter-canal');
         const filterPlataformaEl = document.getElementById('ct-filter-plataforma');
         const filterCategoriaEl = document.getElementById('ct-filter-categoria');
         const filterEstadoEl = document.getElementById('ct-filter-estado');
@@ -663,6 +672,7 @@
         const badgesEl = document.getElementById('ct-detail-badges');
         const descripcionEl = document.getElementById('ct-detail-descripcion');
         const responsableEl = document.getElementById('ct-detail-responsable');
+        const canalEl = document.getElementById('ct-detail-canal');
         const tiendaEl = document.getElementById('ct-detail-tienda');
         const categoriaEl = document.getElementById('ct-detail-categoria');
         const actualizadoEl = document.getElementById('ct-detail-actualizado');
@@ -693,7 +703,8 @@
             template.categoria,
             template.estado,
             template.responsable,
-            CT.storeLabel(CT.templateStore(template)),
+            CT.labelsFor(CT.templateChannels(template), CT.channelLabel),
+            CT.labelsFor(CT.templateStores(template), CT.storeLabel),
             template.archivoHtml,
             template.ejemplo,
             ...(Array.isArray(template.variables) ? template.variables : []),
@@ -705,11 +716,20 @@
         }
 
         function fillStoreSelect() {
-          CT.storeOptionsFor(templates, CT.templateStore).forEach((store) => {
+          CT.storeOptionsFor(templates, CT.templateStores).forEach((store) => {
             const option = document.createElement('option');
             option.value = store.id;
             option.textContent = store.label;
             filterTiendaEl.appendChild(option);
+          });
+        }
+
+        function fillChannelSelect() {
+          CT.channelOptionsFor(templates, CT.templateChannels).forEach((channel) => {
+            const option = document.createElement('option');
+            option.value = channel.id;
+            option.textContent = channel.label;
+            filterCanalEl.appendChild(option);
           });
         }
 
@@ -734,6 +754,8 @@
 
         function previewUrl(template) {
           const params = new URLSearchParams({ store: CT.templateStore(template), template: template.id });
+          const channel = CT.templateChannels(template)[0];
+          if (channel) params.set('channel', channel);
           if (template.ejemplo) params.set('example', template.ejemplo);
           return `../visualizador/index.html?${params.toString()}`;
         }
@@ -750,18 +772,21 @@
           document.getElementById('ct-kpi-total').textContent = templates.length;
           document.getElementById('ct-kpi-active').textContent = templates.filter((t) => t.estado === 'activo').length;
           document.getElementById('ct-kpi-examples').textContent = templates.filter((t) => t.ejemplo).length;
-          document.getElementById('ct-kpi-platforms').textContent = CT.storeOptionsFor(templates, CT.templateStore).length;
+          document.getElementById('ct-kpi-platforms').textContent = CT.channelOptionsFor(templates, CT.templateChannels).length;
         }
 
         function matchesFilters(template) {
           const query = normalize(searchEl.value.trim());
           const matchesQuery = !query || searchableText(template).includes(query);
-          const matchesTienda = !filterTiendaEl.value || CT.templateStore(template) === filterTiendaEl.value;
+          const matchesCanalTienda = CT.matchesChannelStore(template, {
+            channel: filterCanalEl.value,
+            store: filterTiendaEl.value,
+          });
           const matchesPlataforma = !filterPlataformaEl.value || template.plataforma === filterPlataformaEl.value;
           const matchesCategoria = !filterCategoriaEl.value || template.categoria === filterCategoriaEl.value;
           const matchesEstado = !filterEstadoEl.value || template.estado === filterEstadoEl.value;
 
-          return matchesQuery && matchesTienda && matchesPlataforma && matchesCategoria && matchesEstado;
+          return matchesQuery && matchesCanalTienda && matchesPlataforma && matchesCategoria && matchesEstado;
         }
 
         function sortTemplates(items) {
@@ -778,8 +803,9 @@
         function renderActiveFilters() {
           const chips = [];
           if (searchEl.value.trim()) chips.push(`Búsqueda: ${searchEl.value.trim()}`);
-          if (filterTiendaEl.value) chips.push(`Tienda: ${CT.storeLabel(filterTiendaEl.value)}`);
           if (filterPlataformaEl.value) chips.push(`Plataforma: ${filterPlataformaEl.value}`);
+          if (filterCanalEl.value) chips.push(`Canal: ${CT.channelLabel(filterCanalEl.value)}`);
+          if (filterTiendaEl.value) chips.push(`Tienda: ${CT.storeLabel(filterTiendaEl.value)}`);
           if (filterCategoriaEl.value) chips.push(`Categoría: ${filterCategoriaEl.value}`);
           if (filterEstadoEl.value) chips.push(`Estado: ${capitalizeFirst(filterEstadoEl.value)}`);
           if (sortEl.value !== 'updated-desc') chips.push(`Orden: ${sortEl.selectedOptions[0]?.textContent || 'Personalizado'}`);
@@ -797,7 +823,8 @@
             <div class="ct-card-top">
               <div class="ct-badges">
                 ${CT.platformBadge(template.plataforma || 'Sin plataforma')}
-                ${CT.storeBadge(CT.templateStore(template))}
+                ${CT.channelBadges(CT.templateChannels(template))}
+                ${CT.storeBadges(CT.templateStores(template))}
                 ${CT.statusBadge(template.estado || 'sin estado')}
               </div>
               <code class="ct-template-id" title="${CT.escapeHtml(template.id || '')}">${CT.escapeHtml(template.id || '')}</code>
@@ -853,10 +880,11 @@
           currentTemplate = template;
           lastFocusedEl = document.activeElement;
           titleEl.textContent = template.nombre || 'Sin nombre';
-          badgesEl.innerHTML = `${CT.platformBadge(template.plataforma || 'Sin plataforma')}${CT.storeBadge(CT.templateStore(template))}${CT.statusBadge(template.estado || 'sin estado')}`;
+          badgesEl.innerHTML = `${CT.platformBadge(template.plataforma || 'Sin plataforma')}${CT.channelBadges(CT.templateChannels(template))}${CT.storeBadges(CT.templateStores(template))}${CT.statusBadge(template.estado || 'sin estado')}`;
           descripcionEl.textContent = template.descripcion || 'Sin descripción documentada.';
           responsableEl.textContent = template.responsable || 'Sin responsable';
-          tiendaEl.textContent = CT.storeLabel(CT.templateStore(template));
+          canalEl.textContent = CT.labelsFor(CT.templateChannels(template), CT.channelLabel);
+          tiendaEl.textContent = CT.labelsFor(CT.templateStores(template), CT.storeLabel);
           categoriaEl.textContent = template.categoria || 'Sin categoría';
           actualizadoEl.textContent = formatDate(template.actualizado);
           archivoEl.innerHTML = template.archivoHtml ? `<code>${CT.escapeHtml(template.archivoHtml)}</code>` : 'Sin HTML asociado.';
@@ -931,21 +959,23 @@
           }
         }
 
-        fillStoreSelect();
         fillSelect(filterPlataformaEl, uniqueValues('plataforma'));
+        fillChannelSelect();
+        fillStoreSelect();
         fillSelect(filterCategoriaEl, uniqueValues('categoria'));
         fillSelect(filterEstadoEl, uniqueValues('estado'), capitalizeFirst);
         updateKpis();
 
-        [searchEl, filterTiendaEl, filterPlataformaEl, filterCategoriaEl, filterEstadoEl, sortEl].forEach((el) => {
+        [searchEl, filterPlataformaEl, filterCanalEl, filterTiendaEl, filterCategoriaEl, filterEstadoEl, sortEl].forEach((el) => {
           el.addEventListener('input', renderResults);
           el.addEventListener('change', renderResults);
         });
 
         clearFiltersBtn.addEventListener('click', () => {
           searchEl.value = '';
-          filterTiendaEl.value = '';
           filterPlataformaEl.value = '';
+          filterCanalEl.value = '';
+          filterTiendaEl.value = '';
           filterCategoriaEl.value = '';
           filterEstadoEl.value = '';
           sortEl.value = 'updated-desc';

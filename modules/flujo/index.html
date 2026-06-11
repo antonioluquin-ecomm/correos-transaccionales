@@ -206,6 +206,12 @@
         border-color: #dc2626;
       }
 
+      .ct-flow-filter-btn.active[data-channel] {
+        background: #7c2d12;
+        color: #ffffff;
+        border-color: #7c2d12;
+      }
+
       .ct-flow-filter-btn.active[data-store] {
         background: #0f766e;
         color: #ffffff;
@@ -661,6 +667,11 @@
           <span class="ct-flow-filter-sep"></span>
           <button class="ct-flow-filter-btn" type="button" data-priority="alta">↑ Prioridad alta</button>
           <span class="ct-flow-filter-sep"></span>
+          <span class="ct-flow-filter-label">Canal</span>
+          <button class="ct-flow-filter-btn active" type="button" data-channel="all">Todos</button>
+          <button class="ct-flow-filter-btn" type="button" data-channel="ecommerce">E-commerce</button>
+          <button class="ct-flow-filter-btn" type="button" data-channel="punto-de-venta">Punto de Venta</button>
+          <span class="ct-flow-filter-sep"></span>
           <span class="ct-flow-filter-label">Tienda</span>
           <button class="ct-flow-filter-btn active" type="button" data-store="all">Todas</button>
           <button class="ct-flow-filter-btn" type="button" data-store="sporting">Sporting</button>
@@ -738,6 +749,7 @@
               { id: 'access', lane: 'vtex', x: 170, text: 'Código de acceso a cuenta', templateId: 'access-key', status: 'existente', priority: 'baja', trigger: 'Usuario solicita ingreso o recuperación de acceso.', note: 'Plantilla disponible en catálogo. Pendiente revisión de diseño.' },
               { id: 'order', lane: 'vtex', x: 300, text: 'Pedido realizado con éxito', templateId: 'pedido-confirmado', status: 'existente', priority: 'alta', trigger: 'VTEX registra correctamente un pedido.', note: 'Plantilla real disponible y asociada al catálogo.' },
               { id: 'b2b-order', lane: 'vtex', x: 300, y: 72, text: 'Orden generada B2B', templateId: 'b2b-orden-generada', status: 'existente', priority: 'alta', trigger: 'VTEX B2B genera una orden pendiente de validación comercial.', note: 'Plantilla B2B disponible y asociada al catálogo.' },
+              { id: 'pv-order', lane: 'pim', x: 300, y: -72, text: 'Compra realizada PV', templateId: 'pim-confirmacion-multideposito', status: 'existente', priority: 'alta', trigger: 'Venta multidepósito/Punto de Venta registrada en PIM.', note: 'PV se modela como canal, no como tienda. Plantilla compartida por Sporting y Woker.' },
               { id: 'cancelled', lane: 'vtex', x: 430, y: -72, text: 'Pedido cancelado', templateId: 'pedido-cancelado', status: 'existente', priority: 'media', trigger: 'VTEX cancela o informa cancelación del pedido.', note: 'Plantilla real disponible y asociada al catálogo.' },
               { id: 'paid', lane: 'vtex', x: 430, text: 'Pago aprobado', templateId: 'pago-aprobado', status: 'existente', priority: 'alta', trigger: 'VTEX confirma autorización/aprobación de pago.', note: 'Plantilla real disponible y asociada al catálogo.' },
               { id: 'stockout', lane: 'pim', x: 430, text: 'Sin stock', status: 'faltante', priority: 'alta', trigger: 'PIM detecta falta de stock para uno o más productos.', note: 'Priorizar si impacta pedidos ya pagados o confirmados.' },
@@ -758,10 +770,14 @@
               ['back-in-stock', 'access'],
               ['access', 'order'],
               ['access', 'b2b-order'],
+              ['access', 'pv-order'],
               ['order', 'cancelled'],
               ['order', 'paid'],
               ['order', 'stockout'],
               ['b2b-order', 'paid'],
+              ['pv-order', 'stockout'],
+              ['pv-order', 'pickup'],
+              ['pv-order', 'shipped'],
               ['paid', 'invoiced'],
               ['invoiced', 'pickup'],
               ['invoiced', 'shipped'],
@@ -865,6 +881,7 @@
         let activeFlowId = 'entrega';
         let activeStatusFilter = null;
         let activePriorityFilter = false;
+        let activeChannelFilter = null;
         let activeStoreFilter = null;
 
         const BOARD_WIDTH = 1420;
@@ -915,6 +932,8 @@
           const template = templateById(node.templateId);
           if (template) {
             const params = new URLSearchParams({ store: CT.templateStore(template), template: template.id });
+            const channel = CT.templateChannels(template)[0];
+            if (channel) params.set('channel', channel);
             if (template.ejemplo) params.set('example', template.ejemplo);
             if (device) params.set('device', device);
             return `../visualizador/index.html?${params.toString()}`;
@@ -939,8 +958,11 @@
           boardEl.querySelectorAll('.ct-flow-node').forEach((el) => {
             const matchStatus = !activeStatusFilter || el.dataset.status === activeStatusFilter;
             const matchPriority = !activePriorityFilter || el.dataset.priority === 'alta';
-            const matchStore = !activeStoreFilter || !el.dataset.store || el.dataset.store === activeStoreFilter;
-            const isVisible = matchStatus && matchPriority && matchStore;
+            const channels = (el.dataset.channels || '').split(' ').filter(Boolean);
+            const stores = (el.dataset.stores || '').split(' ').filter(Boolean);
+            const matchChannel = !activeChannelFilter || !channels.length || channels.includes(activeChannelFilter);
+            const matchStore = !activeStoreFilter || !stores.length || stores.includes(activeStoreFilter);
+            const isVisible = matchStatus && matchPriority && matchChannel && matchStore;
             visibleNodes.set(el.dataset.node, isVisible);
             el.classList.toggle('filtered-out', !isVisible);
           });
@@ -967,7 +989,7 @@
           boardEl.querySelectorAll('.ct-flow-node.active').forEach((el) => el.classList.remove('active'));
           nodeEl.classList.add('active');
 
-          detailBadges.innerHTML = `${statusBadge(status)}${template ? CT.storeBadge(CT.templateStore(template)) : ''}${priorityBadge(node.priority || 'media')}`;
+          detailBadges.innerHTML = `${statusBadge(status)}${template ? CT.channelBadges(CT.templateChannels(template)) + CT.storeBadges(CT.templateStores(template)) : ''}${priorityBadge(node.priority || 'media')}`;
           detailTitle.textContent = node.text;
           detailNote.textContent = node.note || 'Sin nota operativa definida.';
           detailPlatform.textContent = lane ? lane.label : node.lane;
@@ -1093,7 +1115,8 @@
             el.dataset.node = node.id;
             el.dataset.status = status;
             el.dataset.priority = node.priority || 'media';
-            if (template) el.dataset.store = CT.templateStore(template);
+            el.dataset.channels = (node.canales || (template ? CT.templateChannels(template) : [])).join(' ');
+            el.dataset.stores = (node.tiendas || (template ? CT.templateStores(template) : [])).join(' ');
             el.style.left = position.left + 'px';
             el.style.top = position.top + 'px';
             el.tabIndex = 0;
@@ -1147,6 +1170,14 @@
           } else if ('priority' in btn.dataset) {
             activePriorityFilter = !activePriorityFilter;
             btn.classList.toggle('active', activePriorityFilter);
+          } else if ('channel' in btn.dataset) {
+            const channel = btn.dataset.channel;
+            activeChannelFilter = channel === 'all' || activeChannelFilter === channel ? null : channel;
+            document.querySelectorAll('#ct-flow-filters [data-channel]').forEach((b) => b.classList.remove('active'));
+            const activeBtn = activeChannelFilter
+              ? document.querySelector(`[data-channel="${activeChannelFilter}"]`)
+              : document.querySelector('[data-channel="all"]');
+            if (activeBtn) activeBtn.classList.add('active');
           } else if ('store' in btn.dataset) {
             const store = btn.dataset.store;
             activeStoreFilter = store === 'all' || activeStoreFilter === store ? null : store;

@@ -67,6 +67,18 @@
       <div class="ct-preview-tool">
         <aside class="ct-preview-controls">
           <div>
+            <label for="ct-sim-platform">Plataforma</label>
+            <select id="ct-sim-platform" aria-label="Filtrar por plataforma">
+              <option value="">Todas</option>
+            </select>
+          </div>
+          <div>
+            <label for="ct-sim-channel">Canal</label>
+            <select id="ct-sim-channel" aria-label="Filtrar por canal">
+              <option value="">Todos</option>
+            </select>
+          </div>
+          <div>
             <label for="ct-sim-store">Tienda</label>
             <select id="ct-sim-store" aria-label="Filtrar por tienda">
               <option value="">Todas</option>
@@ -148,6 +160,8 @@
           woker: BASE_ORDER_PATH,
         };
 
+        const platformSelect = document.getElementById('ct-sim-platform');
+        const channelSelect = document.getElementById('ct-sim-channel');
         const storeSelect = document.getElementById('ct-sim-store');
         const templateSelect = document.getElementById('ct-sim-template');
         const envioSelect = document.getElementById('ct-sim-envio');
@@ -163,7 +177,20 @@
         let activeDevice = 'desktop';
 
         const renderable = TEMPLATES.filter((t) => t.archivoHtml);
-        CT.storeOptionsFor(renderable, CT.templateStore).forEach((store) => {
+
+        function addOptions(selectEl, options) {
+          options.forEach((item) => {
+            const option = document.createElement('option');
+            option.value = item.id || item;
+            option.textContent = item.label || item;
+            selectEl.appendChild(option);
+          });
+        }
+
+        addOptions(platformSelect, Array.from(new Set(renderable.map((template) => template.plataforma).filter(Boolean))).sort().map((id) => ({ id, label: id })));
+        addOptions(channelSelect, CT.channelOptionsFor(renderable, CT.templateChannels));
+
+        CT.storeOptionsFor(renderable, CT.templateStores).forEach((store) => {
           const option = document.createElement('option');
           option.value = store.id;
           option.textContent = store.label;
@@ -171,7 +198,13 @@
         });
 
         function filteredTemplates() {
-          return renderable.filter((template) => !storeSelect.value || CT.templateStore(template) === storeSelect.value);
+          return renderable.filter((template) => {
+            const matchesPlatform = !platformSelect.value || template.plataforma === platformSelect.value;
+            return matchesPlatform && CT.matchesChannelStore(template, {
+              channel: channelSelect.value,
+              store: storeSelect.value,
+            });
+          });
         }
 
         function renderTemplateOptions(preferredId) {
@@ -180,7 +213,7 @@
           options.forEach((template) => {
             const option = document.createElement('option');
             option.value = template.id;
-            option.textContent = `${CT.storeLabel(CT.templateStore(template))} · ${template.nombre}`;
+            option.textContent = `${template.plataforma} · ${CT.labelsFor(CT.templateChannels(template), CT.channelLabel)} · ${CT.labelsFor(CT.templateStores(template), CT.storeLabel)} · ${template.nombre}`;
             templateSelect.appendChild(option);
           });
           const selected = options.find((template) => template.id === preferredId) || options[0];
@@ -197,7 +230,8 @@
 
         function currentBasePath() {
           const template = currentTemplate();
-          const store = template ? CT.templateStore(template) : storeSelect.value;
+          if (template && CT.slugify(template.plataforma) === 'pim' && template.ejemplo) return template.ejemplo;
+          const store = template ? (storeSelect.value || CT.templateStore(template)) : storeSelect.value;
           return BASE_ORDER_PATH_BY_STORE[store] || BASE_ORDER_PATH;
         }
 
@@ -235,7 +269,7 @@
         }
 
         function updateInfo(template) {
-          badgesEl.innerHTML = `${CT.platformBadge(template.plataforma)}${CT.storeBadge(CT.templateStore(template))}${CT.statusBadge(template.estado)}`;
+          badgesEl.innerHTML = `${CT.platformBadge(template.plataforma)}${CT.channelBadges(CT.templateChannels(template))}${CT.storeBadges(CT.templateStores(template))}${CT.statusBadge(template.estado)}`;
           nombreEl.textContent = template.nombre;
           descripcionEl.textContent = template.descripcion;
           archivoEl.textContent = template.archivoHtml;
@@ -389,21 +423,30 @@
               CT.fetchText(BASE + template.archivoHtml),
               loadBaseData(basePath),
             ]);
-            const simulatedData = buildSimulatedData(baseData);
-            CT.renderEmailToFrame(frame, html, simulatedData);
-            setStatus('Variante QA generada desde: ' + basePath);
+            if (CT.slugify(template.plataforma) === 'pim') {
+              CT.renderPimEmailToFrame(frame, html, baseData);
+              setStatus('PIM renderizado con escenario base: ' + basePath);
+            } else {
+              const simulatedData = buildSimulatedData(baseData);
+              CT.renderEmailToFrame(frame, html, simulatedData);
+              setStatus('Variante QA generada desde: ' + basePath);
+            }
           } catch (error) {
             setStatus('No se pudo renderizar la previsualización: ' + error.message, true);
           }
         }
 
-        storeSelect.addEventListener('change', () => {
+        function handleTaxonomyFilterChange() {
           const template = renderTemplateOptions();
           if (template) renderPreview();
           else {
             frame.srcdoc = '';
-            setStatus('No hay plantillas para la tienda seleccionada.', true);
+            setStatus('No hay plantillas para los filtros seleccionados.', true);
           }
+        }
+
+        [platformSelect, channelSelect, storeSelect].forEach((select) => {
+          select.addEventListener('change', handleTaxonomyFilterChange);
         });
 
         envioSelect.addEventListener('change', syncProductOptions);

@@ -20,6 +20,11 @@ const CT = (() => {
     { id: 'b2b', label: 'B2B' },
   ];
 
+  const CHANNEL_OPTIONS = [
+    { id: 'ecommerce', label: 'E-commerce' },
+    { id: 'punto-de-venta', label: 'Punto de Venta' },
+  ];
+
   function escapeHtml(value) {
     if (value === null || value === undefined) return '';
     return String(value)
@@ -72,19 +77,66 @@ const CT = (() => {
     return String(store || slug).replace(/(^|-)([a-z])/g, (_, sep, chr) => `${sep ? ' ' : ''}${chr.toUpperCase()}`);
   }
 
+  function channelLabel(channel) {
+    const slug = slugify(channel || 'ecommerce');
+    const known = CHANNEL_OPTIONS.find((option) => option.id === slug);
+    if (known) return known.label;
+    return String(channel || slug).replace(/(^|-)([a-z])/g, (_, sep, chr) => `${sep ? ' ' : ''}${chr.toUpperCase()}`);
+  }
+
+  function normalizeList(values) {
+    const source = Array.isArray(values) ? values : [values];
+    return Array.from(new Set(source.map(slugify).filter(Boolean)));
+  }
+
+  function labelsFor(values, labelFn) {
+    const list = normalizeList(values);
+    return list.length ? list.map(labelFn).join(', ') : 'Sin clasificar';
+  }
+
+  function optionListFor(items, resolver, knownOptions, labelFn) {
+    const actual = new Set((items || []).flatMap((item) => resolver(item)).filter(Boolean));
+    const known = knownOptions.map((option) => option.id);
+    const unknown = Array.from(actual).filter((id) => !known.includes(id)).sort();
+    return knownOptions.concat(unknown.map((id) => ({ id, label: labelFn(id) })));
+  }
+
+  function channelOptionsFor(items, resolver) {
+    return optionListFor(items, resolver, CHANNEL_OPTIONS, channelLabel);
+  }
+
+  function templateChannels(template) {
+    const explicit = normalizeList(template?.canales || template?.canal);
+    return explicit.length ? explicit : ['ecommerce'];
+  }
+
+  function scenarioChannels(scenario) {
+    const explicit = normalizeList(scenario?.canales || scenario?.canal);
+    return explicit.length ? explicit : ['ecommerce'];
+  }
+
+  function templateStores(template) {
+    const explicit = normalizeList(template?.tiendas || template?.tienda || template?.store);
+    if (explicit.length) return explicit;
+    return normalizeList(storeFromPath(template?.archivoHtml) || storeFromPath(template?.ejemplo) || 'shared');
+  }
+
+  function scenarioStores(scenario) {
+    const explicit = normalizeList(scenario?.tiendas || scenario?.tienda || scenario?.store);
+    if (explicit.length) return explicit;
+    return normalizeList(storeFromPath(scenario?.path) || 'shared');
+  }
+
   function templateStore(template) {
-    return slugify(template?.tienda || template?.store || storeFromPath(template?.archivoHtml) || storeFromPath(template?.ejemplo));
+    return templateStores(template)[0] || 'shared';
   }
 
   function scenarioStore(scenario) {
-    return slugify(scenario?.tienda || scenario?.store || storeFromPath(scenario?.path));
+    return scenarioStores(scenario)[0] || 'shared';
   }
 
   function storeOptionsFor(items, resolver) {
-    const actual = new Set((items || []).map((item) => resolver(item)).filter(Boolean));
-    const known = STORE_OPTIONS.map((option) => option.id);
-    const unknown = Array.from(actual).filter((id) => !known.includes(id)).sort();
-    return STORE_OPTIONS.concat(unknown.map((id) => ({ id, label: storeLabel(id) })));
+    return optionListFor(items, (item) => normalizeList(resolver(item)), STORE_OPTIONS, storeLabel);
   }
 
   function badge(text, extraClass) {
@@ -102,6 +154,29 @@ const CT = (() => {
   function storeBadge(store) {
     const slug = slugify(store || 'shared');
     return badge(storeLabel(slug), `ct-store-${slug}`);
+  }
+
+  function storeBadges(stores) {
+    return normalizeList(stores).map(storeBadge).join('');
+  }
+
+  function channelBadge(channel) {
+    const slug = slugify(channel || 'ecommerce');
+    return badge(channelLabel(slug), `ct-channel-${slug}`);
+  }
+
+  function channelBadges(channels) {
+    return normalizeList(channels).map(channelBadge).join('');
+  }
+
+  function matchesChannelStore(item, filters) {
+    const channel = slugify(filters?.channel);
+    const store = slugify(filters?.store);
+    const channels = item?.compatibleTemplates ? scenarioChannels(item) : templateChannels(item);
+    const stores = item?.compatibleTemplates ? scenarioStores(item) : templateStores(item);
+    const matchesChannel = !channel || channels.includes(channel);
+    const matchesStore = !store || stores.includes(store) || stores.includes('shared');
+    return matchesChannel && matchesStore;
   }
 
   /**
@@ -475,14 +550,26 @@ const CT = (() => {
     escapeHtml,
     slugify,
     STORE_OPTIONS,
+    CHANNEL_OPTIONS,
     platformBadge,
     statusBadge,
+    channelBadge,
+    channelBadges,
     storeBadge,
+    storeBadges,
     storeFromPath,
     storeLabel,
+    channelLabel,
+    labelsFor,
+    templateChannels,
+    scenarioChannels,
+    templateStores,
+    scenarioStores,
     templateStore,
     scenarioStore,
     storeOptionsFor,
+    channelOptionsFor,
+    matchesChannelStore,
     renderTopbar,
     downloadFile,
     fetchText,

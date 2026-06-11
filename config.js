@@ -5,6 +5,9 @@
  *   id            -> identificador único, kebab-case, igual al nombre de archivo sin extensión
  *   nombre        -> nombre visible de la plantilla
  *   plataforma    -> "VTEX" | "PIM" | otra plataforma futura
+ *   canales       -> canales comerciales donde aplica: "ecommerce" | "punto-de-venta"
+ *   tiendas       -> marcas/negocios donde aplica: "sporting" | "woker" | "b2b"
+ *   evento        -> evento funcional normalizado ({ id, label })
  *   categoria     -> etapa del flujo (ver modules/flujo): "Logística de Entrega",
  *                    "Logística inversa - Cambio", "Logística inversa - Devolución",
  *                    "Logística inversa - Garantía"
@@ -23,6 +26,9 @@
  *   label               -> nombre visible del escenario
  *   tipo                -> familia funcional del JSON
  *   descripcion         -> variante que representa
+ *   canales             -> canales comerciales donde aplica el escenario
+ *   tiendas             -> tiendas/marcas donde aplica el escenario
+ *   eventoId            -> id del evento funcional asociado
  *   compatibleTemplates -> ids de plantillas que pueden renderizarse con ese JSON
  */
 
@@ -884,10 +890,188 @@ const EXAMPLE_SCENARIOS = [
   },
 ];
 
+const TEMPLATE_TAXONOMY = {
+  'pedido-confirmado': {
+    canales: ['ecommerce'],
+    tiendas: ['sporting'],
+    evento: { id: 'pedido-realizado', label: 'Pedido realizado' },
+  },
+  'woker-pedido-confirmado': {
+    canales: ['ecommerce'],
+    tiendas: ['woker'],
+    evento: { id: 'pedido-realizado', label: 'Pedido realizado' },
+  },
+  'pedido-cancelado': {
+    canales: ['ecommerce'],
+    tiendas: ['sporting'],
+    evento: { id: 'pedido-cancelado', label: 'Pedido cancelado' },
+  },
+  'woker-pedido-cancelado': {
+    canales: ['ecommerce'],
+    tiendas: ['woker'],
+    evento: { id: 'pedido-cancelado', label: 'Pedido cancelado' },
+  },
+  'pago-aprobado': {
+    canales: ['ecommerce'],
+    tiendas: ['sporting'],
+    evento: { id: 'pago-aprobado', label: 'Pago aprobado' },
+  },
+  'woker-pago-aprobado': {
+    canales: ['ecommerce'],
+    tiendas: ['woker'],
+    evento: { id: 'pago-aprobado', label: 'Pago aprobado' },
+  },
+  'access-key': {
+    canales: ['ecommerce'],
+    tiendas: ['sporting'],
+    evento: { id: 'acceso-cuenta', label: 'Acceso a cuenta' },
+  },
+  'b2b-access-key': {
+    canales: ['ecommerce'],
+    tiendas: ['b2b'],
+    evento: { id: 'acceso-cuenta', label: 'Acceso a cuenta' },
+  },
+  'woker-access-key': {
+    canales: ['ecommerce'],
+    tiendas: ['woker'],
+    evento: { id: 'acceso-cuenta', label: 'Acceso a cuenta' },
+  },
+  'back-in-stock': {
+    canales: ['ecommerce'],
+    tiendas: ['sporting'],
+    evento: { id: 'volvio-a-stock', label: 'Volvio a stock' },
+  },
+  'woker-back-in-stock': {
+    canales: ['ecommerce'],
+    tiendas: ['woker'],
+    evento: { id: 'volvio-a-stock', label: 'Volvio a stock' },
+  },
+  'order-invoiced': {
+    canales: ['ecommerce'],
+    tiendas: ['sporting'],
+    evento: { id: 'pedido-facturado', label: 'Pedido facturado' },
+  },
+  'b2b-orden-generada': {
+    canales: ['ecommerce'],
+    tiendas: ['b2b'],
+    evento: { id: 'orden-generada', label: 'Orden generada' },
+  },
+  'pim-confirmacion-multideposito': {
+    canales: ['punto-de-venta'],
+    tiendas: ['sporting', 'woker'],
+    evento: { id: 'compra-realizada-pv', label: 'Compra realizada PV' },
+  },
+  'pim-nuevo-envio': {
+    canales: ['ecommerce', 'punto-de-venta'],
+    tiendas: ['sporting', 'woker'],
+    evento: { id: 'pedido-despachado', label: 'Pedido despachado' },
+  },
+  'pim-despacho-pickup': {
+    canales: ['ecommerce', 'punto-de-venta'],
+    tiendas: ['sporting', 'woker'],
+    evento: { id: 'pedido-listo-para-retirar', label: 'Pedido listo para retirar' },
+  },
+  'pim-despacho-b2b': {
+    canales: ['ecommerce'],
+    tiendas: ['b2b'],
+    evento: { id: 'despacho-b2b', label: 'Despacho B2B' },
+  },
+  'pim-giftcard': {
+    canales: ['ecommerce', 'punto-de-venta'],
+    tiendas: ['sporting', 'woker'],
+    evento: { id: 'giftcard', label: 'Giftcard' },
+  },
+  'pim-recepcion-cambio': {
+    canales: ['ecommerce', 'punto-de-venta'],
+    tiendas: ['sporting', 'woker'],
+    evento: { id: 'recepcion-cambio', label: 'Recepcion de cambio' },
+  },
+  'pim-recepcion-devolucion': {
+    canales: ['ecommerce', 'punto-de-venta'],
+    tiendas: ['sporting', 'woker'],
+    evento: { id: 'recepcion-devolucion', label: 'Recepcion de devolucion' },
+  },
+  'pim-recepcion-garantia': {
+    canales: ['ecommerce', 'punto-de-venta'],
+    tiendas: ['sporting', 'woker'],
+    evento: { id: 'recepcion-garantia', label: 'Recepcion de garantia' },
+  },
+  'pim-reembolso': {
+    canales: ['ecommerce', 'punto-de-venta'],
+    tiendas: ['sporting', 'woker'],
+    evento: { id: 'reembolso', label: 'Reembolso' },
+  },
+  'pim-factura-disponible': {
+    canales: ['ecommerce', 'punto-de-venta'],
+    tiendas: ['sporting', 'woker'],
+    evento: { id: 'factura-disponible', label: 'Factura disponible' },
+  },
+  'pim-etiqueta-devolucion': {
+    canales: ['ecommerce', 'punto-de-venta'],
+    tiendas: ['sporting', 'woker'],
+    evento: { id: 'etiqueta-devolucion', label: 'Etiqueta de devolucion' },
+  },
+};
+
+const SCENARIO_TAXONOMY = {
+  'pim-confirmacion-multideposito-sporting': {
+    canales: ['punto-de-venta'],
+    tiendas: ['sporting'],
+    eventoId: 'compra-realizada-pv',
+  },
+  'pim-confirmacion-multideposito-woker': {
+    canales: ['punto-de-venta'],
+    tiendas: ['woker'],
+    eventoId: 'compra-realizada-pv',
+  },
+};
+
+function uniqueTaxonomyValues(values) {
+  return Array.from(new Set((values || []).filter(Boolean)));
+}
+
+function normalizeTaxonomyArray(values) {
+  return uniqueTaxonomyValues(Array.isArray(values) ? values : [values]);
+}
+
+function taxonomyFromTemplates(templateIds, field) {
+  return uniqueTaxonomyValues((templateIds || []).flatMap((templateId) => {
+    const template = TEMPLATES.find((item) => item.id === templateId);
+    const fallback = TEMPLATE_TAXONOMY[templateId] || {};
+    return (template && template[field]) || fallback[field] || [];
+  }));
+}
+
+TEMPLATES.forEach((template) => {
+  const taxonomy = TEMPLATE_TAXONOMY[template.id] || {};
+  template.canales = normalizeTaxonomyArray(template.canales || taxonomy.canales || ['ecommerce']);
+  template.tiendas = normalizeTaxonomyArray(template.tiendas || taxonomy.tiendas || template.tienda || template.store);
+  template.evento = template.evento || taxonomy.evento || { id: template.id, label: template.nombre };
+});
+
+EXAMPLE_SCENARIOS.forEach((scenario) => {
+  const taxonomy = SCENARIO_TAXONOMY[scenario.id] || {};
+  scenario.canales = normalizeTaxonomyArray(
+    scenario.canales || taxonomy.canales || taxonomyFromTemplates(scenario.compatibleTemplates, 'canales')
+  );
+  scenario.tiendas = normalizeTaxonomyArray(
+    scenario.tiendas || taxonomy.tiendas || taxonomyFromTemplates(scenario.compatibleTemplates, 'tiendas') || scenario.tienda || scenario.store
+  );
+  scenario.eventoId = scenario.eventoId
+    || taxonomy.eventoId
+    || (scenario.compatibleTemplates || [])
+      .map((templateId) => {
+        const template = TEMPLATES.find((item) => item.id === templateId);
+        return template && template.evento && template.evento.id;
+      })
+      .find(Boolean)
+    || scenario.tipo;
+});
+
 const VERSION = {
-  number: '1.12.0',
-  date: '2026-06-10',
-  summary: 'factura-disponible.v2 alineada a VTEX (factura adjunta + N° de pedido condicional). 10/10 plantillas PIM en v2.',
+  number: '1.13.0',
+  date: '2026-06-11',
+  summary: 'Taxonomia Plataforma > Canal > Tienda > Evento > Escenario para catalogo, visualizador, simulador y flujo.',
 };
 
 const CHANGELOG = [

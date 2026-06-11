@@ -2,6 +2,15 @@
 
 Formato: versión, fecha, resumen del cambio principal.
 
+## v1.13.0 — 2026-06-11
+
+Modelo de taxonomía **Plataforma > Canal > Tienda > Evento > Escenario**:
+
+- **`config.js`**: agrega normalización explícita de `canales`, `tiendas` y `evento` por plantilla, más `canales`, `tiendas` y `eventoId` por escenario. PV queda como canal (`punto-de-venta`) y B2B se mantiene como tienda.
+- **Catálogo / Visualizador / Simulador**: nuevos filtros por plataforma, canal y tienda; las plantillas PIM compartidas se muestran bajo Sporting/Woker en vez de depender de `shared`.
+- **Flujo de Correos**: nuevo filtro de canal y nodo **Compra realizada PV** conectado al flujo PIM compartido.
+- **Docs**: ADR del modelo y guía de alta actualizada.
+
 ## v1.12.0 — 2026-06-10
 
 Plantilla PIM **Factura disponible** `factura-disponible.v2` — cierra el estándar PIM (10/10 en v2):

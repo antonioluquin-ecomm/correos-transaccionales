@@ -6,6 +6,9 @@ Esta guía define el flujo recomendado para sumar una plantilla real al reposito
 
 - Nombre funcional del correo.
 - Plataforma que lo envía (`VTEX`, `PIM` u otra).
+- Canal comercial donde aplica (`ecommerce`, `punto-de-venta` u otro futuro).
+- Tienda/marca donde aplica (`sporting`, `woker`, `b2b` o combinaciones).
+- Evento funcional normalizado que dispara el correo.
 - Momento del flujo en que se dispara.
 - Objetivo del mensaje para el cliente.
 - HTML base de referencia, si debe mantener una estructura existente.
@@ -19,14 +22,18 @@ El JSON es necesario para garantizar que el HTML sea funcional. Puede estar sani
 2. Guardar el JSON en `examples/<plataforma>/<escenario>.json`.
 3. Sanitizar datos sensibles del JSON antes de publicarlo.
 4. Agregar la plantilla en `TEMPLATES` dentro de `config.js`.
-5. Agregar el escenario en `EXAMPLE_SCENARIOS` si debe estar disponible en el Visualizador.
-6. Validar la plantilla desde `modules/visualizador/`.
-7. Actualizar `CHANGELOG.md` si el cambio queda publicado.
+5. Registrar su taxonomía: `canales`, `tiendas` y `evento`.
+6. Agregar el escenario en `EXAMPLE_SCENARIOS` si debe estar disponible en el Visualizador.
+7. Registrar o verificar en el escenario `canales`, `tiendas` y `eventoId`.
+8. Validar la plantilla desde `modules/visualizador/`.
+9. Actualizar `CHANGELOG.md` si el cambio queda publicado.
 
 ## Criterios de aceptación
 
 - El HTML compila sin errores de Handlebars.
 - El Visualizador renderiza contenido real, no una pantalla vacía.
+- La plantilla filtra correctamente por plataforma, canal y tienda.
+- El escenario compatible aparece bajo el evento correcto.
 - No quedan variables importantes sin dato.
 - El diseño mantiene la base visual del resto de plantillas.
 - La descarga del HTML funciona desde la ficha del catálogo.
