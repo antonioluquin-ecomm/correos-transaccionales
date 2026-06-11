@@ -2,6 +2,15 @@
 
 Formato: versión, fecha, resumen del cambio principal.
 
+## v1.11.0 — 2026-06-10
+
+Plantilla PIM **Despacho B2B** `despacho-b2b.v2` + limpieza de plantillas Andreani:
+
+- **`templates/pim/shared/despacho-b2b/despacho-b2b.v2.html`**: orden B2B confirmada y en preparación, alineada al estándar visual VTEX (hero con check, callout "en preparación", meta-grid N.° pedido/fecha, **stepper** Generada ✓ · Confirmada ✓ · Despacho · Entrega, card **Datos de envío** con dirección postal y referencia condicional, card **Detalle de tu compra** con tabla de productos + total, footer VTEX). Variables reales: `Pedido.DatosEnvio.Destinatario.Nombres`, `NroPedidoCanal`, `FechaPedido`, `DatosEnvio.Destino.Postal.*` (`Calle`/`Numero`/`Localidad`/`Pais`/`CodigoPostal`/`Referencia`), `LineasPedido[]` (`Producto`/`SKU`/`Importe`/`Cantidad`/`Subtotal`), `TotalLineas`. **Nota**: el header dinámico (`Tienda.Datos.NotificacionesConfig.*`, `Tienda.Nombre`) se usa por consistencia con el estándar PIM aunque la versión `.current` hardcodeaba el logo; confirmar que el flujo B2B expone esas variables.
+- **`examples/pim/shared/despacho-b2b-sporting.json`**: orden mayorista con dos packs y dirección de envío.
+- **Se eliminan `andreani-alta-automatica`, `andreani-distribucion` y `andreani-entregado`**: no forman parte del estándar PIM (pertenecen al frente logístico Andreani). Se borran sus carpetas y entradas del catálogo.
+- **`config.js`**: `pim-despacho-b2b` → v2 + escenario; se quitan las 3 entradas Andreani. VERSION → 1.11.0.
+
 ## v1.10.0 — 2026-06-10
 
 Plantilla PIM **Etiqueta de devolución** `etiqueta-devolucion.v2`:

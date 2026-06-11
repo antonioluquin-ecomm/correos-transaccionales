@@ -1,0 +1,340 @@
+<!-- PIM · despacho-b2b — Version 2 (base canónica compartida) -->
+<!-- Flujo B2B: orden confirmada y en preparación, con datos de envío y resumen. -->
+<!-- Estructura alineada al estándar visual VTEX (multi-card, hero, stepper, meta-grid). -->
+<!-- Variables reales del flujo: Pedido.DatosEnvio.Destinatario.Nombres, NroPedidoCanal, -->
+<!-- FechaPedido, DatosEnvio.Destino.Postal.* (Calle/Numero/Localidad/Pais/CodigoPostal/ -->
+<!-- Referencia), LineasPedido[] (Producto/SKU/Importe/Cantidad/Subtotal), TotalLineas. -->
+<!-- NOTA: la versión .current hardcodea el logo y el copyright. Aquí se usa el header -->
+<!-- dinámico Tienda.Datos.NotificacionesConfig.* y Tienda.Nombre por consistencia con el -->
+<!-- resto del estándar PIM; confirmar que el flujo B2B expone esas variables. -->
+<!doctype html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta name="x-apple-disable-message-reformatting" />
+    <meta name="format-detection" content="telephone=no,address=no,email=no,date=no" />
+    <title>{{ .Tienda.Nombre }} — Confirmamos tu pedido</title>
+    <!--[if mso]>
+      <xml><o:OfficeDocumentSettings><o:AllowPNG/><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml>
+    <![endif]-->
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&display=swap');
+
+      html, body { margin:0 !important; padding:0 !important; width:100% !important; background:#e8e8e8 !important; }
+      body { font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; color:#111827; }
+      * { -ms-text-size-adjust:100%; -webkit-text-size-adjust:100%; }
+      table, td { border-collapse:collapse !important; mso-table-lspace:0pt !important; mso-table-rspace:0pt !important; }
+      img { border:0; outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; display:block; }
+      a { text-decoration:none; color:inherit; }
+
+      .wrap { width:100%; max-width:600px; margin:0 auto; }
+      .card { background:#ffffff; border:1px solid #e5e7eb; border-radius:12px; overflow:hidden; }
+      .gap { height:12px; line-height:12px; font-size:12px; }
+      .h2 { font-size:15px; line-height:22px; font-weight:bold; color:#111827; margin:0; }
+      .text { font-size:14px; line-height:22px; color:#374151; margin:0; }
+      .text-sm { font-size:13px; line-height:20px; color:#6b7280; margin:0; }
+
+      @media only screen and (max-width:600px) {
+        .wrap { width:100% !important; max-width:100% !important; }
+        .card { border-radius:0 !important; border-left:none !important; border-right:none !important; }
+        .outer-pad { padding:0 !important; }
+        .hero-td { padding:32px 20px 28px !important; }
+        .h1 { font-size:22px !important; line-height:28px !important; }
+        .sum-cell, .sum-cell-r { display:block !important; width:100% !important; border-left:none !important; border-bottom:1px solid #f3f4f6 !important; padding:14px 16px !important; box-sizing:border-box !important; }
+        .sum-last { border-bottom:none !important; }
+        .step-lbl { font-size:9px !important; }
+        .col-precio { display:none !important; }
+        .footer-td { border-radius:0 !important; }
+        .trust-logos { border-radius:0 !important; }
+        .header-logo { width:128px !important; }
+        .brand-logo-sporting { width:88px !important; }
+        .brand-logo-woker { width:64px !important; }
+        .brand-logo-luquin { width:78px !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Preheader -->
+    <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;visibility:hidden;mso-hide:all;">
+      Confirmamos tu pedido {{ .Pedido.NroPedidoCanal }}. Ya está en preparación.&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;
+    </div>
+
+    <table role="presentation" width="100%" bgcolor="#e8e8e8" style="background:#e8e8e8;">
+      <tr>
+        <td align="center" class="outer-pad" style="padding:24px 12px 48px;">
+          <table role="presentation" class="wrap" width="100%" style="width:100%;max-width:600px;">
+
+            <!-- ── MAIN CARD ── -->
+            <tr>
+              <td>
+                <table role="presentation" width="100%" class="card">
+
+                  <!-- HEADER / logo dinámico por tienda -->
+                  <tr>
+                    <td bgcolor="#ffffff" style="background:#ffffff;padding:20px 24px 16px;border-bottom:1px solid #eef2f7;">
+                      <a href="{{ .Tienda.Datos.NotificacionesConfig.HeaderURL }}" target="_blank" style="display:inline-block;text-decoration:none;">
+                        <img src="{{ .Tienda.Datos.NotificacionesConfig.HeaderImage }}" alt="{{ .Tienda.Nombre }}" width="150" class="header-logo" style="width:150px;height:auto;display:block;" />
+                      </a>
+                    </td>
+                  </tr>
+
+                  <!-- HERO (slate neutro: plantilla compartida) -->
+                  <tr>
+                    <td class="hero-td" bgcolor="#0f172a" style="background:linear-gradient(150deg,#0b1220 0%,#0f172a 45%,#1e293b 100%);padding:40px 28px 36px;text-align:center;">
+                      <table cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 16px auto;">
+                        <tr>
+                          <td align="center" valign="middle" width="80" height="80" style="width:80px;height:80px;border-radius:50%;background:rgba(34,197,94,.18);">
+                            <table cellpadding="0" cellspacing="0" border="0" align="center"><tr>
+                              <td align="center" valign="middle" width="52" height="52" style="width:52px;height:52px;border-radius:50%;background:#22c55e;font-size:26px;line-height:52px;font-weight:bold;color:#ffffff;text-align:center;">&#10003;</td>
+                            </tr></table>
+                          </td>
+                        </tr>
+                      </table>
+                      <p style="font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:#86efac;margin:0 0 10px 0;text-align:center;">Pedido B2B confirmado</p>
+                      <p class="h1" style="font-size:28px;line-height:1.1;font-weight:800;color:#ffffff;letter-spacing:-0.3px;margin:0 0 8px 0;text-align:center;text-shadow:0 2px 16px rgba(0,0,0,.15);">Confirmamos tu pedido</p>
+                      <p style="font-size:13px;color:rgba(255,255,255,.8);margin:0;text-align:center;">Hola {{ .Pedido.DatosEnvio.Destinatario.Nombres }} — tu pedido ya está en preparación.</p>
+                    </td>
+                  </tr>
+
+                  <!-- CALLOUT: en preparación -->
+                  <tr>
+                    <td style="padding:22px 24px 0;">
+                      <table role="presentation" width="100%" bgcolor="#eff6ff" style="background:#eff6ff;border-radius:10px;">
+                        <tr>
+                          <td valign="middle" width="56" style="padding:14px 0 14px 16px;">
+                            <table cellpadding="0" cellspacing="0" border="0"><tr>
+                              <td align="center" valign="middle" width="36" height="36" style="width:36px;height:36px;border-radius:10px;background:#2563eb;font-size:18px;line-height:36px;text-align:center;">&#128230;</td>
+                            </tr></table>
+                          </td>
+                          <td valign="middle" style="padding:14px 16px;">
+                            <p style="font-size:12.5px;font-weight:700;color:#1d4ed8;margin:0 0 3px 0;">Estamos preparando tu pedido</p>
+                            <p style="font-size:11.5px;color:#3b5bdb;line-height:1.55;margin:0;">Cuando salga del depósito te avisamos con la información del despacho.</p>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+
+                  <!-- META GRID -->
+                  <tr>
+                    <td style="padding:20px 24px 0;">
+                      <table role="presentation" width="100%" style="width:100%;table-layout:fixed;border-radius:10px;overflow:hidden;">
+                        <tr>
+                          <td class="sum-cell sum-last" style="width:50%;padding:16px 18px;vertical-align:top;">
+                            <p style="font-size:9.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#b0b0b0;margin:0 0 5px 0;">N.&deg; de pedido</p>
+                            <p style="font-size:15px;line-height:22px;font-weight:700;color:#111827;margin:0;">{{ .Pedido.NroPedidoCanal }}</p>
+                          </td>
+                          <td class="sum-cell sum-cell-r sum-last" style="width:50%;padding:16px 18px;vertical-align:top;border-left:1px solid #f3f4f6;">
+                            <p style="font-size:9.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#b0b0b0;margin:0 0 5px 0;">Fecha</p>
+                            <p style="font-size:15px;line-height:22px;font-weight:700;color:#111827;margin:0;">{{ .Pedido.FechaPedido }}</p>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+
+                  <!-- STEPPER: Generada ✓ · Confirmada ✓ · Despacho · Entrega -->
+                  <tr>
+                    <td class="stepper-td" style="padding:24px 24px 20px;">
+                      <table role="presentation" width="100%" style="width:100%;table-layout:fixed;">
+                        <tr>
+                          <td width="28" align="center" valign="top" style="width:28px;padding:0;">
+                            <div style="width:28px;height:28px;line-height:28px;border-radius:50%;background:#22c55e;text-align:center;font-size:13px;font-weight:bold;color:#fff;margin:0 auto;">&#10003;</div>
+                            <p class="step-lbl" style="font-size:10px;font-weight:700;color:#15803d;text-align:center;margin:5px 0 0;white-space:nowrap;">Generada</p>
+                          </td>
+                          <td valign="top" style="padding:14px 4px 0;"><div style="height:3px;background:#22c55e;border-radius:2px;font-size:0;line-height:0;">&nbsp;</div></td>
+                          <td width="28" align="center" valign="top" style="width:28px;padding:0;">
+                            <div style="width:28px;height:28px;line-height:28px;border-radius:50%;background:#22c55e;text-align:center;font-size:13px;font-weight:bold;color:#fff;margin:0 auto;">&#10003;</div>
+                            <p class="step-lbl" style="font-size:10px;font-weight:700;color:#15803d;text-align:center;margin:5px 0 0;white-space:nowrap;">Confirmada</p>
+                          </td>
+                          <td valign="top" style="padding:14px 4px 0;"><div style="height:3px;background:#e5e7eb;border-radius:2px;font-size:0;line-height:0;">&nbsp;</div></td>
+                          <td width="28" align="center" valign="top" style="width:28px;padding:0;">
+                            <div style="width:28px;height:28px;line-height:28px;border-radius:50%;background:#2563eb;text-align:center;font-size:11px;font-weight:bold;color:#fff;margin:0 auto;">3</div>
+                            <p class="step-lbl" style="font-size:10px;font-weight:700;color:#2563eb;text-align:center;margin:5px 0 0;white-space:nowrap;">Despacho</p>
+                          </td>
+                          <td valign="top" style="padding:14px 4px 0;"><div style="height:3px;background:#e5e7eb;border-radius:2px;font-size:0;line-height:0;">&nbsp;</div></td>
+                          <td width="28" align="center" valign="top" style="width:28px;padding:0;">
+                            <div style="width:28px;height:28px;line-height:28px;border-radius:50%;background:#ebebeb;text-align:center;font-size:11px;font-weight:bold;color:#ccc;margin:0 auto;">4</div>
+                            <p class="step-lbl" style="font-size:10px;color:#9ca3af;text-align:center;margin:5px 0 0;white-space:nowrap;">Entrega</p>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="gap">&nbsp;</td></tr>
+
+            <!-- DATOS DE ENVÍO -->
+            <tr>
+              <td>
+                <table role="presentation" width="100%" class="card">
+                  <tr>
+                    <td style="padding:18px 20px 12px;border-bottom:1px solid #f3f4f6;">
+                      <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0;">Datos de envío</p>
+                      <p class="text-sm" style="font-size:12px;line-height:18px;color:#6b7280;margin:4px 0 0;">Verificá que los datos sean correctos. Si necesitás un ajuste, contactanos cuanto antes.</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding:16px 20px;">
+                      <table role="presentation" width="100%">
+                        <tr>
+                          <td valign="top" width="28" style="width:28px;font-size:16px;line-height:22px;">&#128205;</td>
+                          <td valign="top" style="padding-left:8px;">
+                            <p class="text" style="font-size:14px;line-height:22px;color:#111827;font-weight:bold;margin:0 0 2px 0;">{{ .Pedido.DatosEnvio.Destinatario.Nombres }}</p>
+                            <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0;">{{ .Pedido.DatosEnvio.Destino.Postal.Calle }} {{ .Pedido.DatosEnvio.Destino.Postal.Numero }}</p>
+                            <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0;">{{ .Pedido.DatosEnvio.Destino.Postal.Localidad }}, {{ .Pedido.DatosEnvio.Destino.Postal.Pais }}</p>
+                            <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0;">CP {{ .Pedido.DatosEnvio.Destino.Postal.CodigoPostal }}</p>
+                            {{ if .Pedido.DatosEnvio.Destino.Postal.Referencia }}
+                            <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:4px 0 0;">Referencia: {{ .Pedido.DatosEnvio.Destino.Postal.Referencia }}</p>
+                            {{ end }}
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="gap">&nbsp;</td></tr>
+
+            <!-- DETALLE DE COMPRA -->
+            <tr>
+              <td>
+                <table role="presentation" width="100%" class="card">
+                  <tr>
+                    <td style="padding:18px 20px 12px;border-bottom:1px solid #f3f4f6;">
+                      <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0;">Detalle de tu compra</p>
+                    </td>
+                  </tr>
+                  {{ with .Pedido.LineasPedido }}
+                    {{ range . }}
+                    <tr>
+                      <td style="padding:16px 20px;border-bottom:1px solid #f3f4f6;">
+                        <table role="presentation" width="100%">
+                          <tr>
+                            <td valign="top" style="padding-right:12px;">
+                              <p class="item-name" style="font-size:14px;line-height:20px;font-weight:bold;color:#111827;margin:0 0 3px 0;word-break:break-word;overflow-wrap:break-word;">{{ .Producto }}</p>
+                              <p class="item-meta" style="font-size:12px;line-height:18px;color:#6b7280;margin:0;">SKU {{ .SKU }}</p>
+                              <p class="item-meta" style="font-size:12px;line-height:18px;color:#6b7280;margin:0;">Cantidad: {{ .Cantidad }}</p>
+                              <p class="col-precio item-meta" style="font-size:12px;line-height:18px;color:#9ca3af;margin:2px 0 0;">$ {{ .Importe }} c/u</p>
+                            </td>
+                            <td valign="top" align="right" style="white-space:nowrap;">
+                              <p class="text-sm" style="font-size:12px;line-height:18px;color:#6b7280;margin:0 0 2px 0;">Subtotal</p>
+                              <p class="item-price" style="font-size:14px;line-height:20px;font-weight:bold;color:#111827;margin:0;">$ {{ .Subtotal }}</p>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                    {{ end }}
+                  {{ else }}
+                    <tr><td style="padding:16px 20px;"><p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:0;">El detalle de productos no está disponible en este correo.</p></td></tr>
+                  {{ end }}
+                  <!-- Total -->
+                  <tr>
+                    <td style="padding:14px 20px;">
+                      <table role="presentation" width="100%">
+                        <tr>
+                          <td style="font-size:16px;line-height:22px;font-weight:bold;color:#111827;">Total</td>
+                          <td align="right" style="font-size:16px;line-height:22px;font-weight:bold;color:#111827;white-space:nowrap;">$ {{ .Pedido.TotalLineas }}</td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="gap">&nbsp;</td></tr>
+
+            <!-- NOTA correo automático -->
+            <tr>
+              <td>
+                <table role="presentation" width="100%" class="card">
+                  <tr>
+                    <td style="padding:16px 24px;">
+                      <p class="text-sm" style="font-size:12px;line-height:19px;color:#94a3b8;margin:0;">Este es un mensaje automático enviado desde una casilla que no recibe respuestas. Si necesitás ayuda, escribinos a través de los canales de atención de {{ .Tienda.Nombre }}.</p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="gap">&nbsp;</td></tr>
+
+            <!-- DARK FOOTER -->
+            <tr>
+              <td class="footer-td" bgcolor="#1c1c1c" style="background:#1c1c1c;border-radius:10px;padding:22px 24px 20px;">
+                <table role="presentation" width="100%">
+                  <!-- Logos de marcas -->
+                  <tr>
+                    <td style="padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,.08);">
+                      <table role="presentation" width="100%" style="width:100%;table-layout:fixed;">
+                        <tr>
+                          <td align="center" valign="middle" style="padding:0 8px;">
+                            <img src="https://sporting.vteximg.com.br/arquivos/logo-sporting-white.png" alt="Sporting" width="110" class="brand-logo-sporting" style="width:110px;height:auto;display:block;margin:0 auto;" />
+                          </td>
+                          <td align="center" valign="middle" style="padding:0 8px;">
+                            <img src="https://sporting.vteximg.com.br/arquivos/logo-woker-white.png" alt="Woker" width="80" class="brand-logo-woker" style="width:80px;height:auto;display:block;margin:0 auto;" />
+                          </td>
+                          <td align="center" valign="middle" style="padding:0 8px;">
+                            <img src="https://sporting.vteximg.com.br/arquivos/logo-luquin-white.png" alt="Antonio Luquin" width="100" class="brand-logo-luquin" style="width:100px;height:auto;display:block;margin:0 auto;" />
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <!-- Links -->
+                  <tr>
+                    <td style="padding:16px 0 14px;border-bottom:1px solid rgba(255,255,255,.08);">
+                      <table role="presentation" width="100%"><tr>
+                        <td valign="middle" align="center">
+                          <a href="{{ .Tienda.Datos.NotificacionesConfig.HeaderURL }}/contacto" target="_blank" style="font-size:11px;color:rgba(255,255,255,.45);text-decoration:none;font-weight:500;">Contacto</a>
+                          &nbsp;&nbsp;
+                          <a href="{{ .Tienda.Datos.NotificacionesConfig.HeaderURL }}/centro-de-ayuda" target="_blank" style="font-size:11px;color:rgba(255,255,255,.45);text-decoration:none;font-weight:500;">Ayuda</a>
+                        </td>
+                      </tr></table>
+                    </td>
+                  </tr>
+                  <!-- Copyright -->
+                  <tr>
+                    <td align="center" style="padding-top:14px;">
+                      <p style="font-size:10.5px;color:rgba(255,255,255,.25);text-align:center;margin:0;line-height:1.6;">&copy; {{ .Tienda.Nombre }} — Todos los derechos reservados</p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- TRUST LOGOS -->
+            <tr>
+              <td style="padding:8px 0 0;">
+                <table role="presentation" width="100%" class="trust-logos" bgcolor="#f4f4f4" style="background:#f4f4f4;border-radius:10px;table-layout:fixed;">
+                  <tr>
+                    <td align="center" valign="middle" style="padding:18px 8px;">
+                      <img src="https://sporting.vteximg.com.br/arquivos/logo-cace.png" alt="CACE" width="56" style="width:56px;height:auto;display:block;margin:0 auto;" />
+                    </td>
+                    <td align="center" valign="middle" style="padding:18px 8px;">
+                      <img src="https://sporting.vteximg.com.br/arquivos/logo-mercadopago.png" alt="Mercado Pago" width="110" style="width:110px;height:auto;display:block;margin:0 auto;" />
+                    </td>
+                    <td align="center" valign="middle" style="padding:18px 8px;">
+                      <img src="https://sporting.vteximg.com.br/arquivos/logo-infracommerce.png" alt="Infracommerce" width="100" style="width:100px;height:auto;display:block;margin:0 auto;" />
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
