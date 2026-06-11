@@ -42,6 +42,25 @@
         font-size: 12px;
         line-height: 18px;
       }
+
+      .ct-vis-facets {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+      }
+      .ct-vis-facet {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        font-size: 11px;
+        color: var(--ct-text-muted);
+      }
+      .ct-vis-facet select { width: 100%; }
+      .ct-vis-scenario-facets {
+        display: block;
+        margin-top: 8px;
+      }
+      .ct-vis-scenario-facets .ct-badge { margin: 0 4px 4px 0; }
     </style>
   </head>
   <body>
@@ -82,6 +101,10 @@
           <div>
             <label for="ct-vis-template">Plantilla HTML</label>
             <select id="ct-vis-template" aria-label="Elegir plantilla"></select>
+          </div>
+          <div>
+            <label>Facetas del escenario</label>
+            <div class="ct-vis-facets" id="ct-vis-facets" role="group" aria-label="Filtrar escenarios por facetas"></div>
           </div>
           <div>
             <label for="ct-vis-example">Escenario de datos compatible</label>
@@ -187,6 +210,32 @@
 
         addOptions(logisticaSelect, CT.logisticaOptionsFor(renderable, CT.templateLogistics));
 
+        const facetsContainer = document.getElementById('ct-vis-facets');
+        const facetSelects = {};
+        CT.FACET_GROUPS.forEach((group) => {
+          const wrap = document.createElement('label');
+          wrap.className = 'ct-vis-facet';
+          wrap.innerHTML = `<span>${group.label}</span>`;
+          const select = document.createElement('select');
+          select.setAttribute('aria-label', `Filtrar por ${group.label}`);
+          select.innerHTML = '<option value="">Todas</option>';
+          group.options.forEach((opt) => {
+            const option = document.createElement('option');
+            option.value = opt.id;
+            option.textContent = opt.label;
+            select.appendChild(option);
+          });
+          wrap.appendChild(select);
+          facetsContainer.appendChild(wrap);
+          facetSelects[group.id] = select;
+        });
+
+        function facetFilters() {
+          const out = {};
+          Object.keys(facetSelects).forEach((groupId) => { out[groupId] = facetSelects[groupId].value; });
+          return out;
+        }
+
         function filteredTemplates() {
           return renderable.filter((template) => {
             const matchesPlatform = !platformSelect.value || template.plataforma === platformSelect.value;
@@ -231,6 +280,7 @@
           const channelFilter = channelSelect.value || CT.templateChannels(template)[0];
           const storeFilter = storeSelect.value || CT.templateStores(template)[0];
           if (!CT.matchesChannelStore(scenario, { channel: channelFilter, store: storeFilter, logistica: logisticaSelect.value })) return false;
+          if (!CT.matchesFacets(scenario, facetFilters())) return false;
           return scenario.compatibleTemplates.includes(template.id);
         }
 
@@ -330,7 +380,8 @@
           copyHtmlBtn.disabled = !template.archivoHtml;
           scenarioLabelEl.textContent = scenario ? `${scenario.tipo || 'Escenario'} · ${scenario.label}` : 'Sin escenario seleccionado';
           ejemploEl.textContent = scenario ? scenario.path : '';
-          scenarioNoteEl.textContent = scenario?.descripcion || '';
+          const facetMarkup = scenario ? CT.facetBadges(CT.scenarioFacets(scenario)) : '';
+          scenarioNoteEl.innerHTML = `${scenario?.descripcion ? CT.escapeHtml(scenario.descripcion) : ''}${facetMarkup ? `<span class="ct-vis-scenario-facets">${facetMarkup}</span>` : ''}`;
         }
 
         async function downloadCurrentHtml() {
@@ -422,6 +473,17 @@
 
         [platformSelect, channelSelect, storeSelect, logisticaSelect].forEach((select) => {
           select.addEventListener('change', handleTaxonomyFilterChange);
+        });
+
+        // Las facetas solo acotan los escenarios compatibles del template actual.
+        Object.values(facetSelects).forEach((select) => {
+          select.addEventListener('change', () => {
+            const template = currentTemplate();
+            if (template) {
+              renderScenarioOptions(template, template.ejemplo);
+              renderPreview();
+            }
+          });
         });
 
         templateSelect.addEventListener('change', () => {

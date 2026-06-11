@@ -2,6 +2,16 @@
 
 Formato: versión, fecha, resumen del cambio principal.
 
+## v1.17.0 — 2026-06-11
+
+Dimensión de **Escenarios** (facetas del pedido de ejemplo), separada de Canal/Tienda/Logística:
+
+- **Facetas** en grupos: Paquetes (1 / multidepósito), Promoción (con/sin), Envío (gratis/con costo), Entrega (domicilio/retiro/mixto). Modelo extensible.
+- **`config.js`**: campo `facetas` etiquetado a mano en 21 escenarios según evidencia de label/descripción.
+- **`assets/js/shared.js`**: `FACET_GROUPS`, helpers (`scenarioFacets`, `facetLabel`, `facetBadges`) y `matchesFacets`.
+- **Visualizador**: filtros multi-grupo de faceta que acotan los escenarios compatibles del template, más badges de faceta en la ficha del escenario.
+- **Pendiente**: la faceta **Promoción** no está documentada en los datos actuales; queda sin etiquetar hasta confirmar fuente (no se inventaron datos).
+
 ## v1.16.0 — 2026-06-11
 
 Rediseño del modelo de clasificación a **Canal > Tienda > Logística > Escenario**:

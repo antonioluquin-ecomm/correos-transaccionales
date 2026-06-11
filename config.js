@@ -639,6 +639,7 @@ const TEMPLATES = [
 const EXAMPLE_SCENARIOS = [
   {
     id: 'pedido-estandar-domicilio',
+    facetas: ['un-paquete', 'domicilio'],
     path: 'examples/vtex/sporting/pedido-estandar.sample.json',
     label: 'Pedido estándar - envío a domicilio',
     tipo: 'Pedido',
@@ -647,6 +648,7 @@ const EXAMPLE_SCENARIOS = [
   },
   {
     id: 'pedido-estandar-woker',
+    facetas: ['un-paquete', 'domicilio'],
     path: 'examples/vtex/woker/pedido-estandar.sample.json',
     label: 'Woker - pedido estándar',
     tipo: 'Pedido',
@@ -655,6 +657,7 @@ const EXAMPLE_SCENARIOS = [
   },
   {
     id: 'pedido-realizado-exito',
+    facetas: ['un-paquete'],
     path: 'examples/vtex/sporting/pedido-realizado.sample.json',
     label: 'Pedido realizado - 1 producto',
     tipo: 'Pedido',
@@ -663,6 +666,7 @@ const EXAMPLE_SCENARIOS = [
   },
   {
     id: 'pago-aprobado-base',
+    facetas: ['un-paquete'],
     path: 'examples/vtex/sporting/pago-aprobado.sample.json',
     label: 'Pago aprobado - pedido base',
     tipo: 'Pedido',
@@ -671,6 +675,7 @@ const EXAMPLE_SCENARIOS = [
   },
   {
     id: 'pago-aprobado-woker',
+    facetas: ['un-paquete'],
     path: 'examples/vtex/woker/pago-aprobado.sample.json',
     label: 'Woker - pago aprobado',
     tipo: 'Pedido',
@@ -679,6 +684,7 @@ const EXAMPLE_SCENARIOS = [
   },
   {
     id: 'pedido-cancelado-un-producto',
+    facetas: ['un-paquete'],
     path: 'examples/vtex/sporting/pedido-cancelado.sample.json',
     label: 'Cancelación - 1 producto',
     tipo: 'Cancelación',
@@ -695,6 +701,7 @@ const EXAMPLE_SCENARIOS = [
   },
   {
     id: 'pedido-cancelado-envio-gratis',
+    facetas: ['un-paquete', 'envio-gratis'],
     path: 'examples/vtex/sporting/pedido-cancelado-2.sample.json',
     label: 'Cancelación - 2 productos, envío gratis',
     tipo: 'Cancelación',
@@ -736,6 +743,7 @@ const EXAMPLE_SCENARIOS = [
   },
   {
     id: 'order-invoiced-seguimiento',
+    facetas: ['un-paquete'],
     path: 'examples/vtex/sporting/order-invoiced.sample.json',
     label: 'Facturación - con seguimiento',
     tipo: 'Facturación',
@@ -744,6 +752,7 @@ const EXAMPLE_SCENARIOS = [
   },
   {
     id: 'b2b-orden-generada-base',
+    facetas: ['un-paquete', 'domicilio'],
     path: 'examples/vtex/b2b/orden-generada.sample.json',
     label: 'B2B - orden generada',
     tipo: 'B2B',
@@ -752,6 +761,7 @@ const EXAMPLE_SCENARIOS = [
   },
   {
     id: 'pim-envio-despachado-andreani',
+    facetas: ['un-paquete', 'domicilio'],
     path: 'examples/pim/shared/envio-despachado.sample.json',
     store: 'shared',
     label: 'Andreani',
@@ -761,6 +771,7 @@ const EXAMPLE_SCENARIOS = [
   },
   {
     id: 'pim-envio-despachado-producteca-urbano',
+    facetas: ['un-paquete', 'domicilio'],
     path: 'examples/pim/shared/envio-despachado-producteca-urbano.json',
     store: 'shared',
     label: 'Producteca → Urbano (UR…)',
@@ -770,6 +781,7 @@ const EXAMPLE_SCENARIOS = [
   },
   {
     id: 'pim-envio-despachado-producteca-correo-argentino',
+    facetas: ['un-paquete', 'domicilio'],
     path: 'examples/pim/shared/envio-despachado-producteca-correo-argentino.json',
     store: 'shared',
     label: 'Producteca → Correo Argentino (CA…)',
@@ -779,6 +791,7 @@ const EXAMPLE_SCENARIOS = [
   },
   {
     id: 'pim-envio-despachado-producteca-oca',
+    facetas: ['un-paquete', 'domicilio'],
     path: 'examples/pim/shared/envio-despachado-producteca-oca.json',
     store: 'shared',
     label: 'Producteca → OCA (numérico largo)',
@@ -788,6 +801,7 @@ const EXAMPLE_SCENARIOS = [
   },
   {
     id: 'pim-envio-despachado-producteca-trf',
+    facetas: ['un-paquete', 'domicilio'],
     path: 'examples/pim/shared/envio-despachado-producteca-trf.json',
     store: 'shared',
     label: 'Producteca → TRF (numérico corto)',
@@ -797,6 +811,7 @@ const EXAMPLE_SCENARIOS = [
   },
   {
     id: 'pim-envio-despachado-producteca-sin-tracking',
+    facetas: ['un-paquete', 'domicilio'],
     path: 'examples/pim/shared/envio-despachado-producteca-sin-tracking.json',
     store: 'shared',
     label: 'Producteca — sin tracking aún',
@@ -806,6 +821,7 @@ const EXAMPLE_SCENARIOS = [
   },
   {
     id: 'pim-envio-despachado-ocasa',
+    facetas: ['un-paquete', 'domicilio'],
     path: 'examples/pim/shared/envio-despachado-ocasa.json',
     store: 'shared',
     label: 'OCASA',
@@ -815,6 +831,7 @@ const EXAMPLE_SCENARIOS = [
   },
   {
     id: 'pim-envio-despachado-propia',
+    facetas: ['un-paquete', 'domicilio'],
     path: 'examples/pim/shared/envio-despachado-propia.json',
     store: 'shared',
     label: 'Logística Propia',
@@ -824,6 +841,7 @@ const EXAMPLE_SCENARIOS = [
   },
   {
     id: 'pim-pedido-confirmado-pv-sporting',
+    facetas: ['multideposito'],
     path: 'examples/pim/shared/pedido-confirmado-pv-sporting.json',
     store: 'shared',
     label: 'Sporting (2 productos)',
@@ -833,6 +851,7 @@ const EXAMPLE_SCENARIOS = [
   },
   {
     id: 'pim-pedido-confirmado-pv-woker',
+    facetas: ['un-paquete'],
     path: 'examples/pim/shared/pedido-confirmado-pv-woker.json',
     store: 'shared',
     label: 'Woker (1 producto)',
@@ -851,6 +870,7 @@ const EXAMPLE_SCENARIOS = [
   },
   {
     id: 'pim-retiro-disponible-sporting',
+    facetas: ['retiro'],
     path: 'examples/pim/shared/retiro-disponible-sporting.json',
     store: 'shared',
     label: 'Sporting (2 productos)',
@@ -914,6 +934,7 @@ const EXAMPLE_SCENARIOS = [
   },
   {
     id: 'pim-envio-b2b-venta-deportiva',
+    facetas: ['multideposito', 'domicilio'],
     path: 'examples/pim/shared/envio-b2b-venta-deportiva.json',
     store: 'venta-deportiva',
     label: 'Venta Deportiva — orden mayorista (2 packs)',
@@ -1244,12 +1265,13 @@ EXAMPLE_SCENARIOS.forEach((scenario) => {
 });
 
 const VERSION = {
-  number: '1.16.0',
+  number: '1.17.0',
   date: '2026-06-11',
-  summary: 'Taxonomía de 4 canales (PV, B2C, B2B, EXT), tienda por canal y nueva dimensión Logística con filtro propio.',
+  summary: 'Facetas de escenario (paquetes, promoción, envío, entrega) con filtros en el Visualizador.',
 };
 
 const CHANGELOG = [
+  { version: '1.17.0', date: '2026-06-11', summary: 'Facetas de escenario (paquetes, promoción, envío, entrega): etiquetado por escenario, filtros multi-grupo en el Visualizador y badges. Promoción pendiente de datos.' },
   { version: '1.16.0', date: '2026-06-11', summary: 'Modelo canal/tienda/logística: 4 canales (PV/B2C/B2B/EXT), Venta Deportiva como tienda B2B, Seller adidas/Producteca como EXT, y filtro de Logística en los módulos.' },
   { version: '1.15.0', date: '2026-06-11', summary: 'Plantilla PIM Sin stock PV, escenario Sporting representativo y flujo actualizado para Punto de Venta.' },
   { version: '1.4.0', date: '2026-06-09', summary: 'Inventario PIM, 14 plantillas compartidas en catálogo, renderer PIM mínimo y envio-despachado v2 con escenario representativo.' },

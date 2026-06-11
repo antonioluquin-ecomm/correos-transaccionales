@@ -181,6 +181,12 @@ a.ct-card {
 .ct-badge.ct-logistica-producteca-trf,
 .ct-badge.ct-logistica-producteca-urbano { background: #0e7490; }
 
+.ct-badge.ct-facet { background: #1e293b; text-transform: none; letter-spacing: 0; font-weight: 600; }
+.ct-badge.ct-facet-paquetes { background: #334155; }
+.ct-badge.ct-facet-promocion { background: #9333ea; }
+.ct-badge.ct-facet-envio { background: #0d9488; }
+.ct-badge.ct-facet-entrega { background: #b45309; }
+
 .ct-badge.ct-status-activo { background: var(--ct-status-activo); }
 .ct-badge.ct-status-en-revision { background: var(--ct-status-revision); }
 .ct-badge.ct-status-faltante { background: var(--ct-status-faltante); }

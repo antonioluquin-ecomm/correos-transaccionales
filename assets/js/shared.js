@@ -47,6 +47,34 @@ const CT = (() => {
     'ext': ['producteca-oca', 'producteca-correo-argentino', 'producteca-trf', 'producteca-urbano'],
   };
 
+  // Facetas de escenario: describen el pedido de ejemplo (no la plantilla).
+  // Cada escenario lleva un array plano `facetas` con ids de estas opciones.
+  // Extensible: agregar grupos/opciones aquí y etiquetar los escenarios.
+  const FACET_GROUPS = [
+    { id: 'paquetes', label: 'Paquetes', options: [
+      { id: 'un-paquete', label: '1 paquete' },
+      { id: 'multideposito', label: '2 paq. multidepósito' },
+    ] },
+    { id: 'promocion', label: 'Promoción', options: [
+      { id: 'con-promo', label: 'Con promoción' },
+      { id: 'sin-promo', label: 'Sin promoción' },
+    ] },
+    { id: 'envio', label: 'Envío', options: [
+      { id: 'envio-gratis', label: 'Envío gratis' },
+      { id: 'envio-pago', label: 'Envío con costo' },
+    ] },
+    { id: 'entrega', label: 'Entrega', options: [
+      { id: 'domicilio', label: 'A domicilio' },
+      { id: 'retiro', label: 'Retiro en tienda' },
+      { id: 'mixto', label: 'Envío + retiro' },
+    ] },
+  ];
+
+  const FACET_OPTION_INDEX = FACET_GROUPS.reduce((acc, group) => {
+    group.options.forEach((option) => { acc[option.id] = { ...option, group: group.id }; });
+    return acc;
+  }, {});
+
   function escapeHtml(value) {
     if (value === null || value === undefined) return '';
     return String(value)
@@ -152,6 +180,27 @@ const CT = (() => {
     return normalizeList(scenario?.logistica || scenario?.logisticas);
   }
 
+  function scenarioFacets(scenario) {
+    return normalizeList(scenario?.facetas || scenario?.facets);
+  }
+
+  function facetLabel(facetId) {
+    const slug = slugify(facetId);
+    const known = FACET_OPTION_INDEX[slug];
+    if (known) return known.label;
+    return String(facetId || slug).replace(/(^|-)([a-z])/g, (_, sep, chr) => `${sep ? ' ' : ''}${chr.toUpperCase()}`);
+  }
+
+  // filters: { paquetes, promocion, envio, entrega } — cada valor es un id de opción o ''.
+  // AND entre grupos: si un grupo tiene valor elegido, el escenario debe incluirlo.
+  function matchesFacets(scenario, filters) {
+    const facets = scenarioFacets(scenario);
+    return FACET_GROUPS.every((group) => {
+      const wanted = slugify(filters?.[group.id]);
+      return !wanted || facets.includes(wanted);
+    });
+  }
+
   function templateStores(template) {
     const explicit = normalizeList(template?.tiendas || template?.tienda || template?.store);
     if (explicit.length) return explicit;
@@ -217,6 +266,16 @@ const CT = (() => {
 
   function logisticaBadges(logisticas) {
     return normalizeList(logisticas).map(logisticaBadge).join('');
+  }
+
+  function facetBadge(facetId) {
+    const slug = slugify(facetId);
+    const group = FACET_OPTION_INDEX[slug]?.group || 'otro';
+    return badge(facetLabel(slug), `ct-facet ct-facet-${group}`);
+  }
+
+  function facetBadges(facets) {
+    return normalizeList(facets).map(facetBadge).join('');
   }
 
   function matchesChannelStore(item, filters) {
@@ -608,6 +667,7 @@ const CT = (() => {
     CHANNEL_OPTIONS,
     LOGISTICA_OPTIONS,
     CHANNEL_LOGISTICA,
+    FACET_GROUPS,
     platformBadge,
     statusBadge,
     channelBadge,
@@ -616,10 +676,13 @@ const CT = (() => {
     storeBadges,
     logisticaBadge,
     logisticaBadges,
+    facetBadge,
+    facetBadges,
     storeFromPath,
     storeLabel,
     channelLabel,
     logisticaLabel,
+    facetLabel,
     labelsFor,
     templateChannels,
     scenarioChannels,
@@ -629,10 +692,12 @@ const CT = (() => {
     scenarioStore,
     templateLogistics,
     scenarioLogistics,
+    scenarioFacets,
     storeOptionsFor,
     channelOptionsFor,
     logisticaOptionsFor,
     matchesChannelStore,
+    matchesFacets,
     renderTopbar,
     downloadFile,
     fetchText,
