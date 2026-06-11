@@ -18,6 +18,16 @@
       "Etiqueta": {
         "NroSeguimiento": "90012345"
       }
-    }
+    },
+    "LineasPedido": [
+      {
+        "SKU": "SPO-RUN-001",
+        "Cantidad": 1
+      },
+      {
+        "SKU": "SPO-MED-014",
+        "Cantidad": 2
+      }
+    ]
   }
 }

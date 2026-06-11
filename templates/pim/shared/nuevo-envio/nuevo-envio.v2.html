@@ -269,14 +269,16 @@
                 <table role="presentation" width="100%" class="card">
                   <tr>
                     <td style="padding:18px 24px;">
-                      <table role="presentation" width="100%" bgcolor="#e0f2fe" style="background:#e0f2fe;border-radius:8px;">
+                      {{ if gt (len .Pedido.LineasPedido) 1 }}
+                      <table role="presentation" width="100%" bgcolor="#e0f2fe" style="background:#e0f2fe;border-radius:8px;margin-bottom:16px;">
                         <tr>
                           <td style="padding:14px 16px;border-left:4px solid #0c4a6e;border-radius:8px;">
                             <p style="font-size:13px;line-height:21px;color:#075985;margin:0;"><strong>Recordá:</strong> si tu pedido tiene más de un producto, puede llegar en paquetes separados, con distintas facturas y códigos de seguimiento.</p>
                           </td>
                         </tr>
                       </table>
-                      <p class="text-sm" style="font-size:12px;line-height:19px;color:#94a3b8;margin:16px 0 0;">Este es un mensaje automático enviado desde una casilla que no recibe respuestas. Si necesitás ayuda, escribinos a través de los canales de atención de {{ .Tienda.Nombre }}.</p>
+                      {{ end }}
+                      <p class="text-sm" style="font-size:12px;line-height:19px;color:#94a3b8;margin:0;">Este es un mensaje automático enviado desde una casilla que no recibe respuestas. Si necesitás ayuda, escribinos a través de los canales de atención de {{ .Tienda.Nombre }}.</p>
                     </td>
                   </tr>
                 </table>
