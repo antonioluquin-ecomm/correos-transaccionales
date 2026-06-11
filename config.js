@@ -8,6 +8,7 @@
  *   canales       -> canales comerciales donde aplica: "ecommerce" | "punto-de-venta"
  *   tiendas       -> marcas/negocios donde aplica: "sporting" | "woker" | "b2b"
  *   evento        -> evento funcional normalizado ({ id, label })
+ *   stageId       -> etapa comun del flujo general (derivada de evento)
  *   categoria     -> etapa del flujo (ver modules/flujo): "Logística de Entrega",
  *                    "Logística inversa - Cambio", "Logística inversa - Devolución",
  *                    "Logística inversa - Garantía"
@@ -35,7 +36,7 @@
 const TEMPLATES = [
   {
     id: 'pedido-confirmado',
-    nombre: 'Pedido realizado con éxito',
+    nombre: 'Pedido realizado Sporting',
     plataforma: 'VTEX',
     categoria: 'Logística de Entrega',
     estado: 'activo',
@@ -89,7 +90,7 @@ const TEMPLATES = [
   },
   {
     id: 'pedido-cancelado',
-    nombre: 'Pedido cancelado',
+    nombre: 'Pedido cancelado Sporting',
     plataforma: 'VTEX',
     categoria: 'Logística de Entrega',
     estado: 'activo',
@@ -145,7 +146,7 @@ const TEMPLATES = [
   },
   {
     id: 'pago-aprobado',
-    nombre: 'Pago aprobado',
+    nombre: 'Pago aprobado Sporting',
     plataforma: 'VTEX',
     categoria: 'Logística de Entrega',
     estado: 'activo',
@@ -195,7 +196,7 @@ const TEMPLATES = [
   },
   {
     id: 'access-key',
-    nombre: 'Código de acceso a cuenta',
+    nombre: 'Código de acceso Sporting',
     plataforma: 'VTEX',
     categoria: 'Cuenta',
     estado: 'en revisión',
@@ -255,7 +256,7 @@ const TEMPLATES = [
   },
   {
     id: 'back-in-stock',
-    nombre: 'Volvió a stock',
+    nombre: 'Volvió a stock Sporting',
     plataforma: 'VTEX',
     categoria: 'Logística de Entrega',
     estado: 'en revisión',
@@ -301,7 +302,7 @@ const TEMPLATES = [
   },
   {
     id: 'order-invoiced',
-    nombre: 'Pedido facturado',
+    nombre: 'Pedido facturado Sporting',
     plataforma: 'VTEX',
     categoria: 'Logística de Entrega',
     estado: 'en revisión',
@@ -1026,6 +1027,27 @@ const SCENARIO_TAXONOMY = {
   },
 };
 
+const EVENT_STAGE_META = {
+  'acceso-cuenta': { id: 'cuenta-acceso', label: 'Cuenta / Acceso' },
+  'volvio-a-stock': { id: 'cuenta-acceso', label: 'Cuenta / Acceso' },
+  'pedido-realizado': { id: 'compra-pedido', label: 'Compra o Pedido realizado' },
+  'orden-generada': { id: 'compra-pedido', label: 'Compra o Pedido realizado' },
+  'compra-realizada-pv': { id: 'compra-pedido', label: 'Compra o Pedido realizado' },
+  'pago-aprobado': { id: 'pago', label: 'Pago' },
+  'pedido-facturado': { id: 'facturacion', label: 'Facturacion' },
+  'factura-disponible': { id: 'facturacion', label: 'Facturacion' },
+  'pedido-despachado': { id: 'despacho-retiro', label: 'Despacho / Retiro' },
+  'pedido-listo-para-retirar': { id: 'despacho-retiro', label: 'Despacho / Retiro' },
+  'despacho-b2b': { id: 'preparacion', label: 'Preparacion' },
+  'pedido-cancelado': { id: 'cancelacion-reembolso', label: 'Cancelacion / Reembolso' },
+  'reembolso': { id: 'cancelacion-reembolso', label: 'Cancelacion / Reembolso' },
+  'etiqueta-devolucion': { id: 'cambios-devoluciones-garantia', label: 'Cambios / Devoluciones / Garantia' },
+  'recepcion-cambio': { id: 'cambios-devoluciones-garantia', label: 'Cambios / Devoluciones / Garantia' },
+  'recepcion-devolucion': { id: 'cambios-devoluciones-garantia', label: 'Cambios / Devoluciones / Garantia' },
+  'recepcion-garantia': { id: 'cambios-devoluciones-garantia', label: 'Cambios / Devoluciones / Garantia' },
+  'giftcard': { id: 'cambios-devoluciones-garantia', label: 'Cambios / Devoluciones / Garantia' },
+};
+
 function uniqueTaxonomyValues(values) {
   return Array.from(new Set((values || []).filter(Boolean)));
 }
@@ -1047,6 +1069,9 @@ TEMPLATES.forEach((template) => {
   template.canales = normalizeTaxonomyArray(template.canales || taxonomy.canales || ['ecommerce']);
   template.tiendas = normalizeTaxonomyArray(template.tiendas || taxonomy.tiendas || template.tienda || template.store);
   template.evento = template.evento || taxonomy.evento || { id: template.id, label: template.nombre };
+  const stage = EVENT_STAGE_META[template.evento.id] || { id: 'sin-etapa', label: 'Sin etapa normalizada' };
+  template.stageId = template.stageId || stage.id;
+  template.stageLabel = template.stageLabel || stage.label;
 });
 
 EXAMPLE_SCENARIOS.forEach((scenario) => {
@@ -1066,12 +1091,15 @@ EXAMPLE_SCENARIOS.forEach((scenario) => {
       })
       .find(Boolean)
     || scenario.tipo;
+  const stage = EVENT_STAGE_META[scenario.eventoId] || { id: 'sin-etapa', label: 'Sin etapa normalizada' };
+  scenario.stageId = scenario.stageId || stage.id;
+  scenario.stageLabel = scenario.stageLabel || stage.label;
 });
 
 const VERSION = {
-  number: '1.13.0',
+  number: '1.14.0',
   date: '2026-06-11',
-  summary: 'Taxonomia Plataforma > Canal > Tienda > Evento > Escenario para catalogo, visualizador, simulador y flujo.',
+  summary: 'Consolidacion funcional: acciones rapidas, flujo general, etapas normalizadas y auditoria de escenarios.',
 };
 
 const CHANGELOG = [

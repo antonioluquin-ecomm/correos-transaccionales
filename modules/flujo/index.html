@@ -200,6 +200,12 @@
         border-color: #2563eb;
       }
 
+      .ct-flow-filter-btn.active[data-filter="referencial"] {
+        background: #475569;
+        color: #ffffff;
+        border-color: #475569;
+      }
+
       .ct-flow-filter-btn.active[data-priority="alta"] {
         background: #dc2626;
         color: #ffffff;
@@ -338,6 +344,11 @@
         border-style: solid solid solid dotted;
       }
 
+      .ct-flow-node.status-referencial {
+        background: #f8fafc;
+        border-style: solid solid solid dotted;
+      }
+
       .ct-flow-node.active {
         outline: 3px solid rgba(37, 99, 235, 0.24);
         outline-offset: 3px;
@@ -394,9 +405,11 @@
         bottom: -8px;
         min-width: 20px;
         height: 20px;
+        box-sizing: border-box;
         display: inline-flex;
         align-items: center;
         justify-content: center;
+        padding: 0 5px;
         border-radius: 999px;
         background: #ffffff;
         border: 1px solid currentColor;
@@ -654,6 +667,7 @@
               <span class="ct-badge ct-status-activo">✓ Existente</span>
               <span class="ct-badge ct-status-faltante">! Faltante</span>
               <span class="ct-badge ct-status-candidato">? Candidato</span>
+              <span class="ct-badge ct-status-referencial">Ref. externa</span>
             </div>
           </div>
         </div>
@@ -664,6 +678,7 @@
           <button class="ct-flow-filter-btn" type="button" data-filter="existente">✓ Existentes</button>
           <button class="ct-flow-filter-btn" type="button" data-filter="faltante">! Faltantes</button>
           <button class="ct-flow-filter-btn" type="button" data-filter="candidato">? Candidatos</button>
+          <button class="ct-flow-filter-btn" type="button" data-filter="referencial">Referencias</button>
           <span class="ct-flow-filter-sep"></span>
           <button class="ct-flow-filter-btn" type="button" data-priority="alta">↑ Prioridad alta</button>
           <span class="ct-flow-filter-sep"></span>
@@ -684,7 +699,7 @@
         </div>
 
         <div class="ct-flow-note">
-          La prioridad alta agrupa comunicaciones con impacto directo en confirmación, despacho, retiro o seguimiento.
+          La prioridad alta agrupa comunicaciones con impacto directo en confirmacion, despacho, retiro o seguimiento. Andreani y OCASA se muestran como referencia externa: no son plantillas gestionadas por este repositorio.
         </div>
       </section>
     </main>
@@ -704,6 +719,12 @@
         <dl>
           <dt>Plataforma</dt>
           <dd id="ct-flow-detail-platform"></dd>
+          <dt>Canal</dt>
+          <dd id="ct-flow-detail-channel"></dd>
+          <dt>Tienda</dt>
+          <dd id="ct-flow-detail-store"></dd>
+          <dt>Evento</dt>
+          <dd id="ct-flow-detail-event"></dd>
           <dt>Etapa</dt>
           <dd id="ct-flow-detail-stage"></dd>
           <dt>Estado</dt>
@@ -740,7 +761,76 @@
           { x: 950, label: 'Seguimiento' },
         ];
 
+        const GENERAL_STAGE_LABELS = [
+          { x: 20, label: 'Cuenta / Acceso' },
+          { x: 150, label: 'Compra / Pedido' },
+          { x: 280, label: 'Pago' },
+          { x: 410, label: 'Preparacion' },
+          { x: 540, label: 'Facturacion' },
+          { x: 670, label: 'Despacho / Retiro' },
+          { x: 800, label: 'Seguimiento' },
+          { x: 930, label: 'Entrega' },
+          { x: 1060, label: 'Cancelacion / Reembolso' },
+          { x: 1190, label: 'Cambios / Devoluciones / Garantia' },
+        ];
+
         const FLOWS = {
+          general: {
+            title: 'Flujo General de Correos',
+            description: 'Vista unificada por etapa comun. Mantiene carriles por plataforma emisora y marca operadores externos como referencia documental.',
+            stageLabels: GENERAL_STAGE_LABELS,
+            nodes: [
+              { id: 'access', lane: 'vtex', x: 20, y: -70, text: 'Acceso a cuenta Sporting', templateId: 'access-key', priority: 'baja', trigger: 'Usuario solicita ingreso o recuperacion de acceso.', note: 'Variante VTEX para Sporting.' },
+              { id: 'access-woker', lane: 'vtex', x: 20, text: 'Acceso a cuenta Woker', templateId: 'woker-access-key', priority: 'baja', trigger: 'Usuario Woker solicita ingreso o recuperacion de acceso.', note: 'Variante VTEX para Woker.' },
+              { id: 'access-b2b', lane: 'vtex', x: 20, y: 70, text: 'Acceso a cuenta B2B', templateId: 'b2b-access-key', priority: 'baja', trigger: 'Comprador B2B solicita ingreso a su cuenta.', note: 'B2B se mantiene como tienda dentro de e-commerce.' },
+              { id: 'order', lane: 'vtex', x: 150, y: -70, text: 'Pedido realizado Sporting', templateId: 'pedido-confirmado', priority: 'alta', trigger: 'VTEX registra correctamente un pedido e-commerce Sporting.', note: 'Inicio e-commerce Sporting.' },
+              { id: 'order-woker', lane: 'vtex', x: 150, text: 'Pedido realizado Woker', templateId: 'woker-pedido-confirmado', priority: 'alta', trigger: 'VTEX registra correctamente un pedido e-commerce Woker.', note: 'Inicio e-commerce Woker.' },
+              { id: 'order-b2b', lane: 'vtex', x: 150, y: 70, text: 'Orden generada B2B', templateId: 'b2b-orden-generada', priority: 'alta', trigger: 'VTEX B2B genera una orden pendiente de validacion comercial.', note: 'Inicio e-commerce B2B.' },
+              { id: 'order-pv', lane: 'pim', x: 150, y: -70, text: 'Compra realizada PV', templateId: 'pim-confirmacion-multideposito', priority: 'alta', trigger: 'Venta multideposito/Punto de Venta registrada en PIM.', note: 'Inicio PV; PV es canal, no tienda.' },
+              { id: 'paid', lane: 'vtex', x: 280, y: -35, text: 'Pago aprobado Sporting', templateId: 'pago-aprobado', priority: 'alta', trigger: 'VTEX confirma autorizacion/aprobacion de pago.', note: 'Etapa de pago e-commerce Sporting.' },
+              { id: 'paid-woker', lane: 'vtex', x: 280, y: 35, text: 'Pago aprobado Woker', templateId: 'woker-pago-aprobado', priority: 'alta', trigger: 'VTEX confirma autorizacion/aprobacion de pago Woker.', note: 'Etapa de pago e-commerce Woker.' },
+              { id: 'prep-b2b', lane: 'pim', x: 410, text: 'Despacho B2B', templateId: 'pim-despacho-b2b', priority: 'media', trigger: 'PIM confirma orden B2B en preparacion.', note: 'Preparacion operativa B2B.' },
+              { id: 'invoiced', lane: 'vtex', x: 540, text: 'Pedido facturado Sporting', templateId: 'order-invoiced', priority: 'media', trigger: 'VTEX notifica facturacion del pedido.', note: 'Facturacion VTEX e-commerce.' },
+              { id: 'invoice-pim', lane: 'pim', x: 540, y: 70, text: 'Factura disponible PIM', templateId: 'pim-factura-disponible', priority: 'media', trigger: 'PIM notifica factura electronica adjunta.', note: 'Facturacion PIM compartida por canal/tienda.' },
+              { id: 'pickup', lane: 'pim', x: 670, y: -70, text: 'Pedido listo para retirar', templateId: 'pim-despacho-pickup', priority: 'alta', trigger: 'Pedido queda disponible para retiro en sucursal.', note: 'Aplica a e-commerce y PV cuando corresponda.' },
+              { id: 'shipped', lane: 'pim', x: 670, text: 'Pedido despachado', templateId: 'pim-nuevo-envio', priority: 'alta', trigger: 'Pedido sale del deposito o pasa a operador logistico.', note: 'Etapa PIM compartida post-origen.' },
+              { id: 'andreani-track', lane: 'andreani', x: 800, text: 'Seguimiento Andreani', priority: 'media', trigger: 'Andreani informa preparacion, transito o visita.', note: 'Referencia documental: correo externo no gestionado en este repo.' },
+              { id: 'ocasa-track', lane: 'ocasa', x: 800, text: 'Seguimiento OCASA', priority: 'media', trigger: 'OCASA informa preparacion, visita o transito.', note: 'Referencia documental: correo externo no gestionado en este repo.' },
+              { id: 'andreani-delivery', lane: 'andreani', x: 930, text: 'Entrega Andreani', priority: 'media', trigger: 'Andreani confirma visita o entrega.', note: 'Referencia documental.' },
+              { id: 'cancelled', lane: 'vtex', x: 1060, y: -35, text: 'Pedido cancelado Sporting', templateId: 'pedido-cancelado', priority: 'media', trigger: 'VTEX cancela o informa cancelacion del pedido Sporting.', note: 'Cancelacion e-commerce Sporting.' },
+              { id: 'cancelled-woker', lane: 'vtex', x: 1060, y: 35, text: 'Pedido cancelado Woker', templateId: 'woker-pedido-cancelado', priority: 'media', trigger: 'VTEX cancela o informa cancelacion del pedido Woker.', note: 'Cancelacion e-commerce Woker.' },
+              { id: 'refund', lane: 'pim', x: 1060, text: 'Reembolso PIM', templateId: 'pim-reembolso', priority: 'alta', trigger: 'PIM informa reembolso por error de inventario o baja de articulos.', note: 'Reembolso compartido por canal/tienda.' },
+              { id: 'return-label', lane: 'pim', x: 1190, y: -110, text: 'Etiqueta devolucion', templateId: 'pim-etiqueta-devolucion', priority: 'media', trigger: 'PIM gestiona etiqueta adjunta para devolucion.', note: 'Inicio logistico de devolucion.' },
+              { id: 'change-received', lane: 'pim', x: 1190, y: -55, text: 'Recepcion cambio', templateId: 'pim-recepcion-cambio', priority: 'alta', trigger: 'PIM confirma recepcion de productos vinculados a cambio.', note: 'Logistica inversa - cambio.' },
+              { id: 'return-received', lane: 'pim', x: 1190, text: 'Recepcion devolucion', templateId: 'pim-recepcion-devolucion', priority: 'alta', trigger: 'PIM confirma recepcion de productos devueltos.', note: 'Logistica inversa - devolucion.' },
+              { id: 'warranty-received', lane: 'pim', x: 1190, y: 55, text: 'Recepcion garantia', templateId: 'pim-recepcion-garantia', priority: 'alta', trigger: 'PIM confirma recepcion de producto en garantia.', note: 'Logistica inversa - garantia.' },
+              { id: 'giftcard', lane: 'pim', x: 1190, y: 110, text: 'Giftcard', templateId: 'pim-giftcard', priority: 'alta', trigger: 'Se emite codigo/giftcard para resolver cambio, devolucion o falta de stock.', note: 'Resolucion por codigo/giftcard.' },
+            ],
+            links: [
+              ['access', 'order'],
+              ['access-woker', 'order-woker'],
+              ['access-b2b', 'order-b2b'],
+              ['order', 'paid'],
+              ['order-woker', 'paid-woker'],
+              ['order-b2b', 'prep-b2b'],
+              ['paid', 'invoiced'],
+              ['paid-woker', 'invoiced'],
+              ['order-pv', 'pickup'],
+              ['order-pv', 'shipped'],
+              ['invoiced', 'pickup'],
+              ['invoiced', 'shipped'],
+              ['invoice-pim', 'shipped'],
+              ['shipped', 'andreani-track'],
+              ['shipped', 'ocasa-track'],
+              ['andreani-track', 'andreani-delivery'],
+              ['order', 'cancelled'],
+              ['order-woker', 'cancelled-woker'],
+              ['shipped', 'refund'],
+              ['return-label', 'return-received'],
+              ['change-received', 'giftcard'],
+              ['warranty-received', 'giftcard'],
+            ],
+          },
           entrega: {
             title: 'Logística de Entrega',
             description: 'Recorrido principal desde cuenta/pedido hasta preparación, despacho, visita y entrega.',
@@ -867,6 +957,9 @@
         const detailTitle = document.getElementById('ct-flow-detail-title');
         const detailNote = document.getElementById('ct-flow-detail-note');
         const detailPlatform = document.getElementById('ct-flow-detail-platform');
+        const detailChannel = document.getElementById('ct-flow-detail-channel');
+        const detailStore = document.getElementById('ct-flow-detail-store');
+        const detailEvent = document.getElementById('ct-flow-detail-event');
         const detailStage = document.getElementById('ct-flow-detail-stage');
         const detailStatus = document.getElementById('ct-flow-detail-status');
         const detailPriority = document.getElementById('ct-flow-detail-priority');
@@ -878,13 +971,13 @@
         const kpiMissing = document.getElementById('ct-flow-kpi-missing');
         const kpiPriority = document.getElementById('ct-flow-kpi-priority');
 
-        let activeFlowId = 'entrega';
+        let activeFlowId = 'general';
         let activeStatusFilter = null;
         let activePriorityFilter = false;
         let activeChannelFilter = null;
         let activeStoreFilter = null;
 
-        const BOARD_WIDTH = 1420;
+        const BOARD_WIDTH = 1600;
         const BOARD_HEIGHT = 620;
         const FLOW_X_OFFSET = 170;
         const NODE_WIDTH = 128;
@@ -894,6 +987,7 @@
           existente: { label: 'Existente', icon: '✓', className: 'ct-status-activo' },
           faltante: { label: 'Faltante', icon: '!', className: 'ct-status-faltante' },
           candidato: { label: 'Candidato', icon: '?', className: 'ct-status-candidato' },
+          referencial: { label: 'Referencia externa', icon: 'Ref', className: 'ct-status-referencial' },
         };
 
         const PRIORITY_LABELS = {
@@ -914,7 +1008,24 @@
 
         function effectiveStatus(node) {
           if (node.templateId && templateById(node.templateId)) return 'existente';
+          if (['andreani', 'ocasa'].includes(node.lane)) return 'referencial';
           return node.status || 'faltante';
+        }
+
+        function nodeChannels(node, template) {
+          return node.canales || (template ? CT.templateChannels(template) : []);
+        }
+
+        function nodeStores(node, template) {
+          return node.tiendas || (template ? CT.templateStores(template) : []);
+        }
+
+        function nodeEventLabel(node, template) {
+          return node.eventoLabel || template?.evento?.label || node.text;
+        }
+
+        function nodeStageLabel(node, template, flow) {
+          return node.stageLabel || template?.stageLabel || flow.title;
         }
 
         function statusBadge(status) {
@@ -985,15 +1096,20 @@
           const statusMeta = STATUS_META[status] || STATUS_META.faltante;
           const template = templateById(node.templateId);
           const lane = LANES.find((l) => l.id === node.lane);
+          const channels = nodeChannels(node, template);
+          const stores = nodeStores(node, template);
 
           boardEl.querySelectorAll('.ct-flow-node.active').forEach((el) => el.classList.remove('active'));
           nodeEl.classList.add('active');
 
-          detailBadges.innerHTML = `${statusBadge(status)}${template ? CT.channelBadges(CT.templateChannels(template)) + CT.storeBadges(CT.templateStores(template)) : ''}${priorityBadge(node.priority || 'media')}`;
+          detailBadges.innerHTML = `${statusBadge(status)}${CT.channelBadges(channels)}${CT.storeBadges(stores)}${priorityBadge(node.priority || 'media')}`;
           detailTitle.textContent = node.text;
           detailNote.textContent = node.note || 'Sin nota operativa definida.';
           detailPlatform.textContent = lane ? lane.label : node.lane;
-          detailStage.textContent = flow.title;
+          detailChannel.textContent = channels.length ? CT.labelsFor(channels, CT.channelLabel) : 'No aplica';
+          detailStore.textContent = stores.length ? CT.labelsFor(stores, CT.storeLabel) : 'No aplica';
+          detailEvent.textContent = nodeEventLabel(node, template);
+          detailStage.textContent = nodeStageLabel(node, template, flow);
           detailStatus.textContent = statusMeta.label;
           detailPriority.textContent = PRIORITY_LABELS[node.priority] || node.priority || 'Media';
           detailTrigger.textContent = node.trigger || 'Por definir.';
@@ -1007,6 +1123,8 @@
                 <a class="ct-btn" href="${CT.escapeHtml(nodeActionUrl(node, 'mobile'))}">Mobile</a>
               </div>
             `;
+          } else if (status === 'referencial') {
+            detailActions.innerHTML = '<p class="ct-flow-detail-note">Referencia documental: plantilla externa no gestionada por este repositorio.</p>';
           } else {
             detailActions.innerHTML = `<a class="ct-btn" href="${CT.escapeHtml(nodeActionUrl(node))}">Crear plantilla</a>`;
           }
@@ -1040,7 +1158,8 @@
           const total = flow.nodes.length;
           const existing = flow.nodes.filter((n) => effectiveStatus(n) === 'existente').length;
           const candidate = flow.nodes.filter((n) => effectiveStatus(n) === 'candidato').length;
-          const missing = total - existing - candidate;
+          const reference = flow.nodes.filter((n) => effectiveStatus(n) === 'referencial').length;
+          const missing = total - existing - candidate - reference;
           const highPriority = flow.nodes.filter((n) => (n.priority || 'media') === 'alta').length;
           kpiExisting.textContent = existing;
           kpiMissing.textContent = missing + candidate;
@@ -1061,7 +1180,7 @@
             boardEl.appendChild(label);
           });
 
-          STAGE_LABELS.forEach((stage) => {
+          (flow.stageLabels || STAGE_LABELS).forEach((stage) => {
             const label = document.createElement('div');
             label.className = 'ct-flow-stage-label';
             label.style.left = FLOW_X_OFFSET + stage.x + 'px';
@@ -1115,8 +1234,8 @@
             el.dataset.node = node.id;
             el.dataset.status = status;
             el.dataset.priority = node.priority || 'media';
-            el.dataset.channels = (node.canales || (template ? CT.templateChannels(template) : [])).join(' ');
-            el.dataset.stores = (node.tiendas || (template ? CT.templateStores(template) : [])).join(' ');
+            el.dataset.channels = nodeChannels(node, template).join(' ');
+            el.dataset.stores = nodeStores(node, template).join(' ');
             el.style.left = position.left + 'px';
             el.style.top = position.top + 'px';
             el.tabIndex = 0;
@@ -1211,7 +1330,7 @@
         });
         window.addEventListener('resize', fitBoardToViewport);
 
-        renderFlow('entrega');
+        renderFlow('general');
       })();
     </script>
   </body>

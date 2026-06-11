@@ -2,6 +2,15 @@
 
 Formato: versión, fecha, resumen del cambio principal.
 
+## v1.14.0 — 2026-06-11
+
+Consolidación funcional posterior al modelo de canal/tienda:
+
+- **Visualizador**: suma acciones rápidas para abrir, descargar y copiar el HTML de la plantilla seleccionada.
+- **Flujo de Correos**: agrega vista **Flujo General de Correos** con etapas comunes, conserva carriles por plataforma y marca Andreani/OCASA como referencias externas.
+- **`config.js`**: agrega etapa normalizada (`stageId`/`stageLabel`) derivada del evento y ajusta nombres visibles de plantillas Sporting para evitar ambigüedad.
+- **Docs**: nueva auditoría de escenarios y actualización de roadmap/matriz de validación.
+
 ## v1.13.0 — 2026-06-11
 
 Modelo de taxonomía **Plataforma > Canal > Tienda > Evento > Escenario**:

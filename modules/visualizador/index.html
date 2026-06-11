@@ -98,6 +98,11 @@
             <p class="ct-meta"><strong>Escenario:</strong> <span id="ct-vis-scenario-label"></span></p>
             <p class="ct-meta"><strong>JSON del escenario:</strong> <code id="ct-vis-ejemplo"></code></p>
             <p class="ct-vis-scenario-note" id="ct-vis-scenario-note"></p>
+            <div class="ct-card-actions" style="margin-top:12px;">
+              <a class="ct-btn ct-btn-primary" id="ct-vis-open-html" target="_blank" rel="noopener">Abrir HTML</a>
+              <button class="ct-btn" id="ct-vis-download-html" type="button">Descargar HTML</button>
+              <button class="ct-btn" id="ct-vis-copy-html" type="button">Copiar HTML</button>
+            </div>
           </div>
           <p class="ct-preview-status" id="ct-vis-status"></p>
         </aside>
@@ -140,6 +145,9 @@
         const exampleHelpEl = document.getElementById('ct-vis-example-help');
         const statusEl = document.getElementById('ct-vis-status');
         const frame = document.getElementById('ct-vis-frame');
+        const openHtmlBtn = document.getElementById('ct-vis-open-html');
+        const downloadHtmlBtn = document.getElementById('ct-vis-download-html');
+        const copyHtmlBtn = document.getElementById('ct-vis-copy-html');
 
         const renderable = TEMPLATES.filter((t) => t.archivoHtml);
         const urlParams = new URLSearchParams(window.location.search);
@@ -203,6 +211,10 @@
           return examples.find((example) => example.path === path);
         }
 
+        function htmlUrl(template) {
+          return template?.archivoHtml ? BASE + template.archivoHtml : '';
+        }
+
         function isCompatibleScenario(template, scenario) {
           if (!template || !scenario) return false;
           if (!Array.isArray(scenario.compatibleTemplates) || !scenario.compatibleTemplates.length) return true;
@@ -263,6 +275,28 @@
           statusEl.classList.toggle('error', Boolean(isError));
         }
 
+        async function readCurrentHtml() {
+          const template = currentTemplate();
+          if (!template?.archivoHtml) throw new Error('La plantilla seleccionada no tiene HTML asociado.');
+          return {
+            template,
+            html: await CT.fetchText(BASE + template.archivoHtml),
+          };
+        }
+
+        function copyTextFallback(text) {
+          const textarea = document.createElement('textarea');
+          textarea.value = text;
+          textarea.setAttribute('readonly', '');
+          textarea.style.position = 'fixed';
+          textarea.style.left = '-9999px';
+          document.body.appendChild(textarea);
+          textarea.select();
+          const copied = document.execCommand('copy');
+          document.body.removeChild(textarea);
+          if (!copied) throw new Error('El navegador no permitiÃ³ copiar al portapapeles.');
+        }
+
         function applyDevice(device) {
           activeDevice = device;
           frame.dataset.device = device;
@@ -280,9 +314,51 @@
           nombreEl.textContent = template.nombre;
           descripcionEl.textContent = template.descripcion;
           archivoEl.textContent = template.archivoHtml;
+          openHtmlBtn.href = htmlUrl(template) || '#';
+          openHtmlBtn.toggleAttribute('aria-disabled', !template.archivoHtml);
+          downloadHtmlBtn.disabled = !template.archivoHtml;
+          copyHtmlBtn.disabled = !template.archivoHtml;
           scenarioLabelEl.textContent = scenario ? `${scenario.tipo || 'Escenario'} · ${scenario.label}` : 'Sin escenario seleccionado';
           ejemploEl.textContent = scenario ? scenario.path : '';
           scenarioNoteEl.textContent = scenario?.descripcion || '';
+        }
+
+        async function downloadCurrentHtml() {
+          const originalText = downloadHtmlBtn.textContent;
+          downloadHtmlBtn.disabled = true;
+          downloadHtmlBtn.textContent = 'Descargando...';
+          try {
+            const { template, html } = await readCurrentHtml();
+            const filename = template.archivoHtml.split('/').pop() || `${template.id || 'plantilla'}.html`;
+            CT.downloadFile(filename, html, 'text/html');
+            setStatus(`Descarga iniciada: ${filename}`);
+          } catch (error) {
+            setStatus('No se pudo descargar el HTML: ' + error.message, true);
+          } finally {
+            downloadHtmlBtn.disabled = false;
+            downloadHtmlBtn.textContent = originalText;
+          }
+        }
+
+        async function copyCurrentHtml() {
+          const originalText = copyHtmlBtn.textContent;
+          copyHtmlBtn.disabled = true;
+          copyHtmlBtn.textContent = 'Copiando...';
+          try {
+            const { html } = await readCurrentHtml();
+            try {
+              window.focus();
+              await navigator.clipboard.writeText(html);
+            } catch (clipboardError) {
+              copyTextFallback(html);
+            }
+            setStatus('HTML copiado al portapapeles.');
+          } catch (error) {
+            setStatus('No se pudo copiar el HTML: ' + error.message, true);
+          } finally {
+            copyHtmlBtn.disabled = false;
+            copyHtmlBtn.textContent = originalText;
+          }
         }
 
         async function renderPreview() {
@@ -345,6 +421,8 @@
         });
 
         exampleSelect.addEventListener('change', renderPreview);
+        downloadHtmlBtn.addEventListener('click', downloadCurrentHtml);
+        copyHtmlBtn.addEventListener('click', copyCurrentHtml);
 
         document.getElementById('ct-vis-device-switch').addEventListener('click', (event) => {
           const button = event.target.closest('button[data-device]');

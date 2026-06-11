@@ -171,6 +171,7 @@ a.ct-card {
 .ct-badge.ct-status-en-revision { background: var(--ct-status-revision); }
 .ct-badge.ct-status-faltante { background: var(--ct-status-faltante); }
 .ct-badge.ct-status-candidato { background: #2563eb; }
+.ct-badge.ct-status-referencial { background: #475569; }
 .ct-badge.ct-status-deprecado { background: var(--ct-status-deprecado); }
 
 /* Buttons */
