@@ -2,6 +2,15 @@
 
 Formato: versión, fecha, resumen del cambio principal.
 
+## v1.8.0 — 2026-06-10
+
+Plantillas PIM de **logística inversa** `recepcion-cambio` / `recepcion-devolucion` / `recepcion-garantia` v2 + soporte `index` en el motor:
+
+- **`assets/js/shared.js`**: el motor PIM ahora soporta la función Go **`index`** (`(index .Historial 0).Observaciones` y `index .Array N`), para acceder al primer elemento de un array y su propiedad. Reusable para el motivo de rechazo por línea. Sin regresiones en las plantillas previas.
+- **`templates/pim/shared/recepcion-cambio/recepcion-cambio.v2.html`**, **`recepcion-devolucion.v2.html`**, **`recepcion-garantia.v2.html`**: las tres alineadas al estándar visual VTEX (hero, card de detalle, footer). Cada línea de `Pedido.LineasPedido` muestra su **estado**: `O` → **Aceptado** (verde) / `R` → **Rechazado** (rojo) con el **motivo** desde `(index .Historial 0).Observaciones`. Difieren en el bloque "Información importante": cambio → código de cambio; devolución → reembolso a 96 h; garantía → código de cambio + aclaraciones de reembolso (crédito/débito). Paleta neutra slate. Variables reales: `Tienda.Nombre`, `HeaderURL`/`HeaderImage`, `LineasPedido[]` (`Producto`/`SKU`/`Cantidad`/`Estado`) y `Historial[0].Observaciones`.
+- **`examples/pim/shared/recepcion-{cambio,devolucion,garantia}-sporting.json`**: cada uno con una línea aceptada y una rechazada (con motivo).
+- **`config.js`**: las 3 entradas → v2 + escenario; 3 escenarios nuevos. VERSION → 1.8.0.
+
 ## v1.7.0 — 2026-06-10
 
 Plantilla PIM **Giftcard (código de cambio)** `giftcard.v2`:

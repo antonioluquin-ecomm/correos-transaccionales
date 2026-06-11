@@ -1,0 +1,31 @@
+{
+  "Tienda": {
+    "Nombre": "Sporting",
+    "Datos": {
+      "NotificacionesConfig": {
+        "HeaderURL": "https://www.sporting.com.ar",
+        "HeaderImage": "https://ventadeportiva.vteximg.com.br/arquivos/logo-mail.png"
+      }
+    }
+  },
+  "Pedido": {
+    "LineasPedido": [
+      {
+        "Producto": "Zapatillas Running Pro",
+        "SKU": "SPO-RUN-001",
+        "Cantidad": 1,
+        "Estado": "O",
+        "Historial": []
+      },
+      {
+        "Producto": "Botines Fútbol Campo",
+        "SKU": "SPO-BOT-302",
+        "Cantidad": 1,
+        "Estado": "R",
+        "Historial": [
+          { "Observaciones": "La falla reportada corresponde a desgaste por uso, no cubierto por garantía." }
+        ]
+      }
+    ]
+  }
+}

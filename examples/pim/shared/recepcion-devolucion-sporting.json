@@ -1,0 +1,31 @@
+{
+  "Tienda": {
+    "Nombre": "Sporting",
+    "Datos": {
+      "NotificacionesConfig": {
+        "HeaderURL": "https://www.sporting.com.ar",
+        "HeaderImage": "https://ventadeportiva.vteximg.com.br/arquivos/logo-mail.png"
+      }
+    }
+  },
+  "Pedido": {
+    "LineasPedido": [
+      {
+        "Producto": "Campera Rompeviento",
+        "SKU": "SPO-CAM-330",
+        "Cantidad": 1,
+        "Estado": "O",
+        "Historial": []
+      },
+      {
+        "Producto": "Gorra Trucker",
+        "SKU": "SPO-GOR-012",
+        "Cantidad": 1,
+        "Estado": "R",
+        "Historial": [
+          { "Observaciones": "El producto fue devuelto fuera del plazo permitido." }
+        ]
+      }
+    ]
+  }
+}

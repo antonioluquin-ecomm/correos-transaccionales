@@ -240,22 +240,43 @@ const CT = (() => {
     return value;
   }
 
+  // Recorre un path tipo ".A.B.C" sobre un valor base.
+  function traversePimPath(base, path) {
+    return String(path || '')
+      .replace(/^\./, '')
+      .split('.')
+      .filter(Boolean)
+      .reduce((current, key) => {
+        if (current === null || current === undefined) return '';
+        return current[key];
+      }, base);
+  }
+
+  // Resuelve la función Go "index": (index .Array N).Prop  o  index .Array N
+  // Devuelve undefined si la expresión no es un index (para que siga el flujo normal).
+  function resolvePimIndex(context, expr) {
+    const m = expr.match(/^\(\s*index\s+(\.\S+)\s+(\d+)\s*\)(\.[A-Za-z0-9_.]+)?$/)
+      || expr.match(/^index\s+(\.\S+)\s+(\d+)$/);
+    if (!m) return undefined;
+    const arr = getPimValue(context, m[1]);
+    if (!Array.isArray(arr)) return '';
+    let val = arr[parseInt(m[2], 10)];
+    if (val === null || val === undefined) return '';
+    if (m[3]) val = traversePimPath(val, m[3]);
+    return val === null || val === undefined ? '' : val;
+  }
+
   function getPimValue(context, expression) {
     const expr = normalizePimExpression(expression);
     if (!expr) return '';
     if ((expr.startsWith('"') && expr.endsWith('"')) || (expr.startsWith("'") && expr.endsWith("'"))) {
       return expr.slice(1, -1);
     }
+    const indexed = resolvePimIndex(context, expr);
+    if (indexed !== undefined) return indexed;
     if (!expr.startsWith('.')) return expr;
 
-    return expr
-      .slice(1)
-      .split('.')
-      .filter(Boolean)
-      .reduce((current, key) => {
-        if (current === null || current === undefined) return '';
-        return current[key];
-      }, context);
+    return traversePimPath(context, expr);
   }
 
   // Tokeniza una expresion PIM respetando comillas y grupos entre parentesis.
