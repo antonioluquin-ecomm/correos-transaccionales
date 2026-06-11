@@ -74,6 +74,12 @@
             </select>
           </div>
           <div>
+            <label for="ct-vis-logistica">Logística</label>
+            <select id="ct-vis-logistica" aria-label="Filtrar por logística">
+              <option value="">Todas</option>
+            </select>
+          </div>
+          <div>
             <label for="ct-vis-template">Plantilla HTML</label>
             <select id="ct-vis-template" aria-label="Elegir plantilla"></select>
           </div>
@@ -133,6 +139,7 @@
         const platformSelect = document.getElementById('ct-vis-platform');
         const channelSelect = document.getElementById('ct-vis-channel');
         const storeSelect = document.getElementById('ct-vis-store');
+        const logisticaSelect = document.getElementById('ct-vis-logistica');
         const templateSelect = document.getElementById('ct-vis-template');
         const exampleSelect = document.getElementById('ct-vis-example');
         const badgesEl = document.getElementById('ct-vis-badges');
@@ -178,12 +185,15 @@
           storeSelect.appendChild(option);
         });
 
+        addOptions(logisticaSelect, CT.logisticaOptionsFor(renderable, CT.templateLogistics));
+
         function filteredTemplates() {
           return renderable.filter((template) => {
             const matchesPlatform = !platformSelect.value || template.plataforma === platformSelect.value;
             return matchesPlatform && CT.matchesChannelStore(template, {
               channel: channelSelect.value,
               store: storeSelect.value,
+              logistica: logisticaSelect.value,
             });
           });
         }
@@ -220,7 +230,7 @@
           if (!Array.isArray(scenario.compatibleTemplates) || !scenario.compatibleTemplates.length) return true;
           const channelFilter = channelSelect.value || CT.templateChannels(template)[0];
           const storeFilter = storeSelect.value || CT.templateStores(template)[0];
-          if (!CT.matchesChannelStore(scenario, { channel: channelFilter, store: storeFilter })) return false;
+          if (!CT.matchesChannelStore(scenario, { channel: channelFilter, store: storeFilter, logistica: logisticaSelect.value })) return false;
           return scenario.compatibleTemplates.includes(template.id);
         }
 
@@ -310,7 +320,7 @@
 
         function updateInfo(template) {
           const scenario = currentScenario();
-          badgesEl.innerHTML = `${CT.platformBadge(template.plataforma)}${CT.channelBadges(CT.templateChannels(template))}${CT.storeBadges(CT.templateStores(template))}${CT.statusBadge(template.estado)}`;
+          badgesEl.innerHTML = `${CT.platformBadge(template.plataforma)}${CT.channelBadges(CT.templateChannels(template))}${CT.storeBadges(CT.templateStores(template))}${CT.logisticaBadges(CT.templateLogistics(template))}${CT.statusBadge(template.estado)}`;
           nombreEl.textContent = template.nombre;
           descripcionEl.textContent = template.descripcion;
           archivoEl.textContent = template.archivoHtml;
@@ -410,7 +420,7 @@
           }
         }
 
-        [platformSelect, channelSelect, storeSelect].forEach((select) => {
+        [platformSelect, channelSelect, storeSelect, logisticaSelect].forEach((select) => {
           select.addEventListener('change', handleTaxonomyFilterChange);
         });
 

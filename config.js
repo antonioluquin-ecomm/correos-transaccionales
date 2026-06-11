@@ -5,8 +5,10 @@
  *   id            -> identificador único, kebab-case, igual al nombre de archivo sin extensión
  *   nombre        -> nombre visible de la plantilla
  *   plataforma    -> "VTEX" | "PIM" | otra plataforma futura
- *   canales       -> canales comerciales donde aplica: "ecommerce" | "punto-de-venta"
- *   tiendas       -> marcas/negocios donde aplica: "sporting" | "woker" | "b2b"
+ *   canales       -> canales comerciales donde aplica: "punto-de-venta" | "b2c" | "b2b" | "ext"
+ *   tiendas       -> marcas/negocios donde aplica: "sporting" | "woker" (B2C) | "venta-deportiva" (B2B) | "seller-adidas" (EXT). PV no tiene tienda.
+ *   logistica     -> medios de envío donde aplica: "andreani" | "ocasa" | "propia" | "retiro" |
+ *                    "producteca-oca" | "producteca-correo-argentino" | "producteca-trf" | "producteca-urbano"
  *   evento        -> evento funcional normalizado ({ id, label })
  *   stageId       -> etapa comun del flujo general (derivada de evento)
  *   categoria     -> etapa del flujo (ver modules/flujo): "Logística de Entrega",
@@ -29,6 +31,7 @@
  *   descripcion         -> variante que representa
  *   canales             -> canales comerciales donde aplica el escenario
  *   tiendas             -> tiendas/marcas donde aplica el escenario
+ *   logistica           -> medios de envío que representa el escenario (opcional)
  *   eventoId            -> id del evento funcional asociado
  *   compatibleTemplates -> ids de plantillas que pueden renderizarse con ese JSON
  */
@@ -370,7 +373,7 @@ const TEMPLATES = [
     ],
   },
   {
-    id: 'pim-pedido-confirmado-b2b',
+    id: 'pim-pedido-confirmado-pv',
     nombre: 'Confirmación de compra (Venta Multidepósito)',
     plataforma: 'PIM',
     categoria: 'Confirmación de Compra',
@@ -378,8 +381,8 @@ const TEMPLATES = [
     actualizado: '2026-06-10',
     responsable: 'Por definir',
     descripcion: 'Confirmación inicial de compra para ventas multidepósito (compra en sucursal con envío posterior). Centraliza compra registrada, pago aprobado, pedido generado y factura adjunta; explica próximas etapas e informa políticas de cambios y reembolsos. Reemplaza a los correos VTEX de pedido realizado, pago aprobado y pedido facturado.',
-    archivoHtml: 'templates/pim/shared/pedido-confirmado-b2b/pedido-confirmado-b2b.v2.html',
-    ejemplo: 'examples/pim/shared/pedido-confirmado-b2b-sporting.json',
+    archivoHtml: 'templates/pim/shared/pedido-confirmado-pv/pedido-confirmado-pv.v2.html',
+    ejemplo: 'examples/pim/shared/pedido-confirmado-pv-sporting.json',
     variables: [
       'Tienda.Nombre',
       'Tienda.Datos.NotificacionesConfig.HeaderURL',
@@ -464,7 +467,7 @@ const TEMPLATES = [
     responsable: 'Por definir',
     descripcion: 'Confirma una orden B2B en preparacion, con datos de envio, productos y totales. Header dinamico asumido (la version vieja hardcodeaba el logo).',
     archivoHtml: 'templates/pim/shared/envio-b2b/envio-b2b.v2.html',
-    ejemplo: 'examples/pim/shared/envio-b2b-sporting.json',
+    ejemplo: 'examples/pim/shared/envio-b2b-venta-deportiva.json',
     variables: [
       'Tienda.Nombre',
       'Tienda.Datos.NotificacionesConfig.HeaderURL',
@@ -820,22 +823,22 @@ const EXAMPLE_SCENARIOS = [
     compatibleTemplates: ['pim-envio-despachado'],
   },
   {
-    id: 'pim-pedido-confirmado-b2b-sporting',
-    path: 'examples/pim/shared/pedido-confirmado-b2b-sporting.json',
+    id: 'pim-pedido-confirmado-pv-sporting',
+    path: 'examples/pim/shared/pedido-confirmado-pv-sporting.json',
     store: 'shared',
     label: 'Sporting (2 productos)',
     tipo: 'PIM — confirmación multidepósito',
     descripcion: 'Confirmación de compra multidepósito de Sporting con dos productos y portal de gestión propio.',
-    compatibleTemplates: ['pim-pedido-confirmado-b2b'],
+    compatibleTemplates: ['pim-pedido-confirmado-pv'],
   },
   {
-    id: 'pim-pedido-confirmado-b2b-woker',
-    path: 'examples/pim/shared/pedido-confirmado-b2b-woker.json',
+    id: 'pim-pedido-confirmado-pv-woker',
+    path: 'examples/pim/shared/pedido-confirmado-pv-woker.json',
     store: 'shared',
     label: 'Woker (1 producto)',
     tipo: 'PIM — confirmación multidepósito',
     descripcion: 'Confirmación de compra multidepósito de Woker con un producto; valida la marca dinámica y el portal de gestión de Woker.',
-    compatibleTemplates: ['pim-pedido-confirmado-b2b'],
+    compatibleTemplates: ['pim-pedido-confirmado-pv'],
   },
   {
     id: 'pim-quiebre-stock-pv-sporting',
@@ -910,12 +913,12 @@ const EXAMPLE_SCENARIOS = [
     compatibleTemplates: ['pim-etiqueta-devolucion'],
   },
   {
-    id: 'pim-envio-b2b-sporting',
-    path: 'examples/pim/shared/envio-b2b-sporting.json',
-    store: 'shared',
-    label: 'Orden mayorista (2 packs)',
+    id: 'pim-envio-b2b-venta-deportiva',
+    path: 'examples/pim/shared/envio-b2b-venta-deportiva.json',
+    store: 'venta-deportiva',
+    label: 'Venta Deportiva — orden mayorista (2 packs)',
     tipo: 'PIM — despacho B2B',
-    descripcion: 'Orden B2B confirmada y en preparación, con datos de envío y dos packs mayoristas.',
+    descripcion: 'Orden B2B (Venta Deportiva) confirmada y en preparación, con datos de envío y dos packs mayoristas.',
     compatibleTemplates: ['pim-envio-b2b'],
   },
   {
@@ -931,147 +934,239 @@ const EXAMPLE_SCENARIOS = [
 
 const TEMPLATE_TAXONOMY = {
   'pedido-confirmado': {
-    canales: ['ecommerce'],
+    canales: ['b2c'],
     tiendas: ['sporting'],
     evento: { id: 'pedido-realizado', label: 'Pedido realizado' },
   },
   'woker-pedido-confirmado': {
-    canales: ['ecommerce'],
+    canales: ['b2c'],
     tiendas: ['woker'],
     evento: { id: 'pedido-realizado', label: 'Pedido realizado' },
   },
   'pedido-cancelado': {
-    canales: ['ecommerce'],
+    canales: ['b2c'],
     tiendas: ['sporting'],
     evento: { id: 'pedido-cancelado', label: 'Pedido cancelado' },
   },
   'woker-pedido-cancelado': {
-    canales: ['ecommerce'],
+    canales: ['b2c'],
     tiendas: ['woker'],
     evento: { id: 'pedido-cancelado', label: 'Pedido cancelado' },
   },
   'pago-aprobado': {
-    canales: ['ecommerce'],
+    canales: ['b2c'],
     tiendas: ['sporting'],
     evento: { id: 'pago-aprobado', label: 'Pago aprobado' },
   },
   'woker-pago-aprobado': {
-    canales: ['ecommerce'],
+    canales: ['b2c'],
     tiendas: ['woker'],
     evento: { id: 'pago-aprobado', label: 'Pago aprobado' },
   },
   'access-key': {
-    canales: ['ecommerce'],
+    canales: ['b2c'],
     tiendas: ['sporting'],
     evento: { id: 'acceso-cuenta', label: 'Acceso a cuenta' },
   },
   'b2b-access-key': {
-    canales: ['ecommerce'],
-    tiendas: ['b2b'],
+    canales: ['b2b'],
+    tiendas: ['venta-deportiva'],
     evento: { id: 'acceso-cuenta', label: 'Acceso a cuenta' },
   },
   'woker-access-key': {
-    canales: ['ecommerce'],
+    canales: ['b2c'],
     tiendas: ['woker'],
     evento: { id: 'acceso-cuenta', label: 'Acceso a cuenta' },
   },
   'back-in-stock': {
-    canales: ['ecommerce'],
+    canales: ['b2c'],
     tiendas: ['sporting'],
     evento: { id: 'volvio-a-stock', label: 'Volvio a stock' },
   },
   'woker-back-in-stock': {
-    canales: ['ecommerce'],
+    canales: ['b2c'],
     tiendas: ['woker'],
     evento: { id: 'volvio-a-stock', label: 'Volvio a stock' },
   },
   'order-invoiced': {
-    canales: ['ecommerce'],
+    canales: ['b2c'],
     tiendas: ['sporting'],
     evento: { id: 'pedido-facturado', label: 'Pedido facturado' },
   },
   'b2b-orden-generada': {
-    canales: ['ecommerce'],
-    tiendas: ['b2b'],
+    canales: ['b2b'],
+    tiendas: ['venta-deportiva'],
     evento: { id: 'orden-generada', label: 'Orden generada' },
   },
-  'pim-pedido-confirmado-b2b': {
+  'pim-pedido-confirmado-pv': {
     canales: ['punto-de-venta'],
-    tiendas: ['sporting', 'woker'],
+    tiendas: [],
     evento: { id: 'compra-realizada-pv', label: 'Compra realizada PV' },
   },
   'pim-quiebre-stock-pv': {
     canales: ['punto-de-venta'],
-    tiendas: ['sporting', 'woker'],
+    tiendas: [],
     evento: { id: 'quiebre-stock-pv', label: 'Sin stock PV' },
   },
   'pim-envio-despachado': {
-    canales: ['ecommerce', 'punto-de-venta'],
-    tiendas: ['sporting', 'woker'],
+    canales: ['b2c', 'punto-de-venta', 'ext'],
+    tiendas: ['sporting', 'woker', 'seller-adidas'],
+    logistica: ['andreani', 'ocasa', 'propia', 'retiro', 'producteca-oca', 'producteca-correo-argentino', 'producteca-trf', 'producteca-urbano'],
     evento: { id: 'pedido-despachado', label: 'Pedido despachado' },
   },
   'pim-retiro-disponible': {
-    canales: ['ecommerce'],
+    canales: ['b2c', 'punto-de-venta'],
     tiendas: ['sporting', 'woker'],
+    logistica: ['retiro'],
     evento: { id: 'pedido-listo-para-retirar', label: 'Pedido listo para retirar' },
   },
   'pim-envio-b2b': {
-    canales: ['ecommerce'],
-    tiendas: ['b2b'],
+    canales: ['b2b'],
+    tiendas: ['venta-deportiva'],
+    logistica: ['propia'],
     evento: { id: 'envio-b2b', label: 'Despacho B2B' },
   },
   'pim-giftcard-enviada': {
-    canales: ['ecommerce', 'punto-de-venta'],
+    canales: ['b2c', 'punto-de-venta'],
     tiendas: ['sporting', 'woker'],
     evento: { id: 'giftcard-enviada', label: 'Giftcard' },
   },
   'pim-recepcion-cambio': {
-    canales: ['ecommerce', 'punto-de-venta'],
+    canales: ['b2c', 'punto-de-venta'],
     tiendas: ['sporting', 'woker'],
     evento: { id: 'recepcion-cambio', label: 'Recepcion de cambio' },
   },
   'pim-recepcion-devolucion': {
-    canales: ['ecommerce'],
+    canales: ['b2c'],
     tiendas: ['sporting', 'woker'],
     evento: { id: 'recepcion-devolucion', label: 'Recepcion de devolucion' },
   },
   'pim-recepcion-garantia': {
-    canales: ['ecommerce', 'punto-de-venta'],
+    canales: ['b2c', 'punto-de-venta'],
     tiendas: ['sporting', 'woker'],
     evento: { id: 'recepcion-garantia', label: 'Recepcion de garantia' },
   },
   'pim-quiebre-stock': {
-    canales: ['ecommerce'],
+    canales: ['b2c'],
     tiendas: ['sporting', 'woker'],
     evento: { id: 'quiebre-stock', label: 'Quiebre de stock' },
   },
   'pim-factura-disponible': {
-    canales: ['ecommerce'],
+    canales: ['b2c'],
     tiendas: ['sporting', 'woker'],
     evento: { id: 'factura-disponible', label: 'Factura disponible' },
   },
   'pim-etiqueta-devolucion': {
-    canales: ['ecommerce', 'punto-de-venta'],
+    canales: ['b2c', 'punto-de-venta'],
     tiendas: ['sporting', 'woker'],
     evento: { id: 'etiqueta-devolucion', label: 'Etiqueta de devolucion' },
   },
 };
 
 const SCENARIO_TAXONOMY = {
-  'pim-pedido-confirmado-b2b-sporting': {
+  'pim-envio-despachado-andreani': {
+    canales: ['b2c', 'punto-de-venta'],
+    tiendas: ['sporting', 'woker'],
+    logistica: ['andreani'],
+    eventoId: 'pedido-despachado',
+  },
+  'pim-envio-despachado-ocasa': {
+    canales: ['b2c'],
+    tiendas: ['sporting', 'woker'],
+    logistica: ['ocasa'],
+    eventoId: 'pedido-despachado',
+  },
+  'pim-envio-despachado-propia': {
+    canales: ['b2c'],
+    tiendas: ['sporting', 'woker'],
+    logistica: ['propia'],
+    eventoId: 'pedido-despachado',
+  },
+  'pim-envio-despachado-producteca-oca': {
+    canales: ['ext'],
+    tiendas: ['seller-adidas'],
+    logistica: ['producteca-oca'],
+    eventoId: 'pedido-despachado',
+  },
+  'pim-envio-despachado-producteca-correo-argentino': {
+    canales: ['ext'],
+    tiendas: ['seller-adidas'],
+    logistica: ['producteca-correo-argentino'],
+    eventoId: 'pedido-despachado',
+  },
+  'pim-envio-despachado-producteca-trf': {
+    canales: ['ext'],
+    tiendas: ['seller-adidas'],
+    logistica: ['producteca-trf'],
+    eventoId: 'pedido-despachado',
+  },
+  'pim-envio-despachado-producteca-urbano': {
+    canales: ['ext'],
+    tiendas: ['seller-adidas'],
+    logistica: ['producteca-urbano'],
+    eventoId: 'pedido-despachado',
+  },
+  'pim-envio-despachado-producteca-sin-tracking': {
+    canales: ['ext'],
+    tiendas: ['seller-adidas'],
+    eventoId: 'pedido-despachado',
+  },
+  'pim-pedido-confirmado-pv-sporting': {
     canales: ['punto-de-venta'],
-    tiendas: ['sporting'],
+    tiendas: [],
     eventoId: 'compra-realizada-pv',
   },
-  'pim-pedido-confirmado-b2b-woker': {
+  'pim-pedido-confirmado-pv-woker': {
     canales: ['punto-de-venta'],
-    tiendas: ['woker'],
+    tiendas: [],
     eventoId: 'compra-realizada-pv',
   },
   'pim-quiebre-stock-pv-sporting': {
     canales: ['punto-de-venta'],
-    tiendas: ['sporting'],
+    tiendas: [],
     eventoId: 'quiebre-stock-pv',
+  },
+  'pim-retiro-disponible-sporting': {
+    canales: ['b2c'],
+    tiendas: ['sporting'],
+    logistica: ['retiro'],
+    eventoId: 'pedido-listo-para-retirar',
+  },
+  'pim-giftcard-enviada-sporting': {
+    canales: ['b2c'],
+    tiendas: ['sporting'],
+    eventoId: 'giftcard-enviada',
+  },
+  'pim-recepcion-cambio-sporting': {
+    canales: ['b2c'],
+    tiendas: ['sporting'],
+    eventoId: 'recepcion-cambio',
+  },
+  'pim-recepcion-devolucion-sporting': {
+    canales: ['b2c'],
+    tiendas: ['sporting'],
+    eventoId: 'recepcion-devolucion',
+  },
+  'pim-recepcion-garantia-sporting': {
+    canales: ['b2c'],
+    tiendas: ['sporting'],
+    eventoId: 'recepcion-garantia',
+  },
+  'pim-quiebre-stock-sporting': {
+    canales: ['b2c'],
+    tiendas: ['sporting'],
+    eventoId: 'quiebre-stock',
+  },
+  'pim-etiqueta-devolucion-sporting': {
+    canales: ['b2c'],
+    tiendas: ['sporting'],
+    eventoId: 'etiqueta-devolucion',
+  },
+  'pim-envio-b2b-venta-deportiva': {
+    canales: ['b2b'],
+    tiendas: ['venta-deportiva'],
+    logistica: ['propia'],
+    eventoId: 'envio-b2b',
   },
 };
 
@@ -1115,8 +1210,9 @@ function taxonomyFromTemplates(templateIds, field) {
 
 TEMPLATES.forEach((template) => {
   const taxonomy = TEMPLATE_TAXONOMY[template.id] || {};
-  template.canales = normalizeTaxonomyArray(template.canales || taxonomy.canales || ['ecommerce']);
+  template.canales = normalizeTaxonomyArray(template.canales || taxonomy.canales || ['b2c']);
   template.tiendas = normalizeTaxonomyArray(template.tiendas || taxonomy.tiendas || template.tienda || template.store);
+  template.logistica = normalizeTaxonomyArray(template.logistica || taxonomy.logistica || []);
   template.evento = template.evento || taxonomy.evento || { id: template.id, label: template.nombre };
   const stage = EVENT_STAGE_META[template.evento.id] || { id: 'sin-etapa', label: 'Sin etapa normalizada' };
   template.stageId = template.stageId || stage.id;
@@ -1131,6 +1227,8 @@ EXAMPLE_SCENARIOS.forEach((scenario) => {
   scenario.tiendas = normalizeTaxonomyArray(
     scenario.tiendas || taxonomy.tiendas || taxonomyFromTemplates(scenario.compatibleTemplates, 'tiendas') || scenario.tienda || scenario.store
   );
+  // La logística es específica del escenario (un carrier), no se hereda de la plantilla.
+  scenario.logistica = normalizeTaxonomyArray(scenario.logistica || taxonomy.logistica || []);
   scenario.eventoId = scenario.eventoId
     || taxonomy.eventoId
     || (scenario.compatibleTemplates || [])
@@ -1146,12 +1244,13 @@ EXAMPLE_SCENARIOS.forEach((scenario) => {
 });
 
 const VERSION = {
-  number: '1.15.0',
+  number: '1.16.0',
   date: '2026-06-11',
-  summary: 'Nueva plantilla PIM para quiebre de stock PV con alternativas de cambio, reembolso presencial o giftcard-enviada.',
+  summary: 'Taxonomía de 4 canales (PV, B2C, B2B, EXT), tienda por canal y nueva dimensión Logística con filtro propio.',
 };
 
 const CHANGELOG = [
+  { version: '1.16.0', date: '2026-06-11', summary: 'Modelo canal/tienda/logística: 4 canales (PV/B2C/B2B/EXT), Venta Deportiva como tienda B2B, Seller adidas/Producteca como EXT, y filtro de Logística en los módulos.' },
   { version: '1.15.0', date: '2026-06-11', summary: 'Plantilla PIM Sin stock PV, escenario Sporting representativo y flujo actualizado para Punto de Venta.' },
   { version: '1.4.0', date: '2026-06-09', summary: 'Inventario PIM, 14 plantillas compartidas en catálogo, renderer PIM mínimo y envio-despachado v2 con escenario representativo.' },
   { version: '1.3.0', date: '2026-06-08', summary: 'Nueva plantilla orden generada B2B y escenario específico para previsualización.' },

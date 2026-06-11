@@ -2,6 +2,19 @@
 
 Formato: versión, fecha, resumen del cambio principal.
 
+## v1.16.0 — 2026-06-11
+
+Rediseño del modelo de clasificación a **Canal > Tienda > Logística > Escenario**:
+
+- **Canal** pasa a 4 valores: `punto-de-venta`, `b2c`, `b2b`, `ext` (antes `ecommerce` + `punto-de-venta`).
+- **Tienda** por canal: PV no tiene tienda; B2C = Sporting/Woker; **B2B = Venta Deportiva**; **EXT = Seller adidas** (Producteca).
+- **Logística** es una **dimensión nueva** con filtro propio: `andreani`, `ocasa`, `propia`, `retiro` y `producteca-{oca,correo-argentino,trf,urbano}`.
+- **`config.js`**: `TEMPLATE_TAXONOMY` y `SCENARIO_TAXONOMY` remapeados; nuevo campo `logistica`; escenarios Producteca reclasificados a EXT/Seller adidas; el ejemplo B2B apunta a Venta Deportiva.
+- **`assets/js/shared.js`**: `CHANNEL_OPTIONS`/`STORE_OPTIONS` actualizados, nuevo `LOGISTICA_OPTIONS` + `CHANNEL_LOGISTICA`, helpers de logística y filtro de logística en `matchesChannelStore`.
+- **Catálogo / Visualizador / Simulador**: nuevo filtro **Logística** y badges; **Flujo** suma botones de canal (B2C/B2B/EXT) y tiendas Venta Deportiva/Seller adidas.
+- **Renombre**: `pedido-confirmado-b2b` → `pedido-confirmado-pv` (es evento de Punto de Venta, evita colisión con el canal B2B).
+- **Limpieza**: se eliminan ejemplos Venta Deportiva sobre plantillas B2C/PV y los B2B sobre tiendas no-VD (VD solo en B2B).
+
 ## v1.15.0 - 2026-06-11
 
 Plantilla PIM **Sin stock PV** para quiebres de stock en Punto de Venta:

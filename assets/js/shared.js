@@ -17,13 +17,35 @@ const CT = (() => {
   const STORE_OPTIONS = [
     { id: 'sporting', label: 'Sporting' },
     { id: 'woker', label: 'Woker' },
-    { id: 'b2b', label: 'B2B' },
+    { id: 'venta-deportiva', label: 'Venta Deportiva' },
+    { id: 'seller-adidas', label: 'Seller adidas' },
   ];
 
   const CHANNEL_OPTIONS = [
-    { id: 'ecommerce', label: 'E-commerce' },
     { id: 'punto-de-venta', label: 'Punto de Venta' },
+    { id: 'b2c', label: 'B2C' },
+    { id: 'b2b', label: 'B2B' },
+    { id: 'ext', label: 'EXT' },
   ];
+
+  const LOGISTICA_OPTIONS = [
+    { id: 'andreani', label: 'Andreani' },
+    { id: 'ocasa', label: 'OCASA' },
+    { id: 'propia', label: 'Propia' },
+    { id: 'retiro', label: 'Retiro' },
+    { id: 'producteca-oca', label: 'Producteca · OCA' },
+    { id: 'producteca-correo-argentino', label: 'Producteca · Correo Argentino' },
+    { id: 'producteca-trf', label: 'Producteca · TRF' },
+    { id: 'producteca-urbano', label: 'Producteca · Urbano' },
+  ];
+
+  // Logística válida por canal (para hints de UI y validación).
+  const CHANNEL_LOGISTICA = {
+    'punto-de-venta': ['andreani', 'retiro'],
+    'b2c': ['andreani', 'ocasa', 'propia', 'retiro'],
+    'b2b': ['propia'],
+    'ext': ['producteca-oca', 'producteca-correo-argentino', 'producteca-trf', 'producteca-urbano'],
+  };
 
   function escapeHtml(value) {
     if (value === null || value === undefined) return '';
@@ -78,10 +100,17 @@ const CT = (() => {
   }
 
   function channelLabel(channel) {
-    const slug = slugify(channel || 'ecommerce');
+    const slug = slugify(channel || 'b2c');
     const known = CHANNEL_OPTIONS.find((option) => option.id === slug);
     if (known) return known.label;
     return String(channel || slug).replace(/(^|-)([a-z])/g, (_, sep, chr) => `${sep ? ' ' : ''}${chr.toUpperCase()}`);
+  }
+
+  function logisticaLabel(logistica) {
+    const slug = slugify(logistica);
+    const known = LOGISTICA_OPTIONS.find((option) => option.id === slug);
+    if (known) return known.label;
+    return String(logistica || slug).replace(/(^|-)([a-z])/g, (_, sep, chr) => `${sep ? ' ' : ''}${chr.toUpperCase()}`);
   }
 
   function normalizeList(values) {
@@ -107,12 +136,20 @@ const CT = (() => {
 
   function templateChannels(template) {
     const explicit = normalizeList(template?.canales || template?.canal);
-    return explicit.length ? explicit : ['ecommerce'];
+    return explicit.length ? explicit : ['b2c'];
   }
 
   function scenarioChannels(scenario) {
     const explicit = normalizeList(scenario?.canales || scenario?.canal);
-    return explicit.length ? explicit : ['ecommerce'];
+    return explicit.length ? explicit : ['b2c'];
+  }
+
+  function templateLogistics(template) {
+    return normalizeList(template?.logistica || template?.logisticas);
+  }
+
+  function scenarioLogistics(scenario) {
+    return normalizeList(scenario?.logistica || scenario?.logisticas);
   }
 
   function templateStores(template) {
@@ -139,6 +176,10 @@ const CT = (() => {
     return optionListFor(items, (item) => normalizeList(resolver(item)), STORE_OPTIONS, storeLabel);
   }
 
+  function logisticaOptionsFor(items, resolver) {
+    return optionListFor(items, (item) => normalizeList(resolver(item)), LOGISTICA_OPTIONS, logisticaLabel);
+  }
+
   function badge(text, extraClass) {
     return `<span class="ct-badge ${extraClass}">${escapeHtml(text)}</span>`;
   }
@@ -161,7 +202,7 @@ const CT = (() => {
   }
 
   function channelBadge(channel) {
-    const slug = slugify(channel || 'ecommerce');
+    const slug = slugify(channel || 'b2c');
     return badge(channelLabel(slug), `ct-channel-${slug}`);
   }
 
@@ -169,14 +210,28 @@ const CT = (() => {
     return normalizeList(channels).map(channelBadge).join('');
   }
 
+  function logisticaBadge(logistica) {
+    const slug = slugify(logistica);
+    return badge(logisticaLabel(slug), `ct-logistica-${slug}`);
+  }
+
+  function logisticaBadges(logisticas) {
+    return normalizeList(logisticas).map(logisticaBadge).join('');
+  }
+
   function matchesChannelStore(item, filters) {
     const channel = slugify(filters?.channel);
     const store = slugify(filters?.store);
-    const channels = item?.compatibleTemplates ? scenarioChannels(item) : templateChannels(item);
-    const stores = item?.compatibleTemplates ? scenarioStores(item) : templateStores(item);
+    const logistica = slugify(filters?.logistica);
+    const isScenario = !!item?.compatibleTemplates;
+    const channels = isScenario ? scenarioChannels(item) : templateChannels(item);
+    const stores = isScenario ? scenarioStores(item) : templateStores(item);
+    const logisticas = isScenario ? scenarioLogistics(item) : templateLogistics(item);
     const matchesChannel = !channel || channels.includes(channel);
     const matchesStore = !store || stores.includes(store) || stores.includes('shared');
-    return matchesChannel && matchesStore;
+    // Si el ítem no declara logística, no lo excluye un filtro de logística (es transversal).
+    const matchesLogistica = !logistica || logisticas.length === 0 || logisticas.includes(logistica);
+    return matchesChannel && matchesStore && matchesLogistica;
   }
 
   /**
@@ -551,15 +606,20 @@ const CT = (() => {
     slugify,
     STORE_OPTIONS,
     CHANNEL_OPTIONS,
+    LOGISTICA_OPTIONS,
+    CHANNEL_LOGISTICA,
     platformBadge,
     statusBadge,
     channelBadge,
     channelBadges,
     storeBadge,
     storeBadges,
+    logisticaBadge,
+    logisticaBadges,
     storeFromPath,
     storeLabel,
     channelLabel,
+    logisticaLabel,
     labelsFor,
     templateChannels,
     scenarioChannels,
@@ -567,8 +627,11 @@ const CT = (() => {
     scenarioStores,
     templateStore,
     scenarioStore,
+    templateLogistics,
+    scenarioLogistics,
     storeOptionsFor,
     channelOptionsFor,
+    logisticaOptionsFor,
     matchesChannelStore,
     renderTopbar,
     downloadFile,

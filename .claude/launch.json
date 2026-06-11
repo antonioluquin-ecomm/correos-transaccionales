@@ -5,7 +5,8 @@
       "name": "correos-transaccionales-static",
       "runtimeExecutable": "node",
       "runtimeArgs": [".tmp-static-server.js"],
-      "port": 8723
+      "port": 8723,
+      "autoPort": true
     }
   ]
 }

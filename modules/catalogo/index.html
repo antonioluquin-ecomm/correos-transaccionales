@@ -565,6 +565,12 @@
             </select>
           </div>
           <div class="ct-field">
+            <label for="ct-filter-logistica">Logística</label>
+            <select id="ct-filter-logistica">
+              <option value="">Todas</option>
+            </select>
+          </div>
+          <div class="ct-field">
             <label for="ct-filter-categoria">Categoría</label>
             <select id="ct-filter-categoria">
               <option value="">Todas</option>
@@ -619,6 +625,8 @@
             <dd id="ct-detail-canal"></dd>
             <dt>Tienda</dt>
             <dd id="ct-detail-tienda"></dd>
+            <dt>Logística</dt>
+            <dd id="ct-detail-logistica"></dd>
             <dt>Categoría</dt>
             <dd id="ct-detail-categoria"></dd>
             <dt>Última actualización</dt>
@@ -659,6 +667,7 @@
         const clearFiltersBtn = document.getElementById('ct-clear-filters');
         const searchEl = document.getElementById('ct-search');
         const filterTiendaEl = document.getElementById('ct-filter-tienda');
+        const filterLogisticaEl = document.getElementById('ct-filter-logistica');
         const filterCanalEl = document.getElementById('ct-filter-canal');
         const filterPlataformaEl = document.getElementById('ct-filter-plataforma');
         const filterCategoriaEl = document.getElementById('ct-filter-categoria');
@@ -674,6 +683,7 @@
         const responsableEl = document.getElementById('ct-detail-responsable');
         const canalEl = document.getElementById('ct-detail-canal');
         const tiendaEl = document.getElementById('ct-detail-tienda');
+        const logisticaEl = document.getElementById('ct-detail-logistica');
         const categoriaEl = document.getElementById('ct-detail-categoria');
         const actualizadoEl = document.getElementById('ct-detail-actualizado');
         const archivoEl = document.getElementById('ct-detail-archivo');
@@ -733,6 +743,15 @@
           });
         }
 
+        function fillLogisticaSelect() {
+          CT.logisticaOptionsFor(templates, CT.templateLogistics).forEach((logistica) => {
+            const option = document.createElement('option');
+            option.value = logistica.id;
+            option.textContent = logistica.label;
+            filterLogisticaEl.appendChild(option);
+          });
+        }
+
         function fillSelect(selectEl, values, labelFn) {
           values.forEach((value) => {
             const option = document.createElement('option');
@@ -781,6 +800,7 @@
           const matchesCanalTienda = CT.matchesChannelStore(template, {
             channel: filterCanalEl.value,
             store: filterTiendaEl.value,
+            logistica: filterLogisticaEl.value,
           });
           const matchesPlataforma = !filterPlataformaEl.value || template.plataforma === filterPlataformaEl.value;
           const matchesCategoria = !filterCategoriaEl.value || template.categoria === filterCategoriaEl.value;
@@ -806,6 +826,7 @@
           if (filterPlataformaEl.value) chips.push(`Plataforma: ${filterPlataformaEl.value}`);
           if (filterCanalEl.value) chips.push(`Canal: ${CT.channelLabel(filterCanalEl.value)}`);
           if (filterTiendaEl.value) chips.push(`Tienda: ${CT.storeLabel(filterTiendaEl.value)}`);
+          if (filterLogisticaEl.value) chips.push(`Logística: ${CT.logisticaLabel(filterLogisticaEl.value)}`);
           if (filterCategoriaEl.value) chips.push(`Categoría: ${filterCategoriaEl.value}`);
           if (filterEstadoEl.value) chips.push(`Estado: ${capitalizeFirst(filterEstadoEl.value)}`);
           if (sortEl.value !== 'updated-desc') chips.push(`Orden: ${sortEl.selectedOptions[0]?.textContent || 'Personalizado'}`);
@@ -825,6 +846,7 @@
                 ${CT.platformBadge(template.plataforma || 'Sin plataforma')}
                 ${CT.channelBadges(CT.templateChannels(template))}
                 ${CT.storeBadges(CT.templateStores(template))}
+                ${CT.logisticaBadges(CT.templateLogistics(template))}
                 ${CT.statusBadge(template.estado || 'sin estado')}
               </div>
               <code class="ct-template-id" title="${CT.escapeHtml(template.id || '')}">${CT.escapeHtml(template.id || '')}</code>
@@ -880,11 +902,13 @@
           currentTemplate = template;
           lastFocusedEl = document.activeElement;
           titleEl.textContent = template.nombre || 'Sin nombre';
-          badgesEl.innerHTML = `${CT.platformBadge(template.plataforma || 'Sin plataforma')}${CT.channelBadges(CT.templateChannels(template))}${CT.storeBadges(CT.templateStores(template))}${CT.statusBadge(template.estado || 'sin estado')}`;
+          badgesEl.innerHTML = `${CT.platformBadge(template.plataforma || 'Sin plataforma')}${CT.channelBadges(CT.templateChannels(template))}${CT.storeBadges(CT.templateStores(template))}${CT.logisticaBadges(CT.templateLogistics(template))}${CT.statusBadge(template.estado || 'sin estado')}`;
           descripcionEl.textContent = template.descripcion || 'Sin descripción documentada.';
           responsableEl.textContent = template.responsable || 'Sin responsable';
           canalEl.textContent = CT.labelsFor(CT.templateChannels(template), CT.channelLabel);
           tiendaEl.textContent = CT.labelsFor(CT.templateStores(template), CT.storeLabel);
+          const logisticas = CT.templateLogistics(template);
+          logisticaEl.textContent = logisticas.length ? CT.labelsFor(logisticas, CT.logisticaLabel) : 'No aplica';
           categoriaEl.textContent = template.categoria || 'Sin categoría';
           actualizadoEl.textContent = formatDate(template.actualizado);
           archivoEl.innerHTML = template.archivoHtml ? `<code>${CT.escapeHtml(template.archivoHtml)}</code>` : 'Sin HTML asociado.';
@@ -962,11 +986,12 @@
         fillSelect(filterPlataformaEl, uniqueValues('plataforma'));
         fillChannelSelect();
         fillStoreSelect();
+        fillLogisticaSelect();
         fillSelect(filterCategoriaEl, uniqueValues('categoria'));
         fillSelect(filterEstadoEl, uniqueValues('estado'), capitalizeFirst);
         updateKpis();
 
-        [searchEl, filterPlataformaEl, filterCanalEl, filterTiendaEl, filterCategoriaEl, filterEstadoEl, sortEl].forEach((el) => {
+        [searchEl, filterPlataformaEl, filterCanalEl, filterTiendaEl, filterLogisticaEl, filterCategoriaEl, filterEstadoEl, sortEl].forEach((el) => {
           el.addEventListener('input', renderResults);
           el.addEventListener('change', renderResults);
         });
@@ -976,6 +1001,7 @@
           filterPlataformaEl.value = '';
           filterCanalEl.value = '';
           filterTiendaEl.value = '';
+          filterLogisticaEl.value = '';
           filterCategoriaEl.value = '';
           filterEstadoEl.value = '';
           sortEl.value = 'updated-desc';

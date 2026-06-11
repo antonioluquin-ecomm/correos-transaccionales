@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 const root = path.resolve(process.cwd());
-const port = 8723;
+const port = process.env.PORT || 8723;
 const host = '127.0.0.1';
 
 const mime = {

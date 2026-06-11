@@ -162,10 +162,24 @@ a.ct-card {
 
 .ct-badge.ct-store-sporting { background: #5b8c2a; }
 .ct-badge.ct-store-woker { background: #111827; }
+.ct-badge.ct-store-venta-deportiva { background: #0f766e; }
+.ct-badge.ct-store-seller-adidas { background: #7c3aed; }
 .ct-badge.ct-store-b2b { background: #0f766e; }
 .ct-badge.ct-store-shared { background: #64748b; }
-.ct-badge.ct-channel-ecommerce { background: #1d4ed8; }
 .ct-badge.ct-channel-punto-de-venta { background: #7c2d12; }
+.ct-badge.ct-channel-b2c { background: #1d4ed8; }
+.ct-badge.ct-channel-b2b { background: #0f766e; }
+.ct-badge.ct-channel-ext { background: #7c3aed; }
+.ct-badge.ct-channel-ecommerce { background: #1d4ed8; }
+
+.ct-badge.ct-logistica-andreani { background: #b91c1c; }
+.ct-badge.ct-logistica-ocasa { background: #c2410c; }
+.ct-badge.ct-logistica-propia { background: #0f766e; }
+.ct-badge.ct-logistica-retiro { background: #475569; }
+.ct-badge.ct-logistica-producteca-oca,
+.ct-badge.ct-logistica-producteca-correo-argentino,
+.ct-badge.ct-logistica-producteca-trf,
+.ct-badge.ct-logistica-producteca-urbano { background: #0e7490; }
 
 .ct-badge.ct-status-activo { background: var(--ct-status-activo); }
 .ct-badge.ct-status-en-revision { background: var(--ct-status-revision); }
