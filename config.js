@@ -570,13 +570,16 @@ const TEMPLATES = [
     estado: 'en revisión',
     actualizado: '2026-06-09',
     responsable: 'Por definir',
-    descripcion: 'Informa al cliente los productos incluidos en una etiqueta de devolucion.',
-    archivoHtml: 'templates/pim/shared/etiqueta-devolucion/etiqueta-devolucion.current.html',
-    ejemplo: null,
+    descripcion: 'Informa que la devolucion esta en gestion: la etiqueta viaja adjunta al correo y el operador logistico retira los productos a domicilio. Lista los productos a devolver.',
+    archivoHtml: 'templates/pim/shared/etiqueta-devolucion/etiqueta-devolucion.v2.html',
+    ejemplo: 'examples/pim/shared/etiqueta-devolucion-sporting.json',
     variables: [
+      'Tienda.Nombre',
       'Tienda.Datos.NotificacionesConfig.HeaderURL',
       'Tienda.Datos.NotificacionesConfig.HeaderImage',
-      'Pedido.LineasPedido[] (Producto, SKU, Cantidad)',
+      'Pedido.LineasPedido[].Producto',
+      'Pedido.LineasPedido[].SKU',
+      'Pedido.LineasPedido[].Cantidad',
     ],
   },
   {
@@ -884,12 +887,21 @@ const EXAMPLE_SCENARIOS = [
     descripcion: 'Reembolso por error de inventario con dos artículos dados de baja y plazos por medio de pago.',
     compatibleTemplates: ['pim-reembolso'],
   },
+  {
+    id: 'pim-etiqueta-devolucion-sporting',
+    path: 'examples/pim/shared/etiqueta-devolucion-sporting.json',
+    store: 'shared',
+    label: '2 productos a devolver',
+    tipo: 'PIM — etiqueta de devolución',
+    descripcion: 'Etiqueta de devolución adjunta con dos productos a retirar a domicilio.',
+    compatibleTemplates: ['pim-etiqueta-devolucion'],
+  },
 ];
 
 const VERSION = {
-  number: '1.9.0',
+  number: '1.10.0',
   date: '2026-06-10',
-  summary: 'reembolso.v2 (error de inventario) alineado a VTEX, con artículos dados de baja y plazos de reintegro.',
+  summary: 'etiqueta-devolucion.v2 alineada a VTEX (etiqueta adjunta + pasos de retiro a domicilio).',
 };
 
 const CHANGELOG = [

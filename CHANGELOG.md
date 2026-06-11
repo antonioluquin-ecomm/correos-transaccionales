@@ -2,6 +2,14 @@
 
 Formato: versión, fecha, resumen del cambio principal.
 
+## v1.10.0 — 2026-06-10
+
+Plantilla PIM **Etiqueta de devolución** `etiqueta-devolucion.v2`:
+
+- **`templates/pim/shared/etiqueta-devolucion/etiqueta-devolucion.v2.html`**: alineada al estándar visual VTEX. Informa que la devolución está en gestión: callout de **etiqueta adjunta** al correo, card **Productos a devolver** (`range LineasPedido` → Producto/SKU/Cantidad) y card **¿Cómo sigue?** (preparar paquete con la etiqueta → retiro a domicilio → aviso al recibir). Paleta neutra slate. La etiqueta viaja adjunta (sin URL, como la factura en multidepósito). Variables reales: `Tienda.Nombre`, `HeaderURL`/`HeaderImage`, `LineasPedido[]` (`Producto`/`SKU`/`Cantidad`).
+- **`examples/pim/shared/etiqueta-devolucion-sporting.json`**: escenario con dos productos a devolver.
+- **`config.js`**: `pim-etiqueta-devolucion` → v2 + escenario; VERSION → 1.10.0.
+
 ## v1.9.0 — 2026-06-10
 
 Plantilla PIM **Reembolso** `reembolso.v2` (error de inventario):

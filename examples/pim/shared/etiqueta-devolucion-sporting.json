@@ -1,0 +1,25 @@
+{
+  "Tienda": {
+    "Nombre": "Sporting",
+    "Datos": {
+      "NotificacionesConfig": {
+        "HeaderURL": "https://www.sporting.com.ar",
+        "HeaderImage": "https://ventadeportiva.vteximg.com.br/arquivos/logo-mail.png"
+      }
+    }
+  },
+  "Pedido": {
+    "LineasPedido": [
+      {
+        "Producto": "Remera Algodón Básica",
+        "SKU": "SPO-REM-205",
+        "Cantidad": 1
+      },
+      {
+        "Producto": "Short Deportivo",
+        "SKU": "SPO-SHO-088",
+        "Cantidad": 1
+      }
+    ]
+  }
+}
