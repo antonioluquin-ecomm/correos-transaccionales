@@ -1,0 +1,28 @@
+{
+  "Tienda": {
+    "Nombre": "Sporting",
+    "Datos": {
+      "NotificacionesConfig": {
+        "HeaderURL": "https://www.sporting.com.ar",
+        "HeaderImage": "https://ventadeportiva.vteximg.com.br/arquivos/logo-mail.png"
+      }
+    }
+  },
+  "Pedido": {
+    "NroPedidoCanal": "SPO-771045820",
+    "LineasPedido": [
+      {
+        "Producto": "Buzo Canguro Algodón",
+        "SKU": "SPO-BUZ-209",
+        "Cantidad": 1,
+        "Estado": "B"
+      },
+      {
+        "Producto": "Pantalón Jogger",
+        "SKU": "SPO-PAN-141",
+        "Cantidad": 2,
+        "Estado": "B"
+      }
+    ]
+  }
+}

@@ -21,7 +21,7 @@ Inventario inicial para estandarizar las plantillas PIM compartidas por Sporting
 | `recepcion-cambio` | Alta | Base v2 (lista) | `Tienda.Nombre`, `HeaderURL`, `HeaderImage`, `Pedido.LineasPedido[]` (`Producto`/`SKU`/`Cantidad`/`Estado`), `(index .Historial 0).Observaciones` | Header dinamico, footer VTEX, estados aceptado/rechazado | Estado por linea (O=Aceptado / R=Rechazado + motivo) |
 | `recepcion-devolucion` | Alta | Base v2 (lista) | `Tienda.Nombre`, `HeaderURL`, `HeaderImage`, `Pedido.LineasPedido[]` (`Producto`/`SKU`/`Cantidad`/`Estado`), `(index .Historial 0).Observaciones` | Header dinamico, footer VTEX, estados + plazo reembolso | Igual a cambio, con info de reintegro a 96 h |
 | `recepcion-garantia` | Alta | Base v2 (lista) | `Tienda.Nombre`, `HeaderURL`, `HeaderImage`, `Pedido.LineasPedido[]` (`Producto`/`SKU`/`Cantidad`/`Estado`), `(index .Historial 0).Observaciones` | Header dinamico, footer VTEX, estados + aclaraciones | Igual a cambio, con aclaraciones de reembolso (credito/debito) |
-| `reembolso` | Alta | Pendiente | `HeaderURL`, `HeaderImage`, `Pedido.NroPedidoCanal`, `Pedido.LineasPedido[]`, `Producto`, `SKU`, `Cantidad`, `Estado` | Header dinamico, footer banner, logos footer | Clarificar motivo, productos afectados y tiempos por medio de pago |
+| `reembolso` | Alta | Base v2 (lista) | `Tienda.Nombre`, `HeaderURL`, `HeaderImage`, `Pedido.NroPedidoCanal`, `Pedido.LineasPedido[]` (`Producto`/`SKU`/`Cantidad`/`Estado`; "B"=Baja) | Header dinamico, footer VTEX, articulos dados de baja | Reembolso por error de inventario, plazos por medio de pago |
 | `factura-disponible` | Media | Pendiente | `HeaderURL`, `HeaderImage` | Header dinamico, footer banner, logos footer | Agregar contexto de pedido/factura si PIM lo expone |
 | `etiqueta-devolucion` | Media | Pendiente | `HeaderURL`, `HeaderImage`, `Pedido.LineasPedido[]`, `Producto`, `SKU`, `Cantidad` | Header dinamico, footer banner, logos footer | Mejorar instrucciones para imprimir/usar etiqueta y preparar paquete |
 | `despacho-b2b` | Media | Pendiente | `Pedido.NroPedidoCanal`, `Pedido.FechaPedido`, `Pedido.DatosEnvio.*`, `Pedido.LineasPedido[]`, `Pedido.TotalLineas` | Header dinamico, iconos check/circle, logos footer | Validar si debe quedar en PIM compartido o en flujo B2B especifico |
@@ -36,6 +36,7 @@ Inventario inicial para estandarizar las plantillas PIM compartidas por Sporting
 3. `despacho-pickup`: pedido listo para retirar en sucursal, con datos de pickup. (Listo v2)
 4. `giftcard`: codigo de cambio con codigo destacado y condiciones. (Listo v2)
 5. `recepcion-cambio`, `recepcion-devolucion`, `recepcion-garantia`: estados aceptado/rechazado con motivo. (Listo v2)
-6. `despacho-b2b`: migra tablas/resumen del flujo B2B.
+6. `reembolso`: reembolso por error de inventario con articulos dados de baja. (Listo v2)
+7. `despacho-b2b`: migra tablas/resumen del flujo B2B.
 
 > Nota: `nuevo-pickup` se eliminó (2026-06-10). Era una version vieja y redundante con `despacho-pickup`, que es la plantilla correcta de retiro en sucursal.

@@ -1,0 +1,264 @@
+<!-- PIM · reembolso — Version 2 (base canónica compartida Sporting/Woker) -->
+<!-- Flujo Reembolso por error de inventario: artículos dados de baja (Estado "B") y -->
+<!-- reembolso al medio de pago original. Estructura alineada al estándar visual VTEX. -->
+<!-- Variables reales: Tienda.Nombre, HeaderURL/Image, Pedido.NroPedidoCanal, -->
+<!-- Pedido.LineasPedido[] (Producto/SKU/Cantidad/Estado; "B" = Baja). -->
+<!doctype html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta name="x-apple-disable-message-reformatting" />
+    <meta name="format-detection" content="telephone=no,address=no,email=no,date=no" />
+    <title>{{ .Tienda.Nombre }} — Procesamos tu reembolso</title>
+    <!--[if mso]>
+      <xml><o:OfficeDocumentSettings><o:AllowPNG/><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml>
+    <![endif]-->
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&display=swap');
+
+      html, body { margin:0 !important; padding:0 !important; width:100% !important; background:#e8e8e8 !important; }
+      body { font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; color:#111827; }
+      * { -ms-text-size-adjust:100%; -webkit-text-size-adjust:100%; }
+      table, td { border-collapse:collapse !important; mso-table-lspace:0pt !important; mso-table-rspace:0pt !important; }
+      img { border:0; outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; display:block; }
+      a { text-decoration:none; color:inherit; }
+
+      .wrap { width:100%; max-width:600px; margin:0 auto; }
+      .card { background:#ffffff; border:1px solid #e5e7eb; border-radius:12px; overflow:hidden; }
+      .gap { height:12px; line-height:12px; font-size:12px; }
+      .h2 { font-size:15px; line-height:22px; font-weight:bold; color:#111827; margin:0; }
+      .text { font-size:14px; line-height:22px; color:#374151; margin:0; }
+      .text-sm { font-size:13px; line-height:20px; color:#6b7280; margin:0; }
+
+      @media only screen and (max-width:600px) {
+        .wrap { width:100% !important; max-width:100% !important; }
+        .card { border-radius:0 !important; border-left:none !important; border-right:none !important; }
+        .outer-pad { padding:0 !important; }
+        .hero-td { padding:32px 20px 28px !important; }
+        .h1 { font-size:22px !important; line-height:28px !important; }
+        .sum-cell, .sum-cell-r { display:block !important; width:100% !important; border-left:none !important; border-bottom:1px solid #f3f4f6 !important; padding:14px 16px !important; box-sizing:border-box !important; }
+        .sum-last { border-bottom:none !important; }
+        .footer-td { border-radius:0 !important; }
+        .trust-logos { border-radius:0 !important; }
+        .header-logo { width:128px !important; }
+        .brand-logo-sporting { width:88px !important; }
+        .brand-logo-woker { width:64px !important; }
+        .brand-logo-luquin { width:78px !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Preheader -->
+    <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;visibility:hidden;mso-hide:all;">
+      Procesamos el reembolso de tu pedido {{ .Pedido.NroPedidoCanal }} al medio de pago original.&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;
+    </div>
+
+    <table role="presentation" width="100%" bgcolor="#e8e8e8" style="background:#e8e8e8;">
+      <tr>
+        <td align="center" class="outer-pad" style="padding:24px 12px 48px;">
+          <table role="presentation" class="wrap" width="100%" style="width:100%;max-width:600px;">
+
+            <!-- ── MAIN CARD ── -->
+            <tr>
+              <td>
+                <table role="presentation" width="100%" class="card">
+
+                  <!-- HEADER / logo dinámico por tienda -->
+                  <tr>
+                    <td bgcolor="#ffffff" style="background:#ffffff;padding:20px 24px 16px;border-bottom:1px solid #eef2f7;">
+                      <a href="{{ .Tienda.Datos.NotificacionesConfig.HeaderURL }}" target="_blank" style="display:inline-block;text-decoration:none;">
+                        <img src="{{ .Tienda.Datos.NotificacionesConfig.HeaderImage }}" alt="{{ .Tienda.Nombre }}" width="150" class="header-logo" style="width:150px;height:auto;display:block;" />
+                      </a>
+                    </td>
+                  </tr>
+
+                  <!-- HERO (slate neutro: plantilla compartida) -->
+                  <tr>
+                    <td class="hero-td" bgcolor="#0f172a" style="background:linear-gradient(150deg,#0b1220 0%,#0f172a 45%,#1e293b 100%);padding:40px 28px 36px;text-align:center;">
+                      <table cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 16px auto;">
+                        <tr>
+                          <td align="center" valign="middle" width="80" height="80" style="width:80px;height:80px;border-radius:50%;background:rgba(37,99,235,.20);">
+                            <table cellpadding="0" cellspacing="0" border="0" align="center"><tr>
+                              <td align="center" valign="middle" width="52" height="52" style="width:52px;height:52px;border-radius:50%;background:#ffffff;font-size:24px;line-height:52px;text-align:center;">&#128184;</td>
+                            </tr></table>
+                          </td>
+                        </tr>
+                      </table>
+                      <p style="font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:#93c5fd;margin:0 0 10px 0;text-align:center;">Reembolso</p>
+                      <p class="h1" style="font-size:28px;line-height:1.1;font-weight:800;color:#ffffff;letter-spacing:-0.3px;margin:0 0 8px 0;text-align:center;text-shadow:0 2px 16px rgba(0,0,0,.15);">Procesamos tu reembolso</p>
+                      <p style="font-size:13px;color:rgba(255,255,255,.8);margin:0;text-align:center;">Por un error de inventario no pudimos completar tu pedido. Te devolvemos el importe abonado.</p>
+                    </td>
+                  </tr>
+
+                  <!-- Intro + N° de pedido -->
+                  <tr>
+                    <td style="padding:24px 24px 0;">
+                      <p class="text" style="font-size:15px;line-height:23px;color:#374151;margin:0 0 16px 0;">Lamentamos informarte que, debido a un error de inventario, tu pedido no pudo procesarse correctamente: algunos artículos no están disponibles en este momento.</p>
+                      <table role="presentation" width="100%" bgcolor="#f8fafc" style="background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;">
+                        <tr>
+                          <td style="padding:14px 18px;">
+                            <p style="font-size:9.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#b0b0b0;margin:0 0 4px 0;">N.&deg; de pedido</p>
+                            <p style="font-size:16px;line-height:22px;font-weight:800;color:#111827;margin:0;">{{ .Pedido.NroPedidoCanal }}</p>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="gap">&nbsp;</td></tr>
+
+            <!-- ARTÍCULOS NO DISPONIBLES -->
+            <tr>
+              <td>
+                <table role="presentation" width="100%" class="card">
+                  <tr>
+                    <td style="padding:18px 20px 12px;border-bottom:1px solid #f3f4f6;">
+                      <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0;">Artículos no disponibles</p>
+                    </td>
+                  </tr>
+                  {{ with .Pedido.LineasPedido }}
+                    {{ range . }}
+                      {{ if (eq .Estado "B") }}
+                      <tr>
+                        <td style="padding:14px 20px;border-bottom:1px solid #f3f4f6;">
+                          <table role="presentation" width="100%">
+                            <tr>
+                              <td valign="top" width="26" style="width:26px;font-size:15px;line-height:20px;color:#b45309;font-weight:bold;">&#9888;</td>
+                              <td valign="top" style="padding-right:10px;">
+                                <p class="item-name" style="font-size:14px;line-height:20px;font-weight:bold;color:#111827;margin:0 0 2px 0;">{{ .Producto }}</p>
+                                <p class="item-meta" style="font-size:12px;line-height:18px;color:#6b7280;margin:0;">SKU {{ .SKU }} &middot; Cantidad: {{ .Cantidad }}</p>
+                              </td>
+                              <td valign="top" align="right" style="white-space:nowrap;"><span style="display:inline-block;font-size:11px;font-weight:700;color:#92400e;background:#fef3c7;border-radius:6px;padding:4px 10px;">No disponible</span></td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                      {{ end }}
+                    {{ end }}
+                  {{ else }}
+                    <tr><td style="padding:16px 20px;"><p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:0;">No hay artículos para mostrar.</p></td></tr>
+                  {{ end }}
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="gap">&nbsp;</td></tr>
+
+            <!-- INFORMACIÓN IMPORTANTE / REEMBOLSO -->
+            <tr>
+              <td>
+                <table role="presentation" width="100%" class="card">
+                  <tr>
+                    <td style="padding:18px 20px 12px;border-bottom:1px solid #f3f4f6;">
+                      <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0;">Sobre tu reembolso</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding:16px 20px;">
+                      <table role="presentation" width="100%" bgcolor="#eff6ff" style="background:#eff6ff;border-radius:8px;">
+                        <tr>
+                          <td style="padding:14px 16px;border-left:4px solid #2563eb;border-radius:8px;">
+                            <p style="font-size:13px;line-height:21px;color:#1e3a8a;margin:0;">Realizamos el reembolso del importe abonado a través del <strong>mismo medio de pago</strong> con el que hiciste la compra. <strong>No necesitás hacer ninguna gestión ni reclamo adicional.</strong></p>
+                          </td>
+                        </tr>
+                      </table>
+
+                      <p style="font-size:13px;line-height:21px;font-weight:bold;color:#111827;margin:16px 0 6px;">Plazos según el medio de pago</p>
+                      <table role="presentation" width="100%">
+                        <tr>
+                          <td valign="top" width="18" style="width:18px;font-size:13px;line-height:21px;color:#2563eb;font-weight:bold;">&bull;</td>
+                          <td valign="top" style="padding-bottom:6px;"><p class="text-sm" style="font-size:13px;line-height:21px;color:#374151;margin:0;"><strong>Tarjeta de débito:</strong> puede tardar entre 5 y 11 días hábiles en reflejarse en tu cuenta.</p></td>
+                        </tr>
+                        <tr>
+                          <td valign="top" width="18" style="width:18px;font-size:13px;line-height:21px;color:#2563eb;font-weight:bold;">&bull;</td>
+                          <td valign="top"><p class="text-sm" style="font-size:13px;line-height:21px;color:#374151;margin:0;"><strong>Tarjeta de crédito:</strong> verás el monto en el próximo resumen de tu tarjeta, según la fecha de cierre.</p></td>
+                        </tr>
+                      </table>
+
+                      <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:16px 0 0;">Te pedimos disculpas por los inconvenientes y agradecemos tu comprensión.</p>
+                      <p class="text-sm" style="font-size:12px;line-height:19px;color:#94a3b8;margin:14px 0 0;">Este es un mensaje automático enviado desde una casilla que no recibe respuestas. Si necesitás ayuda, escribinos a través de los canales de atención de {{ .Tienda.Nombre }}.</p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="gap">&nbsp;</td></tr>
+
+            <!-- DARK FOOTER -->
+            <tr>
+              <td class="footer-td" bgcolor="#1c1c1c" style="background:#1c1c1c;border-radius:10px;padding:22px 24px 20px;">
+                <table role="presentation" width="100%">
+                  <!-- Logos de marcas -->
+                  <tr>
+                    <td style="padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,.08);">
+                      <table role="presentation" width="100%" style="width:100%;table-layout:fixed;">
+                        <tr>
+                          <td align="center" valign="middle" style="padding:0 8px;">
+                            <img src="https://sporting.vteximg.com.br/arquivos/logo-sporting-white.png" alt="Sporting" width="110" class="brand-logo-sporting" style="width:110px;height:auto;display:block;margin:0 auto;" />
+                          </td>
+                          <td align="center" valign="middle" style="padding:0 8px;">
+                            <img src="https://sporting.vteximg.com.br/arquivos/logo-woker-white.png" alt="Woker" width="80" class="brand-logo-woker" style="width:80px;height:auto;display:block;margin:0 auto;" />
+                          </td>
+                          <td align="center" valign="middle" style="padding:0 8px;">
+                            <img src="https://sporting.vteximg.com.br/arquivos/logo-luquin-white.png" alt="Antonio Luquin" width="100" class="brand-logo-luquin" style="width:100px;height:auto;display:block;margin:0 auto;" />
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <!-- Links -->
+                  <tr>
+                    <td style="padding:16px 0 14px;border-bottom:1px solid rgba(255,255,255,.08);">
+                      <table role="presentation" width="100%"><tr>
+                        <td valign="middle" align="center">
+                          <a href="{{ .Tienda.Datos.NotificacionesConfig.HeaderURL }}/contacto" target="_blank" style="font-size:11px;color:rgba(255,255,255,.45);text-decoration:none;font-weight:500;">Contacto</a>
+                          &nbsp;&nbsp;
+                          <a href="{{ .Tienda.Datos.NotificacionesConfig.HeaderURL }}/centro-de-ayuda" target="_blank" style="font-size:11px;color:rgba(255,255,255,.45);text-decoration:none;font-weight:500;">Ayuda</a>
+                          &nbsp;&nbsp;
+                          <a href="{{ .Tienda.Datos.NotificacionesConfig.HeaderURL }}/cambios-y-devoluciones" target="_blank" style="font-size:11px;color:rgba(255,255,255,.45);text-decoration:none;font-weight:500;">Devoluciones</a>
+                        </td>
+                      </tr></table>
+                    </td>
+                  </tr>
+                  <!-- Copyright -->
+                  <tr>
+                    <td align="center" style="padding-top:14px;">
+                      <p style="font-size:10.5px;color:rgba(255,255,255,.25);text-align:center;margin:0;line-height:1.6;">&copy; {{ .Tienda.Nombre }} — Todos los derechos reservados</p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- TRUST LOGOS -->
+            <tr>
+              <td style="padding:8px 0 0;">
+                <table role="presentation" width="100%" class="trust-logos" bgcolor="#f4f4f4" style="background:#f4f4f4;border-radius:10px;table-layout:fixed;">
+                  <tr>
+                    <td align="center" valign="middle" style="padding:18px 8px;">
+                      <img src="https://sporting.vteximg.com.br/arquivos/logo-cace.png" alt="CACE" width="56" style="width:56px;height:auto;display:block;margin:0 auto;" />
+                    </td>
+                    <td align="center" valign="middle" style="padding:18px 8px;">
+                      <img src="https://sporting.vteximg.com.br/arquivos/logo-mercadopago.png" alt="Mercado Pago" width="110" style="width:110px;height:auto;display:block;margin:0 auto;" />
+                    </td>
+                    <td align="center" valign="middle" style="padding:18px 8px;">
+                      <img src="https://sporting.vteximg.com.br/arquivos/logo-infracommerce.png" alt="Infracommerce" width="100" style="width:100px;height:auto;display:block;margin:0 auto;" />
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

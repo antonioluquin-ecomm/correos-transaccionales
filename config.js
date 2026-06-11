@@ -532,14 +532,18 @@ const TEMPLATES = [
     estado: 'en revisión',
     actualizado: '2026-06-09',
     responsable: 'Por definir',
-    descripcion: 'Informa que se gestiono el reembolso por productos no procesados o dados de baja.',
-    archivoHtml: 'templates/pim/shared/reembolso/reembolso.current.html',
-    ejemplo: null,
+    descripcion: 'Informa el reembolso por un error de inventario: lista los articulos dados de baja y los plazos de reintegro segun el medio de pago.',
+    archivoHtml: 'templates/pim/shared/reembolso/reembolso.v2.html',
+    ejemplo: 'examples/pim/shared/reembolso-sporting.json',
     variables: [
+      'Tienda.Nombre',
       'Tienda.Datos.NotificacionesConfig.HeaderURL',
       'Tienda.Datos.NotificacionesConfig.HeaderImage',
       'Pedido.NroPedidoCanal',
-      'Pedido.LineasPedido[] (Producto, SKU, Cantidad, Estado)',
+      'Pedido.LineasPedido[].Producto',
+      'Pedido.LineasPedido[].SKU',
+      'Pedido.LineasPedido[].Cantidad',
+      'Pedido.LineasPedido[].Estado',
     ],
   },
   {
@@ -871,12 +875,21 @@ const EXAMPLE_SCENARIOS = [
     descripcion: 'Recepción de garantía con un producto aceptado y uno rechazado (con motivo) y aclaraciones de reembolso.',
     compatibleTemplates: ['pim-recepcion-garantia'],
   },
+  {
+    id: 'pim-reembolso-sporting',
+    path: 'examples/pim/shared/reembolso-sporting.json',
+    store: 'shared',
+    label: 'Por error de inventario (2 bajas)',
+    tipo: 'PIM — reembolso',
+    descripcion: 'Reembolso por error de inventario con dos artículos dados de baja y plazos por medio de pago.',
+    compatibleTemplates: ['pim-reembolso'],
+  },
 ];
 
 const VERSION = {
-  number: '1.8.0',
+  number: '1.9.0',
   date: '2026-06-10',
-  summary: 'recepcion-cambio/devolucion/garantia v2 alineadas a VTEX (estados aceptado/rechazado); motor PIM suma soporte index.',
+  summary: 'reembolso.v2 (error de inventario) alineado a VTEX, con artículos dados de baja y plazos de reintegro.',
 };
 
 const CHANGELOG = [

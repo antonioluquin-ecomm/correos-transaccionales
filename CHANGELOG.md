@@ -2,6 +2,14 @@
 
 Formato: versión, fecha, resumen del cambio principal.
 
+## v1.9.0 — 2026-06-10
+
+Plantilla PIM **Reembolso** `reembolso.v2` (error de inventario):
+
+- **`templates/pim/shared/reembolso/reembolso.v2.html`**: alineada al estándar visual VTEX. Comunica el reembolso cuando un pedido no pudo procesarse por error de inventario: intro + N.° de pedido, card de **Artículos no disponibles** (líneas con `Estado` "B" = Baja, badge "No disponible"), y card **Sobre tu reembolso** (reintegro al mismo medio de pago, sin gestión adicional, plazos: débito 5–11 días hábiles / crédito próximo resumen) + disculpas. Paleta neutra slate. Variables reales: `Tienda.Nombre`, `HeaderURL`/`HeaderImage`, `Pedido.NroPedidoCanal`, `LineasPedido[]` (`Producto`/`SKU`/`Cantidad`/`Estado`).
+- **`examples/pim/shared/reembolso-sporting.json`**: escenario con dos artículos dados de baja.
+- **`config.js`**: `pim-reembolso` → v2 + escenario; VERSION → 1.9.0.
+
 ## v1.8.0 — 2026-06-10
 
 Plantillas PIM de **logística inversa** `recepcion-cambio` / `recepcion-devolucion` / `recepcion-garantia` v2 + soporte `index` en el motor:
