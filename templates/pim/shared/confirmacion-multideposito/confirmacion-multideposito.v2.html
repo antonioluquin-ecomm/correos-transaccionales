@@ -170,12 +170,12 @@
                     </td>
                   </tr>
 
-                  <!-- CTA: Portal de Gestión de Pedidos (URL dinámica por marca) -->
+                  <!-- CTA: Portal de Gestión de Pedidos (solo Sporting y Woker) -->
+                  {{ if or (eq .Tienda.Nombre "Sporting") (eq .Tienda.Nombre "Woker") }}
                   <tr>
                     <td style="padding:4px 24px 24px;">
                       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
                         <tr>
-                          <!-- Portal por marca (URLs confirmadas): Woker / Sporting -->
                           <td bgcolor="#0c4a6e" style="background:#0c4a6e;border-radius:8px;">
                             <a href="{{ if (eq .Tienda.Nombre "Woker") }}https://gestiondepedidos.woker.com.ar/login{{ else }}https://gestiondepedidos.sporting.com.ar/login{{ end }}" target="_blank" style="display:block;width:100%;box-sizing:border-box;background:#0c4a6e;color:#ffffff;border-radius:8px;font-size:13px;line-height:52px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-align:center;text-decoration:none;">Portal de Gestión de Pedidos &nbsp;&#8594;</a>
                           </td>
@@ -184,6 +184,7 @@
                       <p class="text-sm" style="font-size:12px;line-height:18px;color:#6b7280;margin:12px 0 0;text-align:center;">Desde el portal podés consultar el estado de tu pedido y gestionar las opciones habilitadas.</p>
                     </td>
                   </tr>
+                  {{ end }}
 
                 </table>
               </td>
@@ -408,10 +409,9 @@
                       <table role="presentation" width="100%"><tr>
                         <td valign="middle" align="center">
                           <a href="{{ .Tienda.Datos.NotificacionesConfig.HeaderURL }}/contacto" target="_blank" style="font-size:11px;color:rgba(255,255,255,.45);text-decoration:none;font-weight:500;">Contacto</a>
+
                           &nbsp;&nbsp;
-                          <a href="{{ .Tienda.Datos.NotificacionesConfig.HeaderURL }}/centro-de-ayuda" target="_blank" style="font-size:11px;color:rgba(255,255,255,.45);text-decoration:none;font-weight:500;">Ayuda</a>
-                          &nbsp;&nbsp;
-                          <a href="{{ .Tienda.Datos.NotificacionesConfig.HeaderURL }}/cambios-y-devoluciones" target="_blank" style="font-size:11px;color:rgba(255,255,255,.45);text-decoration:none;font-weight:500;">Devoluciones</a>
+                          <a href="{{ .Tienda.Datos.NotificacionesConfig.HeaderURL }}/politicas-de-cambio-y-devolucion" target="_blank" style="font-size:11px;color:rgba(255,255,255,.45);text-decoration:none;font-weight:500;">Cambios y devoluciones</a>
                         </td>
                       </tr></table>
                     </td>
