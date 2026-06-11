@@ -396,6 +396,35 @@ const TEMPLATES = [
     ],
   },
   {
+    id: 'pim-sin-stock-pv',
+    nombre: 'Sin stock PV',
+    plataforma: 'PIM',
+    categoria: 'Cancelacion / Reembolso',
+    estado: 'en revision',
+    actualizado: '2026-06-11',
+    responsable: 'Por definir',
+    descripcion: 'Informa un quiebre de stock en pedidos de Punto de Venta y ofrece alternativas operativas: cambio en sucursal, reembolso presencial en la sucursal de compra o giftcard para tiendas online.',
+    archivoHtml: 'templates/pim/shared/sin-stock-pv/sin-stock-pv.v2.html',
+    ejemplo: 'examples/pim/shared/sin-stock-pv-sporting.json',
+    variables: [
+      'Tienda.Nombre',
+      'Tienda.Datos.NotificacionesConfig.HeaderURL',
+      'Tienda.Datos.NotificacionesConfig.HeaderImage',
+      'Pedido.NroPedidoCanal',
+      'Pedido.FechaPedido',
+      'Pedido.DatosEnvio.Destinatario.Nombres',
+      'Pedido.LineasPedido[].Producto',
+      'Pedido.LineasPedido[].SKU',
+      'Pedido.LineasPedido[].Cantidad',
+      'Pedido.LineasPedido[].Estado',
+      'Pedido.TotalLineas',
+      'Deposito.DatosDeposito.DatosPickup.NombrePublico',
+      'Deposito.DatosDeposito.DatosPickup.Direccion',
+      'Deposito.DatosDeposito.DatosPickup.Localidad',
+      'Deposito.DatosDeposito.DatosPickup.Horario',
+    ],
+  },
+  {
     id: 'pim-despacho-pickup',
     nombre: 'Pedido listo para retirar (pickup)',
     plataforma: 'PIM',
@@ -543,16 +572,16 @@ const TEMPLATES = [
     ],
   },
   {
-    id: 'pim-reembolso',
+    id: 'pim-quiebre-stock',
     nombre: 'Reembolso',
     plataforma: 'PIM',
     categoria: 'Logística inversa - Devolución',
     estado: 'en revisión',
     actualizado: '2026-06-09',
     responsable: 'Por definir',
-    descripcion: 'Informa el reembolso por un error de inventario: lista los articulos dados de baja y los plazos de reintegro segun el medio de pago.',
-    archivoHtml: 'templates/pim/shared/reembolso/reembolso.v2.html',
-    ejemplo: 'examples/pim/shared/reembolso-sporting.json',
+    descripcion: 'Informa el quiebre de stock por error de inventario: lista los artículos dados de baja y los plazos de reintegro según el medio de pago.',
+    archivoHtml: 'templates/pim/shared/quiebre-stock/quiebre-stock.v2.html',
+    ejemplo: 'examples/pim/shared/quiebre-stock-sporting.json',
     variables: [
       'Tienda.Nombre',
       'Tienda.Datos.NotificacionesConfig.HeaderURL',
@@ -809,6 +838,15 @@ const EXAMPLE_SCENARIOS = [
     compatibleTemplates: ['pim-confirmacion-multideposito'],
   },
   {
+    id: 'pim-sin-stock-pv-sporting',
+    path: 'examples/pim/shared/sin-stock-pv-sporting.json',
+    store: 'shared',
+    label: 'Sporting (2 productos sin stock)',
+    tipo: 'PIM - sin stock PV',
+    descripcion: 'Quiebre de stock en compra PV de Sporting con dos productos dados de baja y alternativas: cambio, reembolso presencial o giftcard online.',
+    compatibleTemplates: ['pim-sin-stock-pv'],
+  },
+  {
     id: 'pim-despacho-pickup-sporting',
     path: 'examples/pim/shared/despacho-pickup-sporting.json',
     store: 'shared',
@@ -854,13 +892,13 @@ const EXAMPLE_SCENARIOS = [
     compatibleTemplates: ['pim-recepcion-garantia'],
   },
   {
-    id: 'pim-reembolso-sporting',
-    path: 'examples/pim/shared/reembolso-sporting.json',
+    id: 'pim-quiebre-stock-sporting',
+    path: 'examples/pim/shared/quiebre-stock-sporting.json',
     store: 'shared',
     label: 'Por error de inventario (2 bajas)',
-    tipo: 'PIM — reembolso',
+    tipo: 'PIM — quiebre de stock',
     descripcion: 'Reembolso por error de inventario con dos artículos dados de baja y plazos por medio de pago.',
-    compatibleTemplates: ['pim-reembolso'],
+    compatibleTemplates: ['pim-quiebre-stock'],
   },
   {
     id: 'pim-etiqueta-devolucion-sporting',
@@ -962,6 +1000,11 @@ const TEMPLATE_TAXONOMY = {
     tiendas: ['sporting', 'woker'],
     evento: { id: 'compra-realizada-pv', label: 'Compra realizada PV' },
   },
+  'pim-sin-stock-pv': {
+    canales: ['punto-de-venta'],
+    tiendas: ['sporting', 'woker'],
+    evento: { id: 'sin-stock-pv', label: 'Sin stock PV' },
+  },
   'pim-nuevo-envio': {
     canales: ['ecommerce', 'punto-de-venta'],
     tiendas: ['sporting', 'woker'],
@@ -997,10 +1040,10 @@ const TEMPLATE_TAXONOMY = {
     tiendas: ['sporting', 'woker'],
     evento: { id: 'recepcion-garantia', label: 'Recepcion de garantia' },
   },
-  'pim-reembolso': {
+  'pim-quiebre-stock': {
     canales: ['ecommerce'],
     tiendas: ['sporting', 'woker'],
-    evento: { id: 'reembolso', label: 'Reembolso' },
+    evento: { id: 'quiebre-stock', label: 'Quiebre de stock' },
   },
   'pim-factura-disponible': {
     canales: ['ecommerce'],
@@ -1025,6 +1068,11 @@ const SCENARIO_TAXONOMY = {
     tiendas: ['woker'],
     eventoId: 'compra-realizada-pv',
   },
+  'pim-sin-stock-pv-sporting': {
+    canales: ['punto-de-venta'],
+    tiendas: ['sporting'],
+    eventoId: 'sin-stock-pv',
+  },
 };
 
 const EVENT_STAGE_META = {
@@ -1040,7 +1088,8 @@ const EVENT_STAGE_META = {
   'pedido-listo-para-retirar': { id: 'despacho-retiro', label: 'Despacho / Retiro' },
   'despacho-b2b': { id: 'preparacion', label: 'Preparacion' },
   'pedido-cancelado': { id: 'cancelacion-reembolso', label: 'Cancelacion / Reembolso' },
-  'reembolso': { id: 'cancelacion-reembolso', label: 'Cancelacion / Reembolso' },
+  'sin-stock-pv': { id: 'cancelacion-reembolso', label: 'Cancelacion / Reembolso' },
+  'quiebre-stock': { id: 'cancelacion-reembolso', label: 'Cancelacion / Reembolso' },
   'etiqueta-devolucion': { id: 'cambios-devoluciones-garantia', label: 'Cambios / Devoluciones / Garantia' },
   'recepcion-cambio': { id: 'cambios-devoluciones-garantia', label: 'Cambios / Devoluciones / Garantia' },
   'recepcion-devolucion': { id: 'cambios-devoluciones-garantia', label: 'Cambios / Devoluciones / Garantia' },
@@ -1097,12 +1146,13 @@ EXAMPLE_SCENARIOS.forEach((scenario) => {
 });
 
 const VERSION = {
-  number: '1.14.0',
+  number: '1.15.0',
   date: '2026-06-11',
-  summary: 'Consolidacion funcional: acciones rapidas, flujo general, etapas normalizadas y auditoria de escenarios.',
+  summary: 'Nueva plantilla PIM para quiebre de stock PV con alternativas de cambio, reembolso presencial o giftcard.',
 };
 
 const CHANGELOG = [
+  { version: '1.15.0', date: '2026-06-11', summary: 'Plantilla PIM Sin stock PV, escenario Sporting representativo y flujo actualizado para Punto de Venta.' },
   { version: '1.4.0', date: '2026-06-09', summary: 'Inventario PIM, 14 plantillas compartidas en catálogo, renderer PIM mínimo y nuevo-envio v2 con escenario representativo.' },
   { version: '1.3.0', date: '2026-06-08', summary: 'Nueva plantilla orden generada B2B y escenario específico para previsualización.' },
   { version: '0.7.0', date: '2026-06-07', summary: 'Flujo de Correos suma estados por nodo, ficha operativa, acciones para previsualización/creación y soporte de query params en Visualizador.' },
