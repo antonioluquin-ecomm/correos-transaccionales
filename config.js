@@ -968,7 +968,7 @@ const TEMPLATE_TAXONOMY = {
     evento: { id: 'pedido-despachado', label: 'Pedido despachado' },
   },
   'pim-despacho-pickup': {
-    canales: ['ecommerce', 'punto-de-venta'],
+    canales: ['ecommerce'],
     tiendas: ['sporting', 'woker'],
     evento: { id: 'pedido-listo-para-retirar', label: 'Pedido listo para retirar' },
   },
@@ -988,7 +988,7 @@ const TEMPLATE_TAXONOMY = {
     evento: { id: 'recepcion-cambio', label: 'Recepcion de cambio' },
   },
   'pim-recepcion-devolucion': {
-    canales: ['ecommerce', 'punto-de-venta'],
+    canales: ['ecommerce'],
     tiendas: ['sporting', 'woker'],
     evento: { id: 'recepcion-devolucion', label: 'Recepcion de devolucion' },
   },
@@ -998,12 +998,12 @@ const TEMPLATE_TAXONOMY = {
     evento: { id: 'recepcion-garantia', label: 'Recepcion de garantia' },
   },
   'pim-reembolso': {
-    canales: ['ecommerce', 'punto-de-venta'],
+    canales: ['ecommerce'],
     tiendas: ['sporting', 'woker'],
     evento: { id: 'reembolso', label: 'Reembolso' },
   },
   'pim-factura-disponible': {
-    canales: ['ecommerce', 'punto-de-venta'],
+    canales: ['ecommerce'],
     tiendas: ['sporting', 'woker'],
     evento: { id: 'factura-disponible', label: 'Factura disponible' },
   },
