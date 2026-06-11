@@ -2,6 +2,15 @@
 
 Formato: versión, fecha, resumen del cambio principal.
 
+## v1.7.0 — 2026-06-10
+
+Plantilla PIM **Giftcard (código de cambio)** `giftcard.v2`:
+
+- **`templates/pim/shared/giftcard/giftcard.v2.html`**: alineada al estándar visual VTEX (hero, card, footer oscuro + trust logos), con el **código destacado** en un recuadro, **saldo inicial** y **observaciones** condicionales, CTA "Ir a la tienda" y card de **Información importante** con las condiciones de uso. Paleta neutra slate con acento violeta para la giftcard.
+- **Particularidad del flujo**: usa `Proveedor.GetEmailHeaderURL` / `Proveedor.GetEmailHeaderImage` (no `Tienda.*`) y **no expone** `Tienda.Nombre` ni `Destinatario.Nombres`. Por eso el saludo es genérico, el copyright del footer no lleva marca, y los links (políticas, contacto, ayuda) se arman sobre `Proveedor.GetEmailHeaderURL`. Variables reales: `Giftcard.Codigo`, `Giftcard.SaldoInicial` (cond.), `Giftcard.Descripcion` (cond.).
+- **`examples/pim/shared/giftcard-sporting.json`**: escenario con código, saldo y observaciones.
+- **`config.js`**: `pim-giftcard` → v2 + escenario; VERSION → 1.7.0.
+
 ## v1.6.1 — 2026-06-10
 
 Auditoría de consistencia de las plantillas PIM y el mapa de flujo:

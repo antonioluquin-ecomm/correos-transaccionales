@@ -17,7 +17,7 @@ Inventario inicial para estandarizar las plantillas PIM compartidas por Sporting
 | `confirmacion-multideposito` | Alta | Base v2 (nueva) | `Tienda.Nombre`, `HeaderURL`, `HeaderImage`, `Pedido.NroPedidoCanal`, `Pedido.FechaPedido`, `Pedido.DatosEnvio.Destinatario.Nombres`, `Pedido.LineasPedido[]` (`Producto`/`SKU`/`Importe`/`Cantidad`/`Subtotal`), `Pedido.TotalLineas` | Header dinamico, footer VTEX, tabla de productos, portal por marca | Confirmar URL del portal de Woker; validar variables reales de PIM para venta en sucursal |
 | `nuevo-envio` | Alta | Base v2 inicial | `Tienda.Datos.NotificacionesConfig.HeaderURL`, `HeaderImage`, `Pedido.NroPedidoCanal`, `Pedido.Logistica`, `Pedido.DatosEnvio.Etiqueta.NroSeguimiento`, `Pedido.DatosEnvio.Destinatario.Nombres` | Header dinamico, footer banner, logos footer | Ordenar tracking, CTA por operador, fallback sin seguimiento, tono mas claro |
 | `despacho-pickup` | Alta | Base v2 (nueva) | `Tienda.Nombre`, `HeaderURL`, `HeaderImage`, `Pedido.NroPedidoCanal`, `Pedido.FechaPedido`, `Pedido.DatosEnvio.Destinatario.Nombres`, `Pedido.LineasPedido[]` (`Producto`/`SKU`/`Importe`/`Cantidad`/`Subtotal`), `Pedido.TotalLineas`, `Deposito.DatosDeposito.DatosPickup.*` (`NombrePublico`/`Direccion`/`Localidad`/`Horario`) | Header dinamico, footer VTEX, stepper, tabla de productos, datos de pickup | Validar variables reales de pickup |
-| `giftcard` | Alta | Pendiente | `Proveedor.GetEmailHeaderURL`, `Proveedor.GetEmailHeaderImage`, `Giftcard.Codigo`, `Giftcard.SaldoInicial`, `Giftcard.Descripcion` | Header dinamico de proveedor, footer banner, logos footer | Hacer visible codigo, monto, instrucciones y politica de uso |
+| `giftcard` | Alta | Base v2 (lista) | `Proveedor.GetEmailHeaderURL`, `Proveedor.GetEmailHeaderImage`, `Giftcard.Codigo`, `Giftcard.SaldoInicial` (cond.), `Giftcard.Descripcion` (cond.) | Header dinamico de proveedor, footer VTEX, codigo destacado | Flujo sin Tienda.Nombre ni Destinatario.Nombres: saludo y copyright genericos, links sobre Proveedor.GetEmailHeaderURL |
 | `recepcion-cambio` | Alta | Pendiente | `HeaderURL`, `HeaderImage`, `Pedido.LineasPedido[]`, `Producto`, `SKU`, `Cantidad`, `Estado`, `Historial[0].Observaciones` | Header dinamico, footer banner, logos footer | Separar aceptados/rechazados, explicar proximos pasos |
 | `recepcion-devolucion` | Alta | Pendiente | `HeaderURL`, `HeaderImage`, `Pedido.LineasPedido[]`, `Producto`, `SKU`, `Cantidad`, `Estado`, `Historial[0].Observaciones` | Header dinamico, footer banner, logos footer | Aclarar estado de revision y plazos de reintegro |
 | `recepcion-garantia` | Alta | Pendiente | `HeaderURL`, `HeaderImage`, `Pedido.LineasPedido[]`, `Producto`, `SKU`, `Cantidad`, `Estado`, `Historial[0].Observaciones` | Header dinamico, footer banner, logos footer | Diferenciar garantia aprobada/rechazada y condiciones |
@@ -34,7 +34,7 @@ Inventario inicial para estandarizar las plantillas PIM compartidas por Sporting
 1. `nuevo-envio`: fija header, hero, tracking, CTA logistico y footer. (Listo v2)
 2. `confirmacion-multideposito`: confirmacion de compra venta multideposito. (Listo v2)
 3. `despacho-pickup`: pedido listo para retirar en sucursal, con datos de pickup. (Listo v2)
-4. `giftcard`: valida componentes de codigo/monto para flujo inverso.
+4. `giftcard`: codigo de cambio con codigo destacado y condiciones. (Listo v2)
 5. `recepcion-cambio`, `recepcion-devolucion`, `recepcion-garantia`: migran estados de revision y motivos.
 6. `despacho-b2b`: migra tablas/resumen del flujo B2B.
 

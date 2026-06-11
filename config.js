@@ -441,15 +441,15 @@ const TEMPLATES = [
   },
   {
     id: 'pim-giftcard',
-    nombre: 'Giftcard',
+    nombre: 'Giftcard (código de cambio)',
     plataforma: 'PIM',
     categoria: 'Logística inversa - Cambio',
     estado: 'en revisión',
-    actualizado: '2026-06-09',
+    actualizado: '2026-06-10',
     responsable: 'Por definir',
-    descripcion: 'Informa la emision de una giftcard para resolver un cambio, devolucion o incidencia de stock.',
-    archivoHtml: 'templates/pim/shared/giftcard/giftcard.current.html',
-    ejemplo: null,
+    descripcion: 'Informa la emision de una giftcard/codigo para resolver un cambio, devolucion o falta de stock, con el codigo destacado, saldo inicial, observaciones y condiciones de uso.',
+    archivoHtml: 'templates/pim/shared/giftcard/giftcard.v2.html',
+    ejemplo: 'examples/pim/shared/giftcard-sporting.json',
     variables: [
       'Proveedor.GetEmailHeaderURL',
       'Proveedor.GetEmailHeaderImage',
@@ -823,12 +823,21 @@ const EXAMPLE_SCENARIOS = [
     descripcion: 'Pedido listo para retirar en sucursal Sporting, con dos productos, lugar de retiro (dirección y horario) y requisitos.',
     compatibleTemplates: ['pim-despacho-pickup'],
   },
+  {
+    id: 'pim-giftcard-sporting',
+    path: 'examples/pim/shared/giftcard-sporting.json',
+    store: 'shared',
+    label: 'Con saldo y observaciones',
+    tipo: 'PIM — giftcard',
+    descripcion: 'Giftcard/código de cambio con código destacado, saldo inicial y observaciones; header dinámico por proveedor.',
+    compatibleTemplates: ['pim-giftcard'],
+  },
 ];
 
 const VERSION = {
-  number: '1.6.1',
+  number: '1.7.0',
   date: '2026-06-10',
-  summary: 'Auditoría de consistencia PIM: nombres de flujo alineados, mapa de flujo enlazado al catálogo y variables corregidas.',
+  summary: 'giftcard.v2 (código de cambio) alineado al estándar visual VTEX, con código destacado y condiciones de uso.',
 };
 
 const CHANGELOG = [
