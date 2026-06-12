@@ -10,6 +10,13 @@
       .ct-flow-page {
         max-width: none;
         padding: 24px 28px;
+        transition: padding-right 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      @media (min-width: 1024px) {
+        .ct-flow-page.detail-open {
+          padding-right: 452px;
+        }
       }
 
       /* ═══ TABS ═══════════════════════════════════════════════════ */
@@ -403,6 +410,16 @@
       .ct-flow-cell--empty {
         min-height: 36px;
         background: var(--ct-bg);
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .ct-flow-cell--empty::before {
+        content: '—';
+        color: var(--ct-line);
+        font-size: 14px;
+        font-weight: 300;
       }
 
       /* ═══ CARD STATUS DOT ════════════════════════════════════════ */
@@ -681,11 +698,6 @@
               </div>
             </div>
             <div class="ct-flow-legend">
-              <span class="ct-badge ct-platform-vtex">VTEX</span>
-              <span class="ct-badge ct-platform-pim">PIM</span>
-              <span class="ct-badge ct-platform-andreani">Andreani</span>
-              <span class="ct-badge ct-platform-ocasa">Ocasa</span>
-              <span class="ct-flow-legend-sep"></span>
               <span class="ct-badge ct-status-activo">✓ Existente</span>
               <span class="ct-badge ct-status-faltante">! Faltante</span>
               <span class="ct-badge ct-status-candidato">? Candidato</span>
@@ -697,6 +709,16 @@
         <div class="ct-flow-filters" id="ct-flow-filters">
           <input type="search" id="ct-filter-search" class="ct-flow-search" placeholder="Buscar correo..." autocomplete="off">
           <span class="ct-flow-filter-sep"></span>
+          <div class="ct-flow-filter-group">
+            <label for="ct-filter-lane">Plataforma</label>
+            <select id="ct-filter-lane">
+              <option value="">Todas</option>
+              <option value="vtex">VTEX</option>
+              <option value="pim">PIM</option>
+              <option value="andreani">Andreani</option>
+              <option value="ocasa">Ocasa</option>
+            </select>
+          </div>
           <div class="ct-flow-filter-group">
             <label for="ct-filter-estado">Estado</label>
             <select id="ct-filter-estado">
@@ -1066,6 +1088,7 @@
         let activeFlowId = 'general';
         let activeStatusFilter = null;
         let activePriorityFilter = false;
+        let activeLaneFilter = null;
         let activeChannelFilter = null;
         let activeStoreFilter = null;
         let activeSearchQuery = '';
@@ -1150,6 +1173,7 @@
           el.type = 'button';
           el.className = `ct-flow-card ${node.lane} status-${status}`;
           el.dataset.node = node.id;
+          el.dataset.lane = node.lane;
           el.dataset.status = status;
           el.dataset.priority = node.priority || 'media';
           el.dataset.channels = channels.join(' ');
@@ -1161,7 +1185,7 @@
             ...channels.map(CT.channelLabel),
             ...stores.map(CT.storeLabel),
           ].filter(Boolean);
-          const metaText = metaParts.join(' · ');
+          const metaText = metaParts.join(' · ') || laneLabel;
 
           const statusMeta = STATUS_META[status] || STATUS_META.faltante;
           el.innerHTML = `
@@ -1212,10 +1236,12 @@
           // Reset all filters on tab change
           activeStatusFilter = null;
           activePriorityFilter = false;
+          activeLaneFilter = null;
           activeChannelFilter = null;
           activeStoreFilter = null;
           activeSearchQuery = '';
           document.getElementById('ct-filter-search').value = '';
+          document.getElementById('ct-filter-lane').value = '';
           document.getElementById('ct-filter-estado').value = '';
           document.getElementById('ct-filter-prioridad').value = '';
           document.getElementById('ct-filter-channel').value = '';
@@ -1279,18 +1305,19 @@
           gridEl.querySelectorAll('.ct-flow-card').forEach((el) => {
             const matchStatus   = !activeStatusFilter   || el.dataset.status === activeStatusFilter;
             const matchPriority = !activePriorityFilter || el.dataset.priority === 'alta';
+            const matchLane     = !activeLaneFilter     || el.dataset.lane === activeLaneFilter;
             const channels      = (el.dataset.channels || '').split(' ').filter(Boolean);
             const stores        = (el.dataset.stores   || '').split(' ').filter(Boolean);
             const matchChannel  = !activeChannelFilter  || channels.includes(activeChannelFilter);
             const matchStore    = !activeStoreFilter    || stores.includes(activeStoreFilter);
             const matchSearch   = !activeSearchQuery    || (el.getAttribute('aria-label') || '').toLowerCase().includes(activeSearchQuery);
-            const show = matchStatus && matchPriority && matchChannel && matchStore && matchSearch;
+            const show = matchStatus && matchPriority && matchLane && matchChannel && matchStore && matchSearch;
             el.classList.toggle('filtered-out', !show);
             total++;
             if (show) visible++;
           });
 
-          const hasFilter = activeStatusFilter || activePriorityFilter || activeChannelFilter || activeStoreFilter || activeSearchQuery;
+          const hasFilter = activeStatusFilter || activePriorityFilter || activeLaneFilter || activeChannelFilter || activeStoreFilter || activeSearchQuery;
           const hintEl  = document.getElementById('ct-filter-hint');
           const clearEl = document.getElementById('ct-filter-clear');
           if (hintEl)  { hintEl.style.display  = hasFilter ? '' : 'none'; hintEl.textContent = `${visible} de ${total}`; }
@@ -1300,10 +1327,12 @@
         function clearFilters() {
           activeStatusFilter = null;
           activePriorityFilter = false;
+          activeLaneFilter = null;
           activeChannelFilter = null;
           activeStoreFilter = null;
           activeSearchQuery = '';
           document.getElementById('ct-filter-search').value = '';
+          document.getElementById('ct-filter-lane').value = '';
           document.getElementById('ct-filter-estado').value = '';
           document.getElementById('ct-filter-prioridad').value = '';
           document.getElementById('ct-filter-channel').value = '';
@@ -1314,6 +1343,7 @@
         function closeDetail() {
           detailOverlay.classList.remove('open');
           backdrop.classList.remove('open');
+          document.querySelector('.ct-flow-page').classList.remove('detail-open');
           gridEl.querySelectorAll('.ct-flow-card.active').forEach((el) => el.classList.remove('active'));
         }
 
@@ -1356,11 +1386,16 @@
 
           detailOverlay.classList.add('open');
           backdrop.classList.add('open');
+          document.querySelector('.ct-flow-page').classList.add('detail-open');
         }
 
         document.getElementById('ct-filter-clear').addEventListener('click', clearFilters);
 
-        // Filter bar — selects for estado and prioridad
+        // Filter bar — selects
+        document.getElementById('ct-filter-lane').addEventListener('change', (e) => {
+          activeLaneFilter = e.target.value || null;
+          applyFilter();
+        });
         document.getElementById('ct-filter-estado').addEventListener('change', (e) => {
           activeStatusFilter = e.target.value || null;
           applyFilter();
