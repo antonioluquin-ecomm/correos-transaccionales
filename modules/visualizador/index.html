@@ -69,6 +69,23 @@
       .ct-preview-tool.ct-preview-expanded .ct-preview-controls { display: none; }
       .ct-preview-tool.ct-preview-expanded .ct-preview-pane { flex: 1 1 100%; min-width: 0; }
 
+      .ct-preview-frames { display: flex; gap: 12px; }
+      .ct-preview-frame-col { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; }
+      .ct-compare-col { display: none; }
+      .ct-preview-pane.ct-compare-mode .ct-compare-col { display: flex; }
+      .ct-frame-label {
+        display: none;
+        padding: 0 0 6px 0;
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--ct-text-muted);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .ct-preview-pane.ct-compare-mode .ct-frame-label { display: block; }
+      .ct-frame-label select { width: 100%; font-size: 12px; }
+
       .ct-vis-scenario-note {
         margin-top: 10px;
         padding-top: 10px;
@@ -174,16 +191,36 @@
 
         <div class="ct-preview-pane">
           <div class="ct-preview-pane-bar">
+            <button id="ct-vis-compare" type="button" class="ct-btn ct-vis-expand-btn" title="Comparar dos escenarios" aria-label="Comparar dos escenarios"></button>
             <button id="ct-vis-expand" type="button" class="ct-btn ct-vis-expand-btn" title="Expandir preview" aria-label="Expandir preview"></button>
           </div>
-          <div class="ct-preview-frame-wrap">
-            <iframe
-              id="ct-vis-frame"
-              class="ct-preview-frame"
-              title="Previsualización del correo"
-              sandbox="allow-same-origin"
-              scrolling="no"
-            ></iframe>
+          <div class="ct-preview-frames">
+            <div class="ct-preview-frame-col">
+              <div class="ct-frame-label" id="ct-frame-label-a"></div>
+              <div class="ct-preview-frame-wrap">
+                <iframe
+                  id="ct-vis-frame"
+                  class="ct-preview-frame"
+                  title="Previsualización del correo"
+                  sandbox="allow-same-origin"
+                  scrolling="no"
+                ></iframe>
+              </div>
+            </div>
+            <div class="ct-preview-frame-col ct-compare-col">
+              <div class="ct-frame-label">
+                <select id="ct-vis-example-b" aria-label="Escenario B para comparar"></select>
+              </div>
+              <div class="ct-preview-frame-wrap">
+                <iframe
+                  id="ct-vis-frame-b"
+                  class="ct-preview-frame"
+                  title="Previsualización comparación"
+                  sandbox="allow-same-origin"
+                  scrolling="no"
+                ></iframe>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -214,6 +251,9 @@
         const exampleHelpEl = document.getElementById('ct-vis-example-help');
         const statusEl = document.getElementById('ct-vis-status');
         const frame = document.getElementById('ct-vis-frame');
+        const frameB = document.getElementById('ct-vis-frame-b');
+        const exampleBSelect = document.getElementById('ct-vis-example-b');
+        const frameLabelA = document.getElementById('ct-frame-label-a');
         const openHtmlBtn = document.getElementById('ct-vis-open-html');
         const downloadHtmlBtn = document.getElementById('ct-vis-download-html');
         const copyHtmlBtn = document.getElementById('ct-vis-copy-html');
@@ -568,6 +608,51 @@
         }
 
         let renderGeneration = 0;
+        let renderGenerationB = 0;
+        let isCompareMode = false;
+
+        function populateScenarioBSelect(template) {
+          const compatible = compatibleScenarios(template);
+          exampleBSelect.innerHTML = '';
+          compatible.forEach((scenario) => {
+            const option = document.createElement('option');
+            option.value = scenario.path;
+            option.textContent = scenario.label;
+            exampleBSelect.appendChild(option);
+          });
+          const second = compatible.find((s) => s.path !== exampleSelect.value) || compatible[0];
+          if (second) exampleBSelect.value = second.path;
+          exampleBSelect.disabled = compatible.length === 0;
+        }
+
+        function updateFrameLabelA() {
+          const scenario = currentScenario();
+          frameLabelA.textContent = scenario ? scenario.label : '';
+        }
+
+        async function renderPreviewB() {
+          const genB = ++renderGenerationB;
+          const template = currentTemplate();
+          const scenario = scenarioByPath(exampleBSelect.value);
+          frameB.srcdoc = '';
+          if (!template || !scenario) return;
+          try {
+            const [html, jsonText] = await Promise.all([
+              CT.fetchText(BASE + template.archivoHtml),
+              CT.fetchText(BASE + scenario.path),
+            ]);
+            if (genB !== renderGenerationB) return;
+            const data = JSON.parse(jsonText);
+            if (CT.slugify(template.plataforma) === 'pim') {
+              CT.renderPimEmailToFrame(frameB, html, data);
+            } else {
+              CT.renderEmailToFrame(frameB, html, data);
+            }
+            window.setTimeout(() => CT.resizeEmailFrame(frameB), 0);
+          } catch (_) {
+            if (genB !== renderGenerationB) return;
+          }
+        }
 
         async function renderPreview() {
           const gen = ++renderGeneration;
@@ -617,11 +702,13 @@
             Object.values(facetSelects).forEach((s) => { s.value = ''; });
             renderFacetOptions(template);
             renderScenarioOptions(template, template.ejemplo);
+            if (isCompareMode) { populateScenarioBSelect(template); updateFrameLabelA(); renderPreviewB(); }
             syncUrl();
             renderPreview();
           } else {
             exampleSelect.innerHTML = '';
             frame.srcdoc = '';
+            frameB.srcdoc = '';
             syncUrl();
             setStatus('No hay plantillas para los filtros seleccionados.', true);
           }
@@ -671,11 +758,18 @@
           if (template) renderFacetOptions(template);
           Object.values(facetSelects).forEach((s) => { s.value = ''; });
           renderScenarioOptions(template, template?.ejemplo);
+          if (isCompareMode) { populateScenarioBSelect(template); updateFrameLabelA(); renderPreviewB(); }
           syncUrl();
           renderPreview();
         });
 
-        exampleSelect.addEventListener('change', () => { syncUrl(); renderPreview(); });
+        exampleSelect.addEventListener('change', () => {
+          if (isCompareMode) updateFrameLabelA();
+          syncUrl();
+          renderPreview();
+        });
+
+        exampleBSelect.addEventListener('change', renderPreviewB);
         downloadHtmlBtn.addEventListener('click', downloadCurrentHtml);
         copyHtmlBtn.addEventListener('click', copyCurrentHtml);
 
@@ -687,6 +781,26 @@
 
         const ICON_EXPAND = `<svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9,2 14,2 14,7"/><polyline points="7,14 2,14 2,9"/><line x1="14" y1="2" x2="9" y2="7"/><line x1="2" y1="14" x2="7" y2="9"/></svg> Expandir`;
         const ICON_COLLAPSE = `<svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="14,6 14,2 10,2"/><polyline points="2,10 2,14 6,14"/><line x1="14" y1="2" x2="9" y2="7"/><line x1="2" y1="14" x2="7" y2="9"/></svg> Colapsar`;
+        const ICON_COMPARE_OFF = `<svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><rect x="1" y="2" width="6" height="12" rx="1"/><rect x="9" y="2" width="6" height="12" rx="1"/></svg> Comparar`;
+        const ICON_COMPARE_ON  = `<svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><rect x="1" y="2" width="6" height="12" rx="1"/><rect x="9" y="2" width="6" height="12" rx="1"/></svg> Cerrar`;
+
+        const compareBtn = document.getElementById('ct-vis-compare');
+        const previewPane = document.querySelector('.ct-preview-pane');
+        compareBtn.innerHTML = ICON_COMPARE_OFF;
+
+        compareBtn.addEventListener('click', () => {
+          isCompareMode = !isCompareMode;
+          previewPane.classList.toggle('ct-compare-mode', isCompareMode);
+          compareBtn.innerHTML = isCompareMode ? ICON_COMPARE_ON : ICON_COMPARE_OFF;
+          compareBtn.title = isCompareMode ? 'Cerrar comparación' : 'Comparar dos escenarios';
+          compareBtn.setAttribute('aria-label', isCompareMode ? 'Cerrar comparación' : 'Comparar dos escenarios');
+          if (isCompareMode) {
+            const template = currentTemplate();
+            if (template) { populateScenarioBSelect(template); updateFrameLabelA(); renderPreviewB(); }
+          } else {
+            frameB.srcdoc = '';
+          }
+        });
 
         const expandBtn = document.getElementById('ct-vis-expand');
         const previewTool = document.querySelector('.ct-preview-tool');
