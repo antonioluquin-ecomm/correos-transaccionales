@@ -66,6 +66,11 @@
         font-size: 12px;
         cursor: pointer;
       }
+      .ct-vis-vars-active {
+        background: rgba(59, 130, 246, .15);
+        color: #2563eb;
+        border-color: rgba(59, 130, 246, .4);
+      }
       .ct-preview-tool.ct-preview-expanded .ct-preview-controls { display: none; }
       .ct-preview-tool.ct-preview-expanded .ct-preview-pane { flex: 1 1 100%; min-width: 0; }
 
@@ -191,6 +196,7 @@
 
         <div class="ct-preview-pane">
           <div class="ct-preview-pane-bar">
+            <button id="ct-vis-vars" type="button" class="ct-btn ct-vis-expand-btn" title="Ver variables del escenario en el preview" aria-label="Ver variables"></button>
             <button id="ct-vis-compare" type="button" class="ct-btn ct-vis-expand-btn" title="Comparar dos escenarios" aria-label="Comparar dos escenarios"></button>
             <button id="ct-vis-expand" type="button" class="ct-btn ct-vis-expand-btn" title="Expandir preview" aria-label="Expandir preview"></button>
           </div>
@@ -610,6 +616,59 @@
         let renderGeneration = 0;
         let renderGenerationB = 0;
         let isCompareMode = false;
+        let isVarOverlay = false;
+
+        function annotateVariables(html, plataforma) {
+          const isPim = CT.slugify(plataforma) === 'pim';
+          // PIM = Go templates: skip {{end}} and {{else}}, highlight everything else
+          // VTEX = Handlebars-like: skip block/partial/comment markers and triple-braces
+          const varPattern = isPim
+            ? /\{\{-?\s*(?!end\b|else\b)([^\n\r}][^}]*?)\s*-?\}\}/g
+            : /\{\{(?![{#\/!>~])([^{}]+?)\}\}/g;
+          const PHSTART = '\x02';
+          const PHEND = '\x03';
+          const expressions = [];
+          const withPlaceholders = html.replace(varPattern, (match) => {
+            expressions.push(match);
+            return `${PHSTART}${expressions.length - 1}${PHEND}`;
+          });
+          const doc = new DOMParser().parseFromString(withPlaceholders, 'text/html');
+          const phSplit = new RegExp(`(${PHSTART}\\d+${PHEND})`);
+          const phMatch = new RegExp(`^${PHSTART}(\\d+)${PHEND}$`);
+          function walkNode(node) {
+            if (node.nodeType === 3 && node.textContent.includes(PHSTART)) {
+              const parts = node.textContent.split(phSplit);
+              const frag = doc.createDocumentFragment();
+              parts.forEach((part) => {
+                const m = part.match(phMatch);
+                if (m) {
+                  const expr = expressions[parseInt(m[1])];
+                  const label = expr.replace(/^\{\{-?\s*/, '').replace(/\s*-?\}\}$/, '').trim();
+                  const span = doc.createElement('span');
+                  span.className = '__ct-var__';
+                  span.dataset.ctVar = label;
+                  span.textContent = expr;
+                  frag.appendChild(span);
+                } else if (part) {
+                  frag.appendChild(doc.createTextNode(part));
+                }
+              });
+              node.parentNode.replaceChild(frag, node);
+            } else if (node.nodeType === 1 && !['SCRIPT', 'STYLE'].includes(node.tagName)) {
+              Array.from(node.childNodes).forEach(walkNode);
+            }
+          }
+          walkNode(doc.body);
+          const styleEl = doc.createElement('style');
+          styleEl.textContent =
+            '.__ct-var__{background:rgba(59,130,246,.18);outline:1.5px dashed rgba(59,130,246,.55);border-radius:2px;position:relative;cursor:help}' +
+            '.__ct-var__:hover{background:rgba(59,130,246,.32)}' +
+            '.__ct-var__:hover::after{content:attr(data-ct-var);position:absolute;left:0;top:calc(100% + 2px);background:#1e3a8a;color:#fff;padding:2px 8px;border-radius:4px;font:600 11px/1.4 monospace;white-space:nowrap;z-index:9999;pointer-events:none}';
+          doc.head.appendChild(styleEl);
+          let result = doc.documentElement.outerHTML;
+          result = result.replace(new RegExp(`${PHSTART}(\\d+)${PHEND}`, 'g'), (_, idx) => expressions[parseInt(idx)]);
+          return result;
+        }
 
         function populateScenarioBSelect(template) {
           const compatible = compatibleScenarios(template);
@@ -637,12 +696,13 @@
           frameB.srcdoc = '';
           if (!template || !scenario) return;
           try {
-            const [html, jsonText] = await Promise.all([
+            const [rawHtml, jsonText] = await Promise.all([
               CT.fetchText(BASE + template.archivoHtml),
               CT.fetchText(BASE + scenario.path),
             ]);
             if (genB !== renderGenerationB) return;
             const data = JSON.parse(jsonText);
+            const html = isVarOverlay ? annotateVariables(rawHtml, template.plataforma) : rawHtml;
             if (CT.slugify(template.plataforma) === 'pim') {
               CT.renderPimEmailToFrame(frameB, html, data);
             } else {
@@ -671,7 +731,7 @@
           frame.srcdoc = '';
 
           try {
-            const [html, jsonText] = await Promise.all([
+            const [rawHtml, jsonText] = await Promise.all([
               CT.fetchText(BASE + template.archivoHtml),
               CT.fetchText(BASE + scenario.path),
             ]);
@@ -682,6 +742,7 @@
             } catch (e) {
               throw new Error(`JSON inválido en ${scenario.path}: ${e.message}`);
             }
+            const html = isVarOverlay ? annotateVariables(rawHtml, template.plataforma) : rawHtml;
             if (CT.slugify(template.plataforma) === 'pim') {
               CT.renderPimEmailToFrame(frame, html, data);
             } else {
@@ -777,6 +838,21 @@
           const button = event.target.closest('button[data-device]');
           if (!button) return;
           applyDevice(button.dataset.device);
+        });
+
+        const ICON_VARS_OFF = `<svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="1.5"/><path d="M2 8c1.5-3 9-3 12 0"/><path d="M2 8c1.5 3 9 3 12 0"/></svg> Variables`;
+        const ICON_VARS_ON  = `<svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="1.5"/><path d="M2 8c1.5-3 9-3 12 0"/><path d="M2 8c1.5 3 9 3 12 0"/></svg> Variables ✓`;
+
+        const varsBtn = document.getElementById('ct-vis-vars');
+        varsBtn.innerHTML = ICON_VARS_OFF;
+        varsBtn.addEventListener('click', () => {
+          isVarOverlay = !isVarOverlay;
+          varsBtn.innerHTML = isVarOverlay ? ICON_VARS_ON : ICON_VARS_OFF;
+          varsBtn.title = isVarOverlay ? 'Ocultar variables' : 'Ver variables del escenario en el preview';
+          varsBtn.setAttribute('aria-label', isVarOverlay ? 'Ocultar variables' : 'Ver variables');
+          varsBtn.classList.toggle('ct-vis-vars-active', isVarOverlay);
+          renderPreview();
+          if (isCompareMode) renderPreviewB();
         });
 
         const ICON_EXPAND = `<svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9,2 14,2 14,7"/><polyline points="7,14 2,14 2,9"/><line x1="14" y1="2" x2="9" y2="7"/><line x1="2" y1="14" x2="7" y2="9"/></svg> Expandir`;
