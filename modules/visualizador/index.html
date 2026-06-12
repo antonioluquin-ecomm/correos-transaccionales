@@ -56,15 +56,43 @@
       .ct-preview-pane-bar {
         display: flex;
         justify-content: flex-end;
-        padding: 0 0 6px 0;
+        padding: 0 0 8px 0;
+      }
+      .ct-vis-btn-group {
+        display: inline-flex;
+        border: 1px solid var(--ct-card-border);
+        border-radius: 8px;
+        overflow: hidden;
+        background: #ffffff;
+        box-shadow: 0 1px 3px rgba(15,23,42,.07);
       }
       .ct-vis-expand-btn {
         display: inline-flex;
         align-items: center;
         gap: 5px;
-        padding: 4px 10px;
+        padding: 6px 12px;
         font-size: 12px;
+        font-weight: 600;
         cursor: pointer;
+        border: none;
+        border-right: 1px solid var(--ct-card-border);
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+        color: var(--ct-text-muted);
+        transition: background .13s, color .13s;
+      }
+      .ct-vis-expand-btn:last-child {
+        border-right: none;
+      }
+      .ct-vis-expand-btn:hover {
+        background: var(--ct-bg);
+        color: var(--ct-text);
+        border-color: var(--ct-card-border);
+        box-shadow: none;
+      }
+      .ct-vis-expand-btn:active {
+        transform: none;
       }
       .ct-vis-vars-active {
         background: rgba(59, 130, 246, .15);
@@ -196,9 +224,11 @@
 
         <div class="ct-preview-pane">
           <div class="ct-preview-pane-bar">
-            <button id="ct-vis-vars" type="button" class="ct-btn ct-vis-expand-btn" title="Ver variables del escenario en el preview" aria-label="Ver variables"></button>
-            <button id="ct-vis-compare" type="button" class="ct-btn ct-vis-expand-btn" title="Comparar dos escenarios" aria-label="Comparar dos escenarios"></button>
-            <button id="ct-vis-expand" type="button" class="ct-btn ct-vis-expand-btn" title="Expandir preview" aria-label="Expandir preview"></button>
+            <div class="ct-vis-btn-group">
+              <button id="ct-vis-vars" type="button" class="ct-btn ct-vis-expand-btn" title="Ver variables del escenario en el preview" aria-label="Ver variables"></button>
+              <button id="ct-vis-compare" type="button" class="ct-btn ct-vis-expand-btn" title="Comparar dos escenarios" aria-label="Comparar dos escenarios"></button>
+              <button id="ct-vis-expand" type="button" class="ct-btn ct-vis-expand-btn" title="Expandir preview" aria-label="Expandir preview"></button>
+            </div>
           </div>
           <div class="ct-preview-frames">
             <div class="ct-preview-frame-col">
