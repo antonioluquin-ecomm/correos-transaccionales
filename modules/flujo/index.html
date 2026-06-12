@@ -44,7 +44,19 @@
         transition: background 0.15s, color 0.15s;
         white-space: nowrap;
         text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3px;
       }
+
+      .ct-flow-tab-pct {
+        font-size: 10px;
+        font-weight: 800;
+        line-height: 1;
+      }
+
+      .ct-flow-tab:not(.active) .ct-flow-tab-pct { color: var(--ct-muted); }
 
       .ct-flow-tab:hover {
         background: var(--ct-bg);
@@ -446,6 +458,112 @@
         margin-top: 1px;
       }
 
+      /* ═══ VIEW TOGGLE + EXPORT ══════════════════════════════════ */
+      .ct-flow-header-controls {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 8px;
+      }
+
+      .ct-flow-view-toggle {
+        display: flex;
+        border: 1px solid var(--ct-line);
+        border-radius: 6px;
+        overflow: hidden;
+        background: var(--ct-bg);
+      }
+
+      .ct-flow-view-btn {
+        padding: 5px 12px;
+        border: none;
+        background: transparent;
+        color: var(--ct-muted);
+        font: 600 12px var(--ct-font);
+        cursor: pointer;
+        transition: background 0.13s, color 0.13s;
+      }
+
+      .ct-flow-view-btn + .ct-flow-view-btn { border-left: 1px solid var(--ct-line); }
+
+      .ct-flow-view-btn.active {
+        background: var(--ct-navy);
+        color: #fff;
+      }
+
+      .ct-flow-export-btn {
+        padding: 5px 12px;
+        border: 1px solid var(--ct-line);
+        border-radius: 6px;
+        background: var(--ct-card);
+        color: var(--ct-muted);
+        font: 600 12px var(--ct-font);
+        cursor: pointer;
+        transition: background 0.13s, border-color 0.13s, color 0.13s;
+        white-space: nowrap;
+      }
+
+      .ct-flow-export-btn:hover {
+        background: var(--ct-bg);
+        border-color: var(--ct-accent);
+        color: var(--ct-text);
+      }
+
+      /* ═══ BACKLOG TABLE ══════════════════════════════════════════ */
+      .ct-flow-backlog { overflow-x: auto; }
+
+      .ct-flow-backlog-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 24px 10px;
+        border-bottom: 1px solid var(--ct-line);
+      }
+
+      .ct-flow-backlog-header h3 {
+        margin: 0;
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--ct-text);
+      }
+
+      .ct-flow-backlog-count {
+        font-size: 12px;
+        color: var(--ct-muted);
+      }
+
+      .ct-flow-backlog table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 12px;
+      }
+
+      .ct-flow-backlog th {
+        padding: 8px 14px;
+        text-align: left;
+        font: 800 10px/1 var(--ct-font);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--ct-muted);
+        background: var(--ct-bg);
+        border-bottom: 2px solid var(--ct-line);
+        white-space: nowrap;
+      }
+
+      .ct-flow-backlog td {
+        padding: 9px 14px;
+        border-bottom: 1px solid var(--ct-line);
+        vertical-align: top;
+        line-height: 1.4;
+      }
+
+      .ct-flow-backlog tr:last-child td { border-bottom: none; }
+      .ct-flow-backlog tr:hover td { background: var(--ct-bg); }
+
+      .ct-flow-backlog-name { font-weight: 600; max-width: 240px; }
+      .ct-flow-backlog-trigger { font-size: 11px; color: var(--ct-muted); max-width: 300px; }
+      .ct-flow-backlog-flow { font-size: 11px; font-weight: 700; color: var(--ct-muted); white-space: nowrap; }
+
       /* ═══ FILTER ACTIVE HINT ════════════════════════════════════ */
       .ct-flow-filter-hint {
         font-size: 11px;
@@ -682,6 +800,13 @@
             <p id="ct-flow-description"></p>
           </div>
           <div class="ct-flow-header-side">
+            <div class="ct-flow-header-controls">
+              <div class="ct-flow-view-toggle" role="group" aria-label="Vista">
+                <button id="ct-view-grid" class="ct-flow-view-btn active" type="button">Grilla</button>
+                <button id="ct-view-backlog" class="ct-flow-view-btn" type="button">Backlog</button>
+              </div>
+              <button id="ct-export-btn" class="ct-flow-export-btn" type="button">↓ Exportar CSV</button>
+            </div>
             <div class="ct-flow-kpis" aria-label="Cobertura del flujo">
               <div class="ct-kpi-card" style="--kpi-color:var(--ct-success)">
                 <strong id="ct-flow-kpi-existing">0</strong>
@@ -769,6 +894,26 @@
 
         <div class="ct-flow-grid-wrap">
           <div class="ct-flow-grid" id="ct-flow-grid"></div>
+        </div>
+
+        <div class="ct-flow-backlog" id="ct-flow-backlog" style="display:none">
+          <div class="ct-flow-backlog-header">
+            <h3>Correos pendientes de crear</h3>
+            <span class="ct-flow-backlog-count" id="ct-flow-backlog-count"></span>
+          </div>
+          <table aria-label="Backlog de correos faltantes">
+            <thead>
+              <tr>
+                <th>Flujo</th>
+                <th>Etapa</th>
+                <th>Plataforma</th>
+                <th>Nombre</th>
+                <th>Prioridad</th>
+                <th>Disparador</th>
+              </tr>
+            </thead>
+            <tbody id="ct-flow-backlog-body"></tbody>
+          </table>
         </div>
 
         <div class="ct-flow-note">
@@ -1082,6 +1227,7 @@
         const kpiPriority = document.getElementById('ct-flow-kpi-priority');
 
         let activeFlowId = 'general';
+        let activeView = 'grid';
         let activeStatusFilter = null;
         let activePriorityFilter = false;
         let activeLaneFilter = null;
@@ -1208,6 +1354,15 @@
           closeDetail();
           const flow = FLOWS[flowId];
           activeFlowId = flowId;
+          activeView = 'grid';
+          const gridWrap = document.querySelector('.ct-flow-grid-wrap');
+          const backlogSection = document.getElementById('ct-flow-backlog');
+          if (gridWrap) gridWrap.style.display = '';
+          if (backlogSection) backlogSection.style.display = 'none';
+          const btnGrid = document.getElementById('ct-view-grid');
+          const btnBL = document.getElementById('ct-view-backlog');
+          if (btnGrid) { btnGrid.classList.add('active'); }
+          if (btnBL) { btnBL.classList.remove('active'); }
           titleEl.textContent = flow.title;
           descriptionEl.textContent = flow.description;
 
@@ -1428,7 +1583,14 @@
           button.type = 'button';
           button.className = 'ct-flow-tab';
           button.dataset.flow = flowId;
-          button.textContent = flow.shortTitle || flow.title;
+          const titleSpan = document.createElement('span');
+          titleSpan.textContent = flow.shortTitle || flow.title;
+          const pctSpan = document.createElement('span');
+          pctSpan.className = 'ct-flow-tab-pct';
+          pctSpan.dataset.tabPct = flowId;
+          pctSpan.textContent = '—';
+          button.appendChild(titleSpan);
+          button.appendChild(pctSpan);
           button.addEventListener('click', () => renderFlow(flowId));
           tabsEl.appendChild(button);
         });
@@ -1439,7 +1601,102 @@
           if (event.key === 'Escape' && detailOverlay.classList.contains('open')) closeDetail();
         });
 
+        function updateTabPcts() {
+          Object.entries(FLOWS).forEach(([flowId, flow]) => {
+            const span = document.querySelector(`[data-tab-pct="${flowId}"]`);
+            if (!span) return;
+            let ex = 0, counted = 0;
+            flow.nodes.forEach(n => {
+              const s = effectiveStatus(n);
+              if (s === 'referencial') return;
+              counted++;
+              if (s === 'existente') ex++;
+            });
+            const pct = counted ? Math.round(ex / counted * 100) : 0;
+            span.textContent = `${pct}%`;
+            span.style.color = pct >= 80 ? 'var(--ct-success)' : pct >= 50 ? 'var(--ct-warning)' : 'var(--ct-accent)';
+          });
+        }
+
+        function setView(view) {
+          activeView = view;
+          const gridWrap = document.querySelector('.ct-flow-grid-wrap');
+          const backlogEl = document.getElementById('ct-flow-backlog');
+          document.getElementById('ct-view-grid').classList.toggle('active', view === 'grid');
+          document.getElementById('ct-view-backlog').classList.toggle('active', view === 'backlog');
+          gridWrap.style.display = view === 'grid' ? '' : 'none';
+          backlogEl.style.display = view === 'backlog' ? '' : 'none';
+          if (view === 'backlog') renderBacklog();
+        }
+
+        function renderBacklog() {
+          const tbody = document.getElementById('ct-flow-backlog-body');
+          const countEl = document.getElementById('ct-flow-backlog-count');
+          tbody.innerHTML = '';
+          const rows = [];
+          Object.entries(FLOWS).forEach(([flowId, flow]) => {
+            const stageLabels = flow.stageLabels || FLOW_STAGE_LABELS[flowId] || [];
+            flow.nodes.forEach(n => {
+              if (effectiveStatus(n) !== 'faltante') return;
+              const stageMatch = stageLabels.find(s => s.x === n.x);
+              rows.push({
+                flowTitle: flow.shortTitle || flow.title,
+                stageName: stageMatch ? stageMatch.label : '—',
+                laneLabel: n.lane ? (LANES.find(l => l.id === n.lane)?.label || n.lane) : '—',
+                node: n,
+              });
+            });
+          });
+          const priorityOrder = { alta: 0, media: 1, baja: 2 };
+          rows.sort((a, b) => (priorityOrder[a.node.priority || 'media'] ?? 1) - (priorityOrder[b.node.priority || 'media'] ?? 1));
+          rows.forEach(({ flowTitle, stageName, laneLabel, node }) => {
+            const priority = node.priority || 'media';
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td class="ct-flow-backlog-flow">${flowTitle}</td>
+              <td>${stageName}</td>
+              <td>${laneLabel}</td>
+              <td class="ct-flow-backlog-name">${node.text || node.id}</td>
+              <td><span class="ct-flow-card-priority priority-${priority}">${PRIORITY_LABELS[priority] || priority}</span></td>
+              <td class="ct-flow-backlog-trigger">${node.trigger || '—'}</td>`;
+            tbody.appendChild(tr);
+          });
+          countEl.textContent = `${rows.length} correo${rows.length !== 1 ? 's' : ''}`;
+        }
+
+        function exportFaltantes() {
+          const headers = ['Flujo', 'Etapa', 'Plataforma', 'Nombre', 'Prioridad', 'Disparador'];
+          const rows = [headers];
+          Object.entries(FLOWS).forEach(([flowId, flow]) => {
+            const stageLabels = flow.stageLabels || FLOW_STAGE_LABELS[flowId] || [];
+            flow.nodes.forEach(n => {
+              if (effectiveStatus(n) !== 'faltante') return;
+              const stageMatch = stageLabels.find(s => s.x === n.x);
+              rows.push([
+                flow.shortTitle || flow.title,
+                stageMatch ? stageMatch.label : '',
+                n.lane ? (LANES.find(l => l.id === n.lane)?.label || n.lane) : '',
+                n.text || n.id,
+                n.priority || 'media',
+                n.trigger || '',
+              ]);
+            });
+          });
+          const csv = rows.map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(',')).join('\n');
+          const blob = new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8;' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'backlog-correos-faltantes.csv';
+          a.click();
+          URL.revokeObjectURL(url);
+        }
+
+        document.getElementById('ct-view-grid').addEventListener('click', () => setView('grid'));
+        document.getElementById('ct-view-backlog').addEventListener('click', () => setView('backlog'));
+        document.getElementById('ct-export-btn').addEventListener('click', exportFaltantes);
+
         renderFlow('general');
+        updateTabPcts();
       })();
     </script>
   </body>
