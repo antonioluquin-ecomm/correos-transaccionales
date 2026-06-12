@@ -1,0 +1,507 @@
+{
+  "package": {
+    "items": [
+      {
+        "itemIndex": 0,
+        "quantity": 1,
+        "price": 10999900,
+        "description": null,
+        "unitMultiplier": 0
+      }
+    ],
+    "courier": "OCASA",
+    "invoiceNumber": "187643007",
+    "description": null,
+    "invoiceValue": 11999800,
+    "invoiceUrl": "https://tienda-ejemplo.example.invalid/facturas/187643008",
+    "issuanceDate": "2026-06-08T16:11:03.237Z",
+    "trackingNumber": "OCA0000200001",
+    "invoiceKey": null,
+    "trackingUrl": "https://www.ocasa.com/seguimiento?tracking=OCA0000200001",
+    "embeddedInvoice": "",
+    "type": "Output",
+    "courierStatus": null,
+    "cfop": null,
+    "restitutions": {},
+    "volumes": null,
+    "EnableInferItems": null
+  },
+  "subjectItemAttachment": {
+    "item": "Zapatillas adidas de...",
+    "totalItems": 1
+  },
+  "cancellationReason": null,
+  "paymentData": {
+    "giftCards": [],
+    "transactions": [
+      {
+        "isActive": true,
+        "transactionId": "887DD268E7EE4895AC805481AC68C537",
+        "merchantName": "S*********",
+        "payments": [
+          {
+            "id": "20CA808F306F49C095D84773B6FF622F",
+            "paymentSystem": "2",
+            "paymentSystemName": "V***",
+            "value": 11999800,
+            "installments": 6,
+            "referenceValue": 11999800,
+            "cardHolder": null,
+            "cardNumber": null,
+            "firstDigits": "454832",
+            "lastDigits": "1901",
+            "cvv2": null,
+            "expireMonth": null,
+            "expireYear": null,
+            "url": null,
+            "giftCardId": null,
+            "giftCardName": null,
+            "giftCardCaption": null,
+            "redemptionCode": null,
+            "group": "creditCard",
+            "tid": "1637927999315-1",
+            "dueDate": null,
+            "connectorResponses": {
+              "Tid": "1637927999315-1",
+              "ReturnCode": "200",
+              "Message": "Transaction Approved",
+              "authId": "011686",
+              "nsu": "644",
+              "acquirer": "Payway"
+            },
+            "giftCardProvider": null,
+            "giftCardAsDiscount": null,
+            "koinUrl": null,
+            "accountId": "3086D348E61546E0A9DB468E90CC89D6",
+            "parentAccountId": null,
+            "bankIssuedInvoiceIdentificationNumber": null,
+            "bankIssuedInvoiceIdentificationNumberFormatted": null,
+            "bankIssuedInvoiceBarCodeNumber": null,
+            "bankIssuedInvoiceBarCodeType": null,
+            "billingAddress": {
+              "postalCode": "7***",
+              "city": "G****** A*****",
+              "state": "Buenos Aires",
+              "country": "ARG",
+              "street": "R**** P****",
+              "number": "8**",
+              "neighborhood": null,
+              "complement": null,
+              "reference": null,
+              "geoCoordinates": [
+                -51.4779552,
+                -0.0039779
+              ]
+            },
+            "paymentOrigin": null
+          }
+        ]
+      }
+    ]
+  },
+  "cancellationRequests": null,
+  "invoiceData": null,
+  "clientProfileData": {
+    "id": "clientProfileData",
+    "email": "b*******************************@c*.v***.c**.b*",
+    "firstName": "E****",
+    "lastName": "A******",
+    "documentType": "dni",
+    "document": "4*******",
+    "phone": "0**********",
+    "corporateName": null,
+    "tradeName": null,
+    "corporateDocument": null,
+    "stateInscription": null,
+    "corporatePhone": null,
+    "isCorporate": false,
+    "userProfileId": "aecc4a59-4ead-4bc8-be01-997d4a1711d6",
+    "userProfileVersion": null,
+    "customerClass": null,
+    "customerCode": null
+  },
+  "shippingData": {
+    "id": "shippingData",
+    "address": {
+      "addressType": "residential",
+      "receiverName": "M**** S***** o A******** O******",
+      "addressId": "5342627457369",
+      "versionId": null,
+      "entityId": null,
+      "postalCode": "7***",
+      "city": "G****** A*****",
+      "state": "Buenos Aires",
+      "country": "ARG",
+      "street": "R**** P****",
+      "number": "8**",
+      "neighborhood": null,
+      "complement": null,
+      "reference": null,
+      "geoCoordinates": [
+        -51.4779552,
+        -0.0039779
+      ]
+    },
+    "logisticsInfo": [
+      {
+        "itemIndex": 0,
+        "itemId": "310248866",
+        "selectedDeliveryChannel": "delivery",
+        "selectedSla": "Envío domicilio",
+        "lockTTL": "10d",
+        "price": 999900,
+        "listPrice": 999900,
+        "sellingPrice": 999900,
+        "deliveryWindow": null,
+        "deliveryCompany": null,
+        "shippingEstimate": "13bd",
+        "shippingEstimateDate": "2026-06-25T00:03:16.2084699Z",
+        "slas": [
+          {
+            "id": "Envío domicilio",
+            "name": "E**************",
+            "shippingEstimate": "13bd",
+            "shippingEstimateDate": "2026-06-25T00:03:16.2084699Z",
+            "deliveryWindow": null,
+            "availableDeliveryWindows": [],
+            "deliveryIds": [],
+            "listPrice": 999900,
+            "price": 999900,
+            "deliveryChannel": "delivery",
+            "pickupStoreInfo": {
+              "additionalInfo": null,
+              "address": null,
+              "dockId": null,
+              "friendlyName": null,
+              "isPickupStore": false
+            },
+            "polygonName": null,
+            "lockTTL": "10d",
+            "pickupPointId": null,
+            "transitTime": null,
+            "pickupDistance": null
+          }
+        ],
+        "shipsTo": [
+          "AR",
+          "MX",
+          "BR"
+        ],
+        "deliveryIds": [],
+        "deliveryChannels": [
+          {
+            "id": "delivery",
+            "stockBalance": 0
+          }
+        ],
+        "deliveryChannel": null,
+        "pickupStoreInfo": {
+          "additionalInfo": null,
+          "address": null,
+          "dockId": null,
+          "friendlyName": null,
+          "isPickupStore": false
+        },
+        "addressId": "5342627457369",
+        "versionId": null,
+        "entityId": null,
+        "polygonName": null,
+        "pickupPointId": null,
+        "transitTime": null
+      }
+    ],
+    "trackingHints": [],
+    "selectedAddresses": [
+      {
+        "addressId": "5342627457369",
+        "versionId": null,
+        "entityId": null,
+        "addressType": "residential",
+        "receiverName": "M**** S***** o A******** O******",
+        "street": "R**** P****",
+        "number": "8**",
+        "complement": null,
+        "neighborhood": null,
+        "postalCode": "7***",
+        "city": "G****** A*****",
+        "state": "Buenos Aires",
+        "country": "ARG",
+        "reference": null,
+        "geoCoordinates": [
+          -51.4779552,
+          -0.0039779
+        ]
+      }
+    ],
+    "availableAddresses": [
+      {
+        "addressId": "5342627457369",
+        "versionId": null,
+        "entityId": null,
+        "addressType": "residential",
+        "receiverName": "M**** S***** o A******** O******",
+        "street": "R**** P****",
+        "number": "8**",
+        "complement": null,
+        "neighborhood": null,
+        "postalCode": "7***",
+        "city": "G****** A*****",
+        "state": "Buenos Aires",
+        "country": "ARG",
+        "reference": null,
+        "geoCoordinates": [
+          -51.4779552,
+          -0.0039779
+        ]
+      }
+    ],
+    "contactInformation": [],
+    "contactsInfo": []
+  },
+  "customData": {
+    "customApps": [
+      {
+        "fields": {
+          "uuid": "5ee8b575-90b9-4dfa-908f-d55fa8ceb822",
+          "source": "WEB_DESKTOP",
+          "snrs_params": "{\"utm_source\":\"google\",\"utm_medium\":\"search\",\"utm_campaign\":\"pauta-conversion-competencia\",\"utm_term\":\"generico\"}"
+        },
+        "id": "synerise",
+        "major": 1
+      }
+    ],
+    "customFields": []
+  },
+  "purchaseAgentData": null,
+  "authorizationPolicyData": {
+    "Status": "accepted",
+    "DeniedPolicies": [],
+    "PendingPolicies": []
+  },
+  "items": [
+    {
+      "additionalInfo": {
+        "categoriesIds": "/106/107/110/",
+        "productClusterId": "155,503,557,843,884",
+        "commercialConditionId": "9",
+        "dimension": {
+          "cubicweight": 0.2083,
+          "height": 10,
+          "length": 10,
+          "weight": 0.001,
+          "width": 10
+        },
+        "brandName": "A*****",
+        "brandId": "2000007",
+        "offeringInfo": null,
+        "offeringType": null,
+        "offeringTypeId": null
+      },
+      "sellerSku": "370986403",
+      "priceTable": null,
+      "priceValidUntil": null,
+      "callCenterOperator": null,
+      "commission": 0,
+      "freightCommission": 0,
+      "taxCode": null,
+      "catalogProvider": "vrn:vtex.catalog-api-proxy:-:sportingio:master:/proxy/authenticated/catalog/pvt/sku/stockkeepingunitbyid/310248866",
+      "uniqueId": "5F074B772C804C779AF11ACA5A5A6263",
+      "id": "310248866",
+      "productId": "60208",
+      "productRefId": null,
+      "refId": "JQ9401_630",
+      "ean": "4068812080951",
+      "name": "Z*************************************************",
+      "skuName": "8**",
+      "modalType": null,
+      "parentItemIndex": null,
+      "parentAssemblyBinding": null,
+      "assemblies": [],
+      "tax": 0,
+      "price": 10999900,
+      "listPrice": 10999900,
+      "manualPrice": null,
+      "manualPriceAppliedBy": null,
+      "sellingPrice": 10999900,
+      "rewardValue": 0,
+      "isGift": false,
+      "preSaleDate": null,
+      "productCategoryIds": "/106/107/110/",
+      "productCategories": {
+        "106": "SPORTING",
+        "107": "CALZADO",
+        "110": "Zapatillas"
+      },
+      "quantity": 1,
+      "seller": "aradidas",
+      "sellerChain": [
+        "aradidas"
+      ],
+      "imageUrl": "https://sporting.vteximg.com.br/arquivos/ids/2330552-150-150/image-7f31ec257b6843d0a43cbb33fb8177c5.jpg?v=639045063199430000",
+      "detailUrl": "/zapatillas-adidas-de-running-runfalcon-5-mujer-60208/p",
+      "components": [],
+      "bundleItems": [],
+      "attachments": [],
+      "attachmentOfferings": [],
+      "offerings": [],
+      "priceTags": [],
+      "availability": "available",
+      "measurementUnit": "un",
+      "unitMultiplier": 1,
+      "manufacturerCode": null,
+      "priceDefinition": {
+        "calculatedSellingPrice": 10999900,
+        "total": 10999900,
+        "sellingPrices": [
+          {
+            "value": 10999900,
+            "quantity": 1
+          }
+        ]
+      }
+    }
+  ],
+  "sellers": [
+    {
+      "subSellerId": "1",
+      "fulfillmentEndpoint": "https://apps.producteca.com/sporting/api/vtex/250215",
+      "id": "aradidas",
+      "name": "A*****",
+      "logo": ""
+    }
+  ],
+  "giftRegistryData": null,
+  "receiptData": null,
+  "contextData": null,
+  "marketPlaceOrderId": "",
+  "marketPlaceOrderGroup": null,
+  "marketplaceServicesEndpoint": null,
+  "orderFormId": "b148c7744b0648ddb62295439f3eeec7",
+  "sequence": "7999315",
+  "affiliateId": "",
+  "status": "",
+  "callCenterOperator": "",
+  "userProfileId": "aecc4a59-4ead-4bc8-be01-997d4a1711d6",
+  "hostName": "s*********",
+  "creationVersion": null,
+  "creationEnvironment": null,
+  "lastChangeVersion": null,
+  "workflowInstanceId": null,
+  "marketplacePaymentValue": null,
+  "orderId": "TEST-2002-01",
+  "orderGroup": "1637927999315",
+  "state": "payment-approved",
+  "isCheckedIn": false,
+  "sellerOrderId": "187643007",
+  "storeId": null,
+  "checkedInPickupPointId": null,
+  "value": 11999800,
+  "totals": [
+    {
+      "id": "Items",
+      "name": "T*****************",
+      "value": 10999900
+    },
+    {
+      "id": "Discounts",
+      "name": "T******************",
+      "value": 0
+    },
+    {
+      "id": "Shipping",
+      "name": "C********************",
+      "value": 999900
+    },
+    {
+      "id": "Tax",
+      "name": "C*********************",
+      "value": 0
+    }
+  ],
+  "ratesAndBenefitsData": {
+    "rateAndBenefitsIdentifiers": [],
+    "teaser": []
+  },
+  "clientPreferencesData": {
+    "locale": "es-AR",
+    "optinNewsLetter": true
+  },
+  "commercialConditionData": null,
+  "marketingData": {
+    "utmSource": "google",
+    "utmMedium": "search",
+    "utmCampaign": "pauta-conversion-competencia",
+    "utmipage": "",
+    "utmiPart": "",
+    "utmiCampaign": "",
+    "coupon": null,
+    "marketingTags": []
+  },
+  "storePreferencesData": {
+    "countryCode": "ARG",
+    "saveUserData": false,
+    "timeZone": "Argentina Standard Time",
+    "currencyCode": "ARS",
+    "currencyLocale": 11274,
+    "currencySymbol": "$",
+    "currencyFormatInfo": {
+      "currencyDecimalDigits": 0,
+      "currencyDecimalSeparator": ",",
+      "currencyGroupSeparator": ".",
+      "currencyGroupSize": 3,
+      "startsWithCurrencySymbol": true
+    }
+  },
+  "openTextField": null,
+  "itemMetadata": null,
+  "taxData": null,
+  "hooksData": null,
+  "changeData": null,
+  "subscriptionData": null,
+  "salesChannel": "3",
+  "followUpEmail": "",
+  "creationDate": "2026-06-08T00:03:02.1615318Z",
+  "lastChange": "2026-06-08T00:03:16.2084887Z",
+  "timeZoneCreationDate": "2026-06-07T21:03:02.1615318",
+  "timeZoneLastChange": "2026-06-07T21:03:16.2084887",
+  "isCompleted": true,
+  "merchantName": null,
+  "userType": "",
+  "roundingError": 0,
+  "allowEdition": false,
+  "allowCancellation": false,
+  "isUserDataVisible": false,
+  "allowChangeSeller": false,
+  "_accountInfo": {
+    "MainAccountName": "s*******",
+    "AccountName": "s*********",
+    "Cnpj": "30709964360",
+    "Id": "3b50fdc9-2fa8-4ed3-b86c-5aace09d5051",
+    "AppId": "aad3c2ce-d115-4059-88c2-a0060e5acd9a",
+    "IsActive": true,
+    "IsOperating": true,
+    "CreationDate": "2017-09-13T04:00:22",
+    "OperationDate": "2018-04-12T14:44:05",
+    "CompanyName": "B*************",
+    "TradingName": "S*******",
+    "City": "San Miguel de Tucuman",
+    "Complement": null,
+    "Country": "Argentina",
+    "State": null,
+    "Address": "Avenida Siria",
+    "District": null,
+    "Number": "2345",
+    "PostalCode": "4000",
+    "Licenses": [
+      28
+    ],
+    "ParentAccountId": null,
+    "ParentAccountName": null,
+    "InactivationDate": null,
+    "Platform": "vtex",
+    "Privacy": null,
+    "HasPiiRestriction": false,
+    "Infra": null,
+    "Sponsor": "3f29e577-433f-42b8-9ded-d2ede67d8ab3"
+  }
+}
