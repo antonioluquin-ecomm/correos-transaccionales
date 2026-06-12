@@ -33,6 +33,9 @@
         font-size: 12px;
         line-height: 17px;
       }
+      .ct-vis-field-note.ct-coverage-empty { color: #ef4444; font-weight: 600; }
+      .ct-vis-field-note.ct-coverage-low   { color: #d97706; font-weight: 500; }
+      .ct-vis-field-note.ct-coverage-ok    { color: #16a34a; }
 
       .ct-vis-scenario-note {
         margin-top: 10px;
@@ -329,13 +332,26 @@
           });
         }
 
+        function syncUrl() {
+          const params = new URLSearchParams();
+          if (platformSelect.value) params.set('platform', platformSelect.value);
+          if (channelSelect.value) params.set('channel', channelSelect.value);
+          if (storeSelect.value) params.set('store', storeSelect.value);
+          if (templateSelect.value) params.set('template', templateSelect.value);
+          if (exampleSelect.value) params.set('example', exampleSelect.value);
+          const qs = params.toString();
+          history.replaceState(null, '', qs ? `?${qs}` : window.location.pathname);
+        }
+
         function renderTemplateOptions(preferredId) {
           const options = filteredTemplates();
           templateSelect.innerHTML = '';
           options.forEach((template) => {
+            const count = examples.filter((s) => isCompatibleScenario(template, s)).length;
+            const countTag = count === 0 ? '–' : String(count);
             const option = document.createElement('option');
             option.value = template.id;
-            option.textContent = `${template.plataforma} · ${CT.labelsFor(CT.templateChannels(template), CT.channelLabel)} · ${CT.labelsFor(CT.templateStores(template), CT.storeLabel)} · ${template.nombre}`;
+            option.textContent = `${template.plataforma} · ${CT.labelsFor(CT.templateChannels(template), CT.channelLabel)} · ${CT.labelsFor(CT.templateStores(template), CT.storeLabel)} · ${template.nombre} (${countTag})`;
             templateSelect.appendChild(option);
           });
           const selected = options.find((template) => template.id === preferredId) || options[0];
@@ -403,9 +419,12 @@
           if (selected) exampleSelect.value = selected.path;
 
           exampleSelect.disabled = compatible.length === 0;
+          exampleHelpEl.className = `ct-vis-field-note ${
+            compatible.length === 0 ? 'ct-coverage-empty' : compatible.length === 1 ? 'ct-coverage-low' : 'ct-coverage-ok'
+          }`;
           exampleHelpEl.textContent = compatible.length
             ? `${compatible.length} escenario${compatible.length !== 1 ? 's' : ''} disponible${compatible.length !== 1 ? 's' : ''} para esta plantilla.`
-            : 'Sin escenarios compatibles definidos.';
+            : 'Sin escenarios compatibles — esta plantilla no tiene datos de prueba.';
         }
 
         function currentScenario() {
@@ -553,10 +572,12 @@
             Object.values(facetSelects).forEach((s) => { s.value = ''; });
             renderFacetOptions(template);
             renderScenarioOptions(template, template.ejemplo);
+            syncUrl();
             renderPreview();
           } else {
             exampleSelect.innerHTML = '';
             frame.srcdoc = '';
+            syncUrl();
             setStatus('No hay plantillas para los filtros seleccionados.', true);
           }
         }
@@ -594,10 +615,11 @@
           if (template) renderFacetOptions(template);
           Object.values(facetSelects).forEach((s) => { s.value = ''; });
           renderScenarioOptions(template, template?.ejemplo);
+          syncUrl();
           renderPreview();
         });
 
-        exampleSelect.addEventListener('change', renderPreview);
+        exampleSelect.addEventListener('change', () => { syncUrl(); renderPreview(); });
         downloadHtmlBtn.addEventListener('click', downloadCurrentHtml);
         copyHtmlBtn.addEventListener('click', copyCurrentHtml);
 
@@ -621,6 +643,7 @@
           if (initial) {
             renderFacetOptions(initial);
             renderScenarioOptions(initial, requestedExamplePath || initial.ejemplo);
+            syncUrl();
             renderPreview();
           } else {
             setStatus('No hay plantillas para los filtros seleccionados.', true);
