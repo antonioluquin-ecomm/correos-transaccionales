@@ -1,439 +1,425 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Flujo de Correos — Correos Transaccionales</title>
     <link rel="stylesheet" href="../../assets/css/shared.css" />
     <style>
-      .ct-flow-page {
-        max-width: 1600px;
-      }
-
-      .ct-flow-page h1 {
-        font-size: 28px;
-        letter-spacing: 0;
-      }
-
+      /* ═══ TABS ═══════════════════════════════════════════════════ */
       .ct-flow-tabs {
         display: flex;
-        gap: 8px;
+        gap: 4px;
         flex-wrap: wrap;
-        margin-bottom: 16px;
+        margin-bottom: 20px;
+        background: var(--ct-card);
+        border: 1px solid var(--ct-line);
+        border-radius: var(--ct-radius);
+        padding: 6px;
+        box-shadow: var(--ct-shadow-xs);
       }
 
       .ct-flow-tab {
-        border: 1px solid #d7dde7;
-        background: #ffffff;
-        color: #253247;
-        border-radius: 8px;
-        padding: 9px 14px;
-        min-height: 38px;
-        font-size: 13px;
-        font-weight: 800;
+        flex: 1 1 auto;
+        padding: 8px 14px;
+        border-radius: var(--ct-radius-sm);
+        border: none;
+        background: transparent;
+        color: var(--ct-muted);
+        font: 600 13px/1 var(--ct-font);
         cursor: pointer;
-        box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
-        transition: background 0.14s, color 0.14s, border-color 0.14s, box-shadow 0.14s;
+        transition: background 0.15s, color 0.15s;
+        white-space: nowrap;
+        text-align: center;
+      }
+
+      .ct-flow-tab:hover {
+        background: var(--ct-bg);
+        color: var(--ct-text);
       }
 
       .ct-flow-tab.active {
         background: var(--ct-navy);
-        color: #ffffff;
-        border-color: var(--ct-navy);
-        box-shadow: 0 8px 18px rgba(31, 58, 95, 0.18);
+        color: #fff;
       }
 
-      .ct-flow-tab:not(.active):hover {
-        border-color: #8ea4c0;
-        color: var(--ct-navy);
-      }
-
+      /* ═══ SHELL / HEADER ═════════════════════════════════════════ */
       .ct-flow-shell {
-        background: #ffffff;
-        border: 1px solid #dce3ec;
-        border-radius: 8px;
+        background: var(--ct-card);
+        border: 1px solid var(--ct-line);
+        border-radius: var(--ct-radius);
+        box-shadow: var(--ct-shadow-sm);
         overflow: hidden;
-        box-shadow: 0 16px 40px rgba(31, 58, 95, 0.08);
       }
 
       .ct-flow-header {
         display: grid;
-        grid-template-columns: minmax(280px, 1fr) auto;
+        grid-template-columns: 1fr auto;
         gap: 20px;
-        padding: 18px 20px;
-        border-bottom: 1px solid #dce3ec;
-        background: #ffffff;
+        padding: 20px 24px 16px;
+        border-bottom: 1px solid var(--ct-line);
       }
 
       .ct-flow-header h2 {
-        margin: 0;
-        font-size: 17px;
-        letter-spacing: 0;
+        margin: 0 0 4px;
+        color: var(--ct-text);
+        font-size: 18px;
+        font-weight: 800;
       }
 
       .ct-flow-header p {
-        margin: 5px 0 0 0;
-        color: #526174;
+        margin: 0;
+        color: var(--ct-muted);
         font-size: 13px;
-        line-height: 19px;
+        line-height: 1.5;
       }
 
       .ct-flow-header-side {
         display: flex;
         flex-direction: column;
+        gap: 10px;
         align-items: flex-end;
-        gap: 12px;
       }
 
+      /* ═══ KPIs ═══════════════════════════════════════════════════ */
       .ct-flow-kpis {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(86px, 1fr));
+        display: flex;
         gap: 8px;
       }
 
-      .ct-flow-kpi {
-        min-width: 86px;
-        padding: 8px 10px;
-        border: 1px solid #dce3ec;
-        border-radius: 8px;
-        background: #f8fafc;
-        text-align: right;
+      .ct-flow-kpis .ct-kpi-card {
+        min-width: 80px;
+        text-align: center;
+        border-top-color: var(--kpi-color, var(--ct-accent));
+        padding: 10px 12px;
       }
 
-      .ct-flow-kpi strong {
+      .ct-flow-kpis .ct-kpi-card strong {
         display: block;
-        color: #16293f;
-        font-size: 18px;
-        line-height: 20px;
-      }
-
-      .ct-flow-kpi span {
-        display: block;
-        margin-top: 2px;
-        color: #64748b;
-        font-size: 11px;
+        font-size: 22px;
         font-weight: 800;
-        text-transform: uppercase;
+        color: var(--kpi-color, var(--ct-accent));
       }
 
+      .ct-flow-kpis .ct-kpi-card span {
+        display: block;
+        font-size: 10px;
+        color: var(--ct-muted);
+        margin-top: 2px;
+        white-space: nowrap;
+      }
+
+      /* ═══ LEGEND ═════════════════════════════════════════════════ */
       .ct-flow-legend {
         display: flex;
+        flex-wrap: wrap;
         gap: 6px;
         align-items: center;
-        flex-wrap: wrap;
         justify-content: flex-end;
       }
 
       .ct-flow-legend-sep {
         width: 1px;
-        height: 18px;
-        background: #dce3ec;
+        height: 16px;
+        background: var(--ct-line);
         flex-shrink: 0;
-        margin: 0 2px;
       }
 
+      /* ═══ FILTERS ════════════════════════════════════════════════ */
       .ct-flow-filters {
         display: flex;
-        gap: 8px;
-        flex-wrap: wrap;
         align-items: center;
-        padding: 12px 20px;
-        border-bottom: 1px solid #dce3ec;
-        background: #f8fafc;
+        flex-wrap: wrap;
+        gap: 6px;
+        padding: 10px 24px;
+        border-bottom: 1px solid var(--ct-line);
+        background: var(--ct-bg);
       }
 
       .ct-flow-filter-label {
         font-size: 11px;
-        font-weight: 800;
+        font-weight: 700;
         text-transform: uppercase;
-        color: #64748b;
-        margin-right: 2px;
+        letter-spacing: 0.05em;
+        color: var(--ct-muted);
       }
 
       .ct-flow-filter-btn {
         display: inline-flex;
         align-items: center;
-        gap: 6px;
-        padding: 7px 12px;
-        min-height: 32px;
-        border-radius: 8px;
-        border: 1px solid #d7dde7;
-        background: #ffffff;
-        color: #253247;
+        gap: 4px;
+        padding: 4px 10px;
+        border-radius: 99px;
+        border: 1px solid var(--ct-line);
+        background: var(--ct-card);
+        color: var(--ct-text);
         font-size: 12px;
-        font-weight: 800;
+        font-weight: 600;
         cursor: pointer;
-        box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
-        transition: background 0.14s, color 0.14s, border-color 0.14s, box-shadow 0.14s;
+        transition: background 0.13s, color 0.13s, border-color 0.13s;
+        white-space: nowrap;
       }
 
       .ct-flow-filter-btn:hover {
-        border-color: #8ea4c0;
-        color: var(--ct-navy);
+        background: var(--ct-bg);
+        border-color: var(--ct-accent);
+        color: var(--ct-accent);
       }
 
       .ct-flow-filter-btn.active {
-        box-shadow: 0 8px 18px rgba(15, 23, 42, 0.12);
-      }
-
-      .ct-flow-filter-btn.active[data-filter="all"] {
         background: var(--ct-navy);
-        color: #ffffff;
         border-color: var(--ct-navy);
-      }
-
-      .ct-flow-filter-btn.active[data-filter="existente"] {
-        background: var(--ct-status-activo);
-        color: #ffffff;
-        border-color: var(--ct-status-activo);
-      }
-
-      .ct-flow-filter-btn.active[data-filter="faltante"] {
-        background: var(--ct-status-faltante);
-        color: #ffffff;
-        border-color: var(--ct-status-faltante);
-      }
-
-      .ct-flow-filter-btn.active[data-filter="candidato"] {
-        background: #2563eb;
-        color: #ffffff;
-        border-color: #2563eb;
-      }
-
-      .ct-flow-filter-btn.active[data-filter="referencial"] {
-        background: #475569;
-        color: #ffffff;
-        border-color: #475569;
-      }
-
-      .ct-flow-filter-btn.active[data-priority="alta"] {
-        background: #dc2626;
-        color: #ffffff;
-        border-color: #dc2626;
-      }
-
-      .ct-flow-filter-btn.active[data-channel] {
-        background: #7c2d12;
-        color: #ffffff;
-        border-color: #7c2d12;
-      }
-
-      .ct-flow-filter-btn.active[data-store] {
-        background: #0f766e;
-        color: #ffffff;
-        border-color: #0f766e;
+        color: #fff;
       }
 
       .ct-flow-filter-sep {
         width: 1px;
-        height: 24px;
-        background: #dce3ec;
+        height: 20px;
+        background: var(--ct-line);
         flex-shrink: 0;
       }
 
-      .ct-flow-board-wrap {
-        overflow: auto;
-        background: #eef3f8;
+      .ct-flow-filter-select {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin: 0;
       }
 
-      .ct-flow-board {
-        position: relative;
-        width: 1420px;
-        height: 620px;
-        transform-origin: top left;
-        background:
-          linear-gradient(90deg, rgba(148, 163, 184, 0.14) 1px, transparent 1px) 0 0 / 130px 100%,
-          linear-gradient(#dce3ec 1px, transparent 1px) 0 88px / 100% 128px,
-          #f6f9fc;
-      }
-
-      .ct-flow-stage-label {
-        position: absolute;
-        top: 18px;
-        min-width: 96px;
-        padding: 5px 9px;
-        border: 1px solid #d7dde7;
-        border-radius: 8px;
-        background: rgba(255, 255, 255, 0.82);
-        color: #64748b;
-        font-size: 10px;
-        font-weight: 900;
-        text-align: center;
+      .ct-flow-filter-select label {
+        font-size: 11px;
+        font-weight: 700;
         text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--ct-muted);
+        white-space: nowrap;
       }
 
-      .ct-flow-lane-label {
-        position: absolute;
-        left: 18px;
-        width: 112px;
-        min-height: 46px;
+      .ct-flow-filter-select select {
+        padding: 4px 8px;
+        border-radius: 6px;
+        border: 1px solid var(--ct-line);
+        background: var(--ct-card);
+        color: var(--ct-text);
+        font: 600 12px var(--ct-font);
+        cursor: pointer;
+      }
+
+      /* ═══ STAGE GRID ═════════════════════════════════════════════ */
+      .ct-flow-grid-wrap {
+        overflow-x: auto;
+        background: var(--ct-bg);
+      }
+
+      .ct-flow-grid {
+        display: flex;
+        align-items: stretch;
+        min-width: max-content;
+      }
+
+      .ct-flow-col--lanes {
+        flex-shrink: 0;
+        width: 72px;
+        position: sticky;
+        left: 0;
+        z-index: 2;
+        background: var(--ct-bg);
+        border-right: 2px solid var(--ct-line);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .ct-flow-col--lanes .ct-flow-col-head {
+        border-right: none;
+        border-bottom: 2px solid var(--ct-line);
+      }
+
+      .ct-flow-col {
+        display: flex;
+        flex-direction: column;
+        min-width: 160px;
+        flex: 1 0 160px;
+        border-right: 1px solid var(--ct-line);
+      }
+
+      .ct-flow-col:last-child {
+        border-right: none;
+      }
+
+      .ct-flow-col-head {
+        padding: 10px 12px;
+        font: 800 10px/1 var(--ct-font);
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        color: var(--ct-muted);
+        background: var(--ct-bg);
+        border-bottom: 2px solid var(--ct-line);
+        min-height: 38px;
+        display: flex;
+        align-items: center;
+      }
+
+      .ct-flow-cell {
+        padding: 8px;
+        border-bottom: 1px solid var(--ct-line);
+        min-height: 80px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        background: var(--ct-card);
+        flex: 1;
+      }
+
+      .ct-flow-cell:last-child {
+        border-bottom: none;
+      }
+
+      .ct-flow-lane-row {
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 8px;
-        color: #ffffff;
-        font-weight: 900;
-        font-size: 14px;
-        box-shadow: 0 10px 22px rgba(15, 23, 42, 0.16);
+        min-height: 80px;
+        padding: 8px 4px;
+        font: 800 10px/1 var(--ct-font);
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        color: #fff;
+        background: var(--lane-color, var(--ct-navy));
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        flex: 1;
       }
 
-      .ct-flow-lane-guide {
-        position: absolute;
-        left: 150px;
-        top: 0;
-        bottom: 0;
-        width: 1px;
-        background: #a7b4c5;
+      .ct-flow-lane-row:last-child {
+        border-bottom: none;
       }
 
-      .ct-flow-svg {
-        position: absolute;
-        inset: 0;
+      /* ═══ NODE CARDS ═════════════════════════════════════════════ */
+      .ct-flow-card {
+        border: 1px solid var(--ct-line);
+        border-left: 3px solid var(--card-accent, var(--ct-line));
+        border-radius: var(--ct-radius-xs);
+        padding: 8px 9px;
+        box-shadow: var(--ct-shadow-xs);
+        cursor: pointer;
+        transition: box-shadow 0.14s, transform 0.14s, opacity 0.18s;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        background: var(--ct-card);
+        text-align: left;
         width: 100%;
-        height: 100%;
+        font: inherit;
+      }
+
+      .ct-flow-card:hover {
+        box-shadow: var(--ct-shadow-md);
+        transform: translateY(-1px);
+      }
+
+      .ct-flow-card:focus-visible {
+        outline: 2px solid var(--ct-accent);
+        outline-offset: 2px;
+      }
+
+      .ct-flow-card.filtered-out {
+        opacity: 0.12;
         pointer-events: none;
       }
 
-      .ct-flow-link {
-        fill: none;
-        stroke: #32648f;
-        stroke-width: 2;
-        opacity: 0.78;
+      .ct-flow-card.active {
+        box-shadow: 0 0 0 2px var(--ct-accent);
       }
 
-      .ct-flow-link.filtered-out {
-        opacity: 0.12;
+      .ct-flow-card.status-existente {
+        --card-accent: var(--ct-success);
+        background: #f3fcf6;
       }
 
-      .ct-flow-node {
-        position: absolute;
-        width: 128px;
-        min-height: 60px;
-        display: grid;
-        grid-template-rows: auto 1fr;
-        gap: 4px;
-        padding: 8px 10px 9px 13px;
-        border: 1px solid #d7dde7;
-        border-left: 5px solid currentColor;
-        border-radius: 8px;
-        background: #ffffff;
-        color: var(--ct-text);
-        box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
-        cursor: pointer;
-        transition: transform 0.14s, box-shadow 0.14s, opacity 0.2s, border-color 0.14s;
-      }
-
-      .ct-flow-node:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 16px 32px rgba(15, 23, 42, 0.16);
-        z-index: 4;
-      }
-
-      .ct-flow-node.vtex { color: var(--ct-platform-vtex); }
-      .ct-flow-node.andreani { color: #ef4056; }
-      .ct-flow-node.pim { color: #0891b2; }
-      .ct-flow-node.ocasa { color: #0f766e; }
-
-      .ct-flow-node.status-existente { background: #f3fcf6; }
-      .ct-flow-node.status-faltante {
+      .ct-flow-card.status-faltante {
+        --card-accent: var(--ct-warning);
         background: #fffaf3;
-        border-style: solid solid solid dashed;
+        border-left-style: dashed;
       }
-      .ct-flow-node.status-candidato {
+
+      .ct-flow-card.status-candidato {
+        --card-accent: var(--ct-accent);
         background: #f2f7ff;
-        border-style: solid solid solid dotted;
+        border-left-style: dotted;
       }
 
-      .ct-flow-node.status-referencial {
-        background: #f8fafc;
-        border-style: solid solid solid dotted;
+      .ct-flow-card.status-referencial {
+        --card-accent: var(--ct-muted);
+        background: var(--ct-bg);
+        border-left-style: dotted;
       }
 
-      .ct-flow-node.active {
-        outline: 3px solid rgba(37, 99, 235, 0.24);
-        outline-offset: 3px;
-        z-index: 5;
-      }
-
-      .ct-flow-node:focus-visible {
-        outline: 3px solid #2563eb;
-        outline-offset: 3px;
-      }
-
-      .ct-flow-node.filtered-out {
-        opacity: 0.15;
-      }
-
-      .ct-flow-node-meta {
+      .ct-flow-card-top {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 6px;
-        min-width: 0;
+        gap: 4px;
       }
 
-      .ct-flow-node-platform {
-        color: #64748b;
+      .ct-flow-card-top .ct-badge {
         font-size: 9px;
-        font-weight: 900;
-        line-height: 1;
-        text-transform: uppercase;
-      }
-
-      .ct-flow-node-priority {
-        width: 8px;
-        height: 8px;
-        border-radius: 999px;
+        padding: 1px 5px;
         flex-shrink: 0;
       }
 
-      .ct-flow-node-priority.priority-alta { background: #dc2626; }
-      .ct-flow-node-priority.priority-media { background: #f59e0b; }
-      .ct-flow-node-priority.priority-baja { background: #94a3b8; }
+      .ct-flow-card-priority {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
 
-      .ct-flow-node-title {
-        color: #172033;
+      .ct-flow-card-priority.priority-alta  { background: var(--ct-danger); }
+      .ct-flow-card-priority.priority-media { background: var(--ct-warning); }
+      .ct-flow-card-priority.priority-baja  { background: var(--ct-muted); }
+
+      .ct-flow-card-title {
+        margin: 0;
         font-size: 11px;
-        font-weight: 900;
+        font-weight: 700;
         line-height: 14px;
-        text-align: left;
+        color: var(--ct-text);
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
       }
 
-      .ct-flow-node-status {
-        position: absolute;
-        right: -8px;
-        bottom: -8px;
-        min-width: 20px;
-        height: 20px;
-        box-sizing: border-box;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0 5px;
-        border-radius: 999px;
-        background: #ffffff;
-        border: 1px solid currentColor;
-        font-size: 10px;
-        line-height: 1;
-        font-weight: 900;
+      .ct-flow-card-foot {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 3px;
+        margin-top: 2px;
       }
 
+      .ct-flow-card-foot .ct-badge {
+        font-size: 9px;
+        padding: 1px 5px;
+      }
+
+      /* ═══ NOTE BAR ═══════════════════════════════════════════════ */
       .ct-flow-note {
-        padding: 10px 20px;
-        border-top: 1px solid #dce3ec;
-        background: #ffffff;
-        color: #64748b;
+        padding: 10px 24px;
+        border-top: 1px solid var(--ct-line);
+        color: var(--ct-muted);
         font-size: 12px;
-        line-height: 18px;
+        line-height: 1.6;
       }
 
+      /* ═══ DETAIL OVERLAY ═════════════════════════════════════════ */
       .ct-flow-detail-overlay {
         position: fixed;
         top: 0;
         right: -440px;
         width: 420px;
         height: 100%;
-        background: #ffffff;
+        background: var(--ct-card);
         box-shadow: -16px 0 48px rgba(15, 23, 42, 0.18);
         z-index: 80;
         overflow-y: auto;
@@ -459,9 +445,9 @@
 
       .ct-flow-detail-header h2 {
         margin: 10px 0 0 0;
-        color: #172033;
-        font-size: 22px;
-        line-height: 28px;
+        color: var(--ct-text);
+        font-size: 20px;
+        line-height: 26px;
       }
 
       #ct-flow-detail-badges {
@@ -476,19 +462,19 @@
         gap: 12px 14px;
         margin: 20px 0;
         padding: 16px 0;
-        border-top: 1px solid #e6ebf2;
-        border-bottom: 1px solid #e6ebf2;
+        border-top: 1px solid var(--ct-line);
+        border-bottom: 1px solid var(--ct-line);
         font-size: 13px;
       }
 
       .ct-flow-detail-inner dt {
-        color: #64748b;
+        color: var(--ct-muted);
         font-weight: 800;
       }
 
       .ct-flow-detail-inner dd {
         margin: 0;
-        color: #253247;
+        color: var(--ct-text);
         line-height: 19px;
       }
 
@@ -510,47 +496,41 @@
         gap: 8px;
       }
 
-      .ct-badge.ct-platform-andreani {
-        background: #ef4056;
-      }
-
-      .ct-badge.ct-platform-ocasa {
-        background: #0f766e;
-      }
-
-      .ct-badge.ct-priority-alta { background: #dc2626; }
-      .ct-badge.ct-priority-media { background: #d97706; }
-      .ct-badge.ct-priority-baja { background: #64748b; }
+      .ct-badge.ct-platform-andreani { background: #ef4056; }
+      .ct-badge.ct-platform-ocasa   { background: #0f766e; }
+      .ct-badge.ct-priority-alta    { background: #dc2626; }
+      .ct-badge.ct-priority-media   { background: #d97706; }
+      .ct-badge.ct-priority-baja    { background: #64748b; }
 
       .ct-flow-detail-note {
-        color: #526174;
+        color: var(--ct-muted);
         font-size: 13px;
         line-height: 20px;
         margin: 0;
         padding: 13px 14px;
-        background: #f8fafc;
-        border-radius: 8px;
-        border-left: 4px solid #8ea4c0;
+        background: var(--ct-bg);
+        border-radius: var(--ct-radius-sm);
+        border-left: 4px solid var(--ct-line);
       }
 
       .ct-flow-close {
         flex-shrink: 0;
         width: 34px;
         height: 34px;
-        border: 1px solid #d7dde7;
-        background: #ffffff;
-        color: #64748b;
+        border: 1px solid var(--ct-line);
+        background: var(--ct-card);
+        color: var(--ct-muted);
         cursor: pointer;
         font-size: 22px;
         line-height: 1;
         padding: 0;
-        border-radius: 8px;
+        border-radius: var(--ct-radius-sm);
         transition: background 0.14s, color 0.14s;
       }
 
       .ct-flow-close:hover {
-        background: #f1f5f9;
-        color: #172033;
+        background: var(--ct-bg);
+        color: var(--ct-text);
       }
 
       .ct-flow-backdrop {
@@ -561,6 +541,7 @@
         z-index: 79;
       }
 
+      /* ═══ RESPONSIVE ═════════════════════════════════════════════ */
       @media (max-width: 920px) {
         .ct-flow-header {
           grid-template-columns: 1fr;
@@ -571,11 +552,7 @@
         }
 
         .ct-flow-kpis {
-          grid-template-columns: repeat(3, minmax(0, 1fr));
-        }
-
-        .ct-flow-kpi {
-          text-align: left;
+          justify-content: flex-start;
         }
 
         .ct-flow-legend {
@@ -592,18 +569,14 @@
           font-size: 24px;
         }
 
-        .ct-flow-tab,
+        .ct-flow-tab {
+          font-size: 11px;
+          padding: 7px 10px;
+        }
+
         .ct-flow-filter-btn {
           flex: 1 1 auto;
           justify-content: center;
-        }
-
-        .ct-flow-board-wrap {
-          overflow-x: auto;
-        }
-
-        .ct-flow-board {
-          transform: none !important;
         }
 
         .ct-flow-detail-overlay {
@@ -645,15 +618,15 @@
           </div>
           <div class="ct-flow-header-side">
             <div class="ct-flow-kpis" aria-label="Cobertura del flujo">
-              <div class="ct-flow-kpi">
+              <div class="ct-kpi-card" style="--kpi-color:var(--ct-success)">
                 <strong id="ct-flow-kpi-existing">0</strong>
                 <span>Existentes</span>
               </div>
-              <div class="ct-flow-kpi">
+              <div class="ct-kpi-card" style="--kpi-color:var(--ct-warning)">
                 <strong id="ct-flow-kpi-missing">0</strong>
                 <span>Faltantes</span>
               </div>
-              <div class="ct-flow-kpi">
+              <div class="ct-kpi-card" style="--kpi-color:var(--ct-danger)">
                 <strong id="ct-flow-kpi-priority">0</strong>
                 <span>Alta prioridad</span>
               </div>
@@ -682,23 +655,30 @@
           <span class="ct-flow-filter-sep"></span>
           <button class="ct-flow-filter-btn" type="button" data-priority="alta">↑ Prioridad alta</button>
           <span class="ct-flow-filter-sep"></span>
-          <span class="ct-flow-filter-label">Canal</span>
-          <button class="ct-flow-filter-btn active" type="button" data-channel="all">Todos</button>
-          <button class="ct-flow-filter-btn" type="button" data-channel="punto-de-venta">Punto de Venta</button>
-          <button class="ct-flow-filter-btn" type="button" data-channel="b2c">B2C</button>
-          <button class="ct-flow-filter-btn" type="button" data-channel="b2b">B2B</button>
-          <button class="ct-flow-filter-btn" type="button" data-channel="ext">EXT</button>
-          <span class="ct-flow-filter-sep"></span>
-          <span class="ct-flow-filter-label">Tienda</span>
-          <button class="ct-flow-filter-btn active" type="button" data-store="all">Todas</button>
-          <button class="ct-flow-filter-btn" type="button" data-store="sporting">Sporting</button>
-          <button class="ct-flow-filter-btn" type="button" data-store="woker">Woker</button>
-          <button class="ct-flow-filter-btn" type="button" data-store="venta-deportiva">Venta Deportiva</button>
-          <button class="ct-flow-filter-btn" type="button" data-store="seller-adidas">Seller adidas</button>
+          <div class="ct-flow-filter-select">
+            <label for="ct-filter-channel">Canal</label>
+            <select id="ct-filter-channel">
+              <option value="">Todos</option>
+              <option value="punto-de-venta">Punto de Venta</option>
+              <option value="b2c">B2C</option>
+              <option value="b2b">B2B</option>
+              <option value="ext">EXT</option>
+            </select>
+          </div>
+          <div class="ct-flow-filter-select">
+            <label for="ct-filter-store">Tienda</label>
+            <select id="ct-filter-store">
+              <option value="">Todas</option>
+              <option value="sporting">Sporting</option>
+              <option value="woker">Woker</option>
+              <option value="venta-deportiva">Venta Deportiva</option>
+              <option value="seller-adidas">Seller adidas</option>
+            </select>
+          </div>
         </div>
 
-        <div class="ct-flow-board-wrap">
-          <div class="ct-flow-board" id="ct-flow-board"></div>
+        <div class="ct-flow-grid-wrap">
+          <div class="ct-flow-grid" id="ct-flow-grid"></div>
         </div>
 
         <div class="ct-flow-note">
@@ -953,8 +933,7 @@
         };
 
         const tabsEl = document.getElementById('ct-flow-tabs');
-        const boardEl = document.getElementById('ct-flow-board');
-        const boardWrapEl = document.querySelector('.ct-flow-board-wrap');
+        const gridEl = document.getElementById('ct-flow-grid');
         const titleEl = document.getElementById('ct-flow-title');
         const descriptionEl = document.getElementById('ct-flow-description');
         const detailOverlay = document.getElementById('ct-flow-detail-overlay');
@@ -983,29 +962,19 @@
         let activeChannelFilter = null;
         let activeStoreFilter = null;
 
-        const BOARD_WIDTH = 1600;
-        const BOARD_HEIGHT = 620;
-        const FLOW_X_OFFSET = 170;
-        const NODE_WIDTH = 128;
-        const NODE_HEIGHT = 60;
-
         const STATUS_META = {
-          existente: { label: 'Existente', icon: '✓', className: 'ct-status-activo' },
-          faltante: { label: 'Faltante', icon: '!', className: 'ct-status-faltante' },
-          candidato: { label: 'Candidato', icon: '?', className: 'ct-status-candidato' },
-          referencial: { label: 'Referencia externa', icon: 'Ref', className: 'ct-status-referencial' },
+          existente:   { label: 'Existente',        icon: '✓', className: 'ct-status-activo' },
+          faltante:    { label: 'Faltante',          icon: '!', className: 'ct-status-faltante' },
+          candidato:   { label: 'Candidato',         icon: '?', className: 'ct-status-candidato' },
+          referencial: { label: 'Referencia externa', icon: 'R', className: 'ct-status-referencial' },
         };
 
-        const PRIORITY_LABELS = {
-          alta: 'Alta',
-          media: 'Media',
-          baja: 'Baja',
-        };
+        const PRIORITY_LABELS = { alta: 'Alta', media: 'Media', baja: 'Baja' };
 
         const PRIORITY_BADGE_CLASSES = {
-          alta: 'ct-priority-alta',
+          alta:  'ct-priority-alta',
           media: 'ct-priority-media',
-          baja: 'ct-priority-baja',
+          baja:  'ct-priority-baja',
         };
 
         function templateById(templateId) {
@@ -1058,46 +1027,134 @@
           return '../../docs/crear-nueva-plantilla.md';
         }
 
-        function fitBoardToViewport() {
-          if (!boardWrapEl) return;
-          const available = boardWrapEl.clientWidth;
-          const forceScroll = window.matchMedia('(max-width: 760px)').matches;
-          const scale = forceScroll ? 1 : Math.min(1, Math.max(0.82, available / BOARD_WIDTH));
-          boardEl.style.width = BOARD_WIDTH + 'px';
-          boardEl.style.height = BOARD_HEIGHT + 'px';
-          boardEl.style.transform = `scale(${scale})`;
-          boardWrapEl.style.height = Math.ceil(BOARD_HEIGHT * scale) + 'px';
+        function renderCard(node, flow) {
+          const status = effectiveStatus(node);
+          const template = templateById(node.templateId);
+          const lane = LANES.find((l) => l.id === node.lane);
+          const channels = nodeChannels(node, template);
+          const stores = nodeStores(node, template);
+
+          const el = document.createElement('button');
+          el.type = 'button';
+          el.className = `ct-flow-card ${node.lane} status-${status}`;
+          el.dataset.node = node.id;
+          el.dataset.status = status;
+          el.dataset.priority = node.priority || 'media';
+          el.dataset.channels = channels.join(' ');
+          el.dataset.stores = stores.join(' ');
+          el.setAttribute('aria-label', `${node.text}. Estado: ${(STATUS_META[status] || STATUS_META.faltante).label}`);
+
+          const laneLabel = lane ? lane.label : node.lane;
+          const footBadges = CT.channelBadges(channels) + CT.storeBadges(stores);
+
+          el.innerHTML = `
+            <div class="ct-flow-card-top">
+              <span class="ct-badge ct-platform-${CT.escapeHtml(node.lane)}">${CT.escapeHtml(laneLabel)}</span>
+              <span class="ct-flow-card-priority priority-${CT.escapeHtml(node.priority || 'media')}" title="Prioridad ${CT.escapeHtml(PRIORITY_LABELS[node.priority || 'media'] || '')}"></span>
+            </div>
+            <p class="ct-flow-card-title">${CT.escapeHtml(node.text)}</p>
+            ${footBadges ? `<div class="ct-flow-card-foot">${footBadges}</div>` : ''}
+          `;
+
+          el.addEventListener('click', () => openDetail(node, flow, el));
+          el.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+              event.preventDefault();
+              openDetail(node, flow, el);
+            }
+          });
+
+          return el;
+        }
+
+        function renderFlow(flowId) {
+          closeDetail();
+          const flow = FLOWS[flowId];
+          activeFlowId = flowId;
+          titleEl.textContent = flow.title;
+          descriptionEl.textContent = flow.description;
+
+          const total = flow.nodes.length;
+          const existing = flow.nodes.filter((n) => effectiveStatus(n) === 'existente').length;
+          const candidate = flow.nodes.filter((n) => effectiveStatus(n) === 'candidato').length;
+          const reference = flow.nodes.filter((n) => effectiveStatus(n) === 'referencial').length;
+          const missing = total - existing - candidate - reference;
+          const highPriority = flow.nodes.filter((n) => (n.priority || 'media') === 'alta').length;
+          kpiExisting.textContent = existing;
+          kpiMissing.textContent = missing + candidate;
+          kpiPriority.textContent = highPriority;
+
+          gridEl.innerHTML = '';
+
+          const stageLabels = flow.stageLabels || STAGE_LABELS;
+
+          // sticky lane header column
+          const lanesCol = document.createElement('div');
+          lanesCol.className = 'ct-flow-col--lanes';
+          const lanesHead = document.createElement('div');
+          lanesHead.className = 'ct-flow-col-head';
+          lanesCol.appendChild(lanesHead);
+          LANES.forEach((lane) => {
+            const row = document.createElement('div');
+            row.className = 'ct-flow-lane-row';
+            row.style.setProperty('--lane-color', lane.color);
+            row.textContent = lane.label;
+            lanesCol.appendChild(row);
+          });
+          gridEl.appendChild(lanesCol);
+
+          // one column per stage
+          stageLabels.forEach((stage) => {
+            const col = document.createElement('div');
+            col.className = 'ct-flow-col';
+            col.dataset.stageX = stage.x;
+
+            const head = document.createElement('div');
+            head.className = 'ct-flow-col-head';
+            head.textContent = stage.label;
+            col.appendChild(head);
+
+            LANES.forEach((lane) => {
+              const cell = document.createElement('div');
+              cell.className = 'ct-flow-cell';
+              cell.dataset.lane = lane.id;
+
+              const nodesInCell = flow.nodes.filter(
+                (n) => n.lane === lane.id && n.x === stage.x
+              );
+              nodesInCell.forEach((node) => cell.appendChild(renderCard(node, flow)));
+              col.appendChild(cell);
+            });
+
+            gridEl.appendChild(col);
+          });
+
+          Array.from(tabsEl.children).forEach((tab) => {
+            tab.classList.toggle('active', tab.dataset.flow === flowId);
+          });
+
+          applyFilter();
         }
 
         function applyFilter() {
-          const visibleNodes = new Map();
-
-          boardEl.querySelectorAll('.ct-flow-node').forEach((el) => {
+          gridEl.querySelectorAll('.ct-flow-card').forEach((el) => {
             const matchStatus = !activeStatusFilter || el.dataset.status === activeStatusFilter;
             const matchPriority = !activePriorityFilter || el.dataset.priority === 'alta';
             const channels = (el.dataset.channels || '').split(' ').filter(Boolean);
             const stores = (el.dataset.stores || '').split(' ').filter(Boolean);
             const matchChannel = !activeChannelFilter || !channels.length || channels.includes(activeChannelFilter);
             const matchStore = !activeStoreFilter || !stores.length || stores.includes(activeStoreFilter);
-            const isVisible = matchStatus && matchPriority && matchChannel && matchStore;
-            visibleNodes.set(el.dataset.node, isVisible);
-            el.classList.toggle('filtered-out', !isVisible);
-          });
-
-          boardEl.querySelectorAll('.ct-flow-link').forEach((el) => {
-            const sourceVisible = visibleNodes.get(el.dataset.from) !== false;
-            const targetVisible = visibleNodes.get(el.dataset.to) !== false;
-            el.classList.toggle('filtered-out', !(sourceVisible && targetVisible));
+            el.classList.toggle('filtered-out', !(matchStatus && matchPriority && matchChannel && matchStore));
           });
         }
 
         function closeDetail() {
           detailOverlay.classList.remove('open');
           backdrop.classList.remove('open');
-          boardEl.querySelectorAll('.ct-flow-node.active').forEach((el) => el.classList.remove('active'));
+          gridEl.querySelectorAll('.ct-flow-card.active').forEach((el) => el.classList.remove('active'));
         }
 
-        function openDetail(node, flow, nodeEl) {
+        function openDetail(node, flow, cardEl) {
           const status = effectiveStatus(node);
           const statusMeta = STATUS_META[status] || STATUS_META.faltante;
           const template = templateById(node.templateId);
@@ -1105,8 +1162,8 @@
           const channels = nodeChannels(node, template);
           const stores = nodeStores(node, template);
 
-          boardEl.querySelectorAll('.ct-flow-node.active').forEach((el) => el.classList.remove('active'));
-          nodeEl.classList.add('active');
+          gridEl.querySelectorAll('.ct-flow-card.active').forEach((el) => el.classList.remove('active'));
+          cardEl.classList.add('active');
 
           detailBadges.innerHTML = `${statusBadge(status)}${CT.channelBadges(channels)}${CT.storeBadges(stores)}${priorityBadge(node.priority || 'media')}`;
           detailTitle.textContent = node.text;
@@ -1139,147 +1196,7 @@
           backdrop.classList.add('open');
         }
 
-        function nodePosition(node) {
-          const lane = LANES.find((l) => l.id === node.lane);
-          return { left: FLOW_X_OFFSET + node.x, top: lane.top + (node.y || 0), lane };
-        }
-
-        function linkPath(from, to) {
-          const start = nodePosition(from);
-          const end = nodePosition(to);
-          const x1 = start.left + NODE_WIDTH;
-          const y1 = start.top + NODE_HEIGHT / 2;
-          const x2 = end.left;
-          const y2 = end.top + NODE_HEIGHT / 2;
-          const mid = x1 + Math.max(24, (x2 - x1) / 2);
-          return `M ${x1} ${y1} H ${mid} V ${y2} H ${x2}`;
-        }
-
-        function renderFlow(flowId) {
-          const flow = FLOWS[flowId];
-          activeFlowId = flowId;
-          titleEl.textContent = flow.title;
-          descriptionEl.textContent = flow.description;
-
-          const total = flow.nodes.length;
-          const existing = flow.nodes.filter((n) => effectiveStatus(n) === 'existente').length;
-          const candidate = flow.nodes.filter((n) => effectiveStatus(n) === 'candidato').length;
-          const reference = flow.nodes.filter((n) => effectiveStatus(n) === 'referencial').length;
-          const missing = total - existing - candidate - reference;
-          const highPriority = flow.nodes.filter((n) => (n.priority || 'media') === 'alta').length;
-          kpiExisting.textContent = existing;
-          kpiMissing.textContent = missing + candidate;
-          kpiPriority.textContent = highPriority;
-
-          boardEl.innerHTML = '';
-
-          const laneGuide = document.createElement('div');
-          laneGuide.className = 'ct-flow-lane-guide';
-          boardEl.appendChild(laneGuide);
-
-          LANES.forEach((lane) => {
-            const label = document.createElement('div');
-            label.className = 'ct-flow-lane-label';
-            label.style.top = lane.top + 'px';
-            label.style.background = lane.color;
-            label.textContent = lane.label;
-            boardEl.appendChild(label);
-          });
-
-          (flow.stageLabels || STAGE_LABELS).forEach((stage) => {
-            const label = document.createElement('div');
-            label.className = 'ct-flow-stage-label';
-            label.style.left = FLOW_X_OFFSET + stage.x + 'px';
-            label.textContent = stage.label;
-            boardEl.appendChild(label);
-          });
-
-          const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-          svg.setAttribute('class', 'ct-flow-svg');
-          svg.setAttribute('viewBox', `0 0 ${BOARD_WIDTH} ${BOARD_HEIGHT}`);
-
-          // Arrow marker
-          const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
-          const marker = document.createElementNS('http://www.w3.org/2000/svg', 'marker');
-          marker.setAttribute('id', 'ct-arrow');
-          marker.setAttribute('viewBox', '0 0 6 6');
-          marker.setAttribute('refX', '5');
-          marker.setAttribute('refY', '3');
-          marker.setAttribute('markerWidth', '5');
-          marker.setAttribute('markerHeight', '5');
-          marker.setAttribute('orient', 'auto');
-          const arrowPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-          arrowPath.setAttribute('d', 'M 0 0 L 6 3 L 0 6 z');
-          arrowPath.setAttribute('fill', '#1f5c8a');
-          marker.appendChild(arrowPath);
-          defs.appendChild(marker);
-          svg.appendChild(defs);
-
-          flow.links.forEach(([fromId, toId]) => {
-            const from = flow.nodes.find((n) => n.id === fromId);
-            const to = flow.nodes.find((n) => n.id === toId);
-            if (!from || !to) return;
-            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-            path.setAttribute('class', 'ct-flow-link');
-            path.dataset.from = fromId;
-            path.dataset.to = toId;
-            path.setAttribute('d', linkPath(from, to));
-            path.setAttribute('marker-end', 'url(#ct-arrow)');
-            svg.appendChild(path);
-          });
-
-          boardEl.appendChild(svg);
-
-          flow.nodes.forEach((node) => {
-            const position = nodePosition(node);
-            const status = effectiveStatus(node);
-            const statusMeta = STATUS_META[status] || STATUS_META.faltante;
-            const template = templateById(node.templateId);
-            const el = document.createElement('div');
-            el.className = `ct-flow-node ${node.lane} status-${status}`;
-            el.dataset.node = node.id;
-            el.dataset.status = status;
-            el.dataset.priority = node.priority || 'media';
-            el.dataset.channels = nodeChannels(node, template).join(' ');
-            el.dataset.stores = nodeStores(node, template).join(' ');
-            el.style.left = position.left + 'px';
-            el.style.top = position.top + 'px';
-            el.tabIndex = 0;
-            el.setAttribute('role', 'button');
-            el.setAttribute('aria-label', `${node.text}. Estado: ${statusMeta.label}`);
-            el.innerHTML = `
-              <span class="ct-flow-node-meta">
-                <span class="ct-flow-node-platform">${CT.escapeHtml(position.lane ? position.lane.label : node.lane)}</span>
-                <span class="ct-flow-node-priority priority-${CT.escapeHtml(node.priority || 'media')}"></span>
-              </span>
-              <span class="ct-flow-node-title">${CT.escapeHtml(node.text)}</span>
-            `;
-
-            const statusDot = document.createElement('span');
-            statusDot.className = 'ct-flow-node-status';
-            statusDot.textContent = statusMeta.icon;
-            el.appendChild(statusDot);
-
-            el.addEventListener('click', () => openDetail(node, flow, el));
-            el.addEventListener('keydown', (event) => {
-              if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault();
-                openDetail(node, flow, el);
-              }
-            });
-
-            boardEl.appendChild(el);
-          });
-
-          Array.from(tabsEl.children).forEach((tab) => {
-            tab.classList.toggle('active', tab.dataset.flow === flowId);
-          });
-
-          applyFilter();
-          fitBoardToViewport();
-        }
-
-        // Filter bar
+        // Filter bar — status pills and priority toggle
         document.getElementById('ct-flow-filters').addEventListener('click', (e) => {
           const btn = e.target.closest('.ct-flow-filter-btn');
           if (!btn) return;
@@ -1295,37 +1212,30 @@
           } else if ('priority' in btn.dataset) {
             activePriorityFilter = !activePriorityFilter;
             btn.classList.toggle('active', activePriorityFilter);
-          } else if ('channel' in btn.dataset) {
-            const channel = btn.dataset.channel;
-            activeChannelFilter = channel === 'all' || activeChannelFilter === channel ? null : channel;
-            document.querySelectorAll('#ct-flow-filters [data-channel]').forEach((b) => b.classList.remove('active'));
-            const activeBtn = activeChannelFilter
-              ? document.querySelector(`[data-channel="${activeChannelFilter}"]`)
-              : document.querySelector('[data-channel="all"]');
-            if (activeBtn) activeBtn.classList.add('active');
-          } else if ('store' in btn.dataset) {
-            const store = btn.dataset.store;
-            activeStoreFilter = store === 'all' || activeStoreFilter === store ? null : store;
-            document.querySelectorAll('#ct-flow-filters [data-store]').forEach((b) => b.classList.remove('active'));
-            const activeBtn = activeStoreFilter
-              ? document.querySelector(`[data-store="${activeStoreFilter}"]`)
-              : document.querySelector('[data-store="all"]');
-            if (activeBtn) activeBtn.classList.add('active');
           }
 
           applyFilter();
         });
 
+        // Channel / store selects
+        document.getElementById('ct-filter-channel').addEventListener('change', (e) => {
+          activeChannelFilter = e.target.value || null;
+          applyFilter();
+        });
+
+        document.getElementById('ct-filter-store').addEventListener('change', (e) => {
+          activeStoreFilter = e.target.value || null;
+          applyFilter();
+        });
+
+        // Tabs
         Object.entries(FLOWS).forEach(([flowId, flow]) => {
           const button = document.createElement('button');
           button.type = 'button';
           button.className = 'ct-flow-tab';
           button.dataset.flow = flowId;
           button.textContent = flow.title;
-          button.addEventListener('click', () => {
-            closeDetail();
-            renderFlow(flowId);
-          });
+          button.addEventListener('click', () => renderFlow(flowId));
           tabsEl.appendChild(button);
         });
 
@@ -1334,7 +1244,6 @@
         document.addEventListener('keydown', (event) => {
           if (event.key === 'Escape' && detailOverlay.classList.contains('open')) closeDetail();
         });
-        window.addEventListener('resize', fitBoardToViewport);
 
         renderFlow('general');
       })();
