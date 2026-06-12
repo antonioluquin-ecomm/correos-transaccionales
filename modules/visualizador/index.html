@@ -37,6 +37,22 @@
       .ct-vis-field-note.ct-coverage-low   { color: #d97706; font-weight: 500; }
       .ct-vis-field-note.ct-coverage-ok    { color: #16a34a; }
 
+      #ct-vis-template-search {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 6px 8px;
+        border: 1px solid var(--ct-card-border);
+        border-radius: 6px;
+        font-size: 13px;
+        background: var(--ct-bg);
+        color: var(--ct-text);
+        margin-bottom: 4px;
+      }
+      #ct-vis-template-search:focus {
+        outline: 2px solid var(--ct-accent);
+        outline-offset: -1px;
+      }
+
       .ct-vis-scenario-note {
         margin-top: 10px;
         padding-top: 10px;
@@ -102,7 +118,8 @@
             </select>
           </div>
           <div>
-            <label for="ct-vis-template">Plantilla HTML</label>
+            <label for="ct-vis-template-search">Plantilla HTML</label>
+            <input type="search" id="ct-vis-template-search" placeholder="Buscar plantilla…" autocomplete="off" spellcheck="false">
             <select id="ct-vis-template" aria-label="Elegir plantilla"></select>
           </div>
           <div>
@@ -183,6 +200,11 @@
         const copyHtmlBtn = document.getElementById('ct-vis-copy-html');
 
         const renderable = TEMPLATES.filter((t) => t.archivoHtml);
+        const templateSearchEl = document.getElementById('ct-vis-template-search');
+
+        function normalizeSearch(s) {
+          return (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+        }
         const urlParams = new URLSearchParams(window.location.search);
         const requestedPlatform = urlParams.get('platform');
         const requestedChannel = urlParams.get('channel');
@@ -344,7 +366,10 @@
         }
 
         function renderTemplateOptions(preferredId) {
-          const options = filteredTemplates();
+          const q = normalizeSearch(templateSearchEl.value);
+          const options = filteredTemplates().filter((t) =>
+            !q || normalizeSearch(t.nombre).includes(q) || normalizeSearch(t.id).includes(q)
+          );
           templateSelect.innerHTML = '';
           options.forEach((template) => {
             const count = examples.filter((s) => isCompatibleScenario(template, s)).length;
@@ -566,6 +591,7 @@
         }
 
         function doFilterChange() {
+          templateSearchEl.value = '';
           const preferred = templateSelect.value;
           const template = renderTemplateOptions(preferred);
           if (template) {
@@ -608,6 +634,17 @@
               renderPreview();
             }
           });
+        });
+
+        templateSearchEl.addEventListener('input', () => {
+          const preferred = templateSelect.value;
+          const template = renderTemplateOptions(preferred);
+          if (template) {
+            renderFacetOptions(template);
+            renderScenarioOptions(template, template.ejemplo);
+            syncUrl();
+            renderPreview();
+          }
         });
 
         templateSelect.addEventListener('change', () => {
