@@ -6,6 +6,12 @@
     <title>Flujo de Correos — Correos Transaccionales</title>
     <link rel="stylesheet" href="../../assets/css/shared.css" />
     <style>
+      /* Flujo usa todo el ancho disponible */
+      .ct-flow-page {
+        max-width: none;
+        padding: 24px 28px;
+      }
+
       /* ═══ TABS ═══════════════════════════════════════════════════ */
       .ct-flow-tabs {
         display: flex;
@@ -130,46 +136,41 @@
         display: flex;
         align-items: center;
         flex-wrap: wrap;
-        gap: 6px;
+        gap: 8px;
         padding: 10px 24px;
         border-bottom: 1px solid var(--ct-line);
         background: var(--ct-bg);
       }
 
-      .ct-flow-filter-label {
+      .ct-flow-filter-group {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .ct-flow-filter-group label {
         font-size: 11px;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.05em;
         color: var(--ct-muted);
-      }
-
-      .ct-flow-filter-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
-        padding: 4px 10px;
-        border-radius: 99px;
-        border: 1px solid var(--ct-line);
-        background: var(--ct-card);
-        color: var(--ct-text);
-        font-size: 12px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: background 0.13s, color 0.13s, border-color 0.13s;
         white-space: nowrap;
       }
 
-      .ct-flow-filter-btn:hover {
-        background: var(--ct-bg);
-        border-color: var(--ct-accent);
-        color: var(--ct-accent);
+      .ct-flow-filter-group select {
+        padding: 5px 10px;
+        border-radius: 6px;
+        border: 1px solid var(--ct-line);
+        background: var(--ct-card);
+        color: var(--ct-text);
+        font: 600 12px var(--ct-font);
+        cursor: pointer;
+        transition: border-color 0.13s;
       }
 
-      .ct-flow-filter-btn.active {
-        background: var(--ct-navy);
-        border-color: var(--ct-navy);
-        color: #fff;
+      .ct-flow-filter-group select:focus {
+        outline: none;
+        border-color: var(--ct-accent);
       }
 
       .ct-flow-filter-sep {
@@ -177,32 +178,6 @@
         height: 20px;
         background: var(--ct-line);
         flex-shrink: 0;
-      }
-
-      .ct-flow-filter-select {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        margin: 0;
-      }
-
-      .ct-flow-filter-select label {
-        font-size: 11px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        color: var(--ct-muted);
-        white-space: nowrap;
-      }
-
-      .ct-flow-filter-select select {
-        padding: 4px 8px;
-        border-radius: 6px;
-        border: 1px solid var(--ct-line);
-        background: var(--ct-card);
-        color: var(--ct-text);
-        font: 600 12px var(--ct-font);
-        cursor: pointer;
       }
 
       /* ═══ STAGE GRID ═════════════════════════════════════════════ */
@@ -380,10 +355,6 @@
         font-weight: 700;
         line-height: 14px;
         color: var(--ct-text);
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
       }
 
       .ct-flow-card-meta {
@@ -629,11 +600,6 @@
           padding: 7px 10px;
         }
 
-        .ct-flow-filter-btn {
-          flex: 1 1 auto;
-          justify-content: center;
-        }
-
         .ct-flow-detail-overlay {
           width: 100%;
           right: -100%;
@@ -704,16 +670,24 @@
         <div class="ct-flow-filters" id="ct-flow-filters">
           <input type="search" id="ct-filter-search" class="ct-flow-search" placeholder="Buscar correo..." autocomplete="off">
           <span class="ct-flow-filter-sep"></span>
-          <span class="ct-flow-filter-label">Ver</span>
-          <button class="ct-flow-filter-btn active" type="button" data-filter="all">Todos</button>
-          <button class="ct-flow-filter-btn" type="button" data-filter="existente">✓ Existentes</button>
-          <button class="ct-flow-filter-btn" type="button" data-filter="faltante">! Faltantes</button>
-          <button class="ct-flow-filter-btn" type="button" data-filter="candidato">? Candidatos</button>
-          <button class="ct-flow-filter-btn" type="button" data-filter="referencial">Referencias</button>
-          <span class="ct-flow-filter-sep"></span>
-          <button class="ct-flow-filter-btn" type="button" data-priority="alta">↑ Prioridad alta</button>
-          <span class="ct-flow-filter-sep"></span>
-          <div class="ct-flow-filter-select">
+          <div class="ct-flow-filter-group">
+            <label for="ct-filter-estado">Estado</label>
+            <select id="ct-filter-estado">
+              <option value="">Todos</option>
+              <option value="existente">✓ Existentes</option>
+              <option value="faltante">! Faltantes</option>
+              <option value="candidato">? Candidatos</option>
+              <option value="referencial">Referencias</option>
+            </select>
+          </div>
+          <div class="ct-flow-filter-group">
+            <label for="ct-filter-prioridad">Prioridad</label>
+            <select id="ct-filter-prioridad">
+              <option value="">Todas</option>
+              <option value="alta">↑ Alta</option>
+            </select>
+          </div>
+          <div class="ct-flow-filter-group">
             <label for="ct-filter-channel">Canal</label>
             <select id="ct-filter-channel">
               <option value="">Todos</option>
@@ -723,7 +697,7 @@
               <option value="ext">EXT</option>
             </select>
           </div>
-          <div class="ct-flow-filter-select">
+          <div class="ct-flow-filter-group">
             <label for="ct-filter-store">Tienda</label>
             <select id="ct-filter-store">
               <option value="">Todas</option>
@@ -1322,24 +1296,14 @@
           backdrop.classList.add('open');
         }
 
-        // Filter bar — status pills and priority toggle
-        document.getElementById('ct-flow-filters').addEventListener('click', (e) => {
-          const btn = e.target.closest('.ct-flow-filter-btn');
-          if (!btn) return;
+        // Filter bar — selects for estado and prioridad
+        document.getElementById('ct-filter-estado').addEventListener('change', (e) => {
+          activeStatusFilter = e.target.value || null;
+          applyFilter();
+        });
 
-          if ('filter' in btn.dataset) {
-            const filter = btn.dataset.filter;
-            activeStatusFilter = filter === 'all' || activeStatusFilter === filter ? null : filter;
-            document.querySelectorAll('[data-filter]').forEach((b) => b.classList.remove('active'));
-            const activeBtn = activeStatusFilter
-              ? document.querySelector(`[data-filter="${activeStatusFilter}"]`)
-              : document.querySelector('[data-filter="all"]');
-            if (activeBtn) activeBtn.classList.add('active');
-          } else if ('priority' in btn.dataset) {
-            activePriorityFilter = !activePriorityFilter;
-            btn.classList.toggle('active', activePriorityFilter);
-          }
-
+        document.getElementById('ct-filter-prioridad').addEventListener('change', (e) => {
+          activePriorityFilter = e.target.value === 'alta';
           applyFilter();
         });
 
