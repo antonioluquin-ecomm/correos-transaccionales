@@ -429,6 +429,33 @@
         margin-top: 1px;
       }
 
+      /* ═══ FILTER ACTIVE HINT ════════════════════════════════════ */
+      .ct-flow-filter-hint {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--ct-muted);
+        margin-left: auto;
+        white-space: nowrap;
+      }
+
+      .ct-flow-filter-clear {
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--ct-accent);
+        background: none;
+        border: 1px solid var(--ct-accent);
+        border-radius: 99px;
+        padding: 3px 10px;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: background 0.13s, color 0.13s;
+      }
+
+      .ct-flow-filter-clear:hover {
+        background: var(--ct-accent);
+        color: #fff;
+      }
+
       /* ═══ NOTE BAR ═══════════════════════════════════════════════ */
       .ct-flow-note {
         padding: 10px 24px;
@@ -707,6 +734,8 @@
               <option value="seller-adidas">Seller adidas</option>
             </select>
           </div>
+          <span id="ct-filter-hint" class="ct-flow-filter-hint" style="display:none" aria-live="polite"></span>
+          <button type="button" id="ct-filter-clear" class="ct-flow-filter-clear" style="display:none">Limpiar</button>
         </div>
 
         <div class="ct-flow-coverage-bar" id="ct-flow-coverage-bar">
@@ -745,8 +774,6 @@
           <dd id="ct-flow-detail-channel"></dd>
           <dt>Tienda</dt>
           <dd id="ct-flow-detail-store"></dd>
-          <dt>Evento</dt>
-          <dd id="ct-flow-detail-event"></dd>
           <dt>Etapa</dt>
           <dd id="ct-flow-detail-stage"></dd>
           <dt>Estado</dt>
@@ -769,10 +796,10 @@
         CT.renderTopbar('flujo', '../../');
 
         const LANES = [
-          { id: 'vtex', label: 'VTEX', top: 112, color: '#ec4178' },
-          { id: 'pim', label: 'PIM', top: 240, color: '#0891b2' },
-          { id: 'andreani', label: 'Andreani', top: 368, color: '#ef4056' },
-          { id: 'ocasa', label: 'Ocasa', top: 496, color: '#0f766e' },
+          { id: 'vtex',     label: 'VTEX',     color: '#ec4178' },
+          { id: 'pim',      label: 'PIM',       color: '#0891b2' },
+          { id: 'andreani', label: 'Andreani',  color: '#ef4056' },
+          { id: 'ocasa',    label: 'Ocasa',     color: '#0f766e' },
         ];
 
         const STAGE_LABELS = [
@@ -799,35 +826,36 @@
         const FLOWS = {
           general: {
             title: 'Flujo General de Correos',
+            shortTitle: 'General',
             description: 'Vista unificada por etapa comun. Mantiene carriles por plataforma emisora y marca operadores externos como referencia documental.',
             stageLabels: GENERAL_STAGE_LABELS,
             nodes: [
-              { id: 'access', lane: 'vtex', x: 20, y: -70, text: 'Acceso a cuenta Sporting', templateId: 'access-key', priority: 'baja', trigger: 'Usuario solicita ingreso o recuperacion de acceso.', note: 'Variante VTEX para Sporting.' },
+              { id: 'access', lane: 'vtex', x: 20, text: 'Acceso a cuenta Sporting', templateId: 'access-key', priority: 'baja', trigger: 'Usuario solicita ingreso o recuperacion de acceso.', note: 'Variante VTEX para Sporting.' },
               { id: 'access-woker', lane: 'vtex', x: 20, text: 'Acceso a cuenta Woker', templateId: 'woker-access-key', priority: 'baja', trigger: 'Usuario Woker solicita ingreso o recuperacion de acceso.', note: 'Variante VTEX para Woker.' },
-              { id: 'access-b2b', lane: 'vtex', x: 20, y: 70, text: 'Acceso a cuenta B2B', templateId: 'b2b-access-key', priority: 'baja', trigger: 'Comprador B2B solicita ingreso a su cuenta.', note: 'B2B es canal propio; su tienda es Venta Deportiva.' },
-              { id: 'order', lane: 'vtex', x: 150, y: -70, text: 'Pedido realizado Sporting', templateId: 'pedido-confirmado', priority: 'alta', trigger: 'VTEX registra correctamente un pedido e-commerce Sporting.', note: 'Inicio e-commerce Sporting.' },
+              { id: 'access-b2b', lane: 'vtex', x: 20, text: 'Acceso a cuenta B2B', templateId: 'b2b-access-key', priority: 'baja', trigger: 'Comprador B2B solicita ingreso a su cuenta.', note: 'B2B es canal propio; su tienda es Venta Deportiva.' },
+              { id: 'order', lane: 'vtex', x: 150, text: 'Pedido realizado Sporting', templateId: 'pedido-confirmado', priority: 'alta', trigger: 'VTEX registra correctamente un pedido e-commerce Sporting.', note: 'Inicio e-commerce Sporting.' },
               { id: 'order-woker', lane: 'vtex', x: 150, text: 'Pedido realizado Woker', templateId: 'woker-pedido-confirmado', priority: 'alta', trigger: 'VTEX registra correctamente un pedido e-commerce Woker.', note: 'Inicio e-commerce Woker.' },
-              { id: 'order-b2b', lane: 'vtex', x: 150, y: 70, text: 'Orden generada B2B', templateId: 'b2b-orden-generada', priority: 'alta', trigger: 'VTEX B2B genera una orden pendiente de validacion comercial.', note: 'Inicio e-commerce B2B.' },
-              { id: 'order-pv', lane: 'pim', x: 150, y: -70, text: 'Compra realizada PV', templateId: 'pim-pedido-confirmado-pv', priority: 'alta', trigger: 'Venta multideposito/Punto de Venta registrada en PIM.', note: 'Inicio PV; PV es canal, no tienda.' },
-              { id: 'paid', lane: 'vtex', x: 280, y: -35, text: 'Pago aprobado Sporting', templateId: 'pago-aprobado', priority: 'alta', trigger: 'VTEX confirma autorizacion/aprobacion de pago.', note: 'Etapa de pago e-commerce Sporting.' },
-              { id: 'paid-woker', lane: 'vtex', x: 280, y: 35, text: 'Pago aprobado Woker', templateId: 'woker-pago-aprobado', priority: 'alta', trigger: 'VTEX confirma autorizacion/aprobacion de pago Woker.', note: 'Etapa de pago e-commerce Woker.' },
-              { id: 'stockout-pv', lane: 'pim', x: 410, y: -105, text: 'Sin stock PV', templateId: 'pim-quiebre-stock-pv', priority: 'alta', trigger: 'PIM detecta quiebre de stock en una compra de Punto de Venta.', note: 'No informa reembolso automatico; ofrece cambio, reembolso presencial o giftcard online.' },
+              { id: 'order-b2b', lane: 'vtex', x: 150, text: 'Orden generada B2B', templateId: 'b2b-orden-generada', priority: 'alta', trigger: 'VTEX B2B genera una orden pendiente de validacion comercial.', note: 'Inicio e-commerce B2B.' },
+              { id: 'order-pv', lane: 'pim', x: 150, text: 'Compra realizada PV', templateId: 'pim-pedido-confirmado-pv', priority: 'alta', trigger: 'Venta multideposito/Punto de Venta registrada en PIM.', note: 'Inicio PV; PV es canal, no tienda.' },
+              { id: 'paid', lane: 'vtex', x: 280, text: 'Pago aprobado Sporting', templateId: 'pago-aprobado', priority: 'alta', trigger: 'VTEX confirma autorizacion/aprobacion de pago.', note: 'Etapa de pago e-commerce Sporting.' },
+              { id: 'paid-woker', lane: 'vtex', x: 280, text: 'Pago aprobado Woker', templateId: 'woker-pago-aprobado', priority: 'alta', trigger: 'VTEX confirma autorizacion/aprobacion de pago Woker.', note: 'Etapa de pago e-commerce Woker.' },
+              { id: 'stockout-pv', lane: 'pim', x: 410, text: 'Sin stock PV', templateId: 'pim-quiebre-stock-pv', priority: 'alta', trigger: 'PIM detecta quiebre de stock en una compra de Punto de Venta.', note: 'No informa reembolso automatico; ofrece cambio, reembolso presencial o giftcard online.' },
               { id: 'prep-b2b', lane: 'pim', x: 410, text: 'Despacho B2B', templateId: 'pim-envio-b2b', priority: 'media', trigger: 'PIM confirma orden B2B en preparacion.', note: 'Preparacion operativa B2B.' },
               { id: 'invoiced', lane: 'vtex', x: 540, text: 'Pedido facturado Sporting', templateId: 'order-invoiced', priority: 'media', trigger: 'VTEX notifica facturacion del pedido.', note: 'Facturacion VTEX e-commerce.' },
-              { id: 'invoice-pim', lane: 'pim', x: 540, y: 70, text: 'Factura disponible PIM', templateId: 'pim-factura-disponible', priority: 'media', trigger: 'PIM notifica factura electronica adjunta.', note: 'Facturacion PIM compartida por canal/tienda.' },
-              { id: 'pickup', lane: 'pim', x: 670, y: -70, text: 'Pedido listo para retirar', templateId: 'pim-retiro-disponible', priority: 'alta', trigger: 'Pedido queda disponible para retiro en sucursal.', note: 'Aplica a e-commerce y PV cuando corresponda.' },
+              { id: 'invoice-pim', lane: 'pim', x: 540, text: 'Factura disponible PIM', templateId: 'pim-factura-disponible', priority: 'media', trigger: 'PIM notifica factura electronica adjunta.', note: 'Facturacion PIM compartida por canal/tienda.' },
+              { id: 'pickup', lane: 'pim', x: 670, text: 'Pedido listo para retirar', templateId: 'pim-retiro-disponible', priority: 'alta', trigger: 'Pedido queda disponible para retiro en sucursal.', note: 'Aplica a e-commerce y PV cuando corresponda.' },
               { id: 'shipped', lane: 'pim', x: 670, text: 'Pedido despachado', templateId: 'pim-envio-despachado', priority: 'alta', trigger: 'Pedido sale del deposito o pasa a operador logistico.', note: 'Etapa PIM compartida post-origen.' },
               { id: 'andreani-track', lane: 'andreani', x: 800, text: 'Seguimiento Andreani', priority: 'media', trigger: 'Andreani informa preparacion, transito o visita.', note: 'Referencia documental: correo externo no gestionado en este repo.' },
               { id: 'ocasa-track', lane: 'ocasa', x: 800, text: 'Seguimiento OCASA', priority: 'media', trigger: 'OCASA informa preparacion, visita o transito.', note: 'Referencia documental: correo externo no gestionado en este repo.' },
               { id: 'andreani-delivery', lane: 'andreani', x: 930, text: 'Entrega Andreani', priority: 'media', trigger: 'Andreani confirma visita o entrega.', note: 'Referencia documental.' },
-              { id: 'cancelled', lane: 'vtex', x: 1060, y: -35, text: 'Pedido cancelado Sporting', templateId: 'pedido-cancelado', priority: 'media', trigger: 'VTEX cancela o informa cancelacion del pedido Sporting.', note: 'Cancelacion e-commerce Sporting.' },
-              { id: 'cancelled-woker', lane: 'vtex', x: 1060, y: 35, text: 'Pedido cancelado Woker', templateId: 'woker-pedido-cancelado', priority: 'media', trigger: 'VTEX cancela o informa cancelacion del pedido Woker.', note: 'Cancelacion e-commerce Woker.' },
+              { id: 'cancelled', lane: 'vtex', x: 1060, text: 'Pedido cancelado Sporting', templateId: 'pedido-cancelado', priority: 'media', trigger: 'VTEX cancela o informa cancelacion del pedido Sporting.', note: 'Cancelacion e-commerce Sporting.' },
+              { id: 'cancelled-woker', lane: 'vtex', x: 1060, text: 'Pedido cancelado Woker', templateId: 'woker-pedido-cancelado', priority: 'media', trigger: 'VTEX cancela o informa cancelacion del pedido Woker.', note: 'Cancelacion e-commerce Woker.' },
               { id: 'refund', lane: 'pim', x: 1060, text: 'Quiebre de stock PIM', templateId: 'pim-quiebre-stock', priority: 'alta', trigger: 'PIM informa reembolso por error de inventario o baja de articulos.', note: 'Reembolso compartido por canal/tienda.' },
-              { id: 'return-label', lane: 'pim', x: 1190, y: -110, text: 'Etiqueta devolucion', templateId: 'pim-etiqueta-devolucion', priority: 'media', trigger: 'PIM gestiona etiqueta adjunta para devolucion.', note: 'Inicio logistico de devolucion.' },
-              { id: 'change-received', lane: 'pim', x: 1190, y: -55, text: 'Recepcion cambio', templateId: 'pim-recepcion-cambio', priority: 'alta', trigger: 'PIM confirma recepcion de productos vinculados a cambio.', note: 'Logistica inversa - cambio.' },
+              { id: 'return-label', lane: 'pim', x: 1190, text: 'Etiqueta devolucion', templateId: 'pim-etiqueta-devolucion', priority: 'media', trigger: 'PIM gestiona etiqueta adjunta para devolucion.', note: 'Inicio logistico de devolucion.' },
+              { id: 'change-received', lane: 'pim', x: 1190, text: 'Recepcion cambio', templateId: 'pim-recepcion-cambio', priority: 'alta', trigger: 'PIM confirma recepcion de productos vinculados a cambio.', note: 'Logistica inversa - cambio.' },
               { id: 'return-received', lane: 'pim', x: 1190, text: 'Recepcion devolucion', templateId: 'pim-recepcion-devolucion', priority: 'alta', trigger: 'PIM confirma recepcion de productos devueltos.', note: 'Logistica inversa - devolucion.' },
-              { id: 'warranty-received', lane: 'pim', x: 1190, y: 55, text: 'Recepcion garantia', templateId: 'pim-recepcion-garantia', priority: 'alta', trigger: 'PIM confirma recepcion de producto en garantia.', note: 'Logistica inversa - garantia.' },
-              { id: 'giftcard', lane: 'pim', x: 1190, y: 110, text: 'Giftcard', templateId: 'pim-giftcard', priority: 'alta', trigger: 'Se emite codigo/giftcard para resolver cambio, devolucion o falta de stock.', note: 'Resolucion por codigo/giftcard.' },
+              { id: 'warranty-received', lane: 'pim', x: 1190, text: 'Recepcion garantia', templateId: 'pim-recepcion-garantia', priority: 'alta', trigger: 'PIM confirma recepcion de producto en garantia.', note: 'Logistica inversa - garantia.' },
+              { id: 'giftcard', lane: 'pim', x: 1190, text: 'Giftcard', templateId: 'pim-giftcard', priority: 'alta', trigger: 'Se emite codigo/giftcard para resolver cambio, devolucion o falta de stock.', note: 'Resolucion por codigo/giftcard.' },
             ],
             links: [
               ['access', 'order'],
@@ -858,23 +886,24 @@
           },
           entrega: {
             title: 'Logística de Entrega',
+            shortTitle: 'Entrega',
             description: 'Recorrido principal desde cuenta/pedido hasta preparación, despacho, visita y entrega.',
             nodes: [
               { id: 'back-in-stock', lane: 'vtex', x: 40, text: 'Volvió a stock', templateId: 'back-in-stock', status: 'existente', priority: 'media', trigger: 'SKU sin stock pasa a disponible y hay suscriptores activos.', note: 'Plantilla disponible en catálogo. Pendiente revisión de diseño.' },
               { id: 'access', lane: 'vtex', x: 170, text: 'Código de acceso a cuenta', templateId: 'access-key', status: 'existente', priority: 'baja', trigger: 'Usuario solicita ingreso o recuperación de acceso.', note: 'Plantilla disponible en catálogo. Pendiente revisión de diseño.' },
               { id: 'order', lane: 'vtex', x: 300, text: 'Pedido realizado con éxito', templateId: 'pedido-confirmado', status: 'existente', priority: 'alta', trigger: 'VTEX registra correctamente un pedido.', note: 'Plantilla real disponible y asociada al catálogo.' },
-              { id: 'b2b-order', lane: 'vtex', x: 300, y: 72, text: 'Orden generada B2B', templateId: 'b2b-orden-generada', status: 'existente', priority: 'alta', trigger: 'VTEX B2B genera una orden pendiente de validación comercial.', note: 'Plantilla B2B disponible y asociada al catálogo.' },
-              { id: 'pv-order', lane: 'pim', x: 300, y: -72, text: 'Compra realizada PV', templateId: 'pim-pedido-confirmado-pv', status: 'existente', priority: 'alta', trigger: 'Venta multidepósito/Punto de Venta registrada en PIM.', note: 'PV se modela como canal, no como tienda. Plantilla compartida por Sporting y Woker.' },
-              { id: 'cancelled', lane: 'vtex', x: 430, y: -72, text: 'Pedido cancelado', templateId: 'pedido-cancelado', status: 'existente', priority: 'media', trigger: 'VTEX cancela o informa cancelación del pedido.', note: 'Plantilla real disponible y asociada al catálogo.' },
+              { id: 'b2b-order', lane: 'vtex', x: 300, text: 'Orden generada B2B', templateId: 'b2b-orden-generada', status: 'existente', priority: 'alta', trigger: 'VTEX B2B genera una orden pendiente de validación comercial.', note: 'Plantilla B2B disponible y asociada al catálogo.' },
+              { id: 'pv-order', lane: 'pim', x: 300, text: 'Compra realizada PV', templateId: 'pim-pedido-confirmado-pv', status: 'existente', priority: 'alta', trigger: 'Venta multidepósito/Punto de Venta registrada en PIM.', note: 'PV se modela como canal, no como tienda. Plantilla compartida por Sporting y Woker.' },
+              { id: 'cancelled', lane: 'vtex', x: 430, text: 'Pedido cancelado', templateId: 'pedido-cancelado', status: 'existente', priority: 'media', trigger: 'VTEX cancela o informa cancelación del pedido.', note: 'Plantilla real disponible y asociada al catálogo.' },
               { id: 'paid', lane: 'vtex', x: 430, text: 'Pago aprobado', templateId: 'pago-aprobado', status: 'existente', priority: 'alta', trigger: 'VTEX confirma autorización/aprobación de pago.', note: 'Plantilla real disponible y asociada al catálogo.' },
               { id: 'stockout', lane: 'pim', x: 430, text: 'Sin stock PV', templateId: 'pim-quiebre-stock-pv', status: 'existente', priority: 'alta', trigger: 'PIM detecta falta de stock para uno o mas productos en una compra PV.', note: 'Plantilla disponible para ofrecer cambio, reembolso presencial o giftcard online.' },
               { id: 'invoiced', lane: 'vtex', x: 560, text: 'Pedido facturado', templateId: 'order-invoiced', status: 'existente', priority: 'media', trigger: 'VTEX notifica facturación y despacho del pedido.', note: 'Plantilla disponible en catálogo. Pendiente revisión de diseño.' },
-              { id: 'pickup', lane: 'pim', x: 690, y: -72, text: 'Pedido listo para retirar', templateId: 'pim-retiro-disponible', status: 'existente', priority: 'alta', trigger: 'Pedido queda disponible para retiro en la sucursal seleccionada.', note: 'Plantilla v2 disponible en catálogo con datos de punto de retiro y requisitos.' },
+              { id: 'pickup', lane: 'pim', x: 690, text: 'Pedido listo para retirar', templateId: 'pim-retiro-disponible', status: 'existente', priority: 'alta', trigger: 'Pedido queda disponible para retiro en la sucursal seleccionada.', note: 'Plantilla v2 disponible en catálogo con datos de punto de retiro y requisitos.' },
               { id: 'shipped', lane: 'pim', x: 690, text: 'Pedido despachado', templateId: 'pim-envio-despachado', status: 'existente', priority: 'alta', trigger: 'Pedido sale del depósito o pasa a operador logístico.', note: 'Plantilla v2 disponible en catálogo con tracking y detección de carrier.' },
               { id: 'prep-a', lane: 'andreani', x: 690, text: 'Estamos preparando tu pedido', status: 'faltante', priority: 'media', trigger: 'Andreani recibe prealta o preparación del envío.', note: 'Confirmar evento exacto con integración Andreani.' },
               { id: 'moving-a', lane: 'andreani', x: 820, text: 'Tu envío está en camino', status: 'faltante', priority: 'alta', trigger: 'Andreani informa envío en tránsito.', note: 'Debe incluir número de seguimiento si está disponible.' },
-              { id: 'today-a', lane: 'andreani', x: 950, y: -72, text: 'Tu envío llega hoy', status: 'faltante', priority: 'media', trigger: 'Andreani informa visita programada para el día.', note: 'Validar si se envía siempre o solo en ciertos servicios.' },
-              { id: 'delay-a', lane: 'andreani', x: 950, y: 28, text: 'Pedido con demora', status: 'faltante', priority: 'media', trigger: 'Andreani informa atraso o reprogramación.', note: 'Debe explicar expectativa sin prometer fecha no confirmada.' },
+              { id: 'today-a', lane: 'andreani', x: 950, text: 'Tu envío llega hoy', status: 'faltante', priority: 'media', trigger: 'Andreani informa visita programada para el día.', note: 'Validar si se envía siempre o solo en ciertos servicios.' },
+              { id: 'delay-a', lane: 'andreani', x: 950, text: 'Pedido con demora', status: 'faltante', priority: 'media', trigger: 'Andreani informa atraso o reprogramación.', note: 'Debe explicar expectativa sin prometer fecha no confirmada.' },
               { id: 'visited-a', lane: 'andreani', x: 1080, text: 'Te visitamos', status: 'faltante', priority: 'media', trigger: 'Andreani registra intento de entrega.', note: 'Definir variantes: entrega fallida, ausente o segunda visita.' },
               { id: 'prep-o', lane: 'ocasa', x: 690, text: 'Pedido en preparación', status: 'faltante', priority: 'media', trigger: 'Ocasa recibe o prepara el envío.', note: 'Confirmar evento exacto de Ocasa.' },
               { id: 'visit-o', lane: 'ocasa', x: 820, text: 'Pronto visita', status: 'faltante', priority: 'media', trigger: 'Ocasa anticipa próxima visita.', note: 'Requiere datos de ventana o mensaje operativo.' },
@@ -910,15 +939,16 @@
           },
           cambio: {
             title: 'Logística Inversa - Cambio',
+            shortTitle: 'Cambio',
             description: 'Flujo de retiro por cambio, recepción del producto y emisión de giftcard/código de cambio.',
             nodes: [
               { id: 'request', lane: 'pim', x: 220, text: 'Solicitud de cambio', status: 'faltante', priority: 'alta', trigger: 'Cliente solicita cambio de producto.', note: 'Inicio del flujo inverso de cambio.' },
               { id: 'pickup-order', lane: 'andreani', x: 350, text: 'Recibimos tu orden de retiro', status: 'faltante', priority: 'alta', trigger: 'Andreani recibe orden de retiro.', note: 'Debe confirmar al cliente que el retiro fue solicitado.' },
               { id: 'courier', lane: 'andreani', x: 500, text: 'Estamos en camino para retirar tu producto', status: 'faltante', priority: 'media', trigger: 'Andreani informa retiro en curso.', note: 'Validar disponibilidad de datos de visita.' },
               { id: 'delivered', lane: 'andreani', x: 650, text: 'Ya entregamos tu producto', status: 'faltante', priority: 'media', trigger: 'Andreani confirma entrega/devolución al depósito.', note: 'Nombre operativo a confirmar: entrega del producto retirado.' },
-              { id: 'rejected', lane: 'pim', x: 790, y: -72, text: 'Notificación de cambio rechazado', status: 'faltante', priority: 'media', trigger: 'PIM rechaza solicitud o recepción de cambio.', note: 'Debe explicar motivo y próximo paso.' },
-              { id: 'received', lane: 'pim', x: 790, y: 12, text: 'Recepción de producto por cambio', templateId: 'pim-recepcion-cambio', status: 'existente', priority: 'alta', trigger: 'PIM confirma recepción del producto a cambiar.', note: 'Plantilla disponible en catálogo. Pendiente revisión de diseño.' },
-              { id: 'giftcard', lane: 'pim', x: 940, y: 12, text: 'Giftcard (Código para cambio)', templateId: 'pim-giftcard', status: 'existente', priority: 'alta', trigger: 'Se emite código/giftcard para nuevo cambio.', note: 'Plantilla disponible en catálogo. Pendiente revisión de diseño.' },
+              { id: 'rejected', lane: 'pim', x: 790, text: 'Notificación de cambio rechazado', status: 'faltante', priority: 'media', trigger: 'PIM rechaza solicitud o recepción de cambio.', note: 'Debe explicar motivo y próximo paso.' },
+              { id: 'received', lane: 'pim', x: 790, text: 'Recepción de producto por cambio', templateId: 'pim-recepcion-cambio', status: 'existente', priority: 'alta', trigger: 'PIM confirma recepción del producto a cambiar.', note: 'Plantilla disponible en catálogo. Pendiente revisión de diseño.' },
+              { id: 'giftcard', lane: 'pim', x: 940, text: 'Giftcard (Código para cambio)', templateId: 'pim-giftcard', status: 'existente', priority: 'alta', trigger: 'Se emite código/giftcard para nuevo cambio.', note: 'Plantilla disponible en catálogo. Pendiente revisión de diseño.' },
             ],
             links: [
               ['request', 'pickup-order'],
@@ -931,14 +961,15 @@
           },
           devolucion: {
             title: 'Logística Inversa - Devolución',
+            shortTitle: 'Devolución',
             description: 'Flujo de solicitud, retiro y recepción de producto para gestionar devolución.',
             nodes: [
               { id: 'request', lane: 'pim', x: 220, text: 'Solicitud de devolución', status: 'faltante', priority: 'alta', trigger: 'Cliente solicita devolución.', note: 'Inicio del flujo inverso de devolución.' },
               { id: 'pickup-order', lane: 'andreani', x: 350, text: 'Recibimos tu orden de retiro', status: 'faltante', priority: 'alta', trigger: 'Andreani recibe orden de retiro.', note: 'Debe confirmar el retiro al cliente.' },
               { id: 'courier', lane: 'andreani', x: 500, text: 'Estamos en camino para retirar tu producto', status: 'faltante', priority: 'media', trigger: 'Andreani informa retiro en curso.', note: 'Validar evento de visita.' },
               { id: 'delivered', lane: 'andreani', x: 650, text: 'Ya entregamos tu producto', status: 'faltante', priority: 'media', trigger: 'Andreani confirma entrega del producto retirado.', note: 'Nombre operativo a confirmar.' },
-              { id: 'rejected', lane: 'pim', x: 790, y: -72, text: 'Solicitud de devolución rechazada', status: 'faltante', priority: 'media', trigger: 'PIM rechaza devolución.', note: 'Debe explicar motivo y opciones.' },
-              { id: 'received', lane: 'pim', x: 790, y: 12, text: 'Recepción de devolución', templateId: 'pim-recepcion-devolucion', status: 'existente', priority: 'alta', trigger: 'PIM confirma recepción del producto devuelto.', note: 'Plantilla disponible en catálogo. Pendiente revisión de diseño.' },
+              { id: 'rejected', lane: 'pim', x: 790, text: 'Solicitud de devolución rechazada', status: 'faltante', priority: 'media', trigger: 'PIM rechaza devolución.', note: 'Debe explicar motivo y opciones.' },
+              { id: 'received', lane: 'pim', x: 790, text: 'Recepción de devolución', templateId: 'pim-recepcion-devolucion', status: 'existente', priority: 'alta', trigger: 'PIM confirma recepción del producto devuelto.', note: 'Plantilla disponible en catálogo. Pendiente revisión de diseño.' },
             ],
             links: [
               ['request', 'pickup-order'],
@@ -950,15 +981,16 @@
           },
           garantia: {
             title: 'Logística Inversa - Garantía',
+            shortTitle: 'Garantía',
             description: 'Flujo de solicitud por garantía, retiro, recepción y resolución con cambio o rechazo.',
             nodes: [
               { id: 'request', lane: 'pim', x: 220, text: 'Solicitud de cambio por garantía', status: 'faltante', priority: 'alta', trigger: 'Cliente solicita garantía o cambio por falla.', note: 'Inicio del flujo de garantía.' },
               { id: 'pickup-order', lane: 'andreani', x: 350, text: 'Recibimos tu orden de retiro', status: 'faltante', priority: 'alta', trigger: 'Andreani recibe orden de retiro.', note: 'Debe confirmar gestión de retiro.' },
               { id: 'courier', lane: 'andreani', x: 500, text: 'Estamos en camino para retirar tu producto', status: 'faltante', priority: 'media', trigger: 'Andreani informa retiro en curso.', note: 'Validar si comparte texto con cambio/devolución.' },
               { id: 'delivered', lane: 'andreani', x: 650, text: 'Ya entregamos tu producto', status: 'faltante', priority: 'media', trigger: 'Andreani confirma entrega al centro de revisión.', note: 'Nombre operativo a confirmar.' },
-              { id: 'rejected', lane: 'pim', x: 790, y: -72, text: 'Notificación de garantía rechazada', status: 'faltante', priority: 'media', trigger: 'Garantía rechazada por revisión.', note: 'Debe explicar motivo y alternativas.' },
-              { id: 'received', lane: 'pim', x: 790, y: 12, text: 'Recepción de producto para cambio', templateId: 'pim-recepcion-garantia', status: 'existente', priority: 'alta', trigger: 'Producto recibido para revisión o cambio por garantía.', note: 'Plantilla disponible en catálogo. Pendiente revisión de diseño.' },
-              { id: 'giftcard', lane: 'pim', x: 940, y: 12, text: 'Giftcard (Código para cambio)', templateId: 'pim-giftcard', status: 'existente', priority: 'alta', trigger: 'Se emite código para resolver la garantía.', note: 'Plantilla disponible en catálogo. Pendiente revisión de diseño.' },
+              { id: 'rejected', lane: 'pim', x: 790, text: 'Notificación de garantía rechazada', status: 'faltante', priority: 'media', trigger: 'Garantía rechazada por revisión.', note: 'Debe explicar motivo y alternativas.' },
+              { id: 'received', lane: 'pim', x: 790, text: 'Recepción de producto para cambio', templateId: 'pim-recepcion-garantia', status: 'existente', priority: 'alta', trigger: 'Producto recibido para revisión o cambio por garantía.', note: 'Plantilla disponible en catálogo. Pendiente revisión de diseño.' },
+              { id: 'giftcard', lane: 'pim', x: 940, text: 'Giftcard (Código para cambio)', templateId: 'pim-giftcard', status: 'existente', priority: 'alta', trigger: 'Se emite código para resolver la garantía.', note: 'Plantilla disponible en catálogo. Pendiente revisión de diseño.' },
             ],
             links: [
               ['request', 'pickup-order'],
@@ -1020,7 +1052,6 @@
         const detailPlatform = document.getElementById('ct-flow-detail-platform');
         const detailChannel = document.getElementById('ct-flow-detail-channel');
         const detailStore = document.getElementById('ct-flow-detail-store');
-        const detailEvent = document.getElementById('ct-flow-detail-event');
         const detailStage = document.getElementById('ct-flow-detail-stage');
         const detailStatus = document.getElementById('ct-flow-detail-status');
         const detailPriority = document.getElementById('ct-flow-detail-priority');
@@ -1178,9 +1209,17 @@
           document.getElementById('ct-cov-candidato').style.flex  = candidate  || 0;
           document.getElementById('ct-cov-ref').style.flex        = reference  || 0;
 
-          // Reset search on tab change
-          const searchEl = document.getElementById('ct-filter-search');
-          if (searchEl) { searchEl.value = ''; activeSearchQuery = ''; }
+          // Reset all filters on tab change
+          activeStatusFilter = null;
+          activePriorityFilter = false;
+          activeChannelFilter = null;
+          activeStoreFilter = null;
+          activeSearchQuery = '';
+          document.getElementById('ct-filter-search').value = '';
+          document.getElementById('ct-filter-estado').value = '';
+          document.getElementById('ct-filter-prioridad').value = '';
+          document.getElementById('ct-filter-channel').value = '';
+          document.getElementById('ct-filter-store').value = '';
 
           gridEl.innerHTML = '';
 
@@ -1236,16 +1275,40 @@
         }
 
         function applyFilter() {
+          let visible = 0, total = 0;
           gridEl.querySelectorAll('.ct-flow-card').forEach((el) => {
             const matchStatus   = !activeStatusFilter   || el.dataset.status === activeStatusFilter;
             const matchPriority = !activePriorityFilter || el.dataset.priority === 'alta';
             const channels      = (el.dataset.channels || '').split(' ').filter(Boolean);
             const stores        = (el.dataset.stores   || '').split(' ').filter(Boolean);
-            const matchChannel  = !activeChannelFilter  || !channels.length || channels.includes(activeChannelFilter);
-            const matchStore    = !activeStoreFilter    || !stores.length   || stores.includes(activeStoreFilter);
+            const matchChannel  = !activeChannelFilter  || channels.includes(activeChannelFilter);
+            const matchStore    = !activeStoreFilter    || stores.includes(activeStoreFilter);
             const matchSearch   = !activeSearchQuery    || (el.getAttribute('aria-label') || '').toLowerCase().includes(activeSearchQuery);
-            el.classList.toggle('filtered-out', !(matchStatus && matchPriority && matchChannel && matchStore && matchSearch));
+            const show = matchStatus && matchPriority && matchChannel && matchStore && matchSearch;
+            el.classList.toggle('filtered-out', !show);
+            total++;
+            if (show) visible++;
           });
+
+          const hasFilter = activeStatusFilter || activePriorityFilter || activeChannelFilter || activeStoreFilter || activeSearchQuery;
+          const hintEl  = document.getElementById('ct-filter-hint');
+          const clearEl = document.getElementById('ct-filter-clear');
+          if (hintEl)  { hintEl.style.display  = hasFilter ? '' : 'none'; hintEl.textContent = `${visible} de ${total}`; }
+          if (clearEl) { clearEl.style.display = hasFilter ? '' : 'none'; }
+        }
+
+        function clearFilters() {
+          activeStatusFilter = null;
+          activePriorityFilter = false;
+          activeChannelFilter = null;
+          activeStoreFilter = null;
+          activeSearchQuery = '';
+          document.getElementById('ct-filter-search').value = '';
+          document.getElementById('ct-filter-estado').value = '';
+          document.getElementById('ct-filter-prioridad').value = '';
+          document.getElementById('ct-filter-channel').value = '';
+          document.getElementById('ct-filter-store').value = '';
+          applyFilter();
         }
 
         function closeDetail() {
@@ -1271,7 +1334,6 @@
           detailPlatform.textContent = lane ? lane.label : node.lane;
           detailChannel.textContent = channels.length ? CT.labelsFor(channels, CT.channelLabel) : 'No aplica';
           detailStore.textContent = stores.length ? CT.labelsFor(stores, CT.storeLabel) : 'No aplica';
-          detailEvent.textContent = nodeEventLabel(node, template);
           detailStage.textContent = nodeStageLabel(node, template, flow, activeFlowId);
           detailStatus.textContent = statusMeta.label;
           detailPriority.textContent = PRIORITY_LABELS[node.priority] || node.priority || 'Media';
@@ -1289,12 +1351,14 @@
           } else if (status === 'referencial') {
             detailActions.innerHTML = '<p class="ct-flow-detail-note">Referencia documental: plantilla externa no gestionada por este repositorio.</p>';
           } else {
-            detailActions.innerHTML = `<a class="ct-btn" href="${CT.escapeHtml(nodeActionUrl(node))}">Crear plantilla</a>`;
+            detailActions.innerHTML = '<p class="ct-flow-detail-note">Sin plantilla creada. Para iniciarla, agregala al catálogo en <code>config.js</code> y creá el archivo en <code>templates/</code>.</p>';
           }
 
           detailOverlay.classList.add('open');
           backdrop.classList.add('open');
         }
+
+        document.getElementById('ct-filter-clear').addEventListener('click', clearFilters);
 
         // Filter bar — selects for estado and prioridad
         document.getElementById('ct-filter-estado').addEventListener('change', (e) => {
@@ -1330,7 +1394,7 @@
           button.type = 'button';
           button.className = 'ct-flow-tab';
           button.dataset.flow = flowId;
-          button.textContent = flow.title;
+          button.textContent = flow.shortTitle || flow.title;
           button.addEventListener('click', () => renderFlow(flowId));
           tabsEl.appendChild(button);
         });
