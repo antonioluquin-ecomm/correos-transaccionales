@@ -197,7 +197,7 @@ const CT = (() => {
     const facets = scenarioFacets(scenario);
     return FACET_GROUPS.every((group) => {
       const wanted = slugify(filters?.[group.id]);
-      return !wanted || facets.includes(wanted);
+      return !wanted || facets.length === 0 || facets.includes(wanted);
     });
   }
 

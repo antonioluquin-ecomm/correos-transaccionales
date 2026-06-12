@@ -487,6 +487,7 @@
         });
 
         templateSelect.addEventListener('change', () => {
+          Object.values(facetSelects).forEach((s) => { s.value = ''; });
           const template = currentTemplate();
           renderScenarioOptions(template, template?.ejemplo);
           renderPreview();
