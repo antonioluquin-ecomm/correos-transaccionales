@@ -758,7 +758,18 @@
         function doFilterChange() {
           templateSearchEl.value = '';
           const preferred = templateSelect.value;
-          const template = renderTemplateOptions(preferred);
+          let template = renderTemplateOptions(preferred);
+
+          // Si la combinación plataforma+canal no tiene resultados, intentar sin filtro de plataforma.
+          // Ej: usuario en VTEX/B2C cambia a PV → no hay VTEX/PV → se relaja a todas las plataformas.
+          if (!template && platformSelect.value) {
+            platformSelect.value = '';
+            refreshChannelOptions();
+            refreshStoreOptions();
+            refreshLogisticaOptions();
+            template = renderTemplateOptions(preferred);
+          }
+
           if (template) {
             Object.values(facetSelects).forEach((s) => { s.value = ''; });
             renderFacetOptions(template);
