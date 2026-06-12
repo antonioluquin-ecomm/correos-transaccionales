@@ -236,6 +236,37 @@
           return out;
         }
 
+        function renderFacetOptions(template) {
+          const channelFilter = channelSelect.value || CT.templateChannels(template)[0];
+          const storeFilter = storeSelect.value || CT.templateStores(template)[0];
+          const baseScenarios = examples.filter((s) => {
+            if (!s.compatibleTemplates?.includes(template?.id)) return false;
+            return CT.matchesChannelStore(s, { channel: channelFilter, store: storeFilter, logistica: logisticaSelect.value });
+          });
+
+          CT.FACET_GROUPS.forEach((group) => {
+            const select = facetSelects[group.id];
+            const wrap = select.closest('label');
+            const available = new Set();
+            baseScenarios.forEach((s) => {
+              CT.scenarioFacets(s).forEach((f) => {
+                if (group.options.some((o) => o.id === f)) available.add(f);
+              });
+            });
+            select.innerHTML = '<option value="">Todas</option>';
+            group.options.forEach((opt) => {
+              if (available.has(opt.id)) {
+                const option = document.createElement('option');
+                option.value = opt.id;
+                option.textContent = opt.label;
+                select.appendChild(option);
+              }
+            });
+            if (select.value && !available.has(select.value)) select.value = '';
+            wrap.style.display = available.size > 0 ? '' : 'none';
+          });
+        }
+
         function filteredTemplates() {
           return renderable.filter((template) => {
             const matchesPlatform = !platformSelect.value || template.plataforma === platformSelect.value;
@@ -462,6 +493,8 @@
         function handleTaxonomyFilterChange() {
           const template = renderTemplateOptions();
           if (template) {
+            Object.values(facetSelects).forEach((s) => { s.value = ''; });
+            renderFacetOptions(template);
             renderScenarioOptions(template, template.ejemplo);
             renderPreview();
           } else {
@@ -487,8 +520,9 @@
         });
 
         templateSelect.addEventListener('change', () => {
-          Object.values(facetSelects).forEach((s) => { s.value = ''; });
           const template = currentTemplate();
+          if (template) renderFacetOptions(template);
+          Object.values(facetSelects).forEach((s) => { s.value = ''; });
           renderScenarioOptions(template, template?.ejemplo);
           renderPreview();
         });
@@ -515,6 +549,7 @@
           if (platformSelect.value && !filteredTemplates().length) platformSelect.value = '';
           const initial = renderTemplateOptions(requestedTemplate?.id);
           if (initial) {
+            renderFacetOptions(initial);
             renderScenarioOptions(initial, requestedExamplePath || initial.ejemplo);
             renderPreview();
           } else {
