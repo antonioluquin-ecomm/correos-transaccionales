@@ -576,9 +576,9 @@ const TEMPLATES = [
   },
   {
     id: 'pim-quiebre-stock',
-    nombre: 'Reembolso',
+    nombre: 'Quiebre de stock',
     plataforma: 'PIM',
-    categoria: 'Logística inversa - Devolución',
+    categoria: 'Cancelacion / Reembolso',
     estado: 'en revisión',
     actualizado: '2026-06-09',
     responsable: 'Por definir',
