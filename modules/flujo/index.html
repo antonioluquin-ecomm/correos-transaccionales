@@ -209,12 +209,13 @@
       .ct-flow-grid-wrap {
         overflow-x: auto;
         background: var(--ct-bg);
+        width: 100%;
       }
 
       .ct-flow-grid {
         display: flex;
         align-items: stretch;
-        min-width: max-content;
+        width: 100%;
       }
 
       .ct-flow-col--lanes {
@@ -237,8 +238,8 @@
       .ct-flow-col {
         display: flex;
         flex-direction: column;
-        min-width: 160px;
-        flex: 1 0 160px;
+        min-width: 110px;
+        flex: 1 1 0;
         border-right: 1px solid var(--ct-line);
       }
 
@@ -358,14 +359,8 @@
       .ct-flow-card-top {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: flex-end;
         gap: 4px;
-      }
-
-      .ct-flow-card-top .ct-badge {
-        font-size: 9px;
-        padding: 1px 5px;
-        flex-shrink: 0;
       }
 
       .ct-flow-card-priority {
@@ -391,16 +386,11 @@
         overflow: hidden;
       }
 
-      .ct-flow-card-foot {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 3px;
-        margin-top: 2px;
-      }
-
-      .ct-flow-card-foot .ct-badge {
-        font-size: 9px;
-        padding: 1px 5px;
+      .ct-flow-card-meta {
+        font-size: 10px;
+        color: var(--ct-muted);
+        line-height: 1.3;
+        margin-top: 1px;
       }
 
       /* ═══ NOTE BAR ═══════════════════════════════════════════════ */
@@ -1082,15 +1072,18 @@
           el.setAttribute('aria-label', `${node.text}. Estado: ${(STATUS_META[status] || STATUS_META.faltante).label}`);
 
           const laneLabel = lane ? lane.label : node.lane;
-          const footBadges = CT.channelBadges(channels) + CT.storeBadges(stores);
+          const metaParts = [
+            ...channels.map(CT.channelLabel),
+            ...stores.map(CT.storeLabel),
+          ].filter(Boolean);
+          const metaText = metaParts.join(' · ');
 
           el.innerHTML = `
             <div class="ct-flow-card-top">
-              <span class="ct-badge ct-platform-${CT.escapeHtml(node.lane)}">${CT.escapeHtml(laneLabel)}</span>
               <span class="ct-flow-card-priority priority-${CT.escapeHtml(node.priority || 'media')}" title="Prioridad ${CT.escapeHtml(PRIORITY_LABELS[node.priority || 'media'] || '')}"></span>
             </div>
             <p class="ct-flow-card-title">${CT.escapeHtml(node.text)}</p>
-            ${footBadges ? `<div class="ct-flow-card-foot">${footBadges}</div>` : ''}
+            ${metaText ? `<span class="ct-flow-card-meta">${CT.escapeHtml(metaText)}</span>` : ''}
           `;
 
           el.addEventListener('click', () => openDetail(node, flow, el));
