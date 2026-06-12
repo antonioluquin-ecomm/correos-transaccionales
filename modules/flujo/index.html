@@ -393,6 +393,71 @@
         margin-top: 1px;
       }
 
+      /* ═══ COVERAGE BAR ══════════════════════════════════════════ */
+      .ct-flow-coverage-bar {
+        display: flex;
+        height: 4px;
+        border-bottom: 1px solid var(--ct-line);
+      }
+
+      .ct-flow-coverage-seg {
+        height: 100%;
+        transition: flex 0.35s ease;
+      }
+
+      .seg-existente   { background: var(--ct-success); }
+      .seg-faltante    { background: var(--ct-warning); }
+      .seg-candidato   { background: var(--ct-accent); }
+      .seg-referencial { background: var(--ct-line); }
+
+      /* ═══ SEARCH ═════════════════════════════════════════════════ */
+      .ct-flow-search {
+        padding: 4px 10px;
+        border: 1px solid var(--ct-line);
+        border-radius: 99px;
+        background: var(--ct-card);
+        color: var(--ct-text);
+        font: 600 12px var(--ct-font);
+        width: 148px;
+        outline: none;
+        transition: border-color 0.13s, width 0.2s;
+      }
+
+      .ct-flow-search:focus {
+        border-color: var(--ct-accent);
+        width: 200px;
+      }
+
+      /* ═══ EMPTY CELL ═════════════════════════════════════════════ */
+      .ct-flow-cell--empty {
+        min-height: 36px;
+        background: var(--ct-bg);
+      }
+
+      /* ═══ CARD STATUS DOT ════════════════════════════════════════ */
+      .ct-flow-card-status-dot {
+        font-size: 9px;
+        font-weight: 900;
+        line-height: 1;
+        padding: 1px 4px;
+        border-radius: 4px;
+        flex-shrink: 0;
+      }
+
+      .ct-flow-card-status-dot.status-existente   { background: #dcfce7; color: var(--ct-success); }
+      .ct-flow-card-status-dot.status-faltante    { background: #fff7ed; color: var(--ct-warning); }
+      .ct-flow-card-status-dot.status-candidato   { background: #eff6ff; color: var(--ct-accent); }
+      .ct-flow-card-status-dot.status-referencial { background: var(--ct-bg); color: var(--ct-muted); }
+
+      /* KPI pct line */
+      .ct-flow-kpi-pct {
+        display: block;
+        font-size: 10px;
+        color: var(--ct-success);
+        font-weight: 700;
+        margin-top: 1px;
+      }
+
       /* ═══ NOTE BAR ═══════════════════════════════════════════════ */
       .ct-flow-note {
         padding: 10px 24px;
@@ -611,6 +676,7 @@
               <div class="ct-kpi-card" style="--kpi-color:var(--ct-success)">
                 <strong id="ct-flow-kpi-existing">0</strong>
                 <span>Existentes</span>
+                <span class="ct-flow-kpi-pct" id="ct-flow-kpi-pct"></span>
               </div>
               <div class="ct-kpi-card" style="--kpi-color:var(--ct-warning)">
                 <strong id="ct-flow-kpi-missing">0</strong>
@@ -636,6 +702,8 @@
         </div>
 
         <div class="ct-flow-filters" id="ct-flow-filters">
+          <input type="search" id="ct-filter-search" class="ct-flow-search" placeholder="Buscar correo..." autocomplete="off">
+          <span class="ct-flow-filter-sep"></span>
           <span class="ct-flow-filter-label">Ver</span>
           <button class="ct-flow-filter-btn active" type="button" data-filter="all">Todos</button>
           <button class="ct-flow-filter-btn" type="button" data-filter="existente">✓ Existentes</button>
@@ -665,6 +733,13 @@
               <option value="seller-adidas">Seller adidas</option>
             </select>
           </div>
+        </div>
+
+        <div class="ct-flow-coverage-bar" id="ct-flow-coverage-bar">
+          <div class="ct-flow-coverage-seg seg-existente"   id="ct-cov-existente"></div>
+          <div class="ct-flow-coverage-seg seg-faltante"    id="ct-cov-faltante"></div>
+          <div class="ct-flow-coverage-seg seg-candidato"   id="ct-cov-candidato"></div>
+          <div class="ct-flow-coverage-seg seg-referencial" id="ct-cov-ref"></div>
         </div>
 
         <div class="ct-flow-grid-wrap">
@@ -988,6 +1063,7 @@
         let activePriorityFilter = false;
         let activeChannelFilter = null;
         let activeStoreFilter = null;
+        let activeSearchQuery = '';
 
         const STATUS_META = {
           existente:   { label: 'Existente',        icon: '✓', className: 'ct-status-activo' },
@@ -1026,8 +1102,12 @@
           return node.eventoLabel || template?.evento?.label || node.text;
         }
 
-        function nodeStageLabel(node, template, flow) {
-          return node.stageLabel || template?.stageLabel || flow.title;
+        function nodeStageLabel(node, template, flow, flowId) {
+          if (node.stageLabel) return node.stageLabel;
+          if (template?.stageLabel) return template.stageLabel;
+          const stages = flow.stageLabels || FLOW_STAGE_LABELS[flowId] || STAGE_LABELS;
+          const match = stages.find((s) => s.x === node.x);
+          return match ? match.label : flow.title;
         }
 
         function statusBadge(status) {
@@ -1078,8 +1158,10 @@
           ].filter(Boolean);
           const metaText = metaParts.join(' · ');
 
+          const statusMeta = STATUS_META[status] || STATUS_META.faltante;
           el.innerHTML = `
             <div class="ct-flow-card-top">
+              <span class="ct-flow-card-status-dot status-${status}" title="${CT.escapeHtml(statusMeta.label)}">${CT.escapeHtml(statusMeta.icon)}</span>
               <span class="ct-flow-card-priority priority-${CT.escapeHtml(node.priority || 'media')}" title="Prioridad ${CT.escapeHtml(PRIORITY_LABELS[node.priority || 'media'] || '')}"></span>
             </div>
             <p class="ct-flow-card-title">${CT.escapeHtml(node.text)}</p>
@@ -1104,15 +1186,27 @@
           titleEl.textContent = flow.title;
           descriptionEl.textContent = flow.description;
 
-          const total = flow.nodes.length;
-          const existing = flow.nodes.filter((n) => effectiveStatus(n) === 'existente').length;
-          const candidate = flow.nodes.filter((n) => effectiveStatus(n) === 'candidato').length;
-          const reference = flow.nodes.filter((n) => effectiveStatus(n) === 'referencial').length;
-          const missing = total - existing - candidate - reference;
+          const existing   = flow.nodes.filter((n) => effectiveStatus(n) === 'existente').length;
+          const missing    = flow.nodes.filter((n) => effectiveStatus(n) === 'faltante').length;
+          const candidate  = flow.nodes.filter((n) => effectiveStatus(n) === 'candidato').length;
+          const reference  = flow.nodes.filter((n) => effectiveStatus(n) === 'referencial').length;
           const highPriority = flow.nodes.filter((n) => (n.priority || 'media') === 'alta').length;
+          const counted    = existing + missing + candidate;
+          const pct        = counted ? Math.round((existing / counted) * 100) : 0;
+
           kpiExisting.textContent = existing;
-          kpiMissing.textContent = missing + candidate;
+          kpiMissing.textContent  = missing;
           kpiPriority.textContent = highPriority;
+          document.getElementById('ct-flow-kpi-pct').textContent = `${pct}% cubierto`;
+
+          document.getElementById('ct-cov-existente').style.flex  = existing   || 0;
+          document.getElementById('ct-cov-faltante').style.flex   = missing    || 0;
+          document.getElementById('ct-cov-candidato').style.flex  = candidate  || 0;
+          document.getElementById('ct-cov-ref').style.flex        = reference  || 0;
+
+          // Reset search on tab change
+          const searchEl = document.getElementById('ct-filter-search');
+          if (searchEl) { searchEl.value = ''; activeSearchQuery = ''; }
 
           gridEl.innerHTML = '';
 
@@ -1153,6 +1247,7 @@
                 (n) => n.lane === lane.id && n.x === stage.x
               );
               nodesInCell.forEach((node) => cell.appendChild(renderCard(node, flow)));
+              if (nodesInCell.length === 0) cell.classList.add('ct-flow-cell--empty');
               col.appendChild(cell);
             });
 
@@ -1168,13 +1263,14 @@
 
         function applyFilter() {
           gridEl.querySelectorAll('.ct-flow-card').forEach((el) => {
-            const matchStatus = !activeStatusFilter || el.dataset.status === activeStatusFilter;
+            const matchStatus   = !activeStatusFilter   || el.dataset.status === activeStatusFilter;
             const matchPriority = !activePriorityFilter || el.dataset.priority === 'alta';
-            const channels = (el.dataset.channels || '').split(' ').filter(Boolean);
-            const stores = (el.dataset.stores || '').split(' ').filter(Boolean);
-            const matchChannel = !activeChannelFilter || !channels.length || channels.includes(activeChannelFilter);
-            const matchStore = !activeStoreFilter || !stores.length || stores.includes(activeStoreFilter);
-            el.classList.toggle('filtered-out', !(matchStatus && matchPriority && matchChannel && matchStore));
+            const channels      = (el.dataset.channels || '').split(' ').filter(Boolean);
+            const stores        = (el.dataset.stores   || '').split(' ').filter(Boolean);
+            const matchChannel  = !activeChannelFilter  || !channels.length || channels.includes(activeChannelFilter);
+            const matchStore    = !activeStoreFilter    || !stores.length   || stores.includes(activeStoreFilter);
+            const matchSearch   = !activeSearchQuery    || (el.getAttribute('aria-label') || '').toLowerCase().includes(activeSearchQuery);
+            el.classList.toggle('filtered-out', !(matchStatus && matchPriority && matchChannel && matchStore && matchSearch));
           });
         }
 
@@ -1202,7 +1298,7 @@
           detailChannel.textContent = channels.length ? CT.labelsFor(channels, CT.channelLabel) : 'No aplica';
           detailStore.textContent = stores.length ? CT.labelsFor(stores, CT.storeLabel) : 'No aplica';
           detailEvent.textContent = nodeEventLabel(node, template);
-          detailStage.textContent = nodeStageLabel(node, template, flow);
+          detailStage.textContent = nodeStageLabel(node, template, flow, activeFlowId);
           detailStatus.textContent = statusMeta.label;
           detailPriority.textContent = PRIORITY_LABELS[node.priority] || node.priority || 'Media';
           detailTrigger.textContent = node.trigger || 'Por definir.';
@@ -1244,6 +1340,12 @@
             btn.classList.toggle('active', activePriorityFilter);
           }
 
+          applyFilter();
+        });
+
+        // Search input
+        document.getElementById('ct-filter-search').addEventListener('input', (e) => {
+          activeSearchQuery = e.target.value.trim().toLowerCase();
           applyFilter();
         });
 
