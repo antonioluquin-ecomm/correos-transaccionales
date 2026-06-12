@@ -932,6 +932,43 @@
           },
         };
 
+        const FLOW_STAGE_LABELS = {
+          entrega: [
+            { x: 40,   label: 'Stock / Alertas' },
+            { x: 170,  label: 'Cuenta' },
+            { x: 300,  label: 'Pedido' },
+            { x: 430,  label: 'Pago / Incidencias' },
+            { x: 560,  label: 'Facturación' },
+            { x: 690,  label: 'Despacho / Retiro' },
+            { x: 820,  label: 'Tránsito' },
+            { x: 950,  label: 'Entrega prevista' },
+            { x: 1080, label: 'Seguimiento final' },
+          ],
+          cambio: [
+            { x: 220, label: 'Solicitud' },
+            { x: 350, label: 'Orden de retiro' },
+            { x: 500, label: 'Retiro en curso' },
+            { x: 650, label: 'Entregado al depósito' },
+            { x: 790, label: 'Recepción / Revisión' },
+            { x: 940, label: 'Resolución' },
+          ],
+          devolucion: [
+            { x: 220, label: 'Solicitud' },
+            { x: 350, label: 'Orden de retiro' },
+            { x: 500, label: 'Retiro en curso' },
+            { x: 650, label: 'Entregado al depósito' },
+            { x: 790, label: 'Recepción / Revisión' },
+          ],
+          garantia: [
+            { x: 220, label: 'Solicitud' },
+            { x: 350, label: 'Orden de retiro' },
+            { x: 500, label: 'Retiro en curso' },
+            { x: 650, label: 'Entregado al depósito' },
+            { x: 790, label: 'Recepción / Revisión' },
+            { x: 940, label: 'Resolución' },
+          ],
+        };
+
         const tabsEl = document.getElementById('ct-flow-tabs');
         const gridEl = document.getElementById('ct-flow-grid');
         const titleEl = document.getElementById('ct-flow-title');
@@ -1086,7 +1123,7 @@
 
           gridEl.innerHTML = '';
 
-          const stageLabels = flow.stageLabels || STAGE_LABELS;
+          const stageLabels = flow.stageLabels || FLOW_STAGE_LABELS[flowId] || STAGE_LABELS;
 
           // sticky lane header column
           const lanesCol = document.createElement('div');
