@@ -824,14 +824,6 @@
           { id: 'ocasa',    label: 'Ocasa',     color: '#0f766e' },
         ];
 
-        const STAGE_LABELS = [
-          { x: 40, label: 'Cuenta' },
-          { x: 300, label: 'Pedido' },
-          { x: 560, label: 'Facturación' },
-          { x: 690, label: 'Despacho' },
-          { x: 950, label: 'Seguimiento' },
-        ];
-
         const GENERAL_STAGE_LABELS = [
           { x: 20, label: 'Cuenta / Acceso' },
           { x: 150, label: 'Compra / Pedido' },
@@ -845,6 +837,10 @@
           { x: 1190, label: 'Cambios / Devoluciones / Garantia' },
         ];
 
+        // Cada flujo es una vista independiente — los nodos NO están compartidos entre flujos.
+        // Si un nodo aparece en el General y en Entrega (ej. "Pedido realizado"), son objetos distintos.
+        // Cambios de texto, trigger o nota deben aplicarse en cada flujo por separado.
+        // templateId es el vínculo con config.js — ese sí es la fuente de verdad única.
         const FLOWS = {
           general: {
             title: 'Flujo General de Correos',
@@ -964,11 +960,11 @@
             shortTitle: 'Cambio',
             description: 'Flujo de retiro por cambio, recepción del producto y emisión de giftcard/código de cambio.',
             nodes: [
-              { id: 'request', lane: 'pim', x: 220, text: 'Solicitud de cambio', status: 'faltante', priority: 'alta', trigger: 'Cliente solicita cambio de producto.', note: 'Inicio del flujo inverso de cambio.' },
+              { id: 'request', lane: 'pim', x: 220, text: 'Solicitud de cambio', status: 'faltante', priority: 'alta', canales: ['b2c', 'punto-de-venta'], tiendas: ['sporting', 'woker'], trigger: 'Cliente solicita cambio de producto.', note: 'Inicio del flujo inverso de cambio.' },
               { id: 'pickup-order', lane: 'andreani', x: 350, text: 'Recibimos tu orden de retiro', status: 'faltante', priority: 'alta', trigger: 'Andreani recibe orden de retiro.', note: 'Debe confirmar al cliente que el retiro fue solicitado.' },
               { id: 'courier', lane: 'andreani', x: 500, text: 'Estamos en camino para retirar tu producto', status: 'faltante', priority: 'media', trigger: 'Andreani informa retiro en curso.', note: 'Validar disponibilidad de datos de visita.' },
               { id: 'delivered', lane: 'andreani', x: 650, text: 'Ya entregamos tu producto', status: 'faltante', priority: 'media', trigger: 'Andreani confirma entrega/devolución al depósito.', note: 'Nombre operativo a confirmar: entrega del producto retirado.' },
-              { id: 'rejected', lane: 'pim', x: 790, text: 'Notificación de cambio rechazado', status: 'faltante', priority: 'media', trigger: 'PIM rechaza solicitud o recepción de cambio.', note: 'Debe explicar motivo y próximo paso.' },
+              { id: 'rejected', lane: 'pim', x: 790, text: 'Notificación de cambio rechazado', status: 'faltante', priority: 'media', canales: ['b2c', 'punto-de-venta'], tiendas: ['sporting', 'woker'], trigger: 'PIM rechaza solicitud o recepción de cambio.', note: 'Debe explicar motivo y próximo paso.' },
               { id: 'received', lane: 'pim', x: 790, text: 'Recepción de producto por cambio', templateId: 'pim-recepcion-cambio', status: 'existente', priority: 'alta', trigger: 'PIM confirma recepción del producto a cambiar.', note: 'Plantilla disponible en catálogo. Pendiente revisión de diseño.' },
               { id: 'giftcard', lane: 'pim', x: 940, text: 'Giftcard (Código para cambio)', templateId: 'pim-giftcard', status: 'existente', priority: 'alta', trigger: 'Se emite código/giftcard para nuevo cambio.', note: 'Plantilla disponible en catálogo. Pendiente revisión de diseño.' },
             ],
@@ -986,11 +982,11 @@
             shortTitle: 'Devolución',
             description: 'Flujo de solicitud, retiro y recepción de producto para gestionar devolución.',
             nodes: [
-              { id: 'request', lane: 'pim', x: 220, text: 'Solicitud de devolución', status: 'faltante', priority: 'alta', trigger: 'Cliente solicita devolución.', note: 'Inicio del flujo inverso de devolución.' },
+              { id: 'request', lane: 'pim', x: 220, text: 'Solicitud de devolución', status: 'faltante', priority: 'alta', canales: ['b2c', 'punto-de-venta'], tiendas: ['sporting', 'woker'], trigger: 'Cliente solicita devolución.', note: 'Inicio del flujo inverso de devolución.' },
               { id: 'pickup-order', lane: 'andreani', x: 350, text: 'Recibimos tu orden de retiro', status: 'faltante', priority: 'alta', trigger: 'Andreani recibe orden de retiro.', note: 'Debe confirmar el retiro al cliente.' },
               { id: 'courier', lane: 'andreani', x: 500, text: 'Estamos en camino para retirar tu producto', status: 'faltante', priority: 'media', trigger: 'Andreani informa retiro en curso.', note: 'Validar evento de visita.' },
               { id: 'delivered', lane: 'andreani', x: 650, text: 'Ya entregamos tu producto', status: 'faltante', priority: 'media', trigger: 'Andreani confirma entrega del producto retirado.', note: 'Nombre operativo a confirmar.' },
-              { id: 'rejected', lane: 'pim', x: 790, text: 'Solicitud de devolución rechazada', status: 'faltante', priority: 'media', trigger: 'PIM rechaza devolución.', note: 'Debe explicar motivo y opciones.' },
+              { id: 'rejected', lane: 'pim', x: 790, text: 'Solicitud de devolución rechazada', status: 'faltante', priority: 'media', canales: ['b2c', 'punto-de-venta'], tiendas: ['sporting', 'woker'], trigger: 'PIM rechaza devolución.', note: 'Debe explicar motivo y opciones.' },
               { id: 'received', lane: 'pim', x: 790, text: 'Recepción de devolución', templateId: 'pim-recepcion-devolucion', status: 'existente', priority: 'alta', trigger: 'PIM confirma recepción del producto devuelto.', note: 'Plantilla disponible en catálogo. Pendiente revisión de diseño.' },
             ],
             links: [
@@ -1006,11 +1002,11 @@
             shortTitle: 'Garantía',
             description: 'Flujo de solicitud por garantía, retiro, recepción y resolución con cambio o rechazo.',
             nodes: [
-              { id: 'request', lane: 'pim', x: 220, text: 'Solicitud de cambio por garantía', status: 'faltante', priority: 'alta', trigger: 'Cliente solicita garantía o cambio por falla.', note: 'Inicio del flujo de garantía.' },
+              { id: 'request', lane: 'pim', x: 220, text: 'Solicitud de cambio por garantía', status: 'faltante', priority: 'alta', canales: ['b2c', 'punto-de-venta'], tiendas: ['sporting', 'woker'], trigger: 'Cliente solicita garantía o cambio por falla.', note: 'Inicio del flujo de garantía.' },
               { id: 'pickup-order', lane: 'andreani', x: 350, text: 'Recibimos tu orden de retiro', status: 'faltante', priority: 'alta', trigger: 'Andreani recibe orden de retiro.', note: 'Debe confirmar gestión de retiro.' },
               { id: 'courier', lane: 'andreani', x: 500, text: 'Estamos en camino para retirar tu producto', status: 'faltante', priority: 'media', trigger: 'Andreani informa retiro en curso.', note: 'Validar si comparte texto con cambio/devolución.' },
               { id: 'delivered', lane: 'andreani', x: 650, text: 'Ya entregamos tu producto', status: 'faltante', priority: 'media', trigger: 'Andreani confirma entrega al centro de revisión.', note: 'Nombre operativo a confirmar.' },
-              { id: 'rejected', lane: 'pim', x: 790, text: 'Notificación de garantía rechazada', status: 'faltante', priority: 'media', trigger: 'Garantía rechazada por revisión.', note: 'Debe explicar motivo y alternativas.' },
+              { id: 'rejected', lane: 'pim', x: 790, text: 'Notificación de garantía rechazada', status: 'faltante', priority: 'media', canales: ['b2c', 'punto-de-venta'], tiendas: ['sporting', 'woker'], trigger: 'Garantía rechazada por revisión.', note: 'Debe explicar motivo y alternativas.' },
               { id: 'received', lane: 'pim', x: 790, text: 'Recepción de producto para cambio', templateId: 'pim-recepcion-garantia', status: 'existente', priority: 'alta', trigger: 'Producto recibido para revisión o cambio por garantía.', note: 'Plantilla disponible en catálogo. Pendiente revisión de diseño.' },
               { id: 'giftcard', lane: 'pim', x: 940, text: 'Giftcard (Código para cambio)', templateId: 'pim-giftcard', status: 'existente', priority: 'alta', trigger: 'Se emite código para resolver la garantía.', note: 'Plantilla disponible en catálogo. Pendiente revisión de diseño.' },
             ],
@@ -1133,7 +1129,7 @@
         function nodeStageLabel(node, template, flow, flowId) {
           if (node.stageLabel) return node.stageLabel;
           if (template?.stageLabel) return template.stageLabel;
-          const stages = flow.stageLabels || FLOW_STAGE_LABELS[flowId] || STAGE_LABELS;
+          const stages = flow.stageLabels || FLOW_STAGE_LABELS[flowId] || [];
           const match = stages.find((s) => s.x === node.x);
           return match ? match.label : flow.title;
         }
@@ -1215,24 +1211,6 @@
           titleEl.textContent = flow.title;
           descriptionEl.textContent = flow.description;
 
-          const existing   = flow.nodes.filter((n) => effectiveStatus(n) === 'existente').length;
-          const missing    = flow.nodes.filter((n) => effectiveStatus(n) === 'faltante').length;
-          const candidate  = flow.nodes.filter((n) => effectiveStatus(n) === 'candidato').length;
-          const reference  = flow.nodes.filter((n) => effectiveStatus(n) === 'referencial').length;
-          const highPriority = flow.nodes.filter((n) => (n.priority || 'media') === 'alta').length;
-          const counted    = existing + missing + candidate;
-          const pct        = counted ? Math.round((existing / counted) * 100) : 0;
-
-          kpiExisting.textContent = existing;
-          kpiMissing.textContent  = missing;
-          kpiPriority.textContent = highPriority;
-          document.getElementById('ct-flow-kpi-pct').textContent = `${pct}% cubierto`;
-
-          document.getElementById('ct-cov-existente').style.flex  = existing   || 0;
-          document.getElementById('ct-cov-faltante').style.flex   = missing    || 0;
-          document.getElementById('ct-cov-candidato').style.flex  = candidate  || 0;
-          document.getElementById('ct-cov-ref').style.flex        = reference  || 0;
-
           // Reset all filters on tab change
           activeStatusFilter = null;
           activePriorityFilter = false;
@@ -1249,7 +1227,7 @@
 
           gridEl.innerHTML = '';
 
-          const stageLabels = flow.stageLabels || FLOW_STAGE_LABELS[flowId] || STAGE_LABELS;
+          const stageLabels = flow.stageLabels || FLOW_STAGE_LABELS[flowId] || [];
 
           // sticky lane header column
           const lanesCol = document.createElement('div');
@@ -1302,6 +1280,8 @@
 
         function applyFilter() {
           let visible = 0, total = 0;
+          let kpiEx = 0, kpiMiss = 0, kpiCand = 0, kpiRef = 0, kpiPri = 0;
+
           gridEl.querySelectorAll('.ct-flow-card').forEach((el) => {
             const matchStatus   = !activeStatusFilter   || el.dataset.status === activeStatusFilter;
             const matchPriority = !activePriorityFilter || el.dataset.priority === 'alta';
@@ -1314,8 +1294,27 @@
             const show = matchStatus && matchPriority && matchLane && matchChannel && matchStore && matchSearch;
             el.classList.toggle('filtered-out', !show);
             total++;
-            if (show) visible++;
+            if (show) {
+              visible++;
+              const s = el.dataset.status;
+              if (s === 'existente')   kpiEx++;
+              else if (s === 'faltante')   kpiMiss++;
+              else if (s === 'candidato')  kpiCand++;
+              else if (s === 'referencial') kpiRef++;
+              if (el.dataset.priority === 'alta') kpiPri++;
+            }
           });
+
+          kpiExisting.textContent = kpiEx;
+          kpiMissing.textContent  = kpiMiss;
+          kpiPriority.textContent = kpiPri;
+          const counted = kpiEx + kpiMiss + kpiCand;
+          const pct = counted ? Math.round(kpiEx / counted * 100) : 0;
+          document.getElementById('ct-flow-kpi-pct').textContent = `${pct}% cubierto`;
+          document.getElementById('ct-cov-existente').style.flex = kpiEx   || 0;
+          document.getElementById('ct-cov-faltante').style.flex  = kpiMiss || 0;
+          document.getElementById('ct-cov-candidato').style.flex = kpiCand || 0;
+          document.getElementById('ct-cov-ref').style.flex       = kpiRef  || 0;
 
           const hasFilter = activeStatusFilter || activePriorityFilter || activeLaneFilter || activeChannelFilter || activeStoreFilter || activeSearchQuery;
           const hintEl  = document.getElementById('ct-filter-hint');
