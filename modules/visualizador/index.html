@@ -198,17 +198,63 @@
           });
         }
 
-        addOptions(platformSelect, Array.from(new Set(renderable.map((template) => template.plataforma).filter(Boolean))).sort().map((id) => ({ id, label: id })));
-        addOptions(channelSelect, CT.channelOptionsFor(renderable, CT.templateChannels));
+        function rebuildSelect(selectEl, allOptions, validSet) {
+          const current = selectEl.value;
+          while (selectEl.options.length > 1) selectEl.remove(1);
+          allOptions.forEach((opt) => {
+            if (validSet.has(opt.id)) {
+              const option = document.createElement('option');
+              option.value = opt.id;
+              option.textContent = opt.label;
+              selectEl.appendChild(option);
+            }
+          });
+          selectEl.value = validSet.has(current) ? current : '';
+        }
 
-        CT.storeOptionsFor(renderable, CT.templateStores).forEach((store) => {
-          const option = document.createElement('option');
-          option.value = store.id;
-          option.textContent = store.label;
-          storeSelect.appendChild(option);
-        });
+        function refreshDependentSelects() {
+          const platform = platformSelect.value;
 
-        addOptions(logisticaSelect, CT.logisticaOptionsFor(renderable, CT.templateLogistics));
+          // Canal — derivado de las plantillas disponibles por plataforma
+          const validChannels = new Set();
+          renderable.forEach((t) => {
+            if (!platform || t.plataforma === platform) CT.templateChannels(t).forEach((c) => validChannels.add(c));
+          });
+          rebuildSelect(channelSelect, CT.CHANNEL_OPTIONS, validChannels);
+
+          // Tienda — usa CHANNEL_STORES (mapeo canónico) si hay canal seleccionado
+          const channel = channelSelect.value;
+          const validStores = new Set();
+          if (channel && CT.CHANNEL_STORES[channel]) {
+            CT.CHANNEL_STORES[channel].forEach((s) => validStores.add(s));
+          } else {
+            renderable.forEach((t) => {
+              if ((!platform || t.plataforma === platform) && (!channel || CT.templateChannels(t).includes(channel))) {
+                CT.templateStores(t).forEach((s) => { if (s !== 'shared') validStores.add(s); });
+              }
+            });
+          }
+          rebuildSelect(storeSelect, CT.STORE_OPTIONS, validStores);
+
+          // Logística — usa CHANNEL_LOGISTICA si hay canal seleccionado
+          const store = storeSelect.value;
+          const validLogistica = new Set();
+          if (channel && CT.CHANNEL_LOGISTICA[channel]) {
+            CT.CHANNEL_LOGISTICA[channel].forEach((l) => validLogistica.add(l));
+          } else {
+            renderable.forEach((t) => {
+              if ((!platform || t.plataforma === platform) &&
+                  (!channel || CT.templateChannels(t).includes(channel)) &&
+                  (!store || CT.templateStores(t).includes(store) || CT.templateStores(t).includes('shared'))) {
+                CT.templateLogistics(t).forEach((l) => validLogistica.add(l));
+              }
+            });
+          }
+          rebuildSelect(logisticaSelect, CT.LOGISTICA_OPTIONS, validLogistica);
+        }
+
+        addOptions(platformSelect, Array.from(new Set(renderable.map((t) => t.plataforma).filter(Boolean))).sort().map((id) => ({ id, label: id })));
+        refreshDependentSelects();
 
         const facetsContainer = document.getElementById('ct-vis-facets');
         const facetSelects = {};
@@ -491,6 +537,7 @@
         }
 
         function handleTaxonomyFilterChange() {
+          refreshDependentSelects();
           const template = renderTemplateOptions();
           if (template) {
             Object.values(facetSelects).forEach((s) => { s.value = ''; });

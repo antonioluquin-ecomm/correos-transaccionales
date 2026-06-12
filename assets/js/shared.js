@@ -39,6 +39,14 @@ const CT = (() => {
     { id: 'producteca-urbano', label: 'Producteca · Urbano' },
   ];
 
+  // Tiendas válidas por canal (mapeo canónico).
+  const CHANNEL_STORES = {
+    'punto-de-venta': [],
+    'b2c': ['sporting', 'woker'],
+    'b2b': ['venta-deportiva'],
+    'ext': ['seller-adidas'],
+  };
+
   // Logística válida por canal (para hints de UI y validación).
   const CHANNEL_LOGISTICA = {
     'punto-de-venta': ['andreani', 'retiro'],
@@ -666,6 +674,7 @@ const CT = (() => {
     STORE_OPTIONS,
     CHANNEL_OPTIONS,
     LOGISTICA_OPTIONS,
+    CHANNEL_STORES,
     CHANNEL_LOGISTICA,
     FACET_GROUPS,
     platformBadge,
