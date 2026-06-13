@@ -453,6 +453,29 @@
         margin-top: 16px;
       }
 
+      .ct-detail-device-label {
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--ct-muted);
+        margin: 16px 0 6px;
+      }
+
+      .ct-detail-device-actions {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+
+      .ct-detail-device-actions .ct-btn {
+        justify-content: center;
+      }
+
+      .ct-export-btn {
+        margin-left: auto;
+      }
+
       .ct-detail-status {
         color: var(--ct-muted);
         font-size: 13px;
@@ -628,6 +651,7 @@
           <div id="ct-result-count" class="ct-result-count" aria-live="polite"></div>
           <div class="ct-active-filters" id="ct-active-filters"></div>
           <button class="ct-btn" id="ct-clear-filters" type="button">Limpiar filtros</button>
+          <button class="ct-btn ct-export-btn" id="ct-export-csv" type="button">↓ Exportar CSV</button>
         </div>
 
         <div id="ct-results" class="ct-template-grid"></div>
@@ -670,8 +694,13 @@
           </dl>
           <h3>Variables y datos que utiliza</h3>
           <div class="ct-variables" id="ct-detail-variables"></div>
+          <p class="ct-detail-device-label">Previsualizar en</p>
+          <div class="ct-detail-device-actions" id="ct-detail-device-actions">
+            <a class="ct-btn ct-btn-primary" id="ct-detail-preview-desktop">Desktop</a>
+            <a class="ct-btn" id="ct-detail-preview-tablet">Tablet</a>
+            <a class="ct-btn" id="ct-detail-preview-mobile">Mobile</a>
+          </div>
           <div class="ct-detail-actions">
-            <a class="ct-btn ct-btn-primary" id="ct-detail-preview">Previsualizar</a>
             <a class="ct-btn" id="ct-detail-ver" target="_blank" rel="noopener">Abrir HTML</a>
             <button class="ct-btn" id="ct-detail-copy-path" type="button">Copiar ruta</button>
             <button class="ct-btn" id="ct-detail-descargar" type="button">Descargar HTML</button>
@@ -721,7 +750,9 @@
         const archivoEl = document.getElementById('ct-detail-archivo');
         const ejemploEl = document.getElementById('ct-detail-ejemplo');
         const variablesEl = document.getElementById('ct-detail-variables');
-        const previewBtn = document.getElementById('ct-detail-preview');
+        const previewDesktopBtn = document.getElementById('ct-detail-preview-desktop');
+        const previewTabletBtn  = document.getElementById('ct-detail-preview-tablet');
+        const previewMobileBtn  = document.getElementById('ct-detail-preview-mobile');
         const verBtn = document.getElementById('ct-detail-ver');
         const copyPathBtn = document.getElementById('ct-detail-copy-path');
         const descargarBtn = document.getElementById('ct-detail-descargar');
@@ -729,6 +760,7 @@
 
         let currentTemplate = null;
         let lastFocusedEl = null;
+        let lastFilteredSet = [];
 
         function normalize(value) {
           return String(value || '')
@@ -803,11 +835,12 @@
           return d.toLocaleDateString('es-AR', { day: 'numeric', month: 'short', year: 'numeric' });
         }
 
-        function previewUrl(template) {
+        function previewUrl(template, device) {
           const params = new URLSearchParams({ store: CT.templateStore(template), template: template.id });
           const channel = CT.templateChannels(template)[0];
           if (channel) params.set('channel', channel);
           if (template.ejemplo) params.set('example', template.ejemplo);
+          if (device) params.set('device', device);
           return `../visualizador/index.html?${params.toString()}`;
         }
 
@@ -938,6 +971,7 @@
 
         function renderResults() {
           const filtered = sortTemplates(templates.filter(matchesFilters));
+          lastFilteredSet = filtered;
           const fragment = document.createDocumentFragment();
           filtered.forEach((template) => fragment.appendChild(renderCard(template)));
 
@@ -947,6 +981,36 @@
           resultCountEl.textContent = `${filtered.length} de ${templates.length} plantilla${templates.length !== 1 ? 's' : ''}`;
           updateKpis(filtered);
           renderActiveFilters();
+        }
+
+        function exportCatalogo() {
+          const headers = ['ID', 'Nombre', 'Plataforma', 'Canal', 'Tienda', 'Logística', 'Categoría', 'Estado', 'Responsable', 'Actualizado', 'Archivo HTML', 'Ejemplo', 'Variables'];
+          const rows = [headers];
+          lastFilteredSet.forEach((t) => {
+            rows.push([
+              t.id || '',
+              t.nombre || '',
+              t.plataforma || '',
+              CT.labelsFor(CT.templateChannels(t), CT.channelLabel),
+              CT.labelsFor(CT.templateStores(t), CT.storeLabel),
+              CT.labelsFor(CT.templateLogistics(t), CT.logisticaLabel),
+              t.categoria || '',
+              t.estado || '',
+              t.responsable || '',
+              t.actualizado || '',
+              t.archivoHtml || '',
+              t.ejemplo || '',
+              Array.isArray(t.variables) ? t.variables.length : 0,
+            ]);
+          });
+          const csv = rows.map((r) => r.map((v) => `"${String(v).replace(/"/g, '""')}"`).join(',')).join('\n');
+          const blob = new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8;' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `catalogo-plantillas${lastFilteredSet.length < templates.length ? '-filtrado' : ''}.csv`;
+          a.click();
+          URL.revokeObjectURL(url);
         }
 
         function setDetailStatus(message, isError) {
@@ -975,12 +1039,15 @@
           variablesEl.innerHTML = Array.isArray(template.variables) && template.variables.length
             ? `<ul>${template.variables.map((v) => `<li><code>${CT.escapeHtml(v)}</code></li>`).join('')}</ul>`
             : '<p>Sin variables documentadas todavía.</p>';
+          const hasHtml = Boolean(template.archivoHtml);
           verBtn.href = htmlUrl(template) || '#';
-          previewBtn.href = template.archivoHtml ? previewUrl(template) : '#';
-          verBtn.toggleAttribute('aria-disabled', !template.archivoHtml);
-          previewBtn.toggleAttribute('aria-disabled', !template.archivoHtml);
-          descargarBtn.disabled = !template.archivoHtml;
-          copyPathBtn.disabled = !template.archivoHtml;
+          verBtn.toggleAttribute('aria-disabled', !hasHtml);
+          previewDesktopBtn.href = hasHtml ? previewUrl(template, 'desktop') : '#';
+          previewTabletBtn.href  = hasHtml ? previewUrl(template, 'tablet')  : '#';
+          previewMobileBtn.href  = hasHtml ? previewUrl(template, 'mobile')  : '#';
+          [previewDesktopBtn, previewTabletBtn, previewMobileBtn].forEach(b => b.toggleAttribute('aria-disabled', !hasHtml));
+          descargarBtn.disabled = !hasHtml;
+          copyPathBtn.disabled  = !hasHtml;
           setDetailStatus('');
 
           overlay.classList.add('open');
@@ -1077,6 +1144,7 @@
           searchEl.focus();
         });
 
+        document.getElementById('ct-export-csv').addEventListener('click', exportCatalogo);
         closeBtn.addEventListener('click', closeDetail);
         copyPathBtn.addEventListener('click', copyCurrentPath);
         descargarBtn.addEventListener('click', downloadCurrentHtml);
