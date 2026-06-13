@@ -564,6 +564,42 @@
       .ct-flow-backlog-trigger { font-size: 11px; color: var(--ct-muted); max-width: 300px; }
       .ct-flow-backlog-flow { font-size: 11px; font-weight: 700; color: var(--ct-muted); white-space: nowrap; }
 
+      .ct-flow-backlog-badge {
+        display: inline-block;
+        font-size: 10px;
+        font-weight: 800;
+        padding: 2px 6px;
+        border-radius: 4px;
+        white-space: nowrap;
+      }
+      .ct-flow-backlog-badge.priority-alta  { background: #fee2e2; color: var(--ct-danger); }
+      .ct-flow-backlog-badge.priority-media { background: #fef3c7; color: #92400e; }
+      .ct-flow-backlog-badge.priority-baja  { background: var(--ct-bg); color: var(--ct-muted); }
+
+      .ct-flow-backlog-scope {
+        display: flex;
+        border: 1px solid var(--ct-line);
+        border-radius: 6px;
+        overflow: hidden;
+        background: var(--ct-bg);
+      }
+      .ct-flow-backlog-scope-btn {
+        padding: 4px 11px;
+        border: none;
+        background: transparent;
+        color: var(--ct-muted);
+        font: 600 11px var(--ct-font);
+        cursor: pointer;
+        transition: background 0.13s, color 0.13s;
+      }
+      .ct-flow-backlog-scope-btn + .ct-flow-backlog-scope-btn { border-left: 1px solid var(--ct-line); }
+      .ct-flow-backlog-scope-btn.active { background: var(--ct-navy); color: #fff; }
+
+      .ct-flow-cell--all-filtered {
+        min-height: 36px !important;
+        background: var(--ct-bg);
+      }
+
       /* ═══ FILTER ACTIVE HINT ════════════════════════════════════ */
       .ct-flow-filter-hint {
         font-size: 11px;
@@ -805,7 +841,7 @@
                 <button id="ct-view-grid" class="ct-flow-view-btn active" type="button">Grilla</button>
                 <button id="ct-view-backlog" class="ct-flow-view-btn" type="button">Backlog</button>
               </div>
-              <button id="ct-export-btn" class="ct-flow-export-btn" type="button">↓ Exportar CSV</button>
+              <button id="ct-export-btn" class="ct-flow-export-btn" type="button">↓ Exportar faltantes</button>
             </div>
             <div class="ct-flow-kpis" aria-label="Cobertura del flujo">
               <div class="ct-kpi-card" style="--kpi-color:var(--ct-success)">
@@ -899,7 +935,13 @@
         <div class="ct-flow-backlog" id="ct-flow-backlog" style="display:none">
           <div class="ct-flow-backlog-header">
             <h3>Correos pendientes de crear</h3>
-            <span class="ct-flow-backlog-count" id="ct-flow-backlog-count"></span>
+            <div style="display:flex;align-items:center;gap:10px">
+              <div class="ct-flow-backlog-scope" role="group" aria-label="Alcance">
+                <button type="button" class="ct-flow-backlog-scope-btn active" id="ct-backlog-scope-flow">Este flujo</button>
+                <button type="button" class="ct-flow-backlog-scope-btn" id="ct-backlog-scope-all">Todos</button>
+              </div>
+              <span class="ct-flow-backlog-count" id="ct-flow-backlog-count"></span>
+            </div>
           </div>
           <table aria-label="Backlog de correos faltantes">
             <thead>
@@ -1228,6 +1270,7 @@
 
         let activeFlowId = 'general';
         let activeView = 'grid';
+        let activeBacklogScope = 'flow';
         let activeStatusFilter = null;
         let activePriorityFilter = false;
         let activeLaneFilter = null;
@@ -1355,6 +1398,7 @@
           const flow = FLOWS[flowId];
           activeFlowId = flowId;
           activeView = 'grid';
+          activeBacklogScope = 'flow';
           const gridWrap = document.querySelector('.ct-flow-grid-wrap');
           const backlogSection = document.getElementById('ct-flow-backlog');
           if (gridWrap) gridWrap.style.display = '';
@@ -1363,6 +1407,10 @@
           const btnBL = document.getElementById('ct-view-backlog');
           if (btnGrid) { btnGrid.classList.add('active'); }
           if (btnBL) { btnBL.classList.remove('active'); }
+          const btnScopeFlow = document.getElementById('ct-backlog-scope-flow');
+          const btnScopeAll = document.getElementById('ct-backlog-scope-all');
+          if (btnScopeFlow) { btnScopeFlow.classList.add('active'); }
+          if (btnScopeAll) { btnScopeAll.classList.remove('active'); }
           titleEl.textContent = flow.title;
           descriptionEl.textContent = flow.description;
 
@@ -1470,6 +1518,13 @@
           document.getElementById('ct-cov-faltante').style.flex  = kpiMiss || 0;
           document.getElementById('ct-cov-candidato').style.flex = kpiCand || 0;
           document.getElementById('ct-cov-ref').style.flex       = kpiRef  || 0;
+
+          // collapse cells where all cards are filtered out
+          gridEl.querySelectorAll('.ct-flow-cell:not(.ct-flow-cell--empty)').forEach(cell => {
+            const cards = cell.querySelectorAll('.ct-flow-card');
+            const allHidden = cards.length > 0 && Array.from(cards).every(c => c.classList.contains('filtered-out'));
+            cell.classList.toggle('ct-flow-cell--all-filtered', allHidden);
+          });
 
           const hasFilter = activeStatusFilter || activePriorityFilter || activeLaneFilter || activeChannelFilter || activeStoreFilter || activeSearchQuery;
           const hintEl  = document.getElementById('ct-filter-hint');
@@ -1629,15 +1684,27 @@
           if (view === 'backlog') renderBacklog();
         }
 
+        function backlogMatchesFilters(n) {
+          if (activeLaneFilter    && n.lane !== activeLaneFilter) return false;
+          if (activeChannelFilter && !(n.canales || []).includes(activeChannelFilter)) return false;
+          if (activeStoreFilter   && !(n.tiendas || []).includes(activeStoreFilter)) return false;
+          if (activeSearchQuery   && !(n.text || n.id || '').toLowerCase().includes(activeSearchQuery)) return false;
+          return true;
+        }
+
         function renderBacklog() {
           const tbody = document.getElementById('ct-flow-backlog-body');
           const countEl = document.getElementById('ct-flow-backlog-count');
           tbody.innerHTML = '';
+          const flowsToScan = activeBacklogScope === 'flow'
+            ? { [activeFlowId]: FLOWS[activeFlowId] }
+            : FLOWS;
           const rows = [];
-          Object.entries(FLOWS).forEach(([flowId, flow]) => {
+          Object.entries(flowsToScan).forEach(([flowId, flow]) => {
             const stageLabels = flow.stageLabels || FLOW_STAGE_LABELS[flowId] || [];
             flow.nodes.forEach(n => {
               if (effectiveStatus(n) !== 'faltante') return;
+              if (!backlogMatchesFilters(n)) return;
               const stageMatch = stageLabels.find(s => s.x === n.x);
               rows.push({
                 flowTitle: flow.shortTitle || flow.title,
@@ -1649,27 +1716,37 @@
           });
           const priorityOrder = { alta: 0, media: 1, baja: 2 };
           rows.sort((a, b) => (priorityOrder[a.node.priority || 'media'] ?? 1) - (priorityOrder[b.node.priority || 'media'] ?? 1));
-          rows.forEach(({ flowTitle, stageName, laneLabel, node }) => {
-            const priority = node.priority || 'media';
+          if (rows.length === 0) {
             const tr = document.createElement('tr');
-            tr.innerHTML = `<td class="ct-flow-backlog-flow">${flowTitle}</td>
-              <td>${stageName}</td>
-              <td>${laneLabel}</td>
-              <td class="ct-flow-backlog-name">${node.text || node.id}</td>
-              <td><span class="ct-flow-card-priority priority-${priority}">${PRIORITY_LABELS[priority] || priority}</span></td>
-              <td class="ct-flow-backlog-trigger">${node.trigger || '—'}</td>`;
+            tr.innerHTML = `<td colspan="6" style="text-align:center;padding:24px;color:var(--ct-muted);font-size:12px">Sin resultados con los filtros actuales</td>`;
             tbody.appendChild(tr);
-          });
+          } else {
+            rows.forEach(({ flowTitle, stageName, laneLabel, node }) => {
+              const priority = node.priority || 'media';
+              const tr = document.createElement('tr');
+              tr.innerHTML = `<td class="ct-flow-backlog-flow">${CT.escapeHtml(flowTitle)}</td>
+                <td>${CT.escapeHtml(stageName)}</td>
+                <td>${CT.escapeHtml(laneLabel)}</td>
+                <td class="ct-flow-backlog-name">${CT.escapeHtml(node.text || node.id)}</td>
+                <td><span class="ct-flow-backlog-badge priority-${CT.escapeHtml(priority)}">${CT.escapeHtml(PRIORITY_LABELS[priority] || priority)}</span></td>
+                <td class="ct-flow-backlog-trigger">${CT.escapeHtml(node.trigger || '—')}</td>`;
+              tbody.appendChild(tr);
+            });
+          }
           countEl.textContent = `${rows.length} correo${rows.length !== 1 ? 's' : ''}`;
         }
 
         function exportFaltantes() {
+          const flowsToScan = activeBacklogScope === 'flow'
+            ? { [activeFlowId]: FLOWS[activeFlowId] }
+            : FLOWS;
           const headers = ['Flujo', 'Etapa', 'Plataforma', 'Nombre', 'Prioridad', 'Disparador'];
           const rows = [headers];
-          Object.entries(FLOWS).forEach(([flowId, flow]) => {
+          Object.entries(flowsToScan).forEach(([flowId, flow]) => {
             const stageLabels = flow.stageLabels || FLOW_STAGE_LABELS[flowId] || [];
             flow.nodes.forEach(n => {
               if (effectiveStatus(n) !== 'faltante') return;
+              if (!backlogMatchesFilters(n)) return;
               const stageMatch = stageLabels.find(s => s.x === n.x);
               rows.push([
                 flow.shortTitle || flow.title,
@@ -1686,7 +1763,8 @@
           const url = URL.createObjectURL(blob);
           const a = document.createElement('a');
           a.href = url;
-          a.download = 'backlog-correos-faltantes.csv';
+          const scopeLabel = activeBacklogScope === 'flow' ? FLOWS[activeFlowId].shortTitle || activeFlowId : 'todos';
+          a.download = `backlog-faltantes-${scopeLabel}.csv`;
           a.click();
           URL.revokeObjectURL(url);
         }
@@ -1694,6 +1772,19 @@
         document.getElementById('ct-view-grid').addEventListener('click', () => setView('grid'));
         document.getElementById('ct-view-backlog').addEventListener('click', () => setView('backlog'));
         document.getElementById('ct-export-btn').addEventListener('click', exportFaltantes);
+
+        document.getElementById('ct-backlog-scope-flow').addEventListener('click', () => {
+          activeBacklogScope = 'flow';
+          document.getElementById('ct-backlog-scope-flow').classList.add('active');
+          document.getElementById('ct-backlog-scope-all').classList.remove('active');
+          renderBacklog();
+        });
+        document.getElementById('ct-backlog-scope-all').addEventListener('click', () => {
+          activeBacklogScope = 'all';
+          document.getElementById('ct-backlog-scope-all').classList.add('active');
+          document.getElementById('ct-backlog-scope-flow').classList.remove('active');
+          renderBacklog();
+        });
 
         renderFlow('general');
         updateTabPcts();
