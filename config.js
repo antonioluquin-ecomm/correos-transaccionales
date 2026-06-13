@@ -668,6 +668,16 @@ const EXAMPLE_SCENARIOS = [
     compatibleTemplates: ['pedido-confirmado', 'pago-aprobado'],
   },
   {
+    id: 'pedido-2-productos-sporting',
+    facetas: ['multideposito', 'con-promo', 'envio-gratis', 'domicilio'],
+    logistica: ['andreani'],
+    path: 'examples/vtex/sporting/pedido-2-productos.sample.json',
+    label: 'Sporting - 2 productos, descuento, envío gratis, 2 depósitos',
+    tipo: 'Pedido',
+    descripcion: 'Pedido con 2 productos: uno con descuento (listPrice > sellingPrice) y otro al precio normal. Envío gratis vía alternativeTotals. Despacho desde 2 depósitos distintos.',
+    compatibleTemplates: ['pedido-confirmado', 'pago-aprobado'],
+  },
+  {
     id: 'pedido-estandar-woker',
     facetas: ['un-paquete', 'domicilio'],
     logistica: ['andreani'],
@@ -675,6 +685,16 @@ const EXAMPLE_SCENARIOS = [
     label: 'Woker - pedido estándar',
     tipo: 'Pedido',
     descripcion: 'Pedido Woker confirmado con varios productos, totales, dirección de entrega y pago registrado.',
+    compatibleTemplates: ['woker-pedido-confirmado'],
+  },
+  {
+    id: 'pedido-2-productos-woker',
+    facetas: ['multideposito', 'con-promo', 'envio-gratis', 'domicilio'],
+    logistica: ['andreani'],
+    path: 'examples/vtex/woker/pedido-2-productos.sample.json',
+    label: 'Woker - 2 productos, descuento, envío gratis, 2 depósitos',
+    tipo: 'Pedido',
+    descripcion: 'Pedido Woker con 2 productos: uno con descuento y otro al precio normal. Envío gratis vía alternativeTotals. Despacho desde 2 depósitos distintos.',
     compatibleTemplates: ['woker-pedido-confirmado'],
   },
   {

@@ -1,0 +1,621 @@
+{
+  "orders": [
+    {
+      "package": null,
+      "subjectItemAttachment": {
+        "item": "Zapatillas adidas St...",
+        "totalItems": 2,
+        "extraItems": 1
+      },
+      "cancellationReason": null,
+      "paymentData": {
+        "giftCards": [],
+        "transactions": [
+          {
+            "isActive": true,
+            "transactionId": "C780D77A60DE431586790C939934A525",
+            "merchantName": "W******",
+            "payments": [
+              {
+                "id": "42FD40483282407CB9EE1D3B87E64E58",
+                "paymentSystem": "2",
+                "paymentSystemName": "V***",
+                "value": 439800,
+                "installments": 3,
+                "referenceValue": 439800,
+                "cardHolder": null,
+                "cardNumber": null,
+                "firstDigits": "493702",
+                "lastDigits": "3744",
+                "cvv2": null,
+                "expireMonth": null,
+                "expireYear": null,
+                "url": null,
+                "giftCardId": null,
+                "giftCardName": null,
+                "giftCardCaption": null,
+                "redemptionCode": null,
+                "group": "creditCard",
+                "tid": "TID-EXAMPLE-W2",
+                "dueDate": null,
+                "connectorResponses": {
+                  "Tid": "TID-EXAMPLE-W2",
+                  "authId": "AUTH-EXAMPLE-W2",
+                  "nsu": "NSU-EXAMPLE-W2"
+                },
+                "giftCardProvider": null,
+                "giftCardAsDiscount": null,
+                "koinUrl": null,
+                "accountId": null,
+                "parentAccountId": null,
+                "bankIssuedInvoiceIdentificationNumber": null,
+                "bankIssuedInvoiceIdentificationNumberFormatted": null,
+                "bankIssuedInvoiceBarCodeNumber": null,
+                "bankIssuedInvoiceBarCodeType": null,
+                "billingAddress": null,
+                "paymentOrigin": null
+              }
+            ]
+          }
+        ]
+      },
+      "cancellationRequests": null,
+      "invoiceData": null,
+      "clientProfileData": {
+        "id": "clientProfileData",
+        "email": "cliente-w2@example.invalid",
+        "firstName": "Cliente",
+        "lastName": "Ejemplo W2",
+        "documentType": "dni",
+        "document": "00000000",
+        "phone": "+540000000000",
+        "corporateName": null,
+        "tradeName": null,
+        "corporateDocument": null,
+        "stateInscription": null,
+        "corporatePhone": null,
+        "isCorporate": false,
+        "userProfileId": "00000000-0000-4000-8000-000000000003",
+        "userProfileVersion": null,
+        "customerClass": null,
+        "customerCode": null
+      },
+      "shippingData": {
+        "id": "shippingData",
+        "address": {
+          "addressType": "residential",
+          "receiverName": "Cliente Ejemplo W2",
+          "addressId": "ADDR-EXAMPLE-W2",
+          "versionId": null,
+          "entityId": null,
+          "postalCode": "4000",
+          "city": "San Miguel de Tucumán",
+          "state": "Tucumán",
+          "country": "ARG",
+          "street": "Avenida Siria",
+          "number": "2345",
+          "neighborhood": "Barrio Ejemplo",
+          "complement": "Piso 1",
+          "reference": null,
+          "geoCoordinates": [-65.2226, -26.8083]
+        },
+        "logisticsInfo": [
+          {
+            "itemIndex": 0,
+            "itemId": "657",
+            "selectedDeliveryChannel": "delivery",
+            "selectedSla": "Envío domicilio",
+            "lockTTL": "12d",
+            "price": 0,
+            "listPrice": 899900,
+            "sellingPrice": 0,
+            "deliveryWindow": null,
+            "deliveryCompany": null,
+            "shippingEstimate": "1bd",
+            "shippingEstimateDate": "2026-04-16T15:19:57.2106729Z",
+            "slas": [
+              {
+                "id": "Envío domicilio",
+                "name": "E**************",
+                "shippingEstimate": "1bd",
+                "shippingEstimateDate": "2026-04-16T15:19:57.2106729Z",
+                "deliveryWindow": null,
+                "availableDeliveryWindows": [],
+                "deliveryIds": [],
+                "listPrice": 899900,
+                "price": 0,
+                "deliveryChannel": "delivery",
+                "pickupStoreInfo": {
+                  "additionalInfo": null,
+                  "address": null,
+                  "dockId": null,
+                  "friendlyName": null,
+                  "isPickupStore": false
+                },
+                "polygonName": null,
+                "lockTTL": "12d",
+                "pickupPointId": null,
+                "transitTime": null,
+                "pickupDistance": null
+              }
+            ],
+            "shipsTo": ["AR"],
+            "deliveryIds": [
+              {
+                "courierId": "courier-example-w1",
+                "courierName": "Andreani",
+                "dockId": "dock-example-w1",
+                "quantity": 1,
+                "warehouseId": "deposito-principal-tucuman",
+                "accountCarrierName": "w*****",
+                "kitItemDetails": []
+              }
+            ],
+            "deliveryChannels": [{ "id": "delivery", "stockBalance": 0 }],
+            "deliveryChannel": null,
+            "pickupStoreInfo": {
+              "additionalInfo": null,
+              "address": null,
+              "dockId": null,
+              "friendlyName": null,
+              "isPickupStore": false
+            },
+            "addressId": "ADDR-EXAMPLE-W2",
+            "versionId": null,
+            "entityId": null,
+            "polygonName": null,
+            "pickupPointId": null,
+            "transitTime": null
+          },
+          {
+            "itemIndex": 1,
+            "itemId": "891",
+            "selectedDeliveryChannel": "delivery",
+            "selectedSla": "Envío domicilio",
+            "lockTTL": "12d",
+            "price": 0,
+            "listPrice": 899900,
+            "sellingPrice": 0,
+            "deliveryWindow": null,
+            "deliveryCompany": null,
+            "shippingEstimate": "2bd",
+            "shippingEstimateDate": "2026-04-17T15:19:57.2106729Z",
+            "slas": [
+              {
+                "id": "Envío domicilio",
+                "name": "E**************",
+                "shippingEstimate": "2bd",
+                "shippingEstimateDate": "2026-04-17T15:19:57.2106729Z",
+                "deliveryWindow": null,
+                "availableDeliveryWindows": [],
+                "deliveryIds": [],
+                "listPrice": 899900,
+                "price": 0,
+                "deliveryChannel": "delivery",
+                "pickupStoreInfo": {
+                  "additionalInfo": null,
+                  "address": null,
+                  "dockId": null,
+                  "friendlyName": null,
+                  "isPickupStore": false
+                },
+                "polygonName": null,
+                "lockTTL": "12d",
+                "pickupPointId": null,
+                "transitTime": null,
+                "pickupDistance": null
+              }
+            ],
+            "shipsTo": ["AR"],
+            "deliveryIds": [
+              {
+                "courierId": "courier-example-w2",
+                "courierName": "Andreani",
+                "dockId": "dock-example-w2",
+                "quantity": 1,
+                "warehouseId": "deposito-secundario-tucuman",
+                "accountCarrierName": "w*****",
+                "kitItemDetails": []
+              }
+            ],
+            "deliveryChannels": [{ "id": "delivery", "stockBalance": 0 }],
+            "deliveryChannel": null,
+            "pickupStoreInfo": {
+              "additionalInfo": null,
+              "address": null,
+              "dockId": null,
+              "friendlyName": null,
+              "isPickupStore": false
+            },
+            "addressId": "ADDR-EXAMPLE-W2",
+            "versionId": null,
+            "entityId": null,
+            "polygonName": null,
+            "pickupPointId": null,
+            "transitTime": null
+          }
+        ],
+        "trackingHints": [],
+        "selectedAddresses": [
+          {
+            "addressId": "ADDR-EXAMPLE-W2",
+            "versionId": null,
+            "entityId": null,
+            "addressType": "residential",
+            "receiverName": "Cliente Ejemplo W2",
+            "street": "Avenida Siria",
+            "number": "2345",
+            "complement": "Piso 1",
+            "neighborhood": "Barrio Ejemplo",
+            "postalCode": "4000",
+            "city": "San Miguel de Tucumán",
+            "state": "Tucumán",
+            "country": "ARG",
+            "reference": null,
+            "geoCoordinates": [-65.2226, -26.8083]
+          }
+        ],
+        "availableAddresses": [
+          {
+            "addressId": "ADDR-EXAMPLE-W2",
+            "versionId": null,
+            "entityId": null,
+            "addressType": "residential",
+            "receiverName": "Cliente Ejemplo W2",
+            "street": "Avenida Siria",
+            "number": "2345",
+            "complement": null,
+            "neighborhood": "Barrio Ejemplo",
+            "postalCode": "4000",
+            "city": "San Miguel de Tucumán",
+            "state": "Tucumán",
+            "country": "ARG",
+            "reference": null,
+            "geoCoordinates": [-65.2226, -26.8083]
+          }
+        ],
+        "contactInformation": [],
+        "contactsInfo": []
+      },
+      "customData": null,
+      "purchaseAgentData": null,
+      "authorizationPolicyData": {
+        "Status": "accepted",
+        "DeniedPolicies": [],
+        "PendingPolicies": []
+      },
+      "items": [
+        {
+          "additionalInfo": {
+            "categoriesIds": "/1/2/4/",
+            "productClusterId": "310",
+            "commercialConditionId": "1",
+            "dimension": {
+              "cubicweight": 0.25,
+              "height": 12,
+              "length": 30,
+              "weight": 0.6,
+              "width": 18
+            },
+            "brandName": "A*****",
+            "brandId": "3000000",
+            "offeringInfo": null,
+            "offeringType": null,
+            "offeringTypeId": null,
+            "catalogProvider": "example-catalog-provider"
+          },
+          "sellerSku": "SKU-EXAMPLE-W1-1",
+          "priceTable": null,
+          "priceValidUntil": null,
+          "callCenterOperator": null,
+          "commission": 0,
+          "freightCommission": 0,
+          "taxCode": null,
+          "catalogProvider": "example-catalog-provider",
+          "uniqueId": "UNIQUE-EXAMPLE-W1-1",
+          "id": "SKU-EXAMPLE-W1-1",
+          "productId": "PRODUCT-EXAMPLE-W1-1",
+          "productRefId": "PRODUCT-REF-EXAMPLE-W1-1",
+          "refId": "REF-EXAMPLE-W1-1",
+          "ean": "0000000000011",
+          "name": "Z**********************************",
+          "skuName": "42",
+          "modalType": null,
+          "parentItemIndex": null,
+          "parentAssemblyBinding": null,
+          "assemblies": [],
+          "tax": 0,
+          "price": 249900,
+          "listPrice": 349900,
+          "manualPrice": null,
+          "manualPriceAppliedBy": null,
+          "sellingPrice": 249900,
+          "rewardValue": 0,
+          "isGift": false,
+          "preSaleDate": null,
+          "productCategoryIds": "/1/2/4/",
+          "productCategories": {
+            "1": "WOKER",
+            "2": "CALZADO",
+            "4": "Zapatillas"
+          },
+          "quantity": 1,
+          "seller": "SELLER-EXAMPLE-W",
+          "sellerChain": ["wokerqa"],
+          "imageUrl": "https://sportingioqa.vteximg.com.br/arquivos/ids/164020-55-55/image-a3e2892fbd7142bb829989b788f0f918.jpg?v=638906262524030000",
+          "detailUrl": "/producto-ejemplo-w1-1/p",
+          "components": [],
+          "bundleItems": [],
+          "attachments": [],
+          "attachmentOfferings": [],
+          "offerings": [],
+          "priceTags": [
+            {
+              "name": "d******************************************************************************************",
+              "value": -100000,
+              "rawValue": -1000,
+              "isPercentual": false,
+              "identifier": "BENEFIT-EXAMPLE-W2"
+            }
+          ],
+          "availability": "available",
+          "measurementUnit": "un",
+          "unitMultiplier": 1,
+          "manufacturerCode": null,
+          "priceDefinition": {
+            "calculatedSellingPrice": 249900,
+            "total": 249900,
+            "sellingPrices": [{ "value": 249900, "quantity": 1 }]
+          }
+        },
+        {
+          "additionalInfo": {
+            "categoriesIds": "/1/3/6/",
+            "productClusterId": "410",
+            "commercialConditionId": "1",
+            "dimension": {
+              "cubicweight": 0.05,
+              "height": 3,
+              "length": 20,
+              "weight": 0.2,
+              "width": 15
+            },
+            "brandName": "N****",
+            "brandId": "3000001",
+            "offeringInfo": null,
+            "offeringType": null,
+            "offeringTypeId": null,
+            "catalogProvider": "example-catalog-provider"
+          },
+          "sellerSku": "SKU-EXAMPLE-W2-1",
+          "priceTable": null,
+          "priceValidUntil": null,
+          "callCenterOperator": null,
+          "commission": 0,
+          "freightCommission": 0,
+          "taxCode": null,
+          "catalogProvider": "example-catalog-provider",
+          "uniqueId": "UNIQUE-EXAMPLE-W2-1",
+          "id": "SKU-EXAMPLE-W2-1",
+          "productId": "PRODUCT-EXAMPLE-W2-1",
+          "productRefId": "PRODUCT-REF-EXAMPLE-W2-1",
+          "refId": "REF-EXAMPLE-W2-1",
+          "ean": "0000000000012",
+          "name": "C**************************",
+          "skuName": "M*",
+          "modalType": null,
+          "parentItemIndex": null,
+          "parentAssemblyBinding": null,
+          "assemblies": [],
+          "tax": 0,
+          "price": 189900,
+          "listPrice": 189900,
+          "manualPrice": null,
+          "manualPriceAppliedBy": null,
+          "sellingPrice": 189900,
+          "rewardValue": 0,
+          "isGift": false,
+          "preSaleDate": null,
+          "productCategoryIds": "/1/3/6/",
+          "productCategories": {
+            "1": "WOKER",
+            "3": "INDUMENTARIA",
+            "6": "Camperas"
+          },
+          "quantity": 1,
+          "seller": "SELLER-EXAMPLE-W",
+          "sellerChain": ["wokerqa"],
+          "imageUrl": "https://sportingioqa.vteximg.com.br/arquivos/ids/164020-55-55/image-a3e2892fbd7142bb829989b788f0f918.jpg?v=638906262524030000",
+          "detailUrl": "/producto-ejemplo-w2-1/p",
+          "components": [],
+          "bundleItems": [],
+          "attachments": [],
+          "attachmentOfferings": [],
+          "offerings": [],
+          "priceTags": [],
+          "availability": "available",
+          "measurementUnit": "un",
+          "unitMultiplier": 1,
+          "manufacturerCode": null,
+          "priceDefinition": {
+            "calculatedSellingPrice": 189900,
+            "total": 189900,
+            "sellingPrices": [{ "value": 189900, "quantity": 1 }]
+          }
+        }
+      ],
+      "sellers": [
+        {
+          "subSellerId": "1",
+          "fulfillmentEndpoint": "https://apps.producteca.com/woker/api/vtex/250225",
+          "id": "SELLER-EXAMPLE-W",
+          "name": "Woker Ejemplo",
+          "logo": ""
+        }
+      ],
+      "giftRegistryData": null,
+      "receiptData": null,
+      "contextData": null,
+      "marketPlaceOrderId": "",
+      "marketPlaceOrderGroup": null,
+      "marketplaceServicesEndpoint": null,
+      "orderFormId": "51ea232164f143ab9fae444c9d891946",
+      "sequence": "600337",
+      "affiliateId": "",
+      "status": "",
+      "callCenterOperator": "",
+      "userProfileId": "00000000-0000-4000-8000-000000000003",
+      "hostName": "w******",
+      "creationVersion": null,
+      "creationEnvironment": null,
+      "lastChangeVersion": null,
+      "workflowInstanceId": null,
+      "marketplacePaymentValue": null,
+      "orderId": "TEST-W2001-01",
+      "orderGroup": "TEST-W2001",
+      "state": "payment-approved",
+      "isCheckedIn": false,
+      "sellerOrderId": "TEST-W2001-SELLER",
+      "storeId": null,
+      "checkedInPickupPointId": null,
+      "value": 439800,
+      "totals": [
+        {
+          "id": "Items",
+          "name": "T*****************",
+          "value": 439800
+        },
+        {
+          "id": "Discounts",
+          "name": "T******************",
+          "value": 0
+        },
+        {
+          "id": "Shipping",
+          "name": "C********************",
+          "value": 0,
+          "alternativeTotals": [
+            {
+              "id": "AlternativeShippingTotal",
+              "name": "A*************************",
+              "value": 899900
+            },
+            {
+              "id": "AlternativeShippingDiscount",
+              "name": "A****************************",
+              "value": -899900
+            }
+          ]
+        },
+        {
+          "id": "Tax",
+          "name": "C*********************",
+          "value": 0
+        }
+      ],
+      "ratesAndBenefitsData": {
+        "rateAndBenefitsIdentifiers": [
+          {
+            "id": "00000000-0000-4000-8000-000000000602",
+            "name": "Envío gratis por compras sobre $100.000",
+            "featured": true,
+            "description": "Promoción de envío sin costo",
+            "matchedParameters": {},
+            "additionalInfo": null
+          }
+        ],
+        "teaser": []
+      },
+      "clientPreferencesData": {
+        "locale": "es-AR",
+        "optinNewsLetter": false
+      },
+      "commercialConditionData": null,
+      "marketingData": {
+        "utmSource": null,
+        "utmMedium": null,
+        "utmCampaign": null,
+        "utmipage": null,
+        "utmiPart": null,
+        "utmiCampaign": null,
+        "coupon": null,
+        "marketingTags": []
+      },
+      "storePreferencesData": {
+        "countryCode": "ARG",
+        "saveUserData": false,
+        "timeZone": "Argentina Standard Time",
+        "currencyCode": "ARS",
+        "currencyLocale": 11274,
+        "currencySymbol": "$",
+        "currencyFormatInfo": {
+          "currencyDecimalDigits": 2,
+          "currencyDecimalSeparator": ",",
+          "currencyGroupSeparator": ".",
+          "currencyGroupSize": 3,
+          "startsWithCurrencySymbol": true
+        }
+      },
+      "openTextField": null,
+      "itemMetadata": null,
+      "taxData": null,
+      "hooksData": null,
+      "changeData": null,
+      "subscriptionData": null,
+      "salesChannel": "1",
+      "followUpEmail": "seguimiento-w2@example.invalid",
+      "creationDate": "2026-04-15T15:19:49.6736633Z",
+      "lastChange": "2026-04-15T15:19:57.2106866Z",
+      "timeZoneCreationDate": "2026-04-15T12:19:49.6736633",
+      "timeZoneLastChange": "2026-04-15T12:19:57.2106866",
+      "isCompleted": true,
+      "merchantName": "W******",
+      "userType": "",
+      "roundingError": 0,
+      "allowEdition": false,
+      "allowCancellation": false,
+      "isUserDataVisible": false,
+      "allowChangeSeller": false
+    }
+  ],
+  "ordersUrl": "https://tienda-ejemplo.example.invalid/account#/orders",
+  "orderGroup": "TEST-W2001",
+  "subjectItemAttachment": {
+    "item": "Zapatillas adidas St...",
+    "totalItems": 2,
+    "extraItems": 1
+  },
+  "split": true,
+  "totalValue": 439800,
+  "callCenterOperatorData": null,
+  "_accountInfo": {
+    "MainAccountName": "w****",
+    "AccountName": "w******",
+    "Cnpj": "30709964360",
+    "Id": "56343e21-8075-4492-bfbd-15d4da315b0e",
+    "AppId": "e90c276b-eb93-466f-80dd-826091ba2899",
+    "IsActive": true,
+    "IsOperating": true,
+    "CreationDate": "2017-09-13T04:00:20",
+    "OperationDate": "2018-09-05T13:43:19",
+    "CompanyName": "B*************",
+    "TradingName": "W****",
+    "City": "San Miguel de Tucuman",
+    "Complement": null,
+    "Country": "Argentina",
+    "State": null,
+    "Address": "Avenida Siria 2345",
+    "District": null,
+    "Number": null,
+    "PostalCode": "4000",
+    "Licenses": [28],
+    "ParentAccountId": null,
+    "ParentAccountName": null,
+    "InactivationDate": null,
+    "Platform": "vtex",
+    "Privacy": null,
+    "HasPiiRestriction": false,
+    "Infra": null,
+    "Sponsor": "3f29e577-433f-42b8-9ded-d2ede67d8ab3"
+  }
+}
