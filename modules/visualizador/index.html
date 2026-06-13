@@ -23,6 +23,7 @@
       .ct-vis-page .ct-preview-frame-wrap {
         align-items: flex-start;
         overflow: hidden;
+        position: relative;
       }
 
       .ct-vis-field-note {
@@ -104,10 +105,34 @@
 
       .ct-preview-frames { display: flex; gap: 12px; }
       .ct-preview-frame-col { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; }
+
+      .ct-frame-spinner {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--ct-bg);
+        z-index: 10;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity .15s;
+      }
+      .ct-frame-spinner.visible { opacity: 1; pointer-events: auto; }
+      .ct-frame-spinner::after {
+        content: '';
+        width: 28px;
+        height: 28px;
+        border: 3px solid var(--ct-line);
+        border-top-color: var(--ct-accent);
+        border-radius: 50%;
+        animation: ct-spin .7s linear infinite;
+      }
+      @keyframes ct-spin { to { transform: rotate(360deg); } }
       .ct-compare-col { display: none; }
       .ct-preview-pane.ct-compare-mode .ct-compare-col { display: flex; }
       .ct-frame-label {
-        display: none;
+        display: block;
         padding: 0 0 6px 0;
         font-size: 12px;
         font-weight: 500;
@@ -116,7 +141,6 @@
         overflow: hidden;
         text-overflow: ellipsis;
       }
-      .ct-preview-pane.ct-compare-mode .ct-frame-label { display: block; }
       .ct-frame-label select { width: 100%; font-size: 12px; }
 
       .ct-vis-scenario-note {
@@ -219,6 +243,9 @@
               <button class="ct-btn" id="ct-vis-copy-html" type="button">Copiar HTML</button>
             </div>
           </div>
+          <div style="padding-top:4px;">
+            <button type="button" class="ct-btn" id="ct-vis-clear-filters" style="width:100%;">Limpiar filtros</button>
+          </div>
           <p class="ct-preview-status" id="ct-vis-status"></p>
         </aside>
 
@@ -234,6 +261,7 @@
             <div class="ct-preview-frame-col">
               <div class="ct-frame-label" id="ct-frame-label-a"></div>
               <div class="ct-preview-frame-wrap">
+                <div class="ct-frame-spinner" id="ct-vis-spinner"></div>
                 <iframe
                   id="ct-vis-frame"
                   class="ct-preview-frame"
@@ -752,7 +780,9 @@
           const scenario = currentScenario();
           if (!template) return;
 
+          const spinner = document.getElementById('ct-vis-spinner');
           updateInfo(template);
+          updateFrameLabelA();
           if (!scenario) {
             frame.srcdoc = '';
             setStatus('No hay un escenario compatible para esta plantilla.', true);
@@ -761,6 +791,7 @@
 
           setStatus('Renderizando…');
           frame.srcdoc = '';
+          if (spinner) spinner.classList.add('visible');
 
           try {
             const [rawHtml, jsonText] = await Promise.all([
@@ -780,9 +811,11 @@
             } else {
               CT.renderEmailToFrame(frame, html, data);
             }
+            if (spinner) spinner.classList.remove('visible');
             setStatus(`Renderizado con escenario compatible: ${scenario.label}`);
           } catch (error) {
             if (gen !== renderGeneration) return;
+            if (spinner) spinner.classList.remove('visible');
             setStatus('No se pudo renderizar la previsualización: ' + error.message, true);
           }
         }
@@ -868,9 +901,20 @@
         });
 
         exampleSelect.addEventListener('change', () => {
-          if (isCompareMode) updateFrameLabelA();
+          updateFrameLabelA();
           syncUrl();
           renderPreview();
+        });
+
+        document.getElementById('ct-vis-clear-filters').addEventListener('click', () => {
+          platformSelect.value = '';
+          channelSelect.value = '';
+          storeSelect.value = '';
+          logisticaSelect.value = '';
+          refreshChannelOptions();
+          refreshStoreOptions();
+          refreshLogisticaOptions();
+          doFilterChange();
         });
 
         exampleBSelect.addEventListener('change', renderPreviewB);
