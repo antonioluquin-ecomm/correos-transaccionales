@@ -29,13 +29,13 @@
         display: block;
         min-height: 18px;
         margin-top: 5px;
-        color: #64748b;
+        color: var(--ct-muted);
         font-size: 12px;
         line-height: 17px;
       }
-      .ct-vis-field-note.ct-coverage-empty { color: #ef4444; font-weight: 600; }
-      .ct-vis-field-note.ct-coverage-low   { color: #d97706; font-weight: 500; }
-      .ct-vis-field-note.ct-coverage-ok    { color: #16a34a; }
+      .ct-vis-field-note.ct-coverage-empty { color: var(--ct-danger); font-weight: 600; }
+      .ct-vis-field-note.ct-coverage-low   { color: var(--ct-warning); font-weight: 500; }
+      .ct-vis-field-note.ct-coverage-ok    { color: var(--ct-success); }
 
       #ct-vis-template-search {
         width: 100%;
@@ -63,7 +63,7 @@
         border: 1px solid var(--ct-card-border);
         border-radius: 8px;
         overflow: hidden;
-        background: #ffffff;
+        background: var(--ct-card);
         box-shadow: 0 1px 3px rgba(15,23,42,.07);
       }
       .ct-vis-expand-btn {
@@ -123,7 +123,7 @@
         margin-top: 10px;
         padding-top: 10px;
         border-top: 1px solid var(--ct-card-border);
-        color: #526174;
+        color: var(--ct-muted);
         font-size: 12px;
         line-height: 18px;
       }
@@ -454,8 +454,10 @@
           if (platformSelect.value) params.set('platform', platformSelect.value);
           if (channelSelect.value) params.set('channel', channelSelect.value);
           if (storeSelect.value) params.set('store', storeSelect.value);
+          if (logisticaSelect.value) params.set('logistica', logisticaSelect.value);
           if (templateSelect.value) params.set('template', templateSelect.value);
           if (exampleSelect.value) params.set('example', exampleSelect.value);
+          if (activeDevice !== 'desktop') params.set('device', activeDevice);
           const qs = params.toString();
           history.replaceState(null, '', qs ? `?${qs}` : window.location.pathname);
         }
@@ -575,7 +577,7 @@
           textarea.select();
           const copied = document.execCommand('copy');
           document.body.removeChild(textarea);
-          if (!copied) throw new Error('El navegador no permitiÃ³ copiar al portapapeles.');
+          if (!copied) throw new Error('El navegador no permitió copiar al portapapeles.');
         }
 
         function applyDevice(device) {
