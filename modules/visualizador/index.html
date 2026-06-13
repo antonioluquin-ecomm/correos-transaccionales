@@ -141,7 +141,8 @@
         overflow: hidden;
         text-overflow: ellipsis;
       }
-      .ct-frame-label select { width: 100%; font-size: 12px; }
+      .ct-frame-label select { font-size: 12px; flex: 1; min-width: 0; }
+      .ct-frame-col-tag { font-weight: 700; color: var(--ct-accent); margin-right: 2px; }
 
       .ct-vis-scenario-note {
         margin-top: 10px;
@@ -259,7 +260,7 @@
           </div>
           <div class="ct-preview-frames">
             <div class="ct-preview-frame-col">
-              <div class="ct-frame-label" id="ct-frame-label-a"></div>
+              <div class="ct-frame-label" id="ct-frame-label-a"><span class="ct-frame-col-tag">Escenario A:</span> <span id="ct-frame-label-a-text"></span></div>
               <div class="ct-preview-frame-wrap">
                 <div class="ct-frame-spinner" id="ct-vis-spinner"></div>
                 <iframe
@@ -272,9 +273,7 @@
               </div>
             </div>
             <div class="ct-preview-frame-col ct-compare-col">
-              <div class="ct-frame-label">
-                <select id="ct-vis-example-b" aria-label="Escenario B para comparar"></select>
-              </div>
+              <div class="ct-frame-label"><span class="ct-frame-col-tag">Escenario B:</span> <select id="ct-vis-example-b" aria-label="Escenario B para comparar"></select></div>
               <div class="ct-preview-frame-wrap">
                 <iframe
                   id="ct-vis-frame-b"
@@ -501,7 +500,7 @@
             const countTag = count === 0 ? '–' : String(count);
             const option = document.createElement('option');
             option.value = template.id;
-            option.textContent = `${template.plataforma} · ${CT.labelsFor(CT.templateChannels(template), CT.channelLabel)} · ${CT.labelsFor(CT.templateStores(template), CT.storeLabel)} · ${template.nombre} (${countTag})`;
+            option.textContent = `${template.plataforma} · ${template.nombre} (${countTag})`;
             templateSelect.appendChild(option);
           });
           const selected = options.find((template) => template.id === preferredId) || options[0];
@@ -746,7 +745,8 @@
 
         function updateFrameLabelA() {
           const scenario = currentScenario();
-          frameLabelA.textContent = scenario ? scenario.label : '';
+          const textEl = document.getElementById('ct-frame-label-a-text');
+          if (textEl) textEl.textContent = scenario ? scenario.label : '—';
         }
 
         async function renderPreviewB() {
