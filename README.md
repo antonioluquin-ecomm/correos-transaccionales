@@ -16,10 +16,9 @@ Un único lugar donde el equipo puede ver:
 
 Sitio estático (HTML + CSS + JS, sin backend) pensado para GitHub Pages. Se navega desde [`index.html`](index.html) hacia los módulos:
 
-- `modules/catalogo/` — Biblioteca de Plantillas: listado, filtros, búsqueda y ficha por plantilla (descarga de HTML, variables).
-- `modules/visualizador/` — Visualizador de Plantillas: preview de cada plantilla en distintos escenarios.
-- `modules/flujo/` — Flujo de Correos: mapa del recorrido de comunicaciones al cliente.
-- `modules/simulador/` — Simulador QA: herramienta interna para probar variantes sobre un pedido base.
+- `modules/catalogo/` — **Biblioteca de Plantillas**: listado con filtros (plataforma, canal, tienda, logística, estado), búsqueda, KPIs reactivos, ficha con previsualización por dispositivo, descarga de HTML y exportación CSV.
+- `modules/visualizador/` — **Visualizador de Plantillas**: preview de cada plantilla con escenarios de datos reales. Filtros por canal/tienda/logística/faceta, compare mode (dos escenarios lado a lado), switch de dispositivo y overlay de variables. Escenarios enriquecidos incluyen 2 productos (uno con descuento), envío gratis y despacho desde 2 depósitos.
+- `modules/flujo/` — **Flujo de Correos**: mapa del recorrido de comunicaciones por plataforma y flujo. Incluye vista backlog (qué falta por flujo con filtros), porcentaje de cobertura por tab y exportación CSV de faltantes.
 
 Para sumar una plantilla nueva, usar [`docs/crear-nueva-plantilla.md`](docs/crear-nueva-plantilla.md). El insumo clave es un JSON real o representativo del evento: puede estar sanitizado, pero debe conservar la estructura de datos original para validar que el HTML sea funcional.
 
@@ -42,19 +41,20 @@ No hay build ni dependencias instalables, pero los módulos de preview usan `fet
 node .tmp-static-server.js
 ```
 
-Después abrir `http://127.0.0.1:8723/index.html`. Antes de publicar, hacer un smoke visual: carga de cada módulo, filtros y ficha del catálogo, render del Visualizador y, si aplica, prueba del Simulador QA con sus distintos escenarios. La consola debe quedar sin errores.
+Después abrir `http://127.0.0.1:8723/index.html`. Antes de publicar, hacer un smoke visual: carga de cada módulo, filtros y ficha del catálogo, render del Visualizador con los escenarios enriquecidos (2 productos / descuento / multipaquete), y navegación entre tabs del Flujo. La consola debe quedar sin errores.
 
 ## Estado
 
-MVP operativo con auditoría de calidad aplicada (v0.9.0).
+Plataforma operativa con auditoría de calidad completa (v1.21.0).
 
 | Módulo | Estado |
 |---|---|
-| Biblioteca de Plantillas | Operativo — filtros, búsqueda, ficha con variables y descarga de HTML |
-| Visualizador de Plantillas | Operativo — render con Handlebars, iframe ajusta altura al contenido real |
-| Flujo de Correos | Operativo — mapa con leyenda de estados y estadísticas de cobertura por flujo |
-| Simulador QA | Operativo — escenarios combinables, nota contextual en multipaquete |
+| Biblioteca de Plantillas | Operativo — filtros, KPIs reactivos, chips de filtros activos, badge "Reciente", previsualización por dispositivo, exportación CSV |
+| Visualizador de Plantillas | Operativo — render VTEX/PIM, compare mode, overlay de variables, spinner de carga, label de escenario, filtros con sincronización de URL |
+| Flujo de Correos | Operativo — stage-grid por plataforma, vista backlog con filtros y scope, porcentaje de cobertura por tab, exportación CSV de faltantes |
 
-**Cobertura actual:** 2 plantillas VTEX existentes (`pedido-confirmado`, `pago-aprobado`). El Flujo de Correos mapea el gap pendiente por flujo y plataforma.
+**Cobertura de plantillas:** 3 VTEX Sporting · 3 VTEX Woker · 1 B2B · 14 PIM compartidas (todas en v2). El Flujo de Correos mapea el gap por flujo y plataforma.
 
-**Calidad:** el proyecto pasó una auditoría técnica que corrigió semántica de estados CSS, accesibilidad de teclado, typos visibles al usuario, robustez ante fetches lentos y errores de parseo, e inconsistencias de documentación en `config.js`.
+**Escenarios de ejemplo:** 49 JSONs en `examples/`, incluyendo escenarios enriquecidos con 2 productos (uno con descuento), envío gratis vía `alternativeTotals` y despacho desde 2 depósitos distintos.
+
+**Calidad:** todos los módulos pasaron auditoría técnica. Sin colores hardcodeados funcionales, sin referencias rotas, funciones CT.* consistentes con sus exportaciones, y encoding UTF-8 verificado.

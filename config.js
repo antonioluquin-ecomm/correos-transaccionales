@@ -1333,12 +1333,16 @@ EXAMPLE_SCENARIOS.forEach((scenario) => {
 });
 
 const VERSION = {
-  number: '1.17.0',
-  date: '2026-06-11',
-  summary: 'Facetas de escenario (paquetes, promoción, envío, entrega) con filtros en el Visualizador.',
+  number: '1.21.0',
+  date: '2026-06-13',
+  summary: 'Auditoría completa de módulos (Flujo, Catálogo, Visualizador), reemplazo del Simulador QA por escenarios enriquecidos de 2 productos y correcciones críticas.',
 };
 
 const CHANGELOG = [
+  { version: '1.21.0', date: '2026-06-13', summary: 'Simulador QA eliminado. Escenarios enriquecidos con 2 productos/descuento/multipaquete/envío gratis para Sporting y Woker. Fix link roto en index.html y syncUrl en facetas del Visualizador.' },
+  { version: '1.20.0', date: '2026-06-13', summary: 'Visualizador: encoding UTF-8, regex NFD, CSS vars, syncUrl completo, limpiar filtros, spinner, label de escenario siempre visible, headers A/B en compare mode.' },
+  { version: '1.19.0', date: '2026-06-13', summary: 'Catálogo: CSS vars, KPIs reactivos, chips de filtros activos, badge Reciente, previsualización por dispositivo, exportación CSV con BOM.' },
+  { version: '1.18.0', date: '2026-06-13', summary: 'Flujo: vista backlog con filtros y scope, porcentaje de cobertura por tab, exportación CSV de faltantes, colapso de celdas vacías y mejoras de accesibilidad.' },
   { version: '1.17.0', date: '2026-06-11', summary: 'Facetas de escenario (paquetes, promoción, envío, entrega): etiquetado por escenario, filtros multi-grupo en el Visualizador y badges. Promoción pendiente de datos.' },
   { version: '1.16.0', date: '2026-06-11', summary: 'Modelo canal/tienda/logística: 4 canales (PV/B2C/B2B/EXT), Venta Deportiva como tienda B2B, Seller adidas/Producteca como EXT, y filtro de Logística en los módulos.' },
   { version: '1.15.0', date: '2026-06-11', summary: 'Plantilla PIM Sin stock PV, escenario Sporting representativo y flujo actualizado para Punto de Venta.' },

@@ -2,6 +2,41 @@
 
 Formato: versión, fecha, resumen del cambio principal.
 
+## v1.21.0 — 2026-06-13
+
+Reemplazo del Simulador QA por escenarios enriquecidos + correcciones críticas post-auditoría:
+
+- **Simulador QA eliminado**: `modules/simulador/index.html` borrado y quitado del topbar. Su valor (2 productos, multipaquete, descuento, envío gratis) se trasladó a JSONs estáticos más fáciles de mantener.
+- **Escenarios enriquecidos**: `examples/vtex/sporting/pedido-2-productos.sample.json` y `examples/vtex/woker/pedido-2-productos.sample.json`. Cada uno tiene 2 items (producto A con `listPrice > sellingPrice`, producto B sin descuento), `logisticsInfo[]` con 2 depósitos distintos, `alternativeTotals` de envío gratis y `ratesAndBenefitsData.featured: true`. Registrados en `EXAMPLE_SCENARIOS` con facetas `multideposito + con-promo + envio-gratis + domicilio`.
+- **Fix**: `index.html` — card/link roto al simulador eliminado; reemplazado por card del Visualizador.
+- **Fix**: `modules/visualizador/index.html` — cambios de faceta ahora llaman `syncUrl()` (antes la URL no reflejaba la faceta seleccionada al compartir o recargar).
+
+## v1.20.0 — 2026-06-13
+
+Auditoría y mejoras del módulo Visualizador de Plantillas (3 sprints):
+
+- **Sprint 1 — Calidad de código**: encoding UTF-8 corregido en `copyTextFallback` (`'permitiÃ³'` → `'permitió'`); regex NFD `normalizeSearch` corregida de chars literales a `[̀-ͯ]`; 6 colores hardcodeados → CSS vars (`--ct-muted`, `--ct-danger`, `--ct-warning`, `--ct-success`, `--ct-card`); `syncUrl()` suma parámetros `logistica` y `device` (antes se perdían al recargar).
+- **Sprint 2 — UX**: botón "Limpiar filtros" al pie del panel (resetea plataforma/canal/tienda/logística); spinner de carga animado sobre el iframe principal (aparece al iniciar render, desaparece al terminar o fallar); etiqueta del escenario activo siempre visible sobre el iframe (antes solo en compare mode).
+- **Sprint 3 — Claridad**: headers "Escenario A: / B:" sobre los iframes (tag en `--ct-accent`); opciones del select de plantilla reducidas a `Plataforma · Nombre (N)` — canal y tienda ya están en los filtros; `updateFrameLabelA()` se llama en todo `renderPreview()` (no solo en compare mode).
+
+## v1.19.0 — 2026-06-13
+
+Auditoría y mejoras del módulo Biblioteca de Plantillas (3 sprints):
+
+- **Sprint 1 — Base**: todos los colores hardcodeados → CSS vars; clase `.ct-kpi` renombrada a `.ct-kpi-card` (consistente con shared.css); toolbar con 7 columnas (suma columna de estado); selector de estado normaliza acentos en slugs CSS (`.ct-card-en-revision` sin tilde aunque el valor sea `'en revisión'`); estado vacío `.ct-empty` con padding y centrado.
+- **Sprint 2 — Reactividad**: `isRecent(isoDate)` detecta plantillas con < 30 días y agrega badge "Reciente"; `updateKpis(filtered)` reactivo (KPIs muestran conteo del subset filtrado vs. total); `renderActiveFilters()` genera chips con botón "×" para quitar cada filtro individual; botón "Limpiar" en estado vacío llama a `clearFilters()`.
+- **Sprint 3 — Acciones**: `previewUrl(template, device)` con parámetro de dispositivo; 3 botones desktop/tablet/mobile en el panel de detalle para abrir el Visualizador con el device correcto; `lastFilteredSet` capturado en cada render; `exportCatalogo()` genera CSV con BOM UTF-8, 13 columnas, sufijo `-filtrado` cuando hay filtros activos.
+
+## v1.18.0 — 2026-06-13
+
+Auditoría y mejoras del módulo Flujo de Correos (5 sprints + cierre):
+
+- **Vista backlog**: nueva tab "Faltantes / Candidatos" que lista todos los nodos sin plantilla del flujo activo, con filtros de estado/prioridad/plataforma, scope toggle "Este flujo / Todos los flujos" y exportación CSV.
+- **Porcentaje de cobertura**: cada tab muestra `N%` junto al nombre del flujo, calculado como `existentes / (existentes + faltantes + candidatos)`.
+- **Filtros en backlog**: `applyFilter()` actualiza la vista backlog cuando está activa (no solo el grid); `renderBacklog()` respeta los filtros vigentes y el scope.
+- **Colapso de celdas vacías**: `.ct-flow-cell--all-filtered` colapsa celdas cuando todos sus nodos quedan ocultos por filtros.
+- **UX**: badge de texto en lugar de punto para el conteo de faltantes en cada tab; `detailClose.focus()` al abrir el panel de detalle (accesibilidad); label de exportación corregido; typos `confirmación` / `etapa común` corregidos.
+
 ## v1.17.0 — 2026-06-11
 
 Dimensión de **Escenarios** (facetas del pedido de ejemplo), separada de Canal/Tienda/Logística:
