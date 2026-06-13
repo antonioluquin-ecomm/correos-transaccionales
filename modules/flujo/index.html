@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Flujo de Correos — Correos Transaccionales</title>
     <link rel="stylesheet" href="../../assets/css/shared.css" />
+    <script src="../../assets/js/vendor/handlebars-4.7.8.min.js"></script>
     <style>
       /* Flujo usa todo el ancho disponible */
       .ct-flow-page {
@@ -262,7 +263,6 @@
         flex-direction: column;
         gap: 6px;
         background: var(--ct-card);
-        flex: 1;
       }
 
       .ct-flow-cell:last-child {
@@ -283,7 +283,6 @@
         writing-mode: vertical-rl;
         transform: rotate(180deg);
         border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-        flex: 1;
       }
 
       .ct-flow-lane-row:last-child {
@@ -726,6 +725,77 @@
       .ct-badge.ct-priority-media   { background: #d97706; }
       .ct-badge.ct-priority-baja    { background: #64748b; }
 
+      /* ═══ EMBEDDED PREVIEW ══════════════════════════════════════ */
+      .ct-flow-preview-section {
+        margin: 14px 0 16px;
+        border: 1px solid var(--ct-line);
+        border-radius: var(--ct-radius-sm);
+        overflow: hidden;
+        background: #fff;
+      }
+
+      .ct-flow-preview-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 8px 10px;
+        background: var(--ct-bg);
+        border-bottom: 1px solid var(--ct-line);
+      }
+
+      .ct-flow-preview-label {
+        font: 700 10px/1 var(--ct-font);
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        color: var(--ct-muted);
+      }
+
+      .ct-flow-preview-wrap {
+        position: relative;
+        height: 300px;
+        overflow: hidden;
+        background: #fff;
+      }
+
+      .ct-flow-preview-frame {
+        width: 600px;
+        height: 900px;
+        border: none;
+        transform: scale(0.612);
+        transform-origin: top left;
+        display: block;
+        pointer-events: none;
+      }
+
+      .ct-flow-preview-spinner {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        color: var(--ct-muted);
+        background: var(--ct-bg);
+        z-index: 1;
+      }
+
+      .ct-flow-preview-open {
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--ct-accent);
+        text-decoration: none;
+        padding: 4px 9px;
+        border: 1px solid var(--ct-accent);
+        border-radius: 99px;
+        transition: background 0.13s, color 0.13s;
+        white-space: nowrap;
+      }
+
+      .ct-flow-preview-open:hover {
+        background: var(--ct-accent);
+        color: #fff;
+      }
+
       .ct-flow-detail-note {
         color: var(--ct-muted);
         font-size: 13px;
@@ -974,6 +1044,16 @@
             <h2 id="ct-flow-detail-title"></h2>
           </div>
           <button class="ct-flow-close" id="ct-flow-detail-close" type="button" aria-label="Cerrar detalle">&times;</button>
+        </div>
+        <div class="ct-flow-preview-section" id="ct-flow-preview-section" style="display:none">
+          <div class="ct-flow-preview-header">
+            <span class="ct-flow-preview-label">Vista previa</span>
+            <a id="ct-flow-preview-open" class="ct-flow-preview-open" href="#" target="_blank" rel="noopener">Abrir en grande →</a>
+          </div>
+          <div class="ct-flow-preview-wrap">
+            <div id="ct-flow-preview-spinner" class="ct-flow-preview-spinner">Cargando vista previa…</div>
+            <iframe id="ct-flow-preview-frame" class="ct-flow-preview-frame" sandbox="allow-same-origin" scrolling="no" title="Vista previa del correo"></iframe>
+          </div>
         </div>
         <p class="ct-flow-detail-note" id="ct-flow-detail-note"></p>
         <dl>
@@ -1263,6 +1343,10 @@
         const detailTrigger = document.getElementById('ct-flow-detail-trigger');
         const detailTemplate = document.getElementById('ct-flow-detail-template');
         const detailActions = document.getElementById('ct-flow-detail-actions');
+        const previewSection = document.getElementById('ct-flow-preview-section');
+        const previewFrame = document.getElementById('ct-flow-preview-frame');
+        const previewSpinner = document.getElementById('ct-flow-preview-spinner');
+        const previewOpen = document.getElementById('ct-flow-preview-open');
         const backdrop = document.getElementById('ct-flow-backdrop');
         const kpiExisting = document.getElementById('ct-flow-kpi-existing');
         const kpiMissing = document.getElementById('ct-flow-kpi-missing');
@@ -1479,6 +1563,7 @@
           });
 
           applyFilter();
+          requestAnimationFrame(syncRowHeights);
         }
 
         function applyFilter() {
@@ -1581,18 +1666,41 @@
           detailTrigger.textContent = node.trigger || 'Por definir.';
           detailTemplate.textContent = template ? template.nombre : 'Sin plantilla creada';
 
-          if (template) {
+          if (template && template.archivoHtml) {
+            previewSection.style.display = '';
+            previewSpinner.style.display = 'flex';
+            previewSpinner.textContent = 'Cargando vista previa…';
+            previewFrame.srcdoc = '';
+            previewOpen.href = CT.escapeHtml(nodeActionUrl(node, 'desktop'));
+            const BASE = '../../';
+            Promise.all([
+              CT.fetchText(BASE + template.archivoHtml),
+              template.ejemplo ? CT.fetchText(BASE + template.ejemplo) : Promise.resolve('{}'),
+            ]).then(([html, jsonText]) => {
+              const data = JSON.parse(jsonText || '{}');
+              if (template.plataforma === 'PIM') {
+                CT.renderPimEmailToFrame(previewFrame, html, data);
+              } else {
+                CT.renderEmailToFrame(previewFrame, html, data);
+              }
+              previewSpinner.style.display = 'none';
+            }).catch(() => {
+              previewSpinner.textContent = 'No se pudo cargar la vista previa.';
+            });
             detailActions.innerHTML = `
               <div class="ct-flow-device-actions">
-                <a class="ct-btn ct-btn-primary" href="${CT.escapeHtml(nodeActionUrl(node, 'desktop'))}">Desktop</a>
+                <a class="ct-btn" href="${CT.escapeHtml(nodeActionUrl(node, 'desktop'))}">Desktop</a>
                 <a class="ct-btn" href="${CT.escapeHtml(nodeActionUrl(node, 'tablet'))}">Tablet</a>
                 <a class="ct-btn" href="${CT.escapeHtml(nodeActionUrl(node, 'mobile'))}">Mobile</a>
               </div>
             `;
-          } else if (status === 'referencial') {
-            detailActions.innerHTML = '<p class="ct-flow-detail-note">Referencia documental: plantilla externa no gestionada por este repositorio.</p>';
           } else {
-            detailActions.innerHTML = '<p class="ct-flow-detail-note">Sin plantilla creada. Para iniciarla, agregala al catálogo en <code>config.js</code> y creá el archivo en <code>templates/</code>.</p>';
+            previewSection.style.display = 'none';
+            if (status === 'referencial') {
+              detailActions.innerHTML = '<p class="ct-flow-detail-note">Referencia documental: plantilla externa no gestionada por este repositorio.</p>';
+            } else {
+              detailActions.innerHTML = '<p class="ct-flow-detail-note">Sin plantilla creada. Para iniciarla, agregala al catálogo en <code>config.js</code> y creá el archivo en <code>templates/</code>.</p>';
+            }
           }
 
           detailOverlay.classList.add('open');
@@ -1789,8 +1897,31 @@
           renderBacklog();
         });
 
+        function syncRowHeights() {
+          LANES.forEach((lane, i) => {
+            const rowEls = [];
+            const laneRow = document.querySelector(`.ct-flow-col--lanes .ct-flow-lane-row:nth-child(${i + 2})`);
+            if (laneRow) { laneRow.style.height = ''; rowEls.push(laneRow); }
+            document.querySelectorAll(`.ct-flow-col > .ct-flow-cell:nth-child(${i + 2})`).forEach(c => {
+              c.style.height = '';
+              rowEls.push(c);
+            });
+            let maxH = 0;
+            rowEls.forEach(el => { maxH = Math.max(maxH, el.scrollHeight); });
+            const h = Math.max(maxH, 80) + 'px';
+            rowEls.forEach(el => { el.style.height = h; });
+          });
+        }
+
+        let syncTimer = null;
+        window.addEventListener('resize', () => {
+          clearTimeout(syncTimer);
+          syncTimer = setTimeout(syncRowHeights, 120);
+        });
+
         renderFlow('general');
         updateTabPcts();
+        requestAnimationFrame(syncRowHeights);
       })();
     </script>
   </body>
