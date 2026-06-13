@@ -959,7 +959,7 @@
         </div>
 
         <div class="ct-flow-note">
-          La prioridad alta agrupa comunicaciones con impacto directo en confirmacion, despacho, retiro o seguimiento. Andreani y OCASA se muestran como referencia externa: no son plantillas gestionadas por este repositorio.
+          La prioridad alta agrupa comunicaciones con impacto directo en confirmación, despacho, retiro o seguimiento. Andreani y OCASA se muestran como referencia externa: no son plantillas gestionadas por este repositorio.
         </div>
       </section>
     </main>
@@ -1032,7 +1032,7 @@
           general: {
             title: 'Flujo General de Correos',
             shortTitle: 'General',
-            description: 'Vista unificada por etapa comun. Mantiene carriles por plataforma emisora y marca operadores externos como referencia documental.',
+            description: 'Vista unificada por etapa común. Mantiene carriles por plataforma emisora y marca operadores externos como referencia documental.',
             stageLabels: GENERAL_STAGE_LABELS,
             nodes: [
               { id: 'access', lane: 'vtex', x: 20, text: 'Acceso a cuenta Sporting', templateId: 'access-key', priority: 'baja', trigger: 'Usuario solicita ingreso o recuperacion de acceso.', note: 'Variante VTEX para Sporting.' },
@@ -1531,6 +1531,8 @@
           const clearEl = document.getElementById('ct-filter-clear');
           if (hintEl)  { hintEl.style.display  = hasFilter ? '' : 'none'; hintEl.textContent = `${visible} de ${total}`; }
           if (clearEl) { clearEl.style.display = hasFilter ? '' : 'none'; }
+
+          if (activeView === 'backlog') renderBacklog();
         }
 
         function clearFilters() {
@@ -1596,6 +1598,7 @@
           detailOverlay.classList.add('open');
           backdrop.classList.add('open');
           document.querySelector('.ct-flow-page').classList.add('detail-open');
+          detailClose.focus();
         }
 
         document.getElementById('ct-filter-clear').addEventListener('click', clearFilters);
