@@ -113,13 +113,47 @@
       .ct-filter-chip {
         display: inline-flex;
         align-items: center;
-        gap: 6px;
-        padding: 5px 9px;
+        gap: 5px;
+        padding: 4px 8px 4px 10px;
         border-radius: 999px;
         background: #eef2ff;
         color: #1e3a8a;
         font-size: 12px;
         font-weight: 700;
+        border: none;
+        cursor: pointer;
+        transition: background 0.12s;
+        font-family: inherit;
+      }
+
+      .ct-filter-chip:hover {
+        background: #c7d2fe;
+      }
+
+      .ct-filter-chip-x {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: rgba(30, 58, 138, 0.15);
+        font-size: 11px;
+        line-height: 1;
+        flex-shrink: 0;
+      }
+
+      .ct-badge-reciente {
+        display: inline-block;
+        padding: 2px 6px;
+        border-radius: 4px;
+        background: #d1fae5;
+        color: #065f46;
+        font-size: 10px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        vertical-align: middle;
       }
 
       .ct-template-grid {
@@ -598,8 +632,9 @@
 
         <div id="ct-results" class="ct-template-grid"></div>
         <div id="ct-empty" class="ct-empty" hidden>
-          <p><strong>No se encontraron plantillas con esos filtros.</strong></p>
-          <p>Probá ajustar la búsqueda o limpiar los filtros.</p>
+          <p style="font-size:32px;margin:0 0 8px">🔍</p>
+          <p><strong>Sin resultados para estos filtros.</strong></p>
+          <p>Probá ajustar la búsqueda o <button type="button" id="ct-empty-clear" class="ct-btn" style="display:inline;padding:4px 10px;font-size:13px">limpiar los filtros</button>.</p>
         </div>
       </section>
     </main>
@@ -784,11 +819,24 @@
           return template.archivoHtml ? BASE + template.archivoHtml : '';
         }
 
-        function updateKpis() {
-          document.getElementById('ct-kpi-total').textContent = templates.length;
-          document.getElementById('ct-kpi-active').textContent = templates.filter((t) => t.estado === 'activo').length;
-          document.getElementById('ct-kpi-examples').textContent = templates.filter((t) => t.ejemplo).length;
-          document.getElementById('ct-kpi-platforms').textContent = CT.channelOptionsFor(templates, CT.templateChannels).length;
+        const RECENT_DAYS = 30;
+
+        function isRecent(isoDate) {
+          if (!isoDate) return false;
+          const d = new Date(`${isoDate}T00:00:00`);
+          if (Number.isNaN(d.getTime())) return false;
+          return (Date.now() - d.getTime()) < RECENT_DAYS * 24 * 60 * 60 * 1000;
+        }
+
+        function updateKpis(filtered) {
+          const set = filtered || templates;
+          const isFiltered = filtered && filtered.length !== templates.length;
+          document.getElementById('ct-kpi-total').textContent = isFiltered
+            ? `${filtered.length} / ${templates.length}`
+            : templates.length;
+          document.getElementById('ct-kpi-active').textContent = set.filter((t) => t.estado === 'activo').length;
+          document.getElementById('ct-kpi-examples').textContent = set.filter((t) => t.ejemplo).length;
+          document.getElementById('ct-kpi-platforms').textContent = CT.channelOptionsFor(set, CT.templateChannels).length;
         }
 
         function matchesFilters(template) {
@@ -819,17 +867,26 @@
 
         function renderActiveFilters() {
           const chips = [];
-          if (searchEl.value.trim()) chips.push(`Búsqueda: ${searchEl.value.trim()}`);
-          if (filterPlataformaEl.value) chips.push(`Plataforma: ${filterPlataformaEl.value}`);
-          if (filterCanalEl.value) chips.push(`Canal: ${CT.channelLabel(filterCanalEl.value)}`);
-          if (filterTiendaEl.value) chips.push(`Tienda: ${CT.storeLabel(filterTiendaEl.value)}`);
-          if (filterLogisticaEl.value) chips.push(`Logística: ${CT.logisticaLabel(filterLogisticaEl.value)}`);
-          if (filterCategoriaEl.value) chips.push(`Categoría: ${filterCategoriaEl.value}`);
-          if (filterEstadoEl.value) chips.push(`Estado: ${capitalizeFirst(filterEstadoEl.value)}`);
-          if (sortEl.value !== 'updated-desc') chips.push(`Orden: ${sortEl.selectedOptions[0]?.textContent || 'Personalizado'}`);
+          if (searchEl.value.trim()) chips.push({ label: `Búsqueda: ${searchEl.value.trim()}`, clear: () => { searchEl.value = ''; } });
+          if (filterPlataformaEl.value) chips.push({ label: `Plataforma: ${filterPlataformaEl.value}`, clear: () => { filterPlataformaEl.value = ''; } });
+          if (filterCanalEl.value) chips.push({ label: `Canal: ${CT.channelLabel(filterCanalEl.value)}`, clear: () => { filterCanalEl.value = ''; } });
+          if (filterTiendaEl.value) chips.push({ label: `Tienda: ${CT.storeLabel(filterTiendaEl.value)}`, clear: () => { filterTiendaEl.value = ''; } });
+          if (filterLogisticaEl.value) chips.push({ label: `Logística: ${CT.logisticaLabel(filterLogisticaEl.value)}`, clear: () => { filterLogisticaEl.value = ''; } });
+          if (filterCategoriaEl.value) chips.push({ label: `Categoría: ${filterCategoriaEl.value}`, clear: () => { filterCategoriaEl.value = ''; } });
+          if (filterEstadoEl.value) chips.push({ label: `Estado: ${capitalizeFirst(filterEstadoEl.value)}`, clear: () => { filterEstadoEl.value = ''; } });
+          if (sortEl.value !== 'updated-desc') chips.push({ label: `Orden: ${sortEl.selectedOptions[0]?.textContent || 'Personalizado'}`, clear: () => { sortEl.value = 'updated-desc'; } });
 
-          activeFiltersEl.innerHTML = chips.map((chip) => `<span class="ct-filter-chip">${CT.escapeHtml(chip)}</span>`).join('');
-          clearFiltersBtn.hidden = chips.length === 0 && sortEl.value === 'updated-desc';
+          activeFiltersEl.innerHTML = '';
+          chips.forEach(({ label, clear }) => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'ct-filter-chip';
+            btn.innerHTML = `${CT.escapeHtml(label)}<span class="ct-filter-chip-x" aria-hidden="true">×</span>`;
+            btn.setAttribute('aria-label', `Quitar filtro: ${label}`);
+            btn.addEventListener('click', () => { clear(); renderResults(); });
+            activeFiltersEl.appendChild(btn);
+          });
+          clearFiltersBtn.hidden = chips.length === 0;
         }
 
         function renderCard(template) {
@@ -845,6 +902,7 @@
                 ${CT.storeBadges(CT.templateStores(template))}
                 ${CT.logisticaBadges(CT.templateLogistics(template))}
                 ${CT.statusBadge(template.estado || 'sin estado')}
+                ${isRecent(template.actualizado) ? '<span class="ct-badge-reciente">Reciente</span>' : ''}
               </div>
               <code class="ct-template-id" title="${CT.escapeHtml(template.id || '')}">${CT.escapeHtml(template.id || '')}</code>
             </div>
@@ -887,6 +945,7 @@
           emptyEl.hidden = filtered.length > 0;
           resultsEl.hidden = filtered.length === 0;
           resultCountEl.textContent = `${filtered.length} de ${templates.length} plantilla${templates.length !== 1 ? 's' : ''}`;
+          updateKpis(filtered);
           renderActiveFilters();
         }
 
@@ -986,7 +1045,6 @@
         fillLogisticaSelect();
         fillSelect(filterCategoriaEl, uniqueValues('categoria'));
         fillSelect(filterEstadoEl, uniqueValues('estado'), capitalizeFirst);
-        updateKpis();
 
         [searchEl, filterPlataformaEl, filterCanalEl, filterTiendaEl, filterLogisticaEl, filterCategoriaEl, filterEstadoEl, sortEl].forEach((el) => {
           el.addEventListener('input', renderResults);
@@ -994,6 +1052,19 @@
         });
 
         clearFiltersBtn.addEventListener('click', () => {
+          searchEl.value = '';
+          filterPlataformaEl.value = '';
+          filterCanalEl.value = '';
+          filterTiendaEl.value = '';
+          filterLogisticaEl.value = '';
+          filterCategoriaEl.value = '';
+          filterEstadoEl.value = '';
+          sortEl.value = 'updated-desc';
+          renderResults();
+          searchEl.focus();
+        });
+
+        document.getElementById('ct-empty-clear').addEventListener('click', () => {
           searchEl.value = '';
           filterPlataformaEl.value = '';
           filterCanalEl.value = '';
