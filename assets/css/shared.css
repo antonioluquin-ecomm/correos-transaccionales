@@ -30,12 +30,12 @@
   --ct-status-faltante:  #f97316;
   --ct-status-deprecado: #64748b;
 
-  --ct-success:    #16a34a;
-  --ct-success-bg: #dcfce7;
-  --ct-warning:    #d97706;
-  --ct-warning-bg: #fef3c7;
-  --ct-danger:     #dc2626;
-  --ct-danger-bg:  #fee2e2;
+  --ct-success:    #0a7040;
+  --ct-success-bg: #ecfdf5;
+  --ct-warning:    #92400e;
+  --ct-warning-bg: #fffbeb;
+  --ct-danger:     #991b1b;
+  --ct-danger-bg:  #fef2f2;
   --ct-info:       #0369a1;
   --ct-info-bg:    #e0f2fe;
 
