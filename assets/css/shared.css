@@ -46,9 +46,9 @@
   --ct-shadow-lg: 0 12px 32px rgba(15,23,42,.14), 0 2px 6px rgba(15,23,42,.06);
 
   /* Radio */
-  --ct-radius:    12px;
+  --ct-radius:    14px;
   --ct-radius-sm: 8px;
-  --ct-radius-xs: 6px;
+  --ct-radius-xs: 4px;
 
   /* Tipografía */
   --ct-font:  'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -81,7 +81,7 @@ a { color: inherit; }
   gap: 16px;
   padding: 0 24px;
   min-height: 56px;
-  background: linear-gradient(135deg, var(--ct-navy-dark) 0%, var(--ct-navy) 100%);
+  background: linear-gradient(135deg, var(--ct-navy-dark) 0%, var(--ct-navy) 55%, #1e4d82 100%);
   color: #ffffff;
   box-shadow: 0 2px 8px rgba(15,23,42,.18);
 }
@@ -144,7 +144,7 @@ a { color: inherit; }
 }
 
 .ct-page h1 {
-  font-size: 26px;
+  font-size: 30px;
   font-weight: 700;
   letter-spacing: -.3px;
   margin: 0 0 6px 0;
