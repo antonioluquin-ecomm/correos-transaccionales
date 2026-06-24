@@ -1,7 +1,7 @@
 {
   "Proveedor": {
     "GetEmailHeaderURL": "https://www.sporting.com.ar",
-    "GetEmailHeaderImage": "https://ventadeportiva.vteximg.com.br/arquivos/logo-mail.png"
+    "GetEmailHeaderImage": "https://apichannels.luquinsa.com.ar/images/logo-sporting-header.jpg"
   },
   "Giftcard": {
     "Codigo": "SPGC-7F3K9-2XQ4",
