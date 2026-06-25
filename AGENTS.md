@@ -33,3 +33,19 @@ No hay build ni tests automatizados. Validacion minima por cambio:
 - revisar consola sin errores;
 - confirmar que la navegacion entre modulos sigue funcionando;
 - si se toco el catalogo o una plantilla: confirmar que el HTML renderiza y que la descarga funciona.
+
+---
+
+## Documentación estándar compartida
+
+La documentación estándar compartida se encuentra en `../project-standards/`:
+
+- [`../project-standards/ai_rules.md`](../project-standards/ai_rules.md) — reglas de colaboración con IA
+- [`../project-standards/style_guide.md`](../project-standards/style_guide.md) — colores, tipografía, componentes CSS, Git
+
+### Entorno de trabajo
+
+- El desarrollo se realiza desde `C:\Users\gluna\Documents\Repos`
+- No usar OneDrive/SharePoint como carpeta de desarrollo
+- GitHub es la fuente principal para versionado y colaboración
+- OneDrive/SharePoint queda reservado para documentación funcional: archivos compartidos, PDFs, presentaciones, actas e imágenes

@@ -1,6 +1,6 @@
 # Mails Transaccionales — Instrucciones para Claude Code y Codex
 
-> Las reglas generales y los docs maestros están en `../CLAUDE.md` (nivel Proyectos).
+> Las reglas generales y los docs maestros están en `../project-standards/` (`ai_rules.md`, `style_guide.md`).
 > Este archivo contiene solo lo específico de este proyecto.
 
 ---
@@ -80,3 +80,19 @@ No hay build ni tests automatizados. Verificar:
 | Nuevo módulo o feature visible | Minor (`1.21.0` → `1.22.0`) |
 | Fix, mejora UX, estilo | Patch (`1.21.0` → `1.21.1`) |
 | Solo docs, comentarios | Sin bump |
+
+---
+
+## Documentación estándar compartida
+
+La documentación estándar compartida se encuentra en `../project-standards/`:
+
+- [`../project-standards/ai_rules.md`](../project-standards/ai_rules.md) — reglas de colaboración con IA
+- [`../project-standards/style_guide.md`](../project-standards/style_guide.md) — colores, tipografía, componentes CSS, Git
+
+### Entorno de trabajo
+
+- El desarrollo se realiza desde `C:\Users\gluna\Documents\Repos`
+- No usar OneDrive/SharePoint como carpeta de desarrollo
+- GitHub es la fuente principal para versionado y colaboración
+- OneDrive/SharePoint queda reservado para documentación funcional: archivos compartidos, PDFs, presentaciones, actas e imágenes
