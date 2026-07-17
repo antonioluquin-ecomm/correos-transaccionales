@@ -67,8 +67,8 @@
                 <table role="presentation" width="100%" class="card">
                   <tr>
                     <td bgcolor="#ffffff" style="background:#ffffff;padding:20px 24px 16px;border-bottom:1px solid #eef2f7;">
-                      <a href="{{ .Tienda.Datos.NotificacionesConfig.HeaderURL }}" target="_blank" style="display:inline-block;text-decoration:none;">
-                        <img src="{{ .Tienda.Datos.NotificacionesConfig.HeaderImage }}" alt="{{ .Tienda.Nombre }}" width="150" class="header-logo" style="width:150px;height:auto;display:block;" />
+                      <a href="{{ if (eq .Tienda.Nombre "Cross Selling") }}https://www.sporting.com.ar{{ else }}{{ .Tienda.Datos.NotificacionesConfig.HeaderURL }}{{ end }}" target="_blank" style="display:inline-block;text-decoration:none;">
+                        <img src="{{ if (eq .Tienda.Nombre "Cross Selling") }}https://apichannels.luquinsa.com.ar/images/logo-sporting-header.jpg{{ else }}{{ .Tienda.Datos.NotificacionesConfig.HeaderImage }}{{ end }}" alt="{{ if (eq .Tienda.Nombre "Cross Selling") }}Sporting{{ else }}{{ .Tienda.Nombre }}{{ end }}" width="150" class="header-logo" style="width:150px;height:auto;display:block;" />
                       </a>
                     </td>
                   </tr>
@@ -204,7 +204,7 @@
                     <td style="padding:20px 24px;">
                       <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0 0 8px 0;">Si preferís una giftcard</p>
                       <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0 0 16px 0;">Contactanos por los canales de atención de {{ .Tienda.Nombre }} y te ayudamos a generar una giftcard para usar en nuestras tiendas online.</p>
-                      <a href="{{ .Tienda.Datos.NotificacionesConfig.HeaderURL }}/contacto" target="_blank" class="cta" style="display:block;width:100%;box-sizing:border-box;background:#0c4a6e;color:#ffffff;border-radius:8px;font-size:13px;line-height:52px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-align:center;text-decoration:none;">Contactar atención al cliente &nbsp;&#8594;</a>
+                      <a href="{{ if (eq .Tienda.Nombre "Cross Selling") }}https://www.sporting.com.ar{{ else }}{{ .Tienda.Datos.NotificacionesConfig.HeaderURL }}{{ end }}/contacto" target="_blank" class="cta" style="display:block;width:100%;box-sizing:border-box;background:#0c4a6e;color:#ffffff;border-radius:8px;font-size:13px;line-height:52px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-align:center;text-decoration:none;">Contactar atención al cliente &nbsp;&#8594;</a>
                     </td>
                   </tr>
                 </table>
@@ -253,16 +253,16 @@
                     <td style="padding:16px 0 14px;border-bottom:1px solid rgba(255,255,255,.08);">
                       <table role="presentation" width="100%"><tr>
                         <td valign="middle" align="center">
-                          <a href="{{ .Tienda.Datos.NotificacionesConfig.HeaderURL }}/contacto" target="_blank" style="font-size:11px;color:rgba(255,255,255,.45);text-decoration:none;font-weight:500;">Contacto</a>
+                          <a href="{{ if (eq .Tienda.Nombre "Cross Selling") }}https://www.sporting.com.ar{{ else }}{{ .Tienda.Datos.NotificacionesConfig.HeaderURL }}{{ end }}/contacto" target="_blank" style="font-size:11px;color:rgba(255,255,255,.45);text-decoration:none;font-weight:500;">Contacto</a>
                           &nbsp;&nbsp;
-                          <a href="{{ .Tienda.Datos.NotificacionesConfig.HeaderURL }}/politicas-de-cambio-y-devolucion" target="_blank" style="font-size:11px;color:rgba(255,255,255,.45);text-decoration:none;font-weight:500;">Cambios y devoluciones</a>
+                          <a href="{{ if (eq .Tienda.Nombre "Cross Selling") }}https://www.sporting.com.ar{{ else }}{{ .Tienda.Datos.NotificacionesConfig.HeaderURL }}{{ end }}/politicas-de-cambio-y-devolucion" target="_blank" style="font-size:11px;color:rgba(255,255,255,.45);text-decoration:none;font-weight:500;">Cambios y devoluciones</a>
                         </td>
                       </tr></table>
                     </td>
                   </tr>
                   <tr>
                     <td align="center" style="padding-top:14px;">
-                      <p style="font-size:10.5px;color:rgba(255,255,255,.25);text-align:center;margin:0;line-height:1.6;">&copy; {{ .Tienda.Nombre }} — Todos los derechos reservados</p>
+                      <p style="font-size:10.5px;color:rgba(255,255,255,.25);text-align:center;margin:0;line-height:1.6;">&copy; {{ if (eq .Tienda.Nombre "Cross Selling") }}Sporting{{ else }}{{ .Tienda.Nombre }}{{ end }} — Todos los derechos reservados</p>
                     </td>
                   </tr>
                 </table>
