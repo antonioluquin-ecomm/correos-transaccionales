@@ -15,6 +15,15 @@
       "Destinatario": {
         "Nombres": "Cliente"
       },
+      "Destino": {
+        "Postal": {
+          "Calle": "Calle Belgrano",
+          "Numero": "556",
+          "Localidad": "Mar del Plata",
+          "Pais": "Argentina",
+          "CodigoPostal": "B7600"
+        }
+      },
       "Etiqueta": {
         "NroSeguimiento": "90012345"
       }

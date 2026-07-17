@@ -15,6 +15,15 @@
       "Destinatario": {
         "Nombres": "Cliente"
       },
+      "Destino": {
+        "Postal": {
+          "Calle": "Calle Alberdi",
+          "Numero": "340",
+          "Localidad": "Neuquén",
+          "Pais": "Argentina",
+          "CodigoPostal": "Q8300"
+        }
+      },
       "Etiqueta": {
         "NroSeguimiento": ""
       }

@@ -15,6 +15,15 @@
       "Destinatario": {
         "Nombres": "Cliente"
       },
+      "Destino": {
+        "Postal": {
+          "Calle": "Calle Sarmiento",
+          "Numero": "1120",
+          "Localidad": "La Plata",
+          "Pais": "Argentina",
+          "CodigoPostal": "B1900"
+        }
+      },
       "Etiqueta": {
         "NroSeguimiento": ""
       }

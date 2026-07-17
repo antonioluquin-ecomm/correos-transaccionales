@@ -15,6 +15,15 @@
       "Destinatario": {
         "Nombres": "Cliente"
       },
+      "Destino": {
+        "Postal": {
+          "Calle": "Bv. Oroño",
+          "Numero": "2340",
+          "Localidad": "Rosario",
+          "Pais": "Argentina",
+          "CodigoPostal": "S2000"
+        }
+      },
       "Etiqueta": {
         "NroSeguimiento": "CA0001234567"
       }

@@ -15,6 +15,15 @@
       "Destinatario": {
         "Nombres": "Cliente"
       },
+      "Destino": {
+        "Postal": {
+          "Calle": "Calle 9 de Julio",
+          "Numero": "870",
+          "Localidad": "Mendoza",
+          "Pais": "Argentina",
+          "CodigoPostal": "M5500"
+        }
+      },
       "Etiqueta": {
         "NroSeguimiento": "4168200000006619133"
       }

@@ -15,6 +15,16 @@
       "Destinatario": {
         "Nombres": "Cliente"
       },
+      "Destino": {
+        "Postal": {
+          "Calle": "Av. Rivadavia",
+          "Numero": "4521",
+          "Localidad": "Ciudad Autónoma de Buenos Aires",
+          "Pais": "Argentina",
+          "CodigoPostal": "C1424",
+          "Referencia": "Piso 3, depto B"
+        }
+      },
       "Etiqueta": {
         "NroSeguimiento": "360001234567890"
       }

@@ -15,6 +15,15 @@
       "Destinatario": {
         "Nombres": "Cliente"
       },
+      "Destino": {
+        "Postal": {
+          "Calle": "Calle Colón",
+          "Numero": "780",
+          "Localidad": "Tucumán",
+          "Pais": "Argentina",
+          "CodigoPostal": "T4000"
+        }
+      },
       "Etiqueta": {
         "NroSeguimiento": "EC4FFA1597425"
       }
