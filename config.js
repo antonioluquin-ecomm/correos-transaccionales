@@ -1345,12 +1345,13 @@ EXAMPLE_SCENARIOS.forEach((scenario) => {
 });
 
 const VERSION = {
-  number: '1.23.1',
+  number: '1.23.2',
   date: '2026-07-17',
-  summary: 'Ajustes de plazos y políticas de cambio/devolución/garantía en base a auditoría contra Términos y Condiciones: reembolso unificado a 72hs hábiles de procesamiento y hasta 10 días hábiles de acreditación en débito, plazo de retiro de 30 días en retiro-disponible, opción de reembolso en recepcion-garantia y aclaración de cobertura de envío en giftcard-enviada.',
+  summary: 'giftcard-enviada aclara que el código de cambio se puede combinar con cupón de descuento y que su uso está sujeto a disponibilidad de stock (con opción de reembolso si no hay stock).',
 };
 
 const CHANGELOG = [
+  { version: '1.23.2', date: '2026-07-17', summary: 'giftcard-enviada: agrega aclaración de que el código funciona como medio de pago (combinable con cupón de descuento) y que su uso está sujeto a disponibilidad de stock, con opción de reembolso si el producto no está disponible.' },
   { version: '1.23.1', date: '2026-07-17', summary: 'Auditoría vs. Términos y Condiciones: recepcion-devolucion y recepcion-garantia usan el mismo plazo de reembolso (72hs hábiles de procesamiento, hasta 10 días hábiles de acreditación en débito); mismo plazo de débito unificado en pedido-cancelado y quiebre-stock; retiro-disponible informa el plazo de 30 días corridos para retirar; recepcion-garantia aclara la opción de pedir reembolso en vez de código de cambio; giftcard-enviada aclara que el código no garantiza cubrir el envío de la nueva compra; corrección de línea de "código de seguimiento" mal pegada en giftcard.current.html.' },
   { version: '1.23.0', date: '2026-07-17', summary: 'Visualizador: botón "Compartir" con Web Share API (fallback a copiar link) hacia un modo ?share=1 que oculta topbar/filtros/toolbar y deja solo el mail renderizado.' },
   { version: '1.22.0', date: '2026-07-17', summary: 'Visualizador: botón "Descargar PDF" que imprime el preview renderizado (con datos de ejemplo) vía window.print() del iframe, evitando el problema de CORS de las imágenes hotlinkeadas que bloquea la captura por canvas.' },
