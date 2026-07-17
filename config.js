@@ -1345,12 +1345,13 @@ EXAMPLE_SCENARIOS.forEach((scenario) => {
 });
 
 const VERSION = {
-  number: '1.23.5',
+  number: '1.23.6',
   date: '2026-07-17',
-  summary: 'etiqueta-devolucion: separa el aviso "Este correo es automático" en su propia card (mismo fix aplicado antes en recepcion-cambio/devolucion/garantia). Revisados los 12 templates PIM con este aviso; no quedan más casos.',
+  summary: 'quiebre-stock-pv: corrige el preheader ("No pudimos completar tu pedido... por falta de stock") que sobre-alcanzaba el mensaje, igual que el bug corregido antes en el cuerpo de quiebre-stock — contradecía al propio hero del mail, que es preciso sobre el alcance parcial. Auditoría cruzada completa contra Términos y Condiciones sin más hallazgos.',
 };
 
 const CHANGELOG = [
+  { version: '1.23.6', date: '2026-07-17', summary: 'quiebre-stock-pv: preheader corregido de "No pudimos completar tu pedido... por falta de stock" a "Hay artículos sin stock en tu pedido...", alineado con el hero del mismo mail. Auditoría final cruzada de todos los templates vs. Términos y Condiciones sin más inconsistencias detectadas.' },
   { version: '1.23.5', date: '2026-07-17', summary: 'etiqueta-devolucion: el aviso "Este correo es automático" pasa a su propia card con gap, igual que el resto de la familia PIM — quedaba pegado al final de la card "¿Cómo sigue?". Auditoría completa de los 12 templates PIM con este aviso: no quedan más casos con el problema.' },
   { version: '1.23.4', date: '2026-07-17', summary: 'quiebre-stock: reescribe el párrafo de intro ("Lamentamos informarte...") que sobre-alcanzaba el mensaje del hero (sonaba a pedido completo cancelado en vez de artículos puntuales) y no tenía saludo, a diferencia del resto de la familia PIM.' },
   { version: '1.23.3', date: '2026-07-17', summary: 'recepcion-cambio, recepcion-devolucion, recepcion-garantia: el aviso "Este correo es automático" pasa a su propia card con gap, igual que quiebre-stock/giftcard-enviada/retiro-disponible — antes quedaba amontonado dentro de "Información importante".' },
