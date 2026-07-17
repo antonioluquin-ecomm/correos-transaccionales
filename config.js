@@ -1345,12 +1345,13 @@ EXAMPLE_SCENARIOS.forEach((scenario) => {
 });
 
 const VERSION = {
-  number: '1.23.4',
+  number: '1.23.5',
   date: '2026-07-17',
-  summary: 'quiebre-stock: corrige el párrafo de intro que sonaba a que todo el pedido había fallado (contradecía al hero, que aclara que es solo por algunos artículos); agrega saludo y evita la redundancia con el hero.',
+  summary: 'etiqueta-devolucion: separa el aviso "Este correo es automático" en su propia card (mismo fix aplicado antes en recepcion-cambio/devolucion/garantia). Revisados los 12 templates PIM con este aviso; no quedan más casos.',
 };
 
 const CHANGELOG = [
+  { version: '1.23.5', date: '2026-07-17', summary: 'etiqueta-devolucion: el aviso "Este correo es automático" pasa a su propia card con gap, igual que el resto de la familia PIM — quedaba pegado al final de la card "¿Cómo sigue?". Auditoría completa de los 12 templates PIM con este aviso: no quedan más casos con el problema.' },
   { version: '1.23.4', date: '2026-07-17', summary: 'quiebre-stock: reescribe el párrafo de intro ("Lamentamos informarte...") que sobre-alcanzaba el mensaje del hero (sonaba a pedido completo cancelado en vez de artículos puntuales) y no tenía saludo, a diferencia del resto de la familia PIM.' },
   { version: '1.23.3', date: '2026-07-17', summary: 'recepcion-cambio, recepcion-devolucion, recepcion-garantia: el aviso "Este correo es automático" pasa a su propia card con gap, igual que quiebre-stock/giftcard-enviada/retiro-disponible — antes quedaba amontonado dentro de "Información importante".' },
   { version: '1.23.2', date: '2026-07-17', summary: 'giftcard-enviada: agrega aclaración de que el código funciona como medio de pago (combinable con cupón de descuento) y que su uso está sujeto a disponibilidad de stock, con opción de reembolso si el producto no está disponible.' },
