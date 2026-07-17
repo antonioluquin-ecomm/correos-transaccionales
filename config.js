@@ -1345,12 +1345,13 @@ EXAMPLE_SCENARIOS.forEach((scenario) => {
 });
 
 const VERSION = {
-  number: '1.21.2',
+  number: '1.22.0',
   date: '2026-07-17',
-  summary: 'Plantilla PIM Pedido despachado (nuevo envío) suma card de Datos de envío con la dirección del destinatario.',
+  summary: 'Visualizador suma "Descargar PDF" (impresión nativa del browser sobre el preview renderizado, sin dependencias nuevas).',
 };
 
 const CHANGELOG = [
+  { version: '1.22.0', date: '2026-07-17', summary: 'Visualizador: botón "Descargar PDF" que imprime el preview renderizado (con datos de ejemplo) vía window.print() del iframe, evitando el problema de CORS de las imágenes hotlinkeadas que bloquea la captura por canvas.' },
   { version: '1.21.2', date: '2026-07-17', summary: 'pim-envio-despachado: agregada card "Datos de envío" (dirección, localidad, CP, referencia) y datos postales en los 8 escenarios de ejemplo compatibles.' },
   { version: '1.21.1', date: '2026-07-17', summary: 'pim-pedido-confirmado-pv: agregada card "Datos de envío" (dirección, localidad, CP, referencia) y datos postales en los escenarios de ejemplo Sporting/Woker.' },
   { version: '1.21.0', date: '2026-06-13', summary: 'Simulador QA eliminado. Escenarios enriquecidos con 2 productos/descuento/multipaquete/envío gratis para Sporting y Woker. Fix link roto en index.html y syncUrl en facetas del Visualizador.' },

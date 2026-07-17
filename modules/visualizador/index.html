@@ -242,6 +242,7 @@
               <a class="ct-btn ct-btn-primary" id="ct-vis-open-html" target="_blank" rel="noopener">Abrir HTML</a>
               <button class="ct-btn" id="ct-vis-download-html" type="button">Descargar HTML</button>
               <button class="ct-btn" id="ct-vis-copy-html" type="button">Copiar HTML</button>
+              <button class="ct-btn" id="ct-vis-download-pdf" type="button">Descargar PDF</button>
             </div>
           </div>
           <div style="padding-top:4px;">
@@ -320,6 +321,7 @@
         const openHtmlBtn = document.getElementById('ct-vis-open-html');
         const downloadHtmlBtn = document.getElementById('ct-vis-download-html');
         const copyHtmlBtn = document.getElementById('ct-vis-copy-html');
+        const downloadPdfBtn = document.getElementById('ct-vis-download-pdf');
 
         const renderable = TEMPLATES.filter((t) => t.archivoHtml);
         const templateSearchEl = document.getElementById('ct-vis-template-search');
@@ -628,6 +630,7 @@
           openHtmlBtn.toggleAttribute('aria-disabled', !template.archivoHtml);
           downloadHtmlBtn.disabled = !template.archivoHtml;
           copyHtmlBtn.disabled = !template.archivoHtml;
+          downloadPdfBtn.disabled = !template.archivoHtml || !scenario;
           scenarioLabelEl.textContent = scenario ? `${scenario.tipo || 'Escenario'} · ${scenario.label}` : 'Sin escenario seleccionado';
           ejemploEl.textContent = scenario ? scenario.path : '';
           const facetMarkup = scenario ? CT.facetBadges(CT.scenarioFacets(scenario)) : '';
@@ -670,6 +673,37 @@
             copyHtmlBtn.disabled = false;
             copyHtmlBtn.textContent = originalText;
           }
+        }
+
+        function printCurrentPreview() {
+          const template = currentTemplate();
+          const scenario = currentScenario();
+          if (!template || !scenario) {
+            setStatus('No hay una previsualización renderizada para exportar a PDF.', true);
+            return;
+          }
+          const doc = frame.contentDocument;
+          const win = frame.contentWindow;
+          if (!doc || !win) {
+            setStatus('No se pudo acceder a la previsualización para imprimir.', true);
+            return;
+          }
+          let printStyle = doc.getElementById('__ct-print-style__');
+          if (!printStyle) {
+            printStyle = doc.createElement('style');
+            printStyle.id = '__ct-print-style__';
+            doc.head.appendChild(printStyle);
+          }
+          printStyle.textContent = `
+            @media print {
+              @page { margin: 12mm; }
+              html, body { background: #ffffff !important; }
+              .card { page-break-inside: avoid; }
+            }
+          `;
+          setStatus('Abriendo diálogo de impresión — elegí "Guardar como PDF" como destino.');
+          win.focus();
+          win.print();
         }
 
         let renderGeneration = 0;
@@ -921,6 +955,7 @@
         exampleBSelect.addEventListener('change', renderPreviewB);
         downloadHtmlBtn.addEventListener('click', downloadCurrentHtml);
         copyHtmlBtn.addEventListener('click', copyCurrentHtml);
+        downloadPdfBtn.addEventListener('click', printCurrentPreview);
 
         document.getElementById('ct-vis-device-switch').addEventListener('click', (event) => {
           const button = event.target.closest('button[data-device]');
