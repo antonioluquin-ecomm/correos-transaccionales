@@ -651,12 +651,12 @@ const TEMPLATES = [
 const EXAMPLE_SCENARIOS = [
   {
     id: 'pedido-estandar-domicilio',
-    facetas: ['un-paquete', 'domicilio'],
+    facetas: ['un-paquete', 'domicilio', 'con-promo'],
     logistica: ['andreani'],
     path: 'examples/vtex/sporting/pedido-estandar.sample.json',
     label: 'Pedido estándar - Andreani',
     tipo: 'Pedido',
-    descripcion: 'Pedido confirmado con varios productos, totales, dirección de entrega y pago registrado. Transportista: Andreani.',
+    descripcion: 'Pedido confirmado con varios productos, totales, dirección de entrega y pago registrado. Transportista: Andreani. Incluye envío bonificado (alternativeTotals) y una promoción activa.',
     compatibleTemplates: ['pedido-confirmado', 'pago-aprobado'],
   },
   {
@@ -718,16 +718,6 @@ const EXAMPLE_SCENARIOS = [
     tipo: 'Pedido',
     descripcion: 'Pedido confirmado simple para validar la rama base de compra realizada.',
     compatibleTemplates: ['pedido-confirmado', 'pago-aprobado'],
-  },
-  {
-    id: 'pago-aprobado-base',
-    facetas: ['un-paquete', 'domicilio'],
-    logistica: ['andreani'],
-    path: 'examples/vtex/sporting/pago-aprobado.sample.json',
-    label: 'Pago aprobado - pedido base',
-    tipo: 'Pedido',
-    descripcion: 'Pedido con pago aprobado, datos de medio de pago y logística de entrega.',
-    compatibleTemplates: ['pago-aprobado', 'pedido-confirmado'],
   },
   {
     id: 'pago-aprobado-woker',
@@ -1411,12 +1401,13 @@ EXAMPLE_SCENARIOS.forEach((scenario) => {
 });
 
 const VERSION = {
-  number: '1.26.2',
+  number: '1.26.3',
   date: '2026-07-17',
-  summary: 'Completa la cobertura de escenarios "Cross Selling" en las 6 plantillas PIM restantes del flujo de venta multidepósito (quiebre-stock-pv, envio-despachado, retiro-disponible, recepcion-cambio, recepcion-garantia, etiqueta-devolucion), validando el fallback a Sporting en cada una.',
+  summary: 'Auditoría de escenarios del Visualizador: pedido-estandar-domicilio suma la faceta "con-promo" que le faltaba (tenía promoción activa sin etiquetar), y se elimina pago-aprobado-base por ser duplicado exacto de pedido-realizado-exito — de 3 escenarios indistinguibles por faceta quedan 2 con diferencia real.',
 };
 
 const CHANGELOG = [
+  { version: '1.26.3', date: '2026-07-17', summary: 'pedido-estandar-domicilio suma la faceta "con-promo" (tenía ratesAndBenefitsData activo sin etiquetar); se elimina el escenario duplicado pago-aprobado-base (mismo contenido que pedido-realizado-exito) y su JSON. Auditoría completa de EXAMPLE_SCENARIOS: de 3 escenarios indistinguibles por faceta en pedido-confirmado/pago-aprobado quedan 2, cada uno con una diferencia real.' },
   { version: '1.26.2', date: '2026-07-17', summary: 'Escenarios "Cross Selling (dato real de PIM)" agregados a quiebre-stock-pv, envio-despachado, retiro-disponible, recepcion-cambio, recepcion-garantia y etiqueta-devolucion — completa la cobertura de las 7 plantillas del flujo de venta multidepósito con datos anonimizados.' },
   { version: '1.26.1', date: '2026-07-17', summary: 'pim-pedido-confirmado-pv: nuevo escenario de ejemplo "Cross Selling (dato real de PIM)" (examples/pim/shared/pedido-confirmado-pv-cross-selling.json) con datos anonimizados, para validar el fallback a Sporting sin depender del panel de overrides.' },
   { version: '1.26.0', date: '2026-07-17', summary: 'Visualizador: panel de overrides por escenario (CT.OVERRIDE_FIELDS en shared.js). Primer campo cargado: Tienda.Nombre para plantillas PIM (Sporting/Woker/Cross Selling), aplicado sobre el JSON en memoria antes de renderizar — extensible a más campos y plataformas.' },
