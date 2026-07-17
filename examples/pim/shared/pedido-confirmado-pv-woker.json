@@ -15,6 +15,15 @@
     "DatosEnvio": {
       "Destinatario": {
         "Nombres": "Cliente"
+      },
+      "Destino": {
+        "Postal": {
+          "Calle": "Calle San Martín",
+          "Numero": "1287",
+          "Localidad": "Córdoba",
+          "Pais": "Argentina",
+          "CodigoPostal": "X5000"
+        }
       }
     },
     "LineasPedido": [

@@ -242,6 +242,40 @@
 
             <tr><td class="gap">&nbsp;</td></tr>
 
+            <!-- DATOS DE ENVÍO -->
+            <tr>
+              <td>
+                <table role="presentation" width="100%" class="card">
+                  <tr>
+                    <td style="padding:18px 20px 12px;border-bottom:1px solid #f3f4f6;">
+                      <p class="h2" style="font-size:15px;line-height:22px;font-weight:bold;color:#111827;margin:0;">Datos de envío</p>
+                      <p class="text-sm" style="font-size:12px;line-height:18px;color:#6b7280;margin:4px 0 0;">Verificá que los datos sean correctos. Si necesitás un ajuste, contactanos cuanto antes.</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding:16px 20px;">
+                      <table role="presentation" width="100%">
+                        <tr>
+                          <td valign="top" width="28" style="width:28px;font-size:16px;line-height:22px;">&#128205;</td>
+                          <td valign="top" style="padding-left:8px;">
+                            <p class="text" style="font-size:14px;line-height:22px;color:#111827;font-weight:bold;margin:0 0 2px 0;">{{ .Pedido.DatosEnvio.Destinatario.Nombres }}</p>
+                            <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0;">{{ .Pedido.DatosEnvio.Destino.Postal.Calle }} {{ .Pedido.DatosEnvio.Destino.Postal.Numero }}</p>
+                            <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0;">{{ .Pedido.DatosEnvio.Destino.Postal.Localidad }}, {{ .Pedido.DatosEnvio.Destino.Postal.Pais }}</p>
+                            <p class="text" style="font-size:14px;line-height:22px;color:#374151;margin:0;">CP {{ .Pedido.DatosEnvio.Destino.Postal.CodigoPostal }}</p>
+                            {{ if .Pedido.DatosEnvio.Destino.Postal.Referencia }}
+                            <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:4px 0 0;">Referencia: {{ .Pedido.DatosEnvio.Destino.Postal.Referencia }}</p>
+                            {{ end }}
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="gap">&nbsp;</td></tr>
+
             <!-- FACTURA (adjunta — PIM no expone invoiceUrl, no hay botón de descarga) -->
             <tr>
               <td>
