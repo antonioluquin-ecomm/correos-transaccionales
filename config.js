@@ -1345,12 +1345,13 @@ EXAMPLE_SCENARIOS.forEach((scenario) => {
 });
 
 const VERSION = {
-  number: '1.25.0',
+  number: '1.26.0',
   date: '2026-07-17',
-  summary: 'Corrige el header, footer y (en pedido-confirmado-pv) el botón del Portal en las 7 plantillas PIM de venta multidepósito para pedidos que llegan con Tienda.Nombre = "Cross Selling" (dato real confirmado en PIM): antes mostraban logo roto, links inválidos y "© Cross Selling" en el footer; ahora todos caen a Sporting.',
+  summary: 'Visualizador: nuevo panel "Sobrescribir valores del escenario" para plantillas PIM — permite forzar campos como Tienda.Nombre (ej. "Cross Selling") sobre cualquier JSON de ejemplo existente, sin tener que crear un archivo nuevo por combinación.',
 };
 
 const CHANGELOG = [
+  { version: '1.26.0', date: '2026-07-17', summary: 'Visualizador: panel de overrides por escenario (CT.OVERRIDE_FIELDS en shared.js). Primer campo cargado: Tienda.Nombre para plantillas PIM (Sporting/Woker/Cross Selling), aplicado sobre el JSON en memoria antes de renderizar — extensible a más campos y plataformas.' },
   { version: '1.25.0', date: '2026-07-17', summary: 'pedido-confirmado-pv, quiebre-stock-pv, envio-despachado, retiro-disponible, recepcion-cambio, recepcion-garantia, etiqueta-devolucion: agregan fallback a Sporting (logo, links de footer, copyright, y botón de Portal donde aplica) cuando Tienda.Nombre es "Cross Selling" — el valor real que usa PIM para ventas multidepósito y que no tiene NotificacionesConfig propia.' },
   { version: '1.24.2', date: '2026-07-17', summary: 'pim-pedido-confirmado-pv: agrega Sportsman a la condición que muestra el botón del Portal de Gestión de Pedidos (mapea a la URL de Sporting, mismo sistema). Documentar acá cada marca nueva que se habilite para venta multidepósito.' },
   { version: '1.24.1', date: '2026-07-17', summary: 'Franja de sellos de confianza (CACE + Mercado Pago): fondo de #f4f4f4 a #ffffff con borde 1px #e5e7eb, en las 23 plantillas PIM y VTEX que la incluyen — los logos son .jpg con fondo blanco fijo (sin transparencia) y contra el gris se veía un recuadro.' },

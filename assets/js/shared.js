@@ -82,6 +82,38 @@ const CT = (() => {
     return acc;
   }, {});
 
+  // Campos del JSON de escenario que se pueden sobrescribir desde el Visualizador,
+  // por plataforma (slug de TEMPLATES[].plataforma). Sirve para probar valores que
+  // no existen como archivo de ejemplo — ej: Tienda.Nombre = "Cross Selling" en
+  // ventas multidepósito, sin tener que crear un JSON nuevo por combinación.
+  // Extensible: agregar más campos acá a medida que haga falta.
+  const OVERRIDE_FIELDS = {
+    pim: [
+      { path: 'Tienda.Nombre', label: 'Tienda.Nombre', options: ['Sporting', 'Woker', 'Cross Selling'] },
+    ],
+  };
+
+  function setPath(obj, path, value) {
+    const keys = path.split('.');
+    let cur = obj;
+    for (let i = 0; i < keys.length - 1; i++) {
+      const key = keys[i];
+      if (typeof cur[key] !== 'object' || cur[key] === null) cur[key] = {};
+      cur = cur[key];
+    }
+    cur[keys[keys.length - 1]] = value;
+  }
+
+  function applyOverrides(data, overrides) {
+    if (!overrides || !Object.keys(overrides).length) return data;
+    const clone = JSON.parse(JSON.stringify(data));
+    Object.keys(overrides).forEach((path) => {
+      const value = overrides[path];
+      if (value) setPath(clone, path, value);
+    });
+    return clone;
+  }
+
   function escapeHtml(value) {
     if (value === null || value === undefined) return '';
     return String(value)
@@ -676,6 +708,9 @@ const CT = (() => {
     CHANNEL_STORES,
     CHANNEL_LOGISTICA,
     FACET_GROUPS,
+    OVERRIDE_FIELDS,
+    setPath,
+    applyOverrides,
     platformBadge,
     statusBadge,
     channelBadge,
