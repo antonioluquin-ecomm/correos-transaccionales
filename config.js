@@ -1345,12 +1345,14 @@ EXAMPLE_SCENARIOS.forEach((scenario) => {
 });
 
 const VERSION = {
-  number: '1.23.2',
+  number: '1.23.4',
   date: '2026-07-17',
-  summary: 'giftcard-enviada aclara que el código de cambio se puede combinar con cupón de descuento y que su uso está sujeto a disponibilidad de stock (con opción de reembolso si no hay stock).',
+  summary: 'quiebre-stock: corrige el párrafo de intro que sonaba a que todo el pedido había fallado (contradecía al hero, que aclara que es solo por algunos artículos); agrega saludo y evita la redundancia con el hero.',
 };
 
 const CHANGELOG = [
+  { version: '1.23.4', date: '2026-07-17', summary: 'quiebre-stock: reescribe el párrafo de intro ("Lamentamos informarte...") que sobre-alcanzaba el mensaje del hero (sonaba a pedido completo cancelado en vez de artículos puntuales) y no tenía saludo, a diferencia del resto de la familia PIM.' },
+  { version: '1.23.3', date: '2026-07-17', summary: 'recepcion-cambio, recepcion-devolucion, recepcion-garantia: el aviso "Este correo es automático" pasa a su propia card con gap, igual que quiebre-stock/giftcard-enviada/retiro-disponible — antes quedaba amontonado dentro de "Información importante".' },
   { version: '1.23.2', date: '2026-07-17', summary: 'giftcard-enviada: agrega aclaración de que el código funciona como medio de pago (combinable con cupón de descuento) y que su uso está sujeto a disponibilidad de stock, con opción de reembolso si el producto no está disponible.' },
   { version: '1.23.1', date: '2026-07-17', summary: 'Auditoría vs. Términos y Condiciones: recepcion-devolucion y recepcion-garantia usan el mismo plazo de reembolso (72hs hábiles de procesamiento, hasta 10 días hábiles de acreditación en débito); mismo plazo de débito unificado en pedido-cancelado y quiebre-stock; retiro-disponible informa el plazo de 30 días corridos para retirar; recepcion-garantia aclara la opción de pedir reembolso en vez de código de cambio; giftcard-enviada aclara que el código no garantiza cubrir el envío de la nueva compra; corrección de línea de "código de seguimiento" mal pegada en giftcard.current.html.' },
   { version: '1.23.0', date: '2026-07-17', summary: 'Visualizador: botón "Compartir" con Web Share API (fallback a copiar link) hacia un modo ?share=1 que oculta topbar/filtros/toolbar y deja solo el mail renderizado.' },
