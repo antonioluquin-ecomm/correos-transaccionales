@@ -171,6 +171,28 @@
         margin-top: 8px;
       }
       .ct-vis-scenario-facets .ct-badge { margin: 0 4px 4px 0; }
+
+      /* Modo compartir (?share=1): solo el mail renderizado, sin chrome de la herramienta. */
+      body.ct-share-mode .ct-topbar,
+      body.ct-share-mode .ct-vis-page > h1,
+      body.ct-share-mode .ct-vis-page > p.ct-subtitle,
+      body.ct-share-mode .ct-preview-controls,
+      body.ct-share-mode .ct-preview-pane-bar,
+      body.ct-share-mode .ct-frame-label,
+      body.ct-share-mode .ct-compare-col {
+        display: none !important;
+      }
+      body.ct-share-mode .ct-vis-page {
+        max-width: none;
+        padding: 24px 12px;
+      }
+      body.ct-share-mode .ct-preview-tool {
+        display: block;
+      }
+      body.ct-share-mode .ct-preview-pane {
+        flex: none;
+        min-width: 0;
+      }
     </style>
   </head>
   <body>
@@ -243,6 +265,7 @@
               <button class="ct-btn" id="ct-vis-download-html" type="button">Descargar HTML</button>
               <button class="ct-btn" id="ct-vis-copy-html" type="button">Copiar HTML</button>
               <button class="ct-btn" id="ct-vis-download-pdf" type="button">Descargar PDF</button>
+              <button class="ct-btn" id="ct-vis-share" type="button">Compartir</button>
             </div>
           </div>
           <div style="padding-top:4px;">
@@ -322,6 +345,7 @@
         const downloadHtmlBtn = document.getElementById('ct-vis-download-html');
         const copyHtmlBtn = document.getElementById('ct-vis-copy-html');
         const downloadPdfBtn = document.getElementById('ct-vis-download-pdf');
+        const shareBtn = document.getElementById('ct-vis-share');
 
         const renderable = TEMPLATES.filter((t) => t.archivoHtml);
         const templateSearchEl = document.getElementById('ct-vis-template-search');
@@ -337,6 +361,7 @@
         const requestedExamplePath = urlParams.get('example');
         const requestedDevice = urlParams.get('device');
         let activeDevice = ['desktop', 'tablet', 'mobile'].includes(requestedDevice) ? requestedDevice : 'desktop';
+        if (urlParams.get('share') === '1') document.body.classList.add('ct-share-mode');
 
         function addOptions(selectEl, options) {
           options.forEach((item) => {
@@ -631,6 +656,7 @@
           downloadHtmlBtn.disabled = !template.archivoHtml;
           copyHtmlBtn.disabled = !template.archivoHtml;
           downloadPdfBtn.disabled = !template.archivoHtml || !scenario;
+          shareBtn.disabled = !template.archivoHtml || !scenario;
           scenarioLabelEl.textContent = scenario ? `${scenario.tipo || 'Escenario'} · ${scenario.label}` : 'Sin escenario seleccionado';
           ejemploEl.textContent = scenario ? scenario.path : '';
           const facetMarkup = scenario ? CT.facetBadges(CT.scenarioFacets(scenario)) : '';
@@ -704,6 +730,45 @@
           setStatus('Abriendo diálogo de impresión — elegí "Guardar como PDF" como destino.');
           win.focus();
           win.print();
+        }
+
+        async function shareCurrentPreview() {
+          const template = currentTemplate();
+          const scenario = currentScenario();
+          if (!template || !scenario) {
+            setStatus('No hay una previsualización renderizada para compartir.', true);
+            return;
+          }
+          const params = new URLSearchParams();
+          params.set('template', template.id);
+          params.set('example', scenario.path);
+          if (activeDevice !== 'desktop') params.set('device', activeDevice);
+          params.set('share', '1');
+          const shareUrl = new URL(window.location.href);
+          shareUrl.search = params.toString();
+          const shareTitle = `${template.nombre} — ${scenario.label}`;
+
+          if (navigator.share) {
+            try {
+              await navigator.share({ title: shareTitle, url: shareUrl.toString() });
+              return;
+            } catch (error) {
+              if (error && error.name === 'AbortError') return;
+            }
+          }
+
+          try {
+            window.focus();
+            await navigator.clipboard.writeText(shareUrl.toString());
+          } catch (clipboardError) {
+            try {
+              copyTextFallback(shareUrl.toString());
+            } catch (error) {
+              setStatus('No se pudo copiar el enlace: ' + error.message, true);
+              return;
+            }
+          }
+          setStatus('Enlace para compartir copiado al portapapeles.');
         }
 
         let renderGeneration = 0;
@@ -956,6 +1021,7 @@
         downloadHtmlBtn.addEventListener('click', downloadCurrentHtml);
         copyHtmlBtn.addEventListener('click', copyCurrentHtml);
         downloadPdfBtn.addEventListener('click', printCurrentPreview);
+        shareBtn.addEventListener('click', shareCurrentPreview);
 
         document.getElementById('ct-vis-device-switch').addEventListener('click', (event) => {
           const button = event.target.closest('button[data-device]');

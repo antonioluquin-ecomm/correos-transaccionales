@@ -1345,12 +1345,13 @@ EXAMPLE_SCENARIOS.forEach((scenario) => {
 });
 
 const VERSION = {
-  number: '1.22.0',
+  number: '1.23.0',
   date: '2026-07-17',
-  summary: 'Visualizador suma "Descargar PDF" (impresión nativa del browser sobre el preview renderizado, sin dependencias nuevas).',
+  summary: 'Visualizador suma botón "Compartir": genera un link a un modo sin chrome (?share=1) que muestra solo el mail renderizado con el escenario de ejemplo activo.',
 };
 
 const CHANGELOG = [
+  { version: '1.23.0', date: '2026-07-17', summary: 'Visualizador: botón "Compartir" con Web Share API (fallback a copiar link) hacia un modo ?share=1 que oculta topbar/filtros/toolbar y deja solo el mail renderizado.' },
   { version: '1.22.0', date: '2026-07-17', summary: 'Visualizador: botón "Descargar PDF" que imprime el preview renderizado (con datos de ejemplo) vía window.print() del iframe, evitando el problema de CORS de las imágenes hotlinkeadas que bloquea la captura por canvas.' },
   { version: '1.21.2', date: '2026-07-17', summary: 'pim-envio-despachado: agregada card "Datos de envío" (dirección, localidad, CP, referencia) y datos postales en los 8 escenarios de ejemplo compatibles.' },
   { version: '1.21.1', date: '2026-07-17', summary: 'pim-pedido-confirmado-pv: agregada card "Datos de envío" (dirección, localidad, CP, referencia) y datos postales en los escenarios de ejemplo Sporting/Woker.' },
