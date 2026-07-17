@@ -1345,12 +1345,13 @@ EXAMPLE_SCENARIOS.forEach((scenario) => {
 });
 
 const VERSION = {
-  number: '1.24.1',
+  number: '1.24.2',
   date: '2026-07-17',
-  summary: 'Corrige la franja de sellos de confianza (CACE + Mercado Pago) en las 23 plantillas que la usan: pasa de fondo gris (#f4f4f4) a blanco con borde, igual que el resto de las cards, porque los logos son .jpg con fondo blanco horneado y se veía un recuadro blanco sobre el gris.',
+  summary: 'pim-pedido-confirmado-pv: el botón del Portal de Gestión de Pedidos ahora también se muestra para la marca Sportsman (mapea a la URL de Sporting) — antes solo aparecía para Tienda.Nombre exactamente "Sporting" o "Woker", así que quedaba oculto para cualquier local nuevo que se sumara a la modalidad de venta multidepósito.',
 };
 
 const CHANGELOG = [
+  { version: '1.24.2', date: '2026-07-17', summary: 'pim-pedido-confirmado-pv: agrega Sportsman a la condición que muestra el botón del Portal de Gestión de Pedidos (mapea a la URL de Sporting, mismo sistema). Documentar acá cada marca nueva que se habilite para venta multidepósito.' },
   { version: '1.24.1', date: '2026-07-17', summary: 'Franja de sellos de confianza (CACE + Mercado Pago): fondo de #f4f4f4 a #ffffff con borde 1px #e5e7eb, en las 23 plantillas PIM y VTEX que la incluyen — los logos son .jpg con fondo blanco fijo (sin transparencia) y contra el gris se veía un recuadro.' },
   { version: '1.24.0', date: '2026-07-17', summary: 'Las 12 plantillas PIM que comparten el hero degradado suman +8px de padding-top al elemento siguiente (24px->32px o 22px->30px) y un border-top hairline (#f3f4f6), para separar mejor el hero del cuerpo del mail.' },
   { version: '1.23.6', date: '2026-07-17', summary: 'quiebre-stock-pv: preheader corregido de "No pudimos completar tu pedido... por falta de stock" a "Hay artículos sin stock en tu pedido...", alineado con el hero del mismo mail. Auditoría final cruzada de todos los templates vs. Términos y Condiciones sin más inconsistencias detectadas.' },

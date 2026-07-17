@@ -170,8 +170,10 @@
                     </td>
                   </tr>
 
-                  <!-- CTA: Portal de Gestión de Pedidos (solo Sporting y Woker) -->
-                  {{ if or (eq .Tienda.Nombre "Sporting") (eq .Tienda.Nombre "Woker") }}
+                  <!-- CTA: Portal de Gestión de Pedidos. Sporting y Woker tienen portal propio; -->
+                  <!-- otras marcas de la red (ej. Sportsman) mapean al portal de Sporting -->
+                  <!-- (misma URL de la rama "else" de abajo) — sumar acá cada marca nueva que se habilite. -->
+                  {{ if or (eq .Tienda.Nombre "Sporting") (eq .Tienda.Nombre "Woker") (eq .Tienda.Nombre "Sportsman") }}
                   <tr>
                     <td style="padding:4px 24px 24px;">
                       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
