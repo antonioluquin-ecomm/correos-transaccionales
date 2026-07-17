@@ -920,6 +920,16 @@ const EXAMPLE_SCENARIOS = [
     compatibleTemplates: ['pim-envio-despachado'],
   },
   {
+    id: 'pim-envio-despachado-cross-selling',
+    facetas: ['un-paquete', 'domicilio'],
+    path: 'examples/pim/shared/envio-despachado-cross-selling.json',
+    store: 'shared',
+    label: 'Cross Selling (dato real de PIM)',
+    tipo: 'PIM — pedido despachado',
+    descripcion: 'Despacho de una venta multidepósito con Tienda.Nombre = "Cross Selling" — valida el fallback a Sporting en header y footer.',
+    compatibleTemplates: ['pim-envio-despachado'],
+  },
+  {
     id: 'pim-pedido-confirmado-pv-sporting',
     facetas: ['multideposito'],
     path: 'examples/pim/shared/pedido-confirmado-pv-sporting.json',
@@ -940,12 +950,31 @@ const EXAMPLE_SCENARIOS = [
     compatibleTemplates: ['pim-pedido-confirmado-pv'],
   },
   {
+    id: 'pim-pedido-confirmado-pv-cross-selling',
+    facetas: ['un-paquete'],
+    path: 'examples/pim/shared/pedido-confirmado-pv-cross-selling.json',
+    store: 'shared',
+    label: 'Cross Selling (dato real de PIM)',
+    tipo: 'PIM — confirmación multidepósito',
+    descripcion: 'Venta multidepósito con Tienda.Nombre = "Cross Selling", el valor real que envía PIM para este flujo (no Sporting ni Woker) — valida el fallback a Sporting en header, footer y botón del Portal.',
+    compatibleTemplates: ['pim-pedido-confirmado-pv'],
+  },
+  {
     id: 'pim-quiebre-stock-pv-sporting',
     path: 'examples/pim/shared/quiebre-stock-pv-sporting.json',
     store: 'shared',
     label: 'Sporting (2 productos sin stock)',
     tipo: 'PIM - sin stock PV',
     descripcion: 'Quiebre de stock en compra PV de Sporting con dos productos dados de baja y alternativas: cambio, reembolso presencial o giftcard-enviada online.',
+    compatibleTemplates: ['pim-quiebre-stock-pv'],
+  },
+  {
+    id: 'pim-quiebre-stock-pv-cross-selling',
+    path: 'examples/pim/shared/quiebre-stock-pv-cross-selling.json',
+    store: 'shared',
+    label: 'Cross Selling (dato real de PIM)',
+    tipo: 'PIM - sin stock PV',
+    descripcion: 'Quiebre de stock en venta multidepósito con Tienda.Nombre = "Cross Selling" — valida el fallback a Sporting en header y footer.',
     compatibleTemplates: ['pim-quiebre-stock-pv'],
   },
   {
@@ -956,6 +985,16 @@ const EXAMPLE_SCENARIOS = [
     label: 'Sporting (2 productos)',
     tipo: 'PIM — listo para retirar',
     descripcion: 'Pedido listo para retirar en sucursal Sporting, con dos productos, lugar de retiro (dirección y horario) y requisitos.',
+    compatibleTemplates: ['pim-retiro-disponible'],
+  },
+  {
+    id: 'pim-retiro-disponible-cross-selling',
+    facetas: ['retiro'],
+    path: 'examples/pim/shared/retiro-disponible-cross-selling.json',
+    store: 'shared',
+    label: 'Cross Selling (dato real de PIM)',
+    tipo: 'PIM — listo para retirar',
+    descripcion: 'Pedido listo para retirar de una venta multidepósito con Tienda.Nombre = "Cross Selling" — valida el fallback a Sporting en header y footer.',
     compatibleTemplates: ['pim-retiro-disponible'],
   },
   {
@@ -977,6 +1016,15 @@ const EXAMPLE_SCENARIOS = [
     compatibleTemplates: ['pim-recepcion-cambio'],
   },
   {
+    id: 'pim-recepcion-cambio-cross-selling',
+    path: 'examples/pim/shared/recepcion-cambio-cross-selling.json',
+    store: 'shared',
+    label: 'Cross Selling (dato real de PIM)',
+    tipo: 'PIM — recepción de cambio',
+    descripcion: 'Recepción de cambio de una venta multidepósito con Tienda.Nombre = "Cross Selling" — valida el fallback a Sporting en header y footer.',
+    compatibleTemplates: ['pim-recepcion-cambio'],
+  },
+  {
     id: 'pim-recepcion-devolucion-sporting',
     path: 'examples/pim/shared/recepcion-devolucion-sporting.json',
     store: 'shared',
@@ -995,6 +1043,15 @@ const EXAMPLE_SCENARIOS = [
     compatibleTemplates: ['pim-recepcion-garantia'],
   },
   {
+    id: 'pim-recepcion-garantia-cross-selling',
+    path: 'examples/pim/shared/recepcion-garantia-cross-selling.json',
+    store: 'shared',
+    label: 'Cross Selling (dato real de PIM)',
+    tipo: 'PIM — recepción de garantía',
+    descripcion: 'Recepción de garantía de una venta multidepósito con Tienda.Nombre = "Cross Selling" — valida el fallback a Sporting en header y footer.',
+    compatibleTemplates: ['pim-recepcion-garantia'],
+  },
+  {
     id: 'pim-quiebre-stock-sporting',
     path: 'examples/pim/shared/quiebre-stock-sporting.json',
     store: 'shared',
@@ -1010,6 +1067,15 @@ const EXAMPLE_SCENARIOS = [
     label: '2 productos a devolver',
     tipo: 'PIM — etiqueta de devolución',
     descripcion: 'Etiqueta de devolución adjunta con dos productos a retirar a domicilio.',
+    compatibleTemplates: ['pim-etiqueta-devolucion'],
+  },
+  {
+    id: 'pim-etiqueta-devolucion-cross-selling',
+    path: 'examples/pim/shared/etiqueta-devolucion-cross-selling.json',
+    store: 'shared',
+    label: 'Cross Selling (dato real de PIM)',
+    tipo: 'PIM — etiqueta de devolución',
+    descripcion: 'Etiqueta de devolución de una venta multidepósito con Tienda.Nombre = "Cross Selling" — valida el fallback a Sporting en header y footer.',
     compatibleTemplates: ['pim-etiqueta-devolucion'],
   },
   {
@@ -1345,12 +1411,14 @@ EXAMPLE_SCENARIOS.forEach((scenario) => {
 });
 
 const VERSION = {
-  number: '1.26.0',
+  number: '1.26.2',
   date: '2026-07-17',
-  summary: 'Visualizador: nuevo panel "Sobrescribir valores del escenario" para plantillas PIM — permite forzar campos como Tienda.Nombre (ej. "Cross Selling") sobre cualquier JSON de ejemplo existente, sin tener que crear un archivo nuevo por combinación.',
+  summary: 'Completa la cobertura de escenarios "Cross Selling" en las 6 plantillas PIM restantes del flujo de venta multidepósito (quiebre-stock-pv, envio-despachado, retiro-disponible, recepcion-cambio, recepcion-garantia, etiqueta-devolucion), validando el fallback a Sporting en cada una.',
 };
 
 const CHANGELOG = [
+  { version: '1.26.2', date: '2026-07-17', summary: 'Escenarios "Cross Selling (dato real de PIM)" agregados a quiebre-stock-pv, envio-despachado, retiro-disponible, recepcion-cambio, recepcion-garantia y etiqueta-devolucion — completa la cobertura de las 7 plantillas del flujo de venta multidepósito con datos anonimizados.' },
+  { version: '1.26.1', date: '2026-07-17', summary: 'pim-pedido-confirmado-pv: nuevo escenario de ejemplo "Cross Selling (dato real de PIM)" (examples/pim/shared/pedido-confirmado-pv-cross-selling.json) con datos anonimizados, para validar el fallback a Sporting sin depender del panel de overrides.' },
   { version: '1.26.0', date: '2026-07-17', summary: 'Visualizador: panel de overrides por escenario (CT.OVERRIDE_FIELDS en shared.js). Primer campo cargado: Tienda.Nombre para plantillas PIM (Sporting/Woker/Cross Selling), aplicado sobre el JSON en memoria antes de renderizar — extensible a más campos y plataformas.' },
   { version: '1.25.0', date: '2026-07-17', summary: 'pedido-confirmado-pv, quiebre-stock-pv, envio-despachado, retiro-disponible, recepcion-cambio, recepcion-garantia, etiqueta-devolucion: agregan fallback a Sporting (logo, links de footer, copyright, y botón de Portal donde aplica) cuando Tienda.Nombre es "Cross Selling" — el valor real que usa PIM para ventas multidepósito y que no tiene NotificacionesConfig propia.' },
   { version: '1.24.2', date: '2026-07-17', summary: 'pim-pedido-confirmado-pv: agrega Sportsman a la condición que muestra el botón del Portal de Gestión de Pedidos (mapea a la URL de Sporting, mismo sistema). Documentar acá cada marca nueva que se habilite para venta multidepósito.' },

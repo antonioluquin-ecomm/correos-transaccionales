@@ -1,0 +1,38 @@
+{
+  "Tienda": {
+    "Nombre": "Cross Selling",
+    "Datos": {
+      "NotificacionesConfig": {
+        "HeaderURL": "",
+        "HeaderImage": ""
+      }
+    }
+  },
+  "Pedido": {
+    "NroPedidoCanal": "LQ21-450000000000341-01",
+    "Logistica": "Andreani",
+    "DatosEnvio": {
+      "Destinatario": {
+        "Nombres": "Cliente"
+      },
+      "Destino": {
+        "Postal": {
+          "Calle": "Av. Aconquija",
+          "Numero": "1450",
+          "Localidad": "San Miguel de Tucumán",
+          "Pais": "Argentina",
+          "CodigoPostal": "T4000"
+        }
+      },
+      "Etiqueta": {
+        "NroSeguimiento": "360009876543210"
+      }
+    },
+    "LineasPedido": [
+      {
+        "SKU": "SPO-MUS-118",
+        "Cantidad": 1
+      }
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "Tienda": {
+    "Nombre": "Cross Selling",
+    "Datos": {
+      "NotificacionesConfig": {
+        "HeaderURL": "",
+        "HeaderImage": ""
+      }
+    }
+  },
+  "Pedido": {
+    "LineasPedido": [
+      {
+        "Producto": "Musculosa Ultra Flex",
+        "SKU": "SPO-MUS-118",
+        "Cantidad": 1
+      }
+    ]
+  }
+}

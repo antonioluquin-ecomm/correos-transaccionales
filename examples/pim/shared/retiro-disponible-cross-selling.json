@@ -1,0 +1,40 @@
+{
+  "Tienda": {
+    "Nombre": "Cross Selling",
+    "Datos": {
+      "NotificacionesConfig": {
+        "HeaderURL": "",
+        "HeaderImage": ""
+      }
+    }
+  },
+  "Pedido": {
+    "NroPedidoCanal": "LQ21-450000000000341-01",
+    "FechaPedido": "17 de julio de 2026",
+    "TotalLineas": "49.990",
+    "DatosEnvio": {
+      "Destinatario": {
+        "Nombres": "Cliente"
+      }
+    },
+    "LineasPedido": [
+      {
+        "Producto": "Musculosa Ultra Flex",
+        "SKU": "SPO-MUS-118",
+        "Importe": "49.990",
+        "Cantidad": 1,
+        "Subtotal": "49.990"
+      }
+    ]
+  },
+  "Deposito": {
+    "DatosDeposito": {
+      "DatosPickup": {
+        "NombrePublico": "Sporting Tucumán Shopping",
+        "Direccion": "Av. Aconquija 1450",
+        "Localidad": "San Miguel de Tucumán",
+        "Horario": "Lunes a sábados de 10 a 21 h"
+      }
+    }
+  }
+}

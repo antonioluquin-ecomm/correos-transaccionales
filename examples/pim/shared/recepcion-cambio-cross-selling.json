@@ -1,0 +1,31 @@
+{
+  "Tienda": {
+    "Nombre": "Cross Selling",
+    "Datos": {
+      "NotificacionesConfig": {
+        "HeaderURL": "",
+        "HeaderImage": ""
+      }
+    }
+  },
+  "Pedido": {
+    "LineasPedido": [
+      {
+        "Producto": "Musculosa Ultra Flex",
+        "SKU": "SPO-MUS-118",
+        "Cantidad": 1,
+        "Estado": "O",
+        "Historial": []
+      },
+      {
+        "Producto": "Calza Deportiva Compression",
+        "SKU": "SPO-CAL-203",
+        "Cantidad": 1,
+        "Estado": "R",
+        "Historial": [
+          { "Observaciones": "El producto presenta signos de uso y no conserva la etiqueta original." }
+        ]
+      }
+    ]
+  }
+}
