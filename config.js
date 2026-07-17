@@ -1345,12 +1345,14 @@ EXAMPLE_SCENARIOS.forEach((scenario) => {
 });
 
 const VERSION = {
-  number: '1.23.6',
+  number: '1.24.1',
   date: '2026-07-17',
-  summary: 'quiebre-stock-pv: corrige el preheader ("No pudimos completar tu pedido... por falta de stock") que sobre-alcanzaba el mensaje, igual que el bug corregido antes en el cuerpo de quiebre-stock — contradecía al propio hero del mail, que es preciso sobre el alcance parcial. Auditoría cruzada completa contra Términos y Condiciones sin más hallazgos.',
+  summary: 'Corrige la franja de sellos de confianza (CACE + Mercado Pago) en las 23 plantillas que la usan: pasa de fondo gris (#f4f4f4) a blanco con borde, igual que el resto de las cards, porque los logos son .jpg con fondo blanco horneado y se veía un recuadro blanco sobre el gris.',
 };
 
 const CHANGELOG = [
+  { version: '1.24.1', date: '2026-07-17', summary: 'Franja de sellos de confianza (CACE + Mercado Pago): fondo de #f4f4f4 a #ffffff con borde 1px #e5e7eb, en las 23 plantillas PIM y VTEX que la incluyen — los logos son .jpg con fondo blanco fijo (sin transparencia) y contra el gris se veía un recuadro.' },
+  { version: '1.24.0', date: '2026-07-17', summary: 'Las 12 plantillas PIM que comparten el hero degradado suman +8px de padding-top al elemento siguiente (24px->32px o 22px->30px) y un border-top hairline (#f3f4f6), para separar mejor el hero del cuerpo del mail.' },
   { version: '1.23.6', date: '2026-07-17', summary: 'quiebre-stock-pv: preheader corregido de "No pudimos completar tu pedido... por falta de stock" a "Hay artículos sin stock en tu pedido...", alineado con el hero del mismo mail. Auditoría final cruzada de todos los templates vs. Términos y Condiciones sin más inconsistencias detectadas.' },
   { version: '1.23.5', date: '2026-07-17', summary: 'etiqueta-devolucion: el aviso "Este correo es automático" pasa a su propia card con gap, igual que el resto de la familia PIM — quedaba pegado al final de la card "¿Cómo sigue?". Auditoría completa de los 12 templates PIM con este aviso: no quedan más casos con el problema.' },
   { version: '1.23.4', date: '2026-07-17', summary: 'quiebre-stock: reescribe el párrafo de intro ("Lamentamos informarte...") que sobre-alcanzaba el mensaje del hero (sonaba a pedido completo cancelado en vez de artículos puntuales) y no tenía saludo, a diferencia del resto de la familia PIM.' },
