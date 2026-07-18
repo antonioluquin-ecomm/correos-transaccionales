@@ -1258,6 +1258,11 @@ const SCENARIO_TAXONOMY = {
     tiendas: ['seller-adidas'],
     eventoId: 'pedido-despachado',
   },
+  'pim-envio-despachado-cross-selling': {
+    canales: ['punto-de-venta'],
+    tiendas: [],
+    eventoId: 'pedido-despachado',
+  },
   'pim-pedido-confirmado-pv-sporting': {
     canales: ['punto-de-venta'],
     tiendas: [],
@@ -1272,6 +1277,21 @@ const SCENARIO_TAXONOMY = {
     canales: ['punto-de-venta'],
     tiendas: [],
     eventoId: 'quiebre-stock-pv',
+  },
+  'pim-recepcion-cambio-cross-selling': {
+    canales: ['punto-de-venta'],
+    tiendas: [],
+    eventoId: 'recepcion-cambio',
+  },
+  'pim-recepcion-garantia-cross-selling': {
+    canales: ['punto-de-venta'],
+    tiendas: [],
+    eventoId: 'recepcion-garantia',
+  },
+  'pim-etiqueta-devolucion-cross-selling': {
+    canales: ['punto-de-venta'],
+    tiendas: [],
+    eventoId: 'etiqueta-devolucion',
   },
   'pim-retiro-disponible-sporting': {
     canales: ['b2c'],
@@ -1391,12 +1411,13 @@ EXAMPLE_SCENARIOS.forEach((scenario) => {
 });
 
 const VERSION = {
-  number: '1.26.4',
-  date: '2026-07-17',
-  summary: 'Elimina el escenario "Cross Selling" de pim-retiro-disponible: representaba una combinación imposible (venta multidepósito con retiro en sucursal), ya que esa modalidad solo ofrece envío a domicilio por ahora. El fix de código en la plantilla queda igual, como resguardo a futuro.',
+  number: '1.26.5',
+  date: '2026-07-18',
+  summary: 'Corrige la taxonomía de los escenarios Cross Selling: sin entrada propia en SCENARIO_TAXONOMY heredaban los canales/tiendas de la plantilla compartida, por lo que envio-despachado-cross-selling aparecía bajo EXT/Seller adidas y los de logística inversa bajo B2C. Se acotan a punto-de-venta, que es lo correcto para una venta multidepósito.',
 };
 
 const CHANGELOG = [
+  { version: '1.26.5', date: '2026-07-18', summary: 'Taxonomía de escenarios Cross Selling: entradas explícitas en SCENARIO_TAXONOMY para envio-despachado, recepcion-cambio, recepcion-garantia y etiqueta-devolucion, acotándolos a canal punto-de-venta. Antes heredaban toda la taxonomía de la plantilla compartida: envio-despachado-cross-selling aparecía bajo EXT/Seller adidas (regla: Cross Selling nunca es adidas) y los de logística inversa bajo B2C. Verificado en el Visualizador: Cross Selling solo bajo Punto de Venta; Producteca/adidas intactos bajo EXT.' },
   { version: '1.26.4', date: '2026-07-17', summary: 'Se elimina el escenario "Cross Selling" de pim-retiro-disponible (examples/pim/shared/retiro-disponible-cross-selling.json) por representar una combinación imposible: venta multidepósito (Cross Selling) solo ofrece envío a domicilio, nunca retiro en sucursal. El fix de fallback en la plantilla se mantiene, sin escenario de prueba.' },
   { version: '1.26.3', date: '2026-07-17', summary: 'pedido-estandar-domicilio suma la faceta "con-promo" (tenía ratesAndBenefitsData activo sin etiquetar); se elimina el escenario duplicado pago-aprobado-base (mismo contenido que pedido-realizado-exito) y su JSON. Auditoría completa de EXAMPLE_SCENARIOS: de 3 escenarios indistinguibles por faceta en pedido-confirmado/pago-aprobado quedan 2, cada uno con una diferencia real.' },
   { version: '1.26.2', date: '2026-07-17', summary: 'Escenarios "Cross Selling (dato real de PIM)" agregados a quiebre-stock-pv, envio-despachado, retiro-disponible, recepcion-cambio, recepcion-garantia y etiqueta-devolucion — completa la cobertura de las 7 plantillas del flujo de venta multidepósito con datos anonimizados.' },
