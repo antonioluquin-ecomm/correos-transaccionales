@@ -9,6 +9,7 @@ const CT = (() => {
   const NAV_LINKS = [
     { href: 'index.html', label: 'Inicio', match: 'inicio' },
     { href: 'modules/catalogo/index.html', label: 'Biblioteca de Plantillas', match: 'catalogo' },
+    { href: 'modules/recorrido/index.html', label: 'Recorrido por Venta', match: 'recorrido' },
     { href: 'modules/flujo/index.html', label: 'Flujo de Correos', match: 'flujo' },
     { href: 'modules/visualizador/index.html', label: 'Visualizador de Plantillas', match: 'visualizador' },
   ];

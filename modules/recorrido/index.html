@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recorrido por tipo de venta — Correos Transaccionales</title>
+    <link rel="stylesheet" href="../../assets/css/shared.css" />
+    <style>
+      .ct-rec-page { max-width: 1100px; }
+
+      /* Selector de tipo de venta */
+      .ct-rec-types {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+        gap: 12px;
+        margin: 8px 0 4px;
+      }
+      .ct-rec-type {
+        text-align: left;
+        border: 1px solid var(--ct-card-border);
+        background: var(--ct-card);
+        border-radius: var(--ct-radius);
+        padding: 14px 16px;
+        cursor: pointer;
+        transition: border-color .13s, box-shadow .13s, transform .05s;
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+      }
+      .ct-rec-type:hover { border-color: var(--ct-accent); box-shadow: var(--ct-shadow-sm); }
+      .ct-rec-type:active { transform: translateY(1px); }
+      .ct-rec-type.active {
+        border-color: var(--ct-navy);
+        box-shadow: 0 0 0 1px var(--ct-navy);
+        background: var(--ct-accent-soft);
+      }
+      .ct-rec-type-ico { font-size: 22px; line-height: 1; }
+      .ct-rec-type-txt strong { display: block; font-size: 14px; color: var(--ct-text); }
+      .ct-rec-type-txt span { display: block; font-size: 12px; color: var(--ct-text-muted); margin-top: 2px; }
+
+      /* Encabezado del recorrido */
+      .ct-rec-head { margin: 22px 0 6px; }
+      .ct-rec-head h2 { margin: 0 0 4px; font-size: 19px; }
+      .ct-rec-intro { color: var(--ct-text-muted); font-size: 14px; line-height: 1.55; margin: 0; max-width: 760px; }
+
+      .ct-rec-excludes {
+        margin: 14px 0 0;
+        background: var(--ct-warning-bg);
+        border: 1px solid var(--ct-warning);
+        border-left-width: 4px;
+        border-radius: var(--ct-radius-sm);
+        padding: 12px 14px;
+      }
+      .ct-rec-excludes strong { font-size: 12.5px; color: var(--ct-warning); text-transform: uppercase; letter-spacing: .4px; }
+      .ct-rec-excludes ul { margin: 6px 0 0; padding-left: 18px; }
+      .ct-rec-excludes li { font-size: 13px; color: var(--ct-text); line-height: 1.5; margin: 3px 0; }
+
+      /* Secciones */
+      .ct-rec-section-title {
+        font-size: 12px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase;
+        color: var(--ct-text-muted); margin: 26px 0 12px; padding-bottom: 6px;
+        border-bottom: 1px solid var(--ct-line);
+      }
+
+      /* Stepper camino principal */
+      .ct-rec-steps { list-style: none; margin: 0; padding: 0; }
+      .ct-rec-step { position: relative; padding: 0 0 16px 44px; }
+      .ct-rec-step::before {
+        content: ''; position: absolute; left: 15px; top: 26px; bottom: -4px; width: 2px; background: var(--ct-line);
+      }
+      .ct-rec-step:last-child::before { display: none; }
+      .ct-rec-step-num {
+        position: absolute; left: 0; top: 0; width: 32px; height: 32px; border-radius: 50%;
+        background: var(--ct-navy); color: #fff; font-size: 13px; font-weight: 700;
+        display: flex; align-items: center; justify-content: center; z-index: 1;
+      }
+      .ct-rec-step-stage { font-size: 11px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; color: var(--ct-accent); margin: 6px 0 8px; }
+
+      /* Rama / según el caso */
+      .ct-rec-branches { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
+
+      /* Tarjeta de correo */
+      .ct-rec-mail {
+        border: 1px solid var(--ct-card-border); background: var(--ct-card);
+        border-radius: var(--ct-radius); padding: 13px 15px; margin-bottom: 10px;
+      }
+      .ct-rec-mail:last-child { margin-bottom: 0; }
+      .ct-rec-mail-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+      .ct-rec-mail-name { font-size: 14.5px; font-weight: 600; color: var(--ct-text); margin: 0; }
+      .ct-rec-mail-desc { font-size: 12.5px; color: var(--ct-text-muted); line-height: 1.5; margin: 6px 0 0; }
+      .ct-rec-mail-badges { display: flex; gap: 5px; flex-wrap: wrap; flex-shrink: 0; }
+      .ct-rec-mail-variants { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+      .ct-rec-variant {
+        font-size: 12px; text-decoration: none; color: var(--ct-navy);
+        border: 1px solid var(--ct-card-border); border-radius: 999px; padding: 4px 12px;
+        display: inline-flex; align-items: center; gap: 5px; transition: background .12s, border-color .12s;
+      }
+      .ct-rec-variant:hover { background: var(--ct-accent-soft); border-color: var(--ct-accent); }
+      .ct-rec-variant::after { content: '↗'; font-size: 11px; opacity: .6; }
+
+      .ct-rec-empty { color: var(--ct-text-muted); font-size: 13px; font-style: italic; padding: 8px 0; }
+
+      @media (max-width: 640px) {
+        .ct-rec-mail-top { flex-direction: column; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="ct-topbar" data-ct-topbar></header>
+
+    <main class="ct-page ct-rec-page">
+      <h1>Recorrido por tipo de venta</h1>
+      <p class="ct-subtitle">
+        Qué correos recibe el cliente según cómo compró, en orden. Derivado automáticamente del catálogo
+        (canal, evento y etapa de cada plantilla) — siempre en sincronía con la Biblioteca.
+      </p>
+
+      <div class="ct-rec-types" id="ct-rec-types" role="group" aria-label="Elegí el tipo de venta"></div>
+
+      <div id="ct-rec-content"></div>
+    </main>
+
+    <script src="../../config.js"></script>
+    <script src="../../assets/js/shared.js"></script>
+    <script>
+      (function () {
+        const BASE = '../../';
+        CT.renderTopbar('recorrido', BASE);
+
+        const renderable = TEMPLATES.filter((t) => t.archivoHtml);
+
+        // Tipos de venta = canal comercial, con narrativa y exclusiones curadas
+        // (las exclusiones son reglas de negocio: "qué NO recibe", no derivables de la ausencia en el catálogo).
+        const SALE_TYPES = [
+          {
+            id: 'b2c', channel: 'b2c', icon: '🛒',
+            label: 'Compra online', sub: 'Sporting / Woker · sitio web',
+            intro: 'El cliente compra en el sitio web. VTEX gestiona pedido, pago y facturación; PIM gestiona el despacho y toda la logística inversa (cambios, devoluciones, garantía).',
+            excludes: [],
+          },
+          {
+            id: 'multideposito', channel: 'punto-de-venta', icon: '🏬',
+            label: 'Compra multidepósito', sub: 'En sucursal, con envío a domicilio',
+            intro: 'El cliente compra en una sucursal un producto que está en otro depósito; se lo enviamos a domicilio. Todo el flujo corre por PIM y entra como venta de Punto de Venta ("Cross Selling"). La confirmación centraliza compra, pago y factura en un solo correo.',
+            excludes: [
+              'Retiro en sucursal — esta modalidad solo ofrece envío a domicilio.',
+              'Correo de factura por separado — la factura va adjunta en la confirmación de compra.',
+              'Devolución con reembolso digital — el reembolso es presencial, en la sucursal donde se pagó (sí hay cambio y garantía).',
+            ],
+          },
+          {
+            id: 'b2b', channel: 'b2b', icon: '📦',
+            label: 'Mayorista B2B', sub: 'Venta Deportiva',
+            intro: 'Compra mayorista. VTEX genera la orden (queda pendiente de validación comercial) y PIM confirma el despacho.',
+            excludes: [],
+          },
+          {
+            id: 'ext', channel: 'ext', icon: '🏷️',
+            label: 'Marketplace', sub: 'Vendido y distribuido por adidas',
+            intro: 'Productos de un Seller (adidas) ofrecidos en el sitio. El despacho se informa vía PIM con los carriers de Producteca (OCA, Correo Argentino, TRF, Urbano).',
+            excludes: [],
+          },
+        ];
+
+        // Etapas normalizadas: orden del recorrido + a qué bloque pertenecen.
+        const STAGE_DEFS = {
+          'compra-pedido':                 { label: 'Compra / Pedido',                    group: 'main',   order: 1 },
+          'pago':                          { label: 'Pago',                               group: 'main',   order: 2 },
+          'preparacion':                   { label: 'Preparación',                        group: 'main',   order: 3 },
+          'facturacion':                   { label: 'Facturación',                        group: 'main',   order: 4 },
+          'despacho-retiro':               { label: 'Despacho / Entrega',                 group: 'main',   order: 5 },
+          'cancelacion-reembolso':         { label: 'Cancelación / Reembolso',            group: 'branch', order: 6 },
+          'cambios-devoluciones-garantia': { label: 'Cambios / Devoluciones / Garantía',  group: 'branch', order: 7 },
+          'cuenta-acceso':                 { label: 'Cuenta y avisos',                    group: 'aside',  order: 8 },
+        };
+
+        const typesEl = document.getElementById('ct-rec-types');
+        const contentEl = document.getElementById('ct-rec-content');
+
+        const params = new URLSearchParams(window.location.search);
+        let activeType = SALE_TYPES.find((s) => s.id === params.get('tipo'))?.id || SALE_TYPES[0].id;
+
+        // Deriva el recorrido de un canal: plantillas agrupadas por etapa y, dentro de cada
+        // etapa, por evento (así las variantes de marca Sporting/Woker quedan en un solo paso).
+        function journeyFor(channel) {
+          const tpls = renderable.filter((t) => CT.templateChannels(t).includes(channel));
+          const stageMap = {};
+          tpls.forEach((t) => {
+            const sid = t.stageId || 'sin-etapa';
+            const evId = (t.evento && t.evento.id) || t.id;
+            stageMap[sid] = stageMap[sid] || {};
+            (stageMap[sid][evId] = stageMap[sid][evId] || { evento: t.evento, templates: [] }).templates.push(t);
+          });
+          return stageMap;
+        }
+
+        function visualizadorLink(template, channel) {
+          const p = new URLSearchParams();
+          p.set('template', template.id);
+          p.set('channel', channel);
+          return `${BASE}modules/visualizador/index.html?${p.toString()}`;
+        }
+
+        function renderMailCard(group, channel) {
+          const templates = group.templates;
+          const first = templates[0];
+          const title = (group.evento && group.evento.label) || first.nombre;
+          const badges = `${CT.platformBadge(first.plataforma)}${CT.statusBadge(first.estado)}`;
+
+          let variants;
+          if (templates.length === 1) {
+            variants = `<a class="ct-rec-variant" href="${visualizadorLink(first, channel)}">Ver plantilla</a>`;
+          } else {
+            variants = templates.map((t) => {
+              const store = CT.storeLabel((CT.templateStores(t).find((s) => s !== 'shared')) || '') || t.nombre;
+              return `<a class="ct-rec-variant" href="${visualizadorLink(t, channel)}">${CT.escapeHtml(store)}</a>`;
+            }).join('');
+          }
+
+          return `
+            <div class="ct-rec-mail">
+              <div class="ct-rec-mail-top">
+                <p class="ct-rec-mail-name">${CT.escapeHtml(title)}</p>
+                <div class="ct-rec-mail-badges">${badges}</div>
+              </div>
+              ${first.descripcion ? `<p class="ct-rec-mail-desc">${CT.escapeHtml(first.descripcion)}</p>` : ''}
+              <div class="ct-rec-mail-variants">${variants}</div>
+            </div>`;
+        }
+
+        function stageGroupsSorted(stageMap, groupName) {
+          return Object.keys(stageMap)
+            .filter((sid) => STAGE_DEFS[sid] && STAGE_DEFS[sid].group === groupName)
+            .sort((a, b) => STAGE_DEFS[a].order - STAGE_DEFS[b].order);
+        }
+
+        function renderJourney(saleType) {
+          const stageMap = journeyFor(saleType.channel);
+
+          // Camino principal — stepper numerado por etapa
+          const mainStages = stageGroupsSorted(stageMap, 'main');
+          let mainHtml;
+          if (!mainStages.length) {
+            mainHtml = `<p class="ct-rec-empty">No hay correos de camino principal para este tipo de venta.</p>`;
+          } else {
+            mainHtml = `<ol class="ct-rec-steps">` + mainStages.map((sid, i) => {
+              const groups = Object.values(stageMap[sid]);
+              const cards = groups.map((g) => renderMailCard(g, saleType.channel)).join('');
+              return `
+                <li class="ct-rec-step">
+                  <div class="ct-rec-step-num">${i + 1}</div>
+                  <div class="ct-rec-step-stage">${CT.escapeHtml(STAGE_DEFS[sid].label)}</div>
+                  ${cards}
+                </li>`;
+            }).join('') + `</ol>`;
+          }
+
+          // Según el caso — ramas condicionales
+          const branchStages = stageGroupsSorted(stageMap, 'branch');
+          const branchGroups = branchStages.flatMap((sid) => Object.values(stageMap[sid]));
+          const branchHtml = branchGroups.length
+            ? `<div class="ct-rec-branches">${branchGroups.map((g) => renderMailCard(g, saleType.channel)).join('')}</div>`
+            : `<p class="ct-rec-empty">Sin correos condicionales para este tipo de venta.</p>`;
+
+          // Cuenta y avisos — aside (no forman parte de la compra en sí)
+          const asideStages = stageGroupsSorted(stageMap, 'aside');
+          const asideGroups = asideStages.flatMap((sid) => Object.values(stageMap[sid]));
+          const asideHtml = asideGroups.length
+            ? `<div class="ct-rec-branches">${asideGroups.map((g) => renderMailCard(g, saleType.channel)).join('')}</div>`
+            : '';
+
+          const excludesHtml = saleType.excludes.length
+            ? `<div class="ct-rec-excludes"><strong>No aplica en esta modalidad</strong><ul>${saleType.excludes.map((e) => `<li>${CT.escapeHtml(e)}</li>`).join('')}</ul></div>`
+            : '';
+
+          contentEl.innerHTML = `
+            <div class="ct-rec-head">
+              <h2>${CT.escapeHtml(saleType.icon)} ${CT.escapeHtml(saleType.label)}</h2>
+              <p class="ct-rec-intro">${CT.escapeHtml(saleType.intro)}</p>
+              ${excludesHtml}
+            </div>
+
+            <div class="ct-rec-section-title">Camino principal — lo que recibe siempre, en orden</div>
+            ${mainHtml}
+
+            <div class="ct-rec-section-title">Según el caso — correos condicionales</div>
+            ${branchHtml}
+
+            ${asideHtml ? `<div class="ct-rec-section-title">Cuenta y avisos — fuera del recorrido de compra</div>${asideHtml}` : ''}
+          `;
+        }
+
+        function renderTypes() {
+          typesEl.innerHTML = SALE_TYPES.map((s) => `
+            <button type="button" class="ct-rec-type ${s.id === activeType ? 'active' : ''}" data-type="${s.id}" aria-pressed="${s.id === activeType}">
+              <span class="ct-rec-type-ico" aria-hidden="true">${s.icon}</span>
+              <span class="ct-rec-type-txt"><strong>${CT.escapeHtml(s.label)}</strong><span>${CT.escapeHtml(s.sub)}</span></span>
+            </button>`).join('');
+        }
+
+        function selectType(id) {
+          activeType = id;
+          const p = new URLSearchParams(window.location.search);
+          p.set('tipo', id);
+          history.replaceState(null, '', `?${p.toString()}`);
+          renderTypes();
+          renderJourney(SALE_TYPES.find((s) => s.id === id));
+        }
+
+        typesEl.addEventListener('click', (e) => {
+          const btn = e.target.closest('button[data-type]');
+          if (btn) selectType(btn.dataset.type);
+        });
+
+        renderTypes();
+        renderJourney(SALE_TYPES.find((s) => s.id === activeType));
+      })();
+    </script>
+  </body>
+</html>
