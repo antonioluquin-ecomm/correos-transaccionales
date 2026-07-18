@@ -978,16 +978,6 @@ const EXAMPLE_SCENARIOS = [
     compatibleTemplates: ['pim-retiro-disponible'],
   },
   {
-    id: 'pim-retiro-disponible-cross-selling',
-    facetas: ['retiro'],
-    path: 'examples/pim/shared/retiro-disponible-cross-selling.json',
-    store: 'shared',
-    label: 'Cross Selling (dato real de PIM)',
-    tipo: 'PIM — listo para retirar',
-    descripcion: 'Pedido listo para retirar de una venta multidepósito con Tienda.Nombre = "Cross Selling" — valida el fallback a Sporting en header y footer.',
-    compatibleTemplates: ['pim-retiro-disponible'],
-  },
-  {
     id: 'pim-giftcard-enviada-sporting',
     path: 'examples/pim/shared/giftcard-enviada-sporting.json',
     store: 'shared',
@@ -1401,12 +1391,13 @@ EXAMPLE_SCENARIOS.forEach((scenario) => {
 });
 
 const VERSION = {
-  number: '1.26.3',
+  number: '1.26.4',
   date: '2026-07-17',
-  summary: 'Auditoría de escenarios del Visualizador: pedido-estandar-domicilio suma la faceta "con-promo" que le faltaba (tenía promoción activa sin etiquetar), y se elimina pago-aprobado-base por ser duplicado exacto de pedido-realizado-exito — de 3 escenarios indistinguibles por faceta quedan 2 con diferencia real.',
+  summary: 'Elimina el escenario "Cross Selling" de pim-retiro-disponible: representaba una combinación imposible (venta multidepósito con retiro en sucursal), ya que esa modalidad solo ofrece envío a domicilio por ahora. El fix de código en la plantilla queda igual, como resguardo a futuro.',
 };
 
 const CHANGELOG = [
+  { version: '1.26.4', date: '2026-07-17', summary: 'Se elimina el escenario "Cross Selling" de pim-retiro-disponible (examples/pim/shared/retiro-disponible-cross-selling.json) por representar una combinación imposible: venta multidepósito (Cross Selling) solo ofrece envío a domicilio, nunca retiro en sucursal. El fix de fallback en la plantilla se mantiene, sin escenario de prueba.' },
   { version: '1.26.3', date: '2026-07-17', summary: 'pedido-estandar-domicilio suma la faceta "con-promo" (tenía ratesAndBenefitsData activo sin etiquetar); se elimina el escenario duplicado pago-aprobado-base (mismo contenido que pedido-realizado-exito) y su JSON. Auditoría completa de EXAMPLE_SCENARIOS: de 3 escenarios indistinguibles por faceta en pedido-confirmado/pago-aprobado quedan 2, cada uno con una diferencia real.' },
   { version: '1.26.2', date: '2026-07-17', summary: 'Escenarios "Cross Selling (dato real de PIM)" agregados a quiebre-stock-pv, envio-despachado, retiro-disponible, recepcion-cambio, recepcion-garantia y etiqueta-devolucion — completa la cobertura de las 7 plantillas del flujo de venta multidepósito con datos anonimizados.' },
   { version: '1.26.1', date: '2026-07-17', summary: 'pim-pedido-confirmado-pv: nuevo escenario de ejemplo "Cross Selling (dato real de PIM)" (examples/pim/shared/pedido-confirmado-pv-cross-selling.json) con datos anonimizados, para validar el fallback a Sporting sin depender del panel de overrides.' },
