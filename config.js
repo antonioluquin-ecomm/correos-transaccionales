@@ -1411,12 +1411,13 @@ EXAMPLE_SCENARIOS.forEach((scenario) => {
 });
 
 const VERSION = {
-  number: '1.27.0',
-  date: '2026-07-18',
-  summary: 'Nuevo módulo "Recorrido por tipo de venta": muestra qué correos recibe el cliente según cómo compró (online, multidepósito, B2B, marketplace), en orden y con las exclusiones de cada modalidad. Derivado 100% de config.js (canal/evento/etapa), así no se desincroniza. Incluye corrección de taxonomía: pim-retiro-disponible pasa a canal b2c únicamente (multidepósito es solo envío a domicilio).',
+  number: '1.27.1',
+  date: '2026-07-20',
+  summary: 'Módulo Flujo (mapa técnico): corrige la referencia rota templateId "pim-giftcard" (era "pim-giftcard-enviada") en los 3 nodos de giftcard, y actualiza la nota del nodo de retiro que decía "aplica a e-commerce y PV" — el retiro es solo para compras online, la venta multidepósito es únicamente envío a domicilio.',
 };
 
 const CHANGELOG = [
+  { version: '1.27.1', date: '2026-07-20', summary: 'Flujo: fix de referencia rota templateId pim-giftcard -> pim-giftcard-enviada (3 nodos, ahora resuelven a la plantilla real) y nota de retiro corregida (solo online con retiro en tienda; multidepósito solo envío a domicilio).' },
   { version: '1.27.0', date: '2026-07-18', summary: 'Nuevo módulo modules/recorrido/: vista por tipo de venta (b2c/punto-de-venta/b2b/ext) con camino principal ordenado por etapa, ramas condicionales y exclusiones de negocio, derivada de config.js (no dibujada a mano). Cada correo enlaza al Visualizador. Se agrega al nav y a la home. Fix de taxonomía asociado: pim-retiro-disponible.canales pasa de [b2c, punto-de-venta] a [b2c] — multidepósito nunca ofrece retiro en sucursal.' },
   { version: '1.26.5', date: '2026-07-18', summary: 'Taxonomía de escenarios Cross Selling: entradas explícitas en SCENARIO_TAXONOMY para envio-despachado, recepcion-cambio, recepcion-garantia y etiqueta-devolucion, acotándolos a canal punto-de-venta. Antes heredaban toda la taxonomía de la plantilla compartida: envio-despachado-cross-selling aparecía bajo EXT/Seller adidas (regla: Cross Selling nunca es adidas) y los de logística inversa bajo B2C. Verificado en el Visualizador: Cross Selling solo bajo Punto de Venta; Producteca/adidas intactos bajo EXT.' },
   { version: '1.26.4', date: '2026-07-17', summary: 'Se elimina el escenario "Cross Selling" de pim-retiro-disponible (examples/pim/shared/retiro-disponible-cross-selling.json) por representar una combinación imposible: venta multidepósito (Cross Selling) solo ofrece envío a domicilio, nunca retiro en sucursal. El fix de fallback en la plantilla se mantiene, sin escenario de prueba.' },

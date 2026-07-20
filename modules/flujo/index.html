@@ -1128,7 +1128,7 @@
               { id: 'prep-b2b', lane: 'pim', x: 410, text: 'Despacho B2B', templateId: 'pim-envio-b2b', priority: 'media', trigger: 'PIM confirma orden B2B en preparacion.', note: 'Preparacion operativa B2B.' },
               { id: 'invoiced', lane: 'vtex', x: 540, text: 'Pedido facturado Sporting', templateId: 'order-invoiced', priority: 'media', trigger: 'VTEX notifica facturacion del pedido.', note: 'Facturacion VTEX e-commerce.' },
               { id: 'invoice-pim', lane: 'pim', x: 540, text: 'Factura disponible PIM', templateId: 'pim-factura-disponible', priority: 'media', trigger: 'PIM notifica factura electronica adjunta.', note: 'Facturacion PIM compartida por canal/tienda.' },
-              { id: 'pickup', lane: 'pim', x: 670, text: 'Pedido listo para retirar', templateId: 'pim-retiro-disponible', priority: 'alta', trigger: 'Pedido queda disponible para retiro en sucursal.', note: 'Aplica a e-commerce y PV cuando corresponda.' },
+              { id: 'pickup', lane: 'pim', x: 670, text: 'Pedido listo para retirar', templateId: 'pim-retiro-disponible', priority: 'alta', trigger: 'Pedido queda disponible para retiro en sucursal.', note: 'Solo compras online que eligen retiro en tienda. La venta multideposito es unicamente envio a domicilio.' },
               { id: 'shipped', lane: 'pim', x: 670, text: 'Pedido despachado', templateId: 'pim-envio-despachado', priority: 'alta', trigger: 'Pedido sale del deposito o pasa a operador logistico.', note: 'Etapa PIM compartida post-origen.' },
               { id: 'andreani-track', lane: 'andreani', x: 800, text: 'Seguimiento Andreani', priority: 'media', trigger: 'Andreani informa preparacion, transito o visita.', note: 'Referencia documental: correo externo no gestionado en este repo.' },
               { id: 'ocasa-track', lane: 'ocasa', x: 800, text: 'Seguimiento OCASA', priority: 'media', trigger: 'OCASA informa preparacion, visita o transito.', note: 'Referencia documental: correo externo no gestionado en este repo.' },
@@ -1140,7 +1140,7 @@
               { id: 'change-received', lane: 'pim', x: 1190, text: 'Recepcion cambio', templateId: 'pim-recepcion-cambio', priority: 'alta', trigger: 'PIM confirma recepcion de productos vinculados a cambio.', note: 'Logistica inversa - cambio.' },
               { id: 'return-received', lane: 'pim', x: 1190, text: 'Recepcion devolucion', templateId: 'pim-recepcion-devolucion', priority: 'alta', trigger: 'PIM confirma recepcion de productos devueltos.', note: 'Logistica inversa - devolucion.' },
               { id: 'warranty-received', lane: 'pim', x: 1190, text: 'Recepcion garantia', templateId: 'pim-recepcion-garantia', priority: 'alta', trigger: 'PIM confirma recepcion de producto en garantia.', note: 'Logistica inversa - garantia.' },
-              { id: 'giftcard', lane: 'pim', x: 1190, text: 'Giftcard', templateId: 'pim-giftcard', priority: 'alta', trigger: 'Se emite codigo/giftcard para resolver cambio, devolucion o falta de stock.', note: 'Resolucion por codigo/giftcard.' },
+              { id: 'giftcard', lane: 'pim', x: 1190, text: 'Giftcard', templateId: 'pim-giftcard-enviada', priority: 'alta', trigger: 'Se emite codigo/giftcard para resolver cambio, devolucion o falta de stock.', note: 'Resolucion por codigo/giftcard.' },
             ],
             links: [
               ['access', 'order'],
@@ -1233,7 +1233,7 @@
               { id: 'delivered', lane: 'andreani', x: 650, text: 'Ya entregamos tu producto', status: 'faltante', priority: 'media', trigger: 'Andreani confirma entrega/devolución al depósito.', note: 'Nombre operativo a confirmar: entrega del producto retirado.' },
               { id: 'rejected', lane: 'pim', x: 790, text: 'Notificación de cambio rechazado', status: 'faltante', priority: 'media', canales: ['b2c', 'punto-de-venta'], tiendas: ['sporting', 'woker'], trigger: 'PIM rechaza solicitud o recepción de cambio.', note: 'Debe explicar motivo y próximo paso.' },
               { id: 'received', lane: 'pim', x: 790, text: 'Recepción de producto por cambio', templateId: 'pim-recepcion-cambio', status: 'existente', priority: 'alta', trigger: 'PIM confirma recepción del producto a cambiar.', note: 'Plantilla disponible en catálogo. Pendiente revisión de diseño.' },
-              { id: 'giftcard', lane: 'pim', x: 940, text: 'Giftcard (Código para cambio)', templateId: 'pim-giftcard', status: 'existente', priority: 'alta', trigger: 'Se emite código/giftcard para nuevo cambio.', note: 'Plantilla disponible en catálogo. Pendiente revisión de diseño.' },
+              { id: 'giftcard', lane: 'pim', x: 940, text: 'Giftcard (Código para cambio)', templateId: 'pim-giftcard-enviada', status: 'existente', priority: 'alta', trigger: 'Se emite código/giftcard para nuevo cambio.', note: 'Plantilla disponible en catálogo. Pendiente revisión de diseño.' },
             ],
             links: [
               ['request', 'pickup-order'],
@@ -1275,7 +1275,7 @@
               { id: 'delivered', lane: 'andreani', x: 650, text: 'Ya entregamos tu producto', status: 'faltante', priority: 'media', trigger: 'Andreani confirma entrega al centro de revisión.', note: 'Nombre operativo a confirmar.' },
               { id: 'rejected', lane: 'pim', x: 790, text: 'Notificación de garantía rechazada', status: 'faltante', priority: 'media', canales: ['b2c', 'punto-de-venta'], tiendas: ['sporting', 'woker'], trigger: 'Garantía rechazada por revisión.', note: 'Debe explicar motivo y alternativas.' },
               { id: 'received', lane: 'pim', x: 790, text: 'Recepción de producto para cambio', templateId: 'pim-recepcion-garantia', status: 'existente', priority: 'alta', trigger: 'Producto recibido para revisión o cambio por garantía.', note: 'Plantilla disponible en catálogo. Pendiente revisión de diseño.' },
-              { id: 'giftcard', lane: 'pim', x: 940, text: 'Giftcard (Código para cambio)', templateId: 'pim-giftcard', status: 'existente', priority: 'alta', trigger: 'Se emite código para resolver la garantía.', note: 'Plantilla disponible en catálogo. Pendiente revisión de diseño.' },
+              { id: 'giftcard', lane: 'pim', x: 940, text: 'Giftcard (Código para cambio)', templateId: 'pim-giftcard-enviada', status: 'existente', priority: 'alta', trigger: 'Se emite código para resolver la garantía.', note: 'Plantilla disponible en catálogo. Pendiente revisión de diseño.' },
             ],
             links: [
               ['request', 'pickup-order'],
