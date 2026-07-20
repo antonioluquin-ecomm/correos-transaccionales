@@ -157,8 +157,11 @@
           {
             id: 'ext', channel: 'ext', icon: '🏷️',
             label: 'Marketplace', sub: 'Vendido y distribuido por adidas',
-            intro: 'Productos de un Seller (adidas) ofrecidos en el sitio. El despacho se informa vía PIM con los carriers de Producteca (OCA, Correo Argentino, TRF, Urbano).',
-            excludes: [],
+            intro: 'Productos de un Seller (adidas) ofrecidos en el sitio de Sporting. VTEX gestiona pedido, pago y facturación (con sus propios correos); PIM gestiona el despacho, informando los carriers de Producteca (OCA, Correo Argentino, TRF, Urbano).',
+            excludes: [
+              'Cancelación de pedido — no está contemplada para ventas Marketplace en este catálogo.',
+              'Cambios, devoluciones, garantía y giftcard — el seller adidas gestiona esas etapas fuera de este sistema; solo se envía la etiqueta de devolución.',
+            ],
           },
         ];
 
@@ -205,7 +208,7 @@
           const templates = group.templates;
           const first = templates[0];
           const title = (group.evento && group.evento.label) || first.nombre;
-          const badges = `${CT.platformBadge(first.plataforma)}${CT.statusBadge(first.estado)}`;
+          const badges = CT.platformBadge(first.plataforma);
 
           let variants;
           if (templates.length === 1) {

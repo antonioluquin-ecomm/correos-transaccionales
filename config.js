@@ -1081,8 +1081,8 @@ const EXAMPLE_SCENARIOS = [
 
 const TEMPLATE_TAXONOMY = {
   'pedido-confirmado': {
-    canales: ['b2c'],
-    tiendas: ['sporting'],
+    canales: ['b2c', 'ext'],
+    tiendas: ['sporting', 'seller-adidas'],
     evento: { id: 'pedido-realizado', label: 'Pedido realizado' },
   },
   'woker-pedido-confirmado': {
@@ -1101,8 +1101,8 @@ const TEMPLATE_TAXONOMY = {
     evento: { id: 'pedido-cancelado', label: 'Pedido cancelado' },
   },
   'pago-aprobado': {
-    canales: ['b2c'],
-    tiendas: ['sporting'],
+    canales: ['b2c', 'ext'],
+    tiendas: ['sporting', 'seller-adidas'],
     evento: { id: 'pago-aprobado', label: 'Pago aprobado' },
   },
   'woker-pago-aprobado': {
@@ -1136,8 +1136,8 @@ const TEMPLATE_TAXONOMY = {
     evento: { id: 'volvio-a-stock', label: 'Volvio a stock' },
   },
   'order-invoiced': {
-    canales: ['b2c'],
-    tiendas: ['sporting'],
+    canales: ['ext'],
+    tiendas: ['seller-adidas'],
     evento: { id: 'pedido-facturado', label: 'Pedido facturado' },
   },
   'b2b-orden-generada': {
@@ -1204,8 +1204,8 @@ const TEMPLATE_TAXONOMY = {
     evento: { id: 'factura-disponible', label: 'Factura disponible' },
   },
   'pim-etiqueta-devolucion': {
-    canales: ['b2c', 'punto-de-venta'],
-    tiendas: ['sporting', 'woker'],
+    canales: ['b2c', 'punto-de-venta', 'ext'],
+    tiendas: ['sporting', 'woker', 'seller-adidas'],
     evento: { id: 'etiqueta-devolucion', label: 'Etiqueta de devolucion' },
   },
 };
@@ -1411,12 +1411,13 @@ EXAMPLE_SCENARIOS.forEach((scenario) => {
 });
 
 const VERSION = {
-  number: '1.27.1',
+  number: '1.28.0',
   date: '2026-07-20',
-  summary: 'Módulo Flujo (mapa técnico): corrige la referencia rota templateId "pim-giftcard" (era "pim-giftcard-enviada") en los 3 nodos de giftcard, y actualiza la nota del nodo de retiro que decía "aplica a e-commerce y PV" — el retiro es solo para compras online, la venta multidepósito es únicamente envío a domicilio.',
+  summary: 'Taxonomía Marketplace (ext): agrega pedido-confirmado, pago-aprobado y pim-etiqueta-devolucion al canal ext, y corrige order-invoiced (facturación VTEX) para que sea exclusivo de Marketplace, no de compra online — ahí la facturación la informa PIM. Recorrido por tipo de venta ya no muestra el badge de estado (activo/en revisión).',
 };
 
 const CHANGELOG = [
+  { version: '1.28.0', date: '2026-07-20', summary: 'Fix de taxonomía Marketplace (ext): pedido-confirmado y pago-aprobado (VTEX Sporting) se agregan a canal ext — Marketplace usa los mismos correos de compra/pago que Sporting. order-invoiced pasa de canal b2c a ext exclusivamente: la facturación VTEX solo se envía en pedidos Marketplace, en compra online la facturación la informa PIM (pim-factura-disponible), que antes aparecía duplicada con order-invoiced en el mismo paso. pim-etiqueta-devolucion se agrega a canal ext (única gestión post-venta que aplica a Marketplace; cancelación, cambios, devolución, garantía y giftcard no aplican). Módulo Recorrido: se quita el badge de estado (activo/en revisión) de las tarjetas de correo, y se actualizan intro/exclusiones de Marketplace. Módulo Flujo: notas de los nodos "Pedido facturado" actualizadas para reflejar que son exclusivos de Marketplace.' },
   { version: '1.27.1', date: '2026-07-20', summary: 'Flujo: fix de referencia rota templateId pim-giftcard -> pim-giftcard-enviada (3 nodos, ahora resuelven a la plantilla real) y nota de retiro corregida (solo online con retiro en tienda; multidepósito solo envío a domicilio).' },
   { version: '1.27.0', date: '2026-07-18', summary: 'Nuevo módulo modules/recorrido/: vista por tipo de venta (b2c/punto-de-venta/b2b/ext) con camino principal ordenado por etapa, ramas condicionales y exclusiones de negocio, derivada de config.js (no dibujada a mano). Cada correo enlaza al Visualizador. Se agrega al nav y a la home. Fix de taxonomía asociado: pim-retiro-disponible.canales pasa de [b2c, punto-de-venta] a [b2c] — multidepósito nunca ofrece retiro en sucursal.' },
   { version: '1.26.5', date: '2026-07-18', summary: 'Taxonomía de escenarios Cross Selling: entradas explícitas en SCENARIO_TAXONOMY para envio-despachado, recepcion-cambio, recepcion-garantia y etiqueta-devolucion, acotándolos a canal punto-de-venta. Antes heredaban toda la taxonomía de la plantilla compartida: envio-despachado-cross-selling aparecía bajo EXT/Seller adidas (regla: Cross Selling nunca es adidas) y los de logística inversa bajo B2C. Verificado en el Visualizador: Cross Selling solo bajo Punto de Venta; Producteca/adidas intactos bajo EXT.' },
