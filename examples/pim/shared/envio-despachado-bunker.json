@@ -1,0 +1,42 @@
+{
+  "Tienda": {
+    "Nombre": "Sporting",
+    "Datos": {
+      "NotificacionesConfig": {
+        "HeaderURL": "https://www.sporting.com.ar",
+        "HeaderImage": "https://apichannels.luquinsa.com.ar/images/logo-sporting-header.jpg"
+      }
+    }
+  },
+  "Pedido": {
+    "NroPedidoCanal": "SPO-667788002",
+    "Logistica": "AndreaniBunker",
+    "DatosEnvio": {
+      "Destinatario": {
+        "Nombres": "Cliente"
+      },
+      "Destino": {
+        "Postal": {
+          "Calle": "Av. Rivadavia",
+          "Numero": "4521",
+          "Localidad": "Ciudad Autónoma de Buenos Aires",
+          "Pais": "Argentina",
+          "CodigoPostal": "C1424"
+        }
+      },
+      "Etiqueta": {
+        "NroSeguimiento": "360009876543210"
+      }
+    },
+    "LineasPedido": [
+      {
+        "SKU": "SPO-RUN-001",
+        "Cantidad": 1
+      },
+      {
+        "SKU": "SPO-MED-014",
+        "Cantidad": 2
+      }
+    ]
+  }
+}

@@ -900,6 +900,26 @@ const EXAMPLE_SCENARIOS = [
     compatibleTemplates: ['pim-envio-despachado'],
   },
   {
+    id: 'pim-envio-despachado-taika',
+    facetas: ['un-paquete', 'domicilio'],
+    path: 'examples/pim/shared/envio-despachado-taika.json',
+    store: 'shared',
+    label: 'OCASA · Taika (gestión asistida)',
+    tipo: 'PIM — pedido despachado',
+    descripcion: 'Despacho de un seller de gestión asistida (Taika, Tucumán) vendiendo desde la cuenta VTEX propia. Pedido.Logistica = "OCASATaika": el operador logístico real es OCASA (mismo botón/link de tracking que OCASA estándar) y se agrega la leyenda "Vendido por Taika" junto al N.° de pedido.',
+    compatibleTemplates: ['pim-envio-despachado'],
+  },
+  {
+    id: 'pim-envio-despachado-bunker',
+    facetas: ['un-paquete', 'domicilio'],
+    path: 'examples/pim/shared/envio-despachado-bunker.json',
+    store: 'shared',
+    label: 'Andreani · Bunker (gestión asistida)',
+    tipo: 'PIM — pedido despachado',
+    descripcion: 'Despacho de un seller de gestión asistida (Bunker) vendiendo desde la cuenta VTEX propia. Pedido.Logistica = "AndreaniBunker": el operador logístico real es Andreani (mismo botón/link de tracking que Andreani estándar) y se agrega la leyenda "Vendido por Bunker" junto al N.° de pedido.',
+    compatibleTemplates: ['pim-envio-despachado'],
+  },
+  {
     id: 'pim-envio-despachado-propia',
     facetas: ['un-paquete', 'domicilio'],
     path: 'examples/pim/shared/envio-despachado-propia.json',
@@ -1005,12 +1025,48 @@ const EXAMPLE_SCENARIOS = [
     compatibleTemplates: ['pim-recepcion-cambio'],
   },
   {
+    id: 'pim-recepcion-cambio-taika',
+    path: 'examples/pim/shared/recepcion-cambio-taika.json',
+    store: 'shared',
+    label: 'OCASA · Taika (gestión asistida)',
+    tipo: 'PIM — recepción de cambio',
+    descripcion: 'Recepción de cambio de un pedido vendido por Taika (Pedido.Logistica = "OCASATaika"). Agrega la leyenda "Vendido por Taika".',
+    compatibleTemplates: ['pim-recepcion-cambio'],
+  },
+  {
+    id: 'pim-recepcion-cambio-bunker',
+    path: 'examples/pim/shared/recepcion-cambio-bunker.json',
+    store: 'shared',
+    label: 'Andreani · Bunker (gestión asistida)',
+    tipo: 'PIM — recepción de cambio',
+    descripcion: 'Recepción de cambio de un pedido vendido por Bunker (Pedido.Logistica = "AndreaniBunker"). Agrega la leyenda "Vendido por Bunker".',
+    compatibleTemplates: ['pim-recepcion-cambio'],
+  },
+  {
     id: 'pim-recepcion-devolucion-sporting',
     path: 'examples/pim/shared/recepcion-devolucion-sporting.json',
     store: 'shared',
     label: 'Aceptado + rechazado',
     tipo: 'PIM — recepción de devolución',
     descripcion: 'Recepción de devolución con un producto aceptado y uno rechazado (con motivo) e info de reembolso.',
+    compatibleTemplates: ['pim-recepcion-devolucion'],
+  },
+  {
+    id: 'pim-recepcion-devolucion-taika',
+    path: 'examples/pim/shared/recepcion-devolucion-taika.json',
+    store: 'shared',
+    label: 'OCASA · Taika (gestión asistida)',
+    tipo: 'PIM — recepción de devolución',
+    descripcion: 'Recepción de devolución de un pedido vendido por Taika (Pedido.Logistica = "OCASATaika"). Agrega la leyenda "Vendido por Taika".',
+    compatibleTemplates: ['pim-recepcion-devolucion'],
+  },
+  {
+    id: 'pim-recepcion-devolucion-bunker',
+    path: 'examples/pim/shared/recepcion-devolucion-bunker.json',
+    store: 'shared',
+    label: 'Andreani · Bunker (gestión asistida)',
+    tipo: 'PIM — recepción de devolución',
+    descripcion: 'Recepción de devolución de un pedido vendido por Bunker (Pedido.Logistica = "AndreaniBunker"). Agrega la leyenda "Vendido por Bunker".',
     compatibleTemplates: ['pim-recepcion-devolucion'],
   },
   {
@@ -1032,6 +1088,24 @@ const EXAMPLE_SCENARIOS = [
     compatibleTemplates: ['pim-recepcion-garantia'],
   },
   {
+    id: 'pim-recepcion-garantia-taika',
+    path: 'examples/pim/shared/recepcion-garantia-taika.json',
+    store: 'shared',
+    label: 'OCASA · Taika (gestión asistida)',
+    tipo: 'PIM — recepción de garantía',
+    descripcion: 'Recepción de garantía de un pedido vendido por Taika (Pedido.Logistica = "OCASATaika"). Agrega la leyenda "Vendido por Taika".',
+    compatibleTemplates: ['pim-recepcion-garantia'],
+  },
+  {
+    id: 'pim-recepcion-garantia-bunker',
+    path: 'examples/pim/shared/recepcion-garantia-bunker.json',
+    store: 'shared',
+    label: 'Andreani · Bunker (gestión asistida)',
+    tipo: 'PIM — recepción de garantía',
+    descripcion: 'Recepción de garantía de un pedido vendido por Bunker (Pedido.Logistica = "AndreaniBunker"). Agrega la leyenda "Vendido por Bunker".',
+    compatibleTemplates: ['pim-recepcion-garantia'],
+  },
+  {
     id: 'pim-quiebre-stock-sporting',
     path: 'examples/pim/shared/quiebre-stock-sporting.json',
     store: 'shared',
@@ -1041,12 +1115,48 @@ const EXAMPLE_SCENARIOS = [
     compatibleTemplates: ['pim-quiebre-stock'],
   },
   {
+    id: 'pim-quiebre-stock-taika',
+    path: 'examples/pim/shared/quiebre-stock-taika.json',
+    store: 'shared',
+    label: 'OCASA · Taika (gestión asistida)',
+    tipo: 'PIM — quiebre de stock',
+    descripcion: 'Quiebre de stock de un pedido vendido por Taika (Pedido.Logistica = "OCASATaika"). Agrega la leyenda "Vendido por Taika".',
+    compatibleTemplates: ['pim-quiebre-stock'],
+  },
+  {
+    id: 'pim-quiebre-stock-bunker',
+    path: 'examples/pim/shared/quiebre-stock-bunker.json',
+    store: 'shared',
+    label: 'Andreani · Bunker (gestión asistida)',
+    tipo: 'PIM — quiebre de stock',
+    descripcion: 'Quiebre de stock de un pedido vendido por Bunker (Pedido.Logistica = "AndreaniBunker"). Agrega la leyenda "Vendido por Bunker".',
+    compatibleTemplates: ['pim-quiebre-stock'],
+  },
+  {
     id: 'pim-etiqueta-devolucion-sporting',
     path: 'examples/pim/shared/etiqueta-devolucion-sporting.json',
     store: 'shared',
     label: '2 productos a devolver',
     tipo: 'PIM — etiqueta de devolución',
     descripcion: 'Etiqueta de devolución adjunta con dos productos a retirar a domicilio.',
+    compatibleTemplates: ['pim-etiqueta-devolucion'],
+  },
+  {
+    id: 'pim-etiqueta-devolucion-taika',
+    path: 'examples/pim/shared/etiqueta-devolucion-taika.json',
+    store: 'shared',
+    label: 'OCASA · Taika (gestión asistida)',
+    tipo: 'PIM — etiqueta de devolución',
+    descripcion: 'Etiqueta de devolución de un pedido vendido por Taika (Pedido.Logistica = "OCASATaika"). Agrega la leyenda "Vendido por Taika".',
+    compatibleTemplates: ['pim-etiqueta-devolucion'],
+  },
+  {
+    id: 'pim-etiqueta-devolucion-bunker',
+    path: 'examples/pim/shared/etiqueta-devolucion-bunker.json',
+    store: 'shared',
+    label: 'Andreani · Bunker (gestión asistida)',
+    tipo: 'PIM — etiqueta de devolución',
+    descripcion: 'Etiqueta de devolución de un pedido vendido por Bunker (Pedido.Logistica = "AndreaniBunker"). Agrega la leyenda "Vendido por Bunker".',
     compatibleTemplates: ['pim-etiqueta-devolucion'],
   },
   {
@@ -1158,7 +1268,7 @@ const TEMPLATE_TAXONOMY = {
   'pim-envio-despachado': {
     canales: ['b2c', 'punto-de-venta', 'ext'],
     tiendas: ['sporting', 'woker', 'seller-adidas'],
-    logistica: ['andreani', 'ocasa', 'propia', 'retiro', 'producteca-oca', 'producteca-correo-argentino', 'producteca-trf', 'producteca-urbano'],
+    logistica: ['andreani', 'andreani-bunker', 'ocasa', 'ocasa-taika', 'propia', 'retiro', 'producteca-oca', 'producteca-correo-argentino', 'producteca-trf', 'producteca-urbano'],
     evento: { id: 'pedido-despachado', label: 'Pedido despachado' },
   },
   'pim-retiro-disponible': {
@@ -1181,21 +1291,25 @@ const TEMPLATE_TAXONOMY = {
   'pim-recepcion-cambio': {
     canales: ['b2c', 'punto-de-venta'],
     tiendas: ['sporting', 'woker'],
+    logistica: ['ocasa-taika', 'andreani-bunker'],
     evento: { id: 'recepcion-cambio', label: 'Recepcion de cambio' },
   },
   'pim-recepcion-devolucion': {
     canales: ['b2c'],
     tiendas: ['sporting', 'woker'],
+    logistica: ['ocasa-taika', 'andreani-bunker'],
     evento: { id: 'recepcion-devolucion', label: 'Recepcion de devolucion' },
   },
   'pim-recepcion-garantia': {
     canales: ['b2c', 'punto-de-venta'],
     tiendas: ['sporting', 'woker'],
+    logistica: ['ocasa-taika', 'andreani-bunker'],
     evento: { id: 'recepcion-garantia', label: 'Recepcion de garantia' },
   },
   'pim-quiebre-stock': {
     canales: ['b2c'],
     tiendas: ['sporting', 'woker'],
+    logistica: ['ocasa-taika', 'andreani-bunker'],
     evento: { id: 'quiebre-stock', label: 'Quiebre de stock' },
   },
   'pim-factura-disponible': {
@@ -1206,6 +1320,7 @@ const TEMPLATE_TAXONOMY = {
   'pim-etiqueta-devolucion': {
     canales: ['b2c', 'punto-de-venta', 'ext'],
     tiendas: ['sporting', 'woker', 'seller-adidas'],
+    logistica: ['ocasa-taika', 'andreani-bunker'],
     evento: { id: 'etiqueta-devolucion', label: 'Etiqueta de devolucion' },
   },
 };
@@ -1256,6 +1371,18 @@ const SCENARIO_TAXONOMY = {
   'pim-envio-despachado-producteca-sin-tracking': {
     canales: ['ext'],
     tiendas: ['seller-adidas'],
+    eventoId: 'pedido-despachado',
+  },
+  'pim-envio-despachado-taika': {
+    canales: ['b2c'],
+    tiendas: ['sporting'],
+    logistica: ['ocasa-taika'],
+    eventoId: 'pedido-despachado',
+  },
+  'pim-envio-despachado-bunker': {
+    canales: ['b2c'],
+    tiendas: ['sporting'],
+    logistica: ['andreani-bunker'],
     eventoId: 'pedido-despachado',
   },
   'pim-envio-despachado-cross-selling': {
@@ -1309,9 +1436,33 @@ const SCENARIO_TAXONOMY = {
     tiendas: ['sporting'],
     eventoId: 'recepcion-cambio',
   },
+  'pim-recepcion-cambio-taika': {
+    canales: ['b2c'],
+    tiendas: ['sporting'],
+    logistica: ['ocasa-taika'],
+    eventoId: 'recepcion-cambio',
+  },
+  'pim-recepcion-cambio-bunker': {
+    canales: ['b2c'],
+    tiendas: ['sporting'],
+    logistica: ['andreani-bunker'],
+    eventoId: 'recepcion-cambio',
+  },
   'pim-recepcion-devolucion-sporting': {
     canales: ['b2c'],
     tiendas: ['sporting'],
+    eventoId: 'recepcion-devolucion',
+  },
+  'pim-recepcion-devolucion-taika': {
+    canales: ['b2c'],
+    tiendas: ['sporting'],
+    logistica: ['ocasa-taika'],
+    eventoId: 'recepcion-devolucion',
+  },
+  'pim-recepcion-devolucion-bunker': {
+    canales: ['b2c'],
+    tiendas: ['sporting'],
+    logistica: ['andreani-bunker'],
     eventoId: 'recepcion-devolucion',
   },
   'pim-recepcion-garantia-sporting': {
@@ -1319,14 +1470,50 @@ const SCENARIO_TAXONOMY = {
     tiendas: ['sporting'],
     eventoId: 'recepcion-garantia',
   },
+  'pim-recepcion-garantia-taika': {
+    canales: ['b2c'],
+    tiendas: ['sporting'],
+    logistica: ['ocasa-taika'],
+    eventoId: 'recepcion-garantia',
+  },
+  'pim-recepcion-garantia-bunker': {
+    canales: ['b2c'],
+    tiendas: ['sporting'],
+    logistica: ['andreani-bunker'],
+    eventoId: 'recepcion-garantia',
+  },
   'pim-quiebre-stock-sporting': {
     canales: ['b2c'],
     tiendas: ['sporting'],
     eventoId: 'quiebre-stock',
   },
+  'pim-quiebre-stock-taika': {
+    canales: ['b2c'],
+    tiendas: ['sporting'],
+    logistica: ['ocasa-taika'],
+    eventoId: 'quiebre-stock',
+  },
+  'pim-quiebre-stock-bunker': {
+    canales: ['b2c'],
+    tiendas: ['sporting'],
+    logistica: ['andreani-bunker'],
+    eventoId: 'quiebre-stock',
+  },
   'pim-etiqueta-devolucion-sporting': {
     canales: ['b2c'],
     tiendas: ['sporting'],
+    eventoId: 'etiqueta-devolucion',
+  },
+  'pim-etiqueta-devolucion-taika': {
+    canales: ['b2c'],
+    tiendas: ['sporting'],
+    logistica: ['ocasa-taika'],
+    eventoId: 'etiqueta-devolucion',
+  },
+  'pim-etiqueta-devolucion-bunker': {
+    canales: ['b2c'],
+    tiendas: ['sporting'],
+    logistica: ['andreani-bunker'],
     eventoId: 'etiqueta-devolucion',
   },
   'pim-envio-b2b-venta-deportiva': {
@@ -1411,12 +1598,13 @@ EXAMPLE_SCENARIOS.forEach((scenario) => {
 });
 
 const VERSION = {
-  number: '1.28.0',
-  date: '2026-07-20',
-  summary: 'Taxonomía Marketplace (ext): agrega pedido-confirmado, pago-aprobado y pim-etiqueta-devolucion al canal ext, y corrige order-invoiced (facturación VTEX) para que sea exclusivo de Marketplace, no de compra online — ahí la facturación la informa PIM. Recorrido por tipo de venta ya no muestra el badge de estado (activo/en revisión).',
+  number: '1.29.0',
+  date: '2026-07-25',
+  summary: 'Sellers de gestión asistida (Taika, Bunker) identificados por Pedido.Logistica en despacho, recepción de cambio/devolución/garantía, etiqueta de devolución y quiebre de stock, con la leyenda "Vendido por Taika/Bunker" y el operador logístico real (OCASA/Andreani).',
 };
 
 const CHANGELOG = [
+  { version: '1.29.0', date: '2026-07-25', summary: 'Sellers de gestión asistida Taika y Bunker (venden desde la cuenta VTEX propia, sin tienda PIM propia): nuevos valores de Pedido.Logistica "OCASATaika" y "AndreaniBunker". Se agrega la leyenda "Vendido por Taika" / "Vendido por Bunker" en pim-envio-despachado, pim-recepcion-cambio, pim-recepcion-devolucion, pim-recepcion-garantia, pim-etiqueta-devolucion y pim-quiebre-stock (en despacho, además, el operador logístico mostrado y el botón/link de tracking son los reales: OCASA / Andreani, mismas URLs que esos operadores estándar). No aplica a pim-retiro-disponible ni pim-giftcard-enviada (no corresponden a este modelo de venta) ni a pim-factura-disponible (la factura de estos sellers se envía por el mail VTEX order-invoiced, no por PIM — pendiente de resolver ahí su propia taxonomía y leyenda, es otra plataforma/modelo de datos). Nuevos escenarios de ejemplo "OCASA · Taika" y "Andreani · Bunker" en los 6 templates afectados, acotados a canal b2c / tienda Sporting. Nuevas entradas de filtro de Logística ("OCASA · Taika", "Andreani · Bunker") en LOGISTICA_OPTIONS (assets/js/shared.js).' },
   { version: '1.28.0', date: '2026-07-20', summary: 'Fix de taxonomía Marketplace (ext): pedido-confirmado y pago-aprobado (VTEX Sporting) se agregan a canal ext — Marketplace usa los mismos correos de compra/pago que Sporting. order-invoiced pasa de canal b2c a ext exclusivamente: la facturación VTEX solo se envía en pedidos Marketplace, en compra online la facturación la informa PIM (pim-factura-disponible), que antes aparecía duplicada con order-invoiced en el mismo paso. pim-etiqueta-devolucion se agrega a canal ext (única gestión post-venta que aplica a Marketplace; cancelación, cambios, devolución, garantía y giftcard no aplican). Módulo Recorrido: se quita el badge de estado (activo/en revisión) de las tarjetas de correo, y se actualizan intro/exclusiones de Marketplace. Módulo Flujo: notas de los nodos "Pedido facturado" actualizadas para reflejar que son exclusivos de Marketplace.' },
   { version: '1.27.1', date: '2026-07-20', summary: 'Flujo: fix de referencia rota templateId pim-giftcard -> pim-giftcard-enviada (3 nodos, ahora resuelven a la plantilla real) y nota de retiro corregida (solo online con retiro en tienda; multidepósito solo envío a domicilio).' },
   { version: '1.27.0', date: '2026-07-18', summary: 'Nuevo módulo modules/recorrido/: vista por tipo de venta (b2c/punto-de-venta/b2b/ext) con camino principal ordenado por etapa, ramas condicionales y exclusiones de negocio, derivada de config.js (no dibujada a mano). Cada correo enlaza al Visualizador. Se agrega al nav y a la home. Fix de taxonomía asociado: pim-retiro-disponible.canales pasa de [b2c, punto-de-venta] a [b2c] — multidepósito nunca ofrece retiro en sucursal.' },

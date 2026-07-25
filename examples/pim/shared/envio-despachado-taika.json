@@ -1,0 +1,42 @@
+{
+  "Tienda": {
+    "Nombre": "Sporting",
+    "Datos": {
+      "NotificacionesConfig": {
+        "HeaderURL": "https://www.sporting.com.ar",
+        "HeaderImage": "https://apichannels.luquinsa.com.ar/images/logo-sporting-header.jpg"
+      }
+    }
+  },
+  "Pedido": {
+    "NroPedidoCanal": "SPO-778899001",
+    "Logistica": "OCASATaika",
+    "DatosEnvio": {
+      "Destinatario": {
+        "Nombres": "Cliente"
+      },
+      "Destino": {
+        "Postal": {
+          "Calle": "Calle Muñecas",
+          "Numero": "540",
+          "Localidad": "San Miguel de Tucumán",
+          "Pais": "Argentina",
+          "CodigoPostal": "T4000"
+        }
+      },
+      "Etiqueta": {
+        "NroSeguimiento": "EC4FFA1597425"
+      }
+    },
+    "LineasPedido": [
+      {
+        "SKU": "SPO-RUN-001",
+        "Cantidad": 1
+      },
+      {
+        "SKU": "SPO-MED-014",
+        "Cantidad": 2
+      }
+    ]
+  }
+}

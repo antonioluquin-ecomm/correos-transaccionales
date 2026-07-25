@@ -30,7 +30,9 @@ const CT = (() => {
 
   const LOGISTICA_OPTIONS = [
     { id: 'andreani', label: 'Andreani' },
+    { id: 'andreani-bunker', label: 'Andreani · Bunker' },
     { id: 'ocasa', label: 'OCASA' },
+    { id: 'ocasa-taika', label: 'OCASA · Taika' },
     { id: 'propia', label: 'Propia' },
     { id: 'retiro', label: 'Retiro' },
     { id: 'producteca-oca', label: 'Producteca · OCA' },
@@ -50,7 +52,7 @@ const CT = (() => {
   // Logística válida por canal (para hints de UI y validación).
   const CHANNEL_LOGISTICA = {
     'punto-de-venta': ['andreani', 'retiro'],
-    'b2c': ['andreani', 'ocasa', 'propia', 'retiro'],
+    'b2c': ['andreani', 'andreani-bunker', 'ocasa', 'ocasa-taika', 'propia', 'retiro'],
     'b2b': ['propia'],
     'ext': ['producteca-oca', 'producteca-correo-argentino', 'producteca-trf', 'producteca-urbano'],
   };

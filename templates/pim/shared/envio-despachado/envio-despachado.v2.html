@@ -55,7 +55,7 @@
   <body>
     <!-- Preheader -->
     <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;visibility:hidden;mso-hide:all;">
-      Tu pedido {{ .Pedido.NroPedidoCanal }} fue despachado por {{ if (eq .Pedido.Logistica "Producteca") }}{{ if .Pedido.DatosEnvio.Etiqueta.NroSeguimiento }}{{ if (or (hasPrefix .Pedido.DatosEnvio.Etiqueta.NroSeguimiento "UR") (hasPrefix .Pedido.DatosEnvio.Etiqueta.NroSeguimiento "AD")) }}Urbano{{ else if (hasPrefix .Pedido.DatosEnvio.Etiqueta.NroSeguimiento "CA") }}Correo Argentino{{ else if (gt (len .Pedido.DatosEnvio.Etiqueta.NroSeguimiento) 12) }}OCA{{ else }}TRF{{ end }}{{ else }}Producteca{{ end }}{{ else }}{{ .Pedido.Logistica }}{{ end }}. Seguí el envío desde acá.&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;
+      Tu pedido {{ .Pedido.NroPedidoCanal }} fue despachado por {{ if (eq .Pedido.Logistica "Producteca") }}{{ if .Pedido.DatosEnvio.Etiqueta.NroSeguimiento }}{{ if (or (hasPrefix .Pedido.DatosEnvio.Etiqueta.NroSeguimiento "UR") (hasPrefix .Pedido.DatosEnvio.Etiqueta.NroSeguimiento "AD")) }}Urbano{{ else if (hasPrefix .Pedido.DatosEnvio.Etiqueta.NroSeguimiento "CA") }}Correo Argentino{{ else if (gt (len .Pedido.DatosEnvio.Etiqueta.NroSeguimiento) 12) }}OCA{{ else }}TRF{{ end }}{{ else }}Producteca{{ end }}{{ else if (eq .Pedido.Logistica "OCASATaika") }}OCASA{{ else if (eq .Pedido.Logistica "AndreaniBunker") }}Andreani{{ else }}{{ .Pedido.Logistica }}{{ end }}. Seguí el envío desde acá.&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;
     </div>
 
     <table role="presentation" width="100%" bgcolor="#e8e8e8" style="background:#e8e8e8;">
@@ -122,10 +122,15 @@
                           <td class="sum-cell" style="width:50%;padding:16px 18px;vertical-align:top;border-bottom:1px solid #f3f4f6;">
                             <p style="font-size:9.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#b0b0b0;margin:0 0 5px 0;">N.&deg; de pedido</p>
                             <p style="font-size:15px;line-height:22px;font-weight:700;color:#111827;margin:0;">{{ .Pedido.NroPedidoCanal }}</p>
+                            {{ if (eq .Pedido.Logistica "OCASATaika") }}
+                            <p style="font-size:10.5px;color:#94a3b8;margin:4px 0 0;">Vendido por Taika</p>
+                            {{ else if (eq .Pedido.Logistica "AndreaniBunker") }}
+                            <p style="font-size:10.5px;color:#94a3b8;margin:4px 0 0;">Vendido por Bunker</p>
+                            {{ end }}
                           </td>
                           <td class="sum-cell sum-cell-r" style="width:50%;padding:16px 18px;vertical-align:top;border-bottom:1px solid #f3f4f6;border-left:1px solid #f3f4f6;">
                             <p style="font-size:9.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#b0b0b0;margin:0 0 5px 0;">Operador logístico</p>
-                            <p style="font-size:15px;line-height:22px;font-weight:700;color:#111827;margin:0;">{{ if (eq .Pedido.Logistica "Producteca") }}{{ if .Pedido.DatosEnvio.Etiqueta.NroSeguimiento }}{{ if (or (hasPrefix .Pedido.DatosEnvio.Etiqueta.NroSeguimiento "UR") (hasPrefix .Pedido.DatosEnvio.Etiqueta.NroSeguimiento "AD")) }}Urbano{{ else if (hasPrefix .Pedido.DatosEnvio.Etiqueta.NroSeguimiento "CA") }}Correo Argentino{{ else if (gt (len .Pedido.DatosEnvio.Etiqueta.NroSeguimiento) 12) }}OCA{{ else }}TRF{{ end }}{{ else }}Producteca{{ end }}{{ else }}{{ .Pedido.Logistica }}{{ end }}</p>
+                            <p style="font-size:15px;line-height:22px;font-weight:700;color:#111827;margin:0;">{{ if (eq .Pedido.Logistica "Producteca") }}{{ if .Pedido.DatosEnvio.Etiqueta.NroSeguimiento }}{{ if (or (hasPrefix .Pedido.DatosEnvio.Etiqueta.NroSeguimiento "UR") (hasPrefix .Pedido.DatosEnvio.Etiqueta.NroSeguimiento "AD")) }}Urbano{{ else if (hasPrefix .Pedido.DatosEnvio.Etiqueta.NroSeguimiento "CA") }}Correo Argentino{{ else if (gt (len .Pedido.DatosEnvio.Etiqueta.NroSeguimiento) 12) }}OCA{{ else }}TRF{{ end }}{{ else }}Producteca{{ end }}{{ else if (eq .Pedido.Logistica "OCASATaika") }}OCASA{{ else if (eq .Pedido.Logistica "AndreaniBunker") }}Andreani{{ else }}{{ .Pedido.Logistica }}{{ end }}</p>
                           </td>
                         </tr>
                         <tr>
@@ -176,7 +181,7 @@
                   <!-- CTA de seguimiento según operador logístico -->
                   <tr>
                     <td style="padding:4px 24px 24px;">
-                      {{ if (eq .Pedido.Logistica "Andreani") }}
+                      {{ if (or (eq .Pedido.Logistica "Andreani") (eq .Pedido.Logistica "AndreaniBunker")) }}
                       <a href="https://www.andreani.com/envio/{{ .Pedido.DatosEnvio.Etiqueta.NroSeguimiento }}" target="_blank" class="cta" style="display:block;width:100%;box-sizing:border-box;background:#0c4a6e;color:#ffffff;border-radius:8px;font-size:13px;line-height:52px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-align:center;text-decoration:none;">Seguir envío en Andreani &nbsp;&#8594;</a>
                       <p class="text-sm" style="font-size:12px;line-height:18px;color:#6b7280;margin:12px 0 0;text-align:center;">El código puede demorar hasta 72&nbsp;horas en actualizarse en el sitio de Andreani.</p>
 
@@ -195,7 +200,7 @@
                         <p class="text-sm" style="font-size:13px;line-height:20px;color:#6b7280;margin:0;text-align:center;">El enlace de seguimiento estará disponible cuando el operador logístico active el código.</p>
                         {{ end }}
 
-                      {{ else if (eq .Pedido.Logistica "OCASA") }}
+                      {{ else if (or (eq .Pedido.Logistica "OCASA") (eq .Pedido.Logistica "OCASATaika")) }}
                       <a href="https://tracking.ocasa.com/Tracking/index?client=&amp;airbillnumber={{ .Pedido.DatosEnvio.Etiqueta.NroSeguimiento }}&amp;i=18&amp;url=ocasa" target="_blank" class="cta" style="display:block;width:100%;box-sizing:border-box;background:#0c4a6e;color:#ffffff;border-radius:8px;font-size:13px;line-height:52px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-align:center;text-decoration:none;">Seguir envío en OCASA &nbsp;&#8594;</a>
 
                       {{ else if (eq .Pedido.Logistica "Propia") }}
