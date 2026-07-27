@@ -322,6 +322,7 @@ const TEMPLATES = [
       'packages[] (invoiceNumber, invoiceValue, invoiceUrl, issuanceDate, courier, trackingNumber, trackingUrl)',
       'package.* (fallback cuando no hay packages[])',
       'shippingData.address (street, number, city, state, country)',
+      'shippingData.logisticsInfo[0].deliveryIds[0].warehouseId (seller de gestión asistida: "1_198" = Taika, "1_197" = Bunker -> leyenda "Vendido por Taika/Bunker")',
       'paymentData.transactions[].payments[] (paymentSystemName, installments)',
     ],
   },
@@ -809,6 +810,30 @@ const EXAMPLE_SCENARIOS = [
     compatibleTemplates: ['order-invoiced'],
   },
   {
+    id: 'order-invoiced-taika',
+    facetas: ['un-paquete', 'domicilio'],
+    logistica: ['ocasa-taika'],
+    canales: ['b2c'],
+    tiendas: ['sporting'],
+    path: 'examples/vtex/sporting/order-invoiced-taika.sample.json',
+    label: 'Facturación - OCASA · Taika (gestión asistida)',
+    tipo: 'Facturación',
+    descripcion: 'Pedido facturado vendido por el seller de gestión asistida Taika (shippingData.logisticsInfo[0].deliveryIds[0].warehouseId = "1_198"). Agrega la leyenda "Vendido por Taika".',
+    compatibleTemplates: ['order-invoiced'],
+  },
+  {
+    id: 'order-invoiced-bunker',
+    facetas: ['un-paquete', 'domicilio'],
+    logistica: ['andreani-bunker'],
+    canales: ['b2c'],
+    tiendas: ['sporting'],
+    path: 'examples/vtex/sporting/order-invoiced-bunker.sample.json',
+    label: 'Facturación - Andreani · Bunker (gestión asistida)',
+    tipo: 'Facturación',
+    descripcion: 'Pedido facturado vendido por el seller de gestión asistida Bunker (shippingData.logisticsInfo[0].deliveryIds[0].warehouseId = "1_197"). Agrega la leyenda "Vendido por Bunker".',
+    compatibleTemplates: ['order-invoiced'],
+  },
+  {
     id: 'order-invoiced-seguimiento',
     facetas: ['un-paquete', 'domicilio'],
     logistica: ['producteca-urbano'],
@@ -1246,8 +1271,9 @@ const TEMPLATE_TAXONOMY = {
     evento: { id: 'volvio-a-stock', label: 'Volvio a stock' },
   },
   'order-invoiced': {
-    canales: ['ext'],
-    tiendas: ['seller-adidas'],
+    canales: ['ext', 'b2c'],
+    tiendas: ['seller-adidas', 'sporting'],
+    logistica: ['ocasa-taika', 'andreani-bunker'],
     evento: { id: 'pedido-facturado', label: 'Pedido facturado' },
   },
   'b2b-orden-generada': {
@@ -1598,12 +1624,13 @@ EXAMPLE_SCENARIOS.forEach((scenario) => {
 });
 
 const VERSION = {
-  number: '1.29.0',
-  date: '2026-07-25',
-  summary: 'Sellers de gestión asistida (Taika, Bunker) identificados por Pedido.Logistica en despacho, recepción de cambio/devolución/garantía, etiqueta de devolución y quiebre de stock, con la leyenda "Vendido por Taika/Bunker" y el operador logístico real (OCASA/Andreani).',
+  number: '1.30.0',
+  date: '2026-07-27',
+  summary: 'order-invoiced (VTEX) suma a los sellers de gestión asistida Taika/Bunker: la leyenda "Vendido por Taika/Bunker" se dispara por shippingData.logisticsInfo[0].deliveryIds[0].warehouseId ("1_198" / "1_197"), completando el modelo iniciado en PIM.',
 };
 
 const CHANGELOG = [
+  { version: '1.30.0', date: '2026-07-27', summary: 'order-invoiced (VTEX, mail de factura de Marketplace) suma la leyenda "Vendido por Taika" / "Vendido por Bunker" para los sellers de gestión asistida, condicionada por shippingData.logisticsInfo[0].deliveryIds[0].warehouseId = "1_198" (Taika) / "1_197" (Bunker) — a diferencia de PIM, acá no hay tienda ni seller VTEX distinto (siempre sellers[].id = "1" / Sporting), el depósito de despacho es la única señal. Taxonomía de order-invoiced ampliada de exclusivo ext/seller-adidas a también b2c/sporting (por ahora solo Sporting es Marketplace). Nuevos escenarios de ejemplo "OCASA · Taika" y "Andreani · Bunker" reusando los mismos ids de filtro de Logística ya creados para PIM. Nunca hay pedidos con productos de más de un seller/depósito mezclados, así que la leyenda se resuelve a nivel de todo el pedido (primer paquete), sin necesidad de cruzar por paquete individual.' },
   { version: '1.29.0', date: '2026-07-25', summary: 'Sellers de gestión asistida Taika y Bunker (venden desde la cuenta VTEX propia, sin tienda PIM propia): nuevos valores de Pedido.Logistica "OCASATaika" y "AndreaniBunker". Se agrega la leyenda "Vendido por Taika" / "Vendido por Bunker" en pim-envio-despachado, pim-recepcion-cambio, pim-recepcion-devolucion, pim-recepcion-garantia, pim-etiqueta-devolucion y pim-quiebre-stock (en despacho, además, el operador logístico mostrado y el botón/link de tracking son los reales: OCASA / Andreani, mismas URLs que esos operadores estándar). No aplica a pim-retiro-disponible ni pim-giftcard-enviada (no corresponden a este modelo de venta) ni a pim-factura-disponible (la factura de estos sellers se envía por el mail VTEX order-invoiced, no por PIM — pendiente de resolver ahí su propia taxonomía y leyenda, es otra plataforma/modelo de datos). Nuevos escenarios de ejemplo "OCASA · Taika" y "Andreani · Bunker" en los 6 templates afectados, acotados a canal b2c / tienda Sporting. Nuevas entradas de filtro de Logística ("OCASA · Taika", "Andreani · Bunker") en LOGISTICA_OPTIONS (assets/js/shared.js).' },
   { version: '1.28.0', date: '2026-07-20', summary: 'Fix de taxonomía Marketplace (ext): pedido-confirmado y pago-aprobado (VTEX Sporting) se agregan a canal ext — Marketplace usa los mismos correos de compra/pago que Sporting. order-invoiced pasa de canal b2c a ext exclusivamente: la facturación VTEX solo se envía en pedidos Marketplace, en compra online la facturación la informa PIM (pim-factura-disponible), que antes aparecía duplicada con order-invoiced en el mismo paso. pim-etiqueta-devolucion se agrega a canal ext (única gestión post-venta que aplica a Marketplace; cancelación, cambios, devolución, garantía y giftcard no aplican). Módulo Recorrido: se quita el badge de estado (activo/en revisión) de las tarjetas de correo, y se actualizan intro/exclusiones de Marketplace. Módulo Flujo: notas de los nodos "Pedido facturado" actualizadas para reflejar que son exclusivos de Marketplace.' },
   { version: '1.27.1', date: '2026-07-20', summary: 'Flujo: fix de referencia rota templateId pim-giftcard -> pim-giftcard-enviada (3 nodos, ahora resuelven a la plantilla real) y nota de retiro corregida (solo online con retiro en tienda; multidepósito solo envío a domicilio).' },

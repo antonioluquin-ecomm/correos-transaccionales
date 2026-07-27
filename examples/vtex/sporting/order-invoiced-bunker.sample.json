@@ -1,0 +1,139 @@
+{
+  "package": {
+    "items": [
+      {
+        "itemIndex": 0,
+        "quantity": 1,
+        "price": 2299900,
+        "description": null,
+        "unitMultiplier": 0
+      }
+    ],
+    "courier": "Buenos Aires - Andreani - Normal",
+    "invoiceNumber": "189122002",
+    "description": null,
+    "invoiceValue": 2299900,
+    "invoiceUrl": "https://apps.producteca.com/functions/adidas-functions/api/adidasFacturas?cuit=26034410&nroComprobante=07771002",
+    "issuanceDate": "2026-07-27T15:56:48.0000000Z",
+    "trackingNumber": "360087654321",
+    "invoiceKey": null,
+    "trackingUrl": "https://www.andreani.com/envio/360087654321",
+    "embeddedInvoice": "",
+    "type": "Output",
+    "courierStatus": null,
+    "cfop": null,
+    "restitutions": {},
+    "volumes": null,
+    "EnableInferItems": null
+  },
+  "subjectItemAttachment": {
+    "item": "Remera Atlét Running",
+    "totalItems": 1
+  },
+  "cancellationReason": null,
+  "paymentData": {
+    "giftCards": [],
+    "transactions": [
+      {
+        "isActive": true,
+        "transactionId": "576067E784954173A513B5DEBD1C12ED",
+        "merchantName": "SPORTINGIO",
+        "payments": [
+          {
+            "id": "F223536D3CB940789788B1CD52C740E7",
+            "paymentSystem": "10",
+            "paymentSystemName": "Visa Electron",
+            "value": 2299900,
+            "installments": 1,
+            "referenceValue": 2299900,
+            "firstDigits": "451772",
+            "lastDigits": "8359",
+            "group": "debitCard",
+            "connectorResponses": {
+              "authId": "797446"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "cancellationRequests": null,
+  "invoiceData": null,
+  "clientProfileData": {
+    "id": "clientProfileData",
+    "email": "cliente@ct.vtex.com.br",
+    "firstName": "Sofía",
+    "lastName": "De Cicco",
+    "documentType": "dni",
+    "document": "45587447"
+  },
+  "shippingData": {
+    "id": "shippingData",
+    "selectedAddresses": [
+      {
+        "addressId": "8893443012075",
+        "addressType": "residential",
+        "receiverName": "Sofía De Cicco",
+        "street": "Corrientes 2215 esquina italia",
+        "number": "2215",
+        "complement": null,
+        "neighborhood": null,
+        "postalCode": "5521",
+        "city": "Capilla Del Rosario",
+        "state": "Mendoza",
+        "country": "ARG"
+      }
+    ],
+    "logisticsInfo": [
+      {
+        "itemIndex": 0,
+        "itemId": "310241764",
+        "selectedDeliveryChannel": "delivery",
+        "deliveryIds": [
+          {
+            "courierId": "buenosaires_andreani_normal",
+            "courierName": "Buenos Aires - Andreani - Normal",
+            "dockId": "197",
+            "quantity": 1,
+            "warehouseId": "1_197",
+            "accountCarrierName": "sporting"
+          }
+        ]
+      }
+    ]
+  },
+  "items": [
+    {
+      "additionalInfo": {
+        "brandName": "ATLÉT"
+      },
+      "name": "Remera Atlét Running De Mujer",
+      "skuName": "Color: Rosa - Talle: S",
+      "imageUrl": "https://sporting.vteximg.com.br/arquivos/ids/2270328-150-150/ATL0380-ROS-1.jpg",
+      "detailUrl": "/remera-atlet-running-de-mujer-atl0380-ros/p",
+      "quantity": 1,
+      "listPrice": 3199900,
+      "sellingPrice": 2299900,
+      "priceDefinition": {
+        "total": 2299900
+      }
+    }
+  ],
+  "totals": [
+    { "id": "Items", "name": "Total de los items", "value": 2299900 },
+    { "id": "Discounts", "name": "Total de descuentos", "value": 0 },
+    { "id": "Shipping", "name": "Costo total del envío", "value": 0 },
+    { "id": "Tax", "name": "Impuestos", "value": 0 }
+  ],
+  "ratesAndBenefitsData": { "rateAndBenefitsIdentifiers": [] },
+  "orderId": "1649798212700-02",
+  "orderGroup": "1649798212700",
+  "value": 2299900,
+  "creationDate": "2026-07-27T10:57:59.0000000Z",
+  "hostName": "sportingio",
+  "_accountInfo": {
+    "AccountName": "sportingio",
+    "TradingName": "Sporting",
+    "HostName": "www.sporting.com.ar"
+  }
+}

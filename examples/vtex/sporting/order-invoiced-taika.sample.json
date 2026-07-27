@@ -1,0 +1,139 @@
+{
+  "package": {
+    "items": [
+      {
+        "itemIndex": 0,
+        "quantity": 1,
+        "price": 4599900,
+        "description": null,
+        "unitMultiplier": 0
+      }
+    ],
+    "courier": "Tucuman1 - Andreani - Normal",
+    "invoiceNumber": "189122001",
+    "description": null,
+    "invoiceValue": 4599900,
+    "invoiceUrl": "https://apps.producteca.com/functions/adidas-functions/api/adidasFacturas?cuit=26034410&nroComprobante=07771001",
+    "issuanceDate": "2026-07-27T16:09:13.0000000Z",
+    "trackingNumber": "360012345678",
+    "invoiceKey": null,
+    "trackingUrl": "https://www.andreani.com/envio/360012345678",
+    "embeddedInvoice": "",
+    "type": "Output",
+    "courierStatus": null,
+    "cfop": null,
+    "restitutions": {},
+    "volumes": null,
+    "EnableInferItems": null
+  },
+  "subjectItemAttachment": {
+    "item": "Pantalón Saucony Boston Woven",
+    "totalItems": 1
+  },
+  "cancellationReason": null,
+  "paymentData": {
+    "giftCards": [],
+    "transactions": [
+      {
+        "isActive": true,
+        "transactionId": "195F206CBDF14CC6AD3AF62FCCA0E590",
+        "merchantName": "SPORTINGIO",
+        "payments": [
+          {
+            "id": "829D9DC1425E4FBBA9EFFE8F0EE4BE21",
+            "paymentSystem": "4",
+            "paymentSystemName": "Mastercard",
+            "value": 4599900,
+            "installments": 1,
+            "referenceValue": 4599900,
+            "firstDigits": "553771",
+            "lastDigits": "8007",
+            "group": "creditCard",
+            "connectorResponses": {
+              "authId": "657451"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "cancellationRequests": null,
+  "invoiceData": null,
+  "clientProfileData": {
+    "id": "clientProfileData",
+    "email": "cliente@ct.vtex.com.br",
+    "firstName": "Rolando",
+    "lastName": "Derkach",
+    "documentType": "dni",
+    "document": "34332655"
+  },
+  "shippingData": {
+    "id": "shippingData",
+    "selectedAddresses": [
+      {
+        "addressId": "5355442821246",
+        "addressType": "residential",
+        "receiverName": "Rolando Derkach",
+        "street": "San Javier",
+        "number": "261",
+        "complement": null,
+        "neighborhood": null,
+        "postalCode": "3315",
+        "city": "Leandro N Alem",
+        "state": "Misiones",
+        "country": "ARG"
+      }
+    ],
+    "logisticsInfo": [
+      {
+        "itemIndex": 0,
+        "itemId": "310242608",
+        "selectedDeliveryChannel": "delivery",
+        "deliveryIds": [
+          {
+            "courierId": "tucuman1_andreani_normal",
+            "courierName": "Tucuman1 - Andreani - Normal",
+            "dockId": "198",
+            "quantity": 1,
+            "warehouseId": "1_198",
+            "accountCarrierName": "sporting"
+          }
+        ]
+      }
+    ]
+  },
+  "items": [
+    {
+      "additionalInfo": {
+        "brandName": "SAUCONY"
+      },
+      "name": "Pantalón Saucony Boston Woven De Mujer",
+      "skuName": "Color: Negro - Talle: S",
+      "imageUrl": "https://sporting.vteximg.com.br/arquivos/ids/2277093-150-150/P42448S105-000-1.jpg",
+      "detailUrl": "/pantalon-saucony-boston-woven-de-mujer-p42448s105-000/p",
+      "quantity": 1,
+      "listPrice": 7199900,
+      "sellingPrice": 4599900,
+      "priceDefinition": {
+        "total": 4599900
+      }
+    }
+  ],
+  "totals": [
+    { "id": "Items", "name": "Total de los items", "value": 4599900 },
+    { "id": "Discounts", "name": "Total de descuentos", "value": 0 },
+    { "id": "Shipping", "name": "Costo total del envío", "value": 0 },
+    { "id": "Tax", "name": "Impuestos", "value": 0 }
+  ],
+  "ratesAndBenefitsData": { "rateAndBenefitsIdentifiers": [] },
+  "orderId": "1649798212700-01",
+  "orderGroup": "1649798212700",
+  "value": 4599900,
+  "creationDate": "2026-07-27T10:57:59.0000000Z",
+  "hostName": "sportingio",
+  "_accountInfo": {
+    "AccountName": "sportingio",
+    "TradingName": "Sporting",
+    "HostName": "www.sporting.com.ar"
+  }
+}
