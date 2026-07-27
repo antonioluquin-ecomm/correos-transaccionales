@@ -3,6 +3,8 @@
 Inventario inicial para estandarizar las plantillas PIM compartidas por Sporting y Woker. Las plantillas actuales viven en `templates/pim/shared` y no se separan por tienda; la marca debe resolverse con variables dinamicas de PIM.
 
 > Diccionario completo de variables PIM (todas las raíces `Tienda.*`, `Pedido.*`, `Deposito.*`, `Proveedor.*`/`Giftcard.*`, con tipo y en qué plantillas se usan): [`docs/pim-variables.md`](pim-variables.md).
+>
+> Taxonomía real de PIM (canales, tiendas por canal, logística, estados, prefijos de `NroPedidoCanal`): [`docs/pim-taxonomia.md`](pim-taxonomia.md).
 
 ## Criterio de marca y assets
 
