@@ -696,6 +696,8 @@ label.ct-field-label {
 
 .ct-preview-status.error { color: var(--ct-danger); }
 
+.ct-hidden { display: none !important; }
+
 /* ─────────────────────────────────────────────
    Responsive
 ───────────────────────────────────────────── */

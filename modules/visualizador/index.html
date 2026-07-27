@@ -172,6 +172,12 @@
       }
       .ct-vis-scenario-facets .ct-badge { margin: 0 4px 4px 0; }
 
+      .ct-vis-clear-wrap { padding-top: 4px; }
+      .ct-vis-clear-btn { width: 100%; }
+      .ct-preview-info .ct-card-actions { margin-top: 12px; }
+      .ct-vis-override-row { margin-bottom: 6px; }
+      .ct-vis-override-label { margin-top: 0; display: block; }
+
       /* Modo compartir (?share=1): solo el mail renderizado, sin chrome de la herramienta. */
       body.ct-share-mode .ct-topbar,
       body.ct-share-mode .ct-vis-page > h1,
@@ -244,7 +250,7 @@
             <select id="ct-vis-example" aria-label="Elegir escenario de datos" aria-describedby="ct-vis-example-help"></select>
             <small class="ct-vis-field-note" id="ct-vis-example-help"></small>
           </div>
-          <div id="ct-vis-overrides-wrap" style="display:none;">
+          <div id="ct-vis-overrides-wrap" class="ct-hidden">
             <label>Sobrescribir valores del escenario</label>
             <div id="ct-vis-overrides"></div>
             <small class="ct-vis-field-note">Prueba valores que no tienen un JSON de ejemplo propio (ej. tiendas nuevas).</small>
@@ -256,7 +262,7 @@
               <button type="button" data-device="tablet">Tablet</button>
               <button type="button" data-device="mobile">Mobile</button>
             </div>
-            <small class="ct-vis-field-note" id="ct-vis-device-note" style="display:none;">En modo comparar se usa un ancho reducido para que quepan los dos escenarios — el formato de vista queda deshabilitado.</small>
+            <small class="ct-vis-field-note ct-hidden" id="ct-vis-device-note">En modo comparar se usa un ancho reducido para que quepan los dos escenarios — el formato de vista queda deshabilitado.</small>
           </div>
           <div class="ct-card ct-preview-info">
             <div class="ct-badges" id="ct-vis-badges"></div>
@@ -266,7 +272,7 @@
             <p class="ct-meta"><strong>Escenario:</strong> <span id="ct-vis-scenario-label"></span></p>
             <p class="ct-meta"><strong>JSON del escenario:</strong> <code id="ct-vis-ejemplo"></code></p>
             <p class="ct-vis-scenario-note" id="ct-vis-scenario-note"></p>
-            <div class="ct-card-actions" style="margin-top:12px;">
+            <div class="ct-card-actions">
               <a class="ct-btn ct-btn-primary" id="ct-vis-open-html" target="_blank" rel="noopener">Abrir HTML</a>
               <button class="ct-btn" id="ct-vis-download-html" type="button">Descargar HTML</button>
               <button class="ct-btn" id="ct-vis-copy-html" type="button">Copiar HTML</button>
@@ -274,8 +280,8 @@
               <button class="ct-btn" id="ct-vis-share" type="button">Compartir</button>
             </div>
           </div>
-          <div style="padding-top:4px;">
-            <button type="button" class="ct-btn" id="ct-vis-clear-filters" style="width:100%;">Limpiar filtros</button>
+          <div class="ct-vis-clear-wrap">
+            <button type="button" class="ct-btn ct-vis-clear-btn" id="ct-vis-clear-filters">Limpiar filtros</button>
           </div>
           <p class="ct-preview-status" id="ct-vis-status"></p>
         </aside>
@@ -496,7 +502,7 @@
               }
             });
             if (select.value && !available.has(select.value)) select.value = '';
-            wrap.style.display = available.size > 0 ? '' : 'none';
+            wrap.classList.toggle('ct-hidden', available.size === 0);
           });
         }
 
@@ -790,17 +796,15 @@
           overrides = {};
           overridesContainer.innerHTML = '';
           if (!fields.length) {
-            overridesWrap.style.display = 'none';
+            overridesWrap.classList.add('ct-hidden');
             return;
           }
-          overridesWrap.style.display = '';
+          overridesWrap.classList.remove('ct-hidden');
           fields.forEach((field) => {
             const row = document.createElement('div');
-            row.style.marginBottom = '6px';
+            row.className = 'ct-vis-override-row';
             const lbl = document.createElement('span');
-            lbl.className = 'ct-vis-field-note';
-            lbl.style.marginTop = '0';
-            lbl.style.display = 'block';
+            lbl.className = 'ct-vis-field-note ct-vis-override-label';
             lbl.textContent = field.label;
             const select = document.createElement('select');
             select.setAttribute('aria-label', `Sobrescribir ${field.label}`);
@@ -963,6 +967,29 @@
           }
         }
 
+        // Vacía la tarjeta de info + deshabilita sus acciones cuando no hay ninguna
+        // plantilla seleccionada — sin esto quedaban los datos de la última plantilla
+        // válida a la vista, como si el filtro actual la siguiera incluyendo.
+        function clearPreviewInfo() {
+          badgesEl.innerHTML = '';
+          nombreEl.textContent = '';
+          descripcionEl.textContent = '';
+          archivoEl.textContent = '';
+          scenarioLabelEl.textContent = '';
+          ejemploEl.textContent = '';
+          scenarioNoteEl.innerHTML = '';
+          openHtmlBtn.href = '#';
+          openHtmlBtn.toggleAttribute('aria-disabled', true);
+          downloadHtmlBtn.disabled = true;
+          copyHtmlBtn.disabled = true;
+          downloadPdfBtn.disabled = true;
+          shareBtn.disabled = true;
+          Object.values(facetSelects).forEach((s) => {
+            s.innerHTML = '<option value="">Todas</option>';
+            s.closest('label').classList.add('ct-hidden');
+          });
+        }
+
         // Punto único de entrada cuando "la plantilla activa" cambia (por filtros,
         // por búsqueda o por elegirla directo del select) — evita que cada listener
         // reimplemente su propia versión (ligeramente distinta) de este flujo.
@@ -983,6 +1010,7 @@
             frame.srcdoc = '';
             frameB.srcdoc = '';
             renderOverrideControls(null);
+            clearPreviewInfo();
             syncUrl();
             setStatus('No hay plantillas para los filtros seleccionados.', true);
           }
@@ -1105,7 +1133,7 @@
         // (ver auditoría 2026-07) — mejor deshabilitar el selector que dejarlo mentir.
         function setDeviceSwitchEnabled(enabled) {
           deviceSwitchButtons.forEach((button) => { button.disabled = !enabled; });
-          deviceNoteEl.style.display = enabled ? 'none' : '';
+          deviceNoteEl.classList.toggle('ct-hidden', enabled);
         }
 
         compareBtn.addEventListener('click', () => {
