@@ -308,7 +308,7 @@
                 <table role="presentation" width="100%" class="card">
                   <tr>
                     <td style="padding:18px 24px;">
-                      {{ if gt (len .Pedido.LineasPedido) 1 }}
+                      {{ if (and (gt (len .Pedido.LineasPedido) 1) (ne .Pedido.Logistica "OCASATaika") (ne .Pedido.Logistica "AndreaniBunker") (ne .Pedido.Logistica "Producteca")) }}
                       <table role="presentation" width="100%" bgcolor="#e0f2fe" style="background:#e0f2fe;border-radius:8px;margin-bottom:16px;">
                         <tr>
                           <td style="padding:14px 16px;border-left:4px solid #0c4a6e;border-radius:8px;">
