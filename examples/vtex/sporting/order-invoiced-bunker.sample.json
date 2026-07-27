@@ -9,7 +9,7 @@
         "unitMultiplier": 0
       }
     ],
-    "courier": "Buenos Aires - Andreani - Normal",
+    "courier": "Andreani",
     "invoiceNumber": "189122002",
     "description": null,
     "invoiceValue": 2299900,
@@ -91,8 +91,8 @@
         "selectedDeliveryChannel": "delivery",
         "deliveryIds": [
           {
-            "courierId": "buenosaires_andreani_normal",
-            "courierName": "Buenos Aires - Andreani - Normal",
+            "courierId": "buenosaires_andreanibunker_normal",
+            "courierName": "Andreani",
             "dockId": "197",
             "quantity": 1,
             "warehouseId": "1_197",
