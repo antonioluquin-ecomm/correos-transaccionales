@@ -1050,24 +1050,6 @@ const EXAMPLE_SCENARIOS = [
     compatibleTemplates: ['pim-recepcion-cambio'],
   },
   {
-    id: 'pim-recepcion-cambio-taika',
-    path: 'examples/pim/shared/recepcion-cambio-taika.json',
-    store: 'shared',
-    label: 'OCASA · Taika (gestión asistida)',
-    tipo: 'PIM — recepción de cambio',
-    descripcion: 'Recepción de cambio de un pedido vendido por Taika (Pedido.Logistica = "OCASATaika"). Agrega la leyenda "Vendido por Taika".',
-    compatibleTemplates: ['pim-recepcion-cambio'],
-  },
-  {
-    id: 'pim-recepcion-cambio-bunker',
-    path: 'examples/pim/shared/recepcion-cambio-bunker.json',
-    store: 'shared',
-    label: 'Andreani · Bunker (gestión asistida)',
-    tipo: 'PIM — recepción de cambio',
-    descripcion: 'Recepción de cambio de un pedido vendido por Bunker (Pedido.Logistica = "AndreaniBunker"). Agrega la leyenda "Vendido por Bunker".',
-    compatibleTemplates: ['pim-recepcion-cambio'],
-  },
-  {
     id: 'pim-recepcion-devolucion-sporting',
     path: 'examples/pim/shared/recepcion-devolucion-sporting.json',
     store: 'shared',
@@ -1317,7 +1299,6 @@ const TEMPLATE_TAXONOMY = {
   'pim-recepcion-cambio': {
     canales: ['b2c', 'punto-de-venta'],
     tiendas: ['sporting', 'woker'],
-    logistica: ['ocasa-taika', 'andreani-bunker'],
     evento: { id: 'recepcion-cambio', label: 'Recepcion de cambio' },
   },
   'pim-recepcion-devolucion': {
@@ -1460,18 +1441,6 @@ const SCENARIO_TAXONOMY = {
   'pim-recepcion-cambio-sporting': {
     canales: ['b2c'],
     tiendas: ['sporting'],
-    eventoId: 'recepcion-cambio',
-  },
-  'pim-recepcion-cambio-taika': {
-    canales: ['b2c'],
-    tiendas: ['sporting'],
-    logistica: ['ocasa-taika'],
-    eventoId: 'recepcion-cambio',
-  },
-  'pim-recepcion-cambio-bunker': {
-    canales: ['b2c'],
-    tiendas: ['sporting'],
-    logistica: ['andreani-bunker'],
     eventoId: 'recepcion-cambio',
   },
   'pim-recepcion-devolucion-sporting': {
@@ -1624,12 +1593,13 @@ EXAMPLE_SCENARIOS.forEach((scenario) => {
 });
 
 const VERSION = {
-  number: '1.30.1',
+  number: '1.30.2',
   date: '2026-07-27',
-  summary: 'pim-envio-despachado: la nota de "puede llegar en paquetes separados" ya no aparece para pedidos de Taika, Bunker o Producteca (adidas) — esos sellers siempre despachan desde un único depósito, aunque el pedido tenga más de un producto.',
+  summary: 'pim-recepcion-cambio: se revierte la leyenda de vendedor Taika/Bunker — ese mail no aplica a los sellers de gestión asistida ni a adidas, no ofrecen cambios.',
 };
 
 const CHANGELOG = [
+  { version: '1.30.2', date: '2026-07-27', summary: 'pim-recepcion-cambio: se saca la leyenda "Vendido por Taika"/"Vendido por Bunker" y los escenarios de ejemplo asociados — Taika, Bunker (gestión asistida) y adidas no ofrecen cambios, solo devolución/garantía, así que ese mail nunca aplica a esos sellers. Sigue aplicando en envio-despachado, recepcion-devolucion, recepcion-garantia, etiqueta-devolucion y quiebre-stock.' },
   { version: '1.30.1', date: '2026-07-27', summary: 'pim-envio-despachado: la nota multipaquete ("puede llegar en paquetes separados, con distintas facturas y códigos de seguimiento") se condiciona además de por cantidad de líneas a que Pedido.Logistica no sea "OCASATaika", "AndreaniBunker" ni "Producteca" — esos sellers de gestión asistida y el seller adidas siempre despachan desde un único depósito, nunca en paquetes separados. pedido-confirmado/pago-aprobado (VTEX) no necesitaban este fix: ya comparan warehouseId entre paquetes en vez de solo contar líneas.' },
   { version: '1.30.0', date: '2026-07-27', summary: 'order-invoiced (VTEX, mail de factura de Marketplace) suma la leyenda "Vendido por Taika" / "Vendido por Bunker" para los sellers de gestión asistida, condicionada por shippingData.logisticsInfo[0].deliveryIds[0].warehouseId = "1_198" (Taika) / "1_197" (Bunker) — a diferencia de PIM, acá no hay tienda ni seller VTEX distinto (siempre sellers[].id = "1" / Sporting), el depósito de despacho es la única señal. Taxonomía de order-invoiced ampliada de exclusivo ext/seller-adidas a también b2c/sporting (por ahora solo Sporting es Marketplace). Nuevos escenarios de ejemplo "OCASA · Taika" y "Andreani · Bunker" reusando los mismos ids de filtro de Logística ya creados para PIM. Nunca hay pedidos con productos de más de un seller/depósito mezclados, así que la leyenda se resuelve a nivel de todo el pedido (primer paquete), sin necesidad de cruzar por paquete individual.' },
   { version: '1.29.0', date: '2026-07-25', summary: 'Sellers de gestión asistida Taika y Bunker (venden desde la cuenta VTEX propia, sin tienda PIM propia): nuevos valores de Pedido.Logistica "OCASATaika" y "AndreaniBunker". Se agrega la leyenda "Vendido por Taika" / "Vendido por Bunker" en pim-envio-despachado, pim-recepcion-cambio, pim-recepcion-devolucion, pim-recepcion-garantia, pim-etiqueta-devolucion y pim-quiebre-stock (en despacho, además, el operador logístico mostrado y el botón/link de tracking son los reales: OCASA / Andreani, mismas URLs que esos operadores estándar). No aplica a pim-retiro-disponible ni pim-giftcard-enviada (no corresponden a este modelo de venta) ni a pim-factura-disponible (la factura de estos sellers se envía por el mail VTEX order-invoiced, no por PIM — pendiente de resolver ahí su propia taxonomía y leyenda, es otra plataforma/modelo de datos). Nuevos escenarios de ejemplo "OCASA · Taika" y "Andreani · Bunker" en los 6 templates afectados, acotados a canal b2c / tienda Sporting. Nuevas entradas de filtro de Logística ("OCASA · Taika", "Andreani · Bunker") en LOGISTICA_OPTIONS (assets/js/shared.js).' },
