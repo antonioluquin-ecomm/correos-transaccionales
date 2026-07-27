@@ -1593,12 +1593,13 @@ EXAMPLE_SCENARIOS.forEach((scenario) => {
 });
 
 const VERSION = {
-  number: '1.30.4',
+  number: '1.30.5',
   date: '2026-07-27',
-  summary: 'Escenarios de ejemplo PIM: prefijo real LQ21- de Pedido.NroPedidoCanal para Punto de Venta/multidepósito (Sporting y Woker), reemplazando los prefijos ficticios SPO-/WOK-.',
+  summary: 'Fix visual en shared.css: los botones de acción del Visualizador (Abrir HTML, Descargar HTML, Copiar HTML, Descargar PDF, Compartir) no tenían gap definido — se tocaban entre filas y "Abrir HTML" (un <a>) medía distinto que sus vecinos <button>.',
 };
 
 const CHANGELOG = [
+  { version: '1.30.5', date: '2026-07-27', summary: 'shared.css: .ct-card-actions no tenía ninguna regla propia (el Visualizador nunca la definió; solo existía localmente en catalogo/index.html), así que sus botones caían en display:block sin gap — las filas quedaban pegadas al envolver. Se agrega la regla base (display:flex, gap:8px, flex-wrap:wrap) a shared.css. De paso, .ct-btn suma line-height:1.2 explícito: sin eso, <a> y <button> heredan line-height distinto y quedan de alturas distintas uno al lado del otro (37.5px vs 35px) — ahora los 5 botones miden 33.6px parejo. Catálogo (que ya tenía su propia regla local) queda intacto.' },
   { version: '1.30.4', date: '2026-07-27', summary: 'Escenarios de ejemplo PIM: pedido-confirmado-pv-sporting, pedido-confirmado-pv-woker y quiebre-stock-pv-sporting usan el prefijo real LQ21- de Punto de Venta/multidepósito (confirmado igual para todas las tiendas, no solo Cross Selling) en vez de los ficticios SPO-/WOK-.' },
   { version: '1.30.3', date: '2026-07-27', summary: 'Escenarios de ejemplo PIM: Pedido.NroPedidoCanal usa los prefijos reales de canal confirmados (VT10- Sporting B2C, VT9- Woker B2C, VT19- EXT/adidas, VT17- B2B/Venta Deportiva) en vez de los ficticios SPO-/WOK-/B2B- — 20 archivos en examples/pim/shared/. No se tocaron los escenarios de Punto de Venta/Cross Selling (prefijo LQ21- ya confirmado en esos, sin confirmar para el resto de PV).' },
   { version: '1.30.2', date: '2026-07-27', summary: 'pim-recepcion-cambio: se saca la leyenda "Vendido por Taika"/"Vendido por Bunker" y los escenarios de ejemplo asociados — Taika, Bunker (gestión asistida) y adidas no ofrecen cambios, solo devolución/garantía, así que ese mail nunca aplica a esos sellers. Sigue aplicando en envio-despachado, recepcion-devolucion, recepcion-garantia, etiqueta-devolucion y quiebre-stock.' },

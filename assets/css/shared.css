@@ -400,10 +400,21 @@ label.ct-field-label {
   font-family: var(--ct-font);
   font-size: 13px;
   font-weight: 600;
+  line-height: 1.2;
   text-decoration: none;
   cursor: pointer;
   transition: background .15s, border-color .15s, color .15s, box-shadow .15s, transform .1s;
   box-shadow: var(--ct-shadow-xs);
+}
+
+/* .ct-btn se usa en <a> y <button> — sin line-height explícito, cada tag
+   hereda un valor distinto (button: normal, a: heredado) y quedan de
+   distinta altura al lado uno del otro. */
+
+.ct-card-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
 .ct-btn:hover {
