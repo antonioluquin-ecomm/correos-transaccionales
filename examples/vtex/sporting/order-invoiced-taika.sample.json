@@ -9,15 +9,15 @@
         "unitMultiplier": 0
       }
     ],
-    "courier": "Tucuman1 - Andreani - Normal",
+    "courier": "OCASA",
     "invoiceNumber": "189122001",
     "description": null,
     "invoiceValue": 4599900,
     "invoiceUrl": "https://apps.producteca.com/functions/adidas-functions/api/adidasFacturas?cuit=26034410&nroComprobante=07771001",
     "issuanceDate": "2026-07-27T16:09:13.0000000Z",
-    "trackingNumber": "360012345678",
+    "trackingNumber": "EC4FFA1597425",
     "invoiceKey": null,
-    "trackingUrl": "https://www.andreani.com/envio/360012345678",
+    "trackingUrl": "https://tracking.ocasa.com/Tracking/index?client=&airbillnumber=EC4FFA1597425&i=18&url=ocasa",
     "embeddedInvoice": "",
     "type": "Output",
     "courierStatus": null,
@@ -91,8 +91,8 @@
         "selectedDeliveryChannel": "delivery",
         "deliveryIds": [
           {
-            "courierId": "tucuman1_andreani_normal",
-            "courierName": "Tucuman1 - Andreani - Normal",
+            "courierId": "tucuman_ocasataika_normal",
+            "courierName": "OCASA",
             "dockId": "198",
             "quantity": 1,
             "warehouseId": "1_198",
