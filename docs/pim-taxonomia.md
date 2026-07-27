@@ -21,16 +21,15 @@ Este repo (`correos-transaccionales`) solo tiene plantillas para el canal **Vtex
 
 ## Tiendas por canal
 
-**Canal Vtex:**
-- Woker
-- Sporting
-- Tus Zapatos (inactiva)
-- Ventas B2B
-- Adidas
-- Adidas Producteca
-
-**Canal Luquin:**
-- Cross Selling
+| Tienda | Canal | Estado |
+| --- | --- | --- |
+| Sporting | Vtex | Activa |
+| Woker | Vtex | Activa |
+| Tus Zapatos | Vtex | Inactiva |
+| Ventas B2B | Vtex | Activa |
+| Adidas | Vtex | Activa |
+| Adidas Producteca | Vtex | Activa |
+| Cross Selling | Luquin | Activa |
 
 De estas, el repo modela hoy: `sporting`, `woker`, `venta-deportiva` (= Ventas B2B), `seller-adidas` (= Adidas / Adidas Producteca), y `Cross Selling` como caso especial de fallback en las plantillas PIM de multidepósito. **"Tus Zapatos" está inactiva y no está contemplada en ningún módulo de este repo** — si se activa y empieza a generar mails, hay que sumarla a `config.js` (`STORE_OPTIONS`/`TEMPLATE_TAXONOMY`).
 
@@ -48,18 +47,18 @@ Sin confirmar todavía: prefijo de "Tus Zapatos" (inactiva), y prefijos de los c
 
 ## Logística
 
-Lista completa de valores de logística en PIM:
-
-- Andreani
-- Propia
-- Adidas
-- Retiro
-- B2B
-- Producteca
-- OCASA
-- Punto Venta
-- Andreani Bunker
-- OCASA Taika
+| Valor | Tipo |
+| --- | --- |
+| Andreani | Operador de envío |
+| OCASA | Operador de envío |
+| Propia | Operador de envío (logística propia) |
+| Producteca | Operador de envío (adidas) |
+| Andreani Bunker | Gestión asistida (Bunker) |
+| OCASA Taika | Gestión asistida (Taika) |
+| Retiro | Modalidad (retiro en sucursal) |
+| Punto Venta | Modalidad (venta multidepósito) |
+| B2B | Canal (Ventas B2B) |
+| Adidas | Canal / seller (Adidas) |
 
 Esta es la lista de **opciones de filtro** del admin, no necesariamente el literal que guarda `Pedido.Logistica`/`lp_logistica.logistica` en cada pedido — para eso ya confirmamos por separado `"OCASATaika"` y (pendiente de confirmar) `"AndreaniBunker"` como valores reales de dato.
 
@@ -67,23 +66,25 @@ Esta es la lista de **opciones de filtro** del admin, no necesariamente el liter
 
 Ciclo de vida completo del pedido/comprobante en PIM, más granular que el `Estado` de línea (`"O"`/`"R"`/`"B"`) que usan las plantillas de recepción de cambio/devolución/garantía y quiebre de stock:
 
-- En edición
-- Activo
-- Asignado
-- Despachado
-- En Cola de Facturación
-- Facturado
-- Baja
-- Conflicto
-- Devolución Pendiente
-- Devolución en Tránsito
-- Devolución en Warehouse
-- Devolución Aceptada
-- En Cola de Comprobante de Devolución
-- Devolución Rechazada
-- Comprobante Nota de Crédito
-- Resuelto
-- Devolución Cancelada
+| Estado | Etapa |
+| --- | --- |
+| En edición | Carga |
+| Activo | Carga |
+| Asignado | Preparación |
+| Despachado | Envío |
+| En Cola de Facturación | Facturación |
+| Facturado | Facturación |
+| Baja | Cancelación |
+| Conflicto | Cancelación |
+| Devolución Pendiente | Devolución |
+| Devolución en Tránsito | Devolución |
+| Devolución en Warehouse | Devolución |
+| Devolución Aceptada | Devolución |
+| En Cola de Comprobante de Devolución | Devolución |
+| Devolución Rechazada | Devolución |
+| Comprobante Nota de Crédito | Devolución |
+| Devolución Cancelada | Devolución |
+| Resuelto | Cierre |
 
 **Pendiente de reconciliar:** no está confirmado si estos son los mismos valores que terminan mapeados a los códigos de una letra (`O`/`R`/`B`) que usan las plantillas Handlebars de este repo, o si son un estado de nivel superior (pedido/comprobante) distinto del estado de línea que ven las plantillas. Antes de asumir una correspondencia 1 a 1, confirmar con un JSON real de un pedido en cada estado relevante.
 
