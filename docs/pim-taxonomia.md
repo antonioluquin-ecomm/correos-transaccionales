@@ -27,11 +27,11 @@ Este repo (`correos-transaccionales`) solo tiene plantillas para el canal **Vtex
 | Woker | Vtex | Activa |
 | Tus Zapatos | Vtex | Inactiva |
 | Ventas B2B | Vtex | Activa |
-| Adidas | Vtex | Activa |
+| Adidas | Vtex | Inactiva |
 | Adidas Producteca | Vtex | Activa |
 | Cross Selling | Luquin | Activa |
 
-De estas, el repo modela hoy: `sporting`, `woker`, `venta-deportiva` (= Ventas B2B), `seller-adidas` (= Adidas / Adidas Producteca), y `Cross Selling` como caso especial de fallback en las plantillas PIM de multidepósito. **"Tus Zapatos" está inactiva y no está contemplada en ningún módulo de este repo** — si se activa y empieza a generar mails, hay que sumarla a `config.js` (`STORE_OPTIONS`/`TEMPLATE_TAXONOMY`).
+De estas, el repo modela hoy: `sporting`, `woker`, `venta-deportiva` (= Ventas B2B), `seller-adidas` (= Adidas Producteca — Adidas a secas está inactiva), y `Cross Selling` como caso especial de fallback en las plantillas PIM de multidepósito. **"Tus Zapatos" está inactiva y no está contemplada en ningún módulo de este repo** — si se activa y empieza a generar mails, hay que sumarla a `config.js` (`STORE_OPTIONS`/`TEMPLATE_TAXONOMY`).
 
 ## Prefijos confirmados de `Pedido.NroPedidoCanal`
 
@@ -39,7 +39,7 @@ De estas, el repo modela hoy: `sporting`, `woker`, `venta-deportiva` (= Ventas B
 | --- | --- | --- |
 | `VT10-` | Vtex | Sporting (B2C) |
 | `VT9-` | Vtex | Woker (B2C) |
-| `VT19-` | Vtex | Adidas / Adidas Producteca (EXT) |
+| `VT19-` | Vtex | Adidas Producteca (EXT) — Adidas a secas está inactiva |
 | `VT17-` | Vtex | Ventas B2B |
 | `LQ21-` | Luquin | Punto de Venta / multidepósito (todas las tiendas, incluida Cross Selling) |
 
@@ -58,7 +58,7 @@ Sin confirmar todavía: prefijo de "Tus Zapatos" (inactiva), y prefijos de los c
 | Retiro | Modalidad (retiro en sucursal) |
 | Punto Venta | Modalidad (venta multidepósito) |
 | B2B | Canal (Ventas B2B) |
-| Adidas | Canal / seller (Adidas) |
+| Adidas | Canal / seller (Adidas — inactivo, solo queda Adidas Producteca) |
 
 Esta es la lista de **opciones de filtro** del admin, no necesariamente el literal que guarda `Pedido.Logistica`/`lp_logistica.logistica` en cada pedido — para eso ya confirmamos por separado `"OCASATaika"` y (pendiente de confirmar) `"AndreaniBunker"` como valores reales de dato.
 
