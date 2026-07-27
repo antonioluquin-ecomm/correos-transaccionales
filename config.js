@@ -1593,12 +1593,13 @@ EXAMPLE_SCENARIOS.forEach((scenario) => {
 });
 
 const VERSION = {
-  number: '1.30.3',
+  number: '1.30.4',
   date: '2026-07-27',
-  summary: 'Escenarios de ejemplo PIM: prefijos reales de Pedido.NroPedidoCanal por canal (VT10 Sporting B2C, VT9 Woker B2C, VT19 EXT/adidas, VT17 B2B), reemplazando los prefijos ficticios (SPO-/WOK-/B2B-).',
+  summary: 'Escenarios de ejemplo PIM: prefijo real LQ21- de Pedido.NroPedidoCanal para Punto de Venta/multidepósito (Sporting y Woker), reemplazando los prefijos ficticios SPO-/WOK-.',
 };
 
 const CHANGELOG = [
+  { version: '1.30.4', date: '2026-07-27', summary: 'Escenarios de ejemplo PIM: pedido-confirmado-pv-sporting, pedido-confirmado-pv-woker y quiebre-stock-pv-sporting usan el prefijo real LQ21- de Punto de Venta/multidepósito (confirmado igual para todas las tiendas, no solo Cross Selling) en vez de los ficticios SPO-/WOK-.' },
   { version: '1.30.3', date: '2026-07-27', summary: 'Escenarios de ejemplo PIM: Pedido.NroPedidoCanal usa los prefijos reales de canal confirmados (VT10- Sporting B2C, VT9- Woker B2C, VT19- EXT/adidas, VT17- B2B/Venta Deportiva) en vez de los ficticios SPO-/WOK-/B2B- — 20 archivos en examples/pim/shared/. No se tocaron los escenarios de Punto de Venta/Cross Selling (prefijo LQ21- ya confirmado en esos, sin confirmar para el resto de PV).' },
   { version: '1.30.2', date: '2026-07-27', summary: 'pim-recepcion-cambio: se saca la leyenda "Vendido por Taika"/"Vendido por Bunker" y los escenarios de ejemplo asociados — Taika, Bunker (gestión asistida) y adidas no ofrecen cambios, solo devolución/garantía, así que ese mail nunca aplica a esos sellers. Sigue aplicando en envio-despachado, recepcion-devolucion, recepcion-garantia, etiqueta-devolucion y quiebre-stock.' },
   { version: '1.30.1', date: '2026-07-27', summary: 'pim-envio-despachado: la nota multipaquete ("puede llegar en paquetes separados, con distintas facturas y códigos de seguimiento") se condiciona además de por cantidad de líneas a que Pedido.Logistica no sea "OCASATaika", "AndreaniBunker" ni "Producteca" — esos sellers de gestión asistida y el seller adidas siempre despachan desde un único depósito, nunca en paquetes separados. pedido-confirmado/pago-aprobado (VTEX) no necesitaban este fix: ya comparan warehouseId entre paquetes en vez de solo contar líneas.' },
