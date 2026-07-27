@@ -241,7 +241,7 @@
           </div>
           <div>
             <label for="ct-vis-example">Escenario de datos compatible</label>
-            <select id="ct-vis-example" aria-label="Elegir escenario de datos"></select>
+            <select id="ct-vis-example" aria-label="Elegir escenario de datos" aria-describedby="ct-vis-example-help"></select>
             <small class="ct-vis-field-note" id="ct-vis-example-help"></small>
           </div>
           <div id="ct-vis-overrides-wrap" style="display:none;">
@@ -962,6 +962,31 @@
           }
         }
 
+        // Punto único de entrada cuando "la plantilla activa" cambia (por filtros,
+        // por búsqueda o por elegirla directo del select) — evita que cada listener
+        // reimplemente su propia versión (ligeramente distinta) de este flujo.
+        function onTemplateSelected(template) {
+          if (template) {
+            Object.values(facetSelects).forEach((s) => { s.value = ''; });
+            renderFacetOptions(template);
+            renderScenarioOptions(template, template.ejemplo);
+            renderOverrideControls(template);
+            if (isCompareMode) { populateScenarioBSelect(template); updateFrameLabelA(); renderPreviewB(); }
+            syncUrl();
+            renderPreview();
+          } else {
+            exampleSelect.innerHTML = '';
+            exampleSelect.disabled = true;
+            exampleHelpEl.textContent = '';
+            exampleHelpEl.className = 'ct-vis-field-note';
+            frame.srcdoc = '';
+            frameB.srcdoc = '';
+            renderOverrideControls(null);
+            syncUrl();
+            setStatus('No hay plantillas para los filtros seleccionados.', true);
+          }
+        }
+
         function doFilterChange() {
           templateSearchEl.value = '';
           const preferred = templateSelect.value;
@@ -977,21 +1002,7 @@
             template = renderTemplateOptions(preferred);
           }
 
-          if (template) {
-            Object.values(facetSelects).forEach((s) => { s.value = ''; });
-            renderFacetOptions(template);
-            renderScenarioOptions(template, template.ejemplo);
-            renderOverrideControls(template);
-            if (isCompareMode) { populateScenarioBSelect(template); updateFrameLabelA(); renderPreviewB(); }
-            syncUrl();
-            renderPreview();
-          } else {
-            exampleSelect.innerHTML = '';
-            frame.srcdoc = '';
-            frameB.srcdoc = '';
-            syncUrl();
-            setStatus('No hay plantillas para los filtros seleccionados.', true);
-          }
+          onTemplateSelected(template);
         }
 
         platformSelect.addEventListener('change', () => {
@@ -1026,24 +1037,11 @@
         templateSearchEl.addEventListener('input', () => {
           const preferred = templateSelect.value;
           const template = renderTemplateOptions(preferred);
-          if (template) {
-            renderFacetOptions(template);
-            renderScenarioOptions(template, template.ejemplo);
-            renderOverrideControls(template);
-            syncUrl();
-            renderPreview();
-          }
+          onTemplateSelected(template);
         });
 
         templateSelect.addEventListener('change', () => {
-          const template = currentTemplate();
-          if (template) renderFacetOptions(template);
-          Object.values(facetSelects).forEach((s) => { s.value = ''; });
-          renderScenarioOptions(template, template?.ejemplo);
-          renderOverrideControls(template);
-          if (isCompareMode) { populateScenarioBSelect(template); updateFrameLabelA(); renderPreviewB(); }
-          syncUrl();
-          renderPreview();
+          onTemplateSelected(currentTemplate());
         });
 
         exampleSelect.addEventListener('change', () => {
