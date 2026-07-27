@@ -12,19 +12,19 @@ PIM recibe pedidos de 4 canales:
 
 | Canal | Prefijo visto en `NroPedidoCanal` |
 | --- | --- |
-| **Vtex** | `VT` + número de tienda (`VT10-`, `VT9-`, `VT19-`, `VT17-`, ver tabla de tiendas) |
-| **Luquin** | `LQ` + número (`LQ21-`) — punto de venta / multidepósito |
-| **Dafiti** | (sin confirmar el prefijo) |
-| **Mercado Libre** | (sin confirmar el prefijo) |
+| **Vtex** | Activo. `VT` + número de tienda (`VT10-`, `VT9-`, `VT19-`, `VT17-`, ver tabla de tiendas) |
+| **Luquin** | Activo. `LQ` + número (`LQ21-`) — punto de venta / multidepósito |
+| **Dafiti** | Inactivo. |
+| **Mercado Libre** | Inactivo. |
 
-Este repo (`correos-transaccionales`) solo tiene plantillas para el canal **Vtex** y **Luquin** (PV). Dafiti y Mercado Libre no tienen mails propios acá todavía.
+Este repo (`correos-transaccionales`) solo tiene plantillas para el canal **Vtex** y **Luquin** (PV) — los únicos activos hoy.
 
 ## Tiendas por canal
 
 **Canal Vtex:**
 - Woker
 - Sporting
-- Tus Zapatos
+- Tus Zapatos (inactiva)
 - Ventas B2B
 - Adidas
 - Adidas Producteca
@@ -32,7 +32,7 @@ Este repo (`correos-transaccionales`) solo tiene plantillas para el canal **Vtex
 **Canal Luquin:**
 - Cross Selling
 
-De estas, el repo modela hoy: `sporting`, `woker`, `venta-deportiva` (= Ventas B2B), `seller-adidas` (= Adidas / Adidas Producteca), y `Cross Selling` como caso especial de fallback en las plantillas PIM de multidepósito. **"Tus Zapatos" no está contemplado en ningún módulo de este repo** — si empieza a generar mails, hay que sumarlo a `config.js` (`STORE_OPTIONS`/`TEMPLATE_TAXONOMY`).
+De estas, el repo modela hoy: `sporting`, `woker`, `venta-deportiva` (= Ventas B2B), `seller-adidas` (= Adidas / Adidas Producteca), y `Cross Selling` como caso especial de fallback en las plantillas PIM de multidepósito. **"Tus Zapatos" está inactiva y no está contemplada en ningún módulo de este repo** — si se activa y empieza a generar mails, hay que sumarla a `config.js` (`STORE_OPTIONS`/`TEMPLATE_TAXONOMY`).
 
 ## Prefijos confirmados de `Pedido.NroPedidoCanal`
 
@@ -44,11 +44,11 @@ De estas, el repo modela hoy: `sporting`, `woker`, `venta-deportiva` (= Ventas B
 | `VT17-` | Vtex | Ventas B2B |
 | `LQ21-` | Luquin | Punto de Venta / multidepósito (todas las tiendas, incluida Cross Selling) |
 
-Sin confirmar todavía: prefijo de "Tus Zapatos", y prefijos de los canales Dafiti / Mercado Libre.
+Sin confirmar todavía: prefijo de "Tus Zapatos" (inactiva), y prefijos de los canales Dafiti / Mercado Libre (inactivos).
 
 ## Logística
 
-Valores vistos en el filtro "Logística" del admin (lista completa, en el orden que aparece):
+Lista completa de valores de logística en PIM:
 
 - Andreani
 - Propia
@@ -60,13 +60,12 @@ Valores vistos en el filtro "Logística" del admin (lista completa, en el orden 
 - Punto Venta
 - Andreani Bunker
 - OCASA Taika
-- *(la lista seguía más abajo en la captura — hay que scrollear el filtro real para confirmar si hay más valores)*
 
-Esto es la lista de **opciones de filtro** del admin, no necesariamente el literal que guarda `Pedido.Logistica`/`lp_logistica.logistica` en cada pedido — para eso ya confirmamos por separado `"OCASATaika"` y (pendiente de confirmar) `"AndreaniBunker"` como valores reales de dato.
+Esta es la lista de **opciones de filtro** del admin, no necesariamente el literal que guarda `Pedido.Logistica`/`lp_logistica.logistica` en cada pedido — para eso ya confirmamos por separado `"OCASATaika"` y (pendiente de confirmar) `"AndreaniBunker"` como valores reales de dato.
 
 ## Estado
 
-Valores vistos en el filtro "Estado" del admin — parece ser el ciclo de vida completo del pedido/comprobante, más granular que el `Estado` de línea (`"O"`/`"R"`/`"B"`) que usan las plantillas de recepción de cambio/devolución/garantía y quiebre de stock:
+Ciclo de vida completo del pedido/comprobante en PIM, más granular que el `Estado` de línea (`"O"`/`"R"`/`"B"`) que usan las plantillas de recepción de cambio/devolución/garantía y quiebre de stock:
 
 - En edición
 - Activo
