@@ -256,6 +256,7 @@
               <button type="button" data-device="tablet">Tablet</button>
               <button type="button" data-device="mobile">Mobile</button>
             </div>
+            <small class="ct-vis-field-note" id="ct-vis-device-note" style="display:none;">En modo comparar se usa un ancho reducido para que quepan los dos escenarios — el formato de vista queda deshabilitado.</small>
           </div>
           <div class="ct-card ct-preview-info">
             <div class="ct-badges" id="ct-vis-badges"></div>
@@ -1095,7 +1096,17 @@
 
         const compareBtn = document.getElementById('ct-vis-compare');
         const previewPane = document.querySelector('.ct-preview-pane');
+        const deviceNoteEl = document.getElementById('ct-vis-device-note');
+        const deviceSwitchButtons = document.querySelectorAll('#ct-vis-device-switch button');
         compareBtn.innerHTML = ICON_COMPARE_OFF;
+
+        // En modo comparar los dos previews se reparten el ancho disponible, así que
+        // el ancho real termina siendo mucho menor al que indica el botón "Desktop"
+        // (ver auditoría 2026-07) — mejor deshabilitar el selector que dejarlo mentir.
+        function setDeviceSwitchEnabled(enabled) {
+          deviceSwitchButtons.forEach((button) => { button.disabled = !enabled; });
+          deviceNoteEl.style.display = enabled ? 'none' : '';
+        }
 
         compareBtn.addEventListener('click', () => {
           isCompareMode = !isCompareMode;
@@ -1103,6 +1114,7 @@
           compareBtn.innerHTML = isCompareMode ? ICON_COMPARE_ON : ICON_COMPARE_OFF;
           compareBtn.title = isCompareMode ? 'Cerrar comparación' : 'Comparar dos escenarios';
           compareBtn.setAttribute('aria-label', isCompareMode ? 'Cerrar comparación' : 'Comparar dos escenarios');
+          setDeviceSwitchEnabled(!isCompareMode);
           if (isCompareMode) {
             const template = currentTemplate();
             if (template) { populateScenarioBSelect(template); updateFrameLabelA(); renderPreviewB(); }

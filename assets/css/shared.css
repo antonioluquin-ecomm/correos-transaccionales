@@ -679,6 +679,11 @@ label.ct-field-label {
   color: #ffffff;
 }
 
+.ct-device-switch button:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
 .ct-preview-frame[data-device="desktop"] { max-width: 920px; }
 .ct-preview-frame[data-device="tablet"]  { max-width: 768px; }
 .ct-preview-frame[data-device="mobile"]  { max-width: 390px; }
