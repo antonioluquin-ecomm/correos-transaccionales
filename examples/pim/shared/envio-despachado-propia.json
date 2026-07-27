@@ -9,7 +9,7 @@
     }
   },
   "Pedido": {
-    "NroPedidoCanal": "SPO-223344556",
+    "NroPedidoCanal": "VT10-223344556",
     "Logistica": "Propia",
     "DatosEnvio": {
       "Destinatario": {

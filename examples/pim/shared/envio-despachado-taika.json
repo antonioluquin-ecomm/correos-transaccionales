@@ -9,7 +9,7 @@
     }
   },
   "Pedido": {
-    "NroPedidoCanal": "SPO-778899001",
+    "NroPedidoCanal": "VT10-778899001",
     "Logistica": "OCASATaika",
     "DatosEnvio": {
       "Destinatario": {

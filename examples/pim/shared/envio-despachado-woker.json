@@ -9,7 +9,7 @@
     }
   },
   "Pedido": {
-    "NroPedidoCanal": "WOK-123456789",
+    "NroPedidoCanal": "VT9-123456789",
     "Logistica": "Andreani",
     "DatosEnvio": {
       "Destinatario": {

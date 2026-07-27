@@ -9,7 +9,7 @@
     }
   },
   "Pedido": {
-    "NroPedidoCanal": "SPO-987654321",
+    "NroPedidoCanal": "VT19-987654321",
     "Logistica": "Producteca",
     "DatosEnvio": {
       "Destinatario": {

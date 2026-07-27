@@ -9,7 +9,7 @@
     }
   },
   "Pedido": {
-    "NroPedidoCanal": "SPO-445566778",
+    "NroPedidoCanal": "VT10-445566778",
     "Logistica": "OCASA",
     "DatosEnvio": {
       "Destinatario": {

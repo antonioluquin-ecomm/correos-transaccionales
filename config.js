@@ -1593,12 +1593,13 @@ EXAMPLE_SCENARIOS.forEach((scenario) => {
 });
 
 const VERSION = {
-  number: '1.30.2',
+  number: '1.30.3',
   date: '2026-07-27',
-  summary: 'pim-recepcion-cambio: se revierte la leyenda de vendedor Taika/Bunker — ese mail no aplica a los sellers de gestión asistida ni a adidas, no ofrecen cambios.',
+  summary: 'Escenarios de ejemplo PIM: prefijos reales de Pedido.NroPedidoCanal por canal (VT10 Sporting B2C, VT9 Woker B2C, VT19 EXT/adidas, VT17 B2B), reemplazando los prefijos ficticios (SPO-/WOK-/B2B-).',
 };
 
 const CHANGELOG = [
+  { version: '1.30.3', date: '2026-07-27', summary: 'Escenarios de ejemplo PIM: Pedido.NroPedidoCanal usa los prefijos reales de canal confirmados (VT10- Sporting B2C, VT9- Woker B2C, VT19- EXT/adidas, VT17- B2B/Venta Deportiva) en vez de los ficticios SPO-/WOK-/B2B- — 20 archivos en examples/pim/shared/. No se tocaron los escenarios de Punto de Venta/Cross Selling (prefijo LQ21- ya confirmado en esos, sin confirmar para el resto de PV).' },
   { version: '1.30.2', date: '2026-07-27', summary: 'pim-recepcion-cambio: se saca la leyenda "Vendido por Taika"/"Vendido por Bunker" y los escenarios de ejemplo asociados — Taika, Bunker (gestión asistida) y adidas no ofrecen cambios, solo devolución/garantía, así que ese mail nunca aplica a esos sellers. Sigue aplicando en envio-despachado, recepcion-devolucion, recepcion-garantia, etiqueta-devolucion y quiebre-stock.' },
   { version: '1.30.1', date: '2026-07-27', summary: 'pim-envio-despachado: la nota multipaquete ("puede llegar en paquetes separados, con distintas facturas y códigos de seguimiento") se condiciona además de por cantidad de líneas a que Pedido.Logistica no sea "OCASATaika", "AndreaniBunker" ni "Producteca" — esos sellers de gestión asistida y el seller adidas siempre despachan desde un único depósito, nunca en paquetes separados. pedido-confirmado/pago-aprobado (VTEX) no necesitaban este fix: ya comparan warehouseId entre paquetes en vez de solo contar líneas.' },
   { version: '1.30.0', date: '2026-07-27', summary: 'order-invoiced (VTEX, mail de factura de Marketplace) suma la leyenda "Vendido por Taika" / "Vendido por Bunker" para los sellers de gestión asistida, condicionada por shippingData.logisticsInfo[0].deliveryIds[0].warehouseId = "1_198" (Taika) / "1_197" (Bunker) — a diferencia de PIM, acá no hay tienda ni seller VTEX distinto (siempre sellers[].id = "1" / Sporting), el depósito de despacho es la única señal. Taxonomía de order-invoiced ampliada de exclusivo ext/seller-adidas a también b2c/sporting (por ahora solo Sporting es Marketplace). Nuevos escenarios de ejemplo "OCASA · Taika" y "Andreani · Bunker" reusando los mismos ids de filtro de Logística ya creados para PIM. Nunca hay pedidos con productos de más de un seller/depósito mezclados, así que la leyenda se resuelve a nivel de todo el pedido (primer paquete), sin necesidad de cruzar por paquete individual.' },
