@@ -26,6 +26,15 @@
         position: relative;
       }
 
+      .ct-vis-page .ct-preview-controls {
+        position: sticky;
+        top: 16px;
+        max-height: calc(100vh - 32px);
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding-right: 4px;
+      }
+
       .ct-vis-field-note {
         display: block;
         min-height: 18px;
@@ -56,8 +65,24 @@
 
       .ct-preview-pane-bar {
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
         padding: 0 0 8px 0;
+      }
+      #ct-vis-device-note {
+        text-align: right;
+        margin: -4px 0 8px 0;
+      }
+      #ct-vis-device-switch button.active {
+        background: var(--ct-navy);
+        color: #ffffff;
+      }
+      #ct-vis-device-switch button:disabled {
+        opacity: .5;
+        cursor: not-allowed;
+        background: transparent;
+        color: var(--ct-text-muted);
       }
       .ct-vis-btn-group {
         display: inline-flex;
@@ -172,11 +197,48 @@
       }
       .ct-vis-scenario-facets .ct-badge { margin: 0 4px 4px 0; }
 
-      .ct-vis-clear-wrap { padding-top: 4px; }
-      .ct-vis-clear-btn { width: 100%; }
-      .ct-preview-info .ct-card-actions { margin-top: 12px; }
+      .ct-vis-filters-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+      }
+      .ct-vis-filters-title {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: .06em;
+        color: var(--ct-muted);
+      }
+      .ct-vis-clear-btn {
+        border: none;
+        background: none;
+        box-shadow: none;
+        padding: 0;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--ct-accent);
+        cursor: pointer;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+      }
+      .ct-vis-clear-btn:hover { color: var(--ct-text); }
       .ct-vis-override-row { margin-bottom: 6px; }
       .ct-vis-override-label { margin-top: 0; display: block; }
+
+      .ct-preview-actions .ct-card-actions { margin-top: 12px; }
+      .ct-preview-meta {
+        padding: 0 2px;
+      }
+      .ct-preview-meta .ct-meta {
+        font-size: 12px;
+        color: var(--ct-muted);
+        margin: 6px 0 0 0;
+      }
+      .ct-preview-meta .ct-meta code {
+        font-family: var(--ct-mono);
+        font-size: 12px;
+      }
 
       /* Modo compartir (?share=1): solo el mail renderizado, sin chrome de la herramienta. */
       body.ct-share-mode .ct-topbar,
@@ -184,6 +246,7 @@
       body.ct-share-mode .ct-vis-page > p.ct-subtitle,
       body.ct-share-mode .ct-preview-controls,
       body.ct-share-mode .ct-preview-pane-bar,
+      body.ct-share-mode #ct-vis-device-note,
       body.ct-share-mode .ct-frame-label,
       body.ct-share-mode .ct-compare-col {
         display: none !important;
@@ -212,6 +275,10 @@
 
       <div class="ct-preview-tool">
         <aside class="ct-preview-controls">
+          <div class="ct-vis-filters-head">
+            <span class="ct-vis-filters-title">Filtros</span>
+            <button type="button" class="ct-vis-clear-btn" id="ct-vis-clear-filters">Limpiar filtros</button>
+          </div>
           <div>
             <label for="ct-vis-platform">Plataforma</label>
             <select id="ct-vis-platform" aria-label="Filtrar por plataforma">
@@ -255,23 +322,10 @@
             <div id="ct-vis-overrides"></div>
             <small class="ct-vis-field-note">Prueba valores que no tienen un JSON de ejemplo propio (ej. tiendas nuevas).</small>
           </div>
-          <div>
-            <label>Formato de vista</label>
-            <div class="ct-device-switch" id="ct-vis-device-switch" aria-label="Elegir formato de vista">
-              <button type="button" data-device="desktop">Desktop</button>
-              <button type="button" data-device="tablet">Tablet</button>
-              <button type="button" data-device="mobile">Mobile</button>
-            </div>
-            <small class="ct-vis-field-note ct-hidden" id="ct-vis-device-note">En modo comparar se usa un ancho reducido para que quepan los dos escenarios — el formato de vista queda deshabilitado.</small>
-          </div>
-          <div class="ct-card ct-preview-info">
+          <div class="ct-card ct-preview-actions">
             <div class="ct-badges" id="ct-vis-badges"></div>
             <h3 id="ct-vis-nombre"></h3>
             <p id="ct-vis-descripcion"></p>
-            <p class="ct-meta"><strong>Plantilla HTML:</strong> <code id="ct-vis-archivo"></code></p>
-            <p class="ct-meta"><strong>Escenario:</strong> <span id="ct-vis-scenario-label"></span></p>
-            <p class="ct-meta"><strong>JSON del escenario:</strong> <code id="ct-vis-ejemplo"></code></p>
-            <p class="ct-vis-scenario-note" id="ct-vis-scenario-note"></p>
             <div class="ct-card-actions">
               <a class="ct-btn ct-btn-primary" id="ct-vis-open-html" target="_blank" rel="noopener">Abrir HTML</a>
               <button class="ct-btn" id="ct-vis-download-html" type="button">Descargar HTML</button>
@@ -280,20 +334,29 @@
               <button class="ct-btn" id="ct-vis-share" type="button">Compartir</button>
             </div>
           </div>
-          <div class="ct-vis-clear-wrap">
-            <button type="button" class="ct-btn ct-vis-clear-btn" id="ct-vis-clear-filters">Limpiar filtros</button>
+          <div class="ct-preview-meta">
+            <p class="ct-meta"><strong>Plantilla HTML:</strong> <code id="ct-vis-archivo"></code></p>
+            <p class="ct-meta"><strong>Escenario:</strong> <span id="ct-vis-scenario-label"></span></p>
+            <p class="ct-meta"><strong>JSON del escenario:</strong> <code id="ct-vis-ejemplo"></code></p>
+            <p class="ct-vis-scenario-note" id="ct-vis-scenario-note"></p>
           </div>
           <p class="ct-preview-status" id="ct-vis-status"></p>
         </aside>
 
         <div class="ct-preview-pane">
           <div class="ct-preview-pane-bar">
+            <div class="ct-vis-btn-group" id="ct-vis-device-switch" aria-label="Elegir formato de vista">
+              <button type="button" class="ct-vis-expand-btn" data-device="desktop">Desktop</button>
+              <button type="button" class="ct-vis-expand-btn" data-device="tablet">Tablet</button>
+              <button type="button" class="ct-vis-expand-btn" data-device="mobile">Mobile</button>
+            </div>
             <div class="ct-vis-btn-group">
               <button id="ct-vis-vars" type="button" class="ct-btn ct-vis-expand-btn" title="Ver variables del escenario en el preview" aria-label="Ver variables"></button>
               <button id="ct-vis-compare" type="button" class="ct-btn ct-vis-expand-btn" title="Comparar dos escenarios" aria-label="Comparar dos escenarios"></button>
               <button id="ct-vis-expand" type="button" class="ct-btn ct-vis-expand-btn" title="Expandir preview" aria-label="Expandir preview"></button>
             </div>
           </div>
+          <small class="ct-vis-field-note ct-hidden" id="ct-vis-device-note">En modo comparar se usa un ancho reducido para que quepan los dos escenarios — el formato de vista queda deshabilitado.</small>
           <div class="ct-preview-frames">
             <div class="ct-preview-frame-col">
               <div class="ct-frame-label" id="ct-frame-label-a"><span class="ct-frame-col-tag">Escenario A:</span> <span id="ct-frame-label-a-text"></span></div>
