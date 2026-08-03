@@ -89,6 +89,7 @@ La documentación estándar compartida se encuentra en `../project-standards/`:
 
 - [`../project-standards/ai_rules.md`](../project-standards/ai_rules.md) — reglas de colaboración con IA
 - [`../project-standards/style_guide.md`](../project-standards/style_guide.md) — colores, tipografía, componentes CSS, Git
+- [`../project-standards/pcc_task_format.md`](../project-standards/pcc_task_format.md) — formato de tareas para cargar en PCC
 
 ### Entorno de trabajo
 
