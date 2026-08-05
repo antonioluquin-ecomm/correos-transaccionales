@@ -1593,12 +1593,13 @@ EXAMPLE_SCENARIOS.forEach((scenario) => {
 });
 
 const VERSION = {
-  number: '1.30.9',
-  date: '2026-07-27',
-  summary: 'Visualizador (etapa 4 de la auditoría): sidebar sticky, "Limpiar filtros" reubicado junto a los filtros, acciones separadas de la metadata en la tarjeta de info, y Formato de vista unificado con Variables/Comparar/Expandir en la barra del preview.',
+  number: '1.30.10',
+  date: '2026-08-05',
+  summary: 'pim-retiro-disponible: plazo de retiro corregido de 30 a 10 días hábiles, para alinear con Commerce Hub (Documentación > Información > Políticas de envío y Procesos internos > Procesos B2C).',
 };
 
 const CHANGELOG = [
+  { version: '1.30.10', date: '2026-08-05', summary: 'templates/pim/shared/retiro-disponible/retiro-disponible.v2.html: el aviso de plazo pasa de "30 días corridos" a "10 días hábiles" — surgió de una auditoría de coherencia en Commerce Hub que detectó que la página pública "Políticas de envío" decía 30 días y el proceso interno "Retiro en Tienda" decía 7, sin que ninguno coincidiera con este correo. El equipo confirmó 10 días hábiles como valor único; Commerce Hub se actualiza en paralelo.' },
   { version: '1.30.9', date: '2026-07-27', summary: 'Visualizador (etapa 4 de la auditoría 2026-07, sobre el orden/layout del sidebar): .ct-preview-controls pasa a position:sticky (antes el preview salía de la vista al scrollear los filtros/facetas/escenario). "Limpiar filtros" se mueve de debajo de la tarjeta de info a un header "Filtros" junto a Plataforma/Canal/Tienda/Logística, los filtros que resetea. La tarjeta de info se separa en .ct-preview-actions (badges, nombre, descripción y los 5 botones de acción) y .ct-preview-meta (paths de plantilla/escenario/JSON), para que los botones de descarga/copiar/compartir no queden enterrados debajo de la metadata técnica. El switch Formato de vista (Desktop/Tablet/Mobile) se muda del sidebar a la barra superior del preview, como grupo segmentado junto a Variables/Comparar/Expandir — antes eran dos controles de "cómo ver el preview" en dos ubicaciones distintas de la pantalla.' },
   { version: '1.30.8', date: '2026-07-27', summary: 'Visualizador (etapa 3 de la auditoría 2026-07): se reemplazan los style="..." inline dispersos en el HTML y en renderOverrideControls por clases (.ct-hidden nueva en shared.css como utilidad general con !important, .ct-vis-clear-wrap, .ct-vis-clear-btn, .ct-vis-override-row, .ct-vis-override-label, .ct-preview-info .ct-card-actions). Se agrega clearPreviewInfo(): cuando el filtro activo deja 0 plantillas, la tarjeta de info (nombre, descripción, badges, meta) y sus botones de acción se vacían/deshabilitan en vez de seguir mostrando los datos de la última plantilla válida — antes quedaban ahí como si el filtro la siguiera incluyendo.' },
   { version: '1.30.7', date: '2026-07-27', summary: 'Visualizador: en modo Comparar, Formato de vista (Desktop/Tablet/Mobile) queda deshabilitado con una nota explicativa en vez de mostrar un ancho que no se corresponde con la realidad — con los dos previews repartiéndose el panel, "Desktop" (920px) terminaba renderizando a ~480px en una notebook de 1440px, sin nunca mostrar un verdadero lado a lado de escritorio salvo en monitores muy anchos (~2200px+).' },
